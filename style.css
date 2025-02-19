@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+.inter-<uniquifier> {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+  }
+
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+*{
+    font-family: "Inter", serif;
+    font-size: 16px;ddss
+    font-weight: 400;
+    font-style: normal;
+    box-sizing: border-box;
+    margin: 5px;
+    overflow-x: hidden;
+  }
+
+
+  :root h1 {
+    font-family: "Big Shoulders Display", serif;
+    letter-spacing: -0.04em;
+    font-size: 80px;
+    min-width: 1200px;
+    font-weight: 650;
+    font-style: normal;
+    text-align: left;
+    line-height: 1.2;
+  }
+  
+  :root h2,h3,h4,h5,h6, p {
+    font-family: "Inter", serif;
+    text-align: left;
+    line-height: 1.5;
+  }
+
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    background: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    /*transition: background 0.3s;*/
+}
+
+.theme-toggle:hover {
+    background: #555;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #f8f8f8;
+}
+
+.dark-mode a{
+    color: aquamarine;
+}
+
+/*lightmode*/ a{
+    color: #ff0000;
+} 
+
+.dark-mode .section {
+    background: #1e1e1e;
+    color: #f8f8f8;
+    box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.1);
+}
+
+
+
