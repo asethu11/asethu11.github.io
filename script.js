@@ -10,3 +10,16 @@ window.onload = function() {
         document.body.classList.add("dark-mode");
     }
 }
+
+var typed = new Typed('.typed', {
+    strings: [
+      'Hallo', 
+      'Bonjour',
+      'Guten tag',
+      'Bom dia'
+    ],
+    typeSpeed: 80,
+    backSpeed: 50,
+    backDelay: 3000,
+    loop: true,
+  });
