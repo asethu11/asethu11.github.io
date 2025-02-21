@@ -68,11 +68,11 @@ a:link {
   color: var(--primary);
 }
 
-a h7 {
+a .headtag {
   color: var(--primary);
 } 
 
-a h7:hover {
+.headtag:hover {
   color: var(--red);
 }
 
