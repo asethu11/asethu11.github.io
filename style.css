@@ -127,13 +127,35 @@ h3 {
   color: var(--text-light);
 }
 
-a {
+h1 {
   color: var(--text-dark);
+}
+
+.dark-mode h1 {
+  color: var(--text-light);
 }
 
 a:hover {
   color: var(--text-primary);
 }
+
+a h7 {
+  color: var(--text-primary);
+} 
+
+a h7:hover {
+  color: var(--hover-text);
+}
+
+.article-title {
+  color: var(--text-dark);
+}
+
+.dark-mode .article-title {
+  color: var(--text-light);
+}
+
+
 
 .dark-mode .section {
   background: var(--background-grey);
@@ -199,8 +221,98 @@ a:hover {
 
 
 
+.card {
+  /* color used to softly clip top and bottom of the .words container */
+  background-color: var(--bg-color);
+  overflow-y: hidden;
+}
+.loader {
+  color: rgb(124, 124, 124);
+  font-family: "inter", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 26px;
+  
+  display: flex;
+  border-radius: 8px;
+}
 
+.words {
+  overflow: hidden;
+  position: relative;
+}
+.words::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+}
 
+.ploader {
+  overflow: hidden;
+  padding: 0;
+  line-height: 1.5;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-dark);
+}
+
+.dark-mode .ploader {
+  color: var(--text-light);
+}
+
+.word {
+  display: block;
+  height: 100%;
+  padding-left: 6px;
+  margin-top: 1px;
+  color: var(--hover-text);
+  animation: spin_4991 5s infinite;
+}
+
+@keyframes spin_4991 {
+  10% {
+    -webkit-transform: translateY(-102%);
+    transform: translateY(-102%);
+  }
+
+  25% {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+
+  35% {
+    -webkit-transform: translateY(-202%);
+    transform: translateY(-202%);
+  }
+
+  50% {
+    -webkit-transform: translateY(-200%);
+    transform: translateY(-200%);
+  }
+
+  60% {
+    -webkit-transform: translateY(-302%);
+    transform: translateY(-302%);
+  }
+
+  75% {
+    -webkit-transform: translateY(-300%);
+    transform: translateY(-300%);
+  }
+
+  85% {
+    -webkit-transform: translateY(-402%);
+    transform: translateY(-402%);
+  }
+
+  100% {
+    -webkit-transform: translateY(-400%);
+    transform: translateY(-400%);
+  }
+}
 
 
 
@@ -909,9 +1021,9 @@ div.project-title {
 }
 
 .article {
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
-  gap: 16px;  
+  gap: 50px;  
 }
 
 .article:visited {
@@ -924,7 +1036,8 @@ div.project-title {
 }
 
 .article-date {
-  font-size: 11px;
+  margin-top: 2px;
+  font-size: 15px;
   color: #555555;);
 }
 
