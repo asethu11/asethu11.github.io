@@ -909,7 +909,7 @@ div.project-title {
 }
 
 .article {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   gap: 16px;  
 }
@@ -924,7 +924,7 @@ div.project-title {
 }
 
 .article-date {
-  font-size: 14px;
+  font-size: 11px;
   color: #555555;);
 }
 
