@@ -268,7 +268,7 @@ a h7:hover {
   height: 100%;
   padding-left: 6px;
   margin-top: 1px;
-  color: var(--hover-text);
+  color: #ff5c5c;
   animation: spin_4991 5s infinite;
 }
 
