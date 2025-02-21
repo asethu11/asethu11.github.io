@@ -7,7 +7,7 @@
   --background: #FCFCFC;
   --background-grey: #F3F5F7;
   --text-primary: #262628; 
-  --text-secondary: #737373; 
+  --text-secondary: #a1a1a1; 
   --primary: #0070EA; 
   --red: #db4f4f;
 }
@@ -17,7 +17,7 @@
       --background: #040404;
       --background-grey: #2B2C2E;
       --text-primary: #F0F0F0; 
-      --text-secondary: #777777; 
+      --text-secondary: #aaa9a9; 
       --primary: #0A84FF;
       --red: #db4f4f; 
   }
@@ -398,7 +398,6 @@ pre > code {
 }
 
 .grey-background:hover .project-image {
-
   transition: transform 125ms;
   transform: scale(1.02);
 }
@@ -419,6 +418,11 @@ pre > code {
   will-change: transform;
   transition: transform 450ms;
 }
+
+#project-1 {
+  width: 280px;
+}
+
 
 .project-text {
   padding-left: 0.5rem;
