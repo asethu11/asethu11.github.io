@@ -38,6 +38,11 @@ body {
   margin-right: auto;
 }
 
+footer {
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+}
+
 
 h1 {
   font-family: "Big Shoulders Display", serif;
@@ -67,10 +72,6 @@ a:link {
   text-decoration: none;
   color: var(--primary);
 }
-
-a .headtag {
-  color: var(--primary);
-} 
 
 .headtag:hover {
   color: var(--red);
