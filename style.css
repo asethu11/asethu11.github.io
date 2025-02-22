@@ -80,6 +80,7 @@ a:link {
 
 a:visited {
   text-decoration: none;
+  color: var(--primary);
 }
 
 p {
