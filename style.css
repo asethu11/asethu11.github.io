@@ -38,7 +38,8 @@ body {
   margin-right: auto;
 }
 
-footer {
+.footer {
+  padding-left: 1rem;
   margin-top: 6rem;
   margin-bottom: 6rem;
 }
