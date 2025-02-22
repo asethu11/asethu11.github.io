@@ -485,13 +485,13 @@ pre > code {
   }
 }
 
-.side-projects {
+.other-projects {
   margin-top: 5rem;
   position: relative;
   width: 100%;
 }
 
-.side-projects h2 {
+.other-projects h2 {
   margin-bottom: 2rem;
 }
 
@@ -683,7 +683,7 @@ pre > code {
 .image-background {
   width: 252px;
   min-width: 252px;
-  height: 140px;
+  height: 150px;
   background-size: cover;
   background-color: var(--background-grey);
   background-position: center center;
@@ -695,11 +695,11 @@ pre > code {
 }
 
 .bg1 {
-  background-image: url("img/screensthumbnail.png");
+  background-image: url("side-quests/product-adoption/Abhishek\ Sethuraman\ -\ certificate.jpg");;
 }
 
 .bg2 {
-  background-image: url("img/droidcon23thumbnail.png");
+  background-image: url("side-quests/RCR/certificate.png");
 }
 
 .bg3 {
