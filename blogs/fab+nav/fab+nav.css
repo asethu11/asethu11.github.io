@@ -69,6 +69,7 @@ a:link {
 
 a:visited {
     text-decoration: none;
+    color: var(--primary) !important;
 }
 
 p a:hover {
