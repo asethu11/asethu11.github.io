@@ -95,8 +95,24 @@ li {
 
 
 
-
-
+.headtag {
+    display: inline-flex;
+    height: 20px;
+  }
+  
+  .arr {
+    display: none;
+    color: var(--red);
+  }
+  
+  .headtag:hover .arr {
+    display: flex;
+    margin-left: 10px;
+  }
+  
+  .headtag:hover {
+    color: var(--red);
+  }
 
 
 

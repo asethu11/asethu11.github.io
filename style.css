@@ -74,9 +74,7 @@ a:link {
   color: var(--primary);
 }
 
-.headtag:hover {
-  color: var(--red);
-}
+
 
 a:visited {
   text-decoration: none;
@@ -328,7 +326,9 @@ pre > code {
   margin-left: 10px;
 }
 
-
+.headtag:hover {
+  color: var(--red);
+}
 
 
 
