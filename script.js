@@ -1,23 +1,41 @@
-function toggleTheme() {
-    const body = document.body;
-    const isDarkMode = body.classList.toggle("dark-mode");
-    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+// Simulate typing effect
+const words = ["hey ", "bonjour ", "வணக்கம் ", "hola ", "こんにちは "];
+let i = 0;
+let timer;
+
+function typingEffect() {
+    let word = words[i].split("");
+    let target = document.getElementById('word');
+
+    target.innerHTML = ""; // Clear previous word
+    let loopTyping = function() {
+        if (word.length > 0) {
+            target.innerHTML += word.shift();
+        } else {
+            setTimeout(deletingEffect, 1000);
+            return;
+        }
+        timer = setTimeout(loopTyping, 200);
+    };
+    loopTyping();
 }
 
-// Load theme preference on page load
-window.onload = function() {
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-    }
+function deletingEffect() {
+    let word = words[i].split("");
+    let target = document.getElementById('word');
+
+    let loopDeleting = function() {
+        if (word.length > 0) {
+            word.pop();
+            target.innerHTML = word.join("");
+        } else {
+            i = (i + 1) % words.length; // Loop through words array
+            setTimeout(typingEffect, 500);
+            return;
+        }
+        timer = setTimeout(loopDeleting, 100);
+    };
+    loopDeleting();
 }
 
-document.querySelector('a[href="#section-writings"]').addEventListener('click', function(event) {
-    event.preventDefault();
-    const target = document.getElementById('section-writings');
-    if (target) {
-        window.scrollTo({
-            top: target.offsetTop,
-            behavior: "smooth"
-        });
-    }
-});
+window.onload = typingEffect;
