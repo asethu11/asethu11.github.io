@@ -17,16 +17,26 @@
         <script src="scripts/typed.min.js"></script>
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="icon" href="img/favicon.png" type="image/png">
     </head>
 
-     <body>
+     <body>       
         <div class="container">
         <div class="introduction">
             <header class="header">
                 <div class="logo">
                     <a href="index.html">
-                        <h1>hey, i'm abhishek.</h1>
+                      <div class="flex">
+                        <p class="header-sub-title" id="word"></p>
+                        <p class="header-sub-title blink">|</p>
+                    </div>
+                
+                    <script src="script.js"></script>
+                      
+                      <h1>i'm abhishek.</h1>
                     </a>
+                   
+
                     <h4 class="uh-bee">uh-bee-shake</h4>
                 </div>
     
@@ -50,14 +60,16 @@
                         </div>
                       </div> <br><br>
     
-                    Btw, you should check out <a href="Index.html#section-writings" class="headtag"><h7>my blogs<h7></h7></a>.
+                    Btw, you should check out <a href="index.html#blogs" class="headtag">my blogs<p class="arr">↓</p></a><br><br>  
+
+                    More about me over <a href="about.html" class="headtag">here<p class="arr">--></p></a>
                 </p>
           
           <div class="social-icons">
-            <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="#" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
-            <a href="#" target="_blank" aria-label="Medium"><i class="fab fa-medium"></i></a>
+            <a href="https://www.linkedin.com/in/abhishekramans/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/asethu11" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="mailto:mailsofabshk@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://medium.com/@mailsofabhishek" target="_blank" aria-label="Medium"><i class="fab fa-medium"></i></a>
           </div>
 
           <div class="header2"> 
@@ -65,26 +77,28 @@
                 My works
             </h2>
             <div class="headerproject">
-              <a href="#" target="_blank">
+              <a href="ytm.html">
                 <div class="grey-background headerprojectbg">
 
-                  <img src="img/" alt="img" class="project-image">
-
+                  <video autoplay loop muted playsinline class="project-image" id="project-1">
+                    <source src="https://i.imgur.com/2nCqHGw.mp4" type="video/mp4">
+                </video>
                 </div>
+
               </a>
               <div class="project-text">
                 <div class="project-title">
                 <h3>
-                        Project 1 title
+                        Redesigning Youtube Music
                 </h3>
                 </div>
                 <p class="project-description">
                     
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+                  Exploring how small but impactful UI/UX changes could improve navigation, customization, and overall user satisfaction.
                 
                 </p>
 
-                <a href="#" target="_blank" class="link">Visit --></a>
+                <a href="ytm.html" class="link">Visit --></a>
 
               </div>
             </div>
@@ -97,89 +111,65 @@
         </div>
         
 
-        <!--side projects-->
-        <div class="side-projects">
-          <h2 class="section-t">Side projects</h2>
+        <!--Other projects-->
+        <div class="other-projects">
+          <h2 class="section-t">Other projects</h2>
           <div class="columns-container">
               <div class="projects">
       
               <a href="#" target="_blank" class="project-row">
                 <p class="project-row-title">
-                    Side Project 1
+                    User Testing the effectiveness of Safety Messaging
                 </p>
                   <div class="project-row-sub-title">
                       <p class="project-tag">2025</p>
                       <p class="project-tag">·</p>
-                      <p class="project-tag">Field</p>
+                      <p class="project-tag">City of Mesa</p>
                       <p class="project-tag">·</p>
-                      <p class="project-tag">Tools</p>
+                      <p class="project-tag">Usability Testing</p>
                   </div>
               </a>
       
               <a href="#" target="_blank" class="project-row">
                 <p class="project-row-title">
-                    Side Project 2
+                    VR Training Simulation for Cops
                 </p>
                   <div class="project-row-sub-title">
-                      <p class="project-tag">2025</p>
+                      <p class="project-tag">'24-'25</p>
                       <p class="project-tag">·</p>
-                      <p class="project-tag">Field</p>
+                      <p class="project-tag">Virtual Reality</p>
                       <p class="project-tag">·</p>
-                      <p class="project-tag">Tools</p>
+                      <p class="project-tag">Figma, Unreal Engine, Blender</p>
                   </div>
               </a>
 
               <a href="#" target="_blank" class="project-row">
                 <p class="project-row-title">
-                    Side Project 3
+                    Restructuring Courses ASU's LMS Platform
                 </p>
                   <div class="project-row-sub-title">
-                      <p class="project-tag">2025</p>
+                      <p class="project-tag">2024</p>
                       <p class="project-tag">·</p>
                       <p class="project-tag">Field</p>
                       <p class="project-tag">·</p>
-                      <p class="project-tag">Tools</p>
+                      <p class="project-tag">HTML, CSS, Markup, Adobe Creative Suite</p>
                   </div>
               </a>
       
-              <a href="#" target="_blank" class="project-row">
+              <a href="https://www.behance.net/gallery/193505103/Visual-Storytelling-Visual-Design" target="_blank" class="project-row">
                 <p class="project-row-title">
-                    Side Project 4
+                    Visual Storytelling
                 </p>
                   <div class="project-row-sub-title">
-                      <p class="project-tag">2025</p>
+                      <p class="project-tag">2023</p>
                       <p class="project-tag">·</p>
-                      <p class="project-tag">Field</p>
+                      <p class="project-tag">Branding & Marketing</p>
                       <p class="project-tag">·</p>
-                      <p class="project-tag">Tools</p>
+                      <p class="project-tag">Adobe Creative Suite</p>
                   </div>
               </a>
 
-              <a href="#" target="_blank" class="project-row">
-                <p class="project-row-title">
-                    Side Project 5
-                </p>
-                  <div class="project-row-sub-title">
-                      <p class="project-tag">2025</p>
-                      <p class="project-tag">·</p>
-                      <p class="project-tag">Field</p>
-                      <p class="project-tag">·</p>
-                      <p class="project-tag">Tools</p>
-                  </div>
-              </a>
-      
-              <a href="#" target="_blank" class="project-row">
-                <p class="project-row-title">
-                    Side Project 6
-                </p>
-                  <div class="project-row-sub-title">
-                      <p class="project-tag">2025</p>
-                      <p class="project-tag">·</p>
-                      <p class="project-tag">Field</p>
-                      <p class="project-tag">·</p>
-                      <p class="project-tag">Tools</p>
-                  </div>
-              </a>
+
       
               
           </div>
@@ -188,32 +178,30 @@
               <!-- Project Previews -->
               
               <div class="project-preview">
-                  <video autoplay loop muted playsinline>
-                      <source src="vid/project-1.mp4" type="video/mp4">
-                  </video>
+                <img src="my-works/usertesting-mesa/com-presentation.jpg" alt="Project 2 preview">
               </div>
       
               <div class="project-preview">
-                  <img src="img/project-2.png" alt="Project 2 preview">
+                  <img src="my-works/nextgen/img/image.png" alt="Project 2 preview">
               </div>
       
               <div class="project-preview">
-                  <img src="img/project-3.png" alt="Project 3 preview">
+                  <img src="my-works/LTH/img/canvas-after.png" alt="Project 3 preview">
               </div>
               
               <div class="project-preview">
-                <video autoplay loop muted playsinline>
-                    <source src="vid/project-4.mp4" type="video/mp4">
-                </video>
+                <img src="my-works/tellable-visual-storytelling/img/thumbnail.png" alt="Project 5 preview">
             </div>
     
             <div class="project-preview">
                 <img src="img/project-5.png" alt="Project 5 preview">
             </div>
     
-            <div class="project-preview">
-                <img src="img/project-6.png" alt="Project 6 preview">
-            </div>
+            <!--<div class="project-preview">
+              <video autoplay loop muted playsinline>
+                <source src="vid/project-4.mp4" type="video/mp4">
+            </video>
+            </div>-->
               
           </div>
       </div>
@@ -221,11 +209,11 @@
 
 
         <div class="section-keynotes"> 
-          <h2 class="section-t">Side-quests and media</h2>
+          <h2 class="section-t">Side-quests and other media</h2>
           <div class="keynotes">
 
-            <a href="#" target="_blank" class="video">
-              <div class="image-background bg5">
+            <a href="https://www.linkedin.com/posts/abhishekramans_abhishek-sethuramans-course-certificate-activity-7297994596934922241-JeH7?utm_source=share&utm_medium=member_desktop&rcm=ACoAABnQxasBvGS_UBWZWJcHWbmRWtSWLMIQP_Y" target="_blank" class="video">
+              <div class="image-background bg1">
                 <div class="play">
                     <svg  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
@@ -236,16 +224,16 @@
 
               <div class="video-text">
                 <h3 class="video-title">
-                    SQ 1 Title
+                  Took a course on product adoption recently
                 </h3>
                 <p class="video-description">
-                    Designing, 2024
+                    IxDF Certification, 2025
                 </p>
               </div>
             </a>
 
             <a href="#" target="_blank" class="video">
-                <div class="image-background bg5">
+                <div class="image-background bg2">
                   <div class="play">
                       <svg  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
@@ -256,10 +244,10 @@
   
                 <div class="video-text">
                   <h3 class="video-title">
-                      SQ 2 Title
+                      Certified to conduct research responsibly
                   </h3>
                   <p class="video-description">
-                      Designing, 2024
+                    RCR: Graduate Student and Postdoctoral<br> Researcher Responsible Conduct of Research, CITI Program, 2024
                   </p>
                 </div>
               </a>
@@ -269,29 +257,40 @@
           </div>
         </div>
 
+        
+
         <section class="section-writings"> 
             
-          <h2 class="section-t">Blogs and writings</h2>
+          <h2 class="section-t" id="blogs">Blogs and writings</h2>
           <div class="writings">
 
-            <a href="#" class="article"><p class="article-title">
-                BW 1
+            <a href="blogfabnav.html" class="article"><p class="article-title">
+              NavBars: Why Aren't We All Swiping?
             </p>
             <p class="article-date">
-                BW 1 source, February 2025
+                Blog, February 2025
             </p><p class="arrow">--></p></a>
 
             <a href="#" class="article"><p class="article-title">
                 BW 2
             </p>
-            <p class="article-date">
-                BW 2 source, February 2025
-            </p><p class="arrow">--></p></a>
+            <p class="article-date">BW 2 source, February 2025</p>
+            <p class="arrow">--></p></a>
         
 
           </div>
         </section>
+
+
+        
     </div>
+
+    <footer class="footer"><a href="index.html#top" class="headtag">back to top<p class="arr"> ↑</p></a></footer>
+    
+
+    
+      
+    
 
 
     <script>

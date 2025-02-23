@@ -7,7 +7,7 @@
   --background: #FCFCFC;
   --background-grey: #F3F5F7;
   --text-primary: #262628; 
-  --text-secondary: #737373; 
+  --text-secondary: #a1a1a1; 
   --primary: #0070EA; 
   --red: #db4f4f;
 }
@@ -17,7 +17,7 @@
       --background: #040404;
       --background-grey: #2B2C2E;
       --text-primary: #F0F0F0; 
-      --text-secondary: #777777; 
+      --text-secondary: #aaa9a9; 
       --primary: #0A84FF;
       --red: #db4f4f; 
   }
@@ -38,6 +38,34 @@ body {
   margin-right: auto;
 }
 
+.footer {
+  padding-left: 1rem;
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+}
+
+
+.blink {
+  animation: blink 0.5s infinite;
+}
+
+@keyframes blink {
+  to { opacity: 0; }
+}
+
+.flex {
+  display: flex;
+}
+
+.header-sub-title {
+  font-family: "Big Shoulders Display", serif;
+  letter-spacing: -0.04em;
+  font-size: 80px;
+  font-weight: 650;
+  font-style: normal;
+  text-align: left;
+  margin: 0px 0px 30px 0px;
+}
 
 h1 {
   font-family: "Big Shoulders Display", serif;
@@ -68,16 +96,11 @@ a:link {
   color: var(--primary);
 }
 
-a h7 {
-  color: var(--primary);
-} 
 
-a h7:hover {
-  color: var(--red);
-}
 
 a:visited {
   text-decoration: none;
+  color: var(--primary);
 }
 
 p {
@@ -310,6 +333,37 @@ pre > code {
 
 /* -------------  ------------- */
 
+.headtag {
+  display: inline-flex;
+  height: 20px;
+}
+
+.arr {
+  display: none;
+  color: var(--red);
+}
+
+.headtag:hover .arr {
+  display: flex;
+  margin-left: 10px;
+}
+
+.headtag:hover {
+  color: var(--red);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -398,7 +452,6 @@ pre > code {
 }
 
 .grey-background:hover .project-image {
-
   transition: transform 125ms;
   transform: scale(1.02);
 }
@@ -419,6 +472,11 @@ pre > code {
   will-change: transform;
   transition: transform 450ms;
 }
+
+#project-1 {
+  width: 280px;
+}
+
 
 .project-text {
   padding-left: 0.5rem;
@@ -449,13 +507,13 @@ pre > code {
   }
 }
 
-.side-projects {
+.other-projects {
   margin-top: 5rem;
   position: relative;
   width: 100%;
 }
 
-.side-projects h2 {
+.other-projects h2 {
   margin-bottom: 2rem;
 }
 
@@ -647,7 +705,7 @@ pre > code {
 .image-background {
   width: 252px;
   min-width: 252px;
-  height: 140px;
+  height: 150px;
   background-size: cover;
   background-color: var(--background-grey);
   background-position: center center;
@@ -659,11 +717,11 @@ pre > code {
 }
 
 .bg1 {
-  background-image: url("img/screensthumbnail.png");
+  background-image: url("side-quests/product-adoption/Abhishek\ Sethuraman\ -\ certificate.jpg");;
 }
 
 .bg2 {
-  background-image: url("img/droidcon23thumbnail.png");
+  background-image: url("side-quests/RCR/certificate.png");
 }
 
 .bg3 {
