@@ -68,7 +68,14 @@ li {
     line-height: 1.6rem;
 }
 
+:visited {
+    color: var(--primary);
+}
 
+a:visited {
+    text-decoration: none;
+    color: var(--primary) !important;
+}
 
 .redtext {
     color: var(--red);
