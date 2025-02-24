@@ -72,6 +72,14 @@ a:visited {
     color: var(--primary) !important;
 }
 
+.footer a {
+    color: var(--primary);
+}
+
+p a:visited {
+    color: var(--primary) !important;
+}
+
 p a:hover {
     text-decoration: underline;
     color: var(--red);
