@@ -475,8 +475,6 @@ pre > code {
   position: absolute;
   will-change: transform;
   transition: transform 450ms;
-
-  
 }
 
 #project-1 {
