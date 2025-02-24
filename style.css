@@ -439,6 +439,8 @@ pre > code {
   height: 200px;
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
+
 }
 
 @media only screen and (max-width: 480px) {
@@ -449,6 +451,7 @@ pre > code {
 
 .image-bottom{
   align-items: end!important;
+ 
 }
 
 .grey-background:hover .project-image {
@@ -462,19 +465,22 @@ pre > code {
   background-color: var(--background);
   border-radius: 100px;
   position: absolute;
+
 }
 
 .project-image {
-  max-width: 100%;
+  max-width: 90%;
   height: auto;
   max-height: 280px;
   position: absolute;
   will-change: transform;
   transition: transform 450ms;
+
+  
 }
 
 #project-1 {
-  width: 280px;
+  width: 100%;
 }
 
 
