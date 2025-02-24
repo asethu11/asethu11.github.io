@@ -76,7 +76,8 @@ a:link {
 
 a:visited {
     text-decoration: none;
-}
+    color: var(--primary);
+  }
 
 a:hover {
     text-decoration: underline;

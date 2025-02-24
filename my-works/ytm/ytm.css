@@ -74,8 +74,8 @@ li {
 
 a:visited {
     text-decoration: none;
-    color: var(--primary) !important;
-}
+    color: var(--primary);
+  }
 
 .redtext {
     color: var(--red);

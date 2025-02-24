@@ -69,9 +69,8 @@ a:link {
 
 a:visited {
     text-decoration: none;
-    color: var(--primary) !important;
-}
-
+    color: var(--primary);
+  }
 a:hover {
     text-decoration: none;
     color: var(--red);
@@ -82,7 +81,7 @@ a:hover {
 }
 
 p a:visited {
-    color: var(--primary) !important;
+    color: var(--primary);
 }
 
 p a:hover {
