@@ -160,7 +160,7 @@ pre > code {
 .introduction-text {
   width: 60%;
   font-size: 1rem;
-  line-height: 1.75rem;
+  line-height: 1.5rem;
   margin-top: 1.5rem;
 }
 
@@ -234,6 +234,44 @@ pre > code {
 .social-icons a:hover {
   color: #0A84FF;
 }
+
+
+
+/* -------------  ------------- */
+.display {
+  display: flex;
+  gap: 100px;
+}
+
+#linked  {
+  font-size: 16px;
+}
+
+#linkedin {
+  display: flex;
+  gap: 15px;
+  height: 16px;
+  margin: 0;
+}
+
+#linklog {
+  margin-top: 3px;
+  margin-left: 2px;
+  margin-right: 2px;
+  font-size: 20px;
+}
+
+#blue {
+  color: var(--red);
+}
+
+.social-icons:hover #blue{
+  color: var(--primary);
+}
+
+
+
+
 
 /* -------------  ------------- */
 
