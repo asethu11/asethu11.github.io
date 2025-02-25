@@ -324,7 +324,7 @@ pre > code {
   padding-left: 6px;
   margin-top: 1px;
   color: #fc4a4a;
-  animation: spin_4991 5s infinite;
+  animation: spin_4991 3.3s infinite;
 }
 
 @keyframes spin_4991 {
