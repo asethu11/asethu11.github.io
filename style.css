@@ -759,23 +759,23 @@ pre > code {
 }
 
 .bg1 {
-  background-image: url("side-quests/product-adoption/Abhishek\ Sethuraman\ -\ certificate.jpg");;
+  background-image: url("side-quests/Certifications/product-adoption.jpg");;
 }
 
 .bg2 {
-  background-image: url("side-quests/RCR/certificate.png");
+  background-image: url("side-quests/Certifications/mobile-ui.jpg");
 }
 
 .bg3 {
-  background-image: url("img/droidcon22thumbnail.png");
+  background-image: url("");
 }
 
 .bg4 {
-  background-image: url("img/interview.png");
+  background-image: url("");
 }
 
 .bg5 {
-  background-image: url("img/designmatters.png");
+  background-image: url("");
 }
 
 @media only screen and (max-width: 1050px) and (min-width: 769px) {
