@@ -13,20 +13,24 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-      --background: #040404;
-      --background-grey: #2B2C2E;
-      --text-primary: #F0F0F0; 
-      --text-secondary: #aaa9a9; 
-      --primary: #0A84FF;
-      --red: #db4f4f; 
-  }
+    :root {
+        --background: #040404;
+        --background-grey: #2B2C2E;
+        --text-primary: #F0F0F0; 
+        --text-secondary: #adabab; 
+        --text-normal: #e4e4e4;
+        --text-bold: #ffffff;
+        --primary: #0A84FF;
+        --red: #db4f4f; 
+    }
+    
+    p {
+        color: var(--text-normal);
+    }
 
-
-  
-  b {
-    font-weight: 700;
-  }
+    b {
+        color: var(--text-bold);
+    }
 }
 
 
