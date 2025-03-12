@@ -14,21 +14,19 @@
         --background: #040404;
         --background-grey: #2B2C2E;
         --text-primary: #F0F0F0; 
-        --text-secondary: #777777; 
-        --primary: #0A84FF; 
-        --red:#db4f4f;
+        --text-secondary: #adabab; 
+        --text-normal: #F0F0F0;
+        --text-bold: #ffffff;
+        --primary: #0A84FF;
+        --red: #db4f4f; 
     }
     
     p {
-        font-weight: 280;
+        color: var(--text-normal);
     }
 
-    li {
-        font-weight: 280;
-    }
-
-    a {
-        font-weight: 400;
+    b {
+        color: var(--text-bold);
     }
 }
 
