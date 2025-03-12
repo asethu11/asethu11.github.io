@@ -19,17 +19,9 @@
         --red:#db4f4f;
     }
 
-    p {
-      font-weight: 280;
-  }
-
-  li {
-      font-weight: 280;
-  }
-
-  a {
-      font-weight: 400;
-  }
+    b {
+      font-weight: 700;
+    }
 }
 
 
