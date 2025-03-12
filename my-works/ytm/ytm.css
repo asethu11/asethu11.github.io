@@ -5,19 +5,33 @@
     --background: #FCFCFC;
     --background-grey: #F3F5F7;
     --text-primary: #262628; 
-    --text-secondary: #a1a1a1; 
+    --text-secondary: #7a7a7a; 
     --primary: #0070EA; 
     --red: #db4f4f;
   }
+
+
   
   @media (prefers-color-scheme: dark) {
     :root {
         --background: #040404;
         --background-grey: #2B2C2E;
         --text-primary: #F0F0F0; 
-        --text-secondary: #aaa9a9; 
+        --text-secondary: #adabab; 
         --primary: #0A84FF;
         --red: #db4f4f; 
+    }
+    
+    p {
+        font-weight: 280;
+    }
+
+    li {
+        font-weight: 280;
+    }
+
+    a {
+        font-weight: 400;
     }
   }
   
@@ -35,6 +49,7 @@ body {
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
+
 }
 
 h1 {
@@ -51,14 +66,14 @@ h2, h3, h4, h5, h6, p{
 
 
 h2 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 600;
     margin-bottom: 1rem;
     letter-spacing: -0.3px;
 }
 
 h3 {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 500;
     margin-bottom: 1rem;
     line-height: 1.6rem;
@@ -81,7 +96,13 @@ a:visited {
     color: var(--red);
 }
 
+.hyp-p {
+    color: var(--red) !important;
+}
 
+.hyp-p:hover {
+    color: var(--primary) !important;
+}
 
 
 #pic-1 {
@@ -100,7 +121,9 @@ a:visited {
     width: 100%;
 }
 
-
+#intro-tags1 {
+    color: var(--text-secondary) !important;
+    }
 
 .headtag {
     display: inline-flex;
