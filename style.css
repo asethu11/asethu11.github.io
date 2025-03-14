@@ -255,6 +255,7 @@ pre > code {
 
 #linked  {
   font-size: 16px;
+  color: var(--text-primary);
 }
 
 #linked:hover {
