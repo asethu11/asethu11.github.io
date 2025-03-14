@@ -224,7 +224,7 @@ pre > code {
 }
 
 .introduction-text a:hover {
-  color: var(--hover-text);
+  color: var(--primary);
   cursor: pointer;
 }
 
@@ -242,7 +242,7 @@ pre > code {
 }
 
 .social-icons a:hover {
-  color: #0A84FF;
+  color: #0A84FF !important;
 }
 
 
@@ -255,6 +255,10 @@ pre > code {
 
 #linked  {
   font-size: 16px;
+}
+
+#linked:hover {
+  color: var(--primary);
 }
 
 #linkedin {
