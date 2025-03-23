@@ -5,12 +5,14 @@
 
 :root {
   --background: #FCFCFC;
-  --background-grey: #F3F5F7;
+  --background-grey: #eff1f3;
   --text-primary: #262628; 
-  --text-secondary: #a1a1a1; 
+  --text-secondary: #616161; 
   --primary: #0070EA; 
   --red: #db4f4f;
 }
+
+
 
 @media (prefers-color-scheme: dark) {
     :root {
@@ -23,6 +25,8 @@
         --primary: #0A84FF;
         --red: #db4f4f; 
     }
+
+    
     
     p {
         color: var(--text-normal);
