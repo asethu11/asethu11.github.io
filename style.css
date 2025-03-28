@@ -797,6 +797,8 @@ pre > code {
   background-image: url("");
 }
 
+
+
 @media only screen and (max-width: 1050px) and (min-width: 769px) {
   .section-keynotes {
       width: 100%;
