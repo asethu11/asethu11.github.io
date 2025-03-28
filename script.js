@@ -38,3 +38,5 @@ function deletingEffect() {
     loopDeleting();
 }
 
+window.onload = typingEffect;
+
