@@ -1,0 +1,400 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --background: #FCFCFC;
+    --background-grey: #F3F5F7;
+    --text-primary: #262628; 
+    --text-secondary: #7a7a7a; 
+    --primary: #0070EA; 
+    --red: #db4f4f;
+
+  }
+
+
+  
+  @media (prefers-color-scheme: dark) {
+    :root {
+        --background: #040404;
+        --background-grey: #2B2C2E;
+        --text-primary: #F0F0F0; 
+        --text-secondary: #adabab; 
+        --text-normal: #e4e4e4;
+        --text-bold: #ffffff;
+        --primary: #0A84FF;
+        --red: #db4f4f; 
+    }
+    
+    p {
+        color: var(--text-normal);
+    }
+
+    b {
+        color: var(--text-bold);
+    }
+
+    hr {
+        border-color: var(--background-grey);
+    }
+
+
+
+  }
+  
+
+
+
+
+
+
+
+
+
+html {
+    background-color: var(--background);
+} 
+
+body {
+    font-family: "Inter", serif;
+    font-size: 16px;
+    color: var(--text-primary);
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+h1 {
+    font-family: "Big Shoulders Display", serif;
+    font-size: 3rem !important;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.3px;
+}
+
+h2, h3, h4, h5, h6, p{
+    font-family: 'Inter', sans-serif;
+}   
+
+
+h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: -0.3px;
+}
+
+h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    line-height: 1.6rem;
+}
+
+li {
+    line-height: 1.6rem;
+}
+
+:visited {
+    color: var(--primary);
+}
+
+a:visited {
+    text-decoration: none;
+    color: var(--primary);
+}
+
+  
+.headtag {
+    display: inline-flex;
+    height: 20px;
+  }
+  
+  .arr {
+    display: none;
+    color: var(--red);
+  }
+  
+  .headtag:hover .arr {
+    display: flex;
+    margin-left: 10px;
+  }
+  
+  .headtag:hover {
+    color: var(--red);
+  }
+
+  #theme {
+    color: var(--red);
+  }
+
+
+
+
+
+
+/* Header */
+
+
+
+.hyp-p {
+    color: var(--primary) !important;
+}
+
+.hyp-p:hover {
+    color: var(--red) !important;
+}
+
+
+
+
+
+
+
+#intro-tags1 {
+    margin-top: 3rem;
+    color: var(--text-secondary) !important;
+    }
+
+
+    .intro-hr {
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+        border: 0;
+        border-top: 1px solid var(--background-grey);
+    }
+
+    hr {
+        border-color: var(--background-grey);
+    }
+
+  
+  
+  
+
+
+
+
+
+
+
+
+
+a:link {
+    text-decoration: none;
+    color: var(--primary);
+}
+
+
+
+p {
+    line-height: 24px;
+    margin-top: 0rem;
+}
+
+pre {
+    font-size: 0.8rem;
+    line-height: 1.6rem;
+    margin: 0;
+    padding: 0;
+    background-color: #1E1E1E;
+    border-radius: 8px;
+    width: 100%;
+    margin: 1.5rem 0;
+}
+
+code {
+    padding: 1.5rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: visible;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    color: #D4D4D4;
+    display: block;
+    border-radius: 8px;
+}
+
+pre > code {
+    margin: 0;
+}
+
+
+@media only screen and (max-width: 768px) and (min-width: 481px) {
+}
+
+@media only screen and (max-width: 480px) {
+}
+
+.article-container {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    padding: 100px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.article-body {
+    max-width: 700px;
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.article-figure {
+    margin: 2rem 0;
+}
+
+
+
+.article-figure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.article-figure figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+ol {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+ol li {
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+
+.article-h1{
+    font-size: 2rem;
+    letter-spacing: -0.05rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+.article-h2{
+    margin-top: 4rem;
+}
+
+.grey-background-article {
+    /* background-color: var(--background-grey); */
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    min-width: 180px;
+    height: 280px;
+    position: relative;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 480px) {
+    .grey-background-article {
+        height: 200px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .article-container {
+        padding: 50px 10px;
+    }
+    
+    .article-body {
+        padding: 0;
+    }
+}
+
+/* Make code blocks in list items full width */
+li pre {
+    margin-left: -1.5rem; /* Counter the list item padding */
+    margin-right: 0;
+    width: calc(100% + 1.5rem); /* Expand width to compensate for negative margin */
+}
+
+@media only screen and (max-width: 768px) {
+    li pre {
+        margin-left: -1.5rem;
+        width: calc(100% + 1.5rem);
+    }
+}
+
+.back-button {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    color: var(--text-primary) !important;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    z-index: 100;
+    white-space: nowrap;
+}
+
+.back-button:hover {
+    transform: translateY(-1px);
+    color: var(--primary) !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .back-button {
+        position: relative;
+        display: inline-flex;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .back-button {
+        top: 1rem;
+        left: 1rem;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+}
+
+@media only screen and (max-width: 768px) {
+}
+
+@media only screen and (max-width: 1400px) {
+}
+
+@media only screen and (max-width: 1200px) {
+}
+
+
+
+
+
+
+
+.hyp-p:active + .refd {
+    display: block;
+}
+
+
+/* box'd 
+. {
+    background-color: var(--background-grey);
+    border: var(--background-grey);
+    overflow: visible;
+    padding: 10%;
+    width: 100%;
+    margin-left: -10%;
+    box-sizing: content-box;
+}*/
+
+
+
+
