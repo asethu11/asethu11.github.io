@@ -214,6 +214,7 @@ pre > code {
 }
 
 .logo {
+  display: flex-column;
   align-items: center;
   gap: 0px;
 }
@@ -274,10 +275,10 @@ pre > code {
 
 
 /* -------------  ------------- */
-/* .display {
+.display {
   display: flex;
   gap: 100px;
-} */
+}
 
 #linked  {
   font-size: 16px;
@@ -289,7 +290,15 @@ pre > code {
   color: var(--primary);
 }
 
+#resume  {
+  font-size: 16px;
+  color: var(--text-primary);
+  margin-left: 85px;
+}
 
+#resume:hover {
+  color: var(--primary);
+}
 
 
 #linkedin {
@@ -306,8 +315,13 @@ pre > code {
   font-size: 20px;
 }
 
+#blue {
+  color: var(--red);
+}
 
-
+.social-icons:hover #blue{
+  color: var(--primary);
+}
 
 
 
@@ -352,11 +366,11 @@ pre > code {
   line-height: 1.5;
   font-size: 16px;
   font-weight: 400;
-  color: var(--red);
+  color: var());
 }
 
 .dark-mode .ploader {
-  color: var(--text-normal);
+  color: var(--text-light);
 }
 
 .word {
@@ -455,7 +469,9 @@ pre > code {
   color: var(--text-primary)!important;
 }
 
-
+/* .inline:hover {
+  border-bottom: 2px solid var(--text-primary);
+} */
 
 .header2 {
   margin-top: 5rem;
@@ -526,14 +542,24 @@ pre > code {
   }
 }
 
-
+.image-bottom{
+  align-items: end!important;
+ 
+}
 
 .grey-background:hover .project-image {
   transition: transform 125ms;
   transform: scale(1.02);
 }
 
+.white-circle {
+  width: 110px;
+  height: 110px;
+  background-color: var(--background);
+  border-radius: 100px;
+  position: absolute;
 
+}
 
 .project-image {
   max-width: 90%;
@@ -854,7 +880,86 @@ pre > code {
   margin-top: 2rem;
 }
 
-/* ------------------ Article ------------------ */
+.article {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;  
+}
+
+.article:visited {
+  color: var(--text-primary)
+}
+
+.article-title {
+  text-decoration: none;
+  color: var(--text-primary)
+}
+
+.article-date {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.article:hover .article-title {
+  color: var(--primary)!important;
+}
+
+.article:hover .article-date {
+  color: var(--primary)!important;
+}
+
+.arrow {
+  display: none;
+  color: var(--primary);
+}
+
+.article:hover .arrow{
+  display: block;
+}
+
+@media only screen and (max-width: 1050px) and (min-width: 769px) {
+  .article {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;  
+  }
+  .article-title{
+      margin-bottom: 0;
+  }
+  .article:hover .arrow{
+      display: none;
+  }
+}
+
+@media only screen and (max-width: 768px) and (min-width: 481px) {
+  .article {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;  
+  }
+  .article-title{
+      margin-bottom: 0;
+  }
+  .article:hover .arrow{
+      display: none;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .article {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;  
+  }
+  .article-title{
+      margin-bottom: 0;
+  }
+  .article:hover .arrow{
+      display: none;
+  }
+}
+
+/* -------------  ARTICLE  ------------- */
 .article-container {
   margin: auto;
   display: flex;
@@ -863,7 +968,6 @@ pre > code {
   width: 100%;
   box-sizing: border-box;
 }
-
 .article-body {
   max-width: 700px;
   width: 100%;
@@ -905,13 +1009,14 @@ ol li {
   margin: 1rem 0;
 }
 
-.article-h1 {
+.article-h1{
   font-size: 2rem;
   letter-spacing: -0.05rem;
-  margin: 1rem 0 2rem;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 }
 
-.article-h2 {
+.article-h2{
   margin-top: 4rem;
 }
 
@@ -930,50 +1035,10 @@ ol li {
 
 @media only screen and (max-width: 480px) {
   .grey-background-article {
-    height: 200px;
+      height: 200px;
   }
 }
 
-
-.article {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-}
-
-.article:visited {
-  color: var(--text-primary);
-}
-
-.article-title {
-  text-decoration: none;
-  color: var(--text-primary);
-}
-
-.article-date {
-  font-size: 14px;
-  color: var(--text-secondary);
-}
-
-.article:hover .article-title {
-  color: var(--primary) !important;
-}
-
-.article:hover .article-date {
-  color: var(--primary) !important;
-}
-
-.arrow {
-  display: none;
-  color: var(--primary);
-}
-
-.article:hover .arrow {
-  display: block;
-}
-
--bottom: 2rem;
-  margin-top  
 @media only screen and (max-width: 768px) {
   .article-container {
       padding: 50px 10px;
