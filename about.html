@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,25 +22,14 @@
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
 
         <script src="aboutscript.js"></script>
-        <link rel="stylesheet" href="style-about.css">
+        <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
         <link rel="icon" href="img/favicon.png" type="image/png">
     </head>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-98H0ZTK0T4');
-    </script>
-
-
-
-
     <body>
+        <!-- Back Button -->
         <a href="index.html" class="back-button">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -39,9 +37,12 @@
             Home
         </a>
 
+        <!-- Main -->
         <div class="container">
+
+            <!-- Header -->
             <div class="introduction">
-                <header class="header">
+                <div class="header">
                     <div class="logo">
                         <a href="index.html">
                             <div class="flex">
@@ -49,17 +50,17 @@
                                 <p class="header-sub-title blink">|</p>
                             </div>
                         </a>
+                        
+                        <h4 class="uh-bee">and that's pronounced uh-bee-shake</h4>
                     </div>
-                </header>
+                </div>
 
-                <h4 class="uh-bee">and that's pronounced uh-bee-shake</h4>
                 <br>
+                
+                <!-- Picture -->
+                <img src="https://media.licdn.com/dms/image/v2/D5603AQHbdjpGZeZOuA/profile-displayphoto-shrink_800_800/B56ZYWsVxAHEAc-/0/1744137444743?e=1749686400&v=beta&t=2QMx3OgkDMmi39V-IAsJyxmZm0Tz_WLBBY51Ul9UMJI" alt="Abhishek's photo" class="profile-photo" height="200px" width="200px">
 
-                <p class="introduction-text">
-                    <img src="https://media.licdn.com/dms/image/v2/D5603AQHbdjpGZeZOuA/profile-displayphoto-shrink_800_800/B56ZYWsVxAHEAc-/0/1744137444743?e=1749686400&v=beta&t=2QMx3OgkDMmi39V-IAsJyxmZm0Tz_WLBBY51Ul9UMJI" 
-                    alt="Abhishek's photo" class="profile-photo" height="200px" width="200px">
-                </p>
-
+                <!-- Introduction Text -->
                 <p class="introduction-text">
                     I’m a UX & XR designer with a multidisciplinary background, based in Phoenix, AZ. I'm now pursuing my Master’s in User Experience (HCI) at Arizona State University.<br><br>
 
@@ -68,115 +69,127 @@
                     I like to call myself a self-taught designer. Even though I studied design for 7 years, I learned all my tools through YouTube tutorials, freelance projects and a lot of messing around. I think that gives me an edge. I don’t just follow conventional thinking frameworks; I mix disciplines, experiment, and think outside the box to design more creative solutions.
                 </p>
 
-                <br><br>
+                <br>
 
-                <p>
-                    Check out my <a href="https://docs.google.com/document/d/1IXydVGEXE5wz5FQK83--w8JfNdspRJLz7rsQewwsL6s/edit?usp=sharing" target="_blank" class="headtag">resume<p class="arr">--></p></a>
-                </p>
-
-                <div class="social-icons">
-                    <a href="https://github.com/asethu11" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="mailto:mailsofabshk@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                    <a href="https://medium.com/@mailsofabhishek" target="_blank" aria-label="Medium"><i class="fab fa-medium"></i></a>
-                    <a href="https://www.linkedin.com/in/asethu/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <!-- Social Media Icons -->
+                <div class="socials">
+                    <div class="social-icons">
+                        <a href="https://github.com/asethu11" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="mailto:mailsofabshk@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="https://medium.com/@mailsofabhishek" target="_blank" aria-label="Medium"><i class="fab fa-medium"></i></a>
+                        <a href="https://www.linkedin.com/in/asethu/" target="_blank" aria-label="Medium"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                    
+                    <a href="https://docs.google.com/document/d/1IXydVGEXE5wz5FQK83--w8JfNdspRJLz7rsQewwsL6s/edit?usp=sharing" target="_blank" aria-label="LinkedIn" id="linkedin">
+                        <p id="linked">Check out my resume --></p>
+                    </a>
                 </div>
-
-
-
+                
+                
             </div>
 
-
-             <!--Other projects-->
+            <!-- What I’ve Been Up To Lately -->
             <div class="other-projects">
-                            <h2 class="section-t">What I’ve Been Up To Lately</h2>
-                            <div class="columns-container">
-                                <div class="projects">
-                        
-                                <section class="project-row">
-                                    <p class="project-row-title">
-                                        Been learning JavaScript and React
-                                    </p>
-                                    <div class="project-row-sub-title">
-                                        <p class="project-tag">Mostly to understand the dev complexities and limitations. The hover preview for items in this section is generated using JS.</p>
-                                    </div>
-                                </section>
-                        
-                                <section class="project-row">
-                                    <p class="project-row-title">
-                                        Finishing up a course on Agile Methods for UX Design 
-                                    </p>
-                                    <div class="project-row-sub-title">
-                                        <p class="project-tag">IxDF Certification: Familiarizing myself with Agile and Scrum frameworks</p>
-                                    </div>
-                                </section>
+                <h2 class="section-t">What I’ve Been Up To Lately</h2>
                 
-                                <section class="project-row">
-                                    <p class="project-row-title">
-                                        Redesigning the UX for 2 VR applications
-                                    <div class="project-row-sub-title">
-                                        <p class="project-tag">Transitioning and getting started with 2 separate projects at Meteor Studio. Would be working primarily on the UX, but would be redesigning some UI elements as well</p>
-                                    </div>
-                                </section>
-                        
-                                <section class="project-row">
-                                    <p class="project-row-title">
-                                        Designing the UX & UI for a MedTech Data Extraction App
-                                    </p>
-                                    <div class="project-row-sub-title">
-                                        <p class="project-tag">Working with Oncologists and researchers at MayoClinic Cancer Research to develop a solution for Data Extraction in Living Systematic Reviews Processes. </p>
-                
-                                    </div>
-                                </section>
-                
-                                <section class="project-row">
-                                    <p class="project-row-title">
-                                        Innerverse
-                                    </p>
-                                    <div class="project-row-sub-title">
-                                        <p class="project-tag">A personal project. Have been working on a Dream Logger application. Designing the UX, UI and Design system.</p>
-                                    </div>
-                                </section>
-                
-                        
-                                
+                <div class="columns-container">
+
+                    <!-- Items -->
+                    <div class="projects">
+
+                        <!-- Item 1 -->
+                        <section class="project-row">
+                            <p class="project-row-title">
+                                Been learning JavaScript and React
+                            </p>
+                            <div class="project-row-sub-title">
+                                <p class="project-tag">Mostly to understand the dev complexities and limitations. The hover preview for items in this section is generated using JS.</p>
                             </div>
-                        
-                            <div class="preview-container">
-                                <!-- Project Previews -->
-                                
-                                <div class="project-preview">
-                                    <img src="about-page/WIBUT/JS.png" alt="Project 1 preview">
-                                </div>
-                        
-                                <div class="project-preview">
-                                    <img src="about-page/WIBUT/Agile.png" alt="Project 2 preview">
-                                </div>
-                        
-                                <div class="project-preview">
-                                    <img src="about-page/WIBUT/VR.png" alt="Project 3 preview">
-                                </div>
-                                
-                                <div class="project-preview">
-                                    <img src="about-page/WIBUT/CX.png" alt="Project 5 preview">
-                                </div>
-                        
-                                <div class="project-preview">
-                                    <video autoplay loop muted playsinline class="project-image" id="project-1">
-                                        <source src="https://i.imgur.com/sktzApQ.mp4" type="video/mp4">
-                                    </video>
-                                </div>
-                        
-                                <!--<div class="project-preview">
-                                <video autoplay loop muted playsinline>
-                                    <source src="vid/project-4.mp4" type="video/mp4">
-                                </video>
-                                </div>-->
-                                
+                        </section>
+
+                        <!--  Item 2 -->
+                        <section class="project-row">
+                            <p class="project-row-title">
+                                Finishing up a course on Agile Methods for UX Design 
+                            </p>
+                            <div class="project-row-sub-title">
+                                <p class="project-tag">IxDF Certification: Familiarizing myself with Agile and Scrum frameworks</p>
                             </div>
+                        </section>
+        
+                        <!--  Item 3 -->
+                        <section class="project-row">
+                            <p class="project-row-title">
+                                Redesigning the UX for 2 VR applications
+                            <div class="project-row-sub-title">
+                                <p class="project-tag">Transitioning and getting started with 2 separate projects at Meteor Studio. Would be working primarily on the UX, but would be redesigning some UI elements as well</p>
+                            </div>
+                        </section>
+                        
+                        <!--  Item 4 -->
+                        <section class="project-row">
+                            <p class="project-row-title">
+                                Designing the UX & UI for a MedTech Data Extraction App
+                            </p>
+                            <div class="project-row-sub-title">
+                                <p class="project-tag">Working with Oncologists and researchers at MayoClinic Cancer Research to develop a solution for Data Extraction in Living Systematic Reviews Processes. </p>
+        
+                            </div>
+                        </section>
+                        
+                        <!--  Item 5 -->
+                        <section class="project-row">
+                            <p class="project-row-title">
+                                Innerverse
+                            </p>
+                            <div class="project-row-sub-title">
+                                <p class="project-tag">A personal project. Have been working on a Dream Logger application. Designing the UX, UI and Design system.</p>
+                            </div>
+                        </section>
+
+                    </div>
+                    
+                    <!-- Project Previews -->
+                    <div class="preview-container">
+                               
+                        <!-- Item 1 Preview -->
+                        <div class="project-preview">
+                            <img src="about-page/WIBUT/JS.png" alt="Project 1 preview">
                         </div>
+                        
+                        <!-- Item 2 Preview -->
+                        <div class="project-preview">
+                            <img src="about-page/WIBUT/Agile.png" alt="Project 2 preview">
+                        </div>
+                        
+                        <!-- Item 3 Preview -->
+                        <div class="project-preview">
+                            <img src="about-page/WIBUT/VR.png" alt="Project 3 preview">
+                        </div>
+                        
+                        <!-- Item 4 Preview -->
+                        <div class="project-preview">
+                            <img src="about-page/WIBUT/CX.png" alt="Project 5 preview">
+                        </div>
+                        
+                        <!-- Item 5 Preview -->
+                        <div class="project-preview">
+                            <video autoplay loop muted playsinline class="project-image" id="project-1">
+                                <source src="https://i.imgur.com/sktzApQ.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                
+                        <!--<div class="project-preview">
+                        <video autoplay loop muted playsinline>
+                            <source src="vid/project-4.mp4" type="video/mp4">
+                        </video>
+                        </div>-->
+                        
+                    </div>
+                </div>
             </div>
 
-        <!--
+             <!-- 
             <div class="section-keynotes"> 
                 <h2 class="section-t">I like learning</h2>
                 <div class="keynotes">
@@ -214,25 +227,12 @@
                 </div>
             </div>
         -->    
-     
 
-
-
-
-            
-
-
+            <!-- Footer -->
+            <footer class="footer"><a href="about.html#top" class="headtag">back to top<p class="arr"> ↑</p></a><br><br>
+            </footer>
         </div>
-
-        <footer class="footer"><a href="about.html#top" class="headtag">back to top<p class="arr"> ↑</p></a><br><br>
-            <a href="index.html" class="headtag">take me home<p class="arr"> <--</p></a>
-        </footer>
-
-        <br><br><br><br><br>
-      
-
     </body>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
