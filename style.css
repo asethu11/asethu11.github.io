@@ -55,6 +55,12 @@ body {
   margin-bottom: 6rem;
 }
 
+.footer-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 1.5rem;
+}
+
 
 .blink {
   animation: blink 0.5s infinite;
