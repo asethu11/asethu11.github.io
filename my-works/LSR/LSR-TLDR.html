@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+            <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+          
+            gtag('config', 'G-98H0ZTK0T4');
+          
+            
+          </script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Data Extraction for MayoClinic</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="LSR.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="icon" href="img/favicon.png" type="image/png">
+    </head>
+
+
+<script>
+    function updateImages() {
+    const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.querySelectorAll(".theme-img").forEach(img => {
+        const imageName = img.dataset.name; // Get the image name
+        img.src = isDarkMode ? `darkmode/${imageName}.jpg` : `lightmode/${imageName}.jpg`;
+    });
+}
+
+// Run on page load
+updateImages();
+
+// Listen for theme changes
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateImages);
+
+</script>
+
+
+
+<script>
+    function updateImages() {
+        const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.querySelectorAll(".theme-img").forEach(img => {
+            const imageName = img.dataset.name; // Get the image name
+            const newSrc = isDarkMode 
+                ? `img/dk/${imageName}.png` 
+                : `img/lt/${imageName}.png`;
+
+            // Only update if the src has changed (prevents unnecessary reloads)
+            if (img.src !== newSrc) {
+                img.src = newSrc;
+            }
+        });
+    }
+
+    // Ensure images update on theme change
+    const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    darkModeQuery.addEventListener("change", updateImages);
+
+    // Run on page load
+    document.addEventListener("DOMContentLoaded", updateImages);
+</script>
+
+
+<body>
+    <a href="../../index.html" class="back-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M5 12L12 19M5 12L12 5"
+                stroke="currentColor" 
+                stroke-width="2" 
+                stroke-linecap="round"
+                stroke-linejoin="round"/>
+        </svg>
+        Home
+    </a>
+
+    <div class="article-container">
+        <article class="article-body">
+            <!--Intro Section-->
+            <section class="section-1">
+                <div class="grey-background-article image-bottom">
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="tldr" width="100%" alt="">
+                    </figure>
+                </div>
+
+                <h1 class="article-h1">AI-Powered Data Extraction Interface for Medical Researchers</h1>
+
+                <p>
+                    We built an Airtable-style “smart spreadsheet” that lets doctors pull structured clinical trial data from PDFs—fast, transparently, and with full control. The tool blends AI-assisted extraction with human validation, streamlining a previously manual and error-prone workflow into a focused, fluid experience.
+                </p>
+
+                <div class="sub-header">
+                    <p id="intro-tags1">
+                        TL;DR |
+                        <a href="/building.html" class="headtag">View Project in Detail</a>
+                    </p>
+                </div>
+            </section>
+
+            <hr class="hr">
+
+            <section class="section-2">
+
+                <section class="section-description">
+                    <h2 class="article-h2">What Are Living Systematic Reviews?</h2>
+                    <p>
+                        Living Systematic Reviews (LSRs) are a modern evolution of traditional systematic reviews. Instead of publishing once and becoming outdated, LSRs are designed to be continuously updated as new research emerges. This makes them essential for fast-evolving fields like clinical medicine, public health, and COVID-era trials, where timely evidence can impact real‑world decisions.
+                    </p>
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="tldr slide1" width="100%" alt="">
+                    </figure>
+
+                    <p>
+                        But the process of maintaining an LSR is intensely manual:
+                    </p>
+                    <ul>
+                        <li>Researchers must screen and extract data from dozens or hundreds of new studies regularly.</li>
+                        <li>Even small updates can require repeating the entire review pipeline—screening, extraction, synthesis.</li>
+                    </ul>
+                    <p>
+                        Our goal was to rethink this pipeline, specifically the data extraction bottleneck, by building a tool that doesn’t just speed up the task, but fundamentally supports the human judgment that underpins every evidence‑based decision.
+                    </p>
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="tldr slide2" width="100%" alt="">
+                    </figure>
+                </section>
+
+                <h2 class="article-h2">Why It Mattered</h2>
+                <ul>
+                    <li><strong>Mountains of PDFs:</strong> Clinicians were manually keying data from 100 + study papers per review.</li>
+                    <li><strong>Error‑prone & exhausting:</strong> Copy‑paste mistakes slowed publication and sapped research budgets.</li>
+                    <li><strong>Goal:</strong> Replace scattered tools with one friction‑free workspace that blends AI suggestions with human oversight.</li>
+                </ul>
+
+                <h2 class="article-h2">My Role</h2>
+                <p><b>Product/UX lead</b> — plan research, facilitate co‑design, prototype flows, wrangle dev constraints.</p>
+
+                <hr class="hr">
+
+                <h2 class="article-h2">Process Highlights</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Activity</th>
+                            <th>Outcome</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tdh">Discover</span></td>
+                            <td><span>
+                                <ul>
+                                    <li>6 round‑table chats with physicians</li>
+                                    <li>Shadowed 2 live extraction sessions</li>
+                                    <li>15 h YouTube workflow teardown</li>
+                                </ul>
+                            </span></td>
+                            <td><span>Pain map of 23 hurdles (e.g., duplicate entry, version chaos)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tdh">Analyze</span></td>
+                            <td><span>
+                                <ul>
+                                    <li>Competitive teardown of Covidence, Rayyan, DistillrSR</li>
+                                    <li>Affinity map → 5 core themes</li>
+                                </ul>
+                            </span></td>
+                            <td><span>Gap list: AI assist, inline evidence, conflict resolution</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tdh">CoDesign</span></td>
+                            <td><span>
+                                <ul>
+                                    <li>Card‑sorting & task‑flow workshops with 4 MDs</li>
+                                </ul>
+                            </span></td>
+                            <td><span>Agreed MVP scope: prioritize “single‑cell validation”</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tdh">Ideate</span></td>
+                            <td><span>
+                                <ul>
+                                    <li>4 weekly design sprints</li>
+                                    <li>Low‑fid wireframes in Figma</li>
+                                </ul>
+                            </span></td>
+                            <td><span>First clickable flow for “flag & resolve”</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tdh">Validate</span></td>
+                            <td><span>
+                                <ul>
+                                    <li>2 usability rounds (think‑aloud)</li>
+                                </ul>
+                            </span></td>
+                            <td><span>Iteration 1: doctors fixated on gray boxes → switched to high‑context mock data</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tdh">Refine</span></td>
+                            <td><span>
+                                <ul>
+                                    <li>Pivot to spreadsheet metaphor after MD feedback</li>
+                                    <li>Pattern‑match Airtable UI + ChatGPT side‑panel</li>
+                                </ul>
+                            </span></td>
+                            <td><span>“Feels familiar”‑quote from all 4 test doctors</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tdh">Feasibility</span></td>
+                            <td><span>
+                                <ul>
+                                    <li>Dev sync to map parser limits & latency</li>
+                                </ul>
+                            </span></td>
+                            <td><span>Green‑lit extraction of 12 evidence fields under 1 s</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="tldr slide3" width="100%" alt="">
+                </figure>
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="tldr slide4" width="100%" alt="">
+                </figure>
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="tldr slide5" width="100%" alt="">
+                </figure>
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="tldr slide6" width="100%" alt="">
+                </figure>
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="tldr slide7" width="100%" alt="">
+                </figure>
+
+                <h2 class="article-h2">Design Wins</h2>
+                <ul>
+                    <li><b>Smart Columns:</b> Cells auto-suggest values; conflicts highlighted</li>
+                    <li><b>Evidence Side Panel:</b> Inline PDF snippet + AI model comparison</li>
+                    <li><b>One-Click Resolution:</b> Users confirm or override suggestions; model improves</li>
+                    <li><b>Progress Heatmap:</b> Visual momentum through color-coded row progress</li>
+                </ul>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="tldr slide8" width="100%" alt="">
+                </figure>
+
+                <h2 class="article-h2">Impact & Next Steps</h2>
+                <p>In pilot tests with 3 researchers on 72 papers, extraction time dropped by ~4×. 4/5 of testers said they would use the tool in future reviews.</p>
+                <p>We're now building a high-fidelity prototype for grant submission and broader deployment by Q3 2025.</p>
+            </section>
+
+            <br><br><br>
+            <footer>
+                <hr>
+                <div class="footer-container">
+                <a href="#top" class="hyp-p">back to top ↑</a>
+                <a href="/building.html" class="hyp-p">view project in detail --></a>
+                </div>
+            </footer>
+        </article>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!--Templates-->
+
+<!--
+
+<p > 
+    At the moment, Youtube Music holds under 10% of the streaming market. <a class="hyp-p" href="https://evoca.tv/streaming-service-market-share/#:~:text=Spotify 31.7,Deezer 1.3">(source) ↗</a>
+</p>

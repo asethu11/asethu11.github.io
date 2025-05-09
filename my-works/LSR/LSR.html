@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>User Testing for Safety Messaging</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="LSR.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="icon" href="img/favicon.png" type="image/png">
+
+        <script>
+            function updateImages() {
+            const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            document.querySelectorAll(".theme-img").forEach(img => {
+                const imageName = img.dataset.name; // Get the image name
+                img.src = isDarkMode ? `darkmode/${imageName}.jpg` : `lightmode/${imageName}.jpg`;
+            });
+        }
+        
+        // Run on page load
+        updateImages();
+        
+        // Listen for theme changes
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateImages);
+        
+        </script>
+
+        <script>
+            function updateImages() {
+                const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                document.querySelectorAll(".theme-img").forEach(img => {
+                    const imageName = img.dataset.name; // Get the image name
+                    const newSrc = isDarkMode 
+                        ? `img/dk/${imageName}.png` 
+                        : `img/lt/${imageName}.png`;
+
+                    // Only update if the src has changed (prevents unnecessary reloads)
+                    if (img.src !== newSrc) {
+                        img.src = newSrc;
+                    }
+                });
+            }
+
+            // Ensure images update on theme change
+            const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+            darkModeQuery.addEventListener("change", updateImages);
+
+            // Run on page load
+            document.addEventListener("DOMContentLoaded", updateImages);
+        </script>
+    </head>
+
+    <body>
+        <a href="../../index.html" class="back-button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 12H5M5 12L12 19M5 12L12 5"
+                    stroke="currentColor" 
+                    stroke-width="2" 
+                    stroke-linecap="round"
+                    stroke-linejoin="round"/>
+            </svg>
+            Home
+        </a>
+
+        <div class="article-container">
+            <article class="article-body">
+                
+                <!--Intro Section-->
+                <section class="section-1">
+
+                    <div class="grey-background-article image-bottom">
+                        <figure class="article-figure">
+                            <img class="theme-img" src="" data-name="slide1" width="100%" alt="">
+                        </figure>
+                    </div>
+
+                    <h1 class="article-h1">AI-Powered Data Extraction Interface for Medical Researchers</h1>
+
+                    <div class="sub-header">
+                        <p id="intro-tags1">
+                            <!-- <a href="" target="_blank" class="headtag">
+                                Link to Figma file
+                            </a> -->
+
+                            5-7 min read |
+
+                            <a href="LSR-TLDR.html" class="headtag">TL;DR for those in a rush</a>
+                        </p>
+                    </div>
+
+                </section>
+                
+                <hr class="intro-hr">
+
+                <section class="section-2">
+
+                    <h2 class="article-h2">The Human Cost of Manual Review</h2>
+                    <p>Every systematic review begins with a mountain of PDFs and ends with weary clinicians triple‑checking tables. We shadowed Dr. Khan and Dr. Umar as they copied sample sizes into Excel, toggling between windows, fingers dancing faster than his eyes could track. Midway through the tenth paper Dr. Khan sighed, <em>"I open the PDF, scroll to the tables, copy the number, alt-tab to Excel. Over and over. For hours."</em></p>
+
+                    <p>Multiply that by a hundred papers, and you see the issue: a process designed for machines, executed by humans.</p>
+                    
+                    <p>Existing tools like <b>Covidence</b>, <b>Rayyan</b>, or <b>DistillrSR</b> failed on usability. Doctors either abandoned them or hacked their own makeshift systems. The field desperately needed a <b>human-centered, AI-augmented solution,</b> not just faster, but actually usable and trustworthy.</p>
+
+                </section><br>
+
+                <section class="section-2">
+                    <h2 class="article-h2">Working With Constraints</h2>
+
+
+                    <p>The City’s initial brief was broad — <b>“Is this letter working?”</b></p>
+                    
+                    <p>We had to define our own scope, propose a research plan, and interpret open-ended insights into <b>concrete design actions</b>.</p>
+                </section><br>
+                
+                <section class="section-2">
+                    <h2 class="article-h2">Our Timeline</h2>
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide3" width="100%" alt="">
+                    </figure>
+
+                    <p>This project followed a structured, multi-phase process. We began with <b>client conversations and persona building</b>, moved into <b>designing and conducting user tests</b>, and ended with a <b>redesign, mockups, and a formal presentation</b> to the City of Mesa. Each phase built directly on the one before it, shaping both our understanding of the problem and our solution.</p>
+                </section><br>
+                
+                <section class="section-2">
+                    <h2 class="article-h2">Planning Our Approach</h2>
+
+                    <p>Early in the project, we created <b>three personas</b> to guide our focus and align with Mesa’s community. These personas helped us anticipate resident behaviors, identify potential comprehension barriers, and structure our testing for maximum relevance to the Mesa community. By grounding our plan in these user types, we ensured the project remained <b>human-centered</b> from the beginning.</p>
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide4" width="100%" alt="">
+                    </figure>
+
+                    <p><b>Links to detailed personas and reasoning</b>: 
+                        <a href="https://drive.google.com/drive/folders/1bEvdpqj3UvUxIO3NX5SH0zlQreIPsgQD?usp=sharing" class="hyp-p" target="_blank">Juan</a> | 
+
+                        <a href="https://drive.google.com/drive/folders/1r81YLFZvjB7t3DNH9CTxcsxKO8Ggyrn1?usp=sharing" class="hyp-p" target="_blank">Maria</a> | 
+
+                        <a href="https://drive.google.com/drive/folders/14IvJxgC6zhVt5bBPqPnLajZ14HoqEyi0?usp=drive_link" class="hyp-p" target="_blank">Sarah</a>
+                    </p> <br><br>
+
+
+                    <p>We then created a <b>structured interview protocol</b>. The core of our methodology was a <b>think-aloud usability test</b>, where participants would read the letter and verbalize their thoughts in real-time. Our goal was to catch breakdowns in clarity, flow, and attention.</p>
+
+                    <p>To get there, we went through several draft iterations. Our early scripts focused too narrowly on general impressions. Over time, we refined our tasks and questions to target <b>specific touchpoints</b> in the letter: gas leak detection, 811 protocol, and notification transparency.</p>
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide5" width="100%" alt="">
+                    </figure>
+                </section><br>
+                
+                <section class="section-2">
+                    <h2 class="article-h2">What People Were Really Feeling</h2>
+                    <p>We recruited <b>five participants</b> (four completed testing) from across Mesa and San Tan Valley. Each represented a different demographic profile. Using think-aloud methods, we observed that most participants <b>skimmed or ignored large portions</b> of the letter. The introduction was too dense, and safety steps were often buried midway through the document.</p>
+                    <p>Participants stressed the importance of <b>emergency information being placed at the top</b>, especially steps like recognizing gas leaks by smell, sound, or sight. Many requested <b>stronger visual emphasis</b> through spacing and bolded text.</p>
+
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide6" width="100%" alt="">
+                    </figure>
+                </section><br>
+
+                <section class="section-2">
+                    <h2 class="article-h2"> Initial Assumption → Contradicted by Research</h2>
+
+                    <p><b>Contrary to our expectations, users did not prefer infographics or icons.</b> They felt visuals made the letter seem <b>less serious</b>. Instead, they valued <b>clear, bolded text</b> with a formal tone. A few also noted a <b>lack of clarity</b> around how the city would notify residents in case of an emergency—this gap stood out as an opportunity for improvement.</b></p>
+
+                </section><br>
+
+                <section class="section-2">
+                    <p><a href="https://drive.google.com/drive/folders/1YztnbntYDbCpwA9UDSLW4mkNaIJP3SkA?usp=sharing" class="hyp-p" target="_blank">Summaries of Conversations with Participants</a></p>
+                </section>
+                
+                <section class="section-2">
+                    <h2 class="article-h2">Key Insights</h2>
+                    <p>Users valued <b>clarity and urgency</b>. The redesigned letter needed to open with <b>actionable steps</b> and simplify all supporting information. Emergency instructions like <b>“Smell. Hear. See.”</b> were highly memorable, and tone mattered just as much as structure. Visual aids were unnecessary—users preferred <b>clean, text-driven messaging</b>.</p>
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide7" width="100%" alt="">
+                    </figure>
+                </section>
+
+                <hr class="intro-hr">
+                
+                <section class="section-2">
+                    <h2 class="article-h2">Our Redesign Approach</h2>
+                    <p>We reorganized the letter to <b>prioritize key emergency content</b>. Safety actions were placed at the top and styled for scannability. Technical background information was condensed, and a <b>new notification section</b> was added based on participant feedback. We also restructured the 811 call instructions to appear after the most urgent information.</p>
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide8" width="100%" alt="">
+                    </figure><br>
+                    
+                    <p><a href="https://drive.google.com/file/d/15bUJbsmgu3fj-ZOWe6Ctjp8fwdR_kQxR/view?usp=sharing" class="hyp-p" target="_blank">Final report of User Testing</a></p>
+                </section><br>
+                
+                <section class="section-2">
+                    <h2 class="article-h2">Post-Redesign Validation</h2>
+                    <p>After the redesign, <b>comprehension improved significantly</b>. Where only 1 of 4 participants recalled key emergency steps beforehand, 3 of 4 did so after. <b>Confidence levels</b> also rose: 3 participants said they felt more prepared to act during a leak, compared to just 1 previously.</p>
+                    <p>Participants found the new structure <b>easier to follow</b> and described the message as more <b>serious, trustworthy, and clear</b>.</p>
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide9" width="100%" alt="">
+                    </figure>
+                </section>
+
+                <hr class="intro-hr">
+
+                <br>
+                
+                <section class="section-2">
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide10" width="100%" alt="">
+                    </figure>
+
+                    <h2 class="article-h2">What I Learned</h2>
+                    <p>Sometimes <b>good design means removing, not adding</b>. We expected visuals to improve clarity, but users preferred simplicity. Listening closely to real feedback helped us create a message people would actually <b>read—and remember</b>.</p>
+
+                </section>
+                
+                <section class="section-2">
+                    <h2 class="article-h2">Outcome</h2>
+                    <p>We presented our findings and final redesign to City of Mesa officials. The city is now reviewing the recommendations and considering how to apply them to <b>future public safety communications</b>.</p>
+                </section>
+
+
+                <br><br><br>
+                <footer>
+                    <hr>
+                    <div class="footer-container">
+                    <a href="#top" class="hyp-p">back to top ↑</a>
+                    <a href="LSR.html" class="hyp-p">Easter Egg? --></a>
+                    </div>
+                </footer>
+            
+            </article>
+            
+        </div>
+
+
+        <script src="script.js"></script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+<!--Templates-->
+
+<!--
+
+<p > 
+    At the moment, Youtube Music holds under 10% of the streaming market. <a class="hyp-p" href="https://evoca.tv/streaming-service-market-share/#:~:text=Spotify 31.7,Deezer 1.3">(source) ↗</a>
+</p>
