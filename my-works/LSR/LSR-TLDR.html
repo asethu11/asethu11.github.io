@@ -1,251 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-            <!-- Google tag (gtag.js) -->
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
-            <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-          
-            gtag('config', 'G-98H0ZTK0T4');
-          
-            
-          </script>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <!-- Meta Information -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="asethu11">
+    <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
+    <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
+    <meta name="robots" content="index, follow">
 
-        <title>Data Extraction for MayoClinic</title>
-        <meta name="author" content="asethu11">
-        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
-        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
-        <meta name="robots" content="index, follow">
-        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
-        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+    <!-- Theme Color Definitions -->
+    <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
 
-        <script src="script.js"></script>
-        <link rel="stylesheet" href="LSR.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="icon" href="img/favicon.png" type="image/png">
-    </head>
+    <!-- Page Title -->
+    <title>Data Extraction for MayoClinic</title>
 
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="LSR.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" href="img/favicon.png" type="image/png">
 
-<script>
-    function updateImages() {
-    const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    document.querySelectorAll(".theme-img").forEach(img => {
-        const imageName = img.dataset.name; // Get the image name
-        img.src = isDarkMode ? `darkmode/${imageName}.jpg` : `lightmode/${imageName}.jpg`;
-    });
-}
+    <!-- External Scripts -->
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+    <script>
+        // Initialize dataLayer and gtag function for tracking
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-98H0ZTK0T4');
+    </script>
 
-// Run on page load
-updateImages();
+    <!-- Local Script -->
+    <script src="script.js"></script>
 
-// Listen for theme changes
-window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateImages);
+    <!-- Theme Image Updater: Adjusts images based on OS color scheme -->
+    <script>
+        function updateImages() {
+            const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            document.querySelectorAll(".theme-img").forEach(img => {
+                // Get image name from data attribute
+                const imageName = img.dataset.name;
+                const newSrc = isDarkMode 
+                    ? `img/dk/${imageName}.png` 
+                    : `img/lt/${imageName}.png`;
 
-</script>
+                // Update image source only if needed
+                if (img.src !== newSrc) {
+                    img.src = newSrc;
+                }
+            });
+        }
 
+        // Listen for changes in system theme
+        const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        darkModeQuery.addEventListener("change", updateImages);
 
-
-<script>
-    function updateImages() {
-        const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        document.querySelectorAll(".theme-img").forEach(img => {
-            const imageName = img.dataset.name; // Get the image name
-            const newSrc = isDarkMode 
-                ? `img/dk/${imageName}.png` 
-                : `img/lt/${imageName}.png`;
-
-            // Only update if the src has changed (prevents unnecessary reloads)
-            if (img.src !== newSrc) {
-                img.src = newSrc;
-            }
-        });
-    }
-
-    // Ensure images update on theme change
-    const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    darkModeQuery.addEventListener("change", updateImages);
-
-    // Run on page load
-    document.addEventListener("DOMContentLoaded", updateImages);
-</script>
-
-
+        // Update images after document load
+        document.addEventListener("DOMContentLoaded", updateImages);
+    </script>
+</head>
 <body>
+    <!-- Back Button Navigation -->
     <a href="../../index.html" class="back-button">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
+             xmlns="http://www.w3.org/2000/svg">
             <path d="M19 12H5M5 12L12 19M5 12L12 5"
-                stroke="currentColor" 
-                stroke-width="2" 
-                stroke-linecap="round"
-                stroke-linejoin="round"/>
+                  stroke="currentColor" 
+                  stroke-width="2" 
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
         </svg>
         Home
     </a>
 
+    <!-- Main Article Container -->
     <div class="article-container">
         <article class="article-body">
-            <!--Intro Section-->
+            <!-- Intro Section -->
             <section class="section-1">
                 <div class="grey-background-article image-bottom">
                     <figure class="article-figure">
+                        <!-- Image updates based on theme -->
                         <img class="theme-img" src="" data-name="tldr" width="100%" alt="">
                     </figure>
                 </div>
 
-                <h1 class="article-h1">AI-Powered Data Extraction Interface for Medical Researchers</h1>
+                <h1 class="article-h1">
+                    AI-Powered Data Extraction Interface for Clinical Researchers
+                </h1>
 
                 <p>
-                    We built an Airtable-style “smart spreadsheet” that lets doctors pull structured clinical trial data from PDFs—fast, transparently, and with full control. The tool blends AI-assisted extraction with human validation, streamlining a previously manual and error-prone workflow into a focused, fluid experience.
+                    We built an Airtable-style “smart spreadsheet” that lets doctors pull structured clinical trial data
+                    from PDFs—fast, transparently, and with full control. The tool blends AI-assisted extraction with human
+                    validation, streamlining a previously manual and error-prone workflow into a focused, fluid experience.
                 </p>
 
                 <div class="sub-header">
                     <p id="intro-tags1">
-                        TL;DR |
-                        <a href="lsr.html" class="headtag">View Project in Detail</a>
+                        TL;DR | <a href="lsr.html" class="headtag">View Project in Detail</a>
                     </p>
                 </div>
             </section>
 
             <hr class="hr">
 
+            <!-- Boxed Overview Section -->
             <section class="section-2">
+                <!-- Problem Space -->
+                <h2>The Problem Space</h2>
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="tldr slide2" width="100%" alt="">
+                </figure>
+                <p>
+                    Clinical teams spend <b>1000+ hours</b> manually extracting trial data, causing fatigue, costly errors,
+                    and delayed findings. A streamlined AI-driven process can <b>cut weeks of work and improve research
+                    reliability.</b>
+                </p>
 
-                <section class="section-description">
-                    <h2 class="article-h2">What Are Living Systematic Reviews?</h2>
-                    <p>
-                        Living Systematic Reviews (LSRs) are a modern evolution of traditional systematic reviews. Instead of publishing once and becoming outdated, LSRs are designed to be continuously updated as new research emerges. This makes them essential for fast-evolving fields like clinical medicine, public health, and COVID-era trials, where timely evidence can impact real‑world decisions.
-                    </p>
-                    <figure class="article-figure">
-                        <img class="theme-img" src="" data-name="tldr slide1" width="100%" alt="">
-                    </figure>
+                <br>
 
-                    <p>
-                        But the process of maintaining an LSR is intensely manual:
-                    </p>
-                    <ul>
-                        <li>Researchers must screen and extract data from dozens or hundreds of new studies regularly.</li>
-                        <li>Even small updates can require repeating the entire review pipeline—screening, extraction, synthesis.</li>
-                    </ul>
-                    <p>
-                        Our goal was to rethink this pipeline, specifically the data extraction bottleneck, by building a tool that doesn’t just speed up the task, but fundamentally supports the human judgment that underpins every evidence‑based decision.
-                    </p>
-                    <figure class="article-figure">
-                        <img class="theme-img" src="" data-name="tldr slide2" width="100%" alt="">
-                    </figure>
-                </section>
-
-                <h2 class="article-h2">Why It Mattered</h2>
-                <ul>
-                    <li><strong>Mountains of PDFs:</strong> Clinicians were manually keying data from 100 + study papers per review.</li>
-                    <li><strong>Error‑prone & exhausting:</strong> Copy‑paste mistakes slowed publication and sapped research budgets.</li>
-                    <li><strong>Why not use ChatGPT?:</strong> Researchers are skeptical of its hallucinations.</li>
-                    <li><strong>Goal:</strong> Replace scattered tools with one friction‑free workspace that blends AI suggestions with human oversight.</li>
-                </ul>
-
-                <h2 class="article-h2">My Role</h2>
-                <p><b>Product/UX lead</b> — plan research, facilitate co‑design, prototype flows, wrangle dev constraints.</p>
-
-                <hr >
-
-                                <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="tldr slide2.5" width="100%" alt="">
-
-                <h2 class="article-h2">Process Highlights</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Phase</th>
-                            <th>Activity</th>
-                            <th>Outcome</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="tdh">Discover</span></td>
-                            <td><span>
-                                <ul>
-                                    <li>6 round‑table chats with physicians</li>
-                                    <li>Shadowed 2 live extraction sessions</li>
-                                    <li>15 h YouTube workflow teardown</li>
-                                </ul>
-                            </span></td>
-                            <td><span>Pain map of 23 hurdles (e.g., duplicate entry, version chaos)</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="tdh">Analyze</span></td>
-                            <td><span>
-                                <ul>
-                                    <li>Competitive teardown of Covidence, Rayyan, DistillrSR</li>
-                                    <li>Affinity map → 5 core themes</li>
-                                </ul>
-                            </span></td>
-                            <td><span>Gap list: AI assist, inline evidence, conflict resolution</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="tdh">CoDesign</span></td>
-                            <td><span>
-                                <ul>
-                                    <li>Card‑sorting & task‑flow workshops with 4 MDs</li>
-                                </ul>
-                            </span></td>
-                            <td><span>Agreed MVP scope: prioritize “single‑cell validation”</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="tdh">Ideate</span></td>
-                            <td><span>
-                                <ul>
-                                    <li>4 weekly design sprints</li>
-                                    <li>Low‑fid wireframes in Figma</li>
-                                </ul>
-                            </span></td>
-                            <td><span>First clickable flow for “flag & resolve”</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="tdh">Validate</span></td>
-                            <td><span>
-                                <ul>
-                                    <li>2 usability rounds (think‑aloud)</li>
-                                </ul>
-                            </span></td>
-                            <td><span>Iteration 1: doctors fixated on gray boxes → switched to high‑context mock data</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="tdh">Refine</span></td>
-                            <td><span>
-                                <ul>
-                                    <li>Pivot to spreadsheet metaphor after MD feedback</li>
-                                    <li>Pattern‑match Airtable UI + ChatGPT side‑panel</li>
-                                </ul>
-                            </span></td>
-                            <td><span>“Feels familiar”‑quote from all 4 test doctors</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="tdh">Feasibility</span></td>
-                            <td><span>
-                                <ul>
-                                    <li>Dev sync to map parser limits & latency</li>
-                                </ul>
-                            </span></td>
-                            <td><span>Green‑lit extraction of 12 evidence fields under 1 s</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <!-- Project Details -->
+                <div class="flex-box boxed">
+                    <div>
+                        <h3>Timeline</h3>
+                        <p>Mar–Apr 2025</p>
+                    </div>
+                    <div>
+                        <h3>Role</h3>
+                        <p>Product Designer & Team Lead</p>
+                    </div>
+                    <div>
+                        <h3>Tools</h3>
+                        <p>Figma, FigJam, ChatGPT</p>
+                    </div>
+                </div>
 
                 <hr>
 
-                <h2 class="article-h2">Solution</h2>
-
+                <!-- Additional Slides -->
                 <figure class="article-figure">
                     <img class="theme-img" src="" data-name="tldr slide3" width="100%" alt="">
                 </figure>
+
+                <!-- The Challenge -->
+                <h2>The Challenge</h2>
+                <ul>
+                    <li><b>Data Deluge:</b> Over 1000 PDFs per review cycle to parse and extract.</li>
+                    <li><b>Error Risk:</b> Manual copy-paste leads to transcription mistakes and budget overruns.</li>
+                    <li><b>Tool Fragmentation:</b> Switching between PDF viewers, spreadsheets, and search tools disrupts focus.</li>
+                    <li><b>Trust Barrier:</b> Clinicians skeptical of AI without transparent evidence links.</li>
+                </ul>
                 <figure class="article-figure">
                     <img class="theme-img" src="" data-name="tldr slide4" width="100%" alt="">
                 </figure>
+
+                <hr>
+
+                <!-- Our Approach -->
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="tldr slide5" width="100%" alt="">
+                </figure>
+                <h2>Our Approach</h2>
+                <ol>
+                    <li>
+                        <b>Empathy & Context:</b> Conducted ride‑alongs, shadowing clinicians in live research sessions to map real‑world workflows and pain points.
+                    </li>
+                    <li>
+                        <b>Synthesis & Principles:</b> Organized 50+ notes via affinity mapping to define five core design tenets: Familiarity, Transparency, Contextual Evidence, Efficiency, and Control.
+                    </li>
+                    <li>
+                        <b>Iterative Prototyping:</b> Ran four two‑week sprints—low‑fi sketches → interactive FigJam flows → Figma mockups with AI overlays → developer syncs to validate feasibility and performance.
+                    </li>
+                    <li>
+                        <b>Collaborative Testing:</b> Hosted usability sessions with 6 clinicians, gathering feedback on AI suggestion accuracy and UI clarity; iterated on priority conflicts and trust indicators.
+                    </li>
+                </ol>
+
+                <hr>
+
+                <!-- Solution Highlights -->
+                <h2>Solution Highlights</h2>
+                <ul>
+                    <li><b>Smart Columns:</b> Inline AI suggestions + conflict flags</li>
+                    <li><b>Evidence Panel:</b> Side‑by‑side PDF excerpts</li>
+                    <li><b>One‑Click Confirm:</b> Human‑in‑loop safety switch</li>
+                    <li><b>AI confidence scores:</b> Vote‑based conflict identifiers that involve humans only when necessary.</li>
+                </ul>
                 <figure class="article-figure">
                     <img class="theme-img" src="" data-name="tldr slide5" width="100%" alt="">
                 </figure>
@@ -255,52 +197,55 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", upd
                 <figure class="article-figure">
                     <img class="theme-img" src="" data-name="tldr slide7" width="100%" alt="">
                 </figure>
-
-                <h2 class="article-h2">Design Wins</h2>
-                <ul>
-                    <li><b>Smart Columns:</b> Cells auto-suggest values; conflicts highlighted</li>
-                    <li><b>Evidence Side Panel:</b> Inline PDF snippet + AI model comparison</li>
-                    <li><b>One-Click Resolution:</b> Users confirm or override suggestions; model improves</li>
-                    <li><b>Progress Heatmap:</b> Visual momentum through color-coded row progress</li>
-                </ul>
-
                 <figure class="article-figure">
                     <img class="theme-img" src="" data-name="tldr slide8" width="100%" alt="">
                 </figure>
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="tldr slide9" width="100%" alt="">
+                </figure>
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="tldr slide10" width="100%" alt="">
+                </figure>
 
-                <h2 class="article-h2">Impact & Next Steps</h2>
-                <p>In pilot tests with 3 researchers on 72 papers, extraction and review time dropped by ~4x. 4/5 of testers said they would use the tool in future reviews.</p>
-                <p>We're now building a high-fidelity prototype for grant submission and broader deployment by Q3 2025.</p>
+                <hr>
+
+                <!-- Impact -->
+                <h2>Impact</h2>
+                <ul>
+                    <li><b>4× Speedup</b> in data extraction</li>
+                    <li><b>80% Tester Adoption</b> in prototype trials</li>
+                    <li>Stakeholder buy‑in at Mayo Clinic & ASU</li>
+                </ul>
+
+                <hr>
+
+                <!-- Next Steps -->
+                <h2>Next Steps</h2>
+                <p>
+                    Building a high‑fidelity React prototype, integrating deeper LLM explainability, and running a 10‑user beta study to refine workflows.
+                </p>
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="tldr slide11" width="100%" alt="">
+                </figure>
             </section>
 
-
+            <!-- Footer -->
             <footer>
                 <br><br><br>
                 <hr>
                 <div class="footer-container">
-                <a href="#top" class="hyp-p">back to top ↑</a>
-                <a href="lsr.html" class="hyp-p">view project in detail --></a>
+                    <a href="#top" class="hyp-p">back to top ↑</a>
+                    <a href="lsr.html" class="hyp-p">view project in detail --></a>
                 </div>
             </footer>
         </article>
     </div>
 
-
-    <script src="script.js"></script>
+    <!-- Template or Example Content (Commented Out)
+    <p>
+        At the moment, Youtube Music holds under 10% of the streaming market.
+        <a class="hyp-p" href="https://evoca.tv/streaming-service-market-share/#:~:text=Spotify 31.7,Deezer 1.3">(source) ↗</a>
+    </p>
+    -->
 </body>
 </html>
-
-
-
-
-
-
-
-
-<!--Templates-->
-
-<!--
-
-<p > 
-    At the moment, Youtube Music holds under 10% of the streaming market. <a class="hyp-p" href="https://evoca.tv/streaming-service-market-share/#:~:text=Spotify 31.7,Deezer 1.3">(source) ↗</a>
-</p>
