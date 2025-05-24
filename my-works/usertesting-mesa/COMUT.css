@@ -398,3 +398,10 @@ li pre {
 
 
 
+
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-secondary);
+}
