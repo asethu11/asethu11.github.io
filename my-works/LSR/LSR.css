@@ -21,7 +21,7 @@
         --background-grey: #2B2C2E;
         --text-primary: #F0F0F0; 
         --text-secondary: #adabab; 
-        --text-normal: #e4e4e4;
+        --text-normal: #d6d6d6;
         --text-bold: #ffffff;
         --primary: #0A84FF;
         --red: #db4f4f; 
@@ -34,25 +34,15 @@
     }
 
     b {
+        font-weight: 700;
         color: var(--text-bold);
     }
 
-    hr {
-        margin-top: 4rem;
-        margin-bottom: 2rem;
-        border: 0;
-        border-top: 1px solid var(--theme);
-    }
+
 
 
   }
   
-
-
-
-
-
-
 
 
 
@@ -93,7 +83,7 @@ h2, h3, h4, h5, h6, p{
 
 
 h2 {
-    font-size: 1.4rem;
+    font-size: 1.rem;
     font-weight: 600;
     margin-bottom: 1rem;
     letter-spacing: -0.3px;
@@ -268,6 +258,11 @@ pre > code {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
+}
+
+.img-enlarge img:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
 }
 
 .article-figure figcaption {
@@ -469,26 +464,19 @@ th {
     margin-top: 0%;
 }
 
+.imgbg {
+    background-color: var(--background-grey);
 
+    width: 100%;
 
-.section-2 h2 {
-    color: var(--text-bold);
-}
-
-.section-2-div {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 4%;
-    
-}
-
-.flex-box {
-    display: flex;
-    justify-content: space-between;
-
+    box-sizing: content-box;
+    border-radius: 12px;
 
 }
 
-.flex-box h3 {
-    color: var(--theme);
+video {
+    margin: 1rem 0;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
