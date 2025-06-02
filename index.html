@@ -32,6 +32,17 @@
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="icon" href="img/favicon.png" type="image/png">
+
+        <script>
+          function copyEmail() {
+            const email = "mailsofabshk@gmail.com";
+            navigator.clipboard.writeText(email).then(() => {
+              alert("Email copied to clipboard!");
+            }).catch(err => {
+              console.error("Failed to copy:", err);
+            });
+          }
+        </script>
     </head>
 
     <body>       
@@ -96,7 +107,9 @@
               <div class="socials">
                 <div class="social-icons">
                     <a href="https://github.com/asethu11" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="mailto:mailsofabshk@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="#" onclick="copyEmail(this)" aria-label="Copy email to clipboard">
+  <i class="fas fa-envelope"></i>
+</a>
                     <a href="https://medium.com/@mailsofabhishek" target="_blank" aria-label="Medium"><i class="fab fa-medium"></i></a>
                 </div>
                 
@@ -239,7 +252,7 @@
                 </div>
             </a>
             
-            <a href="building.html" class="project-row">
+            <a href="https://www.behance.net/gallery/189956205/Messing-Around-Typography" class="project-row">
               <p class="project-row-title">
                   Messing Around w/ Typography
               </p>
@@ -249,6 +262,19 @@
                     <p class="project-tag">Graphic Design</p>
                     <p class="project-tag">·</p>
                     <p class="project-tag">Photoshop, Illustrator, After Effects</p>
+                </div>
+            </a>
+
+            <a href="https://www.behance.net/gallery/199625679/College-Assignment-Brief-Quiz-App" class="project-row">
+              <p class="project-row-title">
+                  Gamifying Quizes for Learning
+              </p>
+                <div class="project-row-sub-title">
+                    <p class="project-tag">2024</p>
+                    <p class="project-tag">·</p>
+                    <p class="project-tag">UI/UX</p>
+                    <p class="project-tag">·</p>
+                    <p class="project-tag">Figma</p>
                 </div>
             </a>
             
@@ -272,7 +298,11 @@
                 </div>
 
                 <div class="project-preview">
-                    <img src="side-quests/behance/typography.png" alt="Project 3 preview">
+                    <img src="side-quests/behance/typography.png" alt="Project 4 preview">
+                </div>
+
+                <div class="project-preview">
+                    <img src="side-quests/behance/QuizApp.png" alt="Project 5 preview">
                 </div>
 
 
@@ -287,6 +317,8 @@
             </div>
           </div>
         </div>
+
+
 
         <!-- Sidequests and Other Media -->
          <!-- Change Pictures in CSS -->
