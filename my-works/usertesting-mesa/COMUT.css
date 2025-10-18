@@ -162,6 +162,7 @@ a:visited {
         margin-bottom: 2rem;
         border: 0;
         border-top: 1px solid var(--background-grey);
+        color: var(--background-grey);
     }
 
     hr {

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>About Abhishek</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <script src="aboutscript.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+        <link rel="icon" href="img/favicon.png" type="image/png">
+    </head>
+
+    <body>
+    <a href="index.html" class="back-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M5 12L12 19M5 12L12 5"
+                stroke="currentColor" 
+                stroke-width="2" 
+                stroke-linecap="round"
+                stroke-linejoin="round"/>
+        </svg>
+        Home
+    </a>
+
+        <!-- Main -->
+        <div class="container">
+
+            <!-- Header -->
+            <div class="introduction">
+                <div class="header">
+                    <div class="logo">
+                        <a href="index.html">
+                            <div class="flex">
+                                <p class="header-sub-title" id="word"></p>
+                                <p class="header-sub-title blink">|</p>
+                            </div>
+                        </a>
+                        
+                        <h4 class="uh-bee">and that's pronounced uh-bee-shake</h4>
+                    </div>
+                </div>
+
+                <br>
+                
+                <!-- Picture -->
+                <img src="https://media.licdn.com/dms/image/v2/D5603AQHbdjpGZeZOuA/profile-displayphoto-shrink_800_800/B56ZYWsVxAHEAc-/0/1744137444743?e=1755734400&v=beta&t=SiOb0EbWj8l6RudibSM-d47h4ZOIxoHksk7f8ZgzMzI" alt="Abhishek's photo" class="profile-photo" height="200px" width="200px">
+
+                <!-- Introduction Text -->
+                <p class="introduction-text">
+                    I’m a UX & XR designer with a multidisciplinary background, based in Phoenix, AZ. I'm now pursuing my Master’s in User Experience (HCI) at Arizona State University.<br><br>
+
+                    Right now, at ASU’s LMS division, I’m making online courses more engaging for thousands of students. Along the way, I’ve worked in VR, UI Design, 3D Modelling, and Graphic Design, using tools like Figma, Adobe CC,  Unreal Engine, and Blender.<br><br>
+
+                    Before this, I contributed to Mayo Clinic’s medical review tools powered by AI, built immersive VR simulations at Meteor Studio, and redesigned the safety messaging for the City of Mesa.<br><br>
+
+                    I like to call myself a self-taught designer. Even though I studied design for 7 years, I learned all my tools through YouTube tutorials, freelance projects and a lot of messing around. I think that gives me an edge. I don’t just follow conventional thought frameworks; I mix disciplines, experiment, and think outside the box to design more creative solutions.
+                </p>
+
+                <br>
+
+                <!-- Social Media Icons -->
+                <div class="socials">
+                    <div class="social-icons">
+                        <a href="https://github.com/asethu11" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="mailto:mailsofabshk@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="https://medium.com/@mailsofabhishek" target="_blank" aria-label="Medium"><i class="fab fa-medium"></i></a>
+                        <a href="https://www.linkedin.com/in/asethu/" target="_blank" aria-label="Medium"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                    
+                    <a href="https://docs.google.com/document/d/1IXydVGEXE5wz5FQK83--w8JfNdspRJLz7rsQewwsL6s/edit?usp=sharing" target="_blank" aria-label="LinkedIn" id="linkedin">
+                        <p id="linked">Check out my resume --></p>
+                    </a>
+                </div>
+                
+                
+
+         
+
+            <!-- Footer -->
+        <footer class="footer">
+            <br><br><br><br><br><br><br>
+            <p class="footer-text">© 2025. All rights reserved. Made from scratch in vanilla HTML, CSS, and JavaScript.</p>
+        </footer>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const projectRows = document.querySelectorAll('.project-row');
+                const previews = document.querySelectorAll('.project-preview');
+      
+                // Function to hide all previews
+                const hideAllPreviews = () => {
+                    previews.forEach(preview => {
+                        preview.style.opacity = '0';
+                        preview.style.visibility = 'hidden';
+                    });
+                };
+      
+                projectRows.forEach((row, index) => {
+                    row.addEventListener('mouseenter', () => {
+                        hideAllPreviews();
+                        
+                        // Show the corresponding preview
+                        if (previews[index]) {
+                            previews[index].style.opacity = '1';
+                            previews[index].style.visibility = 'visible';
+                        }
+                    });
+      
+                    row.addEventListener('mouseleave', () => {
+                        hideAllPreviews();
+                    });
+                });
+            });
+          </script>
+    </body>
+
+
+</html>

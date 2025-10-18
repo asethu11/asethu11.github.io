@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Reimagining Youtube Music</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="ytm.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="icon" href="img/favicon.png" type="image/png">
+    </head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+
+<script>
+    function updateImages() {
+    const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.querySelectorAll(".theme-img").forEach(img => {
+        const imageName = img.dataset.name; // Get the image name
+        img.src = isDarkMode ? `darkmode/${imageName}.jpg` : `lightmode/${imageName}.jpg`;
+    });
+}
+
+// Run on page load
+updateImages();
+
+// Listen for theme changes
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateImages);
+
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-98H0ZTK0T4');
+
+  
+</script>
+
+<script>
+    function updateImages() {
+        const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.querySelectorAll(".theme-img").forEach(img => {
+            const imageName = img.dataset.name; // Get the image name
+            const newSrc = isDarkMode 
+                ? `img/dk/${imageName}.png` 
+                : `img/lt/${imageName}.png`;
+
+            // Only update if the src has changed (prevents unnecessary reloads)
+            if (img.src !== newSrc) {
+                img.src = newSrc;
+            }
+        });
+    }
+
+    // Ensure images update on theme change
+    const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    darkModeQuery.addEventListener("change", updateImages);
+
+    // Run on page load
+    document.addEventListener("DOMContentLoaded", updateImages);
+</script>
+
+
+<body>
+    <a href="../../index.html" class="back-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M5 12L12 19M5 12L12 5"
+                stroke="currentColor" 
+                stroke-width="2" 
+                stroke-linecap="round"
+                stroke-linejoin="round"/>
+        </svg>
+        Home
+    </a>
+
+    <div class="article-container">
+        <article class="article-body">
+            
+            <section class="section-1">
+
+                <div class="grey-background-article image-bottom">
+                    <video autoplay loop muted playsinline 
+                        class="project-image" id="pic-1">
+                        <source src="https://i.imgur.com/2nCqHGw.mp4" 
+                                type="video/mp4" 
+                                alt="YT Music Redesigned">
+                    </video>
+                </div>
+
+                <h1 class="article-h1">YouTube Music made better</h1>
+
+                <p >
+                    This redesign was my way of exploring how a few thoughtful changes could make the app smoother, simpler, and more enjoyable to use. This was a personal project, done out of curiosity and a love for music apps.
+                </p>
+
+                <div class="sub-header">
+                    <p id="intro-tags1">
+                        <a href="https://www.figma.com/design/w4fY3P8KKXQcevNKKqRzni/Youtube-Music-but-better?node-id=0-1&t=byjB3KuexsjOj0b7-1" target="_blank" class="headtag">
+                            Figma Doc 
+                        </a> 
+
+                        | 7-9 min read | 
+
+                        <a href="ytm-tldr.html" class="headtag">TL;DR for those in a rush</a>
+
+                        | Mar-April 2025 | UI Design
+                    </p>
+                </div>
+
+            </section>
+            
+            
+
+            <hr class="intro-hr">
+
+
+            <section class="section-2" id="intro">
+  
+                    <h2 class="article-h2" id="theme">Why Isn't YouTube Music Winning?</h2>
+                    <p id="intro">
+                        YouTube Music has everything it needs to be a major player in the streaming world — a massive content library, Google’s backing, and a unique video integration. So why isn’t it taking off like <b><i>Spotify</i></b> or <b><i>Apple Music</i></b>? Users often describe YouTube Music as clunky, confusing, and frustrating.
+                    </p>
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide1" width="100%" alt="Why is google hiding YouTube Music?">
+                        <figcaption>Why is Google hiding YouTube Music?</figcaption>
+                    </figure>
+
+                    <p > 
+                        At the moment, Youtube Music holds under 10% of the streaming market. <a class="hyp-p" href="https://evoca.tv/streaming-service-market-share/#:~:text=Spotify 31.7,Deezer 1.3">(source) ↗</a>
+                    </p>
+
+
+
+            </section>
+
+            <br><br>
+            <figure class="article-figure">
+                <img class="theme-img" src="" data-name="transition-1" width="100%" alt="">
+            </figure>
+            <br>
+
+            <section class="section-2" id="research">
+                
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide2" width="100%" alt="">
+                </figure>
+                
+                <h2 class="article-h2" id="theme">Research & Insights: What’s Holding Users Back?</h2>
+
+                
+                <section class="s2p1">
+                    <h3>
+                        Step 1: Gathering Insights
+                    </h3>
+                   
+                    <p>
+                        Since I couldn’t access Google’s internal data, I turned to what mattered most — <b>real user feedback</b>. I analyzed:
+                        <ul>
+                            <li>Blogs/articles about YouTube Music.</li>
+                            <li>Dozens of Reddit threads where power users shared detailed feedback.</li>
+                            <li>Play Store reviews</li>
+                        </ul>
+                        To uncover the real issues, I took a methodical approach to research — organizing my findings to identify patterns and prioritize solutions. 
+                        <a href="#references" class="hyp-p">[references] ↓</a> 
+                    </p> 
+    
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide3" width="100%" alt="">
+                    </figure>    
+                    
+                    <p>
+                        I systematically <b></b>documented each pain point/user complaint</b> in FigJam, theming by comments like <b>“Navigation,” “Playlist Control,” and “Content Discovery.”</b>  This rigorous qualitative analysis ensured the insights were grounded in real user voices, not just personal hunches.<br><br>
+    
+                        Patterns quickly emerged around <b>navigation, personalization, and content access</b> – indicating the UX was the likely problem behind YouTube Music’s struggles, not the music catalog itself.
+                    </p>
+    
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide3.1" width="100%" alt="">
+                    </figure>
+
+                </section>
+
+                <br><br>
+
+                <hr>
+
+                <br><br>
+
+                <section class="s2p2">
+
+                    <h3>
+                        Step 2: Synthesizing the Findings
+                    </h3>
+    
+                    <p>
+                        After organizing my data, I analyzed the most recurring themes to identify patterns. This step was crucial. It helped me connect the dots and spot relationships between issues. 
+                    </p>
+    
+                    <h3>   
+                        By linking issues back to broader themes, I identified 4 major pain points:
+                    </h3>
+                    
+                    <p>
+                        <ol>
+                            <li><strong>Content Hidden (Podcasts & More):</strong> YouTube Music isn’t just music – it has podcasts, liver-performances and music videos too – but some users barely knew it existed. Users admitted they resorted to the regular YouTube app or other services to find video-versions of songs, a clear sign of navigation failure.</li>
+                            
+                            <figure class="article-figure">
+                                <img class="theme-img" src="" data-name="slide4" width="100%" alt="">
+                            </figure>    
+    
+                            <li><strong>App Is Too Rigid:</strong> People wanted more flexibility in organizing their content.</li>
+    
+                            <li><strong>Video/Audio Confusion:</strong> Users kept accidentally switching between audio-only and video content.</li>
+
+                            <figure class="article-figure">
+                                <img class="theme-img" src="" data-name="slide5" width="100%" alt="">
+                            </figure>    
+    
+                            <li><strong>Samples Feels like YT Shorts:</strong> Samples felt disconnected from users' interests and had no filtering, resulting in random content that wasn’t useful.</li>
+
+                            <figure class="article-figure">
+                                <img class="theme-img" src="" data-name="slide6" width="100%" alt="">
+                            </figure>
+    
+                        </ol>
+                    </p>
+                  
+                    <p>
+                        Samples was missing in the desktop version. In the Mobile version many ignored the Samples feature entirely, which means <b>a whole part of the intended user journey </b>(short-form discovery → finding a new song/artist) <b>was essentially broken.</b><br><br>
+                        
+                        This highlighted an opportunity to redesign the discovery experience to actually serve user needs (e.g., adding filters, better recommendations, clearer actions to save or play the song in full).
+                    </p>
+
+                </section>
+
+                <br><br>
+                
+                <hr>
+
+                <br><br>
+
+                <section class="s2p3">
+                    
+                    <h3>
+                        Step 3: Understanding the Competition
+                    </h3>
+    
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide7" width="100%" alt="">
+                    </figure>
+
+                    <p>
+                        While the focus was on YouTube Music’s users, it’s worth noting many commenters spontaneously compared their experience to Spotify or Apple Music.
+    
+                        To see how YouTube Music performed against the two, I analyzed Spotify and Apple Music. I <b>explored their UI patterns, discovery tools, and content organization</b> to identify where YouTube Music was falling short:
+    
+                        <ul>
+                            <li>Spotify excels at discovery, with intuitive recommendations and smart browsing.</li>
+                            <li>Apple Music offers a sleek, polished UI that feels effortless.</li>
+                            <li>YouTube Music’s video library is a major strength, but it wasn’t being leveraged effectively.</li>
+                        </ul>
+                    </p>
+    
+                </section> 
+
+                <section class="s2p4">
+
+                    <h2>
+                        Personas: Humanizing the findings
+                    </h2>          
+            
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide8" width="100%" alt="">
+                    </figure>
+            
+            
+                    <p>
+                        I developed three key personas to guide design decisions.
+                        These personas directly informed my design goals, ensuring each solution solved a real user problem. 
+                    </p>
+            
+
+                </section>
+
+            </section>
+
+            
+            <figure class="article-figure">
+                <img class="theme-img" src="" data-name="transition-2" width="100%" alt="">
+            </figure>
+            <br><br>
+
+            <section class="section-3" id="design">
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide9" width="100%" alt="">
+                </figure>
+
+                <h2 id="theme">
+                    The Redesign
+                </h2>
+
+                <p>
+                    My redesign deals with just the desktop version — particularly those who listen to music while <b>working, studying, or gaming.</b> These users rely heavily on efficient navigation and seamless control, often <b>juggling multiple tabs or screens.</b> <br><br>
+                </p>
+
+
+                <h3>
+                    Dedicated Podcast Tab
+                </h3>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide10" width="100%" alt="">
+                </figure>
+
+                <p>
+                    To make podcasts easier to find, <b>, the redesign adds "Podcasts" to the navigation</b>.  ensuring they’re no longer buried and are as visible as music<br><br>
+
+                    <b>This also signals that YT Music is more than just music.</b> (Insight tie-in: Users shouldn’t have to “hunt” for major content; this was a clear win from the research feedback.)
+                </p>
+
+                <br>
+
+                <h3>
+                    Better Music Discovery
+                </h3>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide11" width="100%" alt="">
+                </figure>
+
+                <p>
+                    Many users felt <b>YouTube Music was missing the sense of “effortless discovery”</b> that Spotify offers. I realized that discovery <b>wasn’t just about better recommendations — it was also about better browsing.</b><br><br>
+
+                    To improve this, I added a new feature: <b>Shared Sound</b><br><br>
+                    For desktop users with less time to browse actively, these changes ensured that discovery felt intuitive and purposeful, not random.
+                </p>                
+                
+
+
+                <br>
+
+                <h3>
+                    Playbar
+                </h3>
+                <p>
+                    A common micro-frustration was the <b>two-step process to view lyrics.</b> I redesigned the Now Playing screen to <b>display lyrics with no effort</b> for ambient listeners. While not a top complaint in forums, it aligns with the theme of ease of use.
+                </p>
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide12" width="100%" alt="">
+                </figure>
+
+                <br><br>
+
+                <hr>
+
+                <br><br>
+
+                <h2>
+                    Reflection
+                </h2>
+
+                <p>
+                    After Iteration 1, the design felt more <b>logical and a user-friendly experience.</b>
+                </p>
+                    
+                <h3>I did a sense-check against the personas:</h3>
+
+                    <div class="bp">                    
+                        <p class="boxed">
+                        ✅ Alex could manage playlists more easily with <b>clearer navigation and less clutter.</b>
+                        </p>
+                        <p class="boxed">
+                        ✅ Bella immediately noticed the <b>Podcasts button</b>, addressing her biggest pain.</p>
+                    </div>
+
+                    <p>
+                    But some <b>deeper issues remained unaddressed</b> and a few new insights came up upon reflection and feedback from a couple of fellow UX designers I consulted. 
+                    </p>
+
+                    <br>
+
+
+                    <h3>What Didn’t Work:</h3>
+
+                    <div class="bp">
+                        <p class="boxed">
+                        ❌ Despite the cleaner visuals, <b>some users still felt the layout was not ideal.</b>
+                        </p>
+                        <p class="boxed">
+                        ❌ There wasn't really much done for the <b>customization aspect.</b>
+                        </p>
+                        <p class="boxed">
+                        ❌ The redesigned playbar took up a lot of space and <b>didn’t add much value.</b>
+                        </p>
+
+                    </div>
+
+                
+                <br><br><br>
+
+
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="transition-3" width="100%" alt="">
+                </figure><br><br>
+
+                <h2 id="theme">
+                    Back to the drawing board
+                </h2>
+                <p>
+                    For the second iteration, I refined the design with a sharper focus on user feedback, but this time I took a <b>more experimental approach to solving the problems</b> I’d identified.
+                </p>
+
+                <video autoplay loop muted playsinline 
+                    class="project-image" width="100%">
+                    <source src="https://i.imgur.com/2nCqHGw.mp4" 
+                    type="video/mp4" alt="YT Music Redesigned">
+                </video>
+
+                <br><br>
+
+                <h3>
+                    More Distinguishable Content
+                </h3>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide14" width="100%" alt="">
+                </figure>
+
+                <p>
+
+                    The catalogue items get a bit of a makeover to be more <b>distinguishable and easier to navigate.</b> This was a direct response to the feedback.<br><br>
+                    A <b>huge competitive advantage of YouTube Music is access to the vast music video library</b>, but users weren’t fully appreciating it. They often stumbled into music videos when they only wanted audio, or vice versa. <b>The solution needed to balance flexibility with clarity.</b>
+                </p>
+
+                <br>
+
+                <h3>
+                    Improved Playbar with 'Studio Mode'
+                </h3>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide15" width="100%" alt="">
+                </figure>
+
+
+
+                <p>
+                    I experimented a bit with the playbar, making it subtle again – but in way that it is more cohesive with the rest of the UI. 
+                    
+                    I have also made sure it is a scalable design. <b>The expand button opens up a 'Studio Mode'</b> which is a more immersive experience for the user.
+                </p>
+                
+                    <video autoplay loop muted playsinline 
+                    class="project-image" width="50%" style="margin-left: 25%;">
+                    <source src="https://i.imgur.com/w8Ykl89.mp4" 
+                    type="video/mp4" alt="YT Music Redesigned">
+                </video><br><br>
+                
+                <p>
+                    <b>The rationale was to serve both casual and power users:</b> in normal mode, the play bar remains minimalistic for quick control; but in Studio Mode, <b>enthusiasts (like Alex) can geek out on details</b> (perhaps see song credits or add trivia like with <a class="hyp-p" href="https://genius.com" target="_blank">Genius</a>) without cluttering the default view. <br><br>
+                    
+
+                    This wasn’t explicitly asked for by users, but it emerged from thinking about how to <b>exceed expectations while solving the core issues</b> (and it leveraged YouTube’s visual nature, aligning with the overall strategy).<br><br>
+                    
+                    This is a feature that could be a <b>premium feature</b> to add value to the subscription model.
+                </p>
+                
+                <br>
+
+                <h3>
+                    Reimagined “Samples” for Discovery
+                </h3>
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide16" width="100%" alt="">
+                </figure>
+                <p>
+                    <b> I added Samples to the desktop version</b>, including a seek bar for precise playback and a "Save to Library" option for quick bookmarking. <b>This improved discovery while giving Carlos a strong reason to engage with the app.</b><br><br>
+
+                    <b>Oh, it also comes with lyrics.</b>
+                </p>
+                <video autoplay loop muted playsinline 
+                class="project-image" width="90%" style="margin-left: 5%;">
+                <source src="https://i.imgur.com/zyYM38A.mp4" 
+                type="video/mp4" alt="YT Music Redesigned">
+            </video>
+
+                 
+
+
+                <br><br><br>
+
+                <h3>
+                    More Layout Control
+                </h3>
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide17" width="100%" alt="">
+                </figure>
+                <p>
+                    Desktop users, in particular, often <b>switch between background listening and active browsing</b>. They wanted control over their layout to tailor the experience to their workflow.<br><br>
+                </p>
+
+            </section>
+
+            <br><br>
+            <figure class="article-figure">
+                <img class="theme-img" src="" data-name="transition-4" width="100%" alt="">
+            </figure>
+
+            <section class="section-4" id="conclusion">
+                <h2>Reflecting on the redesign</h2>
+                <p>
+                    Through Iteration 2, <b>every design decision was tied back to the research insights</b>: 
+                </p>
+                <ul style="list-style-type: '✅ ';">
+                    <li><b> Alex</b> can now reorganize playlists with less pain and enjoy using the Studio Mode to deeply engage with his music.</li>
+                    <li><b> Bella</b> finds jumping between a music album and a podcast much more straightforward, and the app finally feels like it supports <em>her</em> use case rather than fighting it.</li>
+                    <li><b> Carlos</b> discovers a few new songs via the tailored Samples feed and no longer feels lost on the home screen.</li>
+                </ul>
+            </section>
+    
+            
+
+
+
+
+
+
+
+            
+
+
+
+            <br><br><br><br>
+
+            <section class="references" id="references">
+                <div class="references-t">
+                    <h3>References</h3>
+                    <a href="#s2p1" class="hyp-p" id="refd">Back to Research Section ↑</a>
+                </div>
+                
+
+                <br><br>
+                <ul style="list-style-type: none;">
+                    <li><a href="https://www.techradar.com/audio/audio-streaming/youtube-music-review" target="_blank">YouTube Music Review - TechRadar</a></li>
+                    <li><a href="https://www.soundguys.com/youtube-music-vs-spotify-36176/" target="_blank">YouTube Music vs Spotify - SoundGuys</a></li>
+                    <li><a href="https://www.soundguys.com/youtube-music-premium-review-25622/" target="_blank">YouTube Music Premium Review - SoundGuys</a></li>
+                    <li><a href="https://www.androidauthority.com/spotify-vs-youtube-music-vs-apple-music-3232702/" target="_blank">Spotify vs YouTube Music vs Apple Music - Android Authority</a></li>
+                    <li><a href="https://www.reddit.com/r/YoutubeMusic/comments/ly0jez/can_you_guys_tell_me_your_complaints_with_youtube/?rdt=48084#:~:text=Compared%20to%20Google%20Play%20Music,free%20with%20a%20YTM%20plan" target="_blank">YouTube Music Complaints - Reddit</a></li>
+                    <li><a href="https://relentlessbeats.com/2024/10/spotify-or-youtube-music-the-pros-cons-you-need-to-know/#:~:text=Spotify%20is%20undoubtedly%20the%20king,that%20it%E2%80%99s%20fair%20to%20say" target="_blank">Spotify or YouTube Music: The Pros & Cons - Relentless Beats</a></li>
+                    <li><a href="https://www.pcmag.com/reviews/youtube-music" target="_blank">YouTube Music Review - PCMag</a></li>
+                    <li><a href="https://relentlessbeats.com/2024/10/spotify-or-youtube-music-the-pros-cons-you-need-to-know/#:~:text=Spotify%20does%20have%20its%20downsides%2C,Spotify%20essentially%20doesn%E2%80%99t%20offer%20them" target="_blank">Spotify Downsides - Relentless Beats</a></li>
+                    <li><a href="https://youtube-music.pissedconsumer.com/review.html#:~:text=,a%20solution%20to%20their%20issues" target="_blank">YouTube Music Review - Pissed Consumer</a></li>
+                    <li><a href="https://9to5google.com/2020/08/12/youtube-music-issues-complaints-poll/#:~:text=YouTube%20Music%20issues%20to%20be,your%20%27personal%27%20YouTube%20Music%20playlists" target="_blank">YouTube Music Issues - 9to5Google</a></li>
+                    <li><a href="https://arstechnica.com/gadgets/2020/08/google-says-its-working-hard-to-address-youtube-music-complaints/#:~:text=Google%20says%20it%27s%20working%20hard,currently%20work%2C%20but%20it" target="_blank">Google Addressing YouTube Music Complaints - Ars Technica</a></li>
+                    <li><a href="https://chromeunboxed.com/switching-from-youtube-music-to-spotify/#:~:text=With%20a%20service%20like%20YouTube,but%20it%20also%20kinda%20doesn%E2%80%99t" target="_blank">Switching from YouTube Music to Spotify - Chrome Unboxed</a></li>
+                </ul>
+            </section>
+             
+            </section>
+        </article>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

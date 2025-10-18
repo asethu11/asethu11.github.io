@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Meeting Assistant for PMs</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="SODA.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="icon" href="/img/favicon.png" type="image/png">
+
+        <script>
+            function updateImages() {
+            const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            document.querySelectorAll(".theme-img").forEach(img => {
+                const imageName = img.dataset.name; // Get the image name
+                img.src = isDarkMode ? `darkmode/${imageName}.jpg` : `lightmode/${imageName}.jpg`;
+            });
+        }
+        
+        // Run on page load
+        updateImages();
+        
+        // Listen for theme changes
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateImages);
+        
+        </script>
+
+        <script>
+            function updateImages() {
+                const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                document.querySelectorAll(".theme-img").forEach(img => {
+                    const imageName = img.dataset.name; // Get the image name
+                    const newSrc = isDarkMode 
+                        ? `img/dk/${imageName}.png` 
+                        : `img/lt/${imageName}.png`;
+
+                    // Only update if the src has changed (prevents unnecessary reloads)
+                    if (img.src !== newSrc) {
+                        img.src = newSrc;
+                    }
+                });
+            }
+
+            // Ensure images update on theme change
+            const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+            darkModeQuery.addEventListener("change", updateImages);
+
+            // Run on page load
+            document.addEventListener("DOMContentLoaded", updateImages);
+        </script>
+    </head>
+
+    <body>
+        <a href="../../index.html" class="back-button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 12H5M5 12L12 19M5 12L12 5"
+                    stroke="currentColor" 
+                    stroke-width="2" 
+                    stroke-linecap="round"
+                    stroke-linejoin="round"/>
+            </svg>
+            Home
+        </a>
+
+        <div class="article-container">
+            <article class="article-body">
+                
+               <!-- Intro Section -->
+                <section class="section-1">
+                    <div class="grey-background-article image-bottom">
+                        <figure class="article-figure">
+                            <!-- Image updates based on theme -->
+                            <img class="theme-img" src="" data-name="" width="100%" alt="">
+                        </figure>
+                    </div>
+
+                    <h1 class="article-h1">
+                        Rethinking Meetings for Product Managers <br>
+                        (under 24h)
+                    </h1>
+
+                    <p>
+                        In just 24 hours, we built MeetMate: an AI-powered meeting assistant designed to help PMs cut through the noise. From agenda prep to post-meeting follow-up, MeetMate streamlines every phase of the meeting lifecycle. I led UX and product design from start to finish, transforming pain points into a usable, intuitive solution under real-time pressure.
+                    </p>
+
+                    <div class="sub-header">
+                        <p id="intro-tags1">
+                            April '25 | 24h Hackathon  | UX + Product Designer | Figma, Replit, React, FastAPI, SQLite
+                        </p>
+                    </div>
+                </section>
+                
+                <hr><!-------------------------------------------->
+
+                <!-- TL;DR Section -->
+                <section class="section-tldr">
+                    <h2>TL;DR</h2>
+                    <ul>
+                        <li><b>Problem:</b>  PMs spend over 30 hours/month in meetings, but forget much of what’s discussed.</li>
+                        <li><b>Pain Point:</b>  Existing tools are fragmented—handling scheduling, notes, or tasks separately.</li>
+                        <li><b>My Role:</b>  Led UX end-to-end during a 24-hour hackathon, owning research, flows, and UI design</li>
+                        <li><b>Outcome:</b> Built and delivered a working AI meeting assistant that tackled prep, flow, and follow-up seamlessly under time pressure.</li>
+                    </ul>
+                </section>
+
+                <hr><!-------------------------------------------->
+
+                <!-- Meetings are Broken -->
+                <section class="section-1">
+                    <h2>Meetings Are Broken</h2>
+                    <p>PMs spend over 30-50% of their time in meetings but forget nearly half of what’s discussed. Existing tools cover only fragments—scheduling, transcription, or task tracking—forcing teams to juggle multiple platforms. This fragmentation creates confusion, reduces follow-through, and makes meetings feel unproductive.</p>
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide1" width="100%" alt="">
+                        <figcaption>Source: <a href="https://www.forbes.com/sites/bernardmarr/2023/01/30/how-much-time-do-we-spend-in-meetings-every-day/?sh=4f0b1c2e6d8f" class="hyp-p">Forbes ↗</a></figcaption>
+                    </figure>
+                </section><br>
+                
+                <!-- The Idea -->
+                <section class="section-2">
+                    <h2>The Idea</h2>
+                    <p>We set out to design an all-in-one AI assistant that supports PMs before, during, and after meetings. It had to reduce friction, simplify workflows, and eliminate the need to jump between apps. <br><br>
+                    <b>Our goal: build a tool that anticipates needs and keeps meetings on track.</b></p>
+                </section><br>
+
+                <hr><!-------------------------------------------->
+
+                <!-- My Role -->
+                <section class="section-3">
+                    <h2>My Role and How I Problem Solved</h2>
+                    <p>As the only designer on the team, I joined immediately as the problem was scoped. While the backend explored AI integrations and the frontend reviewed existing repos, I focused on understanding user pain points quickly. We didn’t have time for interviews, so I turned to ChatGPT and Gemini to simulate real PM conversations and extract insights fast.</b></p>
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide2" width="100%" alt="">
+                    </figure>
+                </section>
+
+                <!-- Research -->
+                <section class="section-4">
+
+                    <h2>Research & Design</h2>
+                    
+                    <p>I identified recurring frustrations like last-minute agenda chaos, forgotten action items, and unstructured meeting flow. These issues informed the design priorities. I mapped out the full meeting lifecycle and used it to structure features across pre-, mid-, and post-meeting stages. This helped align the team and ensured that every feature served a purpose.<br>
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide3" width="100%" alt="">
+                        <figcaption>Exploring early ideas and defining direction during the initial ideation phase.</figcaption>
+                    </figure>
+                    <br>
+                    I sketched low-fi flows and iterated rapidly in Figma, simplifying each screen for clarity and speed. The goal was to create an interface that could be built fast, understood instantly, and scaled later if needed.</p>
+                </section><br>
+
+                <section class="section-5">
+                    
+                    <h2>Adapting to Roadblocks</h2>
+                    
+                    <p>Midway through, our frontend developer dropped out. To keep momentum, I quickly sourced a replacement through my network and began building a UI shell using Lovable and Replit. I ensured every screen was visually coherent and API-ready so we could integrate without bottlenecks.
+                    </p>
+                </section><br>
+
+                <section class="section-6">
+                    
+                    <h2>Team Execution</h2>
+                    
+                    <p>Once our new frontend dev joined (at hour 14), we hit the ground running. We co-built the prototype overnight. I stayed closely involved throughout integration, providing continuous UX feedback, tightening interaction flows, and refining layouts in real time. The result was a finished product that felt intuitive and complete—far beyond a typical hackathon demo.
+                    </p>
+                </section><br>
+
+                <hr><!-------------------------------------------->
+
+                <section class="section-7">
+
+                    <h2>The Product: MeetMate</h2>
+                    
+                    <p>MeetMate is a smart meeting assistant that supports PMs throughout the meeting lifecycle. Before meetings, it suggests agendas, links relevant docs, surfaces unfinished tasks, and confirms attendees. During the session, it starts transcribing automatically and flags vague action items or unassigned tasks with subtle AI nudges. Afterward, it delivers clean summaries, highlights decisions, and syncs to task tools. It’s designed to feel ambient, not intrusive—minimal setup, maximum utility.
+                    </p>
+                </section><br>
+
+
+                <section class="section-8">
+                    <h2>Tech Stack</h2>                   
+                    <p>
+                        We used React and TailwindCSS for the frontend, FastAPI with Supabase and SQLite for the backend, and the OpenAI API for AI-driven features. Design and prototyping were handled in Figma, with live integration support through Lovable and Replit to keep development agile and collaborative.
+                    </p>
+                </section><br>
+
+                <section class="section-9">
+                    <h2>What We Achieved</h2>
+                    <p>
+                        We shipped a fully functional prototype in under 48 hours that addressed three core PM pain points—meeting prep, real-time focus, and post-meeting follow-up. Even with a mid-project team change, we maintained momentum and delivered a cohesive, intuitive experience. Judges were able to use the product without explanation, which confirmed the UX worked as intended.
+                    </p>
+                </section><br>
+
+
+
+
+
+                <!-- Reflections Section -->
+                <section class="section-reflections">
+                    <h2>What I Learned</h2>
+                    <p>Through this project, we learned critical lessons:</p>
+                    <ul>
+                        <li>Design under pressure is about <strong>bias toward action</strong></li>
+                        <li>Leading design means being <strong>resourceful</strong>, not just creative</li>
+                        <li>Good UX is as much about <strong>clarity and flow</strong> as it is about looks</li>
+                        <li>The best tools are invisible—the user just <em>feels</em> in control</li>
+                    </ul>
+                </section>
+              
+
+                <footer>
+                    <br><br><br>
+                    <hr>
+                    <div class="footer-container">
+                    <a href="#top" class="hyp-p">back to top ↑</a>
+                    <!-- <a href="LSR.html" class="hyp-p">Easter Egg? </a>-->
+                    </div>
+                </footer>
+            
+            </article>
+            
+        </div>
+
+
+        <script src="script.js"></script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+<!--Templates-->
+
+<!--
+
+<p > 
+    At the moment, Youtube Music holds under 10% of the streaming market. <a class="hyp-p" href="https://evoca.tv/streaming-service-market-share/#:~:text=Spotify 31.7,Deezer 1.3">(source) ↗</a>
+</p>

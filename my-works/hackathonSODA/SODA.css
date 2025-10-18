@@ -167,7 +167,7 @@ hr {
     margin-top: 3rem;
     margin-bottom: 3rem;
     border: 0;
-    border-top: 1px solid var(--text-secondary);
+    border-top: 1px solid var(--background-grey);
 }
 
   
@@ -196,6 +196,7 @@ a:link {
 p {
     line-height: 24px;
     margin-top: 0rem;
+    margin-bottom: 1rem;
 }
 
 pre {
@@ -292,7 +293,7 @@ ol li {
 }
 
 .grey-background-article {
-    /* background-color: var(--background-grey); */
+    background-color: var(--background-grey);
     border-radius: 16px;
     display: flex;
     justify-content: center;
@@ -477,4 +478,38 @@ video {
     height: auto;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* COMPACT: 1-2 Line Layout */
+.tech-stack {
+    background-color: var(--background-grey);
+    padding: 1rem;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+}
+
+.tech-compact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+
+.tech-tool {
+    background-color: var(--text-secondary);
+    color: var(--background);
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    margin: 0.1rem;
+}
+
+.tech-separator {
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin: 0 0.2rem;
 }

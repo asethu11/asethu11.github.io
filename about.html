@@ -21,7 +21,8 @@
         <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
 
-        <script src="aboutscript.js"></script>
+        <script src="script.js"></script>
+        <script src="shared.js"></script>
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -66,13 +67,13 @@
 
                 <!-- Introduction Text -->
                 <p class="introduction-text">
-                    I’m a UX & XR designer with a multidisciplinary background, based in Phoenix, AZ. I'm now pursuing my Master’s in User Experience (HCI) at Arizona State University.<br><br>
+                    I'm a UX & XR designer with a multidisciplinary background, based in Phoenix, AZ. I'm now pursuing my Master's in User Experience (HCI) at Arizona State University.<br><br>
 
-                    Right now, at ASU’s LMS division, I’m making online courses more engaging for thousands of students. Along the way, I’ve worked in VR, UI Design, 3D Modelling, and Graphic Design, using tools like Figma, Adobe CC,  Unreal Engine, and Blender.<br><br>
+                    Right now, at ASU's LMS division, I'm making online courses more engaging for thousands of students. Along the way, I've worked in VR, UI Design, 3D Modelling, and Graphic Design, using tools like Figma, Adobe CC, Unreal Engine, and Blender.<br><br>
 
-                    Before this, I contributed to Mayo Clinic’s medical review tools powered by AI, built immersive VR simulations at Meteor Studio, and redesigned the safety messaging for the City of Mesa.<br><br>
+                    Before this, I contributed to Mayo Clinic's medical review tools powered by AI, built immersive VR simulations at Meteor Studio, and redesigned the safety messaging for the City of Mesa.<br><br>
 
-                    I like to call myself a self-taught designer. Even though I studied design for 7 years, I learned all my tools through YouTube tutorials, freelance projects and a lot of messing around. I think that gives me an edge. I don’t just follow conventional thought frameworks; I mix disciplines, experiment, and think outside the box to design more creative solutions.
+                    I like to call myself a self-taught designer. Even though I studied design for 7 years, I learned all my tools through YouTube tutorials, freelance projects and a lot of messing around. I think that gives me an edge. I don't just follow conventional thought frameworks; I mix disciplines, experiment, and think outside the box to design more creative solutions.
                 </p>
 
                 <br>
@@ -81,7 +82,7 @@
                 <div class="socials">
                     <div class="social-icons">
                         <a href="https://github.com/asethu11" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="mailto:mailsofabshk@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="#" onclick="copyEmail()" aria-label="Copy email to clipboard"><i class="fas fa-envelope"></i></a>
                         <a href="https://medium.com/@mailsofabhishek" target="_blank" aria-label="Medium"><i class="fab fa-medium"></i></a>
                         <a href="https://www.linkedin.com/in/asethu/" target="_blank" aria-label="Medium"><i class="fab fa-linkedin"></i></a>
                     </div>
@@ -102,36 +103,6 @@
         </footer>
         </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const projectRows = document.querySelectorAll('.project-row');
-                const previews = document.querySelectorAll('.project-preview');
-      
-                // Function to hide all previews
-                const hideAllPreviews = () => {
-                    previews.forEach(preview => {
-                        preview.style.opacity = '0';
-                        preview.style.visibility = 'hidden';
-                    });
-                };
-      
-                projectRows.forEach((row, index) => {
-                    row.addEventListener('mouseenter', () => {
-                        hideAllPreviews();
-                        
-                        // Show the corresponding preview
-                        if (previews[index]) {
-                            previews[index].style.opacity = '1';
-                            previews[index].style.visibility = 'visible';
-                        }
-                    });
-      
-                    row.addEventListener('mouseleave', () => {
-                        hideAllPreviews();
-                    });
-                });
-            });
-          </script>
     </body>
 
 

@@ -28,21 +28,11 @@
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
 
         <script src="script.js"></script>
-        <script src="scripts/typed.min.js"></script>
+        <script src="shared.js"></script>
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="icon" href="img/favicon.png" type="image/png">
 
-        <script>
-          function copyEmail() {
-            const email = "mailsofabshk@gmail.com";
-            navigator.clipboard.writeText(email).then(() => {
-              alert("Email copied to clipboard!");
-            }).catch(err => {
-              console.error("Failed to copy:", err);
-            });
-          }
-        </script>
     </head>
 
     <body>       
@@ -58,8 +48,6 @@
                       <p class="header-sub-title" id="word"></p>
                       <p class="header-sub-title blink">|</p>
                   </div>
-              
-                  <script src="script.js"></script>
                     
                     <h1>i'm abhishek.</h1>
                   </a>
@@ -202,7 +190,6 @@
               </div>
             </div>
 
-
           </div>
         </div>
 
@@ -213,7 +200,7 @@
           <div class="columns-container">
             <div class="projects">
 
-            <a href="https://www.linkedin.com/posts/asethu_participated-in-a-24-hour-hackathon-at-arizona-activity-7319915963183771649-qF01?utm_source=share&utm_medium=member_desktop&rcm=ACoAABnQxasBvGS_UBWZWJcHWbmRWtSWLMIQP_Y" class="project-row" target="_blank">
+            <a href="my-works/hackathonSODA/SODA.html" class="project-row">
               <p class="project-row-title">
                   AI-powered Project Management Tool
               </p>
@@ -360,7 +347,7 @@
     
                   <div class="video-text">
                     <h3 class="video-title">
-                        Completed a course on Mobile UI 
+                        Completed a course on Mobile UI
                     </h3>
                     <p class="video-description">
                       IxDF Certification, 2025
@@ -410,36 +397,5 @@
     </body>
  
 
-    <!-- Script for Project Preview -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          const projectRows = document.querySelectorAll('.project-row');
-          const previews = document.querySelectorAll('.project-preview');
-
-          // Function to hide all previews
-          const hideAllPreviews = () => {
-              previews.forEach(preview => {
-                  preview.style.opacity = '0';
-                  preview.style.visibility = 'hidden';
-              });
-          };
-
-          projectRows.forEach((row, index) => {
-              row.addEventListener('mouseenter', () => {
-                  hideAllPreviews();
-                  
-                  // Show the corresponding preview
-                  if (previews[index]) {
-                      previews[index].style.opacity = '1';
-                      previews[index].style.visibility = 'visible';
-                  }
-              });
-
-              row.addEventListener('mouseleave', () => {
-                  hideAllPreviews();
-              });
-          });
-      });
-    </script>
 
 </html>

@@ -169,7 +169,7 @@ hr {
     margin-top: 4rem;
     margin-bottom: 2rem;
     border: 0;
-    border-top: 1px solid var(--text-secondary);
+    border-top: 1px solid var(--background-grey);
 }
 
   
