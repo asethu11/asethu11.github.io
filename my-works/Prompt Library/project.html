@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>AI Prompt Library Platform</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <script src="../../script.js"></script>
+        <script src="../../shared.js"></script>
+        <link rel="stylesheet" href="prompt-library.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="icon" href="/img/favicon.png" type="image/png">
+    </head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+
+<script>
+    function updateImages() {
+        const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.querySelectorAll(".theme-img").forEach(img => {
+            const imageName = img.dataset.name; // Get the image name
+            const newSrc = isDarkMode 
+                ? `img/dk/${imageName}.png` 
+                : `img/lt/${imageName}.png`;
+
+            // Only update if the src has changed (prevents unnecessary reloads)
+            if (img.src !== newSrc) {
+                img.src = newSrc;
+            }
+        });
+    }
+
+    // Ensure images update on theme change
+    const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    darkModeQuery.addEventListener("change", updateImages);
+
+    // Run on page load
+    document.addEventListener("DOMContentLoaded", updateImages);
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-98H0ZTK0T4');
+
+  
+</script>
+
+
+<body>
+    <a href="../../index.html" class="back-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M5 12L12 19M5 12L12 5"
+                stroke="currentColor" 
+                stroke-width="2" 
+                stroke-linecap="round"
+                stroke-linejoin="round"/>
+        </svg>
+        Home
+    </a>
+
+    <div class="article-container">
+        <article class="article-body">
+            
+            <!--Intro Section-->
+            <section class="section-1">
+
+                <div class="grey-background-article image-bottom">
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide1" width="100%" alt="">
+                    </figure>
+                </div>
+
+                <h1 class="article-h1">AI Prompt Library Platform</h1>
+
+                <p>
+                    An open-source web app built in 24 hours to make high-quality AI prompts, searchable, and model-specific. <br><br>
+
+                    What began as a small frustration project turned into a full technical exploration of data processing, UX performance, and scalable static architecture. Processed <b>18,000+ prompts</b> across <b>50 repositories</b>, filtered down to <b>5,036 high-quality unique prompts</b>, and published as a fully client-side React + TypeScript app with <b>zero backend infrastructure</b>.
+                </p>
+
+                <div class="sub-header">
+                     <p id="intro-tags1">
+                         <a href="https://abseth-six.vercel.app" target="_blank" class="headtag">
+                             View Live Platform
+                         </a> |
+                         <a href="https://github.com/asethu11/abseth" target="_blank" class="headtag">
+                             Repo
+                         </a> |
+
+                         8-10 min read | Personal Project
+                     </p>
+                </div>
+
+            </section>
+
+            <hr class="intro-hr">
+
+            <section class="section-tldr">
+                <h2>TL;DR</h2>
+                <ul>
+                    <li><b>Problem:</b> AI experts sharing recycled ChatGPT prompts behind engagement bait.</li>
+                    <li><b>Solution:</b> Open-source prompt library with 18,000+ prompts processed → 5,036 curated.</li>
+                    <li><b>Tech:</b> Static React + TypeScript app on Vercel, zero backend infrastructure.</li>
+                    <li><b>Impact:</b> Fully client-side, searchable, categorized by topic and AI tool.</li>
+                </ul>
+            </section>
+            
+            <hr class="intro-hr">
+
+            <section class="section-2">
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide2" width="100%" alt="">
+                </figure>
+
+                <h2 class="article-h2">The Problem: Recycled Prompts Behind Paywalls</h2>
+                <p>I noticed many "AI experts" sharing recycled ChatGPT prompts behind engagement bait and paywalls. The AI prompt ecosystem was fragmented, with quality prompts scattered across GitHub repositories, Discord servers, and paid courses.</p>
+
+                <p><em><span id="theme">How could I create an open, high-quality prompt library that anyone could browse freely?</span></em></p>
+                <p>I set out to build a solution that would aggregate unstructured prompt data from 50+ GitHub repos, remove duplicates and low-quality entries, categorize prompts automatically by topic, and deliver an intuitive, searchable frontend with zero backend infrastructure.</p>
+
+            </section>
+
+            <section class="section-2">
+                <h2 class="article-h2">System Architecture</h2>
+
+                <p>The system follows a two-phase design: a data processing pipeline that extracts and scores prompts, and a static React app that loads the cleaned JSON dataset on the client side.</p>
+
+                 <pre id="architecture-diagram"><code>GitHub Repositories
+         │
+         ▼
+ Data Processing Pipeline (Node.js)
+  ├─ Extraction
+  ├─ Deduplication  
+  ├─ Categorization (ML-based)
+  └─ QA Scoring → unique-prompts.json
+         │
+         ▼
+ React Frontend (React + TS + Vite)
+  ├─ Search + Filters
+  ├─ Prompt Detail Modal
+  └─ Analytics (GA4)
+         │
+         ▼
+ Vercel (Static Hosting)</code></pre>
+
+                 <p>This architecture ensures zero backend infrastructure while maintaining fast, responsive performance through client-side filtering and caching.</p>
+            </section>
+            
+            <section class="section-2">
+                <h2 class="article-h2">Data Processing Pipeline</h2>
+
+                <p>Processed <b>18,000+ files</b> across <b>30 repositories</b>, removing <b>12.7% duplicates</b> and recategorizing <b>5,193 prompts</b> after QA scoring. The final dataset contained <b>5,085 unique prompts</b>.</p><br>
+
+                <h3>Quality Scoring System</h3>
+                
+                <p><b>Positive Indicators (+1 – +3 points each):</b></p>
+                <ul>
+                    <li>🧩 Role or instruction keywords: "act as", "you are", "system:", etc.</li>
+                    <li>✍️ Adequate length: >100 characters (good) / >500 characters (detailed)</li>
+                    <li>🏷️ Proper tags and categories: correctly labeled beyond "general"</li>
+                    <li>🧠 Advanced prompt types: system prompts, jailbreaks, leaked or internal prompts</li>
+                </ul>
+
+                <p><b>Negative Indicators (−2 points each):</b></p>
+                <ul>
+                    <li>🧪 Placeholder words: "test", "example", "todo", "debug", "sample"</li>
+                    <li>⏳ Too short or too long: <50 chars (auto low) / >10,000 chars (auto low)</li>
+                    <li>🌀 Unstructured or unclear language: lacks actionable instruction</li>
+                </ul>
+
+                <h3>Quality Thresholds</h3>
+                <ul>
+                    <li>🥇 High Quality: ≥ 4 points</li>
+                    <li>🟡 Medium Quality: 2 – 3 points</li>
+                    <li>⚫ Low Quality: < 2 points</li>
+                </ul>
+            </section><br>
+
+            <figure class="article-figure">
+                <img class="theme-img" src="" data-name="slide4" width="100%" alt="">
+            </figure>
+            
+            <section class="section-2">
+                <h2 class="article-h2">Frontend Architecture</h2>
+
+
+                <h3>Tech Stack</h3>
+                <ul>
+                    <li>React 18 + TypeScript + Vite - Modern development experience with type safety</li>
+                    <li>Functional components with hooks - useState, useEffect, useMemo, useCallback</li>
+                    <li>Modular structure - Layout, Prompts, UI, and analytics hooks</li>
+                </ul>
+
+                <h3>Performance Optimizations</h3>
+                <ul>
+                    <li>Pagination - 20 items/page to prevent initial load lag</li>
+                    <li>Infinite scroll + lazy loading - Smooth user experience</li>
+                    <li>Memoization - React.memo, useMemo, useCallback for re-render optimization</li>
+                    <li>Code splitting - Vendor vs app bundles for faster loading</li>
+                    <li>Cached static JSON loading - Instant data access</li>
+                </ul>
+
+                <h3>Key Features</h3>
+                <ul>
+                    <li>Real-time search - Title, description, tags filtering</li>
+                    <li>Category + combined filters - Multi-dimensional filtering</li>
+                    <li>Responsive grid layout - Works on all device sizes</li>
+                    <li>Modal detail views - Copy-to-clipboard functionality</li>
+                </ul>
+            </section><br>
+
+            <figure class="article-figure">
+                <img class="theme-img" src="" data-name="slide5" width="100%" alt="">
+            </figure>
+            
+            <section class="section-2">
+                <h2 class="article-h2">Design System & Analytics</h2>
+
+                <h3>Design System</h3>
+                <ul>
+                    <li>Dark mode UI with orange accents - Consistent with modern developer tools</li>
+                    <li>CSS custom properties for theming - Easy maintenance and customization</li>
+                    <li>Consistent component patterns - Reusable UI elements</li>
+                    <li>Accessible via ARIA labels - Screen reader friendly</li>
+                    <li>Keyboard navigation - Full keyboard accessibility</li>
+                </ul>
+
+                <h3>Analytics Integration</h3>
+                <p>Implemented Google Analytics 4 via a custom React hook for modular tracking.</p>
+                
+                <p><b>Tracked Events:</b></p>
+                <ul>
+                    <li>Prompt views</li>
+                    <li>Search queries</li>
+                    <li>Category filters</li>
+                    <li>"Load more" scroll events</li>
+                    <li>Prompt submissions</li>
+                </ul>
+            </section><br>
+
+            <section class="section-2">
+                <h2 class="article-h2">Deployment & Performance</h2>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide6" width="100%" alt="">
+                </figure>
+
+                <h3>Deployment & Infrastructure</h3>
+                <ul>
+                    <li>Hosting: Vercel (static SPA)</li>
+                    <li>Build: TypeScript → Vite bundle → static deploy</li>
+                    <li>Optimizations: Source maps, cache headers, SPA routing with rewrites</li>
+                    <li>Zero backend infrastructure - Fully static deployment</li>
+                </ul>
+
+                <h3>Performance Metrics</h3>
+                <ul>
+                    <li>Initial Load: Optimized via vendor chunk splitting</li>
+                    <li>Lazy Loading: 20 prompts per page</li>
+                    <li>Search Speed: Client-side filtering with caching</li>
+                    <li>Build Output: Vendor + App bundles separated</li>
+                </ul>
+            </section><br>
+            
+            <section class="section-2">
+                <h2 class="article-h2">Technical Decisions & Challenges</h2>
+
+                <h3>Key Technical Decisions</h3>
+                <ul>
+                    <li>Static Site > API: Zero hosting costs + instant load</li>
+                    <li>JSON Dataset > Database: Simplicity + portable updates</li>
+                    <li>Client-Side Filtering: Snappy UX for small datasets</li>
+                    <li>TypeScript: Type safety and scalability</li>
+                    <li>Vite: Fast builds + code splitting</li>
+                </ul>
+
+                <h3>Challenges & Solutions</h3>
+                <ul>
+                    <li>Large dataset (> 5000 prompts) caused lag → Pagination + memoization + lazy loading</li>
+                    <li>Duplicate prompts across repos → Content-hash deduplication algorithm</li>
+                    <li>Inconsistent categories → Automated recategorization + QA reports</li>
+                    <li>Front-end break after folder refactor → Rebuilt component structure in Cursor</li>
+                </ul>
+            </section><br>
+
+            <hr class="intro-hr">
+            
+            <section class="section-2">
+                <h2 class="article-h2">Results & Impact</h2>
+
+                <p>The AI Prompt Library Platform now runs as a fully static, open-source application serving over <b>5,000 curated, high-quality prompts</b> with model compatibility tags and category filters.</p>
+
+                <h3>Key Outcomes</h3>
+                <ul>
+                    <li>5,000+ unique prompts - Curated from 18,000+ raw entries</li>
+                    <li>Fast, responsive UX - Client-side filtering with pagination</li>
+                    <li>Zero hosting costs - Fully static deployment on Vercel</li>
+                    <li>Data-driven insights - Analytics tracking user behavior</li>
+                    <li>Open-source workflow - Ready for community growth</li>
+                </ul>
+
+                 <p><a href="https://abseth-six.vercel.app" class="hyp-p" target="_blank">View Live Platform</a> | <a href="https://github.com/asethu11/abseth" class="hyp-p" target="_blank">GitHub Repository</a></p>
+            </section><br>
+            
+            <section class="section-2">
+                <h3>Key Technical Insights</h3>
+                <ul>
+                    <li>Static sites can handle complex data - With proper optimization, client-side filtering outperforms many API-based solutions</li>
+                    <li>Quality scoring algorithms - Automated content curation requires careful balance of positive and negative indicators</li>
+                    <li>Performance is UX - Pagination and memoization aren't just technical optimizations, they're essential UX features</li>
+                    <li>TypeScript pays dividends - Type safety prevented countless runtime errors during rapid development</li>
+                </ul><br>
+            </section>
+            
+            <section class="section-2">
+                <h2 class="article-h2">Outcome</h2>
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide8" width="100%" alt="">
+                </figure>
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide7" width="100%" alt="">
+                </figure>
+
+                <p>The AI Prompt Library Platform demonstrates that <b>complex data processing and user experience</b> can coexist in a static application. By processing <b>18,000+ prompts</b> into a curated library of <b>5,000+ high-quality entries</b>, I created a resource that makes AI prompts accessible to everyone, not just those behind paywalls.</p>
+            </section>
+
+
+                <footer>
+                    <br><br><br>
+                    <hr><br>
+                    <div class="footer-container">
+                    <a href="#top" class="hyp-p">back to top ↑</a>
+                    <!-- <a href="next-project.html" class="hyp-p">Next Project →</a>-->
+                    </div>
+                </footer>
+        
+        </article>
+        
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
