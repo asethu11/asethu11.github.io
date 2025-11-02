@@ -5,44 +5,27 @@
     --background: #FCFCFC;
     --background-grey: #F3F5F7;
     --text-primary: #262628; 
-    --text-secondary: #7a7a7a; 
+    --text-secondary: #737373; 
     --primary: #0070EA; 
-    --red: #db4f4f;
-    --theme: #FA704C;
-    --accent: #934CFA;
+    --red:#db4f4f;
+}
 
-  }
-
-
-  
-  @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
     :root {
         --background: #040404;
         --background-grey: #2B2C2E;
         --text-primary: #F0F0F0; 
         --text-secondary: #adabab; 
-        --text-normal: #d6d6d6;
+        --text-normal: #e4e4e4;
         --text-bold: #ffffff;
-        --primary: #0A84FF;
-        --red: #db4f4f; 
-        --theme: #FFC15E;
-        --accent: #934CFA;
-    }
-    
-    p {
-        color: var(--text-normal);
+        --primary: #0A84FF; 
+        --red:#db4f4f;
     }
 
-    b {
-        font-weight: 700;
-        color: var(--text-bold);
+    hr {
+        border-color: var(--background-grey);
     }
-
-
-
-
-  }
-  
+}
 
 
 
@@ -57,17 +40,7 @@ body {
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
-
 }
-
-p {
-    color: var(--text-normal);
-}
-
-b {
-    color: var(--text-bold);
-}
-
 
 h1 {
     font-family: "Big Shoulders Display", serif;
@@ -83,34 +56,44 @@ h2, h3, h4, h5, h6, p{
 
 
 h2 {
-    font-size: 1.rem;
+    font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 1rem;
     letter-spacing: -0.3px;
 }
 
 h3 {
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.1rem;
+    font-weight: 600;
     margin-bottom: 1rem;
     line-height: 1.6rem;
 }
 
 li {
-    line-height: 1.6rem;
-    margin-bottom: 0.3rem;
+    line-height: 1.5;
+    margin-top: 0.5rem;
 }
 
-:visited {
+
+a:link {
+    text-decoration: none;
     color: var(--primary);
 }
 
 a:visited {
     text-decoration: none;
     color: var(--primary);
+  }
+
+p a:hover {
+    text-decoration: underline;
 }
 
-  
+p {
+    line-height: 1.5;
+    margin-top: 0rem;
+}
+
 .headtag {
     display: inline-flex;
     height: 20px;
@@ -130,74 +113,16 @@ a:visited {
     color: var(--red);
   }
 
-  #theme {
-    color: var(--red);
-  }
-
-
-
-
-
-
-/* Header */
-
-
-
-.hyp-p {
-    color: var(--primary) !important;
-}
-
-.hyp-p:hover {
-    color: var(--red) !important;
-}
-
-
-
-
-
-
-
 #intro-tags1 {
     margin-top: 3rem;
     color: var(--text-secondary) !important;
 }
 
-
-
-
-hr {
+.intro-hr {
     margin-top: 4rem;
     margin-bottom: 2rem;
     border: 0;
     border-top: 1px solid var(--background-grey);
-}
-
-  
-  
-  
-
-
-.footer-container {
-    display: flex;
-    justify-content: space-between;
-    color: var(--text-secondary);
-}
-
-
-
-
-
-
-a:link {
-    text-decoration: none;
-    color: var(--primary);
-}
-
-
-
-p {
-    line-height: 24px;
-    margin-top: 0rem;
 }
 
 pre {
@@ -226,11 +151,22 @@ pre > code {
     margin: 0;
 }
 
+.container {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 @media only screen and (max-width: 768px) and (min-width: 481px) {
+    .container {
+        width: 90%;
+    }
 }
 
 @media only screen and (max-width: 480px) {
+    .container {
+        width: 95%;
+    }
 }
 
 .article-container {
@@ -251,8 +187,6 @@ pre > code {
 .article-figure {
     margin: 2rem 0;
 }
-
-
 
 .article-figure img {
     max-width: 100%;
@@ -281,12 +215,19 @@ ol li {
     margin-bottom: 0.5rem;
 }
 
+.article-video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
 
 .article-h1{
     font-size: 2rem;
     letter-spacing: -0.05rem;
     margin-bottom: 2rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .article-h2{
@@ -294,7 +235,7 @@ ol li {
 }
 
 .grey-background-article {
-    /* background-color: var(--background-grey); */
+    background-color: var(--background-grey);
     border-radius: 16px;
     display: flex;
     justify-content: center;
@@ -374,33 +315,23 @@ li pre {
     }
 }
 
-@media only screen and (max-width: 1200px) {
+.hyp-p {
+    color: var(--primary) !important;
 }
 
-@media only screen and (max-width: 768px) {
+.hyp-p:hover {
+    color: var(--red) !important;
 }
 
-@media only screen and (max-width: 1400px) {
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-secondary);
 }
-
-@media only screen and (max-width: 1200px) {
-}
-
-
-
-
-
-
 
 .hyp-p:active + .refd {
     display: block;
 }
-
-
-
-
-
-
 
 table {
     width: 100%;
@@ -480,3 +411,4 @@ video {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
