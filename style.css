@@ -681,6 +681,7 @@ pre > code {
   display: block;
 }
 
+
 /* Mobile and tablet styles */
 @media only screen and (max-width: 800px) {
   .columns-container {
