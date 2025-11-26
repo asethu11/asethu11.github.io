@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Abhishek does UX</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="CAB-KB.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+        <link rel="icon" href="img/favicon.png" type="image/png">
+    </head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-98H0ZTK0T4');
+</script>
+
+<script>
+    function updateImages() {
+        const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.querySelectorAll(".theme-img").forEach(img => {
+            const imageName = img.dataset.name; // Get the image name
+            const newSrc = isDarkMode 
+                ? `img/dk/${imageName}.png` 
+                : `img/lt/${imageName}.png`;
+
+            // Only update if the src has changed (prevents unnecessary reloads)
+            if (img.src !== newSrc) {
+                img.src = newSrc;
+            }
+        });
+    }
+
+    // Ensure images update on theme change
+    const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    darkModeQuery.addEventListener("change", updateImages);
+
+    // Run on page load
+    document.addEventListener("DOMContentLoaded", updateImages);
+</script>
+
+<body>
+    <a href="/index.html" class="back-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Home
+    </a>
+    
+    <div class="article-container">
+        <article class="article-body">
+            
+            <!--Intro Section-->
+            <section class="section-1">
+
+                <div class="grey-background-article image-bottom">
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide1" width="100%" alt="">
+                    </figure>
+                </div>
+
+                <h1 class="article-h1">Knowledge Base Experience Research</h1>
+
+                <p>
+                    As CreateAI Builder (CAB) matured, one feature became its backbone: the <strong>Knowledge Base</strong>, where users upload documents, URLs, and data that power their AI projects by adding more context. <br><br>
+
+                    By mid-2025, it had also become the most complex and least understood part of the platform. Faculty and researchers loved its potential but struggled to trust or control it. <br><br>
+
+                    As a <strong>UX Researcher</strong>, I led a deep-dive into how users actually experienced the Knowledge Base — uncovering hidden friction, mapping mental-model gaps, and translating technical ambiguity into product direction.
+                </p>
+
+                <div class="sub-header">
+                    <p id="intro-tags1">
+                        <!-- <a href="" target="_blank" class="headtag">
+                            Link to Project
+                        </a> -->
+
+                        5-7 min read | Oct '25 - Ongoing | UX Research (with Product & Engineering) | Usability, Error Prevention
+                    </p>
+                </div>
+
+            </section>
+
+            <hr class="intro-hr">
+
+            <section class="section-tldr">
+                <h2>TL;DR</h2>
+                <ul>
+                    <li><b>Problem:</b> Uploads failed silently, settings were confusing, and users didn't trust what the system was doing.</li>
+                    <li><b>Process:</b> Combined qualitative (User chat from Slack Channels, Support tickets, User Interviews, Office Hours Transcripts) and quantitative (Datamart, Tableau) data to uncover root causes and guide product direction.</li>
+                    <li><b>Outcome:</b> Insights drove roadmap priorities for upload transparency, syncing, error clarity, and guided onboarding. Expected impact: 15-20% reduction in support tickets (Measuring over the next 3 months).</li>
+                </ul>
+            </section>
+            
+            <hr class="intro-hr">
+
+            <!--Main Content Sections-->
+            <section class="section-2">
+
+                <h2 class="article-h2">Research Process Timeline</h2>
+                <p><em>(Visual placeholder: horizontal process bar similar to your "Mesa" and "NextGen" layouts)</em></p>
+
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <thead>
+                        <tr>
+                            <th class="table-header" style="border: 1px solid var(--background-grey); padding: 10px; text-align: left;">Phase</th>
+                            <th class="table-header" style="border: 1px solid var(--background-grey); padding: 10px; text-align: left;">Focus</th>
+                            <th class="table-header" style="border: 1px solid var(--background-grey); padding: 10px; text-align: left;">What I Did</th>
+                            <th class="table-header" style="border: 1px solid var(--background-grey); padding: 10px; text-align: left;">Output</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-first-col" style="border: 1px solid var(--background-grey); padding: 10px;"><strong>Discovery (June)</strong></td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Map existing issues and user pain</td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Reviewed Slack threads, Office Hour transcripts, JIRA tickets</td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">80+ data points categorized into 6 pain areas</td>
+                        </tr>
+                        <tr>
+                            <td class="table-first-col" style="border: 1px solid var(--background-grey); padding: 10px;"><strong>Data Audit (July)</strong></td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Quantify problem scale</td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Analyzed Datamart usage data (4K+ projects)</td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Upload failure = 33% of all feedback; 50% projects use Knowledge</td>
+                        </tr>
+                        <tr>
+                            <td class="table-first-col" style="border: 1px solid var(--background-grey); padding: 10px;"><strong>Synthesis (August)</strong></td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Cluster findings & identify themes</td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Created Figma synthesis map + personas</td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">5 user needs → 3 meta-themes (Transparency, Simplicity, Guided Learning)</td>
+                        </tr>
+                        <tr>
+                            <td class="table-first-col" style="border: 1px solid var(--background-grey); padding: 10px;"><strong>Co-Definition (Sept)</strong></td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Validate with Product & Eng</td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Shared in cross-team KB alignment meeting</td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Action items: upload feedback, Firecrawl rollout, onboarding</td>
+                        </tr>
+                        <tr>
+                            <td class="table-first-col" style="border: 1px solid var(--background-grey); padding: 10px;"><strong>Roadmap Influence (Oct)</strong></td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Translate insights into design backlog</td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Partnered with PM + Design Systems</td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Defined "Knowledge Health" feature concept, status clarity, and sync workflow</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2 class="article-h2">Key Findings</h2>
+
+                <h3 class="article-h3">Transparency & Trust</h3>
+                <ul>
+                    <li>Upload and retrieval status were invisible or misleading.</li>
+                    <li>Eye-icon behavior confused users ("is it syncing again?").</li>
+                    <li>Users couldn't tell which sources powered an answer.</li>
+                </ul>
+                <blockquote style="border-left: 3px solid var(--background-grey); padding-left: 1rem; margin: 1.5rem 0; font-style: italic; color: var(--text-secondary);">
+                    "I don't know what the bot is doing with my knowledge."
+                </blockquote>
+                <p><strong>Design Direction:</strong></p>
+                <p>Add visible upload progress, file states (active/hidden/failed), and citation visibility.</p>
+                <hr style="border: 0; border-top: 1px solid var(--background-grey); margin: 2rem 0;">
+
+                <h3 class="article-h3">Terminology & Cognitive Overload</h3>
+                <ul>
+                    <li>Terms like <em>Top K</em>, <em>Retrieval Type</em>, and <em>Behaviors</em> alienated non-technical users.</li>
+                    <li>Users couldn't distinguish <em>chat uploads</em> vs. <em>Knowledge uploads</em>.</li>
+                </ul>
+                <blockquote style="border-left: 3px solid var(--background-grey); padding-left: 1rem; margin: 1.5rem 0; font-style: italic; color: var(--text-secondary);">
+                    "I don't understand the knobs and switches."
+                </blockquote>
+                <p><strong>Design Direction:</strong></p>
+                <p>Simplify defaults, use plain-English labels, and introduce contextual tooltips and examples.</p>
+                <hr style="border: 0; border-top: 1px solid var(--background-grey); margin: 2rem 0;">
+
+                <h3 class="article-h3">Reliability of Ingested Content</h3>
+                <ul>
+                    <li>PDFs parsed inconsistently; CSVs lost header relationships.</li>
+                    <li>ASU URLs didn't refresh due to weekly iSearch crawl cycles.</li>
+                    <li>Users thought toggling the eye icon re-synced data — it didn't.</li>
+                </ul>
+                <blockquote style="border-left: 3px solid var(--background-grey); padding-left: 1rem; margin: 1.5rem 0; font-style: italic; color: var(--text-secondary);">
+                    "I don't trust that my files and links are being read correctly."
+                </blockquote>
+                <p><strong>Design Direction:</strong></p>
+                <p>Show "last updated" date, integrate Firecrawl for URL ingestion, add ingestion-quality feedback.</p>
+                <hr style="border: 0; border-top: 1px solid var(--background-grey); margin: 2rem 0;">
+
+                <h3 class="article-h3">Upload & Setup Frustrations</h3>
+                <ul>
+                    <li>Uploads failed silently.</li>
+                    <li>Hidden and active states were indistinguishable.</li>
+                    <li>Behavior toggles disabled KB without visual feedback.</li>
+                </ul>
+                <blockquote style="border-left: 3px solid var(--background-grey); padding-left: 1rem; margin: 1.5rem 0; font-style: italic; color: var(--text-secondary);">
+                    "I don't know if my setup is correct."
+                </blockquote>
+                <p><strong>Design Direction:</strong></p>
+                <p>Introduce retry/delete actions, progress bar, and clearer separation between <em>upload</em>, <em>enable</em>, and <em>reference</em> states.</p>
+                <hr style="border: 0; border-top: 1px solid var(--background-grey); margin: 2rem 0;">
+
+                <h3 class="article-h3">Learning & Independence</h3>
+                <ul>
+                    <li>Faculty wanted autonomy, not hand-holding.</li>
+                    <li>They needed lightweight guidance on how to tune and interpret results.</li>
+                </ul>
+                <blockquote style="border-left: 3px solid var(--background-grey); padding-left: 1rem; margin: 1.5rem 0; font-style: italic; color: var(--text-secondary);">
+                    "I want to learn how to use this tool, not just get answers."
+                </blockquote>
+                <p><strong>Design Direction:</strong></p>
+                <p>Build <em>in-product learning</em>, "Knowledge Health" dashboards, and conversational debugging cues.</p>
+                <hr style="border: 0; border-top: 1px solid var(--background-grey); margin: 2rem 0;">
+
+                <h3 class="article-h3">Quantitative Signals</h3>
+                <p><em>(Visual placeholder for two charts: "Projects by # of uploads" and "Top error categories")</em></p>
+                <ul>
+                    <li><strong>4,087</strong> total CAB projects analyzed</li>
+                    <li><strong>1,976</strong> used Knowledge Base (~50%)</li>
+                    <li><strong>60%</strong> had 0–5 uploads → high early friction</li>
+                    <li><strong>33%</strong> of all feedback related to upload failures</li>
+                    <li><strong>20%</strong> of support tickets linked to Knowledge or Behaviors configuration</li>
+                </ul>
+
+                <h2 class="article-h2">The Three Meta-Themes</h2>
+
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <thead>
+                        <tr>
+                            <th class="table-header" style="border: 1px solid var(--background-grey); padding: 10px; text-align: left;">Theme</th>
+                            <th class="table-header" style="border: 1px solid var(--background-grey); padding: 10px; text-align: left;">Meaning</th>
+                            <th class="table-header" style="border: 1px solid var(--background-grey); padding: 10px; text-align: left;">Design Implication</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-first-col" style="border: 1px solid var(--background-grey); padding: 10px;"><strong>Transparency</strong></td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Users should see what the system is doing — uploads, retrievals, failures.</td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Add progress and visibility layers.</td>
+                        </tr>
+                        <tr>
+                            <td class="table-first-col" style="border: 1px solid var(--background-grey); padding: 10px;"><strong>Simplicity</strong></td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Replace developer language with professor-friendly defaults.</td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Plain-English UI, simplified behaviors.</td>
+                        </tr>
+                        <tr>
+                            <td class="table-first-col" style="border: 1px solid var(--background-grey); padding: 10px;"><strong>Guided Learning</strong></td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">The tool should teach users how to use it.</td>
+                            <td style="border: 1px solid var(--background-grey); padding: 10px;">Progressive onboarding, contextual help, "debug with me" prompts.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><em>(visual placeholder: diagram linking the three themes to CAB feature roadmap)</em></p>
+
+                <hr style="border: 0; border-top: 1px solid var(--background-grey); margin: 2rem 0;">
+
+                <h2 class="article-h2">Impact</h2>
+
+                <p>Direct roadmap influence across multiple releases:</p>
+                <ul>
+                    <li><strong>File Upload Transparency</strong> (visible progress + retry/delete)</li>
+                    <li><strong>Firecrawl Integration</strong> for URL ingestion reliability</li>
+                    <li><strong>Auto-Sync & Download Capabilities</strong> for Docs and Drive</li>
+                    <li><strong>In-Product Learning & "Knowledge Health"</strong> concept approved for design</li>
+                </ul>
+
+                <ul>
+                    <li>Reduced confusion in support channels by clarifying "Knowledge vs. Chat" behavior</li>
+                    <li>Strengthened collaboration between Design, Eng, and PM through a shared evidence base</li>
+                </ul>
+
+            </section>
+
+
+            <footer>
+                <br><br><br>
+                <hr><br>
+                <div class="footer-container">
+                <a href="#top" class="hyp-p">back to top ↑</a>
+                </div>
+            </footer>
+        
+        </article>
+        
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

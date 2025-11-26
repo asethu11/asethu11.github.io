@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Abhishek does UX</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="../blogs.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="icon" href="img/favicon.png" type="image/png">
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
+
+        <script>
+            function updateImages() {
+                const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                document.querySelectorAll(".theme-img").forEach(img => {
+                    const imageName = img.dataset.name;
+                    const newSrc = isDarkMode 
+                        ? `img/dk/${imageName}.png` 
+                        : `img/lt/${imageName}.png`;
+
+                    if (img.src !== newSrc) {
+                        img.src = newSrc;
+                    }
+                });
+            }
+
+            const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+            darkModeQuery.addEventListener("change", updateImages);
+            document.addEventListener("DOMContentLoaded", updateImages);
+        </script>
+    </head>
+
+    <body>
+        <a href="../../index.html" class="back-button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Home
+        </a>
+        
+        <div class="article-container">
+            <article class="article-body">
+
+                <div class="grey-background-article image-bottom">
+                    <img src="thumbnail.jpg" class="project-image">
+                </div>
+
+                <h1 class="article-h1">Why I Start in High-Fidelity</h1>
+                
+                <p>
+                    The wireframe is dead. It is literally faster to drag a real button into Figma than to draw a grey box. For anyone working with modern design systems, that changes everything: high-fidelity is no longer the finish line, it's the starting point. <a href="https://www.justinmind.com/wireframe/low-fidelity-vs-high-fidelity-wireframing-is-paper-dead" class="headtag" target="_blank">[justinmind]<span class="arr"> ↗</span></a>
+                </p>
+                <br>
+                <p>
+                    I stopped making wireframes two years ago. I do not miss them.
+                </p>
+
+                <hr>
+            
+                <h2 class="article-h2">Why Low-Fi Wireframes Break Down</h2>
+                <p>
+                    Classic wisdom: start with low-fidelity to nail structure, then add detail later. That made sense when tools were slow and design systems did not exist. Today, low-fi often just delays the real work. <a href="https://nulab.com/learn/design-and-ux/low-fidelity-wireframes/" class="headtag" target="_blank">[nulab]<span class="arr"> ↗</span></a>
+                </p>
+                <br>
+                <p>
+                    Low-fi hides the actual problems:
+                </p>
+                <ul>
+                    <li>Placeholder text does not reveal label overflow or truncation.</li>
+                    <li>Grey boxes do not expose density, hierarchy, or readability issues.</li>
+                    <li>Stakeholders struggle to react to abstractions, so feedback becomes vague and late. <a href="https://blog.prototypr.io/from-wireframe-to-high-fidelity-colours-typography-spacing-deliverables-85a3e727bec3" class="headtag" target="_blank">[prototypr]<span class="arr"> ↗</span></a></li>
+                </ul>
+
+                <figure class="article-figure">
+                    <img src="img/slide1.jpg" alt="Slide 1" class="article-image">
+                </figure>
+
+                <p>
+                    You end up designing twice: first as boxes, then again as the real product. It feels fast, <b>but it is fake speed</b>. <a href="https://nulab.com/learn/design-and-ux/low-fidelity-wireframes/" class="headtag" target="_blank">[nulab]<span class="arr"> ↗</span></a>
+                </p>
+
+                <hr>
+
+                <h2 class="article-h2">Design Systems Make High-Fi Faster</h2>
+                <p>
+                    Modern design systems flipped the equation. Dragging a production-ready button into your canvas is as fast as drawing a rectangle, but it comes with real padding, states, and brand styling. <a href="https://www.toptal.com/designers/design-systems/benefits-of-design-system" class="headtag" target="_blank">[toptal]<span class="arr"> ↗</span></a>
+                </p>
+
+                <figure class="article-figure">
+                    <img src="img/slide2.gif" alt="Slide 2" class="article-image">
+                </figure>
+
+                <p>
+                    Working from components means:
+                </p>
+                <ul>
+                    <li>You assemble screens instead of redrawing UI from scratch.</li>
+                    <li>Changes to a component cascade across all screens.</li>
+                    <li>Real typography, spacing, and color expose issues immediately. <a href="https://designproject.io/blog/best-practices-design-system/" class="headtag" target="_blank">[designproject]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <br>
+
+                <p>
+                    Studies and case reports show teams ship faster and more consistently once a design system is in place because they spend time composing, not recreating patterns. <a href="https://www.linkedin.com/pulse/how-can-design-systems-help-accelerate-development-process-" class="headtag" target="_blank">[linkedin]<span class="arr"> ↗</span></a>
+                </p>
+
+
+                <hr>
+
+                <h2 class="article-h2">High-Fidelity from Day One = Honest Design</h2>
+                <p>
+                    Starting in high-fidelity is not about premature polish; it is about honest constraints.
+                </p>
+                <br>
+                <p>
+                    With real components and real content:
+                </p>
+                <ul>
+                    <li>Density, hierarchy, and scannability are visible on day one.</li>
+                    <li>Usability tests become more accurate because the thing people see is close to what they will get.</li>
+                    <li>Developers get a near-production blueprint instead of a loose suggestion. <a href="https://www.eleken.co/blog-posts/what-is-a-high-fidelity-wireframe-and-when-to-use-it-designers-explain" class="headtag" target="_blank">[eleken]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <br>
+                <p>
+                    Feedback shifts from "I guess this layout is okay" to "This CTA gets lost" or "This table is unreadable on small screens"—the kind of feedback that actually improves the product. <a href="https://www.justinmind.com/wireframe/low-fidelity-vs-high-fidelity-wireframing-is-paper-dead" class="headtag" target="_blank">[justinmind]<span class="arr"> ↗</span></a>
+                </p>
+
+                <hr>
+
+                <h2 class="article-h2">Vibecoding: Designing by Feel at High Speed</h2>
+                <p>
+                    Vibecoding pushes this even further. Instead of starting from boxes or strict specs, you start from a mood and intent: "calm and trustworthy," "playful and fast," "serious and high-stakes." Tools and AI help you remix components, layouts, and styles until the screen feels right. <a href="https://www.uxtigers.com/post/vibe-coding-vibe-design" class="headtag" target="_blank">[uxtigers]<span class="arr"> ↗</span></a>
+                </p>
+
+                <div class="grey-background-article image-bottom">
+                    <img src="img/slide4.gif" class="project-image">
+                </div>
+
+                <br>
+                <p>
+                    Combined with a design system, vibecoding means:
+                </p>
+                <ul>
+                    <li>You prototype multiple directions quickly without rewriting everything.</li>
+                    <li>You tune spacing, color, and motion live, in high-fidelity.</li>
+                    <li>You optimize for the emotional experience, not just the diagram of a flow. <a href="https://www.figma.com/resource-library/what-is-vibe-coding/" class="headtag" target="_blank">[figma]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <br>
+                <p>
+                    You are no longer wireframing a structure; you are sculpting a vibe using real UI.
+                </p>
+
+                <hr>
+
+                <h2 class="article-h2">When Wireframes Still Make Sense</h2>
+                <p>
+                    Wireframes are not useless—they are just niche:
+                </p>
+
+                <ul>
+                    <li>Very early, blue-sky concepts with no system in place.</li>
+                    <li>Fast mapping of complex flows before any components exist.</li>
+                    <li>Workshops where fidelity would distract from the conversation. <a href="https://blog.hubspot.com/website/high-fidelity-wireframe" class="headtag" target="_blank">[hubspot]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <br>
+                <p>
+                    For most product teams with a functioning design system, though, wireframes are overhead. High-fidelity plus vibecoding lets you move faster, see problems sooner, and ship interfaces that match how the product will really look and feel.
+                </p>
+
+                <hr>
+
+                <footer>
+                    <br><br><br>
+                    <hr><br>
+                    <div class="footer-container">
+                        <a href="#top" class="headtag">back to top<span class="arr">↑</span></a>
+                    </div>
+                </footer>
+            </article>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
