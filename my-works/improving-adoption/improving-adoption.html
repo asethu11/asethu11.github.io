@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Improving adoption for CAB - Abhishek does UX</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Redesigning onboarding to reduce friction and accelerate time-to-value for Syllabot platform.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Onboarding, User Experience, Arizona, USA">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="improving-adoption.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+        <link rel="icon" href="img/favicon.png" type="image/png">
+    </head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-98H0ZTK0T4');
+</script>
+
+<script>
+    function updateImages() {
+        const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.querySelectorAll(".theme-img").forEach(img => {
+            const imageName = img.dataset.name; // Get the image name
+            const newSrc = isDarkMode 
+                ? `img/dk/${imageName}.png` 
+                : `img/lt/${imageName}.png`;
+
+            // Only update if the src has changed (prevents unnecessary reloads)
+            if (img.src !== newSrc) {
+                img.src = newSrc;
+            }
+        });
+    }
+
+    // Ensure images update on theme change
+    const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    darkModeQuery.addEventListener("change", updateImages);
+
+    // Run on page load
+    document.addEventListener("DOMContentLoaded", updateImages);
+
+    // Function to open image in new tab
+    function openImageInNewTab(imageName) {
+        const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const imagePath = isDarkMode 
+            ? `img/dk/${imageName}.png` 
+            : `img/lt/${imageName}.png`;
+        window.open(imagePath, '_blank');
+    }
+</script>
+
+<body>
+    <a href="../../index.html" class="back-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Home
+    </a>
+    
+    <div class="article-container">
+        <article class="article-body">
+            
+            <!--Intro Section-->
+            <section class="section-1">
+
+                <div class="grey-background-article image-bottom">
+                    <figure class="article-figure">
+                        <img src="thumbnail.png" width="100%" alt="Improving Adoption - Onboarding Redesign">
+                    </figure>
+                </div>
+
+                <h1 class="article-h1">Improving Adoption by Reducing Onboarding Friction & Accelerating Time-to-Value</h1>
+
+                <p>
+                    Despite strong word-of-mouth around Syllabot, most new users struggled to create a functional bot, thus, affecting adoption. <br><br>
+
+                    The platform offers powerful features but has a steep learning curve. New users, mostly faculty and staff, <strong>landed on an ambiguous dashboard, couldn't find Syllabot, and froze during setup.</strong> The platform's complexity wasn't the problem; the lack of guided onboarding was. <br><br>
+
+                    <strong>My goal:</strong> re-architect the first-time experience to reduce cognitive load, guide users through a complex workflow, and communicate value immediately.
+                </p>
+
+                <div class="sub-header">
+                    <p id="intro-tags1">
+                        5-7 min read | UX Design | Onboarding Redesign
+                    </p>
+                </div>
+
+            </section>
+
+            <hr class="intro-hr">
+
+            <!--TL;DR Section-->
+            <section class="section-tldr">
+                <h2>TL;DR</h2>
+                <ul>
+                    <li><b>Problem:</b> New users struggled to create functional bots due to ambiguous dashboard, unclear entry points, and lack of guided onboarding.</li>
+                    <li><b>Solution:</b> Redesigned hero section, created Super Templates with guided workflows, implemented early knowledge upload guardrails, added quick access buttons, and integrated demos with optional live support.</li>
+                    <li><b>Impact:</b> Transformed onboarding from "feature-first" to "value-first" approach, reducing cognitive load and accelerating time-to-value.</li>
+                    <li><b>Approach:</b> User research, competitive analysis, and progressive disclosure principles.</li>
+                </ul>
+            </section>
+            
+            <hr class="intro-hr">
+
+            <!--Main Content Sections-->
+            <section class="section-2">
+
+                <!--Problem Section-->
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide1" width="100%" alt="User flow showing failure points">
+                    <figcaption>
+                        <a href="https://www.figma.com/board/gUv4liQ7SsNrnxwyJu1JKo/Super-Tempates?node-id=0-1" target="_blank">View In Figma</a> | <a href="#" onclick="openImageInNewTab('slide1'); return false;">View image</a>
+                    </figcaption>
+                </figure>
+
+                <h2 class="article-h2">Problem: A Predictable Failure Path</h2>
+
+                <p>This was consistently observed in user sessions and validated by multiple flow analyses.</p>
+
+                <h3 class="article-h3">Key breakdowns:</h3>
+                <ul>
+                    <li><strong>Entry-point confusion:</strong> Users arriving for "Syllabot" landed on "CreateAI Builder" and questioned if they were in the right place.</li>
+                    <li><strong>Template ambiguity:</strong> Users didn't know how to start or what "Copy vs Edit" meant.</li>
+                    <li><strong>Missing dependency awareness:</strong> Users proceeded to the chat screen without uploading knowledge files, resulting in poor output.</li>
+                    <li><strong>No scaffolding:</strong> The platform exposed full complexity immediately</li>
+                </ul>
+
+                <p>This created a loop of:</p>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide2" width="100%" alt="User flow showing failure points">
+                </figure>
+
+                <hr class="intro-hr">
+
+                <!--Research Highlights Section-->
+                <h2 class="article-h2">Research Highlights</h2>
+
+                <h3 class="article-h3">What I Did:</h3>
+                <p>Offered demos with faculty, staff, and instructional designers, this gave us critical insights on expectations of the users and their behaviors</p>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide3" width="100%" alt="Failure loop diagram">
+                    <figcaption>Demo Observation with faculty 1. <a href="https://www.figma.com/board/gUv4liQ7SsNrnxwyJu1JKo/Super-Tempates?node-id=3-146" target="_blank">View in Figma</a> | <a href="#" onclick="openImageInNewTab('slide3'); return false;">View image</a></figcaption>
+                </figure>
+
+                <h3 class="article-h3">Insight</h3>
+                <p>Users who received even a minimal guided walkthrough navigated <strong>significantly better</strong>, confirming the need for structured onboarding and progressive guidance.</p>
+
+                <hr class="intro-hr">
+
+                <h3 class="article-h3">Exploring how other platforms improve adoption and onboarding</h3>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide4" width="100%" alt="Research insights visualization">
+                    <figcaption>
+                        Analyzed Runway, NotebookLM, GitHub CoPilot, Gemini, and h2o.ai demos. | <a href="#" onclick="openImageInNewTab('slide4'); return false;">View image</a>
+                    </figcaption>
+                </figure>
+
+                <p><strong>Patterns observed:</strong></p>
+                <ul>
+                    <li>Strong "hero" sections with clear starting points</li>
+                    <li>Onboarding wizards</li>
+                    <li>Live demo or tutorial support</li>
+                    <li>Simple starting points to acting as Demos</li>
+                </ul>
+
+                <p><strong>These studies informed our onboarding redesign.</strong></p>
+
+                <hr class="intro-hr">
+
+                <!--Transformation Strategy Section-->
+                <h2 class="article-h2">Transformation Strategy</h2>
+
+                <h3 class="article-h3">Goal: Transform onboarding from "feature-first" to "value-first"</h3>
+                <br>
+
+                <p>Three pillars guided the redesign:</p>
+
+                <div style="display: flex; align-items: baseline; gap: 0.5rem; margin: 1rem 0;">
+                    <h3 class="article-h3" style="margin: 0;">1. Surface value early</h3>
+                    <p style="margin: 0;">Clarify what the platform does, who it's for, and how Syllabot fits in.</p>
+                </div>
+
+                <div style="display: flex; align-items: baseline; gap: 0.5rem; margin: 1rem 0;">
+                    <h3 class="article-h3" style="margin: 0;">2. Guide progressively</h3>
+                    <p style="margin: 0;">Show only what users need to know at the right moment.</p>
+                </div>
+
+                <div style="display: flex; align-items: baseline; gap: 0.5rem; margin: 1rem 0;">
+                    <h3 class="article-h3" style="margin: 0;">3. Make dependencies impossible to miss</h3>
+                    <p style="margin: 0;">Ensure users upload knowledge files before testing a bot.</p>
+                </div>
+
+                <hr class="intro-hr">
+
+                <!--Solutions Section-->
+                <h2 class="article-h2">Solutions</h2>
+
+                <br>
+                
+                <!--Solution A: New Hero Section-->
+                <h3 class="article-h3">A. New Hero Section: A Clear Starting Point</h3>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide5" width="100%" alt="Competitive research analysis">
+                    <figcaption>
+                        Redesigned Hero Section | <a href="#" onclick="openImageInNewTab('slide5'); return false;">View image</a>
+                    </figcaption>
+                </figure>
+
+                <p><strong>Why:</strong> The old dashboard lacked context/guidance. Users didn't know where to click.</p>
+
+                <h4 class="article-h3" style="font-size: 1rem; margin-top: 1.5rem;">What Changed</h4>
+                <ul>
+                    <li>Surfacing Syllabot</li>
+                    <li>Hero Carousel with Demo Videos</li>
+                    <li>Community links and access to supporting tools within the platform</li>
+                    <li>Immediate explanation of "what this product does"</li>
+                </ul>
+
+                <p><strong>Expected Outcome:</strong> Users understand context <em>before</em> interacting with the system.</p>
+
+                <hr class="intro-hr" style="margin-top: 3rem; margin-bottom: 3rem;">
+
+                <!--Solution B: Super Templates-->
+                <h3 class="article-h3">B. Super Templates: Guided Starting Workflows</h3>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide6" width="100%" alt="New hero section design">
+                    <figcaption>
+                        Prioritizing information to better convey value | <a href="#" onclick="openImageInNewTab('slide6'); return false;">View image</a>
+                    </figcaption>
+                </figure>
+
+                <p>Super Templates solve the "lost after clicking a template" scenario by functioning as <strong>curated, guided workflows</strong>—not blank starters.</p>
+
+                <p><strong>Each card now includes:</strong></p>
+                <ul>
+                    <li>Audience clarity (faculty / students / staff)</li>
+                    <li>Setup time</li>
+                    <li>Integration badges</li>
+                    <li>Capability highlights</li>
+                    <li>Social validation (e.g., "Used in 147 projects")</li>
+                    <li>Micro demo video</li>
+                    <li>Clear CTA: <strong>Try It Now</strong></li>
+                </ul>
+
+                <p>This turns uncertainty into confidence before users even begin.</p>
+
+                <h4 class="article-h3" style="font-size: 1rem; margin-top: 1.5rem;">Impact</h4>
+                <p>Templates now act as <strong>guided workflows</strong>, not generic building blocks.</p>
+
+                <hr class="intro-hr">
+
+                <!--Solution C: Early Knowledge Upload + Guardrails-->
+                <h3 class="article-h3">C. Early Knowledge Upload + Guardrails</h3>
+
+                <p>Users routinely jumped straight into testing before uploading required files. This led to poor output, and thus frustration.
+                    Introducing guardrails at this stage fundamentally changed the onboarding flow by aligning the system’s expectations with the user’s mental model. This moment of guidance prevents early failure states.
+                </p>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide7" width="100%" alt="Super Templates design">
+                    <figcaption>
+                        <a href="#" onclick="openImageInNewTab('slide7'); return false;">View image</a>
+                    </figcaption>
+                </figure>
+
+                <h4 class="article-h3" style="font-size: 1rem; margin-top: 1.5rem;">Fixes Implemented</h4>
+                <ul>
+                    <li><strong>Intermediary setup screen</strong> prompting users to add files immediately</li>
+                    <li><strong>Guardrails</strong> preventing bot testing without uploaded knowledge</li>
+                    <li><strong>Inline demo video</strong> explaining why knowledge files matter</li>
+                    <li><strong>Sample conversation starters</strong> to show expected bot behavior</li>
+                    <li><strong>Progressive disclosure</strong> of only the necessary settings</li>
+                </ul>
+
+                <p><strong>Result:</strong> A smoother, dependency-aware setup path.</p>
+
+                <hr class="intro-hr">
+
+                <!--Solution D: Quick Access Buttons-->
+                <h3 class="article-h3">D. Quick Access Buttons to Reduce Overwhelm</h3>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide8" width="100%" alt="Quick access buttons design">
+                    <figcaption>Behaviors / Integrations quick access | <a href="#" onclick="openImageInNewTab('slide8'); return false;">View image</a></figcaption>
+                </figure>
+
+                <p>Users repeatedly got lost when they moved to:</p>
+                <ul>
+                    <li>Behaviors</li>
+                    <li>Knowledge settings</li>
+                    <li>Integrations</li>
+                </ul>
+
+                <p>So we added contextual "Quick Access" buttons that take them directly to the relevant setting.</p>
+
+                <p>This eliminates any intimidation when they see a settings screen full of complex terms. This prevents confusion and keeps users on track.</p>
+
+                <hr class="intro-hr">
+
+                <!--Solution E: Demos + Optional Live Support-->
+                <h3 class="article-h3">E. Demos + Optional Live 1:1 Support</h3>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide9" width="100%" alt="Demo button exploration">
+                    <figcaption>Demo Button exploration | <a href="#" onclick="openImageInNewTab('slide9'); return false;">View image</a></figcaption>
+                </figure>
+
+                <p>Inspired by h2o.ai and Runway:</p>
+                <ul>
+                    <li>Added micro demos inside templates</li>
+                    <li>Introduced a "Request a Live Demo" CTA</li>
+                    <li><strong>This also serves as an ongoing feedback loop for understanding new user friction.</strong></li>
+                </ul>
+
+                <hr class="intro-hr">
+
+                <!--Mapping Table Section-->
+                <h2 class="article-h2">How These Fixes Map to Observed Failures</h2>
+
+                <div style="overflow-x: auto; margin: 2rem 0;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Observed Failure (from flows)</th>
+                                <th>Solution Implemented</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Users unsure they're in the right place</td>
+                                <td>Redesigned hero, clearer branding, Syllabot surfacing</td>
+                            </tr>
+                            <tr>
+                                <td>Users can't find Syllabot</td>
+                                <td>Super Templates + hero CTA</td>
+                            </tr>
+                            <tr>
+                                <td>Users confused after landing on project page</td>
+                                <td>Template previews + step-by-step guidance</td>
+                            </tr>
+                            <tr>
+                                <td>Users skip file upload</td>
+                                <td>Guardrails + early upload step</td>
+                            </tr>
+                            <tr>
+                                <td>Users test bot without context</td>
+                                <td>Blockers + sample conversations</td>
+                            </tr>
+                            <tr>
+                                <td>Navigation confusion</td>
+                                <td>Quick-access buttons</td>
+                            </tr>
+                            <tr>
+                                <td>AskMe bot derailing flows</td>
+                                <td>Removed from home</td>
+                            </tr>
+                            <tr>
+                                <td>Users need external help</td>
+                                <td>Built-in demos + optional 1:1 sessions</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+            <!--Footer Section-->
+            <footer>
+                <br><br><br>
+                <hr><br>
+                <div class="footer-container">
+                <a href="#top" class="hyp-p">back to top ↑</a>
+                </div>
+            </footer>
+        
+        </article>
+        
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
