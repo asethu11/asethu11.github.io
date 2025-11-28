@@ -86,9 +86,9 @@
                 <p>
                     Despite strong word-of-mouth around Syllabot, most new users struggled to create a functional bot, thus, affecting adoption. <br><br>
 
-                    The platform offers powerful features but has a steep learning curve. New users, mostly faculty and staff, <strong>landed on an ambiguous dashboard, couldn't find Syllabot, and froze during setup.</strong> The platform's complexity wasn't the problem; the lack of guided onboarding was. <br><br>
+                    The platform offers powerful features but has a steep learning curve. New users, mostly faculty and staff, <b>landed on an ambiguous dashboard, couldn't find Syllabot, and froze during setup.</b> The platform's complexity wasn't the problem; the lack of guided onboarding was. <br><br>
 
-                    <strong>My goal:</strong> re-architect the first-time experience to reduce cognitive load, guide users through a complex workflow, and communicate value immediately.
+                    <b>My goal:</b> re-architect the first-time experience to reduce cognitive load, guide users through a complex workflow, and communicate value immediately.
                 </p>
 
                 <div class="sub-header">
@@ -118,6 +118,14 @@
             <section class="section-2">
 
                 <!--Problem Section-->
+
+                <h2 class="article-h2">Problem: A Predictable Failure Path</h2>
+
+                <p>The core issue wasn’t that users lacked motivation or technical skill; it was that the system didn’t communicate where they were, what mattered, or why. This disconnect meant most first-time experiences collapsed before users reached the value of the tool.
+                </p>
+                
+                <p>This was consistently observed in user sessions and validated by multiple flow analyses.</p>
+
                 <figure class="article-figure">
                     <img class="theme-img" src="" data-name="slide1" width="100%" alt="User flow showing failure points">
                     <figcaption>
@@ -125,19 +133,17 @@
                     </figcaption>
                 </figure>
 
-                <h2 class="article-h2">Problem: A Predictable Failure Path</h2>
-
-                <p>This was consistently observed in user sessions and validated by multiple flow analyses.</p>
-
-                <h3 class="article-h3">Key breakdowns:</h3>
+                <h2 class="article-h2">Key breakdowns:</h2>
                 <ul>
-                    <li><strong>Entry-point confusion:</strong> Users arriving for "Syllabot" landed on "CreateAI Builder" and questioned if they were in the right place.</li>
-                    <li><strong>Template ambiguity:</strong> Users didn't know how to start or what "Copy vs Edit" meant.</li>
-                    <li><strong>Missing dependency awareness:</strong> Users proceeded to the chat screen without uploading knowledge files, resulting in poor output.</li>
-                    <li><strong>No scaffolding:</strong> The platform exposed full complexity immediately</li>
+                    <li><b>Entry-point confusion:</b> Users arriving for "Syllabot" landed on "CreateAI Builder" and questioned if they were in the right place.</li>
+                    <li><b>Template ambiguity:</b> Users didn't know how to start or what "Copy vs Edit" meant.</li>
+                    <li><b>Missing dependency awareness:</b> Users proceeded to the chat screen without uploading knowledge files, resulting in poor output.</li>
+                    <li><b>No scaffolding:</b> The platform exposed full complexity immediately</li>
                 </ul>
 
-                <p>This created a loop of:</p>
+                <br>
+
+                <h3 class="article-h3">This created a loop of:</h3>
 
                 <figure class="article-figure">
                     <img class="theme-img" src="" data-name="slide2" width="100%" alt="User flow showing failure points">
@@ -155,8 +161,7 @@
                 <!--Research Highlights Section-->
                 <h2 class="article-h2">Research Highlights</h2>
 
-                <h3 class="article-h3">What I Did:</h3>
-                <p>Offered demos with faculty, staff, and instructional designers, this gave us critical insights on expectations of the users and their behaviors</p>
+                <p>I offered demos with faculty, staff, and instructional designers. <b>Firstly, I let them try the product on their own and then provided a guided walkthrough.</b> This gave me critical insights on expectations of the users and their behaviors</p>
 
                 <figure class="article-figure">
                     <img class="theme-img" src="" data-name="slide3" width="100%" alt="Failure loop diagram">
@@ -164,11 +169,11 @@
                 </figure>
 
                 <h3 class="article-h3">Insight</h3>
-                <p>Users who received even a minimal guided walkthrough navigated <strong>significantly better</strong>, confirming the need for structured onboarding and progressive guidance.</p>
+                <p>Users who received even a minimal guided walkthrough navigated <b>significantly better</b>, confirming the need for structured onboarding and progressive guidance.</p>
 
                 <hr class="intro-hr">
 
-                <h3 class="article-h3">Exploring how other platforms improve adoption and onboarding</h3>
+                <h2 class="article-h2">Exploring how other platforms improve adoption and onboarding</h2>
 
                 <figure class="article-figure">
                     <img class="theme-img" src="" data-name="slide4" width="100%" alt="Research insights visualization">
@@ -177,7 +182,7 @@
                     </figcaption>
                 </figure>
 
-                <p><strong>Patterns observed:</strong></p>
+                <p><b>Patterns observed:</b></p>
                 <ul>
                     <li>Strong "hero" sections with clear starting points</li>
                     <li>Onboarding wizards</li>
@@ -185,42 +190,34 @@
                     <li>Simple starting points to acting as Demos</li>
                 </ul>
 
-                <p><strong>These studies informed our onboarding redesign.</strong></p>
+                <p><b>These studies informed our onboarding redesign.</b></p>
 
                 <hr class="intro-hr">
 
                 <!--Transformation Strategy Section-->
                 <h2 class="article-h2">Transformation Strategy</h2>
 
+                <br>
+
                 <h3 class="article-h3">Goal: Transform onboarding from "feature-first" to "value-first"</h3>
                 <br>
 
                 <p>Three pillars guided the redesign:</p>
 
-                <div style="display: flex; align-items: baseline; gap: 0.5rem; margin: 1rem 0;">
-                    <h3 class="article-h3" style="margin: 0;">1. Surface value early</h3>
-                    <p style="margin: 0;">Clarify what the platform does, who it's for, and how Syllabot fits in.</p>
-                </div>
-
-                <div style="display: flex; align-items: baseline; gap: 0.5rem; margin: 1rem 0;">
-                    <h3 class="article-h3" style="margin: 0;">2. Guide progressively</h3>
-                    <p style="margin: 0;">Show only what users need to know at the right moment.</p>
-                </div>
-
-                <div style="display: flex; align-items: baseline; gap: 0.5rem; margin: 1rem 0;">
-                    <h3 class="article-h3" style="margin: 0;">3. Make dependencies impossible to miss</h3>
-                    <p style="margin: 0;">Ensure users upload knowledge files before testing a bot.</p>
-                </div>
+                <ol>
+                    <li><b>Surface value early</b> — Clarify what the platform does, who it's for, and how Syllabot fits in.</li>
+                    <li><b>Guide progressively</b> — Show only what users need to know at the right moment.</li>
+                    <li><b>Make dependencies impossible to miss</b> — Ensure users upload knowledge files before testing a bot.</li>
+                </ol>
 
                 <hr class="intro-hr">
 
                 <!--Solutions Section-->
-                <h2 class="article-h2">Solutions</h2>
+                <h1 class="article-h2">Solutions</h1>
 
-                <br>
                 
                 <!--Solution A: New Hero Section-->
-                <h3 class="article-h3">A. New Hero Section: A Clear Starting Point</h3>
+                <h2 class="article-h2">A. New Hero Section: A Clear Starting Point</h2>
 
                 <figure class="article-figure">
                     <img class="theme-img" src="" data-name="slide5" width="100%" alt="Competitive research analysis">
@@ -229,7 +226,7 @@
                     </figcaption>
                 </figure>
 
-                <p><strong>Why:</strong> The old dashboard lacked context/guidance. Users didn't know where to click.</p>
+                <p><b>Why:</b> The old dashboard lacked context/guidance. Users didn't know where to click.</p>
 
                 <h4 class="article-h3" style="font-size: 1rem; margin-top: 1.5rem;">What Changed</h4>
                 <ul>
@@ -239,12 +236,12 @@
                     <li>Immediate explanation of "what this product does"</li>
                 </ul>
 
-                <p><strong>Expected Outcome:</strong> Users understand context <em>before</em> interacting with the system.</p>
+                <p><b>Expected Outcome:</b> Users understand context <em>before</em> interacting with the system.</p>
 
                 <hr class="intro-hr" style="margin-top: 3rem; margin-bottom: 3rem;">
 
                 <!--Solution B: Super Templates-->
-                <h3 class="article-h3">B. Super Templates: Guided Starting Workflows</h3>
+                <h2 class="article-h2">B. Super Templates: Guided Starting Workflows</h2>
 
                 <figure class="article-figure">
                     <img class="theme-img" src="" data-name="slide6" width="100%" alt="New hero section design">
@@ -253,9 +250,9 @@
                     </figcaption>
                 </figure>
 
-                <p>Super Templates solve the "lost after clicking a template" scenario by functioning as <strong>curated, guided workflows</strong>—not blank starters.</p>
+                <p>Super Templates solve the "lost after clicking a template" scenario by functioning as <b>curated, guided workflows</b>—not blank starters.</p>
 
-                <p><strong>Each card now includes:</strong></p>
+                <p><b>Each card now includes:</b></p>
                 <ul>
                     <li>Audience clarity (faculty / students / staff)</li>
                     <li>Setup time</li>
@@ -263,18 +260,18 @@
                     <li>Capability highlights</li>
                     <li>Social validation (e.g., "Used in 147 projects")</li>
                     <li>Micro demo video</li>
-                    <li>Clear CTA: <strong>Try It Now</strong></li>
+                    <li>Clear CTA: <b>Try It Now</b></li>
                 </ul>
 
                 <p>This turns uncertainty into confidence before users even begin.</p>
 
                 <h4 class="article-h3" style="font-size: 1rem; margin-top: 1.5rem;">Impact</h4>
-                <p>Templates now act as <strong>guided workflows</strong>, not generic building blocks.</p>
+                <p>Templates now act as <b>guided workflows</b>, not generic building blocks.</p>
 
                 <hr class="intro-hr">
 
                 <!--Solution C: Early Knowledge Upload + Guardrails-->
-                <h3 class="article-h3">C. Early Knowledge Upload + Guardrails</h3>
+                <h2 class="article-h2">C. Early Knowledge Upload + Guardrails</h2>
 
                 <p>Users routinely jumped straight into testing before uploading required files. This led to poor output, and thus frustration.
                     Introducing guardrails at this stage fundamentally changed the onboarding flow by aligning the system’s expectations with the user’s mental model. This moment of guidance prevents early failure states.
@@ -289,24 +286,19 @@
 
                 <h4 class="article-h3" style="font-size: 1rem; margin-top: 1.5rem;">Fixes Implemented</h4>
                 <ul>
-                    <li><strong>Intermediary setup screen</strong> prompting users to add files immediately</li>
-                    <li><strong>Guardrails</strong> preventing bot testing without uploaded knowledge</li>
-                    <li><strong>Inline demo video</strong> explaining why knowledge files matter</li>
-                    <li><strong>Sample conversation starters</strong> to show expected bot behavior</li>
-                    <li><strong>Progressive disclosure</strong> of only the necessary settings</li>
+                    <li><b>Intermediary setup screen</b> prompting users to add files immediately</li>
+                    <li><b>Guardrails</b> preventing bot testing without uploaded knowledge</li>
+                    <li><b>Inline demo video</b> explaining why knowledge files matter</li>
+                    <li><b>Sample conversation starters</b> to show expected bot behavior</li>
+                    <li><b>Progressive disclosure</b> of only the necessary settings</li>
                 </ul>
 
-                <p><strong>Result:</strong> A smoother, dependency-aware setup path.</p>
+                <p><b>Result:</b> A smoother, dependency-aware setup path.</p>
 
                 <hr class="intro-hr">
 
                 <!--Solution D: Quick Access Buttons-->
-                <h3 class="article-h3">D. Quick Access Buttons to Reduce Overwhelm</h3>
-
-                <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="slide8" width="100%" alt="Quick access buttons design">
-                    <figcaption>Behaviors / Integrations quick access | <a href="#" onclick="openImageInNewTab('slide8'); return false;">View image</a></figcaption>
-                </figure>
+                <h2 class="article-h2">D. Quick Access Buttons to Reduce Overwhelm</h2>
 
                 <p>Users repeatedly got lost when they moved to:</p>
                 <ul>
@@ -317,12 +309,17 @@
 
                 <p>So we added contextual "Quick Access" buttons that take them directly to the relevant setting.</p>
 
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide8" width="100%" alt="Quick access buttons design">
+                    <figcaption>Behaviors / Integrations quick access | <a href="#" onclick="openImageInNewTab('slide8'); return false;">View image</a></figcaption>
+                </figure>
+
                 <p>This eliminates any intimidation when they see a settings screen full of complex terms. This prevents confusion and keeps users on track.</p>
 
                 <hr class="intro-hr">
 
                 <!--Solution E: Demos + Optional Live Support-->
-                <h3 class="article-h3">E. Demos + Optional Live 1:1 Support</h3>
+                <h2 class="article-h2">E. Demos + Optional Live 1:1 Support</h2>
 
                 <figure class="article-figure">
                     <img class="theme-img" src="" data-name="slide9" width="100%" alt="Demo button exploration">
@@ -333,7 +330,7 @@
                 <ul>
                     <li>Added micro demos inside templates</li>
                     <li>Introduced a "Request a Live Demo" CTA</li>
-                    <li><strong>This also serves as an ongoing feedback loop for understanding new user friction.</strong></li>
+                    <li><b>This also serves as an ongoing feedback loop for understanding new user friction.</b></li>
                 </ul>
 
                 <hr class="intro-hr">
@@ -363,8 +360,8 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Observed Failure (from flows)</th>
-                                <th>Solution Implemented</th>
+                                <th class="article-h2">Observed Failure (from flows)</th>
+                                <th class="article-h2">Solution Implemented</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -389,12 +386,8 @@
                                 <td>Blockers + sample conversations</td>
                             </tr>
                             <tr>
-                                <td>Navigation confusion</td>
+                                <td>Settings intimidation</td>
                                 <td>Quick-access buttons</td>
-                            </tr>
-                            <tr>
-                                <td>AskMe bot derailing flows</td>
-                                <td>Removed from home</td>
                             </tr>
                             <tr>
                                 <td>Users need external help</td>

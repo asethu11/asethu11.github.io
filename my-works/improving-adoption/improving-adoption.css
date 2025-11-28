@@ -54,6 +54,11 @@ h2, h3, h4, h5, h6, p{
     font-family: 'Inter', sans-serif;
 }   
 
+b {
+    font-weight: 600;
+    color: var(--text-bold);
+}
+
 
 h2 {
     font-size: 1.3rem;
@@ -362,7 +367,7 @@ table th {
     text-align: left;
     padding: 1rem 0.5rem;
     font-weight: 600;
-    color: var(--text-bold);
+    color: var(--text-secondary);
     border-bottom: 2px solid var(--background-grey);
 }
 
