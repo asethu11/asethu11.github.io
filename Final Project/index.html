@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ChronoCustoms - Custom Casio watches retailer featuring retro classics, tactical mods, and high-end CasiOak collections">
+    <title>ChronoCustoms - Custom Casio Watches</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1 class="logo">ChronoCustoms</h1>
+            <nav>
+                <ul>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#cart">Cart</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+        </div>
+    </header>
+
+    <!-- Hero/Intro Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Custom Casio Watches</h2>
+            <p>Discover our collection of hand-modified Casio watches, from nostalgic retro classics to high-end metal modifications.</p>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <main id="products" class="products-section">
+        <div class="container">
+            <!-- Series A: The Retro Classics -->
+            <section class="product-series series-a">
+                <h2 class="series-heading">Series A: The Retro Classics (F-91W Mods)</h2>
+                <p class="series-description">Cheap, colorful, nostalgic</p>
+                <div class="products-grid" data-series="A">
+                    <!-- Products will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Series B: The "Royale" Line -->
+            <section class="product-series series-b">
+                <h2 class="series-heading">Series B: The "Royale" Line (AE-1200 Mods)</h2>
+                <p class="series-description">Tactical, spy-movie vibes</p>
+                <div class="products-grid" data-series="B">
+                    <!-- Products will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Series C: The "CasiOak" Collection -->
+            <section class="product-series series-c">
+                <h2 class="series-heading">Series C: The "CasiOak" Collection (G-Shock GA-2100)</h2>
+                <p class="series-description">High-end, metal modifications</p>
+                <div class="products-grid" data-series="C">
+                    <!-- Products will be dynamically inserted here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Shopping Cart Section -->
+    <section id="cart" class="cart-section">
+        <div class="container">
+            <h2>Shopping Cart</h2>
+            <div id="cart-items" class="cart-items">
+                <!-- Cart items will be dynamically inserted here -->
+            </div>
+            <div class="cart-totals">
+                <div class="total-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">$0.00</span>
+                </div>
+                <div class="total-row">
+                    <span>Tax (8.5%):</span>
+                    <span id="tax">$0.00</span>
+                </div>
+                <div class="total-row">
+                    <span>Shipping:</span>
+                    <span id="shipping">$0.00</span>
+                </div>
+                <div class="total-row total-final">
+                    <span>Total:</span>
+                    <span id="total">$0.00</span>
+                </div>
+            </div>
+            <button id="checkout-btn" class="checkout-btn">Checkout</button>
+            <div id="checkout-message" class="checkout-message"></div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name <span class="required">*</span></label>
+                    <input type="text" id="name" name="name">
+                    <span class="error-message" id="name-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone <span class="required" id="phone-required">*</span></label>
+                    <input type="tel" id="phone" name="phone">
+                    <span class="error-message" id="phone-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email <span class="required" id="email-required"></span></label>
+                    <input type="email" id="email" name="email">
+                    <span class="error-message" id="email-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Comments <span class="required">*</span></label>
+                    <textarea id="comments" name="comments" rows="5"></textarea>
+                    <span class="error-message" id="comments-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <fieldset>
+                        <legend>Preferred Contact Method</legend>
+                        <label class="radio-label">
+                            <input type="radio" name="contact-preference" value="phone" checked>
+                            Phone
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="contact-preference" value="email">
+                            Email
+                        </label>
+                    </fieldset>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit</button>
+                <div id="form-success" class="form-success"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 ChronoCustoms. All rights reserved.</p>
+            <p>Custom Casio watch modifications and repairs.</p>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
+
