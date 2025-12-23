@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Personalized Interfaces</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="../blogs.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="icon" href="../../img/favicon.png" type="image/png">
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
+
+        <script>
+            function updateImages() {
+                const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                document.querySelectorAll(".theme-img").forEach(img => {
+                    const imageName = img.dataset.name;
+                    const newSrc = isDarkMode 
+                        ? `img/dk/${imageName}.png` 
+                        : `img/lt/${imageName}.png`;
+
+                    if (img.src !== newSrc) {
+                        img.src = newSrc;
+                    }
+                });
+            }
+
+            const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+            darkModeQuery.addEventListener("change", updateImages);
+            document.addEventListener("DOMContentLoaded", updateImages);
+        </script>
+    </head>
+
+    <body>
+        <a href="../../index.html" class="back-button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Home
+        </a>
+        
+        <div class="article-container">
+            <article class="article-body">
+
+                <h1 class="article-h1">Personalized Interfaces</h1>
+                
+                <p>
+                    You take a screenshot of a pasta recipe on Instagram. Your phone has to guess:
+                </p>
+                <p>
+                    Did you want to <b>share</b> it with a friend, <b>save</b> it to notes, <b>extract</b> the ingredients, or just… scroll on?
+                </p>
+
+                <p>
+                    Today, most "smart" systems hedge. They show a bottom sheet with icons for share, copy, search, translate, save, and more. They're adapting, but they're still guessing.
+                    Most apps are still built for an imaginary <i>average</i> user. For some people, that "average" UI is perfect. For others, it's friction. Finding that middle ground has been the work of UX designers for decades.
+                </p>
+                <br>
+                <p>
+                    The real question is changing from "How do we design one great flow?" to:
+                </p>
+
+                <p style="border-left: 3px solid var(--text-secondary); padding-left: 1rem; margin-left: 0; font-style: italic;">
+                    How do we build systems that adapt the interface to each person, in real time?
+                </p>
+                <br>
+                <p>
+                    Over the next decade, the average user quietly disappears, replaced by interfaces that adapt to behavior, context, and intent. The shift is not just from "bad UX" to "good UX," but from static, hand‑crafted flows to systems that generate or reconfigure UI on demand. <a href="https://www.asapdevelopers.com/essential-ui-ux-trends-in-2024-key-takeaways/" class="headtag" target="_blank">[asapdevelopers]<span class="arr"> ↗</span></a>
+                </p>
+
+                <figure class="article-figure">
+                    <img src="img/slide1.png" alt="Android Share Sheet Comparison" class="article-image">
+                </figure>
+
+                <hr>
+
+                <h2 class="article-h2">From Static Layouts to Adaptive and Generative UI</h2>
+                
+                <p>
+                    <b>Today's Baseline: Static and Responsive UI</b>
+                </p>
+                <p>
+                    Traditional UI is still mostly:
+                </p>
+                <ul>
+                    <li><b>Static:</b> Screens and flows are predefined in code or design files.</li>
+                    <li><b>Responsive:</b> Layouts adapt to device size or orientation, not to your individual behavior.</li>
+                    <li><b>Role-based at best:</b> Enterprise tools may show different modules to admins vs. regular users, but these personas are coarse.</li>
+                </ul>
+
+                <p>
+                    All users share the same fundamental interaction model. You learn the interface; it doesn't really learn you. <a href="https://www.netguru.com/blog/adaptive-ui" class="headtag" target="_blank">[netguru]<span class="arr"> ↗</span></a>
+                </p>
+
+                <figure class="article-figure">
+                    <img src="img/slide2.png" alt="Static and Responsive UI" class="article-image">
+                </figure>
+
+                <hr>
+
+                <h2 class="article-h2">Adaptive UI Is No Longer Theoretical</h2>
+                <p>
+                    A few years ago, “adaptive UI” mostly lived in conference talks and speculative design decks. In 2025, it’s quietly shipping. Not as a single dramatic feature, but as a set of capabilities embedded into real products, often without being labeled as such.
+                </p>
+                <p>
+                    The most visible shift is that interfaces are becoming assemblies—composed at runtime based on intent, context, and confidence. This change is subtle from the outside, but foundational under the hood.
+                </p>
+                <br>
+                <p>
+                    <b>Generative UI in Google Search & Gemini</b>
+                </p>
+                <p>
+                    Google's new generative UI can dynamically assemble interfaces, charts, timelines, simulations, tools, etc., based on a single prompt, not a predesigned static screen. It's rolling out through Gemini and AI Mode in Search and can generate bespoke visual experiences per query. <a href="https://research.google/blog/generative-ui-a-rich-custom-visual-interactive-user-experience-for-any-prompt/" class="headtag" target="_blank">[Google Research]<span class="arr"> ↗</span></a>
+                </p>
+
+                <figure class="article-figure">
+                    <img src="img/slide3.png" alt="Google Search & Gemini" class="article-image">
+                </figure>
+                <p>
+                    <b>Personalized accessibility layers</b>
+                </p>
+                <p>
+                    Accessibility vendors and consultancies are pitching "personalized accessibility," where the system adjusts font size, contrast, density, interaction targets, and even input modality based on behavioral data, not via a separate, worse "accessible" UI, but as a tailored version of the main one. <a href="https://rtctek.com/personalized-accessibility-how-ai-and-behavioral-data-can-tailor-ux/" class="headtag" target="_blank">[Round The Clock Technologies]<span class="arr"> ↗</span></a>
+                </p>
+                <br>
+                <p>
+                    The point: this isn't speculative. The <b>productivity and accessibility gains are measurable</b>.
+                </p>
+
+                <hr>
+
+                <figure class="article-figure"> <img src="img/slide4.1.png" alt="What I Mean by Adaptive UI" class="article-image"> </figure>
+
+                <h2 class="article-h2">What I Mean by Adaptive UI</h2>
+                <p>
+                    Adaptive UI modifies the interface based on who you are and what you’re doing in the moment. Rather than presenting a single, fixed flow, the system subtly reshapes itself as it learns how you work. Tools you use frequently tend to surface faster.
+                </p>
+                <p>That can mean:</p>
+                <ul>
+                    <li>Reordering navigation or tools based on usage frequency.</li>
+                    <li>Changing complexity: simplified flows for novices, dense controls for power users.</li>
+                    <li>Adjusting presentation for context: low bandwidth, small screens, impaired vision, and so on.</li>
+                </ul>
+                <br>
+                <p>
+                    Under the hood, these systems rely on:
+                </p>
+                <ul>
+                    <li><b>Context detection:</b> Device, time, network quality, location, sometimes activity (walking vs. stationary). <a href="https://insights.daffodilsw.com/blog/context-based-ui-enhancing-user-experience-through-contextual-design" class="headtag" target="_blank">[Daffodil Software]<span class="arr"> ↗</span></a></li>
+                    <li><b>Behavioral signals:</b> Click paths, dwell time, repeated errors, preferred input method. <a href="https://ceur-ws.org/Vol-3925/paper17.pdf" class="headtag" target="_blank">[CEUR Workshop]<span class="arr"> ↗</span></a></li>
+                    <li><b>Profile data:</b> Past sessions, permissions, accessibility settings. <a href="https://www.osedea.com/insight/transforming-user-experiences-with-adaptive-ui" class="headtag" target="_blank">[Osedea]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <br>
+                <p>
+                    The UI is still mostly designed in advance, but different "modes" are surfaced or tuned per user or situation. <a href="https://www.okoone.com/spark/product-design-research/how-adaptive-ui-can-make-every-user-experience-smarter/" class="headtag" target="_blank">[Okoone]<span class="arr"> ↗</span></a>
+                </p>
+
+                <hr>
+
+                <figure class="article-figure"> <img src="img/slide5.png" alt="How Interfaces That Learn Us Actually Work" class="article-image"> </figure>
+
+                <h2 class="article-h2">How Interfaces That Learn Us Actually Work</h2>
+                <p>
+                    Back to the screenshot example: your phone might learn that <i>you</i> almost always screenshot to share, while your mother screenshots to archive recipes.
+                </p>
+                <br>
+                <p>
+                    To support that, systems need an end‑to‑end pipeline that looks roughly like this.
+                </p>
+                <br>
+                <p>
+                    <b>1. Signal and Context Collection</b>
+                </p>
+                <p>
+                    The system continuously gathers signals such as:
+                </p>
+                <ul>
+                    <li><b>Event data:</b> Screenshot taken, app in foreground, share sheet opened, album created.</li>
+                    <li><b>Temporal context:</b> Time of day, day of week, recency of similar events.</li>
+                    <li><b>Device / environment:</b> Network quality, battery level, orientation, sensors. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7865536/" class="headtag" target="_blank">[PMC]<span class="arr"> ↗</span></a></li>
+                    <li><b>User history:</b> How often this user shares vs. saves, which albums they use, where images end up. <a href="https://ceur-ws.org/Vol-3925/paper17.pdf" class="headtag" target="_blank">[CEUR Workshop]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <p>
+                    These data points are often logged as sequences like (s<sub>t</sub>, a<sub>t</sub>, r<sub>t</sub>): state (context), action (e.g., show share sheet), and reward (did the user complete the flow, undo it, bounce, complain?). <a href="https://www.leewayhertz.com/how-to-implement-adaptive-ai/" class="headtag" target="_blank">[LeewayHertz]<span class="arr"> ↗</span></a>
+                </p>
+                <br>
+                <p>
+                    <b>2. Feature Engineering and Representation</b>
+                </p>
+                <p>
+                    Raw signals are translated into features:
+                </p>
+                <ul>
+                    <li><b>Categorical:</b> Active app (WhatsApp vs. camera), content type, connectivity class.</li>
+                    <li><b>Numeric:</b> Time since last share, number of screenshots per day, time-on-task.</li>
+                    <li><b>Learned embeddings:</b> Representations of users, content types, or tasks learned via neural networks.</li>
+                </ul>
+                <p>
+                    For behavior similarity, systems may use sequence metrics (e.g., Levenshtein distance over action sequences like tap → share → close vs. tap → edit → save). <a href="https://ceur-ws.org/Vol-3925/paper17.pdf" class="headtag" target="_blank">[CEUR Workshop]<span class="arr"> ↗</span></a>
+                </p>
+                <br>
+                <p>
+                    <b>3. Modeling Behavior and Intent</b>
+                </p>
+                <p>
+                    Different modeling strategies apply depending on the problem:
+                </p>
+                <ul>
+                    <li><b>Supervised models</b> predict labels like "share vs. save vs. ignore" after a screenshot. Inputs are features; outputs are probabilities. <a href="https://www.lyzr.ai/glossaries/intent-recognition/" class="headtag" target="_blank">[Lyzr]<span class="arr"> ↗</span></a></li>
+                    <li><b>Sequence models</b> (RNNs, transformers, temporal CNNs) capture patterns over time, such as "this user usually shares within three seconds if they intend to share." <a href="https://research.manchester.ac.uk/files/256978591/behaviour_prediction_review_manuscript.pdf" class="headtag" target="_blank">[University of Manchester]<span class="arr"> ↗</span></a></li>
+                    <li><b>Reinforcement learning</b> treats UI choices (e.g., auto-opening the share sheet) as actions and optimizes for long-term rewards like reduced friction or higher completion rates. <a href="https://www.leewayhertz.com/how-to-implement-adaptive-ai/" class="headtag" target="_blank">[LeewayHertz]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <p>
+                    Intent recognition can be very accurate on constrained tasks (e.g., command classification), but performance drops when intents are ambiguous, overlapping, or rare. <a href="https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0321854" class="headtag" target="_blank">[PLOS One]<span class="arr"> ↗</span></a>
+                </p>
+                <br>
+                <p>
+                    <b>4. Policy and Adaptation Layer</b>
+                </p>
+                <p>
+                    The <b>policy</b> decides how the UI should adapt given model predictions and confidence.
+                </p>
+                <p>
+                    Examples:
+                </p>
+                <ul>
+                    <li>If P(share | s<sub>t</sub>) > θ: auto-open the share sheet.</li>
+                    <li>If confidence is moderate: show a subtle suggestion ("Share this?") instead of a full takeover.</li>
+                    <li>If the model is uncertain or the user has opted out: do nothing.</li>
+                </ul>
+
+                <p>
+                    Designers and engineers can encode guardrails: maximum frequency of intrusive adaptations, fallback paths, or "never adapt this component" rules. <a href="https://www.ijirset.com/upload/2025/march/360_Adaptive.pdf" class="headtag" target="_blank">[IJIRSET]<span class="arr"> ↗</span></a>
+                </p>
+                <p>
+                    For <b>generative UI</b>, the policy also defines:
+                </p>
+                <ul>
+                    <li>Which components are allowed (buttons, cards, charts).</li>
+                    <li>Constraints (no overlapping elements, minimum tap targets).</li>
+                    <li>Safety filters (no disallowed content, respect permissions). <a href="https://www.oecd.org/en/blogs/2025/07/unlocking-productivity-with-generative-ai-evidence-from-experimental-studies.html" class="headtag" target="_blank">[OECD]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <br>
+                <p>
+                    <b>5. Rendering and Runtime Integration</b>
+                </p>
+                <p>
+                    The UI system then:
+                </p>
+                <ul>
+                    <li>Chooses or generates a layout.</li>
+                    <li>Binds it to data and actions (handlers, API calls).</li>
+                    <li>Ensures responsiveness and accessibility (labels, focus order, ARIA roles). <a href="https://www.webability.io/blog/personalized-accessibility-tailoring-the-web-experience-for-individual-needs" class="headtag" target="_blank">[Webability]<span class="arr"> ↗</span></a></li>
+                </ul>
+
+                <p>
+                    On mobile or web, this typically involves:
+                </p>
+                <ul>
+                    <li>A layout engine that can recompute component positions from configuration.</li>
+                    <li>A design system that defines allowed primitives and states.</li>
+                    <li>Runtime checks that reject invalid or unsafe layout proposals. <a href="https://designshack.net/articles/layouts/adaptive-ui-design/" class="headtag" target="_blank">[Design Shack]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <br>
+                <p>
+                    <b>6. Feedback, Evaluation, and Retraining</b>
+                </p>
+                <p>
+                    Finally, the loop closes:
+                </p>
+                <ul>
+                    <li><b>Online metrics:</b> Time to complete tasks, errors, abandonment, instant undos. <a href="https://www.okoone.com/spark/product-design-research/how-adaptive-ui-can-make-every-user-experience-smarter/" class="headtag" target="_blank">[Okoone]<span class="arr"> ↗</span></a></li>
+                    <li><b>Implicit feedback:</b> Users ignoring adaptive elements, repeatedly moving them, or disabling features.</li>
+                    <li><b>Explicit feedback:</b> "Don't show this again," settings toggles, ratings.</li>
+                </ul>
+                <p>
+                    Models retrain periodically or continuously as new data arrives, adapting to behavior drift: changing habits, app updates, seasonal behavior shifts. <a href="https://www.leewayhertz.com/how-to-implement-adaptive-ai/" class="headtag" target="_blank">[LeewayHertz]<span class="arr"> ↗</span></a>
+                </p>
+
+                <hr>
+
+                <figure class="article-figure"> <img src="img/slide4.png" alt="Why This Is Happening: Real Benefits" class="article-image"> </figure>
+
+                <h2 class="article-h2">Why This Is Happening: Real Benefits</h2>
+
+                <p>
+                    <b>Productivity and Capability Gains</b>
+                </p>
+                <p>
+                    Less-experienced workers see the largest relative gains, narrowing skill gaps by giving them embedded expertise. <a href="https://mitsloan.mit.edu/ideas-made-to-matter/how-generative-ai-can-boost-highly-skilled-workers-productivity" class="headtag" target="_blank">[MIT Sloan]<span class="arr"> ↗</span></a>
+                </p>
+                <p>
+                    Adaptive and generative interfaces are about <b>moving that assistance into the interface itself</b>, not just into a separate chat box.
+                </p>
+                <br>
+                <p>
+                    <b>Accessibility and Personalized Comfort</b>
+                </p>
+                <p>
+                    Personalized accessibility uses behavioral data to:
+                </p>
+                <ul>
+                    <li>Adjust font sizes, contrast, spacing, and motion for comfort and readability.</li>
+                    <li>Remember that a user often zooms to 150% and treat that as the default.</li>
+                    <li>Offer alternative input modalities (e.g., voice) if fine motor issues are detected. <a href="https://accessible.org/adaptive-personalization-engines-ai-accessibility/" class="headtag" target="_blank">[Accessible.org]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <br>
+                <p>
+                    The result: higher engagement and task success without asking users to manually configure dozens of settings. <a href="https://www.webability.io/blog/personalized-accessibility-tailoring-the-web-experience-for-individual-needs" class="headtag" target="_blank">[Webability]<span class="arr"> ↗</span></a>
+                </p>
+                <br>
+                <p>
+                    <b>Context Awareness and Reduced Friction</b>
+                </p>
+                <p>
+                    Context-based UI can:
+                </p>
+                <ul>
+                    <li>Show simplified, low‑data layouts on poor connections.</li>
+                    <li>Prioritize large hit targets when motion or walking is detected.</li>
+                    <li>Offer relevant quick actions based on location or routine (e.g., commute shortcuts). <a href="https://insights.daffodilsw.com/blog/context-based-ui-enhancing-user-experience-through-contextual-design" class="headtag" target="_blank">[Daffodil Software]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <br>
+                <p>
+                    These adaptations are often subtle but cumulatively reduce friction and cognitive load.
+                </p>
+
+                <hr>
+
+                <figure class="article-figure"> <img src="img/slide6.jpg" alt="The Real Tensions and Tradeoffs" class="article-image"> </figure>
+
+                <h2 class="article-h2">The Real Tensions and Tradeoffs</h2>
+                <p>
+                    The story is not purely optimistic. Highly personalized UI introduces hard, structural problems that won't go away.
+                </p>
+                <br>
+                <p>
+                    <b>1. Customization vs. Consistency</b>
+                </p>
+                <p>
+                    The more personalized an interface becomes, the less shared mental model exists across users.
+                </p>
+                <p>
+                    In consumer apps, that's usually fine. Your Netflix home screen doesn't have to match mine.
+                </p>
+                <p>
+                    In enterprise tools, it's trickier. If every sales rep sees a different layout, onboarding, support, and collaboration all get harder. Screenshots, documentation, and training materials quickly become obsolete.
+                </p>
+                <br>
+                <p>
+                    One way to manage this is through <b>layers</b>:
+                </p>
+                <ul>
+                    <li>A <b>global frame</b> (navigation, primary actions, terminology) stays consistent.</li>
+                    <li><b>Local surfaces</b> (panels, recommendations, shortcuts, inline actions) adapt.</li>
+                    <li><b>Team-level presets</b> let groups share views so they can talk about the same configuration, even if individuals make small tweaks.</li>
+                </ul>
+                <br>
+                <p>
+                    The design question is:
+                </p>
+                <p style="border-left: 3px solid var(--text-secondary); padding-left: 1rem; margin-left: 0; font-style: italic;">
+                    How much variance can the organization tolerate before collaboration breaks down?
+                </p>
+                <p>
+                    Get that wrong and personalized UX becomes organizational chaos.
+                </p>
+                <br>
+                <p>
+                    <b>2. Intent Is Messy, Not Just a Label</b>
+                </p>
+                <p>
+                    Human intent is:
+                </p>
+                <ul>
+                    <li><b>Context-dependent:</b> The same action (screenshot) can mean "save for later," "share now," or "document something," depending on who you are and when you do it.</li>
+                    <li><b>Evolving:</b> Users change habits; models trained on last year's patterns may misread this year's.</li>
+                    <li><b>Ambiguous:</b> Natural language, sarcasm, indirect requests, and multi-step tasks are hard to compress into a single "intent" label.</li>
+                </ul>
+                <br>
+                <p>
+                    Empirical work on behavior prediction shows high accuracy on constrained, simple tasks but significantly lower performance on complex, multi-step activities. In practice, "almost right most of the time" is realistic; "flawless prediction" is not. <a href="https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0321854" class="headtag" target="_blank">[PLOS One]<span class="arr"> ↗</span></a>
+                </p>
+                <br>
+                <p>
+                    <b>3. Edge Cases and the Long Tail</b>
+                </p>
+                <p>
+                    Adaptive systems inevitably face a long tail of rare situations:
+                </p>
+                <ul>
+                    <li>New behaviors that never appeared in training data.</li>
+                    <li>Unusual contexts (travel, emergencies, shared devices).</li>
+                    <li>Users who intentionally subvert or explore beyond expected flows.</li>
+                </ul>
+                <br>
+                <p>
+                    AI systems are particularly brittle around these edges, often failing unpredictably or with overconfidence. Testing and mitigation (data augmentation, ensembles, uncertainty estimation) help but can't fully eliminate edge cases. <a href="https://www.cognativ.com/blogs/post/why-do-some-ai-models-struggle-with-edge-cases/268" class="headtag" target="_blank">[Cognativ]<span class="arr"> ↗</span></a> <a href="https://www.virtuosoqa.com/post/edge-case-testing" class="headtag" target="_blank">[VirtuosoQA]<span class="arr"> ↗</span></a>
+                </p>
+                <br>
+                <p>
+                    <b>4. The 95% Project‑Failure Problem</b>
+                </p>
+                <p>
+                    Industry reports suggest that most generative-AI initiatives struggle to reach durable production value:
+                </p>
+                <ul>
+                    <li>Many stay in pilot or demo phases, where tightly controlled inputs hide real-world variability. <a href="https://www.linkedin.com/pulse/common-pitfalls-building-generative-ai-applications-surya-prakash--rkibf" class="headtag" target="_blank">[LinkedIn]<span class="arr"> ↗</span></a></li>
+                    <li>Deployed systems often fail to integrate deeply into workflows or break when product requirements change.</li>
+                    <li>The projects that succeed focus on narrow, high‑ROI problems, robust data pipelines, and continuous monitoring and retraining. <a href="https://www.ninetwothree.co/blog/why-generative-ai-projects-fail" class="headtag" target="_blank">[NineTwoThree]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <p>
+                    "Interfaces that learn us" is more than just a modeling problem—it's a systems, org, and lifecycle problem.
+                </p>
+                <br>
+                <p>
+                    <b>5. Data, Privacy, and Trust</b>
+                </p>
+                <p>
+                    To adapt well, systems need data:
+                </p>
+                <ul>
+                    <li>Interaction logs, device context, sometimes biometric or sensor data.</li>
+                    <li>Longitudinal records of behavior and preferences.</li>
+                </ul>
+                <br>
+                <p>
+                    That raises questions:
+                </p>
+                <ul>
+                    <li>What is collected?</li>
+                    <li>How long is it stored?</li>
+                    <li>How is it used (only for personalization, or also for ads, rankings, etc.)?</li>
+                </ul>
+                <br>
+                <p>
+                    Emerging practice emphasizes:
+                </p>
+                <ul>
+                    <li><b>Privacy-aware personalization:</b> Clear communication, consent flows, and the ability to opt out while still using the product. <a href="https://www.webability.io/blog/personalized-accessibility-tailoring-the-web-experience-for-individual-needs" class="headtag" target="_blank">[Webability]<span class="arr"> ↗</span></a></li>
+                    <li><b>Explainable behavior:</b> Users expect interfaces to explain why something changed or was recommended; explainable AI is projected to grow as its own market. <a href="https://www.forbes.com/sites/sap/2025/12/15/9-ux-design-shifts-that-will-shape-2026/" class="headtag" target="_blank">[Forbes]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <br>
+                <p>
+                    Trust becomes part of the interface.
+                </p>
+
+                <hr>
+
+                <figure class="article-figure"> <img src="img/slide9.jpg" alt="Beyond the Screen: Multimodal and Spatial Interfaces" class="article-image"> </figure>
+
+                <h2 class="article-h2">Beyond the Screen: Multimodal and Spatial Interfaces</h2>
+
+                <p>
+                    <b>Multimodal Interaction as the New Normal</b>
+                </p>
+                <p>
+                    Future interfaces are unlikely to be purely visual.
+                </p>
+                <p>
+                    Trends point toward:
+                </p>
+                <ul>
+                    <li><b>Voice</b> for queries, commands, and accessibility, with projections of over 150M voice users in the U.S. alone by the mid‑2020s. <a href="https://www.daydreamsoft.com/blog/voice-first-and-multimodal-interfaces-the-future-of-human-computer-interaction" class="headtag" target="_blank">[Daydreamsoft]<span class="arr"> ↗</span></a></li>
+                    <li><b>Gesture and gaze</b> in AR/VR and automotive environments, where hands and eyes are already busy. <a href="https://fuselabcreative.com/designing-multimodal-ai-interfaces-interactive/" class="headtag" target="_blank">[Fuselab Creative]<span class="arr"> ↗</span></a></li>
+                    <li><b>Text + speech + touch combinations</b>, where systems prioritize modalities based on context (quiet library vs. driving). <a href="https://www.htcinc.com/blog/ai-driven-multimodal-interfaces-the-future-of-user-experience-ux/" class="headtag" target="_blank">[HTC]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <br>
+                <p>
+                    Technically, this requires:
+                </p>
+                <ul>
+                    <li>Models that can interpret and fuse speech, vision, and sensor data.</li>
+                    <li>Orchestration layers that resolve conflicts (e.g., voice says "cancel" while gaze is fixed on "OK"). <a href="https://fuselabcreative.com/designing-multimodal-ai-interfaces-interactive/" class="headtag" target="_blank">[Fuselab Creative]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <br>
+                <p>
+                    <b>Spatial Computing and "Zero UI"</b>
+                </p>
+                <p>
+                    Spatial computing extends UI into 3D space:
+                </p>
+                <ul>
+                    <li>AR overlays information on the physical world.</li>
+                    <li>VR immerses users in fully synthetic environments.</li>
+                    <li>Mixed reality blends both. <a href="https://www.travancoreanalytics.com/en-us/evolution-of-spatial-computing/" class="headtag" target="_blank">[Travancore Analytics]<span class="arr"> ↗</span></a> <a href="https://uxdesign.cc/spatial-computing-the-evolution-of-user-interfaces-and-the-future-of-digital-interactions-106f901a64c8" class="headtag" target="_blank">[UX Collective]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <br>
+                <p>
+                    In these environments:
+                </p>
+                <ul>
+                    <li>UI elements can anchor to physical objects or locations.</li>
+                    <li>Gestures, posture, and head movement become implicit inputs.</li>
+                    <li>"Zero UI" interactions—ambient cues, spoken prompts, projected elements—show up where there's no obvious screen. <a href="https://www.htcinc.com/blog/ai-driven-multimodal-interfaces-the-future-of-user-experience-ux/" class="headtag" target="_blank">[HTC]<span class="arr"> ↗</span></a></li>
+                </ul>
+                <br>
+                <p>
+                    Adaptive behavior here might include repositioning controls to stay within comfortable reach and field of view. And, dynamically simplifying or expanding HUDs based on cognitive load or task criticality.
+                </p>
+
+                <hr>
+
+                <h2 class="article-h2">The Ongoing Role of Design and Product Thinking</h2>
+                <p>
+                    Adaptive and generative UI do <b>not</b> remove the need for design. They change the job.
+                </p>
+                <br>
+                <p>
+                    Designers and product teams increasingly:
+                </p>
+                <ul>
+                    <li>Define <b>component vocabularies, constraints, and safety rails</b> that generative systems must respect. <a href="https://designshack.net/articles/layouts/adaptive-ui-design/" class="headtag" target="_blank">[Design Shack]<span class="arr"> ↗</span></a></li>
+                    <li>Design <b>feedback loops</b>: how the system observes, experiments, and adapts without confusing or overwhelming users. <a href="https://fuselabcreative.com/designing-multimodal-ai-interfaces-interactive/" class="headtag" target="_blank">[Fuselab Creative]<span class="arr"> ↗</span></a></li>
+                    <li>Make <b>tradeoffs explicit</b>: when to favor predictability over personalization, when to ask explicitly instead of guessing.</li>
+                </ul>
+                <br>
+                <p>
+                    Studies suggest many designers see AI as an efficiency enhancer rather than a replacement, and industry analyses emphasize that contextual judgment, cultural nuance, and empathy remain essential. <a href="https://visme.co/blog/ai-design-trends/" class="headtag" target="_blank">[Visme]<span class="arr"> ↗</span></a>
+                </p>
+
+                <hr>
+
+                <h2 class="article-h2">Closing: From Learning Interfaces to Learning Relationships</h2>
+                <p>
+                    The core thesis, summarized:
+                </p>
+                <ul>
+                    <li>Interfaces are moving from static, average‑case designs to adaptive and generative systems that respond to individual users and dynamic contexts.</li>
+                    <li>This shift is driven by measurable gains in productivity, accessibility, and engagement—but it brings real challenges in intent modeling, robustness, data, and trust.</li>
+                    <li>The future of "screens" is less about fixed layouts and more about ongoing relationships: systems that learn us over time, within boundaries that designers, engineers, organizations, and regulators will continue to negotiate.</li>
+                </ul>
+                <br>
+                <p>
+                    For users, that likely means fewer rigid flows and more experiences that feel tailored—sometimes invisibly so. For practitioners, it means designing not just the interface, but the <b>learning process behind it</b>.
+                </p>
+
+                <footer>
+                    <br><br><br>
+                    <hr><br>
+                    <div class="footer-container">
+                        <a href="#top" class="headtag">back to top<span class="arr">↑</span></a>
+                    </div>
+                </footer>
+            </article>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
