@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Stop Leveling Up Prototyping Skills</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="../blogs.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="icon" href="../../img/favicon.png" type="image/png">
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
+
+        <script>
+            function updateImages() {
+                const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                document.querySelectorAll(".theme-img").forEach(img => {
+                    const imageName = img.dataset.name;
+                    const newSrc = isDarkMode 
+                        ? `img/dk/${imageName}.png` 
+                        : `img/lt/${imageName}.png`;
+
+                    if (img.src !== newSrc) {
+                        img.src = newSrc;
+                    }
+                });
+            }
+
+            const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+            darkModeQuery.addEventListener("change", updateImages);
+            document.addEventListener("DOMContentLoaded", updateImages);
+        </script>
+    </head>
+
+    <body>
+        <a href="../../index.html" class="back-button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Home
+        </a>
+        
+        <div class="article-container">
+            <article class="article-body">
+
+                <h1 class="article-h1">If You're a UX Designer, Stop Leveling Up Prototyping Skills</h1>
+                
+                <h3 class="article-h3">
+                    Your PM just shipped a design fix.<br>
+                    Your engineer prototyped a micro-interaction.
+                </h3>
+                <p style="color: var(--red);">
+                    So where does that leave you?
+                </p>
+                <p>
+                    UX designers are often told to focus on craft: better flows, cleaner interactions, higher-fidelity prototypes, stronger Figma proficiency. That advice made sense when interfaces were static, requirements were locked early, and execution was expensive.
+                </p>
+                <p>
+                    That environment is fading.
+                </p>
+                <p>
+                    More and more, the people influencing product direction aren't the ones producing the most polished design artifacts. They're the ones who understand how product decisions are made, how systems are built, and where real constraints live.
+                </p>
+                <p>
+                    AI is compressing the gap between intent and execution. As a result, the boundaries between design, product, and engineering are starting to blur. Designers who stay narrowly focused on UX/UI execution feel increasingly exposed.
+                </p>
+
+                <hr>
+
+                <figure class="article-figure"> <img src="img/slide1.png" alt="The Role Inversion No One's Talking About" class="article-image"> </figure>
+
+                <h2 class="article-h2">The Role Inversion No One's Talking About</h2>
+                
+                <p>
+                    One pattern is hard to miss: PMs and engineers are becoming more fluent in design.
+                </p>
+                <p>
+                    Product managers learn UX concepts to reason about activation, friction, and behavior when making prioritization decisions.
+                </p>
+                <p>
+                    Engineers work directly with UI and interaction patterns because modern frontends are adaptive systems, assembled dynamically rather than rendered from static specs.
+                </p>
+                <p>
+                    Meanwhile, many designers continue to optimize for tool fluency.
+                </p>
+                <br>
+                <p>
+                    That creates an imbalance:
+                </p>
+                <ul>
+                    <li>PMs expand downward into design thinking</li>
+                    <li>Engineers expand upward into UX decisions</li>
+                    <li>Designers remain vertically scoped</li>
+                </ul>
+                <br>
+                <p>
+                    The risk here isn't the loss of design relevance. The risk is that design decisions are increasingly made earlier in the process and deeper in the system, outside traditional design artifacts.
+                </p>
+
+                <hr>
+
+                <h2 class="article-h2">Prototyping Isn't Going Away, But It's Changing Shape</h2>
+                
+                <p>
+                    Prototyping still matters. It's just no longer scarce.
+                </p>
+                <p>
+                    AI accelerates:
+                </p>
+                <ul>
+                    <li>layout generation</li>
+                    <li>interaction variants</li>
+                    <li>copy iteration</li>
+                    <li>component assembly</li>
+                    <li>visual exploration</li>
+                </ul>
+                <br>
+                <p>
+                    Tools across the design and development stack lower the cost of producing UI. Speed and polish no longer differentiate designers on their own.
+                </p>
+                <p>
+                    What starts to matter more is judgment: deciding what deserves to exist, what can wait, and what tradeoffs are acceptable.
+                </p>
+                <p>
+                    Designers focused only on artifact production compete directly with automation. Designers who shape decisions operate at a different level.
+                </p>
+
+                <hr>
+
+                <figure class="article-figure"> <img src="img/slide3.png" alt="What I've Been Noticing About PM Work" class="article-image"> </figure>
+
+                <h2 class="article-h2">What I've Been Noticing About PM Work</h2>
+                
+                <p>
+                    From the outside, PM work can seem abstract. Over time, it becomes clear that most of it revolves around a small set of questions:
+                </p>
+                <ul>
+                    <li>Why build this now?</li>
+                    <li>What problem is worth solving?</li>
+                    <li>What tradeoff are we accepting?</li>
+                    <li>What outcome matters most?</li>
+                </ul>
+                <br>
+                <p>
+                    Those answers often determine the UX long before any screen is designed.
+                </p>
+                <p>
+                    Learning how PMs reason doesn't pull designers away from their role. It gives context for why certain problems are prioritized and others are not. Without that context, design risks becoming reactive.
+                </p>
+
+                <hr>
+
+                <h2 class="article-h2">What I'm Learning From Watching Engineers</h2>
+                
+                <p>
+                    Similarly, engineers increasingly are making UX-impacting decisions as part of everyday work.
+                </p>
+                <p>
+                    They think in terms of:
+                </p>
+                <ul>
+                    <li>Performance and latency</li>
+                    <li>Aesthetics and UI</li>
+                    <li>Interactions and animations</li>
+                    <li>System limits</li>
+                    <li>Failure states</li>
+                    <li>Long-term maintainability</li>
+                </ul>
+                <br>
+                <p>
+                    As products become more adaptive and AI-driven, many UX behaviors live in code: conditional states, confidence thresholds, fallbacks, and defaults.
+                </p>
+                <p>
+                    Basic engineering literacy changes how design problems are framed. It helps identify what's fragile, what's expensive, and what's realistically achievable. Even limited understanding improves collaboration and decision quality.
+                </p>
+
+                <hr>
+
+                <figure class="article-figure"> <img src="img/slide2.png" alt="What I've Been Noticing About PM Work" class="article-image"> </figure>
+
+                <h2 class="article-h2">Where UX Decisions Are Moving</h2>
+                
+                <p>
+                    In more static products, designers could define flows upfront.
+                </p>
+                <p>
+                    In adaptive systems, the focus shifts toward behavior:
+                </p>
+                <ul>
+                    <li>when the system should act automatically</li>
+                    <li>when it should ask the user</li>
+                    <li>when it should stay out of the way</li>
+                </ul>
+                <br>
+                <p>
+                    These decisions sit at the intersection of product logic, system design, and user trust. The quality of the UX depends heavily on how those choices are made.
+                </p>
+                <p>
+                    Understanding that decision layer matters more than refining individual screens.
+                </p>
+
+                <hr>
+
+
+                <h2 class="article-h2">What I've Been Expanding Into</h2>
+                
+                <p>
+                    Over the past few years, I've been spending more time on areas adjacent to traditional design work:
+                </p>
+                <ul>
+                    <li>paying closer attention to product strategy and metrics</li>
+                    <li>learning enough engineering context to understand constraints and implications</li>
+                    <li>asking "why are we building this?" earlier in the process</li>
+                    <li>framing UX in terms of outcomes and system behavior rather than screens</li>
+                </ul>
+                <br>
+                <p>
+                    What surprised me is how naturally this builds on a design foundation. Thinking about users, intent, and edge cases translates well into product and engineering conversations.
+                </p>
+                <p>
+                    The work widens where design thinking applies.
+                </p>
+
+                <hr>
+
+                <h2 class="article-h2">A Tentative Takeaway</h2>
+                
+                <p>
+                    Craft still matters. Prototyping still matters.
+                </p>
+                <p>
+                    Focusing exclusively on those skills feels increasingly narrow as AI accelerates execution and roles continue to overlap.
+                </p>
+                <p>
+                    The designers I find most compelling aren't the ones producing the flashiest prototypes. They're the ones who understand the system well enough to influence meaningful decisions.
+                </p>
+                <p>
+                    I'm still working toward that. For now, it's the direction I'm aiming for.
+                </p>
+
+                <footer>
+                    <br><br><br>
+                    <hr><br>
+                    <div class="footer-container">
+                        <a href="#top" class="headtag">back to top<span class="arr">↑</span></a>
+                    </div>
+                </footer>
+            </article>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
