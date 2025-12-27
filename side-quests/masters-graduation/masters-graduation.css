@@ -195,7 +195,7 @@ h1 {
 .carousel-track {
     display: flex;
     gap: 1rem;
-    animation: scroll 40s linear infinite;
+    animation: scroll 30s linear infinite;
     width: max-content;
 }
 
