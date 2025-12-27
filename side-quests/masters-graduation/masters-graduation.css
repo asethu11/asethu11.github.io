@@ -140,9 +140,14 @@ h1 {
     color: var(--text-secondary);
 }
 
+/* Celebrate Section */
+.celebrate-section {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
 /* Celebrate Button */
 .celebrate-btn {
-    margin-top: 2rem;
     padding: 1rem 2rem;
     font-size: 1.1rem;
     font-weight: 600;
@@ -163,6 +168,20 @@ h1 {
 
 .celebrate-btn:active {
     transform: translateY(0) scale(0.98);
+}
+
+/* Video Section */
+.video-section {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    padding: 0 2rem;
+}
+
+.grad-video {
+    width: 100%;
+    border-radius: 12px;
+    display: block;
 }
 
 /* Carousel */
