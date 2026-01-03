@@ -26,9 +26,17 @@
         <meta name="robots" content="index, follow">
         <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
-
-        <script src="script.js"></script>
-        <script src="shared.js"></script>
+        <!-- Optimized font loading: preconnect early -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+        <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+        
+        <!-- Load only required font weights: Inter (400,500,600) and Big Shoulders Display (650) -->
+        <!-- Removed Roboto (not used) and reduced from 100-900 to only needed weights -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Big+Shoulders+Display:wght@650&display=swap">
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="icon" href="img/favicon.png" type="image/png">
@@ -73,7 +81,7 @@
 
 
 
-                  Strengths in simplifying complex worflows & data-heavy systems, and scaling features/products from 0→1 to 1→N.
+                  Strengths in simplifying complex worflows & data-heavy systems, and scaling features/products from 0→1 and 1→N.
               </p>
 
               <!-- Loader -->
@@ -124,7 +132,7 @@
             <div class="headerproject">
               <a href="my-works/improving-adoption/improving-adoption.html">
                 <div class="grey-background headerprojectbg">
-                  <img src="my-works/improving-adoption/thumbnail.png" alt="Improving Adoption Project" class="project-image">
+                  <img src="my-works/improving-adoption/thumbnail.png" alt="Improving Adoption Project" class="project-image" loading="lazy">
                 </div>
               </a>
 
@@ -149,7 +157,7 @@
             <div class="headerproject">
               <a href="my-works/nextgen/nextgen.html">
                 <div class="grey-background headerprojectbg">
-                  <img src="my-works/nextgen/thumbnail.png" alt="Project GIF" class="project-image">
+                  <img src="my-works/nextgen/thumbnail.png" alt="Project GIF" class="project-image" loading="lazy">
                 </div>
               </a>
 
@@ -174,7 +182,7 @@
             <div class="headerproject">
               <a href="my-works/LSR/LSR.html">
                 <div class="grey-background headerprojectbg">
-                  <img src="my-works/LSR/thumbnail.gif" alt="Project GIF" class="project-image">
+                  <img src="my-works/LSR/thumbnail.gif" alt="Project GIF" class="project-image" loading="lazy">
                 </div>
               </a>
 
@@ -199,7 +207,7 @@
             <div class="headerproject">
               <a href="my-works/usertesting-mesa/COMUT.html">
                 <div class="grey-background headerprojectbg">
-                  <img src="my-works/usertesting-mesa/com-presentation.jpg" alt="" class="project-image">
+                  <img src="my-works/usertesting-mesa/com-presentation.jpg" alt="" class="project-image" loading="lazy">
                 </div>
               </a>
 
@@ -304,23 +312,23 @@
                 <!-- Project Previews -->
 
                 <div class="project-preview">
-                  <img src="my-works/ytm/img/dk/slide1.png" alt="Project 1 preview">
+                  <img src="my-works/ytm/img/dk/slide1.png" alt="Project 1 preview" loading="lazy">
                 </div>
                   
                 <div class="project-preview">
-                  <img src="my-works/hackathonSODA/thumbnail.jpeg" alt="Project 2 preview">
+                  <img src="my-works/hackathonSODA/thumbnail.jpeg" alt="Project 2 preview" loading="lazy">
                 </div>
         
                 <div class="project-preview">
-                    <img src="my-works/LTH/img/canvas-after.png" alt="Project 3 preview">
+                    <img src="my-works/LTH/img/canvas-after.png" alt="Project 3 preview" loading="lazy">
                 </div>
 
                 <div class="project-preview">
-                    <img src="side-quests/behance/typography.png" alt="Project 4 preview">
+                    <img src="side-quests/behance/typography.png" alt="Project 4 preview" loading="lazy">
                 </div>
 
                 <div class="project-preview">
-                    <img src="side-quests/behance/QuizApp.png" alt="Project 5 preview">
+                    <img src="side-quests/behance/QuizApp.png" alt="Project 5 preview" loading="lazy">
                 </div>
 
 
@@ -491,6 +499,10 @@
           <p class="footer-text">© 2025. All rights reserved. Coded by a human in vanilla HTML, CSS, and JavaScript.</p>
         </footer>
       </div>
+
+      <!-- Scripts loaded at end of body for better performance -->
+      <script src="script.js" defer></script>
+      <script src="shared.js" defer></script>
     </body>
  
 

@@ -49,9 +49,33 @@ function deletingEffect(pageType = 'index') {
     loopDeleting();
 }
 
+// Lazy load sections using Intersection Observer
+function initLazySections() {
+    const lazySections = document.querySelectorAll('.other-projects, .section-writings, .section-keynotes');
+    
+    if ('IntersectionObserver' in window) {
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Section is now visible, ensure it's fully rendered
+                    entry.target.style.contentVisibility = 'visible';
+                    sectionObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: '50px' // Start loading 50px before section enters viewport
+        });
+
+        lazySections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+    }
+}
+
 // Auto-detect page type and initialize
 window.onload = function() {
     const isAboutPage = window.location.pathname.includes('about.html');
     typingEffect(isAboutPage ? 'about' : 'index');
+    initLazySections();
 };
 
