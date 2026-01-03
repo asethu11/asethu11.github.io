@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>VR Training Platform - NextGen Badge - Abhishek does UX</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="VR Training Platform for Minnesota's Law Enforcement Trainees built in Unreal Engine 5.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, VR, XR, Unreal Engine, Arizona, USA">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <!-- Optimized font loading -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Big+Shoulders+Display:wght@650&display=swap">
+        
+        <link rel="stylesheet" href="nextgen.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="icon" href="../../img/favicon.png" type="image/png">
+
+        <script>
+            function updateImages() {
+                const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                document.querySelectorAll(".theme-img").forEach(img => {
+                    const imageName = img.dataset.name;
+                    const newSrc = isDarkMode 
+                        ? `img/dk/${imageName}.png` 
+                        : `img/lt/${imageName}.png`;
+                    if (img.src !== newSrc) {
+                        img.src = newSrc;
+                    }
+                });
+            }
+
+            const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+            darkModeQuery.addEventListener("change", updateImages);
+            document.addEventListener("DOMContentLoaded", updateImages);
+
+            function openImageInNewTab(imageName) {
+                const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                const imagePath = isDarkMode 
+                    ? `img/dk/${imageName}.png` 
+                    : `img/lt/${imageName}.png`;
+                window.open(imagePath, '_blank');
+            }
+        </script>
+    </head>
+
+<body>
+    <a href="../../index.html" class="back-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Home
+    </a>
+    
+    <div class="article-container">
+        <article class="article-body">
+            
+            <!--Intro Section-->
+            <section class="section-1">
+
+                <div class="grey-background-article image-bottom">
+                    <figure class="article-figure">
+                        <img src="thumbnail.png" width="100%" alt="NextGen Badge VR Training Platform" loading="lazy">
+                    </figure>
+                </div>
+
+                <h1 class="article-h1">VR Training Platform for Minnesota's Law Enforcement Trainees</h1>
+
+                <p>
+                    Built in Unreal Engine 5, NextGen Badge creates a safe, repeatable space for law-enforcement trainees to test both technical skills and emotional resilience. <br><br>
+
+                    The platform addresses a critical gap in traditional police training: the inability to practice high-stakes scenarios safely and repeatedly. Through immersive VR experiences, trainees can encounter realistic situations, make decisions under pressure, and learn from mistakes without real-world consequences. <br><br>
+
+                    <b>My role:</b> Designed the user interface, interaction patterns, and user experience flows for the VR training platform, ensuring intuitive navigation and effective learning outcomes.
+                </p>
+
+                <div class="sub-header">
+                    <p id="intro-tags1">
+                        5-7 min read | UX Design | VR/XR | Unreal Engine 5
+                    </p>
+                </div>
+
+            </section>
+
+            <hr class="intro-hr">
+
+            <!--TL;DR Section-->
+            <section class="section-tldr">
+                <h2>TL;DR</h2>
+                <p><b style="color: var(--red);">Problem:</b></p>
+                <p>Traditional police training lacks safe, repeatable environments for high-stakes scenario practice.</p>
+                
+                <p><b style="color: var(--red);">Approach:</b></p>
+                <p>VR/XR design, user research with law enforcement trainees, iterative prototyping in Unreal Engine 5.</p>
+                
+                <p><b style="color: var(--red);">Solution:</b></p>
+                <p>Immersive VR training platform with realistic scenarios, intuitive UI interactions, and comprehensive feedback systems.</p>
+                
+                <p><b style="color: var(--red);">Impact:</b></p>
+                <p>Enabled safe, repeatable training scenarios. Improved trainee confidence and decision-making skills in high-pressure situations.</p>
+            </section>
+            
+            <hr class="intro-hr">
+
+            <!--Main Content Sections-->
+            <section class="section-2">
+
+                <h2 class="article-h2">Project Overview</h2>
+
+                <p>
+                    NextGen Badge represents a breakthrough in law enforcement training, leveraging VR technology to create immersive learning experiences. The platform allows trainees to practice critical decision-making, de-escalation techniques, and tactical responses in a controlled, safe environment.
+                </p>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="Visual Design - TS" width="100%" alt="Training scenario visual design" loading="lazy">
+                    <figcaption>
+                        <a href="#" onclick="openImageInNewTab('Visual Design - TS'); return false;">View image</a>
+                    </figcaption>
+                </figure>
+
+                <h2 class="article-h2">Key Features</h2>
+                <ul>
+                    <li><b>Realistic Scenarios:</b> High-fidelity VR environments that replicate real-world situations</li>
+                    <li><b>Interactive UI:</b> Intuitive interface design for seamless navigation in VR space</li>
+                    <li><b>MetaHuman Integration:</b> Realistic character interactions for authentic training experiences</li>
+                    <li><b>Performance Tracking:</b> Comprehensive analytics and feedback systems</li>
+                    <li><b>Tool Bag System:</b> Contextual tools and resources accessible during training</li>
+                </ul>
+
+                <br>
+
+                <h2 class="article-h2">Design Process</h2>
+
+                <p>
+                    The design process involved extensive collaboration with law enforcement professionals to understand training needs, pain points, and learning objectives. Early prototypes were tested with trainees to refine interaction patterns and ensure usability in VR environments.
+                </p>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="early-figma" width="100%" alt="Early Figma wireframes" loading="lazy">
+                    <figcaption>
+                        <a href="#" onclick="openImageInNewTab('early-figma'); return false;">View image</a>
+                    </figcaption>
+                </figure>
+
+                <h2 class="article-h2">User Flow & Interactions</h2>
+
+                <p>
+                    The user flow was designed to guide trainees through scenario selection, preparation, execution, and review. Each interaction was carefully crafted to feel natural in VR while maintaining clarity and purpose.
+                </p>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="Ideation UserFlow-Interactions" width="100%" alt="User flow and interaction design" loading="lazy">
+                    <figcaption>
+                        <a href="#" onclick="openImageInNewTab('Ideation UserFlow-Interactions'); return false;">View image</a>
+                    </figcaption>
+                </figure>
+
+                <h2 class="article-h2">Visual Design</h2>
+
+                <p>
+                    The visual design balances realism with clarity, ensuring that UI elements are visible and functional in immersive VR environments. Color choices, typography, and spatial design were optimized for VR viewing and interaction.
+                </p>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="Visual Design - DC" width="100%" alt="Visual design system" loading="lazy">
+                    <figcaption>
+                        <a href="#" onclick="openImageInNewTab('Visual Design - DC'); return false;">View image</a>
+                    </figcaption>
+                </figure>
+
+                <h2 class="article-h2">Tool Bag System</h2>
+
+                <p>
+                    The Tool Bag system provides contextual access to resources and tools during training scenarios. The design ensures quick access without disrupting the immersive experience.
+                </p>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="ToolBag_Default" width="100%" alt="Tool Bag default state" loading="lazy">
+                    <figcaption>
+                        <a href="#" onclick="openImageInNewTab('ToolBag_Default'); return false;">View image</a>
+                    </figcaption>
+                </figure>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="ToolBag_OnSeen" width="100%" alt="Tool Bag interaction state" loading="lazy">
+                    <figcaption>
+                        <a href="#" onclick="openImageInNewTab('ToolBag_OnSeen'); return false;">View image</a>
+                    </figcaption>
+                </figure>
+
+                <h2 class="article-h2">Video Demonstrations</h2>
+
+                <p>
+                    The platform includes video demonstrations showcasing UI interactions, MetaHuman character selection, and level portal navigation.
+                </p>
+
+                <figure class="article-figure">
+                    <video class="article-video" controls>
+                        <source src="vid/UE5 VR Simulation - UI Interaction, MetaHuman Character Selection & Level Portal.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <figcaption>UI Interaction, MetaHuman Character Selection & Level Portal</figcaption>
+                </figure>
+
+                <figure class="article-figure">
+                    <video class="article-video" controls>
+                        <source src="vid/UE5 VR Simulation Snippet - Raycast Observation & UI Interactions in Police Training (1).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <figcaption>Raycast Observation & UI Interactions in Police Training</figcaption>
+                </figure>
+
+            </section>
+
+            <!--Footer Section-->
+            <footer>
+                <br><br><br>
+                <hr><br>
+                <div class="footer-container">
+                <a href="#top" class="hyp-p">back to top ↑</a>
+                </div>
+            </footer>
+        
+        </article>
+        
+    </div>
+</body>
+</html>
+
