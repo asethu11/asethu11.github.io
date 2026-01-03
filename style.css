@@ -1,3 +1,6 @@
+/* Load Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Big+Shoulders+Display:wght@650&display=swap');
+
 :root {
   --background: #FCFCFC;
   --background-grey: #eff1f3;
