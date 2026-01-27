@@ -371,6 +371,37 @@ li pre {
     margin-bottom: 0;
 }
 
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    border: 1px solid var(--background-grey);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+table td {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+table th, table td {
+    padding: 0.75rem 1rem;
+    vertical-align: top;
+    border-bottom: 1px solid var(--background-grey);
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
 .table-header {
     background-color: #D1D5DB;
 }
@@ -381,7 +412,7 @@ li pre {
 
 table th:first-child,
 table td:first-child {
-    width: 22.5%;
+    /* width: 35%; - moved to inline styles in HTML */
 }
 
 @media (prefers-color-scheme: dark) {

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>New Blog Post Title</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <script src="../../script.js"></script>
+        <link rel="stylesheet" href="../blogs.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="icon" href="../../img/favicon.png" type="image/png">
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
+
+        <script>
+            function updateImages() {
+                const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                document.querySelectorAll(".theme-img").forEach(img => {
+                    const imageName = img.dataset.name;
+                    const newSrc = isDarkMode 
+                        ? `img/dk/${imageName}.png` 
+                        : `img/lt/${imageName}.png`;
+
+                    if (img.src !== newSrc) {
+                        img.src = newSrc;
+                    }
+                });
+            }
+
+            const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+            darkModeQuery.addEventListener("change", updateImages);
+            document.addEventListener("DOMContentLoaded", updateImages);
+        </script>
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav id="navbar">
+            <div class="nav-container">
+                <a href="../../index.html" class="nav-logo">Abhishek</a>
+                <div class="nav-links">
+                    <a href="../../index.html">Home</a>
+                    <a href="../../about.html">About</a>
+                    <a href="../../my-works/index.html">Works</a>
+                    <a href="../blogfabnav.html">Blogs</a>
+                    <a href="../../building.html">Building</a>
+                </div>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="blog-content">
+            <article class="blog-post">
+                <header class="blog-header">
+                    <h1>New Blog Post Title</h1>
+                    <div class="blog-meta">
+                        <span class="date">January 26, 2026</span>
+                        <span class="author">Abhishek</span>
+                    </div>
+                </header>
+
+                <section class="blog-body">
+                    <p>This is a placeholder for your blog post content. Replace this with your actual blog post text.</p>
+
+                    <!-- Add your blog content here -->
+                    <h2>Section 1</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+                    <h2>Section 2</h2>
+                    <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+                    <!-- Image placeholder -->
+                    <figure>
+                        <img src="img/slide1.jpg" alt="Blog image 1" class="blog-image">
+                        <figcaption>Caption for image 1</figcaption>
+                    </figure>
+                </section>
+            </article>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <p>&copy; 2026 Abhishek. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="https://github.com/asethu11" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/abhishek-sethu/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.behance.net/asethu11" target="_blank"><i class="fab fa-behance"></i></a>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
