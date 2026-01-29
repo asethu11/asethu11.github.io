@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Reframing Adoption: Data-Driven Product Pivoting - Abhishek does UX</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Transforming adoption plateau into growth through data analysis and product strategy.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Product Strategy, Data Analysis, Arizona, USA">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="improving-adoption.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+        <link rel="icon" href="../../img/favicon.png" type="image/png">
+    </head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-98H0ZTK0T4');
+</script>
+
+<script>
+    function isDarkTheme() {
+        const forcedLight = document.documentElement.classList.contains('force-light');
+        const forcedDark = document.documentElement.classList.contains('force-dark');
+        if (forcedLight) return false;
+        if (forcedDark) return true;
+        return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+
+    function updateImages() {
+        const isDarkMode = isDarkTheme();
+        document.querySelectorAll(".theme-img").forEach(img => {
+            const imageName = img.dataset.name; // Get the image name
+            const newSrc = isDarkMode 
+                ? `img/dk/${imageName}.png` 
+                : `img/lt/${imageName}.png`;
+
+            // Only update if the src has changed (prevents unnecessary reloads)
+            if (img.src !== newSrc) {
+                img.src = newSrc;
+            }
+        });
+    }
+
+    // Ensure images update on theme change
+    const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    darkModeQuery.addEventListener("change", updateImages);
+
+    // Run on page load
+    document.addEventListener("DOMContentLoaded", updateImages);
+
+    // Function to open image in new tab
+    function openImageInNewTab(imageName) {
+        const isDarkMode = isDarkTheme();
+        const imagePath = isDarkMode 
+            ? `img/dk/${imageName}.png` 
+            : `img/lt/${imageName}.png`;
+        window.open(imagePath, '_blank');
+    }
+</script>
+
+<body>
+    <a href="../../index.html" class="back-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Home
+    </a>
+
+    <!-- Sticky Table of Contents (top-right) -->
+    <aside class="toc-sticky" aria-label="Table of contents">
+        <div class="toc-wrapper">
+            <h3 class="toc-title">Contents</h3>
+            <div class="reading-progress" aria-hidden="true">
+                <div class="reading-progress-fill"></div>
+            </div>
+            <nav class="toc-nav">
+                <ul class="toc-list">
+                    <li><a href="#problem">Problem</a></li>
+                    <li><a href="#research">Research</a></li>
+                    <li><a href="#stakeholder">Stakeholder Negotiation</a></li>
+                    <li><a href="#data-analysis">Data Analysis</a></li>
+                    <li><a href="#solution">Solution</a></li>
+                    <li><a href="#implementation">Implementation</a></li>
+                    <li><a href="#adoption">Adoption Measurement</a></li>
+                    <li><a href="#learnings">Learnings</a></li>
+                    <li><a href="#next">What's Next</a></li>
+                </ul>
+            </nav>
+            <a class="toc-top" href="#top">Back to top</a>
+        </div>
+    </aside>
+    
+    <div class="toast" role="alert" aria-live="polite" aria-atomic="true">
+        <div class="toast-title">This content is optimized for light mode</div>
+        <div class="toast-text">You're viewing in dark mode. Switch to light for the intended contrast and visuals.</div>
+        <div class="toast-actions">
+            <button class="btn-primary" id="toast-switch-light">Switch to light mode</button>
+            <button class="btn-ghost" id="toast-dismiss">Dismiss</button>
+        </div>
+    </div>
+
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">Switch to light</button>
+
+    <div class="article-container">
+        <article class="article-body">
+            
+            <!--Intro Section-->
+            <section class="section-1">
+
+                                <div class="grey-background-article image-bottom">
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="thumbnail" width="100%" alt="Reframing Adoption: From Feature Problems to Activation Strategy">
+                    </figure>
+                </div>
+
+                <h1 class="article-h1">Solving Adoption Crisis (80% bounce-rate) With Limited Engineering Bandwidth</h1>
+
+                <p>80% of new users spent less than 2 minutes on the platform before leaving. They never experienced the product that 8000+ project builders loved and used for 2-3 hours daily. What if the adoption problem wasn't about the experience at all? What if it was about whether we were building the right product for the market we were trying to reach? 
+                </p>
+
+                <div class="sub-header">
+                    <p id="intro-tags1">
+                        10-12 min read | Solo UX/Product Designer | September '25 - Present | AI Platform for Edu
+                    </p>
+                </div>
+
+            </section>
+
+            <hr class="intro-hr">
+
+            <!--Main Content Sections-->
+            <section class="section-2">
+
+                <!--Problem Section-->
+                <h2 class="article-h2" id="problem">The Problem: A Misdiagnosed Adoption Plateau</h2>
+
+                <p>The platform had reached 147 courses. Leadership pointed to feature problems: RAG accuracy, response latency, template discoverability.</p>
+
+                <p>But the analytics told a different story:</p>
+
+                <p><b>80% of new users spent under 2 minutes on the platform.</b></p>
+
+                <p><b>95% of projects created by returning users.</b></p>
+
+                <p><b>Returning users spent 2-3 hours daily on the platform.</b></p>
+
+                <p>Returning users loved the product. They were the early adopters. New users were bouncing before they experienced value.</p>
+
+                <p>The disconnect was stark: the platform was built by computer science faculty, for computer science faculty. When we tried to onboard non-technical faculty and staff (the actual growth market), everything broke.</p>
+
+                <hr class="intro-hr">
+
+                <!--Research Section-->
+                <h2 class="article-h2" id="research">Research: Understanding Why Non-Technical Users Left</h2>
+
+                <p>I began running moderated demos with users. Not formal usability testing (we didn't have budget for that). Just structured conversations where I'd let them explore the product cold, then guide them through setup while documenting where they froze.</p>
+
+                <p><b>Sample:</b> 20-30 faculty, staff, and instructional designers across departments (English, Biology, History, Business)</p>
+
+                <p><b>Key insight:</b> The problem wasn't technical complexity. It was cognitive load at the wrong moment.</p>
+
+                <h3 class="article-h3">The Age Factor (Critical Finding)</h3>
+
+                <p>I was designing for 35-60 year old faculty, not Gen Z users. This changed everything about how I approached the problem.</p>
+
+                <p>These users were intelligent domain experts, but they approached software differently. They expected clarity upfront. They wanted to understand what they were about to do before committing to it. They needed confidence before exploring.</p>
+
+                <p>When a 48-year-old English professor landed on a blank builder interface with dropdowns for "RAG settings" and "temperature," she didn't think "I'll figure this out." She thought "this isn't for me" and left.</p>
+
+                <h3 class="article-h3">Specific Friction Points (From Demos)</h3>
+
+                <ol>
+                    <li><b>Entry point confusion:</b> Users searched for "Syllabot" (the product they heard about) but landed on "CreateAI Builder" (the platform). They questioned if they were in the right place. This happened consistently—not once or twice, but across multiple users in the first 30 seconds.</li>
+                    <li>
+                </ol>
+
+                <ol start="2">
+                    <li><b>Hidden value:</b> The platform's purpose wasn't explained upfront. It was a blank canvas. Powerful features existed, but they were invisible. A user had no sense of "what can this actually do for me?" before being asked to configure it.</li>
+                    <li><b>Configuration anxiety:</b> Non-technical users faced terminology that meant nothing to them. LLM parameters. RAG settings. Temperature controls. Top-K retrieval. These were CS concepts. An English professor asking "what does any of this mean?" wasn't being difficult. She was being reasonable.</li>
+                    <li><b>The False Failure:</b> Users would test a bot without uploading their course materials first, get nonsensical outputs, and assume the product was broken. In reality, they'd skipped a critical dependency. But there was nothing in the interface preventing this mistake or explaining why it mattered.</li>
+                </ol>
+
+                <h3 class="article-h3">Quantifying the Problem</h3>
+
+                <p>We measured support tickets across Slack channels and internal forums: <b>20% of all support issues were about misconfigurations or poor bot output.</b> That's 1-in-5 support conversations focused on a problem we could have prevented in the interface itself.</p>
+
+                <p>Our target: reduce this to under 3% by making misconfiguration impossible.</p>
+
+                <hr class="intro-hr">
+
+                <!--Stakeholder Negotiation Section-->
+                <h2 class="article-h2" id="stakeholder">The Stakeholder Negotiation: Reframing the Problem</h2>
+
+                <p>When I presented these findings to product leadership, I hit resistance immediately.</p>
+
+                <p><i>"We can't make drastic changes without proof it will work. Engineering is at capacity. We need evidence this is the right direction before we overload them with scope."</i></p>
+
+                <p>Fair point. I had research, but no data. Anecdotes, but no scale.</p>
+
+                <p><b>My pivot:</b> Instead of arguing "users are confused," I reframed it as "we're losing 80% of new user signups before they experience value. Converting just 25% of dropoffs hits our growth targets without new acquisition cost. This is an activation problem, not a feature problem."</p>
+
+                <p>This shifted the conversation from "should we redesign?" to "how do we activate existing interest?"</p>
+
+                <p>Now the question became: what's the minimum viable intervention that validates the hypothesis?</p>
+
+                <p>I proposed three low-cost changes that required mostly frontend work:</p>
+
+                <ol>
+                    <li>Guardrails preventing misconfiguration</li>
+                    <li>Super Templates with pre-configured workflows</li>
+                    <li>A strategic pivot to standalone products (longer-term)</li>
+                </ol>
+
+                <p>Engineering could absorb this. It didn't require rewriting the backend. It proved the concept.</p>
+
+                <hr class="intro-hr">
+
+                <!--Data Analysis Section-->
+                <h2 class="article-h2" id="data-analysis">The Data Analysis: Discovering Which Products to Build</h2>
+
+                <p>The standalone product strategy wasn't a guess. It came from systematic analysis.</p>
+
+                <h3 class="article-h3">The Process:</h3>
+
+                <p>I wrote a Python script to analyze every single project created on the platform (8,000+ projects). The script extracted and categorized custom instructions from each project using LLM analysis, creating a taxonomy of what users were actually building.</p>
+
+                <p>Result: 70 different product categories emerged.</p>
+
+                <p>I then consolidated these into 12 major categories, then ranked by volume and viability.</p>
+
+                <h3 class="article-h3">The Findings:</h3>
+
+                <ol>
+                    <li><b>Retrieval-based projects (Q&A bots):</b> 40% of all projects. Faculty uploading syllabus, lecture notes, research papers and asking the bot to answer student questions based on that knowledge. Clear job-to-be-done. High viability.</li>
+                    <li><b>Communications projects (Email, letter writing):</b> 25% of projects. Using the platform to draft emails, recommendation letters, course communication. Clear job-to-be-done. High viability.</li>
+                    <li><b>General writing assistance:</b> 20% of projects. But this was low-viability because ChatGPT and Claude already dominated this space. We had no competitive advantage. Deprioritized strategically.</li>
+                </ol>
+
+                <p>This data-driven approach meant I wasn't guessing which products to build. I was responding to what users were already trying to do with our platform.</p>
+
+                <hr class="intro-hr">
+
+                <!--Solution Section-->
+                <h2 class="article-h2" id="solution">The Solution: Three Interconnected Changes</h2>
+
+                <h3 class="article-h3">1. Smart Defaults + Automated Configuration</h3>
+
+                <p>For Q&A Bot, we auto-tuned backend settings based on document type. Conversation starters shifted from generic prompts ("Ask me anything") to hyper-specific examples ("What are the course prerequisites?" "When is the exam?"). These worked because they were answerable from actual materials, giving users immediate confidence.</p>
+
+                <p>This prevented misconfiguration at the source.</p>
+
+                <h3 class="article-h3">2. Super Templates: Context Before Configuration</h3>
+
+                <p>Each template came with:</p>
+
+                <ul>
+                    <li><b>Specific custom instructions</b> tuned for that use case (e.g., Q&A Bot template included instructions to act as a course assistant, answer based only on provided materials, etc.)</li>
+                    <li><b>Pre-configured workflows</b> so users saw what was already set up</li>
+                    <li><b>Conversation starters</b> that would actually work without error</li>
+                    <li><b>State saving/loading clarity</b> so users understood setup progression</li>
+                </ul>
+
+                <p>A faculty member could now select "Syllabus Q&A Assistant," see it was 95% configured, add her syllabus PDF, and have a working bot in 3-5 minutes instead of 20+ minutes of configuration.</p>
+
+                <h3 class="article-h3">3. Standalone Products: Matching Complexity to User Mental Models</h3>
+
+                <p>Instead of forcing one platform to serve English professors and data scientists equally, we built focused products.</p>
+
+                <p><b>Q&A Bot:</b> Strips away everything except what's needed to turn course materials into a question-answering assistant. No advanced RAG settings visible. No agent configuration. Just: upload materials, set up conversation starters, launch.</p>
+
+                <p><b>Email Comms Tool:</b> Same backend, completely different interface. Optimized for drafting and iterating on communications.</p>
+
+                <p>The insight: you can't make one interface simple for non-technical users without crippling it for power users. Creating focused products lets each interface match its audience's mental model.</p>
+
+                <hr class="intro-hr">
+
+                <!--Implementation Section-->
+                <h2 class="article-h2" id="implementation">Implementation: Preventing the False Failure</h2>
+
+                <p>Beyond guardrails, we made decisions that prevented the "test empty bot, get bad output, assume product is broken" cycle:</p>
+
+                <ol>
+                    <li><b>Conversation starter examples:</b> Pre-tested examples that would succeed, building immediate user confidence</li>
+                    <li><b>Saving and loading states:</b> Clear UI showing configured vs. pending setup steps</li>
+                    <li><b>Error prevention:</b> Rather than error messages, we guided users away from configurations that would fail</li>
+                </ol>
+
+                <hr class="intro-hr">
+
+                <!--Measuring Adoption Section-->
+                <h2 class="article-h2" id="adoption">Measuring Adoption: From Research to Scale</h2>
+
+                <p>The Q&A Bot is rolling out to new departments. We're tracking setup completion rates, time-to-first-bot (goal: under 5 minutes), and misconfiguration support tickets (baseline: 20%, target: &lt;3%).</p>
+
+                <p>Early signals: Q&A Bot is seeing measurable adoption across faculty. We're expanding to 200-300 additional courses next phase, validating the product architecture hypothesis.</p>
+
+                <hr class="intro-hr">
+
+                <!--Learnings Section-->
+                <h2 class="article-h2" id="learnings">What This Taught Me About Strategy and Design</h2>
+
+                <p><b>On problem definition:</b> I could have designed a better onboarding flow for the existing platform. Instead, I questioned whether a monolithic platform was the right solution at all. The research pointed to a product architecture problem, not a UX problem. Sometimes the best design solution is building a different product.</p>
+
+                <p><b>On stakeholders:</b> Technical people (engineers, product leads) care about risk and bandwidth. Rather than argue "redesign the experience," I said "how do we validate this with minimal engineering effort?" This earned trust. Once the hypothesis was validated, larger asks became reasonable.</p>
+
+                <p><b>On research:</b> I didn't need perfect data to shift strategy. I needed consistent patterns across 20+ conversations plus supportable analysis (Python script categorizing 8,000 projects). This was enough. Waiting for perfect research meant delaying validation.</p>
+
+                <p><b>On constraints:</b> Limited engineering bandwidth forced clarity. I couldn't propose everything. This forced prioritization. Guardrails + templates + standalone products = phased approach that proved the concept without overloading the team.</p>
+
+                <p><b>On age and design:</b> Designing for 35-60 year old faculty meant different patterns than designing for students. Confidence-first. Clarity-first. These are features, not constraints.</p>
+
+                <hr class="intro-hr">
+
+                <!--What's Next Section-->
+                <h2 class="article-h2" id="next">What's Next</h2>
+
+                <p>The Q&A Bot is rolling out. Email Comms tool is in parallel design. The goal is expanding the product portfolio to cover more user jobs while maintaining the backend infrastructure.</p>
+
+                <p>The larger lesson: sometimes adoption problems aren't UX problems. They're product-market fit problems disguised as UX problems. Good research finds the difference. And sometimes the best design solution is the courage to say "we're building the wrong product architecture for this audience."</p>
+
+            </section>
+
+            <!--Footer Section-->
+            <footer>
+                <br><br><br>
+                <hr><br>
+                <div class="footer-container">
+                <a href="#top" class="hyp-p">back to top ↑</a>
+                </div>
+            </footer>
+        
+        </article>
+        
+    </div>
+
+    <script>
+        (function() {
+            const fill = document.querySelector('.reading-progress-fill');
+            const track = document.querySelector('.reading-progress');
+            const tocWrapper = document.querySelector('.toc-wrapper');
+            const tocNav = document.querySelector('.toc-nav');
+            const toast = document.querySelector('.toast');
+            const toastSwitch = document.getElementById('toast-switch-light');
+            const toastDismiss = document.getElementById('toast-dismiss');
+            const themeToggle = document.getElementById('theme-toggle');
+            if (!fill) return;
+
+            function updateTrackBounds() {
+                if (!track || !tocWrapper || !tocNav) return;
+                const wrapperRect = tocWrapper.getBoundingClientRect();
+                const navRect = tocNav.getBoundingClientRect();
+                const topOffset = navRect.top - wrapperRect.top;
+                const height = navRect.height;
+                track.style.top = `${topOffset}px`;
+                track.style.height = `${height}px`;
+            }
+
+            function updateProgress() {
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 98 : 0;
+                fill.style.height = `${progress}%`;
+            }
+
+            function showToastIfNeeded() {
+                if (!toast) return;
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const dismissed = sessionStorage.getItem('lightModeToastDismissed') === '1';
+                const forcedLight = document.documentElement.classList.contains('force-light');
+                const forcedDark = document.documentElement.classList.contains('force-dark');
+                if (prefersDark && !dismissed && !forcedLight && !forcedDark) {
+                    toast.classList.add('show');
+                }
+            }
+
+            function applyForcedTheme(theme) {
+                document.documentElement.classList.remove('force-light', 'force-dark');
+                if (theme === 'light') {
+                    document.documentElement.classList.add('force-light');
+                } else if (theme === 'dark') {
+                    document.documentElement.classList.add('force-dark');
+                }
+                if (theme) {
+                    sessionStorage.setItem('forcedTheme', theme);
+                    sessionStorage.setItem('lightModeToastDismissed', '1');
+                } else {
+                    sessionStorage.removeItem('forcedTheme');
+                }
+                updateImages();
+                updateToggleLabel();
+                if (toast) toast.classList.remove('show');
+            }
+
+            function dismissToast() {
+                sessionStorage.setItem('lightModeToastDismissed', '1');
+                if (toast) toast.classList.remove('show');
+            }
+
+            function updateToggleLabel() {
+                if (!themeToggle) return;
+                const isForcedLight = document.documentElement.classList.contains('force-light');
+                const isForcedDark = document.documentElement.classList.contains('force-dark');
+                const isDark = isForcedDark || (!isForcedLight && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                themeToggle.textContent = isDark ? 'Switch to light' : 'Switch to dark';
+                themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+            }
+
+            function toggleTheme() {
+                const isForcedLight = document.documentElement.classList.contains('force-light');
+                const isForcedDark = document.documentElement.classList.contains('force-dark');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                if (isForcedLight) {
+                    applyForcedTheme('dark');
+                } else if (isForcedDark) {
+                    applyForcedTheme('light');
+                } else {
+                    // system state: flip
+                    applyForcedTheme(prefersDark ? 'light' : 'dark');
+                }
+            }
+
+            updateTrackBounds();
+            updateProgress();
+            document.addEventListener('scroll', updateProgress, { passive: true });
+            window.addEventListener('resize', () => {
+                updateTrackBounds();
+                updateProgress();
+            });
+
+            if (toastSwitch) {
+                toastSwitch.addEventListener('click', () => applyForcedTheme('light'));
+            }
+
+            if (toastDismiss) {
+                toastDismiss.addEventListener('click', dismissToast);
+            }
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+
+            const storedTheme = sessionStorage.getItem('forcedTheme');
+            if (storedTheme === 'light' || storedTheme === 'dark') {
+                applyForcedTheme(storedTheme);
+            } else {
+                updateToggleLabel();
+            }
+
+            showToastIfNeeded();
+        })();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
