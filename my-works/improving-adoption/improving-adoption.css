@@ -109,25 +109,6 @@ p {
     color: var(--text-primary);
 }
 
-.headtag {
-    display: inline-flex;
-    height: 20px;
-  }
-  
-  .arr {
-    display: none;
-    color: var(--red);
-  }
-  
-  .headtag:hover .arr {
-    display: flex;
-    margin-left: 10px;
-  }
-  
-  .headtag:hover {
-    color: var(--red);
-  }
-
 #intro-tags1 {
     margin-top: 3rem;
     color: var(--text-secondary) !important;
@@ -178,24 +159,6 @@ code {
 
 pre > code {
     margin: 0;
-}
-
-.container {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-@media only screen and (max-width: 768px) and (min-width: 481px) {
-    .container {
-        width: 90%;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    .container {
-        width: 95%;
-    }
 }
 
 .article-container {
@@ -256,14 +219,6 @@ ul {
 ul li {
     line-height: 1.5;
     margin-bottom: 0.35rem;
-}
-
-.article-video {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin: 1rem 0;
 }
 
 .article-h1{
@@ -395,31 +350,6 @@ li pre {
     .back-button {
         top: 1rem;
         left: 1rem;
-    }
-}
-
-@media only screen and (max-width: 1200px) {
-    .project-preview {
-        right: 0;
-        width: 45%;
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    .project-preview {
-        display: none;
-    }
-}
-
-@media only screen and (max-width: 1400px) {
-    .project-preview {
-        width: 500px;
-    }
-}
-
-@media only screen and (max-width: 1200px) {
-    .project-preview {
-        width: 400px;
     }
 }
 
