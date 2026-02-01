@@ -150,11 +150,9 @@
 
             <section class="section-tldr" aria-label="TL;DR summary">
                 <h2 class="article-h2" id="tldr">TLDR</h2>
-                <p><b style="color: var(--red);">Problem:</b> 80% of new users spent under 2 minutes on the platform before bouncing. Returning users loved it (2-3 hours daily), but non-technical faculty never experienced that value.</p>
+                <p><b style="color: var(--red);">Problem:</b> Engineers designed it, early technical adopters shaped it. Non-technical faculty faced a platform bloated with unnecessary complexity, leading to a plateau in adoption rates.</p>
 
-                <p><b style="color: var(--red);">Root cause:</b> Monolithic platform designed for CS faculty created cognitive overload for 35-60 year old faculty seeking confidence before exploration. This was an activation + product architecture problem, not a feature problem.</p>
-
-                <p><b style="color: var(--red);">Solution:</b> Instead of redesigning the platform, pivoted to building focused products. Analyzed 8,000 projects to identify viable use cases (Q&A bots 40%, communications 25%), built purpose-built products with smart defaults, pre-configured templates, and guardrails preventing misconfiguration.</p>
+                <p><b style="color: var(--red);">Solution:</b> Analysis of 8,000 projects mapped to two core jobs: Q&A (40%) and communications (25%). Branching off the platform, we designed focused-products with intentional constraints, automations, agentic layers, guardrails, that reduced cognitive load for non-technical users while preserving the original platform's flexibility</p>
 
                 <p><b style="color: var(--red);">Impact:</b> Q&A Bot showing measurable adoption across faculty. Expanding from 147 to 200-300 courses. Misconfiguration support tickets on track to drop from 20% to under 3%.</p>
             </section>
@@ -165,9 +163,12 @@
             <section class="section-2">
 
                 <!--Problem Section-->
-                <h2 class="article-h2" id="problem">The Problem: 80% Bounce Rate Before Value</h2>
+                <h2 class="article-h2" id="problem">The Problem: Adoption Plateau Due to Complexity</h2>
 
-                <p>Platform adoption had flatlined at 147 courses. Google Analytics revealed a stark pattern: 80% of new users spent under 2 minutes on the platform before leaving. Meanwhile, returning users - primarily computer science faculty - spent 2-3 hours daily and loved it.</p>
+                <p>Platform adoption hit a ceiling at 147 courses. Engineers built it, technical adopters shaped it, complexity won. 20 settings, RAG tuning, temperature controls.  Options that made sense for power-users. A nightmare for everyone else.</p>
+
+                
+                <br>
 
                 <div class="metric-comparison" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0; padding: 1.5rem; background: var(--background-grey); border-radius: 12px;">
                     <div style="text-align: center; transition: opacity 0.3s ease;" class="metric-card">
@@ -184,7 +185,7 @@
                         <div style="width: 100%; height: 8px; background: rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden;">
                             <div style="width: 0%; height: 100%; background: var(--primary); border-radius: 4px;" class="progress-bar-element"></div>
                         </div>
-                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.75rem;" class="metric-label">Engaged daily users</div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.75rem;" class="metric-label">Engaged power-users</div>
                     </div>
                 </div>
 
@@ -242,31 +243,35 @@
                     })();
                 </script>
 
-                <p>The platform was built by CS faculty for CS faculty. When we tried to onboard non-technical faculty and staff (the actual growth market), everything broke. Leadership pointed at features: RAG accuracy, response latency, template discoverability. I needed to prove the real problem was different.</p>
+                <p>Google Analytics told the story. 80% of new users bounced in under 2 minutes. Meanwhile, power-users were logging 2-3 hours daily, loving it. The platform didn't have a quality problem. It had a complexity problem.</p><br>
 
-                <p>Support data validated this: 20% of all support issues were about misconfigurations or poor bot output. This wasn't a feature quality issue. It was an activation issue.</p>
+                <p>Support data proved it. 20% of tickets weren't about broken features, they were about misconfiguration. Faculty drowning in options they didn't need, making mistakes they shouldn't have to make. Cognitive overload, dressed up as a technical platform.</p>
 
-                <p style="color: red;">[IMAGE: Google Analytics dashboard showing user session duration distribution - 80% of new users in the &lt;2 minute bracket, clear visual contrast with returning users clustering in 60+ minute sessions]</p>
+                <br>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide1" width="100%" alt="Real quotes from support channels reveal the core problem">
+                    <figcaption> These misconfiguration-related tickets represented 20% of all support volume</figcaption>
+                </figure>
 
                 <hr class="intro-hr">
 
                 <h2 class="article-h2" id="challenge">The Challenge: Why Simple Redesign Wouldn't Work</h2>
 
-                <p>When I presented these findings, product leadership resisted: "We can't make drastic changes without proof. Engineering is at capacity."</p>
+                <p>When I presented these findings, product leadership resisted: <br>
+                    <b><i>"We can't make drastic changes without proof. Engineering is at capacity."</i></b></p>
 
-                <p>The deeper challenge: I was designing for 35-60 year old faculty. They approached software differently - they needed confidence before exploring. When a 48-year-old English professor landed on a blank builder with dropdowns for "RAG settings" and "temperature," she thought "this isn't for me" and left.</p>
+                <p>They had a point. The 20 settings, RAG tuning, temperature controls—power-users needed them. Simplify and you break the platform for your best customers. This wasn't a UX fix. It was an architectural problem. Non-technical faculty needed a new product, not an improved one.</p>
 
-                <p>Key insight: you can't solve this by redesigning one platform for two different audiences. You need separate products. But how do I prove that works before engineering builds it?</p>
+                <p>How do we serve both audiences without compromise?</p>
 
                 <hr class="intro-hr">
 
                 <h2 class="article-h2" id="solution">Solution: Focused Products Over Platform Redesign</h2>
 
-                <p>Instead of redesigning the monolithic platform, I pivoted to building focused products based on what users were actually trying to do.</p>
-
                 <p>I analyzed every project created on the platform (8,000+ projects) using a Python script to categorize and understand the jobs users were trying to accomplish. The data cut through the noise immediately.</p>
 
-                <p>The majority of projects fell into two categories:</p>
+                <p><b>Two jobs dominated:</b></p>
 
                 <div class="metric-comparison" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0; padding: 1.5rem; background: var(--background-grey); border-radius: 12px;">
                     <div style="text-align: center; transition: opacity 0.3s ease;" class="metric-card">
@@ -287,23 +292,29 @@
                     </div>
                 </div>
 
-                <p><b>Information Retrieval bots (40% of all projects).</b> Faculty uploading syllabus, lecture notes, research papers and asking the bot to answer student questions based on that knowledge. Information Retrieval averaged 46.72 messages per viewer with a 0.197 success rate. This was the largest cohesive use case on the platform. Clear job-to-be-done. High viability.</p>
+                <p><b>Information Retrieval bots (40% of all projects).</b> Faculty uploading syllabus, lecture notes, research papers and asking the bot to answer student questions based on that knowledge. This was the largest cohesive use case on the platform. Clear job-to-be-done. High viability.</p>
 
-                <p><b>Communication and content generation bots (25% of all projects).</b> Using the platform to rewrite emails, draft recommendation letters, generate course communication. Communication had the highest engagement rate at 48.47 messages per viewer and a stronger success score at 0.220. This was the second-largest use case and showed the strongest quality metrics. Clear job-to-be-done. High viability.</p>
+                <p><b>Communication and content generation bots (25% of all projects).</b> Using the platform to rewrite emails, draft recommendation letters, generate course communication. This was the second-largest use case and showed the strongest quality metrics. Clear job-to-be-done. High viability, but require agents and integrations.</p> <br>
 
-                <p>Together, these two use cases represented 65% of all projects on the platform. Everything else was marginal by comparison. General writing assistance (20%) was deprioritized - ChatGPT and Claude already dominated that space. Decision Support had excellent quality (0.262 success) but only 159 projects. Planning/Organization was 1.2% of usage.</p>
+                <p>Together, these two use cases represented 65% of all projects on the platform. Everything else was marginal by comparison. General writing assistance (20%) was deprioritized - ChatGPT and Claude already dominated that space. Decision Support had excellent quality but only 159 projects. Planning/Organization was 1.2% of usage.</p>
+
+                <br>
 
                 <p>The data was unambiguous: build for information retrieval and communication. Stop trying to be everything to everyone.</p>
 
-                <p style="color: red;">[IMAGE: Performance Matrix showing Success Score vs. Project Count by JTBD Category - with Information Retrieval and Communication clearly in the viable quadrant (high volume, solid success), and other categories scattered with either low volume or low success]</p>
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide2" width="100%" alt="Information Retrieval and Communication were the only jobs worth building for. Everything else was noise.">
+                    <figcaption>Information Retrieval and Communication were the only jobs worth building for. Everything else was noise.</figcaption>
+                </figure>
 
-                <p style="color: red;">[IMAGE: Cost Concentration pie chart - showing where platform costs were being spent, with Retrieval and Communication dominating actual resource utilization]</p>
 
-                <p>This data-driven approach meant I wasn't guessing which products to build. I was responding to what 8,000 real projects told me users were already trying to do with our platform.</p>
 
-                <p>I proposed three frontend-focused changes: Smart defaults with auto-tuned settings and pre-tested conversation starters. Super templates with pre-configured workflows so users had a working bot in 3-5 minutes instead of 20+. Standalone products (Q&A Bot, Email Comms) with interfaces matching each audience's mental model - no advanced RAG settings for faculty, just upload → configure → launch.</p>
+                <p>I designed three layers into these products: agentic layers that automated retrieval settings, and AI written conversation starters, pre-configured templates that shipped a working bot in 3-5 minutes, and focused interfaces stripped of complexity, no RAG settings, no temperature controls, just <b>upload → configure → launch.</b></p>
 
-                <p style="color: red;">[IMAGE: Super Template card design showing the Q&A Bot template]</p>
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide3" width="100%" alt="Information Retrieval and Communication were the only jobs worth building for. Everything else was noise.">
+                    <figcaption>Aligning with business goals and user needs to surface the more important information right within user's reach</figcaption>
+                </figure>
 
                 <p style="color: red;">[IMAGE: Side-by-side interface comparison - Full platform vs. Q&A Bot standalone]</p>
 
@@ -353,7 +364,6 @@
 
                 <p>This shifted the conversation from "should we redesign?" to "how do we activate existing interest?" The question became: what's the minimum viable intervention that validates the hypothesis?</p>
 
-                <p>I proposed three low-cost changes that required mostly frontend work: guardrails preventing misconfiguration, super templates with pre-configured workflows, and a strategic pivot to standalone products (longer-term). Engineering could absorb this. It didn't require rewriting the backend. It proved the concept.</p>
 
                 <hr class="intro-hr">
 
