@@ -173,7 +173,7 @@ pre > code {
     margin: auto;
     display: flex;
     justify-content: center;
-    padding: 100px 20px;
+    padding: 40px 20px 100px 20px;
     width: 100%;
     box-sizing: border-box;
 }

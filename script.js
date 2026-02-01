@@ -72,10 +72,112 @@ function initLazySections() {
     }
 }
 
+// Initialize skeleton loaders for background images
+function initSkeletonLoaders() {
+    // Handle CSS background images
+    const bgElements = document.querySelectorAll('.image-background[class*="bg"]');
+    
+    bgElements.forEach(el => {
+        // Get computed background-image URL
+        const style = window.getComputedStyle(el);
+        const bgImage = style.backgroundImage;
+        
+        if (bgImage && bgImage !== 'none') {
+            // Extract URL from background-image
+            const urlMatch = bgImage.match(/url\(["']?([^"')]+)["']?\)/);
+            if (urlMatch && urlMatch[1]) {
+                const img = new Image();
+                img.onload = function() {
+                    el.classList.add('bg-loaded');
+                };
+                img.onerror = function() {
+                    // Still hide skeleton on error
+                    el.classList.add('bg-loaded');
+                };
+                img.src = urlMatch[1];
+            }
+        }
+    });
+
+    // Handle already-cached images (may have loaded before JS runs)
+    document.querySelectorAll('.project-image').forEach(img => {
+        if (img.complete && img.naturalHeight !== 0) {
+            img.classList.add('loaded');
+            const skeleton = img.previousElementSibling;
+            if (skeleton && skeleton.classList.contains('skeleton')) {
+                skeleton.style.display = 'none';
+            }
+        }
+    });
+}
+
+// Global GA4 click tracking (auto-tags common interactive elements)
+function initGaAutoTagging() {
+    if (window.__gaAutoTaggingInitialized) return;
+    window.__gaAutoTaggingInitialized = true;
+
+    document.addEventListener('click', function(event) {
+        const target = event.target.closest('a, button, [role="button"]');
+        if (!target) return;
+        if (typeof gtag !== 'function') return;
+
+        const action = target.getAttribute('data-ga-event') || 'click';
+        const category = target.getAttribute('data-ga-event-category') || (target.tagName === 'A' ? 'link' : 'button');
+        const name = target.getAttribute('data-ga-event-name')
+            || target.getAttribute('aria-label')
+            || (target.textContent || '').trim().slice(0, 120)
+            || target.getAttribute('href')
+            || target.id
+            || 'interaction';
+
+        gtag('event', action, {
+            event_category: category,
+            event_label: name,
+            value: 1
+        });
+    });
+}
+
+// Track user's color scheme preference in GA4
+function trackColorScheme() {
+    if (typeof gtag !== 'function') return;
+    
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const colorScheme = prefersDark ? 'dark' : 'light';
+    
+    // Set as user property for segmentation
+    gtag('set', 'user_properties', {
+        color_scheme: colorScheme
+    });
+    
+    // Also send as an event for the session
+    gtag('event', 'color_scheme_detected', {
+        event_category: 'user_preference',
+        event_label: colorScheme,
+        color_scheme: colorScheme
+    });
+    
+    // Listen for changes during the session
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        const newScheme = e.matches ? 'dark' : 'light';
+        gtag('set', 'user_properties', {
+            color_scheme: newScheme
+        });
+        gtag('event', 'color_scheme_changed', {
+            event_category: 'user_preference',
+            event_label: newScheme,
+            color_scheme: newScheme
+        });
+    });
+}
+
 // Auto-detect page type and initialize
 window.onload = function() {
     const isAboutPage = window.location.pathname.includes('about.html');
     typingEffect(isAboutPage ? 'about' : 'index');
     initLazySections();
+    initGaAutoTagging();
+    initSkeletonLoaders();
+    trackColorScheme();
 };
 

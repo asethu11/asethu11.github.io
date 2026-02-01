@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
+
+        <!-- Clarity tracking code -->
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "vaaig4fq2o");
+        </script>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -18,15 +36,6 @@
 
         <link rel="icon" href="../../img/favicon.png" type="image/png">
     </head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-98H0ZTK0T4');
-</script>
 
 <script>
     function isDarkTheme() {
@@ -86,19 +95,19 @@
             </div>
             <nav class="toc-nav">
                 <ul class="toc-list">
-                    <li><a href="#tldr">TLDR</a></li>
-                    <li><a href="#problem">Problem</a></li>
-                    <li><a href="#research">Research</a></li>
-                    <li><a href="#stakeholder">Stakeholder Negotiation</a></li>
-                    <li><a href="#data-analysis">Data Analysis</a></li>
-                    <li><a href="#solution">Solution</a></li>
-                    <li><a href="#implementation">Implementation</a></li>
-                    <li><a href="#adoption">Adoption Measurement</a></li>
-                    <li><a href="#learnings">Learnings</a></li>
-                    <li><a href="#next">What's Next</a></li>
+                    <li><a href="#tldr" data-ga-event="click" data-ga-event-name="toc_tldr" data-ga-event-category="navigation">TLDR</a></li>
+                    <li><a href="#problem" data-ga-event="click" data-ga-event-name="toc_problem" data-ga-event-category="navigation">The Problem</a></li>
+                    <li><a href="#challenge" data-ga-event="click" data-ga-event-name="toc_challenge" data-ga-event-category="navigation">The Challenge</a></li>
+                    <li><a href="#solution" data-ga-event="click" data-ga-event-name="toc_solution" data-ga-event-category="navigation">Solution</a></li>
+                    <li><a href="#stakeholder" data-ga-event="click" data-ga-event-name="toc_results" data-ga-event-category="navigation">Results</a></li>
+                    <li><a href="#research" data-ga-event="click" data-ga-event-name="toc_research" data-ga-event-category="navigation">Research</a></li>
+                    <li><a href="#stakeholder-negotiation" data-ga-event="click" data-ga-event-name="toc_stakeholder_negotiation" data-ga-event-category="navigation">Stakeholder Negotiation</a></li>
+                    <li><a href="#data-analysis" data-ga-event="click" data-ga-event-name="toc_data_analysis" data-ga-event-category="navigation">Data Analysis</a></li>
+                    <li><a href="#implementation" data-ga-event="click" data-ga-event-name="toc_implementation" data-ga-event-category="navigation">Implementation</a></li>
+                    <li><a href="#adoption" data-ga-event="click" data-ga-event-name="toc_adoption" data-ga-event-category="navigation">Measuring Adoption</a></li>
                 </ul>
             </nav>
-            <a class="toc-top" href="#top">Back to top</a>
+            <a class="toc-top" href="#top" data-ga-event="click" data-ga-event-name="back_to_top" data-ga-event-category="navigation">Back to top</a>
         </div>
     </aside>
     
@@ -106,17 +115,15 @@
         <div class="toast-title">This content is optimized for light mode</div>
         <div class="toast-text">You're viewing in dark mode. Switch to light for the intended contrast and visuals.</div>
         <div class="toast-actions">
-            <button class="btn-primary" id="toast-switch-light">Switch to light mode</button>
-            <button class="btn-ghost" id="toast-dismiss">Dismiss</button>
+            <button class="btn-primary" id="toast-switch-light" data-ga-event="click" data-ga-event-name="switch_to_light_mode" data-ga-event-category="theme">Switch to light mode</button>
+            <button class="btn-ghost" id="toast-dismiss" data-ga-event="click" data-ga-event-name="dismiss_toast" data-ga-event-category="notification">Dismiss</button>
         </div>
     </div>
 
-    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">Switch to light</button>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme" data-ga-event="click" data-ga-event-name="toggle_theme" data-ga-event-category="theme">Switch to light</button>
 
     <div class="article-container">
         <article class="article-body">
-            
-            <!--Intro Section-->
             <section class="section-1">
 
                 <div class="grey-background-article image-bottom">
@@ -127,12 +134,13 @@
 
                 <h1 class="article-h1">Solving Adoption Crisis (80% bounce-rate) With Limited Engineering Bandwidth</h1>
 
-                <p>80% of new users spent less than 2 minutes on the platform before leaving. They never experienced the product that 8000+ project builders loved and used for 2-3 hours daily. What if the adoption problem wasn't about the experience at all? What if it was about whether we were building the right product for the market we were trying to reach? 
-                </p>
+                <p>CreateAI Platform at Arizona State University is a RAG+LLM system that lets educators build custom AI bots to handle tutoring and repetitive student questions, freeing faculty time to focus on improving learning outcomes. The platform is highly customizable - 20 settings available for builders to tailor bots to their specific use case.</p>
+
+                <p>The adoption story: 147 courses, strong product-market fit. But these were early adopters, mostly technical users. When leadership set a goal to scale to 300+ courses, they realized they needed to reach the broader faculty population. The path to growth was unclear.</p>
 
                 <div class="sub-header">
                     <p id="intro-tags1">
-                        10-12 min read | Solo UX/Product Designer | September '25 - Present | AI Platform for Edu
+                        9-12 min read | UX/Product Designer | September '25 - Present | AI Platform for Edu
                     </p>
                 </div>
 
@@ -141,16 +149,14 @@
             <hr class="intro-hr">
 
             <section class="section-tldr" aria-label="TL;DR summary">
-                <h2 class="article-h2" id="tldr">TL;DR</h2>
-                <p><b style="color: var(--red);">Problem:</b> 80% of new users bounced in under 2 minutes. Platform worked great for CS faculty but failed for non-technical audiences.</p>
+                <h2 class="article-h2" id="tldr">TLDR</h2>
+                <p><b style="color: var(--red);">Problem:</b> 80% of new users spent under 2 minutes on the platform before bouncing. Returning users loved it (2-3 hours daily), but non-technical faculty never experienced that value.</p>
 
-                <p><b style="color: var(--red);">Root cause:</b> Overly complex platform designed for power-users and early-adopters created cognitive overload for 35-60 year old faculty seeking confidence before exploration.</p>
+                <p><b style="color: var(--red);">Root cause:</b> Monolithic platform designed for CS faculty created cognitive overload for 35-60 year old faculty seeking confidence before exploration. This was an activation + product architecture problem, not a feature problem.</p>
 
-                <p><b style="color: var(--red);">Solution:</b> Instead of redesigning the platform, pivoted to building focused products (Q&A Bot, Email Comms) with smart defaults, pre-configured templates, and guardrails preventing misconfiguration.</p>
+                <p><b style="color: var(--red);">Solution:</b> Instead of redesigning the platform, pivoted to building focused products. Analyzed 8,000 projects to identify viable use cases (Q&A bots 40%, communications 25%), built purpose-built products with smart defaults, pre-configured templates, and guardrails preventing misconfiguration.</p>
 
-                <p><b style="color: var(--red);">Research:</b> Analyzed 8,000 projects with Python script, found 40% were Q&A bots and 25% were communications—clear product opportunities.</p>
-
-                <p><b style="color: var(--red);">Impact:</b> Q&A Bot showing measurable adoption. Expanding from 147 to 200-300 courses. Misconfiguration support tickets on track to drop from 20% to under 3%.</p>
+                <p><b style="color: var(--red);">Impact:</b> Q&A Bot showing measurable adoption across faculty. Expanding from 147 to 200-300 courses. Misconfiguration support tickets on track to drop from 20% to under 3%.</p>
             </section>
 
             <hr class="intro-hr">
@@ -159,191 +165,285 @@
             <section class="section-2">
 
                 <!--Problem Section-->
-                <h2 class="article-h2" id="problem">The Problem: A Misdiagnosed Adoption Plateau</h2>
+                <h2 class="article-h2" id="problem">The Problem: 80% Bounce Rate Before Value</h2>
 
-                <p>The platform had reached 147 courses. Leadership pointed to feature problems: RAG accuracy, response latency, template discoverability.</p>
+                <p>Platform adoption had flatlined at 147 courses. Google Analytics revealed a stark pattern: 80% of new users spent under 2 minutes on the platform before leaving. Meanwhile, returning users - primarily computer science faculty - spent 2-3 hours daily and loved it.</p>
 
-                <p>But the analytics told a different story:</p>
+                <div class="metric-comparison" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0; padding: 1.5rem; background: var(--background-grey); border-radius: 12px;">
+                    <div style="text-align: center; transition: opacity 0.3s ease;" class="metric-card">
+                        <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">New Users (80%)</div>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--red); margin-bottom: 0.5rem;" class="metric-number">2 min</div>
+                        <div style="width: 10%; height: 8px; background: rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden;">
+                            <div style="width: 0%; height: 100%; background: var(--red); border-radius: 4px;" class="progress-bar-element"></div>
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.75rem;" class="metric-label">Bounce before value</div>
+                    </div>
+                    <div style="text-align: center; transition: opacity 0.3s ease;" class="metric-card">
+                        <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">Returning Users</div>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem;" class="metric-number">2-3 hrs</div>
+                        <div style="width: 100%; height: 8px; background: rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden;">
+                            <div style="width: 0%; height: 100%; background: var(--primary); border-radius: 4px;" class="progress-bar-element"></div>
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.75rem;" class="metric-label">Engaged daily users</div>
+                    </div>
+                </div>
 
-                <p><b>80% of new users spent under 2 minutes on the platform.</b></p>
+                <style>
+                    @keyframes slideInLeft {
+                        from { opacity: 0; transform: translateX(-20px); }
+                        to { opacity: 1; transform: translateX(0); }
+                    }
+                    @keyframes slideInRight {
+                        from { opacity: 0; transform: translateX(20px); }
+                        to { opacity: 1; transform: translateX(0); }
+                    }
+                    @keyframes fillBar {
+                        from { width: 0 !important; }
+                        to { width: var(--bar-width, 100%) !important; }
+                    }
+                    @keyframes fadeIn {
+                        from { opacity: 0; }
+                        to { opacity: 1; }
+                    }
+                    
+                    .metric-comparison.in-view .metric-number:nth-child(1) {
+                        animation: slideInLeft 0.6s ease-out;
+                    }
+                    .metric-comparison.in-view .metric-number:nth-child(2) {
+                        animation: slideInRight 0.6s ease-out;
+                    }
+                    .metric-comparison.in-view .progress-bar-element {
+                        animation: fillBar 1s ease-out 0.3s both;
+                    }
+                    .metric-comparison.in-view .metric-label {
+                        animation: fadeIn 0.8s ease-out 0.6s both;
+                    }
+                    
+                    .metric-card:hover {
+                        opacity: 1;
+                    }
+                </style>
 
-                <p><b>95% of projects created by returning users.</b></p>
+                <script>
+                    (function() {
+                        const metricsEl = document.querySelector('.metric-comparison');
+                        if (!metricsEl) return;
+                        
+                        const observer = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting && !entry.target.classList.contains('in-view')) {
+                                    entry.target.classList.add('in-view');
+                                    observer.unobserve(entry.target);
+                                }
+                            });
+                        }, { threshold: 0.2 });
+                        
+                        observer.observe(metricsEl);
+                    })();
+                </script>
 
-                <p><b>Returning users spent 2-3 hours daily on the platform.</b></p>
+                <p>The platform was built by CS faculty for CS faculty. When we tried to onboard non-technical faculty and staff (the actual growth market), everything broke. Leadership pointed at features: RAG accuracy, response latency, template discoverability. I needed to prove the real problem was different.</p>
 
-                <p>Returning users loved the product. They were the early adopters. New users were bouncing before they experienced value.</p>
+                <p>Support data validated this: 20% of all support issues were about misconfigurations or poor bot output. This wasn't a feature quality issue. It was an activation issue.</p>
 
-                <p>The disconnect was stark: the platform was built by computer science faculty, for computer science faculty. When we tried to onboard non-technical faculty and staff (the actual growth market), everything broke.</p>
+                <p style="color: red;">[IMAGE: Google Analytics dashboard showing user session duration distribution - 80% of new users in the &lt;2 minute bracket, clear visual contrast with returning users clustering in 60+ minute sessions]</p>
 
                 <hr class="intro-hr">
 
-                <!--Research Section-->
-                <h2 class="article-h2" id="research">Research: Understanding Why Non-Technical Users Left</h2>
+                <h2 class="article-h2" id="challenge">The Challenge: Why Simple Redesign Wouldn't Work</h2>
 
-                <p>I began running moderated demos with users. Not formal usability testing (we didn't have budget for that). Just structured conversations where I'd let them explore the product cold, then guide them through setup while documenting where they froze.</p>
+                <p>When I presented these findings, product leadership resisted: "We can't make drastic changes without proof. Engineering is at capacity."</p>
 
-                <p><b>Sample:</b> 20-30 faculty, staff, and instructional designers across departments (English, Biology, History, Business)</p>
+                <p>The deeper challenge: I was designing for 35-60 year old faculty. They approached software differently - they needed confidence before exploring. When a 48-year-old English professor landed on a blank builder with dropdowns for "RAG settings" and "temperature," she thought "this isn't for me" and left.</p>
 
-                <p><b>Key insight:</b> The problem wasn't technical complexity. It was cognitive load at the wrong moment.</p>
-
-                <h3 class="article-h3">The Age Factor (Critical Finding)</h3>
-
-                <p>I was designing for 35-60 year old faculty, not Gen Z users. This changed everything about how I approached the problem.</p>
-
-                <p>These users were intelligent domain experts, but they approached software differently. They expected clarity upfront. They wanted to understand what they were about to do before committing to it. They needed confidence before exploring.</p>
-
-                <p>When a 48-year-old English professor landed on a blank builder interface with dropdowns for "RAG settings" and "temperature," she didn't think "I'll figure this out." She thought "this isn't for me" and left.</p>
-
-                <h3 class="article-h3">Specific Friction Points (From Demos)</h3>
-
-                <ol>
-                    <li><b>Entry point confusion:</b> Users searched for "Syllabot" (the product they heard about) but landed on "CreateAI Builder" (the platform). They questioned if they were in the right place. This happened consistently—not once or twice, but across multiple users in the first 30 seconds.</li>
-                    <li>
-                </ol>
-
-                <ol start="2">
-                    <li><b>Hidden value:</b> The platform's purpose wasn't explained upfront. It was a blank canvas. Powerful features existed, but they were invisible. A user had no sense of "what can this actually do for me?" before being asked to configure it.</li>
-                    <li><b>Configuration anxiety:</b> Non-technical users faced terminology that meant nothing to them. LLM parameters. RAG settings. Temperature controls. Top-K retrieval. These were CS concepts. An English professor asking "what does any of this mean?" wasn't being difficult. She was being reasonable.</li>
-                    <li><b>The False Failure:</b> Users would test a bot without uploading their course materials first, get nonsensical outputs, and assume the product was broken. In reality, they'd skipped a critical dependency. But there was nothing in the interface preventing this mistake or explaining why it mattered.</li>
-                </ol>
-
-                <h3 class="article-h3">Quantifying the Problem</h3>
-
-                <p>We measured support tickets across Slack channels and internal forums: <b>20% of all support issues were about misconfigurations or poor bot output.</b> That's 1-in-5 support conversations focused on a problem we could have prevented in the interface itself.</p>
-
-                <p>Our target: reduce this to under 3% by making misconfiguration impossible.</p>
+                <p>Key insight: you can't solve this by redesigning one platform for two different audiences. You need separate products. But how do I prove that works before engineering builds it?</p>
 
                 <hr class="intro-hr">
 
-                <!--Stakeholder Negotiation Section-->
-                <h2 class="article-h2" id="stakeholder">The Stakeholder Negotiation: Reframing the Problem</h2>
+                <h2 class="article-h2" id="solution">Solution: Focused Products Over Platform Redesign</h2>
+
+                <p>Instead of redesigning the monolithic platform, I pivoted to building focused products based on what users were actually trying to do.</p>
+
+                <p>I analyzed every project created on the platform (8,000+ projects) using a Python script to categorize and understand the jobs users were trying to accomplish. The data cut through the noise immediately.</p>
+
+                <p>The majority of projects fell into two categories:</p>
+
+                <div class="metric-comparison" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0; padding: 1.5rem; background: var(--background-grey); border-radius: 12px;">
+                    <div style="text-align: center; transition: opacity 0.3s ease;" class="metric-card">
+                        <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">Information Retrieval</div>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem;" class="metric-number">40%</div>
+                        <div style="width: 100%; height: 8px; background: rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden;">
+                            <div style="width: 40%; height: 100%; background: var(--primary); border-radius: 4px;" class="progress-bar-element"></div>
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.75rem;" class="metric-label">46.72 msg/viewer, 0.197 success</div>
+                    </div>
+                    <div style="text-align: center; transition: opacity 0.3s ease;" class="metric-card">
+                        <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">Communication & Content</div>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem;" class="metric-number">25%</div>
+                        <div style="width: 100%; height: 8px; background: rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden;">
+                            <div style="width: 25%; height: 100%; background: var(--primary); border-radius: 4px;" class="progress-bar-element"></div>
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.75rem;" class="metric-label">48.47 msg/viewer, 0.220 success</div>
+                    </div>
+                </div>
+
+                <p><b>Information Retrieval bots (40% of all projects).</b> Faculty uploading syllabus, lecture notes, research papers and asking the bot to answer student questions based on that knowledge. Information Retrieval averaged 46.72 messages per viewer with a 0.197 success rate. This was the largest cohesive use case on the platform. Clear job-to-be-done. High viability.</p>
+
+                <p><b>Communication and content generation bots (25% of all projects).</b> Using the platform to rewrite emails, draft recommendation letters, generate course communication. Communication had the highest engagement rate at 48.47 messages per viewer and a stronger success score at 0.220. This was the second-largest use case and showed the strongest quality metrics. Clear job-to-be-done. High viability.</p>
+
+                <p>Together, these two use cases represented 65% of all projects on the platform. Everything else was marginal by comparison. General writing assistance (20%) was deprioritized - ChatGPT and Claude already dominated that space. Decision Support had excellent quality (0.262 success) but only 159 projects. Planning/Organization was 1.2% of usage.</p>
+
+                <p>The data was unambiguous: build for information retrieval and communication. Stop trying to be everything to everyone.</p>
+
+                <p style="color: red;">[IMAGE: Performance Matrix showing Success Score vs. Project Count by JTBD Category - with Information Retrieval and Communication clearly in the viable quadrant (high volume, solid success), and other categories scattered with either low volume or low success]</p>
+
+                <p style="color: red;">[IMAGE: Cost Concentration pie chart - showing where platform costs were being spent, with Retrieval and Communication dominating actual resource utilization]</p>
+
+                <p>This data-driven approach meant I wasn't guessing which products to build. I was responding to what 8,000 real projects told me users were already trying to do with our platform.</p>
+
+                <p>I proposed three frontend-focused changes: Smart defaults with auto-tuned settings and pre-tested conversation starters. Super templates with pre-configured workflows so users had a working bot in 3-5 minutes instead of 20+. Standalone products (Q&A Bot, Email Comms) with interfaces matching each audience's mental model - no advanced RAG settings for faculty, just upload → configure → launch.</p>
+
+                <p style="color: red;">[IMAGE: Super Template card design showing the Q&A Bot template]</p>
+
+                <p style="color: red;">[IMAGE: Side-by-side interface comparison - Full platform vs. Q&A Bot standalone]</p>
+
+                <hr class="intro-hr">
+
+                <h2 class="article-h2" id="stakeholder">Results</h2>
+
+                <p>Q&A Bot is rolling out to new departments across the university. Early signals show measurable adoption among faculty groups. We're tracking setup completion rates, time-to-first-bot (goal: under 5 minutes), and misconfiguration support tickets (baseline: 20%, target: under 3%).</p>
+
+                <p>The adoption trajectory validates the product architecture hypothesis: we're expanding from 147 courses to 200-300 courses in the next phase, a 40% expansion driven by focused products rather than incremental platform improvements. Misconfiguration-related support issues are declining as guardrails and pre-configured templates prevent the most common failure modes.</p>
+
+                <p>This wasn't just a UX win. The product strategy shifted from "one monolithic platform for everyone" to "focused products by user job." This is now core to the product roadmap going forward.</p>
+
+                <p style="color: red;">[IMAGE: Adoption projection chart - X-axis: Time (months), Y-axis: Courses. Show: Current state (147 courses), Q&A Bot launch point, projected growth curve to 200-300 courses over next 6 months. Annotation: "Standalone product strategy driving adoption growth"]</p>
+
+                <hr class="intro-hr">
+
+                <p style="text-align: center; color: var(--text-secondary); font-size: 0.95rem; margin: 2rem 0 1rem 0;">Deeper dive on thoughts, data, process</p>
+
+                <h2 class="article-h2" id="research">Research: 20-30 Moderated Demos</h2>
+
+                <p>I ran structured conversations with faculty, staff, and instructional designers across departments (English, Biology, History, Business). The approach was simple: let them explore the product cold, then guide them through setup while documenting where they froze.</p>
+
+                <p>Key finding: users who received structured guidance navigated significantly better. This confirmed the problem was information architecture and confidence, not feature complexity.</p>
+
+                <p>I discovered specific friction points that appeared consistently across sessions. <b>Entry point confusion</b> was immediate: users searched for "Syllabot" (the product they'd heard about) but landed on "CreateAI Builder" (the platform). They questioned if they were in the right place. This happened across multiple users in the first 30 seconds.</p>
+
+                <p style="color: red;">[IMAGE: Side-by-side screenshots - LEFT: What users expected to see vs. RIGHT: What they actually saw (CreateAI Builder dashboard). Annotation: "Users unsure if they're in the right product"]</p>
+
+                <p>The platform's purpose wasn't explained upfront. It was a blank canvas. Non-technical users faced terminology that meant nothing to them: LLM parameters, RAG settings, temperature controls, Top-K retrieval. These are CS concepts. An English professor asking "what does any of this mean?" wasn't being difficult. She was being reasonable.</p>
+
+                <p>Then there was the <b>false failure cycle</b>: users tested bots without uploading their course materials first, got nonsensical outputs, and assumed the product was broken. In reality, they'd skipped a critical dependency. But there was nothing in the interface preventing this mistake or explaining why it mattered.</p>
+
+                <p>The age factor was critical. I was designing for 35-60 year old faculty, not Gen Z users. These users were intelligent domain experts, but they approached software differently. They expected clarity upfront. They wanted to understand what they were about to do before committing to it. They needed confidence before exploring. When a 48-year-old English professor landed on a blank builder interface with dropdowns for "RAG settings" and "temperature," she didn't think "I'll figure this out." She thought "this isn't for me" and left.</p>
+
+                <hr class="intro-hr">
+
+                <h2 class="article-h2" id="stakeholder-negotiation">Stakeholder Negotiation: Reframing the Problem</h2>
 
                 <p>When I presented these findings to product leadership, I hit resistance immediately.</p>
 
-                <p><i>"We can't make drastic changes without proof it will work. Engineering is at capacity. We need evidence this is the right direction before we overload them with scope."</i></p>
+                <p>"We can't make drastic changes without proof it will work. Engineering is at capacity. We need evidence this is the right direction before we overload them with scope."</p>
 
-                <p>Fair point. I had research, but no data. Anecdotes, but no scale.</p>
+                <p>Fair point. I had research, but no data. Anecdotes, but no scale. A full platform redesign was off the table. I needed a different approach.</p>
 
-                <p><b>My pivot:</b> Instead of arguing "users are confused," I reframed it as "we're losing 80% of new user signups before they experience value. Converting just 25% of dropoffs hits our growth targets without new acquisition cost. This is an activation problem, not a feature problem."</p>
+                <p>My pivot: instead of arguing "users are confused," I reframed it as "we're losing 80% of new user signups before they experience value. Converting just 25% of dropoffs hits our growth targets without new acquisition cost. This is an activation problem, not a feature problem."</p>
 
-                <p>This shifted the conversation from "should we redesign?" to "how do we activate existing interest?"</p>
+                <p>This shifted the conversation from "should we redesign?" to "how do we activate existing interest?" The question became: what's the minimum viable intervention that validates the hypothesis?</p>
 
-                <p>Now the question became: what's the minimum viable intervention that validates the hypothesis?</p>
-
-                <p>I proposed three low-cost changes that required mostly frontend work:</p>
-
-                <ol>
-                    <li>Guardrails preventing misconfiguration</li>
-                    <li>Super Templates with pre-configured workflows</li>
-                    <li>A strategic pivot to standalone products (longer-term)</li>
-                </ol>
-
-                <p>Engineering could absorb this. It didn't require rewriting the backend. It proved the concept.</p>
+                <p>I proposed three low-cost changes that required mostly frontend work: guardrails preventing misconfiguration, super templates with pre-configured workflows, and a strategic pivot to standalone products (longer-term). Engineering could absorb this. It didn't require rewriting the backend. It proved the concept.</p>
 
                 <hr class="intro-hr">
 
-                <!--Data Analysis Section-->
-                <h2 class="article-h2" id="data-analysis">The Data Analysis: Discovering Which Products to Build</h2>
+                <h2 class="article-h2" id="data-analysis">Data Analysis: Which Products to Build</h2>
 
-                <p>The standalone product strategy wasn't a guess. It came from systematic analysis.</p>
+                <p>The standalone product strategy wasn't a guess. It came from systematic analysis of actual user behavior.</p>
 
-                <h3 class="article-h3">The Process:</h3>
+                <p>I wrote a Python script to analyze every project created on the platform (8,000+ projects). The script extracted and categorized custom instructions using LLM analysis. The raw results showed 70 different product categories - too granular to be actionable. I consolidated these into broader job-to-be-done categories by grouping similar use cases together.</p>
 
-                <p>I wrote a Python script to analyze every single project created on the platform (8,000+ projects). The script extracted and categorized custom instructions from each project using LLM analysis, creating a taxonomy of what users were actually building.</p>
+                <p>What emerged was unmistakable: the vast majority of projects clustered into just two categories. Information Retrieval (Q&A bots) accounted for 40% of all projects. Communications (email rewriting, letter drafting, course communication) represented 25%. Together, these two use cases dominated 65% of the platform.</p>
 
-                <p>Result: 70 different product categories emerged.</p>
+                <p>The remaining projects scattered across writing assistance (20%, but low-viability due to ChatGPT/Claude competition), decision support, planning, and other use cases. Decision Support had the highest quality metrics but represented just 159 projects.</p>
 
-                <p>I then consolidated these into 12 major categories, then ranked by volume and viability.</p>
-
-                <h3 class="article-h3">The Findings:</h3>
-
-                <ol>
-                    <li><b>Retrieval-based projects (Q&A bots):</b> 40% of all projects. Faculty uploading syllabus, lecture notes, research papers and asking the bot to answer student questions based on that knowledge. Clear job-to-be-done. High viability.</li>
-                    <li><b>Communications projects (Email, letter writing):</b> 25% of projects. Using the platform to draft emails, recommendation letters, course communication. Clear job-to-be-done. High viability.</li>
-                    <li><b>General writing assistance:</b> 20% of projects. But this was low-viability because ChatGPT and Claude already dominated this space. We had no competitive advantage. Deprioritized strategically.</li>
-                </ol>
-
-                <p>This data-driven approach meant I wasn't guessing which products to build. I was responding to what users were already trying to do with our platform.</p>
+                <p>This data-driven approach meant I wasn't guessing. I was responding to what users were already trying to do with our platform.</p>
 
                 <hr class="intro-hr">
 
-                <!--Solution Section-->
-                <h2 class="article-h2" id="solution">The Solution: Three Interconnected Changes</h2>
+                <h2 class="article-h2" id="implementation">Implementation: Three Phases</h2>
 
-                <h3 class="article-h3">1. Smart Defaults + Automated Configuration</h3>
+                <p>I broke the solution into three phases, each building on the last.</p>
 
-                <p>For Q&A Bot, we auto-tuned backend settings based on document type. Conversation starters shifted from generic prompts ("Ask me anything") to hyper-specific examples ("What are the course prerequisites?" "When is the exam?"). These worked because they were answerable from actual materials, giving users immediate confidence.</p>
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-items">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Sept 2025</div>
+                            <div class="timeline-label">Research phase</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Oct 2025</div>
+                            <div class="timeline-label">Phase 1 (Guardrails)</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Nov 2025</div>
+                            <div class="timeline-label">Phase 2 (Templates)</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Dec 2025</div>
+                            <div class="timeline-label">Phase 3 (Standalone)</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Jan 2026</div>
+                            <div class="timeline-label">Rollout & measurement</div>
+                        </div>
+                    </div>
+                </div>
 
-                <p>This prevented misconfiguration at the source.</p>
+                <p><b>Phase 1: Guardrails.</b> The first intervention was defensive. We added guardrails to prevent the most common failure mode: users testing bots without uploading knowledge files, getting bad outputs, and assuming the product was broken. We auto-tuned backend settings based on document type and blocked bot testing without uploaded knowledge. This single constraint prevented the false failure cycle before it started.</p>
 
-                <h3 class="article-h3">2. Super Templates: Context Before Configuration</h3>
+                <p>Conversation starters also shifted from generic prompts ("Ask me anything") to hyper-specific examples ("What are the course prerequisites?" "When is the exam?"). These examples worked because they were answerable from actual materials, giving users immediate confidence. These aren't flashy solutions. They're defensive design - making the common mistakes impossible before users encounter them.</p>
 
-                <p>Each template came with:</p>
+                <p><b>Phase 2: Super Templates.</b> The next phase introduced pre-configured workflows. Instead of starting blank, users selected a template that came 95% configured. Saving and loading states provided clear UI showing progress through setup. Super Templates with pre-configured custom instructions and conversation starters meant users could have a working bot in 3-5 minutes instead of 20+ minutes of configuration.</p>
 
-                <ul>
-                    <li><b>Specific custom instructions</b> tuned for that use case (e.g., Q&A Bot template included instructions to act as a course assistant, answer based only on provided materials, etc.)</li>
-                    <li><b>Pre-configured workflows</b> so users saw what was already set up</li>
-                    <li><b>Conversation starters</b> that would actually work without error</li>
-                    <li><b>State saving/loading clarity</b> so users understood setup progression</li>
-                </ul>
+                <p><b>Phase 3: Standalone Platform.</b> The final phase was the strategic pivot: build separate products for separate audiences instead of trying to be everything to everyone. Q&A Bot became a fully automated, focused product: upload materials, set up conversation starters, launch. No manual configuration. No advanced RAG settings visible. No overwhelming options. The system handled complexity behind the scenes.</p>
 
-                <p>A faculty member could now select "Syllabus Q&A Assistant," see it was 95% configured, add her syllabus PDF, and have a working bot in 3-5 minutes instead of 20+ minutes of configuration.</p>
+                <p>This automation-first approach paired with strategic LMS partnerships enabled ASU-wide adoption. Faculty could access Q&A Bot directly from their learning management system, removing friction from the workflow entirely.</p>
 
-                <h3 class="article-h3">3. Standalone Products: Matching Complexity to User Mental Models</h3>
-
-                <p>Instead of forcing one platform to serve English professors and data scientists equally, we built focused products.</p>
-
-                <p><b>Q&A Bot:</b> Strips away everything except what's needed to turn course materials into a question-answering assistant. No advanced RAG settings visible. No agent configuration. Just: upload materials, set up conversation starters, launch.</p>
-
-                <p><b>Email Comms Tool:</b> Same backend, completely different interface. Optimized for drafting and iterating on communications.</p>
-
-                <p>The insight: you can't make one interface simple for non-technical users without crippling it for power users. Creating focused products lets each interface match its audience's mental model.</p>
-
-                <hr class="intro-hr">
-
-                <!--Implementation Section-->
-                <h2 class="article-h2" id="implementation">Implementation: Preventing the False Failure</h2>
-
-                <p>Beyond guardrails, we made decisions that prevented the "test empty bot, get bad output, assume product is broken" cycle:</p>
-
-                <ol>
-                    <li><b>Conversation starter examples:</b> Pre-tested examples that would succeed, building immediate user confidence</li>
-                    <li><b>Saving and loading states:</b> Clear UI showing configured vs. pending setup steps</li>
-                    <li><b>Error prevention:</b> Rather than error messages, we guided users away from configurations that would fail</li>
-                </ol>
-
-                <hr class="intro-hr">
-
-                <!--Measuring Adoption Section-->
-                <h2 class="article-h2" id="adoption">Measuring Adoption: From Research to Scale</h2>
-
-                <p>The Q&A Bot is rolling out to new departments. We're tracking setup completion rates, time-to-first-bot (goal: under 5 minutes), and misconfiguration support tickets (baseline: 20%, target: &lt;3%).</p>
-
-                <p>Early signals: Q&A Bot is seeing measurable adoption across faculty. We're expanding to 200-300 additional courses next phase, validating the product architecture hypothesis.</p>
+                <p style="color: red;">[IMAGE: Q&A Bot setup flow showing 3 stages - Stage 1: Upload Materials (visual of drag-drop area with file types specified), Stage 2: Choose Conversation Starters (showing pre-built examples marked "tested" with checkmarks), Stage 3: Launch Bot (showing preview of bot ready to test). Annotation: "Guided setup path - each step prevents common errors and builds confidence"]</p>
 
                 <hr class="intro-hr">
 
-                <!--Learnings Section-->
-                <h2 class="article-h2" id="learnings">What This Taught Me About Strategy and Design</h2>
+                <h2 class="article-h2" id="adoption">Measuring Adoption and Ongoing Iteration</h2>
 
-                <p><b>On problem definition:</b> I could have designed a better onboarding flow for the existing platform. Instead, I questioned whether a monolithic platform was the right solution at all. The research pointed to a product architecture problem, not a UX problem. Sometimes the best design solution is building a different product.</p>
+                <p>Q&A Bot is rolling out to new departments across the university. We're tracking setup completion rates, time-to-first-bot (goal: under 5 minutes), and misconfiguration support tickets (baseline: 20%, target: under 3%).</p>
 
-                <p><b>On stakeholders:</b> Technical people (engineers, product leads) care about risk and bandwidth. Rather than argue "redesign the experience," I said "how do we validate this with minimal engineering effort?" This earned trust. Once the hypothesis was validated, larger asks became reasonable.</p>
+                <p>Early signals show Q&A Bot seeing measurable adoption among faculty groups. We're expanding to 200-300 additional courses in the next phase. This validates the strategic pivot: focused products outperform monolithic platforms for non-technical audiences.</p>
 
-                <p><b>On research:</b> I didn't need perfect data to shift strategy. I needed consistent patterns across 20+ conversations plus supportable analysis (Python script categorizing 8,000 projects). This was enough. Waiting for perfect research meant delaying validation.</p>
-
-                <p><b>On constraints:</b> Limited engineering bandwidth forced clarity. I couldn't propose everything. This forced prioritization. Guardrails + templates + standalone products = phased approach that proved the concept without overloading the team.</p>
-
-                <p><b>On age and design:</b> Designing for 35-60 year old faculty meant different patterns than designing for students. Confidence-first. Clarity-first. These are features, not constraints.</p>
+                <p>We're still measuring full impact. Post-launch data is coming in. But the direction is clear: the activation problem is being solved differently than leadership initially expected. The strategy shift from "fix the complex platform" to "build focused products" is working better than incremental improvements could ever have.</p>
 
                 <hr class="intro-hr">
 
-                <!--What's Next Section-->
-                <h2 class="article-h2" id="next">What's Next</h2>
-
-                <p>The Q&A Bot is rolling out. Email Comms tool is in parallel design. The goal is expanding the product portfolio to cover more user jobs while maintaining the backend infrastructure.</p>
-
-                <p>The larger lesson: sometimes adoption problems aren't UX problems. They're product-market fit problems disguised as UX problems. Good research finds the difference. And sometimes the best design solution is the courage to say "we're building the wrong product architecture for this audience."</p>
+                <!-- Next Steps CTAs -->
+                <div class="next-steps">
+                    <h3 class="next-steps-title">Continue reading</h3>
+                    <div class="next-steps-grid">
+                        <a href="../nextgen/nextgen.html" class="next-step-card">
+                            <span class="next-step-label">Next project</span>
+                            <span class="next-step-name">NextGen Platform Redesign →</span>
+                        </a>
+                        <a href="../LSR/LSR.html" class="next-step-card">
+                            <span class="next-step-label">Related work</span>
+                            <span class="next-step-name">Learning Space Research →</span>
+                        </a>
+                    </div>
+                </div>
 
             </section>
 
@@ -358,9 +458,7 @@
                 <br></br>
                 <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.95rem;">Site coded by a human in vanilla HTML, CSS, and JavaScript.</p>
             </footer>
-        
         </article>
-        
     </div>
 
     <script>
@@ -478,6 +576,38 @@
             }
 
             showToastIfNeeded();
+        })();
+
+        // Active TOC highlighting based on scroll position
+        (function() {
+            const sections = document.querySelectorAll('h2[id]');
+            const tocLinks = document.querySelectorAll('.toc-list a');
+
+            function updateActiveLink() {
+                let currentSection = null;
+                const scrollPos = window.scrollY + (window.innerHeight * 0.5);
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollPos >= sectionTop) {
+                        currentSection = section;
+                    }
+                });
+
+                if (currentSection) {
+                    const id = currentSection.getAttribute('id');
+                    
+                    tocLinks.forEach(link => link.classList.remove('active'));
+                    
+                    const activeLink = document.querySelector(`.toc-list a[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            }
+
+            window.addEventListener('scroll', updateActiveLink);
+            updateActiveLink();
         })();
     </script>
     <script src="script.js"></script>

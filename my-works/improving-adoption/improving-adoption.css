@@ -14,9 +14,9 @@
     :root {
         --background: #040404;
         --background-grey: #2B2C2E;
-        --text-primary: #F0F0F0; 
+        --text-primary: #d4d4d4; 
         --text-secondary: #adabab; 
-        --text-normal: #e4e4e4;
+        --text-normal: #ffffff;
         --text-bold: #ffffff;
         --primary: #0A84FF; 
         --red:#db4f4f;
@@ -52,7 +52,7 @@ html {
 h1 {
     font-family: "Big Shoulders Display", serif;
     font-size: 3rem !important;
-    margin-top: 1rem;
+    margin-top: 2rem;
     margin-bottom: 1rem;
     letter-spacing: -0.3px;
 }
@@ -165,7 +165,7 @@ pre > code {
     margin: auto;
     display: flex;
     justify-content: center;
-    padding: 100px 20px;
+    padding: 40px 20px 100px 20px;
     width: 100%;
     box-sizing: border-box;
 }
@@ -225,7 +225,7 @@ ul li {
     font-size: 2rem;
     letter-spacing: -0.05rem;
     margin-bottom: 2rem;
-    margin-top: 1rem;
+    margin-top: 2rem;
     line-height: 1.25;
 }
 
@@ -547,7 +547,7 @@ li pre {
     display: block;
     padding: 4px 0 4px 8px;
     border-left: 2px solid transparent;
-    color: var(--text-secondary);
+    color: rgba(128, 128, 128, 0.6);
     font-size: 0.9rem;
     text-decoration: none;
     transition: all 0.2s ease;
@@ -555,7 +555,12 @@ li pre {
 
 .toc-list a:hover {
     color: var(--primary);
-    border-left: 2px solid var(--primary);
+    border-left: 2px solid transparent;
+}
+
+.toc-list a.active {
+    color: var(--text-primary);
+    border-left: 2px solid transparent;
 }
 
 .toc-top {
@@ -601,6 +606,65 @@ table tbody tr:hover {
     transition: background-color 0.2s ease;
 }
 
+/* Timeline Styles */
+.timeline-container {
+    margin: 2.5rem 0;
+    position: relative;
+    overflow-x: auto;
+}
+
+.timeline-line {
+    position: absolute;
+    top: 6px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--text-secondary);
+    opacity: 0.25;
+    z-index: 0;
+}
+
+.timeline-items {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+    min-width: fit-content;
+}
+
+.timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 100px;
+}
+
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--text-primary);
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+}
+
+.timeline-date {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+    font-family: monospace;
+}
+
+.timeline-label {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    line-height: 1.35;
+    font-weight: 400;
+    padding-right: 1rem;
+}
+
 @media only screen and (max-width: 768px) {
     table {
         font-size: 0.85rem;
@@ -609,5 +673,143 @@ table tbody tr:hover {
     table th,
     table td {
         padding: 0.75rem 0.25rem;
+    }
+
+    .timeline-container {
+        margin: 2rem 0;
+    }
+
+    .timeline-items {
+        flex-direction: column;
+        gap: 1.25rem;
+        padding-left: 1.5rem;
+    }
+
+    .timeline-line {
+        left: 5px;
+        right: auto;
+        width: 1px;
+        height: 100%;
+        top: 0;
+    }
+
+    .timeline-item {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 1rem;
+        min-width: auto;
+    }
+
+    .timeline-dot {
+        flex-shrink: 0;
+        margin-bottom: 0;
+        margin-top: 4px;
+        width: 10px;
+        height: 10px;
+    }
+
+    .timeline-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .timeline-label {
+        max-width: none;
+    }
+}
+
+/* Next Steps CTA */
+.next-steps {
+    margin: 3rem 0 2rem;
+}
+
+.next-steps-title {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+}
+
+.next-steps-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.next-step-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--background-grey);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.next-step-card:hover {
+    border-color: var(--text-secondary);
+    background-color: var(--background-grey);
+}
+
+.next-step-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+}
+
+.next-step-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.next-steps-links {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.next-steps-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.next-steps-links a:hover {
+    color: var(--primary);
+}
+
+.next-steps-links .divider {
+    color: var(--text-secondary);
+    opacity: 0.5;
+}
+
+@media only screen and (max-width: 600px) {
+    .next-steps-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .next-steps-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .next-steps-links .divider {
+        display: none;
+    }
+}
+
+    .timeline-date {
+        min-width: 80px;
+    }
+
+    .timeline-label {
+        max-width: none;
     }
 }

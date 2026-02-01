@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
+
+        <!-- Clarity tracking code -->
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "vaaig4fq2o");
+        </script>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -16,60 +34,44 @@
         <script src="../../shared.js"></script>
         <link rel="stylesheet" href="COMUT.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="icon" href="/img/favicon.png" type="image/png">
+        <link rel="icon" href="../../img/favicon.png" type="image/png">
     </head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
 
 <script>
+    function isDarkTheme() {
+        const forcedLight = document.documentElement.classList.contains('force-light');
+        const forcedDark = document.documentElement.classList.contains('force-dark');
+        if (forcedLight) return false;
+        if (forcedDark) return true;
+        return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+
     function updateImages() {
-    const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    document.querySelectorAll(".theme-img").forEach(img => {
-        const imageName = img.dataset.name; // Get the image name
-        img.src = isDarkMode ? `darkmode/${imageName}.jpg` : `lightmode/${imageName}.jpg`;
-    });
-}
-
-// Run on page load
-updateImages();
-
-// Listen for theme changes
-window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateImages);
-
-</script>
-
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-98H0ZTK0T4');
-
-  
-</script>
-
-<script>
-    function updateImages() {
-        const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const isDarkMode = isDarkTheme();
         document.querySelectorAll(".theme-img").forEach(img => {
-            const imageName = img.dataset.name; // Get the image name
+            const imageName = img.dataset.name;
             const newSrc = isDarkMode 
                 ? `img/dk/${imageName}.png` 
                 : `img/lt/${imageName}.png`;
 
-            // Only update if the src has changed (prevents unnecessary reloads)
             if (img.src !== newSrc) {
                 img.src = newSrc;
             }
         });
     }
 
-    // Ensure images update on theme change
     const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
     darkModeQuery.addEventListener("change", updateImages);
 
-    // Run on page load
     document.addEventListener("DOMContentLoaded", updateImages);
+
+    function openImageInNewTab(imageName) {
+        const isDarkMode = isDarkTheme();
+        const imagePath = isDarkMode 
+            ? `img/dk/${imageName}.png` 
+            : `img/lt/${imageName}.png`;
+        window.open(imagePath, '_blank');
+    }
 </script>
 
 
@@ -86,6 +88,41 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", upd
         Home
     </a>
 
+    <!-- Sticky Table of Contents (top-right) -->
+    <aside class="toc-sticky" aria-label="Table of contents">
+        <div class="toc-wrapper">
+            <h3 class="toc-title">Contents</h3>
+            <div class="reading-progress" aria-hidden="true">
+                <div class="reading-progress-fill"></div>
+            </div>
+            <nav class="toc-nav">
+                <ul class="toc-list">
+                    <li><a href="#tldr" data-ga-event="click" data-ga-event-name="toc_tldr" data-ga-event-category="navigation">TL;DR</a></li>
+                    <li><a href="#context" data-ga-event="click" data-ga-event-name="toc_context" data-ga-event-category="navigation">Context</a></li>
+                    <li><a href="#timeline" data-ga-event="click" data-ga-event-name="toc_timeline" data-ga-event-category="navigation">Timeline</a></li>
+                    <li><a href="#approach" data-ga-event="click" data-ga-event-name="toc_approach" data-ga-event-category="navigation">Approach</a></li>
+                    <li><a href="#findings" data-ga-event="click" data-ga-event-name="toc_findings" data-ga-event-category="navigation">Findings</a></li>
+                    <li><a href="#insights" data-ga-event="click" data-ga-event-name="toc_insights" data-ga-event-category="navigation">Insights</a></li>
+                    <li><a href="#redesign" data-ga-event="click" data-ga-event-name="toc_redesign" data-ga-event-category="navigation">Redesign</a></li>
+                    <li><a href="#validation" data-ga-event="click" data-ga-event-name="toc_validation" data-ga-event-category="navigation">Validation</a></li>
+                    <li><a href="#learnings" data-ga-event="click" data-ga-event-name="toc_learnings" data-ga-event-category="navigation">Learnings</a></li>
+                </ul>
+            </nav>
+            <a class="toc-top" href="#top" data-ga-event="click" data-ga-event-name="back_to_top" data-ga-event-category="navigation">Back to top</a>
+        </div>
+    </aside>
+
+    <div class="toast" role="alert" aria-live="polite" aria-atomic="true">
+        <div class="toast-title">This content is optimized for light mode</div>
+        <div class="toast-text">You're viewing in dark mode. Switch to light for the intended contrast and visuals.</div>
+        <div class="toast-actions">
+            <button class="btn-primary" id="toast-switch-light" data-ga-event="click" data-ga-event-name="switch_to_light_mode" data-ga-event-category="theme">Switch to light mode</button>
+            <button class="btn-ghost" id="toast-dismiss" data-ga-event="click" data-ga-event-name="dismiss_toast" data-ga-event-category="notification">Dismiss</button>
+        </div>
+    </div>
+
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme" data-ga-event="click" data-ga-event-name="toggle_theme" data-ga-event-category="theme">Switch to light</button>
+
     <div class="article-container">
         <article class="article-body">
             
@@ -94,7 +131,7 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", upd
 
                 <div class="grey-background-article image-bottom">
                     <figure class="article-figure">
-                        <img class="theme-img" src="" data-name="slide1" width="100%" alt="">
+                        <img class="theme-img" src="" data-name="slide1" width="100%" alt="" loading="lazy">
                     </figure>
                 </div>
 
@@ -123,7 +160,7 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", upd
             <hr class="intro-hr">
 
             <section class="section-tldr">
-                <h2>TL;DR</h2>
+                <h2 id="tldr">TL;DR</h2>
                 <p><b style="color: var(--red);">Problem:</b></p>
                 <p>100+ hrs/review, error-prone manual data extraction.</p>
                 
@@ -142,10 +179,10 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", upd
             <section class="section-2">
 
                 <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="slide2" width="100%" alt="">
+                    <img class="theme-img" src="" data-name="slide2" width="100%" alt="" loading="lazy">
                 </figure>
 
-                <h2 class="article-h2">Why the City Reached Out</h2>
+                <h2 class="article-h2" id="context">Why the City Reached Out</h2>
                 <p>The City of Mesa Energy Resources Department had a concern: they were distributing a natural gas safety letter to thousands of residents but were unsure whether it was actually working.</p>
 
                 <p><em><b><span id="theme">Were people reading it? Were they absorbing the safety guidance?</span></b></em></p>
@@ -163,22 +200,22 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", upd
             </section><br>
             
             <section class="section-2">
-                <h2 class="article-h2">Our Timeline</h2>
+                <h2 class="article-h2" id="timeline">Our Timeline</h2>
 
                 <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="slide3" width="100%" alt="">
+                    <img class="theme-img" src="" data-name="slide3" width="100%" alt="" loading="lazy">
                 </figure>
 
                 <p>This project followed a structured, multi-phase process. We began with <b>client conversations and persona building</b>, moved into <b>designing and conducting user tests</b>, and ended with a <b>redesign, mockups, and a formal presentation</b> to the City of Mesa. Each phase built directly on the one before it, shaping both our understanding of the problem and our solution.</p>
             </section><br>
             
             <section class="section-2">
-                <h2 class="article-h2">Planning Our Approach</h2>
+                <h2 class="article-h2" id="approach">Planning Our Approach</h2>
 
                 <p>Early in the project, we created <b>three personas</b> to guide our focus and align with Mesa’s community. These personas helped us anticipate resident behaviors, identify potential comprehension barriers, and structure our testing for maximum relevance to the Mesa community. By grounding our plan in these user types, we ensured the project remained <b>human-centered</b> from the beginning.</p>
 
                 <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="slide4" width="100%" alt="">
+                    <img class="theme-img" src="" data-name="slide4" width="100%" alt="" loading="lazy">
                 </figure>
 
                 <p><b>Links to detailed personas and reasoning</b>: 
@@ -195,18 +232,18 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", upd
                 <p>To get there, we went through several draft iterations. Our early scripts focused too narrowly on general impressions. Over time, we refined our tasks and questions to target <b>specific touchpoints</b> in the letter: gas leak detection, 811 protocol, and notification transparency.</p>
 
                 <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="slide5" width="100%" alt="">
+                    <img class="theme-img" src="" data-name="slide5" width="100%" alt="" loading="lazy">
                 </figure>
             </section><br>
             
             <section class="section-2">
-                <h2 class="article-h2">What People Were Really Feeling</h2>
+                <h2 class="article-h2" id="findings">What People Were Really Feeling</h2>
                 <p>We recruited <b>five participants</b> (four completed testing) from across Mesa and San Tan Valley. Each represented a different demographic profile. Using think-aloud methods, we observed that most participants <b>skimmed or ignored large portions</b> of the letter. The introduction was too dense, and safety steps were often buried midway through the document.</p>
                 <p>Participants stressed the importance of <b>emergency information being placed at the top</b>, especially steps like recognizing gas leaks by smell, sound, or sight. Many requested <b>stronger visual emphasis</b> through spacing and bolded text.</p>
 
 
                 <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="slide6" width="100%" alt="">
+                    <img class="theme-img" src="" data-name="slide6" width="100%" alt="" loading="lazy">
                 </figure>
             </section><br>
 
@@ -222,31 +259,31 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", upd
             </section>
             
             <section class="section-2">
-                <h2 class="article-h2">Key Insights</h2>
+                <h2 class="article-h2" id="insights">Key Insights</h2>
                 <p>Users valued <b>clarity and urgency</b>. The redesigned letter needed to open with <b>actionable steps</b> and simplify all supporting information. Emergency instructions like <b>“Smell. Hear. See.”</b> were highly memorable, and tone mattered just as much as structure. Visual aids were unnecessary—users preferred <b>clean, text-driven messaging</b>.</p>
                 <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="slide7" width="100%" alt="">
+                    <img class="theme-img" src="" data-name="slide7" width="100%" alt="" loading="lazy">
                 </figure>
             </section>
 
             <hr class="intro-hr">
             
             <section class="section-2">
-                <h2 class="article-h2">Our Redesign Approach</h2>
+                <h2 class="article-h2" id="redesign">Our Redesign Approach</h2>
                 <p>We reorganized the letter to <b>prioritize key emergency content</b>. Safety actions were placed at the top and styled for scannability. Technical background information was condensed, and a <b>new notification section</b> was added based on participant feedback. We also restructured the 811 call instructions to appear after the most urgent information.</p>
                 <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="slide8" width="100%" alt="">
+                    <img class="theme-img" src="" data-name="slide8" width="100%" alt="" loading="lazy">
                 </figure><br>
                 
                 <p><a href="https://drive.google.com/file/d/15bUJbsmgu3fj-ZOWe6Ctjp8fwdR_kQxR/view?usp=sharing" class="hyp-p" target="_blank">Final report of User Testing</a></p>
             </section><br>
             
             <section class="section-2">
-                <h2 class="article-h2">Post-Redesign Validation</h2>
+                <h2 class="article-h2" id="validation">Post-Redesign Validation</h2>
                 <p>After the redesign, <b>comprehension improved significantly</b>. Where only 1 of 4 participants recalled key emergency steps beforehand, 3 of 4 did so after. <b>Confidence levels</b> also rose: 3 participants said they felt more prepared to act during a leak, compared to just 1 previously.</p>
                 <p>Participants found the new structure <b>easier to follow</b> and described the message as more <b>serious, trustworthy, and clear</b>.</p>
                 <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="slide9" width="100%" alt="">
+                    <img class="theme-img" src="" data-name="slide9" width="100%" alt="" loading="lazy">
                 </figure>
             </section>
 
@@ -256,10 +293,10 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", upd
             
             <section class="section-2">
                 <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="slide10" width="100%" alt="">
+                    <img class="theme-img" src="" data-name="slide10" width="100%" alt="" loading="lazy">
                 </figure>
 
-                <h2 class="article-h2">What I Learned</h2>
+                <h2 class="article-h2" id="learnings">What I Learned</h2>
                 <p>Sometimes <b>good design means removing, not adding</b>. We expected visuals to improve clarity, but users preferred simplicity. Listening closely to real feedback helped us create a message people would actually <b>read—and remember</b>.</p>
 
             </section>
@@ -270,13 +307,30 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", upd
             </section>
 
 
+                <!-- Continue Reading Section -->
+                <div class="next-steps">
+                    <h3 class="next-steps-title">Continue reading</h3>
+                    <div class="next-steps-grid">
+                        <a href="../LSR/LSR.html" class="next-step-card">
+                            <span class="next-step-label">Next project</span>
+                            <span class="next-step-name">AI Data Extraction UI →</span>
+                        </a>
+                        <a href="../improving-adoption/improving-adoption-v2.html" class="next-step-card">
+                            <span class="next-step-label">Related work</span>
+                            <span class="next-step-name">Adoption Crisis Solution →</span>
+                        </a>
+                    </div>
+                </div>
+
                 <footer>
                     <br><br><br>
                     <hr><br>
                     <div class="footer-container">
-                    <a href="#top" class="hyp-p">back to top ↑</a>
-                    <!-- <a href="LSR.html" class="hyp-p">Easter Egg? </a>-->
+                        <a href="#top" class="hyp-p">back to top ↑</a>
                     </div>
+
+                    <br></br>
+                    <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.95rem;">Site coded by a human in vanilla HTML, CSS, and JavaScript.</p>
                 </footer>
         
         </article>
@@ -284,21 +338,179 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", upd
     </div>
 
 
-    <script src="script.js"></script>
+    <script>
+        (function() {
+            const fill = document.querySelector('.reading-progress-fill');
+            const track = document.querySelector('.reading-progress');
+            const tocWrapper = document.querySelector('.toc-wrapper');
+            const tocNav = document.querySelector('.toc-nav');
+            const toast = document.querySelector('.toast');
+            const toastSwitch = document.getElementById('toast-switch-light');
+            const toastDismiss = document.getElementById('toast-dismiss');
+            const themeToggle = document.getElementById('theme-toggle');
+            if (!fill) return;
+
+            function updateTrackBounds() {
+                if (!track || !tocWrapper || !tocNav) return;
+                const wrapperRect = tocWrapper.getBoundingClientRect();
+                const navRect = tocNav.getBoundingClientRect();
+                const topOffset = navRect.top - wrapperRect.top;
+                const height = navRect.height;
+                track.style.top = `${topOffset}px`;
+                track.style.height = `${height}px`;
+            }
+
+            function updateProgress() {
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 98 : 0;
+                fill.style.height = `${progress}%`;
+            }
+
+            function showToastIfNeeded() {
+                if (!toast) return;
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const dismissed = sessionStorage.getItem('lightModeToastDismissed') === '1';
+                const forcedLight = document.documentElement.classList.contains('force-light');
+                const forcedDark = document.documentElement.classList.contains('force-dark');
+                if (prefersDark && !dismissed && !forcedLight && !forcedDark) {
+                    toast.classList.add('show');
+                }
+            }
+
+            function applyForcedTheme(theme) {
+                document.documentElement.classList.remove('force-light', 'force-dark');
+                if (theme === 'light') {
+                    document.documentElement.classList.add('force-light');
+                } else if (theme === 'dark') {
+                    document.documentElement.classList.add('force-dark');
+                }
+                if (theme) {
+                    sessionStorage.setItem('forcedTheme', theme);
+                    sessionStorage.setItem('lightModeToastDismissed', '1');
+                } else {
+                    sessionStorage.removeItem('forcedTheme');
+                }
+                updateImages();
+                updateToggleLabel();
+                if (toast) toast.classList.remove('show');
+            }
+
+            function dismissToast() {
+                sessionStorage.setItem('lightModeToastDismissed', '1');
+                if (toast) toast.classList.remove('show');
+            }
+
+            function updateToggleLabel() {
+                if (!themeToggle) return;
+                const isForcedLight = document.documentElement.classList.contains('force-light');
+                const isForcedDark = document.documentElement.classList.contains('force-dark');
+                const isDark = isForcedDark || (!isForcedLight && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                themeToggle.textContent = isDark ? 'Switch to light' : 'Switch to dark';
+                themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+            }
+
+            function toggleTheme() {
+                const isForcedLight = document.documentElement.classList.contains('force-light');
+                const isForcedDark = document.documentElement.classList.contains('force-dark');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                if (isForcedLight) {
+                    applyForcedTheme('dark');
+                } else if (isForcedDark) {
+                    applyForcedTheme('light');
+                } else {
+                    applyForcedTheme(prefersDark ? 'light' : 'dark');
+                }
+            }
+
+            updateTrackBounds();
+            updateProgress();
+            document.addEventListener('scroll', updateProgress, { passive: true });
+            window.addEventListener('resize', () => {
+                updateTrackBounds();
+                updateProgress();
+            });
+
+            if (toastSwitch) {
+                toastSwitch.addEventListener('click', () => applyForcedTheme('light'));
+            }
+
+            if (toastDismiss) {
+                toastDismiss.addEventListener('click', dismissToast);
+            }
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+
+            const storedTheme = sessionStorage.getItem('forcedTheme');
+            if (storedTheme === 'light' || storedTheme === 'dark') {
+                applyForcedTheme(storedTheme);
+            } else {
+                updateToggleLabel();
+            }
+
+            showToastIfNeeded();
+        })();
+
+        // Active TOC highlighting based on scroll position
+        (function() {
+            const sections = Array.from(document.querySelectorAll('h2[id]'));
+            const tocLinks = document.querySelectorAll('.toc-list a');
+            let lastScrollY = window.scrollY;
+
+            function updateActiveLink() {
+                const currentScrollY = window.scrollY;
+                const scrollingUp = currentScrollY < lastScrollY;
+                lastScrollY = currentScrollY;
+
+                // Use different thresholds: 25% when scrolling down, 20% when scrolling up
+                const threshold = scrollingUp ? 0.20 : 0.25;
+                const scrollPos = currentScrollY + (window.innerHeight * threshold);
+                let currentSection = null;
+
+                // Find which section we're currently in
+                for (let i = 0; i < sections.length; i++) {
+                    const section = sections[i];
+                    const nextSection = sections[i + 1];
+                    const sectionTop = section.offsetTop;
+                    const nextSectionTop = nextSection ? nextSection.offsetTop : Infinity;
+
+                    if (scrollPos >= sectionTop && scrollPos < nextSectionTop) {
+                        currentSection = section;
+                        break;
+                    }
+                }
+
+                // Fallback: if we're past the last section
+                if (!currentSection && sections.length > 0) {
+                    const lastSection = sections[sections.length - 1];
+                    if (scrollPos >= lastSection.offsetTop) {
+                        currentSection = lastSection;
+                    }
+                }
+
+                if (currentSection) {
+                    const id = currentSection.getAttribute('id');
+                    
+                    tocLinks.forEach(link => link.classList.remove('active'));
+                    
+                    const activeLink = document.querySelector(`.toc-list a[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            }
+
+            window.addEventListener('scroll', updateActiveLink);
+            updateActiveLink();
+        })();
+    </script>
+    <script src="../../script.js"></script>
+    <script src="../../shared.js"></script>
 </body>
 </html>
 
 
-
-
-
-
-
-
 <!--Templates-->
-
-<!--
-
-<p > 
-    At the moment, Youtube Music holds under 10% of the streaming market. <a class="hyp-p" href="https://evoca.tv/streaming-service-market-share/#:~:text=Spotify 31.7,Deezer 1.3">(source) ↗</a>
-</p>

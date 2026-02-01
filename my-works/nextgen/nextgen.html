@@ -12,6 +12,15 @@
             gtag('config', 'G-98H0ZTK0T4');
         </script>
 
+        <!-- Clarity tracking code -->
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "vaaig4fq2o");
+        </script>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -35,8 +44,16 @@
         <link rel="icon" href="../../img/favicon.png" type="image/png">
 
         <script>
+            function isDarkTheme() {
+                const forcedLight = document.documentElement.classList.contains('force-light');
+                const forcedDark = document.documentElement.classList.contains('force-dark');
+                if (forcedLight) return false;
+                if (forcedDark) return true;
+                return window.matchMedia("(prefers-color-scheme: dark)").matches;
+            }
+
             function updateImages() {
-                const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                const isDarkMode = isDarkTheme();
                 document.querySelectorAll(".theme-img").forEach(img => {
                     const imageName = img.dataset.name;
                     const newSrc = isDarkMode 
@@ -53,7 +70,7 @@
             document.addEventListener("DOMContentLoaded", updateImages);
 
             function openImageInNewTab(imageName) {
-                const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                const isDarkMode = isDarkTheme();
                 const imagePath = isDarkMode 
                     ? `img/dk/${imageName}.png` 
                     : `img/lt/${imageName}.png`;
@@ -69,6 +86,40 @@
         </svg>
         Home
     </a>
+
+    <!-- Sticky Table of Contents (top-right) -->
+    <aside class="toc-sticky" aria-label="Table of contents">
+        <div class="toc-wrapper">
+            <h3 class="toc-title">Contents</h3>
+            <div class="reading-progress" aria-hidden="true">
+                <div class="reading-progress-fill"></div>
+            </div>
+            <nav class="toc-nav">
+                <ul class="toc-list">
+                    <li><a href="#tldr" data-ga-event="click" data-ga-event-name="toc_tldr" data-ga-event-category="navigation">TL;DR</a></li>
+                    <li><a href="#overview" data-ga-event="click" data-ga-event-name="toc_overview" data-ga-event-category="navigation">Project Overview</a></li>
+                    <li><a href="#features" data-ga-event="click" data-ga-event-name="toc_features" data-ga-event-category="navigation">Key Features</a></li>
+                    <li><a href="#process" data-ga-event="click" data-ga-event-name="toc_process" data-ga-event-category="navigation">Design Process</a></li>
+                    <li><a href="#userflow" data-ga-event="click" data-ga-event-name="toc_userflow" data-ga-event-category="navigation">User Flow</a></li>
+                    <li><a href="#visual" data-ga-event="click" data-ga-event-name="toc_visual" data-ga-event-category="navigation">Visual Design</a></li>
+                    <li><a href="#toolbag" data-ga-event="click" data-ga-event-name="toc_toolbag" data-ga-event-category="navigation">Tool Bag System</a></li>
+                    <li><a href="#videos" data-ga-event="click" data-ga-event-name="toc_videos" data-ga-event-category="navigation">Video Demos</a></li>
+                </ul>
+            </nav>
+            <a class="toc-top" href="#top" data-ga-event="click" data-ga-event-name="back_to_top" data-ga-event-category="navigation">Back to top</a>
+        </div>
+    </aside>
+    
+    <div class="toast" role="alert" aria-live="polite" aria-atomic="true">
+        <div class="toast-title">This content is optimized for light mode</div>
+        <div class="toast-text">You're viewing in dark mode. Switch to light for the intended contrast and visuals.</div>
+        <div class="toast-actions">
+            <button class="btn-primary" id="toast-switch-light" data-ga-event="click" data-ga-event-name="switch_to_light_mode" data-ga-event-category="theme">Switch to light mode</button>
+            <button class="btn-ghost" id="toast-dismiss" data-ga-event="click" data-ga-event-name="dismiss_toast" data-ga-event-category="notification">Dismiss</button>
+        </div>
+    </div>
+
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme" data-ga-event="click" data-ga-event-name="toggle_theme" data-ga-event-category="theme">Switch to light</button>
     
     <div class="article-container">
         <article class="article-body">
@@ -103,8 +154,8 @@
             <hr class="intro-hr">
 
             <!--TL;DR Section-->
-            <section class="section-tldr">
-                <h2>TL;DR</h2>
+            <section class="section-tldr" aria-label="TL;DR summary">
+                <h2 class="article-h2" id="tldr">TL;DR</h2>
                 <p><b style="color: var(--red);">Problem:</b></p>
                 <p>Traditional police training lacks safe, repeatable environments for high-stakes scenario practice.</p>
                 
@@ -123,7 +174,7 @@
             <!--Main Content Sections-->
             <section class="section-2">
 
-                <h2 class="article-h2">Project Overview</h2>
+                <h2 class="article-h2" id="overview">Project Overview</h2>
 
                 <p>
                     NextGen Badge represents a breakthrough in law enforcement training, leveraging VR technology to create immersive learning experiences. The platform allows trainees to practice critical decision-making, de-escalation techniques, and tactical responses in a controlled, safe environment.
@@ -136,7 +187,7 @@
                     </figcaption>
                 </figure>
 
-                <h2 class="article-h2">Key Features</h2>
+                <h2 class="article-h2" id="features">Key Features</h2>
                 <ul>
                     <li><b>Realistic Scenarios:</b> High-fidelity VR environments that replicate real-world situations</li>
                     <li><b>Interactive UI:</b> Intuitive interface design for seamless navigation in VR space</li>
@@ -147,7 +198,7 @@
 
                 <br>
 
-                <h2 class="article-h2">Design Process</h2>
+                <h2 class="article-h2" id="process">Design Process</h2>
 
                 <p>
                     The design process involved extensive collaboration with law enforcement professionals to understand training needs, pain points, and learning objectives. Early prototypes were tested with trainees to refine interaction patterns and ensure usability in VR environments.
@@ -160,7 +211,7 @@
                     </figcaption>
                 </figure>
 
-                <h2 class="article-h2">User Flow & Interactions</h2>
+                <h2 class="article-h2" id="userflow">User Flow & Interactions</h2>
 
                 <p>
                     The user flow was designed to guide trainees through scenario selection, preparation, execution, and review. Each interaction was carefully crafted to feel natural in VR while maintaining clarity and purpose.
@@ -173,7 +224,7 @@
                     </figcaption>
                 </figure>
 
-                <h2 class="article-h2">Visual Design</h2>
+                <h2 class="article-h2" id="visual">Visual Design</h2>
 
                 <p>
                     The visual design balances realism with clarity, ensuring that UI elements are visible and functional in immersive VR environments. Color choices, typography, and spatial design were optimized for VR viewing and interaction.
@@ -186,7 +237,7 @@
                     </figcaption>
                 </figure>
 
-                <h2 class="article-h2">Tool Bag System</h2>
+                <h2 class="article-h2" id="toolbag">Tool Bag System</h2>
 
                 <p>
                     The Tool Bag system provides contextual access to resources and tools during training scenarios. The design ensures quick access without disrupting the immersive experience.
@@ -206,7 +257,7 @@
                     </figcaption>
                 </figure>
 
-                <h2 class="article-h2">Video Demonstrations</h2>
+                <h2 class="article-h2" id="videos">Video Demonstrations</h2>
 
                 <p>
                     The platform includes video demonstrations showcasing UI interactions, MetaHuman character selection, and level portal navigation.
@@ -233,15 +284,200 @@
             <!--Footer Section-->
             <footer>
                 <br><br><br>
+
+                <!-- Next Steps CTAs -->
+                <div class="next-steps">
+                    <h3 class="next-steps-title">Continue reading</h3>
+                    <div class="next-steps-grid">
+                        <a href="../LSR/LSR.html" class="next-step-card">
+                            <span class="next-step-label">Next project</span>
+                            <span class="next-step-name">AI-Powered Data Extraction →</span>
+                        </a>
+                        <a href="../improving-adoption/improving-adoption-v2.html" class="next-step-card">
+                            <span class="next-step-label">Related work</span>
+                            <span class="next-step-name">Solving Adoption Crisis →</span>
+                        </a>
+                    </div>
+                </div>
+
                 <hr><br>
                 <div class="footer-container">
                 <a href="#top" class="hyp-p">back to top ↑</a>
                 </div>
+
+                <br></br>
+                <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.95rem;">Site coded by a human in vanilla HTML, CSS, and JavaScript.</p>
             </footer>
         
         </article>
         
     </div>
+
+    <script>
+        (function() {
+            const fill = document.querySelector('.reading-progress-fill');
+            const track = document.querySelector('.reading-progress');
+            const tocWrapper = document.querySelector('.toc-wrapper');
+            const tocNav = document.querySelector('.toc-nav');
+            const toast = document.querySelector('.toast');
+            const toastSwitch = document.getElementById('toast-switch-light');
+            const toastDismiss = document.getElementById('toast-dismiss');
+            const themeToggle = document.getElementById('theme-toggle');
+            if (!fill) return;
+
+            function updateTrackBounds() {
+                if (!track || !tocWrapper || !tocNav) return;
+                const wrapperRect = tocWrapper.getBoundingClientRect();
+                const navRect = tocNav.getBoundingClientRect();
+                const topOffset = navRect.top - wrapperRect.top;
+                const height = navRect.height;
+                track.style.top = `${topOffset}px`;
+                track.style.height = `${height}px`;
+            }
+
+            function updateProgress() {
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 98 : 0;
+                fill.style.height = `${progress}%`;
+            }
+
+            function showToastIfNeeded() {
+                if (!toast) return;
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const dismissed = sessionStorage.getItem('lightModeToastDismissed') === '1';
+                const forcedLight = document.documentElement.classList.contains('force-light');
+                const forcedDark = document.documentElement.classList.contains('force-dark');
+                if (prefersDark && !dismissed && !forcedLight && !forcedDark) {
+                    toast.classList.add('show');
+                }
+            }
+
+            function applyForcedTheme(theme) {
+                document.documentElement.classList.remove('force-light', 'force-dark');
+                if (theme === 'light') {
+                    document.documentElement.classList.add('force-light');
+                } else if (theme === 'dark') {
+                    document.documentElement.classList.add('force-dark');
+                }
+                if (theme) {
+                    sessionStorage.setItem('forcedTheme', theme);
+                    sessionStorage.setItem('lightModeToastDismissed', '1');
+                } else {
+                    sessionStorage.removeItem('forcedTheme');
+                }
+                updateImages();
+                updateToggleLabel();
+                if (toast) toast.classList.remove('show');
+            }
+
+            function dismissToast() {
+                sessionStorage.setItem('lightModeToastDismissed', '1');
+                if (toast) toast.classList.remove('show');
+            }
+
+            function updateToggleLabel() {
+                if (!themeToggle) return;
+                const isForcedLight = document.documentElement.classList.contains('force-light');
+                const isForcedDark = document.documentElement.classList.contains('force-dark');
+                const isDark = isForcedDark || (!isForcedLight && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                themeToggle.textContent = isDark ? 'Switch to light' : 'Switch to dark';
+                themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+            }
+
+            function toggleTheme() {
+                const isForcedLight = document.documentElement.classList.contains('force-light');
+                const isForcedDark = document.documentElement.classList.contains('force-dark');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                if (isForcedLight) {
+                    applyForcedTheme('dark');
+                } else if (isForcedDark) {
+                    applyForcedTheme('light');
+                } else {
+                    applyForcedTheme(prefersDark ? 'light' : 'dark');
+                }
+            }
+
+            updateTrackBounds();
+            updateProgress();
+            document.addEventListener('scroll', updateProgress, { passive: true });
+            window.addEventListener('resize', () => {
+                updateTrackBounds();
+                updateProgress();
+            });
+
+            if (toastSwitch) {
+                toastSwitch.addEventListener('click', () => applyForcedTheme('light'));
+            }
+
+            if (toastDismiss) {
+                toastDismiss.addEventListener('click', dismissToast);
+            }
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+
+            const storedTheme = sessionStorage.getItem('forcedTheme');
+            if (storedTheme === 'light' || storedTheme === 'dark') {
+                applyForcedTheme(storedTheme);
+            } else {
+                updateToggleLabel();
+            }
+
+            showToastIfNeeded();
+        })();
+
+        // Active TOC highlighting based on scroll position (directional thresholds)
+        (function() {
+            const sections = document.querySelectorAll('h2[id]');
+            const tocLinks = document.querySelectorAll('.toc-list a');
+            let lastScrollY = window.scrollY;
+
+            function updateActiveLink() {
+                let currentSection = null;
+                const currentScrollY = window.scrollY;
+                const scrollingUp = currentScrollY < lastScrollY;
+                const threshold = scrollingUp ? 0.20 : 0.25;
+                const scrollPos = currentScrollY + (window.innerHeight * threshold);
+                lastScrollY = currentScrollY;
+
+                const sectionArray = Array.from(sections);
+                for (let i = 0; i < sectionArray.length; i++) {
+                    const section = sectionArray[i];
+                    const sectionTop = section.offsetTop;
+                    const nextSection = sectionArray[i + 1];
+                    const nextTop = nextSection ? nextSection.offsetTop : Infinity;
+
+                    if (scrollPos >= sectionTop && scrollPos < nextTop) {
+                        currentSection = section;
+                        break;
+                    }
+                }
+
+                if (!currentSection && sectionArray.length > 0) {
+                    const lastSection = sectionArray[sectionArray.length - 1];
+                    if (scrollPos >= lastSection.offsetTop) {
+                        currentSection = lastSection;
+                    }
+                }
+
+                if (currentSection) {
+                    const id = currentSection.getAttribute('id');
+                    tocLinks.forEach(link => link.classList.remove('active'));
+                    const activeLink = document.querySelector(`.toc-list a[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            }
+
+            window.addEventListener('scroll', updateActiveLink);
+            updateActiveLink();
+        })();
+    </script>
+    <script src="../../script.js"></script>
 </body>
 </html>
 
