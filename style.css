@@ -49,8 +49,8 @@ body {
 }
 
 .footer {
-  margin-top: 6rem;
-  margin-bottom: 4rem;
+  margin-top: 7.8rem;
+  margin-bottom: 5.2rem;
 }
 
 .footer-text {
@@ -214,8 +214,8 @@ pre > code {
 
 /* -------------  introduction  ------------- */
 .introduction {
-  margin-top: 6rem;
-  margin-bottom: 6rem;
+  margin-top: 7.8rem;
+  margin-bottom: 7.8rem;
 }
 .introduction-text {
   width: 60%;
@@ -786,7 +786,7 @@ pre > code {
 
 /* -------------  KEYNOTES  ------------- */
 .section-keynotes {
-  margin-top: 6rem;
+  margin-top: 7.8rem;
   width: 75%;
   content-visibility: auto;
   contain-intrinsic-size: auto 400px;
@@ -977,8 +977,8 @@ pre > code {
 
 /* -------------  WRITINGS  ------------- */
 .section-writings {
-  margin-top: 6rem;
-  margin-bottom: 6rem;
+  margin-top: 7.8rem;
+  margin-bottom: 7.8rem;
   content-visibility: auto;
   contain-intrinsic-size: auto 400px;
 }
@@ -1420,5 +1420,53 @@ li pre {
 @media only screen and (max-width: 1024px) {
   .human-coded-badge {
     display: none;
+  }
+}
+
+/* Email Toast Notification */
+.email-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(20, 20, 20, 0.95);
+  color: #f7f7f7;
+  padding: 14px 20px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.email-toast-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.email-toast-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.email-toast-content i {
+  color: #4ade80;
+  font-size: 1.1rem;
+}
+
+.email-toast-error .email-toast-content i {
+  color: #ef4444;
+}
+
+@media only screen and (max-width: 480px) {
+  .email-toast {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    padding: 12px 16px;
   }
 }

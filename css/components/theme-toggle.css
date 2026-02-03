@@ -1,0 +1,32 @@
+/* Theme Toggle Button */
+/* Dark/Light mode switcher */
+
+.theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.12);
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.86rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    box-shadow: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 195;
+    transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-1px);
+    background: rgba(0, 0, 0, 0.16);
+    border-color: rgba(0, 0, 0, 0.12);
+}
+
+.theme-toggle:active {
+    transform: translateY(0);
+}

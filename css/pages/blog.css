@@ -1,0 +1,68 @@
+/* Blog Page Specific Styles */
+/* Blog navigation and blog-specific overrides */
+
+/* Blog container (different from article-container) */
+.container {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media only screen and (max-width: 768px) and (min-width: 481px) {
+    .container {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .container {
+        width: 95%;
+    }
+}
+
+/* Blog navigation with arrow */
+.headtag {
+    display: inline-flex;
+    height: 20px;
+    text-decoration: none !important;
+}
+
+.arr {
+    display: none;
+    color: var(--red);
+}
+
+.headtag:hover .arr {
+    display: flex;
+    margin-left: 10px;
+}
+
+.headtag:hover {
+    color: var(--red);
+    text-decoration: none !important;
+}
+
+/* Blog-specific video styling */
+.article-video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+/* Project image in blogs */
+.project-image {
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* Override article-container padding for blogs (was 100px, now standardized to 40px) */
+.article-container {
+    padding: 40px 20px 100px 20px;
+}
+
+/* Blog figures without bleed effect initially (add bleed if needed) */
+.article-figure {
+    margin: 2rem 0;
+}

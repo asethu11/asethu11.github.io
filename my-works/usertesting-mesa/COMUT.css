@@ -3,13 +3,12 @@
 
 :root {
     --background: #FCFCFC;
-    --background-grey: #F3F5F7;
-    --text-primary: #262628; 
-    --text-secondary: #7a7a7a; 
-    --primary: #0070EA; 
+    --background-grey: #ebebeb;
+    --text-primary: #262628;
+    --text-secondary: #737373;
+    --primary: #0070EA;
     --red: #db4f4f;
-
-  }
+}
 
 
   
@@ -172,8 +171,21 @@ a:visited {
         margin-top: 4rem;
         margin-bottom: 2rem;
         border: 0;
-        border-top: 1px solid var(--background-grey);
-        color: var(--background-grey);
+        border-top: 2px solid #cccccc;
+    }
+
+@media (prefers-color-scheme: dark) {
+    .intro-hr {
+        border-top: 2px solid #2B2C2E;
+    }
+}
+    /* Ensure forced themes also control the intro rule color */
+    html.force-light .intro-hr {
+        border-top: 2px solid #cccccc;
+    }
+
+    html.force-dark .intro-hr {
+        border-top: 2px solid #2B2C2E;
     }
 
     hr {
@@ -248,6 +260,7 @@ pre > code {
     width: 100%;
     box-sizing: border-box;
 }
+
 .article-body {
     max-width: 700px;
     width: 100%;
@@ -300,7 +313,6 @@ ul li {
     line-height: 1.5;
     margin-bottom: 0.35rem;
 }
-
 
 .article-h1{
     font-size: 2rem;
@@ -641,6 +653,11 @@ html.force-dark .intro-hr {
     border-radius: 12px;
     padding: 14px 16px 14px 22px;
     box-shadow: none;
+    transition: transform 0.2s ease;
+}
+
+.toc-wrapper:hover {
+    transform: translateY(-1px);
 }
 
 .toc-title {
@@ -694,35 +711,57 @@ html.force-dark .intro-hr {
     }
 }
 
-/* Table styles */
+/* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
     margin: 1.5rem 0;
-    font-size: 0.95rem;
+    border: 1px solid var(--background-grey);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 table th {
     text-align: left;
-    padding: 1rem 0.5rem;
     font-weight: 600;
-    color: var(--text-secondary);
-    border-bottom: 2px solid var(--background-grey);
+    font-size: 0.95rem;
 }
 
 table td {
-    padding: 1rem 0.5rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+table th, table td {
+    padding: 0.75rem 1rem;
+    vertical-align: top;
     border-bottom: 1px solid var(--background-grey);
-    line-height: 1.6;
 }
 
 table tr:last-child td {
     border-bottom: none;
 }
 
-table tbody tr:hover {
-    background-color: var(--background-grey);
-    transition: background-color 0.2s ease;
+.table-header {
+    background-color: #D1D5DB;
+}
+
+.table-first-col {
+    background-color: rgba(209, 213, 219, 0.4);
+}
+
+table th:first-child,
+table td:first-child {
+    /* width: 35%; - moved to inline styles in HTML */
+}
+
+@media (prefers-color-scheme: dark) {
+    .table-header {
+        background-color: var(--background-grey);
+    }
+    .table-first-col {
+        background-color: rgba(43, 44, 46, 0.3);
+    }
 }
 
 /* Timeline Styles */

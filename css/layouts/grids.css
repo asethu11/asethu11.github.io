@@ -1,0 +1,17 @@
+/* Grid Layouts */
+/* Reusable grid systems for content organization */
+
+/* Next Steps Grid (used in article pages) */
+.next-steps-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Responsive: single column on mobile */
+@media only screen and (max-width: 768px) {
+    .next-steps-grid {
+        grid-template-columns: 1fr;
+    }
+}

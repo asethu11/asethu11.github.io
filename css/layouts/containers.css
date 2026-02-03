@@ -1,0 +1,124 @@
+/* Container Layouts */
+/* Article containers, body sections, and content wrappers */
+
+.article-container {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px 100px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.article-body {
+    max-width: 700px;
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.article-body > section + section {
+    margin-top: 3rem;
+}
+
+/* Article figures with bleed effect */
+.article-figure {
+    margin: 2rem auto;
+    max-width: 800px;
+    width: calc(100% + 100px);
+    margin-left: -50px;
+    margin-right: -50px;
+}
+
+.article-figure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.article-figure figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Grey background article container */
+.grey-background-article {
+    background-color: var(--background-grey);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    width: calc(100% + 100px);
+    margin-left: -50px;
+    margin-right: -50px;
+    min-width: 180px;
+    height: 280px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Article-specific heading margins */
+.article-h1 {
+    font-size: 2rem;
+    letter-spacing: -0.05rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    line-height: 1.25;
+}
+
+.article-h2 {
+    margin-top: 3.5rem;
+    margin-bottom: 1.25rem;
+}
+
+/* Lists */
+ol {
+    padding-left: 1.4rem;
+    margin: 0 0 1.2rem 0;
+}
+
+ol li {
+    line-height: 1.5;
+    margin-bottom: 0.35rem;
+}
+
+ul {
+    padding-left: 1.4rem;
+    margin: 0 0 1.2rem 0;
+}
+
+ul li {
+    line-height: 1.5;
+    margin-bottom: 0.35rem;
+}
+
+/* Offset in-page anchors to avoid being hidden under the top edge */
+.article-body h1[id],
+.article-body h2[id],
+.article-body h3[id],
+.article-body h4[id],
+.article-body h5[id],
+.article-body h6[id] {
+    scroll-margin-top: 110px;
+}
+
+/* Additional TOC wrapper positioning for reading progress */
+.toc-wrapper {
+    position: relative;
+    padding-left: 22px;
+}
+
+/* Intro elements */
+#intro-tags1 {
+    margin-top: 3rem;
+    color: var(--text-secondary) !important;
+}
+
+.intro-hr {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    border: 0;
+    border-top: 2px solid #cccccc;
+}

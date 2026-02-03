@@ -1,0 +1,25 @@
+/* Dark Mode Overrides */
+/* Theme-specific style adjustments for dark mode */
+
+@media (prefers-color-scheme: dark) {
+    hr {
+        border-color: var(--background-grey);
+    }
+
+    .intro-hr {
+        border-top: 2px solid #2B2C2E;
+    }
+}
+
+/* Ensure forced themes also control hr colors */
+html.force-light .intro-hr {
+    border-top: 2px solid #cccccc;
+}
+
+html.force-dark .intro-hr {
+    border-top: 2px solid #2B2C2E;
+}
+
+html.force-dark hr {
+    border-color: var(--background-grey);
+}

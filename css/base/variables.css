@@ -1,0 +1,51 @@
+/* CSS Variables - Design Tokens */
+/* Base theme colors, typography tokens, and spacing */
+
+:root {
+    --background: #FCFCFC;
+    --background-grey: #ebebeb;
+    --text-primary: #262628;
+    --text-secondary: #737373;
+    --primary: #0070EA;
+    --red: #db4f4f;
+}
+
+/* Dark mode (system preference) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #040404;
+        --background-grey: #2B2C2E;
+        --text-primary: #d4d4d4;
+        --text-secondary: #adabab;
+        --text-normal: #ffffff;
+        --text-bold: #ffffff;
+        --primary: #0A84FF;
+        --red: #db4f4f;
+    }
+}
+
+/* Force light mode (user toggle) */
+html.force-light {
+    --background: #FCFCFC;
+    --background-grey: #ebebeb;
+    --text-primary: #262628;
+    --text-secondary: #737373;
+    --text-normal: #262628;
+    --text-bold: #0a0a0a;
+    --primary: #0070EA;
+    --red: #db4f4f;
+    color-scheme: light;
+}
+
+/* Force dark mode (user toggle) */
+html.force-dark {
+    --background: #040404;
+    --background-grey: #2B2C2E;
+    --text-primary: #F0F0F0;
+    --text-secondary: #adabab;
+    --text-normal: #e4e4e4;
+    --text-bold: #ffffff;
+    --primary: #0A84FF;
+    --red: #db4f4f;
+    color-scheme: dark;
+}

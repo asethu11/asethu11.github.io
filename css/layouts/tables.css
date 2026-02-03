@@ -1,0 +1,32 @@
+/* Table Layouts */
+/* Standard table styling with hover effects */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+}
+
+table th {
+    text-align: left;
+    padding: 1rem 0.5rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-bottom: 2px solid var(--background-grey);
+}
+
+table td {
+    padding: 1rem 0.5rem;
+    border-bottom: 1px solid var(--background-grey);
+    line-height: 1.6;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+table tbody tr:hover {
+    background-color: var(--background-grey);
+    transition: background-color 0.2s ease;
+}

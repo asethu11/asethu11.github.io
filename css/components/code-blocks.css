@@ -1,0 +1,28 @@
+/* Code Block Styling */
+/* Pre-formatted text and inline code */
+
+pre {
+    font-size: 0.8rem;
+    line-height: 1.6rem;
+    margin: 0;
+    padding: 0;
+    background-color: #1E1E1E;
+    border-radius: 8px;
+    width: 100%;
+    margin: 1.5rem 0;
+}
+
+code {
+    padding: 1.5rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: visible;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    color: #D4D4D4;
+    display: block;
+    border-radius: 8px;
+}
+
+pre > code {
+    margin: 0;
+}

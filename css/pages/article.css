@@ -1,0 +1,131 @@
+/* Article Page Specific Styles */
+/* Timeline and Next Steps components */
+
+/* Timeline Component */
+.timeline-container {
+    margin: 2.5rem 0;
+    position: relative;
+    overflow-x: auto;
+}
+
+.timeline-line {
+    position: absolute;
+    top: 6px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--text-secondary);
+    opacity: 0.25;
+    z-index: 0;
+}
+
+.timeline-items {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+    min-width: fit-content;
+}
+
+.timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 100px;
+}
+
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--text-primary);
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+}
+
+.timeline-date {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+    font-family: monospace;
+    min-width: 80px;
+}
+
+.timeline-label {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    line-height: 1.35;
+    font-weight: 400;
+    padding-right: 1rem;
+}
+
+.timeline-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Next Steps Component */
+.next-steps {
+    margin: 3rem 0 2rem;
+}
+
+.next-steps-title {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+}
+
+.next-step-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--background-grey);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.next-step-card:hover {
+    border-color: var(--text-secondary);
+    background-color: var(--background-grey);
+}
+
+.next-step-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+}
+
+.next-step-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.next-steps-links {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.next-steps-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.next-steps-links a:hover {
+    color: var(--primary);
+}
+
+.next-steps-links .divider {
+    color: var(--text-secondary);
+    opacity: 0.5;
+}

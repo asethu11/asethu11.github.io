@@ -30,13 +30,49 @@ function initProjectPreviews() {
     });
 }
 
+// Toast notification system
+function showToast(message, type = 'success') {
+    // Remove any existing toast
+    const existingToast = document.querySelector('.email-toast');
+    if (existingToast) {
+        existingToast.remove();
+    }
+
+    // Create toast element
+    const toast = document.createElement('div');
+    toast.className = `email-toast email-toast-${type}`;
+    toast.innerHTML = `
+        <div class="email-toast-content">
+            <i class="fas fa-check-circle"></i>
+            <span>${message}</span>
+        </div>
+    `;
+
+    // Add to body
+    document.body.appendChild(toast);
+
+    // Trigger animation
+    setTimeout(() => {
+        toast.classList.add('email-toast-show');
+    }, 10);
+
+    // Remove after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('email-toast-show');
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+    }, 3000);
+}
+
 // Email copy functionality
 function copyEmail() {
     const email = "mailsofabshk@gmail.com";
     navigator.clipboard.writeText(email).then(() => {
-        alert("Email copied to clipboard!");
+        showToast("Email copied to clipboard!");
     }).catch(err => {
         console.error("Failed to copy:", err);
+        showToast("Failed to copy email", "error");
     });
 }
 

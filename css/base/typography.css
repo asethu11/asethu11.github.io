@@ -1,0 +1,68 @@
+/* Typography Styles */
+/* Headings, paragraphs, links, lists, and text formatting */
+
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* Headings */
+h1 {
+    font-family: "Big Shoulders Display", serif;
+    font-size: 3rem !important;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.3px;
+}
+
+h2, h3, h4, h5, h6, p {
+    font-family: 'Inter', sans-serif;
+}
+
+h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: -0.3px;
+    color: var(--text-bold);
+}
+
+h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 1.8rem 0 0.8rem;
+    line-height: 1.6rem;
+    color: var(--text-bold);
+}
+
+/* Text elements */
+p {
+    line-height: 1.5;
+    margin: 1rem 0;
+    color: var(--text-primary);
+}
+
+b {
+    font-weight: 600;
+    color: var(--text-bold);
+}
+
+/* Links */
+a:link {
+    text-decoration: none;
+    color: var(--primary);
+}
+
+a:visited {
+    text-decoration: none;
+    color: var(--primary);
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+/* Lists */
+li {
+    line-height: 1.5;
+    margin-top: 0.35rem;
+}

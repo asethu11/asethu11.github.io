@@ -1,0 +1,70 @@
+/* Toast Notification Component */
+/* Floating notification system for user feedback */
+
+.toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    max-width: 320px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: rgba(20, 20, 20, 0.92);
+    color: #f7f7f7;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    display: none;
+    gap: 12px;
+    z-index: 200;
+}
+
+.toast.show {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+}
+
+.toast-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.toast-text {
+    font-size: 0.9rem;
+    color: #e0e0e0;
+    line-height: 1.4;
+}
+
+.toast-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.toast button {
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.toast .btn-primary {
+    background: #f7f7f7;
+    color: #141414;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+}
+
+.toast .btn-ghost {
+    background: transparent;
+    color: #f7f7f7;
+    border: 1px solid rgba(255,255,255,0.35);
+}
+
+.toast button:hover {
+    transform: translateY(-1px);
+}
+
+.toast button:active {
+    transform: translateY(0);
+}

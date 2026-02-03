@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(move \"c:\\\\Users\\\\sabsk\\\\Desktop\\\\Abhishek\\\\Github\\\\asethu11.github.io\\\\my-works\\\\improving-adoption\\\\improving-adoption.css\" \"c:\\\\Users\\\\sabsk\\\\Desktop\\\\Abhishek\\\\Github\\\\asethu11.github.io\\\\css-archive\"\" && move \"c:UserssabskDesktopAbhishekGithubasethu11.github.iomy-worksLSRLSR-fixed.css\" \"c:UserssabskDesktopAbhishekGithubasethu11.github.iocss-archive\"\")",
+      "Bash(move \"c:\\\\Users\\\\sabsk\\\\Desktop\\\\Abhishek\\\\Github\\\\asethu11.github.io\\\\my-works\\\\usertesting-mesa\\\\COMUT.css\" \"c:\\\\Users\\\\sabsk\\\\Desktop\\\\Abhishek\\\\Github\\\\asethu11.github.io\\\\css-archive\"\")",
+      "Bash(move \"my-works\\\\improving-adoption\\\\improving-adoption.css\" \"css-archive\\\\improving-adoption.css\")",
+      "Bash(ls:*)",
+      "Bash(while read file)",
+      "Bash(do echo \"Updating $file\")",
+      "Bash(done)",
+      "Bash(for file in \"blogs/whyVoiceInterfacesKeepFailing/whyVoiceInterfacesKeepFailing.html\" \"blogs/why-i-start-in-high-fidelity/why-i-start-in-high-fidelity.html\" \"blogs/tyranny-of-the-a-b-test/tyranny-of-the-a-b-test.html\" \"blogs/personalizedInterfaces/personalizedInterfaces.html\" \"blogs/new-blog-post/new-blog-post.html\" \"blogs/followTheVibeOfTheTribe/follow-the-vibe-of-the-tribe.html\")",
+      "Bash(do perl -i -pe 's|<link rel=\"\"stylesheet\"\" href=\"\"\\\\.\\\\.\\\\/\\\\.\\\\.\\\\/css\\\\/pages\\\\/article\\\\.css\"\">\\\\s*<link rel=\"\"stylesheet\"\" href=\"\"\\\\.\\\\.\\\\/\\\\.\\\\.\\\\/css\\\\/pages\\\\/blog\\\\.css\"\">|<link rel=\"\"stylesheet\"\" href=\"\"../blogs.css\"\">|g' \"$file\")"
+    ]
+  }
+}

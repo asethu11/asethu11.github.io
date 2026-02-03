@@ -1,0 +1,16 @@
+/* Footer Component */
+/* Footer container and link styling */
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-secondary);
+}
+
+.hyp-p {
+    color: var(--primary) !important;
+}
+
+.hyp-p:hover {
+    color: var(--red) !important;
+}
