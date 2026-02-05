@@ -96,15 +96,14 @@
             <nav class="toc-nav">
                 <ul class="toc-list">
                     <li><a href="#tldr" data-ga-event="click" data-ga-event-name="toc_tldr" data-ga-event-category="navigation">TLDR</a></li>
-                    <li><a href="#problem" data-ga-event="click" data-ga-event-name="toc_problem" data-ga-event-category="navigation">The Problem</a></li>
-                    <li><a href="#challenge" data-ga-event="click" data-ga-event-name="toc_challenge" data-ga-event-category="navigation">The Challenge</a></li>
-                    <li><a href="#solution" data-ga-event="click" data-ga-event-name="toc_solution" data-ga-event-category="navigation">Solution</a></li>
-                    <li><a href="#stakeholder" data-ga-event="click" data-ga-event-name="toc_results" data-ga-event-category="navigation">Results</a></li>
-                    <li><a href="#research" data-ga-event="click" data-ga-event-name="toc_research" data-ga-event-category="navigation">Research</a></li>
+                    <li><a href="#problem" data-ga-event="click" data-ga-event-name="toc_problem" data-ga-event-category="navigation">Problem</a></li>
+                    <li><a href="#discovery" data-ga-event="click" data-ga-event-name="toc_discovery" data-ga-event-category="navigation">Discovery & Research</a></li>
                     <li><a href="#stakeholder-negotiation" data-ga-event="click" data-ga-event-name="toc_stakeholder_negotiation" data-ga-event-category="navigation">Stakeholder Negotiation</a></li>
-                    <li><a href="#data-analysis" data-ga-event="click" data-ga-event-name="toc_data_analysis" data-ga-event-category="navigation">Data Analysis</a></li>
-                    <li><a href="#implementation" data-ga-event="click" data-ga-event-name="toc_implementation" data-ga-event-category="navigation">Implementation</a></li>
-                    <li><a href="#adoption" data-ga-event="click" data-ga-event-name="toc_adoption" data-ga-event-category="navigation">Measuring Adoption</a></li>
+                    <li><a href="#solution" data-ga-event="click" data-ga-event-name="toc_solution" data-ga-event-category="navigation">Solution</a></li>
+                    <li><a href="#design-rationale" data-ga-event="click" data-ga-event-name="toc_design_rationale" data-ga-event-category="navigation">Design Rationale</a></li>
+                    <li><a href="#validation" data-ga-event="click" data-ga-event-name="toc_validation" data-ga-event-category="navigation">Validation</a></li>
+                    <li><a href="#results" data-ga-event="click" data-ga-event-name="toc_results" data-ga-event-category="navigation">Results</a></li>
+                    <li><a href="#measuring-adoption" data-ga-event="click" data-ga-event-name="toc_measuring_adoption" data-ga-event-category="navigation">Measuring Adoption</a></li>
                 </ul>
             </nav>
             <a class="toc-top" href="#top" data-ga-event="click" data-ga-event-name="back_to_top" data-ga-event-category="navigation">Back to top</a>
@@ -134,9 +133,7 @@
 
                 <h1 class="article-h1">Solving Adoption Crisis (80% bounce-rate) With Limited Engineering Bandwidth</h1>
 
-                <p>CreateAI Platform at Arizona State University is a RAG+LLM system that lets educators build custom AI bots to handle tutoring and repetitive student questions, freeing faculty time to focus on improving learning outcomes. The platform is highly customizable - 20 settings available for builders to tailor bots to their specific use case.</p>
-
-                <p>The adoption story: 147 courses, strong product-market fit. But these were early adopters, mostly technical users. When leadership set a goal to scale to 300+ courses, they realized they needed to reach the broader faculty population. The path to growth was unclear.</p>
+                <p>CreateAI let faculty build custom AI bots for tutoring and answering student questions. Early adopters loved it, but growth stalled at 147 courses. Most new users left within minutes, unable to navigate complex setup. The challenge: non-technical faculty needed a guaranteed path to value without compromising power users.</p>
 
                 <div class="sub-header">
                     <p id="intro-tags1">
@@ -146,15 +143,16 @@
 
             </section>
 
-            <hr class="intro-hr">
+            <hr>
 
             <section class="section-tldr" aria-label="TL;DR summary">
                 <h2 class="article-h2" id="tldr">TLDR</h2>
-                <p><b style="color: var(--red);">Problem:</b> Engineers designed it, early technical adopters shaped it. Non-technical faculty faced a platform bloated with unnecessary complexity, leading to a plateau in adoption rates.</p>
+                <p><b style="color: var(--red);">Problem</b><br> CreateAI was designed by engineers and shaped by early technical adopters. As the platform grew, non-technical faculty encountered advanced AI configuration before completing any task that demonstrated value. Adoption stalled, with most new users bouncing within minutes.</p>
 
-                <p><b style="color: var(--red);">Solution:</b> Analysis of 8,000 projects mapped to two core jobs: Q&A (40%) and communications (25%). Branching off the platform, we designed focused-products with intentional constraints, automations, agentic layers, guardrails, that reduced cognitive load for non-technical users while preserving the original platform's flexibility</p>
+                <p><b style="color: var(--red);">Solution</b><br> Analysis of over 8,000 projects showed that most faculty were trying to solve a small number of predictable jobs, primarily course Q&A. Instead of simplifying the platform, we branched off a focused product with intentional constraints, automation, and guardrails. Complexity was handled by the system, not exposed to the user.</p>
 
-                <p><b style="color: var(--red);">Impact:</b> Q&A Bot showing measurable adoption across faculty. Expanding from 147 to 200-300 courses. Misconfiguration support tickets on track to drop from 20% to under 3%.</p>
+                <p><b style="color: var(--red);">Impact</b><br>
+                    Q&A Bot is showing measurable adoption among faculty who never engaged with the original platform. Setup time dropped to under a minute. Misconfiguration was eliminated by design, and course adoption is expanding from 147 toward 200 to 300 courses as rollout continues.</p>
             </section>
 
             <hr class="intro-hr">
@@ -162,13 +160,14 @@
             <!--Main Content Sections-->
             <section class="section-2">
 
-                <!--Problem Section-->
-                <h2 class="article-h2" id="problem">The Problem: Adoption Plateau Due to Complexity</h2>
+                <!-- ========== PROBLEM & CONTEXT ========== -->
+                <h2 class="article-h2" id="problem">Problem & Context: Adoption Plateau Due to Complexity</h2>
 
-                <p>Platform adoption hit a ceiling at 147 courses. Engineers built it, technical adopters shaped it, complexity won. 20 settings, RAG tuning, temperature controls.  Options that made sense for power-users. A nightmare for everyone else.</p>
+                <p>
+                   CreateAI offered dozens of configuration options, from model selection to RAG settings and conversation parameters. For technical users, this was empowering. For most faculty, it was overwhelming. Google Analytics showed nearly 80% of new users bounced within two minutes. Support data revealed 20 percent of tickets were caused by misconfiguration, not bugs.
+                </p>
 
                 
-                <br>
 
                 <div class="metric-comparison" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0; padding: 1.5rem; background: var(--background-grey); border-radius: 12px;">
                     <div style="text-align: center; transition: opacity 0.3s ease;" class="metric-card">
@@ -241,236 +240,164 @@
                         
                         observer.observe(metricsEl);
                     })();
-                </script>
+                </script> <br>
 
-                <p>Google Analytics told the story. 80% of new users bounced in under 2 minutes. Meanwhile, power-users were logging 2-3 hours daily, loving it. The platform didn't have a quality problem. It had a complexity problem.</p><br>
+                <p>
+                    One English professor summarized the challenge perfectly: “What does any of this mean?” <br><br>
 
-                <p>Support data proved it. 20% of tickets weren't about broken features, they were about misconfiguration. Faculty drowning in options they didn't need, making mistakes they shouldn't have to make. Cognitive overload, dressed up as a technical platform.</p>
+                    She didn’t try to figure it out. She left. 
+                    <br><br>
 
-                <br>
+                    Early exposure to configuration complexity caused users to exit before reaching a first successful outcome.
+                </p>
 
-                <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="slide1" width="100%" alt="Real quotes from support channels reveal the core problem">
-                    <figcaption> These misconfiguration-related tickets represented 20% of all support volume</figcaption>
-                </figure>
+                <p>When I presented these findings to product leadership, their response was cautious. "We can't make drastic changes without proof. Engineering is at capacity.</p>
 
-                <hr class="intro-hr">
-
-                <h2 class="article-h2" id="challenge">The Challenge: Why Simple Redesign Wouldn't Work</h2>
-
-                <p>When I presented these findings, product leadership resisted: <br>
-                    <b><i>"We can't make drastic changes without proof. Engineering is at capacity."</i></b></p>
-
-                <p>They had a point. The 20 settings, RAG tuning, temperature controls—power-users needed them. Simplify and you break the platform for your best customers. This wasn't a UX fix. It was an architectural problem. Non-technical faculty needed a new product, not an improved one.</p>
-
-                <p>How do we serve both audiences without compromise?</p>
+                <!-- Jump to solution CTA -->
+                <a href="#solution" class="jump-btn" data-ga-event="click" data-ga-event-name="skip_to_solution" data-ga-event-category="navigation">
+                    Jump to Solution
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 5v14M5 12l7 7 7-7"/>
+                    </svg>
+                </a>
 
                 <hr class="intro-hr">
 
-                <h2 class="article-h2" id="solution">Solution: Focused Products Over Platform Redesign</h2>
+                <!-- ========== DISCOVERY & RESEARCH ========== -->
+                <h2 class="article-h2" id="discovery">Discovery, Research & Strategic Approach</h2>
 
-                <p>Analysis of 8,000 projects revealed the pattern: 65% of usage clustered into two jobs—Information Retrieval (40%) and Communication & Content (25%). The rest was noise.</p>
+                <h3>What I saw in early research</h3>
+
+                <p>
+                    I ran 20-30 moderated sessions with faculty across multiple departments. Participants entered the platform cold and tried to set up a bot while narrating their decisions. Most participants understood the goal but hesitated at nearly every step, repeatedly pausing to ask whether their actions were correct.
+                </p><br>
 
                 <figure class="article-figure">
                     <img class="theme-img" src="" data-name="slide2" width="100%" alt="Information Retrieval and Communication were the only jobs worth building for. Everything else was noise.">
                     <figcaption>Information Retrieval and Communication were the only jobs worth building for. Everything else was noise.</figcaption>
-                </figure>
+                </figure><br>
 
-                <p>
-                    The strategic pivot: instead of simplifying 20 settings for everyone, build standalone products with zero exposed settings. Automation handles complexity; users see upload → configure → launch.
+                <p><b>Entry point confusion: Users questioned if they were in the right place</b><br>
+                    Faculty had heard about "Syllabot" through word-of-mouth but landed on "CreateAI Builder" and immediately questioned whether they were in the right product. Some assumed they needed to navigate elsewhere. Others assumed both products were the same and tried to use advanced features meant for power users. This friction happened before any setup began. It was purely about positioning and naming clarity.
                 </p>
 
-                <p><b>Three layers made this possible:</b></p>
+                <p><b>Feature bloat</b><br>
+                    Although the advanced settings (LLM parameters, RAG settings, and temperature controls) were optional, faculty interpreted advanced settings as a required step in the flow, which caused hesitation and abandonment before setup progressed.
+                </p>
+
+                <p><b>False failures: Users skipped critical steps without knowing consequences</b><br>
+                    A critical usability issue emerged during testing: users could complete setup without uploading course materials. Participants frequently skipped the content upload, launched the bot, received incoherent responses, and concluded the product itself was broken. The bot wasn't broken—it had no context to work with. But by that point, trust was already lost.
+                </p>
+
+                <p>
+                    The key insight was that non-technical faculty expected clarity and reassurance before taking action, not freedom to explore an open-ended system.
+                </p>
+
+                <br>
+
+                <h3>Validating at scale</h3>
+
+                <p>Analysis of over 8,000 projects confirmed the pattern. Despite dozens of possible configurations, nearly two-thirds of projects clustered around two jobs: course Q&A and communication support. Most faculty were trying predictable tasks and encountering complexity before seeing value.</p><br>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide3" width="100%" alt="Analysis of 8,000 projects showing 65% of usage clustered into two primary jobs">
+                    <figcaption>Success score was calculated by assigning weightages for metrics such as engagement rate and messages per session for each project. This allowed us to rank the best-performing project categories.</figcaption>
+                </figure><br>
+
+                <p>The strategic decision followed directly from this. The platform couldn't serve both audiences without compromise. Power users needed the 20 settings for complex customization. Non-technical faculty needed something that just worked. Incremental fixes like tooltips or onboarding wizards would not work.</p>
+
+                <p>Instead of simplifying the platform and risking power user workflows, we would build standalone products for specific jobs built on the existing platform infrastructure. Configuration would be automated, hidden from users, and constrained to guarantee success while preserving the original platform for advanced users.</p>
+
+                <p>I had full control over design direction with one strict constraint: Bot should be set up with just one click.</p>
+
+                <br>
+
+                <!-- ========== STAKEHOLDER NEGOTIATION ========== -->
+                <h2 class="article-h2" id="stakeholder-negotiation">Stakeholder Negotiation: Making the Business Case</h2>
+
+                <p>Getting approval required reframing the problem as activation economics. That 80% bounce rate represented wasted acquisition spend. Converting even 20% of dropoffs would hit growth targets without additional marketing investment.</p>
+
+                <p>We set measurable OKRs:</p>
                 <ul>
-                    <li>Agentic automation (retrieval settings, conversation starters)</li>
-                    <li>Pre-configured templates (working bot in 3-5 minutes)</li>
-                    <li>Focused interfaces (no RAG controls, no temperature sliders)</li>
+                    <li>Scale from 147 to 300 courses by fiscal year end</li>
+                    <li>Reduce bounce rate from 80% to under 60%</li>
+                    <li>Decrease misconfiguration tickets from 20% to under 3%</li>
+                    <li>Achieve time-to-first-bot under 60 seconds</li>
                 </ul>
 
                 <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="slide3" width="100%" alt="Aligning with business goals and user needs to surface the more important information right within user's reach">
-                    <figcaption>Aligning with business goals and user needs to surfa ce the more important information right within user's reach</figcaption>
+                    <img class="theme-img" src="" data-name="stakeholder_okrs" width="100%" alt="OKRs for Q&A Bot: Scale, Bounce Rate Reduction, Support Ticket Improvement, Setup Time">
+                    <figcaption>Clear metrics aligned business goals with product outcomes</figcaption>
                 </figure>
 
+                <p>Scope constraints kept engineering investment minimal: no core platform modifications, reuse existing RAG infrastructure, build automation layer for configuration, treat as standalone product. Approval was granted based on contained risk and clear success criteria.</p>
 
                 <hr class="intro-hr">
 
-                <h2 class="article-h2" id="stakeholder">Results</h2>
+                <!-- ========== SOLUTION ========== -->
+                <h2 class="article-h2" id="solution">Solution: Automation Over Configuration</h2>
 
-                <p>Q&A Bot is rolling out to new departments across the university. Early signals show measurable adoption among faculty groups. We're tracking setup completion rates, time-to-first-bot (goal: under 5 minutes), and misconfiguration support tickets (baseline: 20%, target: under 3%).</p>
+                <p>The goal was a guaranteed, friction-free first experience for faculty.</p>
 
-                <p>The adoption trajectory validates the product architecture hypothesis: we're expanding from 147 courses to 200-300 courses in the next phase, a 40% expansion driven by focused products rather than incremental platform improvements. Misconfiguration-related support issues are declining as guardrails and pre-configured templates prevent the most common failure modes.</p>
+                <p><b>Canvas LTI integration</b> was the foundation. Q&A Bot lives directly inside course navigation, with single sign-on, automatic student enrollment, and course context delivered without faculty intervention. The bot feels like course infrastructure rather than an external tool faculty have to manage. The cognitive overhead was fully removed.</p>
 
-                <p>This wasn't just a UX win. The product strategy shifted from "one monolithic platform for everyone" to "focused products by user job." This is now core to the product roadmap going forward.</p>
+                <p><b>All manual configuration was eliminated.</b> The system automatically syncs syllabus and course content from Canvas, selects the appropriate model, and applies retrieval settings behind the scenes. Faculty never see temperature sliders or model lists. Conversation starters are pulled directly from course materials and validated to ensure the bot can actually answer them. The result is a setup flow that goes from content sync to launch in under a minute.</p>
 
-                <p style="color: red;">[IMAGE: Adoption projection chart - X-axis: Time (months), Y-axis: Courses. Show: Current state (147 courses), Q&A Bot launch point, projected growth curve to 200-300 courses over next 6 months. Annotation: "Standalone product strategy driving adoption growth"]</p>
+                <p><b>Setup was reduced to one clear step:</b> materials auto-synced from Canvas with optional file upload, and launch. First-time interactions worked every time. Setup time dropped to under a minute for all users.</p>
 
-                <hr class="intro-hr">
+                <!-- Jump to impact CTA -->
+                <a href="#results" class="jump-btn" data-ga-event="click" data-ga-event-name="see_impact" data-ga-event-category="navigation">
+                    See the Impact
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 5v14M5 12l7 7 7-7"/>
+                    </svg>
+                </a>
 
-                <p style="text-align: center; color: var(--text-secondary); font-size: 0.95rem; margin: 2rem 0 1rem 0;">Deeper dive on thoughts, data, process</p>
-
-                <h2 class="article-h2" id="research">Research: Understanding Where Faculty Get Stuck</h2>
-
-                <p>I ran 20-30 moderated demos with faculty, staff, and instructional designers across departments (English, Biology, History, Business). The approach: let them explore the product cold, then guide them through setup while documenting where they froze.</p>
-
-                <p><b>Key finding:</b> users who received structured guidance navigated significantly better. This confirmed the problem was information architecture and confidence, not feature complexity.</p>
-
-                <p><b>Friction points that appeared consistently:</b></p>
-
-                <p><b>Entry point confusion</b> — Users searched for "Syllabot" (the product they'd heard about) but landed on "CreateAI Builder" (the platform). They questioned if they were in the right place within the first 30 seconds.</p>
-
-                <p style="color: red;">[IMAGE: Side-by-side screenshots - LEFT: What users expected to see vs. RIGHT: What they actually saw (CreateAI Builder dashboard). Annotation: "Users unsure if they're in the right product"]</p>
-
-                <p><b>Terminology barrier</b> — The platform's purpose wasn't explained upfront. It was a blank canvas. Non-technical users faced terminology that meant nothing to them: LLM parameters, RAG settings, temperature controls, Top-K retrieval. These are CS concepts. An English professor asking "what does any of this mean?" wasn't being difficult. She was being reasonable.</p>
-
-                <p><b>False failure cycle</b> — Users tested bots without uploading their course materials first, got nonsensical outputs, and assumed the product was broken. In reality, they'd skipped a critical dependency. But there was nothing in the interface preventing this mistake or explaining why it mattered.</p>
-
-                <p><b>Designing for the right audience</b> — I was designing for 35-60 year old faculty, not Gen Z users. These users were intelligent domain experts, but they approached software differently. They expected clarity upfront. They wanted to understand what they were about to do before committing to it. They needed confidence before exploring. When a 48-year-old English professor landed on a blank builder interface with dropdowns for "RAG settings" and "temperature," she didn't think "I'll figure this out." She thought "this isn't for me" and left.</p>
 
                 <hr class="intro-hr">
 
-                <h2 class="article-h2" id="stakeholder-negotiation">Stakeholder Negotiation: Aligning on Metrics and Scope</h2>
+                <!-- ========== DESIGN RATIONALE ========== -->
+                <h2 class="article-h2" id="design-rationale">Design Rationale: Tradeoffs Between Simplicity and Features</h2>
 
-                <p>Leadership required proof before allocating engineering resources. The reframe focused on activation economics rather than UX problems: 80% bounce rate represented wasted acquisition spend. Converting 20% of dropoffs would achieve growth targets without additional marketing investment.</p>
+                <p>Two design decisions shaped the final product and illustrate the tension between building for scale versus building for trust.</p>
 
-                <p><b>Finalized OKRs:</b></p>
-                <ul>
-                    <li>Scale from 147 to 300 courses by fiscal year end</li>
-                    <li>Reduce bounce rate from 80% to &lt;60%</li>
-                    <li>Decrease misconfiguration tickets from 20% to &lt;3%</li>
-                    <li>Achieve time-to-first-bot under 5 minutes</li>
-                </ul>
+                <p><b>Conversation starters and validation.</b><br> 
+                    Engineering pushed for fully AI-generated starters because it scaled cleanly and reduced manual work. The risk was predictability. If a generated example failed or felt off, first-time faculty would assume the entire bot was unreliable. For this audience, trust on first launch mattered more than long-term efficiency. We traded some scalability for confidence by shipping a small set of pre-generated, course-specific examples that were explicitly validated. Faculty could enable them instantly or replace them, but the default experience never asked them to gamble on an untested output.</p>
 
-                <p>Co-design sessions with engineering, product, and LMS teams resulted in three implementation paths: Canvas Syllabus auto-ingestion (primary), manual file upload (fallback), and hybrid approach. Engineering constraints around syllabus detection reliability led to Canvas integration as default with clear sync/non-sync messaging for supplemental uploads.</p>
+                <p><b>No migration path into advanced controls.</b><br> 
+                    A bigger tradeoff came up around whether Q&A Bot should offer a migration path into the main CreateAI platform. Leadership saw value in letting users "graduate" into advanced controls over time. I pushed back because it solved the wrong problem. Power users were not blocked by complexity, and non-technical faculty did not aspire to manage 20 settings later. Adding migration paths would have increased cognitive load and reframed Q&A Bot as a simplified version of the platform instead of a product designed for a specific job. We chose clarity over optionality, even though it meant saying no to a feature that looked good on a roadmap.</p>
 
-                <p>Canvas LTI integration was the critical partnership. Embedding Syllabot directly in course navigation eliminated workflow friction. Required coordination across IT, LMS, and security teams. Without this, faculty would still need to context-switch to external platforms.</p>
-
-                <p>Scope constraints kept engineering lift minimal: no core platform modifications, reused existing RAG infrastructure, automation layer handled configuration complexity. Approval granted based on contained risk, measurable success criteria, and clear exit strategy if metrics underperformed.</p>
+                <p>That decision ultimately protected both products. Q&A Bot stayed focused on fast, reliable course setup, while the core platform remained the place for deep customization. The tradeoff was fewer crossovers, but the upside was clear positioning and fewer confused users.</p>
 
                 <hr class="intro-hr">
 
-                <h2 class="article-h2" id="technical-requirements">Technical Requirements & Architecture</h2>
+                <!-- ========== VALIDATION ========== -->
+                <h2 class="article-h2" id="validation">Validation</h2>
 
-                <p>The implementation required coordinating three core systems: Canvas integration for seamless enrollment, multi-path knowledge ingestion for flexibility, and distinct user flows for students versus faculty. All built as a standalone product on top of existing infrastructure.</p>
+                <p>We tested the product with a mixed group of faculty. Half were experienced users of the main platform, and half had never built a bot before. Setup time was measured through observed task completion rather than self-reporting. Technical users averaged 35 seconds, non-technical users averaged 45, with a mean of 40 seconds.</p>
 
-                <hr class="intro-hr">
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="validation_results" width="100%" alt="Setup time comparison: Technical users 35s, Non-technical users 45s, Mean 40s">
+                    <figcaption>Measured setup times across user groups validated the focused product approach</figcaption>
+                </figure>
 
-                <div class="grey-background-article" style="height: auto; padding: 1.5rem; max-width: 800px; width: calc(100% + 100px); margin-left: -50px; margin-right: -50px;">
-                    <h3 class="article-h3" style="margin-top: 0;">Canvas LTI Integration</h3>
-                    <p style="margin-bottom: 1rem;">Direct integration into Canvas course navigation eliminated context-switching. Students and faculty accessed Syllabot without leaving their existing workflow.</p>
-                    <ul style="margin-bottom: 0;">
-                        <li>Syllabot accessible via course navigation menu</li>
-                        <li>SSO authentication through Canvas</li>
-                        <li>Auto-enrollment of students as bot viewers</li>
-                        <li>Course context payload (user role, course ID, enrollment data)</li>
-                    </ul>
-                </div>
-
-                <br>
-
-                <div class="grey-background-article" style="height: auto; padding: 1.5rem; max-width: 800px; width: calc(100% + 100px); margin-left: -50px; margin-right: -50px;">
-                    <h3 class="article-h3" style="margin-top: 0;">Knowledge Base Ingestion</h3>
-                    <p style="margin-bottom: 1rem;">Three-path approach balanced automation with flexibility. Canvas Syllabus sync was primary, but manual upload served as fallback for edge cases.</p>
-                    <ul style="margin-bottom: 0;">
-                        <li><b>Primary:</b> Canvas Syllabus tab auto-sync</li>
-                        <li><b>Fallback:</b> Manual file upload (.pdf, .docx, .txt)</li>
-                        <li><b>Hybrid:</b> Canvas + supplemental local files</li>
-                        <li>Clear sync status indicators and timestamps</li>
-                    </ul>
-                </div>
-
-                <br>
-
-                <div class="grey-background-article" style="height: auto; padding: 1.5rem; max-width: 800px; width: calc(100% + 100px); margin-left: -50px; margin-right: -50px;">
-                    <h3 class="article-h3" style="margin-top: 0;">User Flows</h3>
-                    <p style="margin-bottom: 1rem;">Two distinct paths depending on role. Students got immediate access to published bots; faculty controlled publishing, preview, and knowledge source management.</p>
-                    <ul style="margin-bottom: 0;">
-                        <li><b>Student view:</b> immediate bot access if published</li>
-                        <li><b>Faculty view:</b> bot preview, source management, publish controls</li>
-                        <li>Auto-detection of Canvas Syllabus presence</li>
-                        <li>Graceful handling when syllabus content unavailable</li>
-                    </ul>
-                </div>
-
-                <br>
-
-                <div class="grey-background-article" style="height: auto; padding: 1.5rem; max-width: 800px; width: calc(100% + 100px); margin-left: -50px; margin-right: -50px;">
-                    <h3 class="article-h3" style="margin-top: 0;">Scope Constraints</h3>
-                    <p style="margin-bottom: 1rem;">Kept engineering investment lean by reusing existing infrastructure. Syllabot operated as a standalone product, not a core platform modification.</p>
-                    <ul style="margin-bottom: 0;">
-                        <li>No modifications to core CreateAI platform</li>
-                        <li>Reuse existing RAG infrastructure</li>
-                        <li>Automation layer handles configuration</li>
-                        <li>Standalone product, separate from main builder</li>
-                    </ul>
-                </div>
+                <p>Testing also validated the architecture choice. Non-technical users hesitated briefly at conversation starter selection, which led us to add previews and clearer confirmation states. Technical users, unexpectedly, preferred the simplified flow for quick course bots even though they still used the main platform for advanced work. The two products complemented each other without cannibalization.</p>
 
                 <hr class="intro-hr">
 
-                <h2 class="article-h2" id="data-analysis">Data Analysis: Which Products to Build</h2>
+                <!-- ========== RESULTS ========== -->
+                <h2 class="article-h2" id="results">Results</h2>
 
-                <p>The standalone product strategy wasn't a guess. It came from systematic analysis of actual user behavior.</p>
+                <p>Misconfiguration was eliminated by design. The only remaining error case is uploading the wrong documents, which is both rare and easily corrected. Adoption is growing beyond the original 147 courses as departments that never engaged with the platform begin using Q&A Bot.</p>
 
-                <p>I wrote a Python script to analyze every project created on the platform (8,000+ projects). The script extracted and categorized custom instructions using LLM analysis. The raw results showed 70 different product categories - too granular to be actionable. I consolidated these into broader job-to-be-done categories by grouping similar use cases together.</p>
+                <p>More importantly, the work reset how the organization thinks about scaling AI internally. Instead of asking how to simplify a complex platform, teams now ask which job should exist as its own product. Communications bots are next, built on the same principle. The original platform remains powerful, but growth is now driven by clarity, not complexity.</p>
 
-                <p>What emerged was unmistakable: the vast majority of projects clustered into just two categories. Information Retrieval (Q&A bots) accounted for 40% of all projects. Communications (email rewriting, letter drafting, course communication) represented 25%. Together, these two use cases dominated 65% of the platform.</p>
-
-                <p>The remaining projects scattered across writing assistance (20%, but low-viability due to ChatGPT/Claude competition), decision support, planning, and other use cases. Decision Support had the highest quality metrics but represented just 159 projects.</p>
-
-                <p>This data-driven approach meant I wasn't guessing. I was responding to what users were already trying to do with our platform.</p>
+                <p>Beyond metrics, the work triggered a broader shift in how the organization thinks about growth. Instead of pushing more features into a single platform, leadership aligned on building focused products tied to specific faculty jobs. That principle is now guiding roadmap decisions across the AI portfolio.</p>
 
                 <hr class="intro-hr">
 
-                <h2 class="article-h2" id="implementation">Implementation: Three Phases</h2>
-
-                <p>I broke the solution into three phases, each building on the last.</p>
-
-                <div class="timeline-container">
-                    <div class="timeline-line"></div>
-                    <div class="timeline-items">
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Sept 2025</div>
-                            <div class="timeline-label">Research phase</div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Oct 2025</div>
-                            <div class="timeline-label">Phase 1 (Guardrails)</div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Nov 2025</div>
-                            <div class="timeline-label">Phase 2 (Templates)</div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Dec 2025</div>
-                            <div class="timeline-label">Phase 3 (Standalone)</div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Jan 2026</div>
-                            <div class="timeline-label">Rollout & measurement</div>
-                        </div>
-                    </div>
-                </div>
-
-                <p><b>Phase 1: Guardrails.</b> The first intervention was defensive. We added guardrails to prevent the most common failure mode: users testing bots without uploading knowledge files, getting bad outputs, and assuming the product was broken. We auto-tuned backend settings based on document type and blocked bot testing without uploaded knowledge. This single constraint prevented the false failure cycle before it started.</p>
-
-                <p>Conversation starters also shifted from generic prompts ("Ask me anything") to hyper-specific examples ("What are the course prerequisites?" "When is the exam?"). These examples worked because they were answerable from actual materials, giving users immediate confidence. These aren't flashy solutions. They're defensive design - making the common mistakes impossible before users encounter them.</p>
-
-                <p><b>Phase 2: Super Templates.</b> The next phase introduced pre-configured workflows. Instead of starting blank, users selected a template that came 95% configured. Saving and loading states provided clear UI showing progress through setup. Super Templates with pre-configured custom instructions and conversation starters meant users could have a working bot in 3-5 minutes instead of 20+ minutes of configuration.</p>
-
-                <p><b>Phase 3: Standalone Platform.</b> The final phase was the strategic pivot: build separate products for separate audiences instead of trying to be everything to everyone. Q&A Bot became a fully automated, focused product: upload materials, set up conversation starters, launch. No manual configuration. No advanced RAG settings visible. No overwhelming options. The system handled complexity behind the scenes.</p>
-
-                <p>This automation-first approach paired with strategic LMS partnerships enabled ASU-wide adoption. Faculty could access Q&A Bot directly from their learning management system, removing friction from the workflow entirely.</p>
-
-                <p style="color: red;">[IMAGE: Q&A Bot setup flow showing 3 stages - Stage 1: Upload Materials (visual of drag-drop area with file types specified), Stage 2: Choose Conversation Starters (showing pre-built examples marked "tested" with checkmarks), Stage 3: Launch Bot (showing preview of bot ready to test). Annotation: "Guided setup path - each step prevents common errors and builds confidence"]</p>
-
-                <hr class="intro-hr">
-
-                <h2 class="article-h2" id="adoption">Measuring Adoption and Ongoing Iteration</h2>
+                <!-- ========== MEASURING ADOPTION ========== -->
+                <h2 class="article-h2" id="measuring-adoption">Measuring Adoption and Ongoing Iteration</h2>
 
                 <p>Q&A Bot is rolling out to new departments across the university. We're tracking setup completion rates, time-to-first-bot (goal: under 5 minutes), and misconfiguration support tickets (baseline: 20%, target: under 3%).</p>
 
@@ -480,7 +407,7 @@
 
                 <hr class="intro-hr">
 
-                <!-- Next Steps CTAs -->
+                <!-- ========== NEXT STEPS ========== -->
                 <div class="next-steps">
                     <h3 class="next-steps-title">Continue reading</h3>
                     <div class="next-steps-grid">
@@ -497,7 +424,7 @@
 
             </section>
 
-            <!--Footer Section-->
+            <!-- ========== FOOTER ========== -->
             <footer>
                 <br><br><br>
                 <hr><br>
@@ -663,3 +590,6 @@
     <script src="script.js"></script>
 </body>
 </html>
+
+
+                <!-- <p style="text-align: center; color: var(--text-secondary); font-size: 0.95rem; margin: 2rem 0 1rem 0;">Deeper dive on thoughts, data, process</p> -->

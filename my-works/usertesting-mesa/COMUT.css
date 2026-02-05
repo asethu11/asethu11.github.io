@@ -12,33 +12,22 @@
 
 
   
-  @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
     :root {
         --background: #040404;
         --background-grey: #2B2C2E;
-        --text-primary: #F0F0F0; 
-        --text-secondary: #adabab; 
-        --text-normal: #e4e4e4;
+        --text-primary: #d4d4d4;
+        --text-secondary: #adabab;
+        --text-normal: #ffffff;
         --text-bold: #ffffff;
         --primary: #0A84FF;
-        --red: #db4f4f; 
-    }
-    
-    p {
-        color: var(--text-normal);
-    }
-
-    b {
-        color: var(--text-bold);
+        --red:#db4f4f;
     }
 
     hr {
         border-color: var(--background-grey);
     }
-
-
-
-  }
+}
   
 
 
@@ -72,11 +61,12 @@ h1 {
     margin-top: 2rem;
     margin-bottom: 1rem;
     letter-spacing: -0.3px;
+    color: var(--text-bold);
 }
 
 h2, h3, h4, h5, h6, p{
     font-family: 'Inter', sans-serif;
-}   
+}
 
 
 b {
