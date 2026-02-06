@@ -233,13 +233,18 @@ p a:hover {
     margin-right: -50px;
 }
 
-.article-figure img {
+.article-figure img,
+.article-figure video,
+.article-video video {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
+    display: block;
+    /* Force clipping for video content */
+    clip-path: inset(0px round 8px);
 }
 
-.article-figure figcaption {
+.article-figure figcaption, .article-video figcaption  {
     margin-top: 0.5rem;
     font-size: 0.9rem;
     color: var(--text-secondary);
@@ -264,11 +269,34 @@ p a:hover {
 
 /* Video styling */
 .article-video {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
     border-radius: 8px;
     margin: 1rem 0;
+    margin: 2rem auto;
+    max-width: 800px;
+    width: calc(100% + 100px);
+    margin-left: -50px;
+    margin-right: -50px;
+    
+                /* Hide content while loading */
+            .media-loading-content {
+                opacity: 0;
+                transition: opacity 0.4s ease-in;
+            }
+            
+            .media-loaded-content {
+                opacity: 1;
+            }
+
+            /* Hide mute button from video controls, keep only fullscreen */
+            video::-webkit-media-controls-mute-button {
+                display: none !important;
+            }
+            video::-moz-media-controls-mute-button {
+                display: none !important;
+            }
+            video::-ms-media-controls-mute-button {
+                display: none !important;
+            }
 }
 
 

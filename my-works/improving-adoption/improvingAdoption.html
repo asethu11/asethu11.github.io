@@ -30,6 +30,44 @@
         <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
 
+        <!-- Skeleton Loading Styles -->
+        <style>
+            /* Base skeleton animation */
+            @keyframes shimmer {
+                0% { background-position: 200% 0; }
+                100% { background-position: -200% 0; }
+            }
+            
+            /* The class applied to the container (figure) during loading */
+            figure.media-skeleton {
+                position: relative;
+                z-index: 1; /* Ensure on top */
+                background: #e0e0e0; /* Fallback - darker */
+                background: linear-gradient(90deg, 
+                    rgba(0, 0, 0, 0.06) 25%, 
+                    rgba(0, 0, 0, 0.15) 37%, 
+                    rgba(0, 0, 0, 0.06) 63%);
+                background-size: 200% 100%;
+                animation: shimmer 1.5s ease-in-out infinite;
+                min-height: 300px; /* Placeholder height */
+                border-radius: 8px;
+                display: block;
+            }
+
+            /* Dark mode specific skeleton */
+            @media (prefers-color-scheme: dark) {
+                figure.media-skeleton {
+                    background: linear-gradient(90deg, 
+                        rgba(255, 255, 255, 0.02) 25%, 
+                        rgba(255, 255, 255, 0.08) 37%, 
+                        rgba(255, 255, 255, 0.02) 63%);
+                    background-size: 200% 100%;
+                }
+            }
+
+
+        </style>
+
         <script src="script.js"></script>
         <link rel="stylesheet" href="improving-adoption.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -275,7 +313,7 @@
                 <figure class="article-figure">
                     <img class="theme-img" src="" data-name="slide2" width="100%" alt="Information Retrieval and Communication were the only jobs worth building for. Everything else was noise.">
                     <figcaption>Information Retrieval and Communication were the only jobs worth building for. Everything else was noise.</figcaption>
-                </figure><br>
+                </figure>
 
                 <p><b>Entry point confusion: Users questioned if they were in the right place</b><br>
                     Faculty had heard about "Syllabot" through word-of-mouth but landed on "CreateAI Builder" and immediately questioned whether they were in the right product. Some assumed they needed to navigate elsewhere. Others assumed both products were the same and tried to use advanced features meant for power users. This friction happened before any setup began. It was purely about positioning and naming clarity.
@@ -302,13 +340,169 @@
                 <figure class="article-figure">
                     <img class="theme-img" src="" data-name="slide3" width="100%" alt="Analysis of 8,000 projects showing 65% of usage clustered into two primary jobs">
                     <figcaption>Success score was calculated by assigning weightages for metrics such as engagement rate and messages per session for each project. This allowed us to rank the best-performing project categories.</figcaption>
-                </figure><br>
+                </figure>
 
                 <p>The strategic decision followed directly from this. The platform couldn't serve both audiences without compromise. Power users needed the 20 settings for complex customization. Non-technical faculty needed something that just worked. Incremental fixes like tooltips or onboarding wizards would not work.</p>
 
                 <p>Instead of simplifying the platform and risking power user workflows, we would build standalone products for specific jobs built on the existing platform infrastructure. Configuration would be automated, hidden from users, and constrained to guarantee success while preserving the original platform for advanced users.</p>
 
-                <p>I had full control over design direction with one strict constraint: Bot should be set up with just one click.</p>
+               <!-- Strategic Branching Visual -->
+                <style>
+                    .strategy-visual {
+                        margin: 3rem 0;
+                        position: relative;
+                        padding: 1rem 0;
+                    }
+                    .sv-infrastructure {
+                        background: var(--background-grey);
+                        border: 1px solid rgba(128,128,128,0.2);
+                        color: var(--text-primary);
+                        padding: 0.75rem 1.5rem;
+                        border-radius: 8px;
+                        text-align: center;
+                        width: fit-content;
+                        margin: 0 auto;
+                        font-weight: 600;
+                        font-size: 0.9rem;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        position: relative;
+                        z-index: 2;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+                    }
+                    .sv-branches-container {
+                        display: flex;
+                        justify-content: center;
+                        gap: 1rem;
+                        position: relative;
+                        padding-top: 2rem;
+                    }
+                    /* Connecting lines */
+                    .sv-branches-container::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 50%;
+                        width: 1px;
+                        height: 1rem;
+                        background: rgba(128,128,128,0.3);
+                    }
+                    .sv-branches-container::after {
+                        content: '';
+                        position: absolute;
+                        top: 1rem;
+                        left: 25%;
+                        width: 50%;
+                        height: 1px;
+                        background: rgba(128,128,128,0.3);
+                    }
+                    .sv-branch {
+                        flex: 1;
+                        max-width: 45%;
+                        position: relative;
+                    }
+                    .sv-branch::before {
+                        content: '';
+                        position: absolute;
+                        top: -1rem; /* Connects to horizontal line */
+                        left: 50%;
+                        width: 1px;
+                        height: 1rem;
+                        background: rgba(128,128,128,0.3);
+                    }
+                    
+                    .sv-card {
+                        padding: 1.25rem;
+                        border-radius: 12px;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center;
+                        transition: transform 0.2s ease;
+                    }
+                    .sv-card.legacy {
+                        border: 1px dashed rgba(128,128,128,0.4);
+                        opacity: 0.8;
+                    }
+                    .sv-card.new {
+                        border: 1px solid var(--primary, #0066cc);
+                        background: rgba(0, 102, 204, 0.05);
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+                    }
+                    .sv-icon { font-size: 1.25rem; margin-bottom: 0.75rem; }
+                    .sv-title { font-weight: 700; margin-bottom: 0.25rem; font-size: 1rem; color: var(--text-primary); }
+                    .sv-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 0.75rem; }
+                    .sv-badge {
+                        font-size: 0.7rem;
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                        font-weight: 600;
+                        padding: 4px 8px;
+                        border-radius: 4px;
+                    }
+                    .legacy .sv-badge { background: rgba(128,128,128,0.1); color: var(--text-secondary); }
+                    .new .sv-badge { background: var(--primary, #0066cc); color: white; }
+                    
+                    /* Light mode adjustments */
+                    @media (prefers-color-scheme: light) {
+                        .sv-infrastructure { background: var(--background-grey); border-color: rgba(0,0,0,0.1); }
+                        .sv-card.new { background: rgba(0, 102, 204, 0.05); border-color: var(--primary, #0066cc); }
+                        .sv-card.legacy { border-color: rgba(0,0,0,0.15); }
+                        .sv-branches-container::before, .sv-branches-container::after, .sv-branch::before { background: rgba(0,0,0,0.15); }
+                    }
+                    
+                    /* Dark mode adjustments */
+                    @media (prefers-color-scheme: dark) {
+                        .sv-infrastructure { background: #1a1a1a; border-color: #444; }
+                        .sv-card.new { background: rgba(66, 165, 245, 0.1); border-color: #42a5f5; }
+                        .sv-card.legacy { border-color: #555; }
+                        .sv-branches-container::before, .sv-branches-container::after, .sv-branch::before { background: #555; }
+                    }
+                    html.force-light .sv-infrastructure { background: var(--background-grey); border-color: rgba(0,0,0,0.1); }
+                    html.force-light .sv-card.new { background: rgba(0, 102, 204, 0.05); border-color: var(--primary, #0066cc); }
+                    html.force-light .sv-card.legacy { border-color: rgba(0,0,0,0.15); }
+                    html.force-light .sv-branches-container::before, 
+                    html.force-light .sv-branches-container::after, 
+                    html.force-light .sv-branch::before { background: rgba(0,0,0,0.15); }
+                    
+                    /* Mobile Adjustment */
+                    @media (max-width: 600px) {
+                        .sv-branches-container { gap: 0.5rem; }
+                        .sv-card { padding: 1rem 0.5rem; }
+                        .sv-title { font-size: 0.9rem; }
+                        .sv-desc { font-size: 0.75rem; }
+                    }
+                </style>
+
+                <div class="strategy-visual">
+                    <div class="sv-infrastructure">
+                        <i class="fa-solid fa-layer-group"></i> Existing Infrastructure
+                    </div>
+                    <div class="sv-branches-container">
+                        <div class="sv-branch">
+                            <div class="sv-card legacy">
+                                <div class="sv-icon" style="color: var(--text-secondary);"><i class="fa-solid fa-sliders"></i></div>
+                                <div class="sv-title">Core Platform</div>
+                                <div class="sv-desc">Manual configuration.<br>Full flexibility exposed.</div>
+                                <div class="sv-badge">Power Users</div>
+                            </div>
+                        </div>
+                        <div class="sv-branch">
+                            <div class="sv-card new">
+                                <div class="sv-icon" style="color: var(--primary, #0066cc);"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                                <div class="sv-title">Focused Product</div>
+                                <div class="sv-desc">Automated setup.<br>Guardrails preventing miscofigs.</div>
+                                <div class="sv-badge">Faculty</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+
+                <p>I had full control over design direction with one strict constraint: <b>Bot should be set up with just one click.</b></p>
 
                 <br>
 
@@ -319,16 +513,78 @@
 
                 <p>We set measurable OKRs:</p>
                 <ul>
-                    <li>Scale from 147 to 300 courses by fiscal year end</li>
+                    <li>Scale from 147 to 300 courses by the end of spring semester</li>
                     <li>Reduce bounce rate from 80% to under 60%</li>
                     <li>Decrease misconfiguration tickets from 20% to under 3%</li>
                     <li>Achieve time-to-first-bot under 60 seconds</li>
                 </ul>
 
-                <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="stakeholder_okrs" width="100%" alt="OKRs for Q&A Bot: Scale, Bounce Rate Reduction, Support Ticket Improvement, Setup Time">
-                    <figcaption>Clear metrics aligned business goals with product outcomes</figcaption>
-                </figure>
+                <!-- Option: Minimalist Stats Ribbon -->
+                <style>
+                    .okr-ribbon {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 2rem;
+                        justify-content: space-between;
+                        margin: 2.5rem 0;
+                        padding: 1.5rem 0;
+                        border-top: 1px solid rgba(128,128,128,0.2);
+                        border-bottom: 1px solid rgba(128,128,128,0.2);
+                    }
+                    .okr-stat-block {
+                        flex: 1;
+                        min-width: 140px;
+                        text-align: left;
+                    }
+                    .okr-stat-label {
+                        font-size: 0.8rem;
+                        color: var(--text-secondary);
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                        margin-bottom: 0.5rem;
+                        display: block;
+                    }
+                    .okr-stat-val {
+                        font-size: 1.8rem;
+                        font-weight: 800;
+                        color: var(--text-primary);
+                        line-height: 1.1;
+                        display: block;
+                        font-variant-numeric: tabular-nums;
+                    }
+                    .okr-stat-context {
+                        font-size: 0.85rem;
+                        color: var(--text-secondary);
+                        margin-top: 0.25rem;
+                    }
+                    .okr-arrow {
+                        font-size: 0.9em;
+                        vertical-align: middle;
+                    }
+                </style>
+
+                <div class="okr-ribbon">
+                    <div class="okr-stat-block">
+                        <span class="okr-stat-label">Adoption Scale</span>
+                        <span class="okr-stat-val">300+</span>
+                        <div class="okr-stat-context">Courses (from 147)</div>
+                    </div>
+                    <div class="okr-stat-block">
+                        <span class="okr-stat-label">Bounce Rate</span>
+                        <span class="okr-stat-val"><i class="fa-solid fa-arrow-down okr-arrow"></i> 60%</span>
+                        <div class="okr-stat-context">Down from 80%</div>
+                    </div>
+                    <div class="okr-stat-block">
+                        <span class="okr-stat-label">Support Tix</span>
+                        <span class="okr-stat-val">&lt; 3%</span>
+                        <div class="okr-stat-context">Miscofiguration error</div>
+                    </div>
+                    <div class="okr-stat-block">
+                        <span class="okr-stat-label">Setup Time</span>
+                        <span class="okr-stat-val">60s</span>
+                        <div class="okr-stat-context">Time-to-first-value</div>
+                    </div>
+                </div>
 
                 <p>Scope constraints kept engineering investment minimal: no core platform modifications, reuse existing RAG infrastructure, build automation layer for configuration, treat as standalone product. Approval was granted based on contained risk and clear success criteria.</p>
 
@@ -340,6 +596,14 @@
                 <p>The goal was a guaranteed, friction-free first experience for faculty.</p>
 
                 <p><b>Canvas LTI integration</b> was the foundation. Q&A Bot lives directly inside course navigation, with single sign-on, automatic student enrollment, and course context delivered without faculty intervention. The bot feels like course infrastructure rather than an external tool faculty have to manage. The cognitive overhead was fully removed.</p>
+
+                <figure class="article-video">
+                    <video width="100%" controls autoplay muted style="border: 1px solid var(--border-light);">
+                        <source src="vid/full-flow.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <figcaption>Q&A Bot setup flow: automatic content sync and launch in under 60 seconds</figcaption>
+                </figure>
 
                 <p><b>All manual configuration was eliminated.</b> The system automatically syncs syllabus and course content from Canvas, selects the appropriate model, and applies retrieval settings behind the scenes. Faculty never see temperature sliders or model lists. Conversation starters are pulled directly from course materials and validated to ensure the bot can actually answer them. The result is a setup flow that goes from content sync to launch in under a minute.</p>
 
@@ -359,15 +623,66 @@
                 <!-- ========== DESIGN RATIONALE ========== -->
                 <h2 class="article-h2" id="design-rationale">Design Rationale: Tradeoffs Between Simplicity and Features</h2>
 
+                <h3>Early explorations</h3>
+
+                <p>
+                    Using Cursor, I vibecoded alternate workflows, stripping down the existing app of complexity, whilst also leaving room for features, without agentic layers. These explorations guided the product and design strategy. 
+                </p>
+
+                <figure class="article-video">
+                    <video width="100%" controls autoplay muted style="border: 1px solid var(--border-light);">
+                        <source src="vid/exploration1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <figcaption>Exploration 1: Guided accordion-style workflow</figcaption>
+                </figure>
+
+                <figure class="article-video">
+                    <video width="100%" controls autoplay muted style="border: 1px solid var(--border-light);">
+                        <source src="vid/exploration1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <figcaption>Exploration 2: Step-by-Step workflow</figcaption>
+                </figure>
+                
+
                 <p>Two design decisions shaped the final product and illustrate the tension between building for scale versus building for trust.</p>
 
-                <p><b>Conversation starters and validation.</b><br> 
-                    Engineering pushed for fully AI-generated starters because it scaled cleanly and reduced manual work. The risk was predictability. If a generated example failed or felt off, first-time faculty would assume the entire bot was unreliable. For this audience, trust on first launch mattered more than long-term efficiency. We traded some scalability for confidence by shipping a small set of pre-generated, course-specific examples that were explicitly validated. Faculty could enable them instantly or replace them, but the default experience never asked them to gamble on an untested output.</p>
+                <p><b>Conversation starters and Customizations.</b><br> 
+                   As we framed requirements, I initially pushed for fully AI-generated starters because the approach scaled cleanly and minimized manual effort. The risk was AI slop. Tonality and personalization features also became a point of debate. To avoid over-investing upfront, I ultimately shipped a lean MVP without conversation starters and designed the system to scale later without reworking the core flow.</p>
 
                 <p><b>No migration path into advanced controls.</b><br> 
                     A bigger tradeoff came up around whether Q&A Bot should offer a migration path into the main CreateAI platform. Leadership saw value in letting users "graduate" into advanced controls over time. I pushed back because it solved the wrong problem. Power users were not blocked by complexity, and non-technical faculty did not aspire to manage 20 settings later. Adding migration paths would have increased cognitive load and reframed Q&A Bot as a simplified version of the platform instead of a product designed for a specific job. We chose clarity over optionality, even though it meant saying no to a feature that looked good on a roadmap.</p>
 
                 <p>That decision ultimately protected both products. Q&A Bot stayed focused on fast, reliable course setup, while the core platform remained the place for deep customization. The tradeoff was fewer crossovers, but the upside was clear positioning and fewer confused users.</p>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide5" width="100%" >
+                    <figcaption>By mapping both happy paths and failure cases upfront, I intentionally prioritized surface-level elements and pushed secondary complexity deeper into the flow, keeping the experience scalable without overwhelming users.</figcaption>
+                </figure>
+
+                <p><b>Hero section</b><br> 
+                    I was adamant about introducing a hero section for two reasons. First, it reduced the perceived wait time while course data was being fetched from Canvas by giving users something meaningful to engage with immediately. <br><br> Second, it acted as a clear product introduction. Instead of pushing demos, FAQs, and community links into a dense tool-tip driven UI, the hero consolidated these resources into a single, scannable space. New users could quickly understand what the product does, how long setup takes, and what value they would get, while also accessing demos, support, and additional resources if needed.</p>                     
+                    
+                    <p>This significantly reduced cognitive load, set expectations upfront, and helped convert first-time users during a moment that would otherwise feel like idle waiting.</p>
+
+                
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide6" width="100%" >
+                    <figcaption>Exploring UI for different user paths, including success and failure states.</figcaption>
+                </figure>
+
+                 <p><b>Clicks vs Scrolls</b><br> 
+                    This could have been a zero-click experience, but I intentionally kept a single action. That one click prevented silent misconfigurations and gave users a moment to review synced documents, watch demo videos, or reference help content without forcing them through an onboarding modal. In practice, this was lower friction than modal-driven onboarding, which would have introduced three to four additional clicks and interrupted the flow.</p>
+
+                    <p>To support this, I explored alternate layouts focused on minimizing setup friction while still enabling a fully functional bot. The goal was to reduce clicks wherever possible, even if that meant trading clicks for scroll when it lowered decision overhead. This was the trickiest part of the design.</p>
+
+                    <p>I started by stripping away entire screens and prioritizing only the import channels required for a successful first launch. By mapping failure states early, I removed the standalone file upload page and folded file management into the initial step. Users could add or remove files without navigating away, unlike the main platform. Consolidating everything into a single view allowed all required setup elements to be visible at once and reduced bot setup to a single, deliberate action.</p>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide7" width="100%" alt="Analysis of 8,000 projects showing 65% of usage clustered into two primary jobs">
+                    <figcaption>Lean screens shipped in one sprint.</figcaption>
+                </figure>
 
                 <hr class="intro-hr">
 
@@ -376,10 +691,148 @@
 
                 <p>We tested the product with a mixed group of faculty. Half were experienced users of the main platform, and half had never built a bot before. Setup time was measured through observed task completion rather than self-reporting. Technical users averaged 35 seconds, non-technical users averaged 45, with a mean of 40 seconds.</p>
 
-                <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="validation_results" width="100%" alt="Setup time comparison: Technical users 35s, Non-technical users 45s, Mean 40s">
-                    <figcaption>Measured setup times across user groups validated the focused product approach</figcaption>
-                </figure>
+                <style>
+                    .setup-time-chart {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr;
+                        gap: 2rem;
+                        margin: 2.5rem 0;
+                        padding: 2rem;
+                        background: var(--background-grey);
+                        border-radius: 12px;
+                    }
+                    .setup-bar-item {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    .setup-bar-label {
+                        font-size: 0.85rem;
+                        font-weight: 600;
+                        color: var(--text-secondary);
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                        margin-bottom: 1rem;
+                    }
+                    .setup-bar-container {
+                        height: 200px;
+                        background: rgba(0,0,0,0.05);
+                        border-radius: 8px;
+                        position: relative;
+                        overflow: hidden;
+                        margin-bottom: 0.5rem;
+                    }
+                    .setup-bar-fill {
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        background: linear-gradient(180deg, var(--primary, #0066cc), rgba(0, 102, 204, 0.7));
+                        border-radius: 8px 8px 0 0;
+                        display: flex;
+                        align-items: flex-end;
+                        justify-content: center;
+                        padding-bottom: 8px;
+                        color: white;
+                        font-weight: 700;
+                        font-size: 1.1rem;
+                        transition: all 0.6s ease-out;
+                    }
+                    .setup-bar-value {
+                        font-size: 1.6rem;
+                        font-weight: 800;
+                        color: var(--text-primary);
+                        margin-bottom: 0.5rem;
+                    }
+                    .setup-bar-context {
+                        font-size: 0.9rem;
+                        color: var(--text-secondary);
+                    }
+                    
+                    /* Light mode - use design system colors */
+                    @media (prefers-color-scheme: light) {
+                        .setup-time-chart { background: var(--background-grey); }
+                        .setup-bar-label {
+                            color: var(--text-primary);
+                        }
+                        .setup-bar-value {
+                            color: var(--text-primary);
+                        }
+                        .setup-bar-context {
+                            color: var(--text-secondary);
+                        }
+                        .setup-bar-container {
+                            background: rgba(0,0,0,0.1);
+                        }
+                    }
+                    
+                    /* Dark mode */
+                    @media (prefers-color-scheme: dark) {
+                        .setup-time-chart { background: #1a1a1a; }
+                        .setup-bar-container { background: rgba(255,255,255,0.05); }
+                    }
+                    html.force-light .setup-time-chart { background: var(--background-grey); }
+                    html.force-light .setup-bar-label { color: var(--text-primary); }
+                    html.force-light .setup-bar-value { color: var(--text-primary); }
+                    html.force-light .setup-bar-context { color: var(--text-secondary); }
+                    html.force-light .setup-bar-container { background: rgba(0,0,0,0.1); }
+                    
+                    /* Mobile */
+                    @media (max-width: 600px) {
+                        .setup-time-chart {
+                            grid-template-columns: 1fr;
+                            gap: 1.5rem;
+                            padding: 1.5rem;
+                        }
+                    }
+                </style>
+
+                <div class="setup-time-chart">
+                    <div class="setup-bar-item">
+                        <div class="setup-bar-label">Technical Users</div>
+                        <div class="setup-bar-container">
+                            <div class="setup-bar-fill" style="height: 78%;">35s</div>
+                        </div>
+                    </div>
+                    <div class="setup-bar-item">
+                        <div class="setup-bar-label">Non-Technical Users</div>
+                        <div class="setup-bar-container">
+                            <div class="setup-bar-fill" style="height: 100%;">45s</div>
+                        </div>
+                    </div>
+                    <div class="setup-bar-item">
+                        <div class="setup-bar-label">Mean</div>
+                        <div class="setup-bar-container">
+                            <div class="setup-bar-fill" style="height: 89%;">40s</div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    (function() {
+                        const chart = document.querySelector('.setup-time-chart');
+                        if (!chart) return;
+                        
+                        const observer = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                                    entry.target.classList.add('animated');
+                                    // Animate bars
+                                    const bars = entry.target.querySelectorAll('.setup-bar-fill');
+                                    bars.forEach((bar, idx) => {
+                                        const height = bar.style.height;
+                                        bar.style.height = '0';
+                                        setTimeout(() => {
+                                            bar.style.height = height;
+                                        }, idx * 100);
+                                    });
+                                    observer.unobserve(entry.target);
+                                }
+                            });
+                        }, { threshold: 0.3 });
+                        
+                        observer.observe(chart);
+                    })();
+                </script>
 
                 <p>Testing also validated the architecture choice. Non-technical users hesitated briefly at conversation starter selection, which led us to add previews and clearer confirmation states. Technical users, unexpectedly, preferred the simplified flow for quick course bots even though they still used the main platform for advanced work. The two products complemented each other without cannibalization.</p>
 
@@ -412,12 +865,12 @@
                     <h3 class="next-steps-title">Continue reading</h3>
                     <div class="next-steps-grid">
                         <a href="../nextgen/nextgen.html" class="next-step-card">
-                            <span class="next-step-label">Next project</span>
-                            <span class="next-step-name">NextGen Platform Redesign →</span>
+                            <span class="next-step-label">Next Project</span>
+                            <span class="next-step-name">AI tool for Clinical Research →</span>
                         </a>
-                        <a href="../LSR/LSR.html" class="next-step-card">
-                            <span class="next-step-label">Related work</span>
-                            <span class="next-step-name">Learning Space Research →</span>
+                        <a href="../../blogs/tyranny-of-the-a-b-test/tyranny-of-the-a-b-test.html" class="next-step-card">
+                            <span class="next-step-label">Check out my blogs</span>
+                            <span class="next-step-name">Tyranny of the A/B test →</span>
                         </a>
                     </div>
                 </div>
@@ -439,6 +892,57 @@
     </div>
 
     <script>
+        (function() {
+            // Skeleton Loader Logic
+            function initSkeletonLoader() {
+                const mediaElements = document.querySelectorAll('.article-body figure img, .article-body figure video');
+                
+                mediaElements.forEach(media => {
+                    // Skip if already handled
+                    if (media.classList.contains('media-loaded-content')) return;
+
+                    const parentFigure = media.closest('figure');
+                    if (!parentFigure) return;
+
+                    // Apply initial states
+                    media.classList.add('media-loading-content');
+                    parentFigure.classList.add('media-skeleton');
+
+                    const handleLoad = () => {
+                        // Remove skeleton and fade in content
+                        parentFigure.classList.remove('media-skeleton');
+                        media.classList.remove('media-loading-content');
+                        media.classList.add('media-loaded-content');
+                        
+                        // Remove min-height enforcement after load so content dictates height
+                        parentFigure.style.minHeight = 'auto';
+                    };
+
+                    // Check if already complete
+                    if (media.tagName === 'IMG' && media.complete) {
+                        handleLoad();
+                    } else if (media.tagName === 'VIDEO' && media.readyState >= 3) {
+                        handleLoad();
+                    } else {
+                        // Add listeners
+                        media.addEventListener('load', handleLoad);
+                        media.addEventListener('loadeddata', handleLoad); // For video
+                        media.addEventListener('error', () => {
+                            parentFigure.classList.remove('media-skeleton'); // Remove skeleton even on error
+                        });
+                    }
+                });
+            }
+
+            // Run on load
+            document.addEventListener('DOMContentLoaded', initSkeletonLoader);
+            
+            // Re-run if themes change (sometimes causes img src reload)
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+                setTimeout(initSkeletonLoader, 100);
+            });
+        })();
+
         (function() {
             const fill = document.querySelector('.reading-progress-fill');
             const track = document.querySelector('.reading-progress');
