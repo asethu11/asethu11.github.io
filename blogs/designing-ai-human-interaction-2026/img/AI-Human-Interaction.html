@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Analytics: Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
+
+        <!-- Analytics: Clarity tracking code -->
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "vaaig4fq2o");
+        </script>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Designing AI Answers Around How People Actually Read Them</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="How users perceive AI answers in practice and how to design responses that match context, tone, and trust.">
+        <meta name="keywords" content="AI, UX, Product Design, Conversational AI, Answer Design, Trust, Tone">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <!-- Shared site script -->
+        <script src="../../../script.js"></script>
+        
+        <!-- Shared blog styles -->
+        <link rel="stylesheet" href="../../../blogs/blogs.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="icon" href="../../../img/favicon.png" type="image/png">
+
+        <!-- Theme-aware image switching -->
+        <script>
+            function isDarkTheme() {
+                const forcedLight = document.documentElement.classList.contains('force-light');
+                const forcedDark = document.documentElement.classList.contains('force-dark');
+                if (forcedLight) return false;
+                if (forcedDark) return true;
+                return window.matchMedia("(prefers-color-scheme: dark)").matches;
+            }
+
+            function updateImages() {
+                const isDarkMode = isDarkTheme();
+                document.querySelectorAll(".theme-img").forEach(img => {
+                    const imageName = img.dataset.name;
+                    const newSrc = isDarkMode
+                        ? `img/dk/${imageName}.png`
+                        : `img/lt/${imageName}.png`;
+
+                    if (img.src !== newSrc) {
+                        img.src = newSrc;
+                    }
+                });
+            }
+
+            const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+            darkModeQuery.addEventListener("change", updateImages);
+            document.addEventListener("DOMContentLoaded", updateImages);
+        </script>
+    </head>
+
+    <body id="top">
+        <!-- Back to home -->
+        <a href="../../../index.html" class="back-button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Home
+        </a>
+
+        <!-- Sticky TOC -->
+        <aside class="toc-sticky" aria-label="Table of contents">
+            <div class="toc-wrapper">
+                <h3 class="toc-title">Contents</h3>
+                <div class="reading-progress" aria-hidden="true">
+                    <div class="reading-progress-fill"></div>
+                </div>
+                <nav class="toc-nav">
+                    <ul class="toc-list">
+                        <li><a href="#how-ai-answers" data-ga-event="click" data-ga-event-name="toc_how_ai_answers" data-ga-event-category="navigation">How AI Answers</a></li>
+                        <li><a href="#empathy" data-ga-event="click" data-ga-event-name="toc_empathy" data-ga-event-category="navigation">Empathy</a></li>
+                        <li><a href="#concise" data-ga-event="click" data-ga-event-name="toc_concise" data-ga-event-category="navigation">Concise vs Lengthy</a></li>
+                        <li><a href="#tone" data-ga-event="click" data-ga-event-name="toc_tone" data-ga-event-category="navigation">Tone</a></li>
+                        <li><a href="#different-users" data-ga-event="click" data-ga-event-name="toc_different_users" data-ga-event-category="navigation">Different Users</a></li>
+                        <li><a href="#frustration" data-ga-event="click" data-ga-event-name="toc_frustration" data-ga-event-category="navigation">Frustration</a></li>
+                        <li><a href="#voice-text" data-ga-event="click" data-ga-event-name="toc_voice_text" data-ga-event-category="navigation">Voice vs Text</a></li>
+                        <li><a href="#typing-fatigue" data-ga-event="click" data-ga-event-name="toc_typing_fatigue" data-ga-event-category="navigation">Typing Fatigue</a></li>
+                        <li><a href="#putting-it-together" data-ga-event="click" data-ga-event-name="toc_putting_it_together" data-ga-event-category="navigation">Putting It Together</a></li>
+                    </ul>
+                </nav>
+                <a class="toc-top" href="#top" data-ga-event="click" data-ga-event-name="back_to_top" data-ga-event-category="navigation">Back to top</a>
+            </div>
+        </aside>
+
+        <div class="toast" role="alert" aria-live="polite" aria-atomic="true">
+            <div class="toast-title">This content is optimized for light mode</div>
+            <div class="toast-text">You're viewing in dark mode. Switch to light for the intended contrast and visuals.</div>
+            <div class="toast-actions">
+                <button class="btn-primary" id="toast-switch-light" data-ga-event="click" data-ga-event-name="switch_to_light_mode" data-ga-event-category="theme">Switch to light mode</button>
+                <button class="btn-ghost" id="toast-dismiss" data-ga-event="click" data-ga-event-name="dismiss_toast" data-ga-event-category="notification">Dismiss</button>
+            </div>
+        </div>
+
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme" data-ga-event="click" data-ga-event-name="toggle_theme" data-ga-event-category="theme">Switch to light</button>
+        
+        <div class="article-container">
+            <article class="article-body">
+
+                <h1 class="article-h1">Designing AI Answers Around How People Actually Read Them</h1>
+
+                <p>Users don’t see your model card or prompt stack. They see answers. They judge those answers very quickly: useful or useless, calm or annoying, respectful or condescending.</p>
+
+                <p>This piece treats AI answers as the main design surface. The focus is: how people perceive different kinds of responses, and how to adjust those responses for different users and situations.</p>
+
+                <hr>
+
+                <h2 class="article-h2" id="how-ai-answers">How AI Answers Come Across Right Now</h2>
+
+                <p>Most AI products ship with a single <b>“voice”</b> and a single answer shape. In practice, people experience very different things:</p>
+
+                <ul>
+                    <li>Some see long, hedged responses and describe them as waffle.</li>
+                    <li>Some see short, blunt responses and describe them as cold.</li>
+                    <li>Some see repeated sympathy lines and describe them as fake.</li>
+                    <li>Some see clearly structured, direct responses and quietly keep using them.</li>
+                </ul>
+
+                <p><b>Perception is not stable.</b> It depends on the task, the user’s state of mind, the channel, and the user’s background. The same answer can feel helpful to one person and irritating to another.</p>
+
+                <p><b>Designing better answers means taking those differences seriously</b> instead of hoping one style will work for everyone.</p>
+
+                <hr>
+
+                <h2 class="article-h2" id="empathy">Empathy, Annoyance, and “I’m Sorry to Hear That”</h2>
+
+                <p>A lot of AI replies start with <b>“I’m sorry to hear that.”</b> It is meant to soften the response. Users often experience it as a template.</p>
+
+                <p>When that line is short and clearly tied to what the user said, it tends to be tolerated. For example: “I’m sorry to hear about the family emergency. Here’s how the late policy works in this course.” The system shows it picked up the emotional context and then moves on.</p>
+
+                <p>When the same sentence appears for every problem, from shipping delays to serious loss, users stop reading it as care. It becomes a <b>verbal loading spinner</b>. In log data and studies, people say they notice this repetition and start to feel that the system is <b>“pretending”</b> rather than listening. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6039770/" target="_blank" rel="noopener">[pmc.ncbi.nlm.nih]</a></p>
+
+                <p>People also make a clear distinction between AI empathy and human empathy. They may rate AI‑generated comforting text as well written, but still <b>prefer a slower human response</b> when the topic is genuinely sensitive. That preference doesn’t go away because the model learned a nicer way to say <b>“that must be hard.”</b> <a href="https://techxplore.com/news/2025-06-human-empathy-age-ai.html" target="_blank" rel="noopener">[techxplore]</a></p>
+
+                <p><b>From a design point of view, the question becomes:</b> when does showing sympathy help the answer land, and when does it increase annoyance?</p>
+
+                <p><b>A workable rule:</b> treat empathy as a <b>small, optional element</b>. One context‑specific sentence is enough when the user shares something heavy. The rest of the answer should focus on what they can do. Generic, repeated sympathy should be treated as a smell and used sparingly.</p>
+
+                <h2 class="article-h2" id="concise">Concise vs Lengthy: What People Actually Want</h2>
+
+                <p>There is a lot of energy online around <b>“make AI answers shorter.”</b> Short answers are not always better. What matters is <b>how quickly the useful part appears</b>, and how much effort the answer demands in that context.</p>
+
+                <p><b>Short answers</b> tend to work better when:</p>
+
+                <ul>
+                    <li>The task is simple and well defined.</li>
+                    <li>The user is on a small screen or low bandwidth.</li>
+                    <li>The user has already signalled impatience or frustration.</li>
+                    <li>The question is factual and the stakes are low.</li>
+                </ul>
+
+                                <br>
+
+                <p><b>Longer or more detailed answers</b> tend to work better when:</p>
+
+                <ul>
+                    <li>The user is clearly trying to learn or understand a concept.</li>
+                    <li>The question is open‑ended and trade‑off heavy.</li>
+                    <li>The stakes are high and people want to understand the reasoning.</li>
+                </ul>
+
+
+
+                <p>Studies of AI verbosity controls show exactly this split: shorter responses improve satisfaction and reduce errors in quick, transactional interactions, while longer responses improve satisfaction in educational and research‑style tasks, but only when the main point is front‑loaded. <a href="https://sparkco.ai/blog/mastering-gpt-5-verbosity-and-reasoning-effort-controls" target="_blank" rel="noopener">[sparkco]</a></p>
+
+                <p><b>The design implication is simple:</b> decide which kind of interaction you are in, then shape the answer to it.</p>
+
+                <p><b>A good default shape is:</b></p>
+
+                <ul>
+                    <li>Lead with a clear outcome or recommendation.</li>
+                    <li>Add one or two lines that capture key caveats.</li>
+                    <li>Offer deeper explanation below or on request.</li>
+                </ul>
+
+                <p>That structure lets the same system feel concise to someone skimming the top and thorough to someone who wants to read everything.</p>
+
+                <hr>
+
+                <h2 class="article-h2" id="tone">Empathetic vs Straight: How People Read Tone</h2>
+
+                <p><b>Tone interacts with length.</b></p>
+
+                <p>Straight, factual answers can feel refreshing in some contexts and harsh in others. Empathetic answers can feel grounding in some contexts and fake in others. How people read them depends on what they came for and how much emotional load they are carrying.</p>
+
+                <p>In day‑to‑day support flows, most users report valuing <b>clear instructions, fast resolution, and fairness</b> more than emotional language. A short acknowledgment plus a clear path to a solution is usually enough. Over time, repeated apologies and long, padded sentences are cited as reasons for dissatisfaction. <a href="https://www.cmswire.com/contact-center/what-data-tells-us-about-the-future-of-chatbots-in-cx/" target="_blank" rel="noopener">[cmswire]</a></p>
+
+                <p>In mental‑health or emotionally heavy contexts, the same straight answer can feel dismissive. Studies there show that <b>simple, specific acknowledgment</b> before skills‑based suggestions improves perceived support and reduces feelings of being brushed aside. Excessive or theatrical empathy, on the other hand, can feel intrusive or insincere, especially when the advice that follows is generic. <a href="https://www.sciencedirect.com/science/article/pii/S2949882124000276" target="_blank" rel="noopener">[sciencedirect]</a></p>
+
+                <p><b>So tone should follow the problem type and user state</b>, not live as a fixed <b>“brand voice.”</b> For most products, that means keeping things fairly straight by default, adding a small amount of empathy when users reveal something personal, and backing off quickly when it starts to get in the way of the actual help.</p>
+
+                <hr>
+
+                <h2 class="article-h2" id="different-users">Different Users, Different Reads</h2>
+
+                <p>The same answer does not land the same way for everyone. <b>Age is one axis, but not the only one.</b></p>
+
+                <p>Younger users often work with AI tools daily. Surveys show they are more willing to try AI for many tasks and more comfortable with direct language and short responses. They skim by default and expect systems to learn their preferences over time. <a href="https://www.barna.com/research/generations-ai/" target="_blank" rel="noopener">[barna]</a></p>
+
+                <p>Older adults approach AI with more caution. They use it less, trust it less, and place more emphasis on intelligibility, safety, and human oversight. They are more sensitive to unclear language, missing explanations, and moments where they feel stuck. <a href="https://dl.acm.org/doi/10.1145/3719160.3736619" target="_blank" rel="noopener">[dl.acm]</a></p>
+
+                <p>That difference translates into answer perception. A very short answer with no explanation can feel efficient to a younger user and incomplete to an older user. A long answer with polite framing can feel respectful to one and exhausting to the other.</p>
+
+                                <br>
+
+                <p><b>Tone and depth can be personalized without changing the meaning.</b> For example:</p>
+
+                <table>
+                    <tr>
+                        <th class="table-header">Ages</th>
+                        <th class="table-header">Tone</th>
+                        <th class="table-header">Channel</th>
+                        <th class="table-header">Depth</th>
+                        <th class="table-header">Expectations</th>
+                    </tr>
+                    <tr>
+                        <td class="table-first-col">Gen Z / Millennials</td>
+                        <td>Direct, tool-like; empathy optional</td>
+                        <td>Text-first, inline assistants</td>
+                        <td>TL;DR up front, expand on demand</td>
+                        <td>Efficiency, self-service, personalization; fast + context-aware</td>
+                    </tr>
+                    <tr>
+                        <td class="table-first-col">Gen X / General Adults</td>
+                        <td>Balanced, professional</td>
+                        <td>Multi-modal (text + voice options)</td>
+                        <td>Moderate, key points with optional detail</td>
+                        <td>Mix of human preference + digital acceptance</td>
+                    </tr>
+                    <tr>
+                        <td class="table-first-col">Boomers / Older Adults</td>
+                        <td>Patient, formal (not patronizing)</td>
+                        <td>Voice or large-text UIs; slower pacing, clear confirmation</td>
+                        <td>Step-by-step, explicit recaps</td>
+                        <td>Prefer humans; need clear structure, escalation, recoverability</td>
+                    </tr>
+                </table>
+
+                <ul>
+                    <li><b>Younger user defaults:</b> plainer wording, tight answers, clear “see details” and “regenerate” controls, visible sources.</li>
+                    <li><b>Older adult defaults:</b> slightly more explicit phrasing, more step‑by‑step structuring, explicit recaps, obvious human handoff.</li>
+                </ul>
+
+                <p>Students, power users, anxious users, and low‑literacy users all bring their own filters. A design pattern that helps is to define a few <b>“interaction roles”</b> (tool, tutor, coach, clerk) and align answer style to the role in that flow, rather than chasing one catch‑all tone.</p>
+
+                
+
+                <br>
+                <h3 class="article-h3">Personality and How People Read the Same Answer</h3>
+
+                <p>Personality research backs up what many designers see in practice: different people react very differently to the same reply.</p>
+
+                <p>Studies that grouped users by MBTI‑style profiles and watched their behaviour with chatbots found clear patterns in trust and engagement. Extraverted–intuitive users tended to hold longer conversations and rated the chatbot as more trustworthy when it was helpful and responsive. Extraverted–sensing users kept conversations brief and reported low trust almost regardless of answer quality. Introverted–sensing users engaged the longest and gave the highest trust scores, while some analytical types, like INTJ, stayed skeptical even when responses were accurate.</p>
+
+                <p>On the system side, work on shaping chatbot personality shows that small conversational cues (greetings, small talk, “remembering” details) shift how users perceive the bot. Social cues make it feel warmer and more human‑like, which some users appreciate. The same cues can make others less comfortable, especially when the bot feels too human for something they still see as a tool. Simple politeness and non‑judgmental language are the safest bets: they consistently improve acceptance without pushing too far into artificial “friend” territory.</p>
+
+                <p>For answer design, this points towards a simple strategy. Instead of forcing one tone and depth on everyone, expose a small number of style controls and let users choose where they sit. Options like “more direct” vs “more conversational” or “short answers” vs “detailed answers” can map directly to answer length, level of empathy, and amount of explanation. Personality matching becomes less about guessing MBTI from behaviour and more about giving people a handle on how the system talks to them.</p>
+
+                <br>
+                <h3 class="article-h3">Adoption, Trust, and the Headspace Users Bring In</h3>
+
+                <p>How people read answers is also shaped by the general mood around AI use.</p>
+
+                <p>Recent surveys show that a growing majority of adults have tried AI tools and that regular usage is rising in both personal and work contexts. At the same time, only a smaller fraction say they highly trust companies to use AI responsibly, and many express concern about accuracy, bias, and data use. In some studies, more than half of respondents say they would support stronger restrictions or pauses on advanced AI, which is a good indication of the underlying anxiety.</p>
+
+                <p>Inside organisations, the picture is similar. Many leaders describe AI as strategically important, and usage across teams is growing, but a lot of people still see day‑to‑day tools as unreliable, hard to integrate, or politically charged at work. Employees report being both hopeful and nervous about what AI will mean for their roles, and this ambivalence shows up in how they react to AI‑generated output.</p>
+
+                <p><b>For designers, this context matters.</b> Users are not coming to your answers as blank slates. They are usually in a state of <b>“I use this because it helps, but I don’t fully trust it.”</b> Overly confident claims, opaque reasoning, and heavy synthetic empathy land on top of that. People are quick to interpret those as signals of unreliability or spin.</p>
+
+                <p><b>Answer patterns that fit this headspace</b> are the ones that:</p>
+
+                <ul>
+                    <li>State outcomes clearly and early.</li>
+                    <li>Show, in a sentence or two, why the answer looks the way it does or what it is based on.</li>
+                    <li>Make limits explicit, especially in edge cases and high‑stakes topics.</li>
+                    <li>Keep control visible so users can edit, regenerate, or escalate without feeling stuck.</li>
+                </ul>
+
+                <p>When answers look like that, they respect the fact that many users are using AI tools while still holding back full trust. Over time, that consistency does more to improve perception than any amount of branding language about how <b>“responsible”</b> the AI is.</p>
+
+                <hr>
+
+                <h2 class="article-h2" id="frustration">Designing Conversations When the User Is Frustrated</h2>
+
+                <p><b>Frustration is where answer design usually fails first.</b></p>
+
+                <p>You can see frustration build in conversations: the user repeats the same intent, uses sharper words, shortens their messages, and eventually says <b>“this is useless”</b> or <b>“I want a human.”</b> Research on frustration detection in dialog systems shows that simple sentiment analysis misses a lot of this. Looking at patterns across turns works better: repetition, negations, and explicit escalation requests. <a href="https://aclanthology.org/2025.coling-industry.23.pdf" target="_blank" rel="noopener">[aclanthology]</a></p>
+
+                <p><b>Once frustration is present, the style of answer should change.</b> In that state, extra sympathy tends to feel like stalling. The user has already decided the system isn’t understanding them. More <b>“I’m sorry you’re having trouble”</b> on top of that can read as condescending.</p>
+
+
+                <p><b>For frustrated users</b>, answers should become more concise, more literal, and more action‑oriented. That usually means:</p>
+                <ul>
+                    <li>Shorter responses that get directly to what the system can and cannot do.</li>
+                    <li>Fewer open questions and more concrete suggestions.</li>
+                    <li>Clear indications of limits, followed by options to escalate.</li>
+                </ul>
+
+                <p>There is also a typing angle. Frustrated users often stop writing full sentences and drop back to fragments or single words. Long answer templates that assume a calm reader make very little sense at this point. A one‑word input is a strong signal: drop the politeness and give them what they came for.</p>
+
+                <p>In this mode, <b>“time to value”</b> becomes the main metric. <b>The right answer is the shortest one that genuinely moves the situation forward</b>, or hands it smoothly to a person who can.</p>
+
+                <hr>
+
+                <h2 class="article-h2" id="voice-text">Voice vs Text: Two Very Different Contexts</h2>
+
+                <p><b>Voice answers and text answers are not just two output formats.</b> They change how people perceive the same content.</p>
+
+                <p>In voice:</p>
+
+                <ul>
+                    <li>Users process information in real time.</li>
+                    <li>They cannot skim or re‑read without an extra command.</li>
+                    <li>Long responses feel heavier and misrecognitions feel more disruptive.</li>
+                </ul><br>
+
+                <p>In text:</p>
+
+                <ul>
+                    <li>Users can scroll and skim.</li>
+                    <li>They can visually locate key phrases.</li>
+                    <li>Length is tolerable if structure is clear.</li>
+                </ul>
+
+                <p>User studies on conversational breakdowns show that long, complex voice turns with no chance to confirm or correct are strongly associated with frustration and perceived <b>“robot stupidity.”</b> In text, the equivalent is a block of unbroken prose that hides the key point. <a href="https://repository.tilburguniversity.edu/bitstreams/0637e186-9faa-4634-909b-4597293adf83/download" target="_blank" rel="noopener">[repository.tilburguniversity]</a></p>
+
+                <p>Voice should therefore favor <b>short, focused turns</b>, frequent confirmations, and explicit checks before giving more detail. Text can carry more content, but it should keep the main answer at the top and use layout to make key information easy to find.</p>
+
+                <p>This distinction also affects how empathy and formality feel. A long, emotionally loaded paragraph in voice can quickly feel overbearing. The same text in a scrollable chat window is easier to skim past if the user just wants the steps.</p>
+
+                <hr>
+
+                <h2 class="article-h2" id="typing-fatigue">Typing Fatigue and Interaction Cost</h2>
+
+                <p>Typing effort is often invisible in dashboards, but very visible to users. When people have to type long descriptions, repeat information, or constantly correct what the AI misunderstood, they feel as if they are doing the system’s work.</p>
+
+                <p><b>Typing fatigue shows up as:</b></p>
+
+                <ul>
+                    <li>Messages getting shorter over time.</li>
+                    <li>Dropped punctuation and detail.</li>
+                    <li>Switching from natural sentences to keywords.</li>
+                    <li>Sudden abandonment.</li>
+                </ul>
+
+                <p><b>Reducing typing is both a usability and a perception win.</b> The system can:</p>
+
+                <ul>
+                    <li>Infer intent from shorter inputs instead of insisting on full paragraphs.</li>
+                    <li>Offer suggested replies, buttons, and chips for common follow‑ups.</li>
+                    <li>Carry context forward so the user does not have to re‑enter known information.</li>
+                    <li>Use voice input as an option when appropriate, with careful confirmation.</li>
+                </ul>
+
+                <p>Work on communication tools for people with high typing burdens shows that <b>cutting required input actions</b> significantly reduces fatigue and increases willingness to use the system. The same effect applies to general users in less extreme form. Every extra turn and every repeated field raises the temperature a bit. <a href="https://research.google/blog/speakfaster-revolutionizing-communication-for-people-with-severe-motor-impairments/" target="_blank" rel="noopener">[research]</a></p>
+
+                <hr>
+
+                <h2 class="article-h2" id="putting-it-together">Putting It Together</h2>
+
+                <p>When you look at AI answers through the lens of perception, a few themes repeat:</p>
+
+                <ul>
+                    <li>People want the main answer early, not hidden behind hedging.</li>
+                    <li>They want tone that matches the context and their state, not generic warmth.</li>
+                    <li>They want the system to change how it talks when they are clearly annoyed.</li>
+                    <li>They read the same words differently depending on age, experience, and task.</li>
+                    <li>They notice when the system makes them work harder than necessary.</li>
+                </ul>
+
+                <p><b>Designing better AI answers is about encoding these expectations into the response patterns themselves.</b> That means:</p>
+
+                <ul>
+                    <li>Shape empathy as a small, targeted element instead of a script.</li>
+                    <li>Adjust length and detail based on task, channel, and signals from the user.</li>
+                    <li>Respond to frustration with shorter, more direct answers and quick exits.</li>
+                    <li>Tune tone and structure for different user groups without changing the facts.</li>
+                    <li>Lower interaction cost so answers feel like help, not another chore.</li>
+                </ul>
+
+                <p><b>The model can stay exactly the same.</b> The experience changes when the answers match how people actually read them.</p>
+
+                <footer>
+                    <br><br><br>
+                    <hr><br>
+                    <div class="footer-container">
+                        <a href="#top" class="headtag">back to top<span class="arr">↑</span></a>
+                    </div>
+                </footer>
+            </article>
+        </div>
+
+        <!-- TOC progress + active section tracking -->
+        <script>
+            (function() {
+                const fill = document.querySelector('.reading-progress-fill');
+                const track = document.querySelector('.reading-progress');
+                const tocWrapper = document.querySelector('.toc-wrapper');
+                const tocNav = document.querySelector('.toc-nav');
+                if (!fill) return;
+
+                function updateTrackBounds() {
+                    if (!track || !tocWrapper || !tocNav) return;
+                    const wrapperRect = tocWrapper.getBoundingClientRect();
+                    const navRect = tocNav.getBoundingClientRect();
+                    const topOffset = navRect.top - wrapperRect.top;
+                    const height = navRect.height;
+                    track.style.top = `${topOffset}px`;
+                    track.style.height = `${height}px`;
+                }
+
+                function updateProgress() {
+                    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 98 : 0;
+                    fill.style.height = `${progress}%`;
+                }
+
+                updateTrackBounds();
+                updateProgress();
+                document.addEventListener('scroll', updateProgress, { passive: true });
+                window.addEventListener('resize', () => {
+                    updateTrackBounds();
+                    updateProgress();
+                });
+            })();
+
+            (function() {
+                const toast = document.querySelector('.toast');
+                const toastSwitch = document.getElementById('toast-switch-light');
+                const toastDismiss = document.getElementById('toast-dismiss');
+                const themeToggle = document.getElementById('theme-toggle');
+
+                function showToastIfNeeded() {
+                    if (!toast) return;
+                    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    const dismissed = sessionStorage.getItem('lightModeToastDismissed') === '1';
+                    const forcedLight = document.documentElement.classList.contains('force-light');
+                    const forcedDark = document.documentElement.classList.contains('force-dark');
+                    if (prefersDark && !dismissed && !forcedLight && !forcedDark) {
+                        toast.classList.add('show');
+                    }
+                }
+
+                function applyForcedTheme(theme) {
+                    document.documentElement.classList.remove('force-light', 'force-dark');
+                    if (theme === 'light') {
+                        document.documentElement.classList.add('force-light');
+                    } else if (theme === 'dark') {
+                        document.documentElement.classList.add('force-dark');
+                    }
+                    if (theme) {
+                        sessionStorage.setItem('forcedTheme', theme);
+                        sessionStorage.setItem('lightModeToastDismissed', '1');
+                    } else {
+                        sessionStorage.removeItem('forcedTheme');
+                    }
+                    updateImages();
+                    updateToggleLabel();
+                    if (toast) toast.classList.remove('show');
+                }
+
+                function dismissToast() {
+                    sessionStorage.setItem('lightModeToastDismissed', '1');
+                    if (toast) toast.classList.remove('show');
+                }
+
+                function updateToggleLabel() {
+                    if (!themeToggle) return;
+                    const isForcedLight = document.documentElement.classList.contains('force-light');
+                    const isForcedDark = document.documentElement.classList.contains('force-dark');
+                    const isDark = isForcedDark || (!isForcedLight && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                    themeToggle.textContent = isDark ? 'Switch to light' : 'Switch to dark';
+                    themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+                }
+
+                function toggleTheme() {
+                    const isForcedLight = document.documentElement.classList.contains('force-light');
+                    const isForcedDark = document.documentElement.classList.contains('force-dark');
+                    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                    if (isForcedLight) {
+                        applyForcedTheme('dark');
+                    } else if (isForcedDark) {
+                        applyForcedTheme('light');
+                    } else {
+                        applyForcedTheme(prefersDark ? 'light' : 'dark');
+                    }
+                }
+
+                if (toastSwitch) {
+                    toastSwitch.addEventListener('click', () => applyForcedTheme('light'));
+                }
+
+                if (toastDismiss) {
+                    toastDismiss.addEventListener('click', dismissToast);
+                }
+
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', toggleTheme);
+                }
+
+                const storedTheme = sessionStorage.getItem('forcedTheme');
+                if (storedTheme === 'light' || storedTheme === 'dark') {
+                    applyForcedTheme(storedTheme);
+                } else {
+                    updateToggleLabel();
+                }
+
+                showToastIfNeeded();
+            })();
+
+            (function() {
+                const sections = document.querySelectorAll('h2[id]');
+                const tocLinks = document.querySelectorAll('.toc-list a');
+
+                function updateActiveLink() {
+                    let currentSection = null;
+                    const scrollPos = window.scrollY + (window.innerHeight * 0.5);
+
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop;
+                        if (scrollPos >= sectionTop) {
+                            currentSection = section;
+                        }
+                    });
+
+                    if (currentSection) {
+                        const id = currentSection.getAttribute('id');
+                        tocLinks.forEach(link => link.classList.remove('active'));
+                        const activeLink = document.querySelector(`.toc-list a[href="#${id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                }
+
+                window.addEventListener('scroll', updateActiveLink);
+                updateActiveLink();
+            })();
+        </script>
+        <script src="../../../script.js"></script>
+    </body>
+</html>
