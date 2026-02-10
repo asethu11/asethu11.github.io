@@ -31,12 +31,12 @@
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
 
         <!-- Shared site script -->
-        <script src="../../../script.js"></script>
+        <script src="../../script.js"></script>
         
         <!-- Shared blog styles -->
-        <link rel="stylesheet" href="../../../blogs/blogs.css">
+        <link rel="stylesheet" href="../../blogs/blogs.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="icon" href="../../../img/favicon.png" type="image/png">
+        <link rel="icon" href="../../img/favicon.png" type="image/png">
 
         <!-- Theme-aware image switching -->
         <script>
@@ -70,7 +70,7 @@
 
     <body id="top">
         <!-- Back to home -->
-        <a href="../../../index.html" class="back-button">
+        <a href="../../index.html" class="back-button">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -120,6 +120,10 @@
                 <p>Users don’t see your model card or prompt stack. They see answers. They judge those answers very quickly: useful or useless, calm or annoying, respectful or condescending.</p>
 
                 <p>This piece treats AI answers as the main design surface. The focus is: how people perceive different kinds of responses, and how to adjust those responses for different users and situations.</p>
+
+                <figure class="article-figure">
+                    <img src="img/slide1.jpeg" class="article-image">
+                </figure>
 
                 <hr>
 
@@ -201,7 +205,11 @@
 
                 <p>Straight, factual answers can feel refreshing in some contexts and harsh in others. Empathetic answers can feel grounding in some contexts and fake in others. How people read them depends on what they came for and how much emotional load they are carrying.</p>
 
-                <p>In day‑to‑day support flows, most users report valuing <b>clear instructions, fast resolution, and fairness</b> more than emotional language. A short acknowledgment plus a clear path to a solution is usually enough. Over time, repeated apologies and long, padded sentences are cited as reasons for dissatisfaction. <a href="https://www.cmswire.com/contact-center/what-data-tells-us-about-the-future-of-chatbots-in-cx/" target="_blank" rel="noopener">[cmswire]</a></p>
+                <p>In day‑to‑day support flows, only 4% users report valuing <b>clear instructions, fast resolution, and fairness</b> more than emotional language. A short acknowledgment plus a clear path to a solution is usually enough for professional contexts but when users were asked if they preferred empathy and energy or conciseness, the predominant majority preferred energy and empathy. Not something I expected. <a href="https://www.cmswire.com/contact-center/what-data-tells-us-about-the-future-of-chatbots-in-cx/" target="_blank" rel="noopener">[cmswire]</a></p>
+
+                <figure class="article-figure">
+                    <img src="img/slide2.png" class="article-image" alt="Tone interaction with answer length and context">
+                </figure>
 
                 <p>In mental‑health or emotionally heavy contexts, the same straight answer can feel dismissive. Studies there show that <b>simple, specific acknowledgment</b> before skills‑based suggestions improves perceived support and reduces feelings of being brushed aside. Excessive or theatrical empathy, on the other hand, can feel intrusive or insincere, especially when the advice that follows is generic. <a href="https://www.sciencedirect.com/science/article/pii/S2949882124000276" target="_blank" rel="noopener">[sciencedirect]</a></p>
 
@@ -303,6 +311,10 @@
                 <p><b>Frustration is where answer design usually fails first.</b></p>
 
                 <p>You can see frustration build in conversations: the user repeats the same intent, uses sharper words, shortens their messages, and eventually says <b>“this is useless”</b> or <b>“I want a human.”</b> Research on frustration detection in dialog systems shows that simple sentiment analysis misses a lot of this. Looking at patterns across turns works better: repetition, negations, and explicit escalation requests. <a href="https://aclanthology.org/2025.coling-industry.23.pdf" target="_blank" rel="noopener">[aclanthology]</a></p>
+
+                <figure class="article-figure">
+                    <img src="img/slide3.png" class="article-image" alt="Tone interaction with answer length and context">
+                </figure>
 
                 <p><b>Once frustration is present, the style of answer should change.</b> In that state, extra sympathy tends to feel like stalling. The user has already decided the system isn’t understanding them. More <b>“I’m sorry you’re having trouble”</b> on top of that can read as condescending.</p>
 
@@ -557,6 +569,6 @@
                 updateActiveLink();
             })();
         </script>
-        <script src="../../../script.js"></script>
+        <script src="../../script.js"></script>
     </body>
 </html>
