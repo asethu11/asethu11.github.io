@@ -92,6 +92,8 @@
         <link rel="preconnect" href="https://cdnjs.cloudflare.com">
         <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/components/cards.css">
+        <link rel="stylesheet" href="css/components/thumbnail-effects.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="icon" href="img/favicon.png" type="image/png">
 
@@ -194,9 +196,12 @@
 
             <div class="headerproject stagger-fade" style="--stagger-delay: 1">
               <a href="my-works/improving-adoption/improvingAdoption.html">
-                <div class="grey-background headerprojectbg skeleton-wrapper">
+                <div class="grey-background headerprojectbg skeleton-wrapper" data-coolthumb="tilt-stack-glare-chroma" style="will-change: transform; transform: translateZ(0); transform-style: preserve-3d; transition: transform 140ms cubic-bezier(.2,.8,.2,1);">
                   <div class="skeleton skeleton-image"></div>
-                  <img src="my-works/improving-adoption/thumbnail.png" alt="Improving Adoption Project" class="project-image" loading="lazy" onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';">
+                  <img src="my-works/improving-adoption/thumbnail.png" alt="Improving Adoption Project" class="project-image" loading="lazy" onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';" style="transform:translateZ(18px);">
+                  <div aria-hidden="true" data-coolthumb-glare style="position:absolute; inset:0; pointer-events:none; z-index:4; opacity:0; transition:opacity 160ms cubic-bezier(.2,.8,.2,1);"></div>
+                  <div aria-hidden="true" data-coolthumb-chroma style="position:absolute; inset:0; pointer-events:none; z-index:6; opacity:0; transition:opacity 160ms cubic-bezier(.2,.8,.2,1); mix-blend-mode:screen; filter:blur(10px); background:radial-gradient(240px 160px at 50% 40%, rgba(0,160,255,0.18), transparent 60%), radial-gradient(240px 160px at 50% 40%, rgba(255,0,120,0.14), transparent 62%);"></div>
+                  <div aria-hidden="true" data-coolthumb-badge style="position:absolute; right:14px; bottom:14px; pointer-events:none; z-index:5; opacity:0; transform:translateY(8px); transition:transform 200ms cubic-bezier(.2,.8,.2,1), opacity 160ms cubic-bezier(.2,.8,.2,1); padding:8px 10px; border-radius:999px; background:color-mix(in srgb, var(--background) 80%, transparent); box-shadow: 0 6px 18px rgba(0,0,0,0.10); color:var(--text-primary); font-weight:650; font-size:0.85rem; letter-spacing:-0.01em;">220K+ users</div>
                 </div>
               </a>
 
@@ -221,9 +226,12 @@
             <!-- Project 2 -->
             <div class="headerproject stagger-fade" style="--stagger-delay: 2">
               <a href="my-works/LSR/LSR.html">
-                <div class="grey-background headerprojectbg skeleton-wrapper">
+                <div class="grey-background headerprojectbg skeleton-wrapper" data-coolthumb="tilt-stack-glare-chroma" style="will-change: transform; transform: translateZ(0); transform-style: preserve-3d; transition: transform 140ms cubic-bezier(.2,.8,.2,1);">
                   <div class="skeleton skeleton-image"></div>
-                  <img src="my-works/LSR/thumbnail.gif" alt="Project GIF" class="project-image" loading="lazy" onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';">
+                  <img src="my-works/LSR/thumbnail.png" alt="Project GIF" class="project-image" loading="lazy" onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';" style="transform:translateZ(18px);">
+                  <div aria-hidden="true" data-coolthumb-glare style="position:absolute; inset:0; pointer-events:none; z-index:4; opacity:0; transition:opacity 160ms cubic-bezier(.2,.8,.2,1);"></div>
+                  <div aria-hidden="true" data-coolthumb-chroma style="position:absolute; inset:0; pointer-events:none; z-index:6; opacity:0; transition:opacity 160ms cubic-bezier(.2,.8,.2,1); mix-blend-mode:screen; filter:blur(10px); background:radial-gradient(240px 160px at 50% 40%, rgba(0,160,255,0.18), transparent 60%), radial-gradient(240px 160px at 50% 40%, rgba(255,0,120,0.14), transparent 62%);"></div>
+                  <div aria-hidden="true" data-coolthumb-badge style="position:absolute; right:14px; bottom:14px; pointer-events:none; z-index:5; opacity:0; transform:translateY(8px); transition:transform 200ms cubic-bezier(.2,.8,.2,1), opacity 160ms cubic-bezier(.2,.8,.2,1); padding:8px 10px; border-radius:999px; background:color-mix(in srgb, var(--background) 80%, transparent); box-shadow: 0 6px 18px rgba(0,0,0,0.10); color:var(--text-primary); font-weight:650; font-size:0.85rem; letter-spacing:-0.01em;">RAG + LLMs</div>
                 </div>
               </a>
 
@@ -247,9 +255,12 @@
             <!-- Project 3 -->
             <div class="headerproject stagger-fade" style="--stagger-delay: 3">
               <a href="my-works/nextgen/nextgen.html">
-                <div class="grey-background headerprojectbg skeleton-wrapper">
+                <div class="grey-background headerprojectbg skeleton-wrapper" data-coolthumb="tilt-stack-glare-chroma" data-coolthumb-hover="my-works/nextgen/thumbnail-hover.mp4" style="will-change: transform; transform: translateZ(0); transform-style: preserve-3d; transition: transform 140ms cubic-bezier(.2,.8,.2,1);">
                   <div class="skeleton skeleton-image"></div>
-                  <img src="my-works/nextgen/thumbnail.png" alt="Project GIF" class="project-image" loading="lazy" onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';">
+                  <img src="my-works/nextgen/thumbnail.png" alt="Project GIF" class="project-image" loading="lazy" onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';" style="transform:translateZ(18px);">
+                  <div aria-hidden="true" data-coolthumb-glare style="position:absolute; inset:0; pointer-events:none; z-index:4; opacity:0; transition:opacity 160ms cubic-bezier(.2,.8,.2,1);"></div>
+                  <div aria-hidden="true" data-coolthumb-chroma style="position:absolute; inset:0; pointer-events:none; z-index:6; opacity:0; transition:opacity 160ms cubic-bezier(.2,.8,.2,1); mix-blend-mode:screen; filter:blur(10px); background:radial-gradient(240px 160px at 50% 40%, rgba(0,160,255,0.18), transparent 60%), radial-gradient(240px 160px at 50% 40%, rgba(255,0,120,0.14), transparent 62%);"></div>
+                  <div aria-hidden="true" data-coolthumb-badge style="position:absolute; right:14px; bottom:14px; pointer-events:none; z-index:5; opacity:0; transform:translateY(8px); transition:transform 200ms cubic-bezier(.2,.8,.2,1), opacity 160ms cubic-bezier(.2,.8,.2,1); padding:8px 10px; border-radius:999px; background:color-mix(in srgb, var(--background) 80%, transparent); box-shadow: 0 6px 18px rgba(0,0,0,0.10); color:var(--text-primary); font-weight:650; font-size:0.85rem; letter-spacing:-0.01em;">Unreal Engine 5</div>
                 </div>
               </a>
 
@@ -273,9 +284,12 @@
             <!-- Project 4 -->
             <div class="headerproject stagger-fade" style="--stagger-delay: 4">
               <a href="my-works/usertesting-mesa/COMUT.html">
-                <div class="grey-background headerprojectbg skeleton-wrapper">
+                <div class="grey-background headerprojectbg skeleton-wrapper" data-coolthumb="tilt-stack-glare-chroma" style="will-change: transform; transform: translateZ(0); transform-style: preserve-3d; transition: transform 140ms cubic-bezier(.2,.8,.2,1);">
                   <div class="skeleton skeleton-image"></div>
-                  <img src="my-works/usertesting-mesa/com-presentation.jpg" alt="" class="project-image" loading="lazy" onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';">
+                  <img src="my-works/usertesting-mesa/com-presentation.jpg" alt="" class="project-image" loading="lazy" onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';" style="transform:translateZ(18px);">
+                  <div aria-hidden="true" data-coolthumb-glare style="position:absolute; inset:0; pointer-events:none; z-index:4; opacity:0; transition:opacity 160ms cubic-bezier(.2,.8,.2,1);"></div>
+                  <div aria-hidden="true" data-coolthumb-chroma style="position:absolute; inset:0; pointer-events:none; z-index:6; opacity:0; transition:opacity 160ms cubic-bezier(.2,.8,.2,1); mix-blend-mode:screen; filter:blur(10px); background:radial-gradient(240px 160px at 50% 40%, rgba(0,160,255,0.18), transparent 60%), radial-gradient(240px 160px at 50% 40%, rgba(255,0,120,0.14), transparent 62%);"></div>
+                  <div aria-hidden="true" data-coolthumb-badge style="position:absolute; right:14px; bottom:14px; pointer-events:none; z-index:5; opacity:0; transform:translateY(8px); transition:transform 200ms cubic-bezier(.2,.8,.2,1), opacity 160ms cubic-bezier(.2,.8,.2,1); padding:8px 10px; border-radius:999px; background:color-mix(in srgb, var(--background) 80%, transparent); box-shadow: 0 6px 18px rgba(0,0,0,0.10); color:var(--text-primary); font-weight:650; font-size:0.85rem; letter-spacing:-0.01em;">3× recall</div>
                 </div>
               </a>
 
@@ -590,6 +604,7 @@
       </div>
 
       <!-- Scripts loaded at end of body for better performance -->
+      <script src="thumbnail-effects.js" defer></script>
       <script src="script.js" defer></script>
       <script src="shared.js" defer></script>
     </body>

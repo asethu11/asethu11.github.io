@@ -229,9 +229,10 @@ p a:hover {
     margin: 2rem auto;
     max-width: 800px;
     width: calc(100% + 100px);
-    margin-left: -50px;
+    margin-left: -40px;
     margin-right: -50px;
 }
+
 
 .article-figure img {
     max-width: 100%;
