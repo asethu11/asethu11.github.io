@@ -403,35 +403,38 @@
       const project = Object.keys(projectColors).find(key => link?.href.includes(key));
       const config = projectColors[project] || { bg: 'rgba(216, 239, 244, 0.5)' };
       const originalSrc = img.src;
-      const explicitHoverSrc = card.getAttribute('data-coolthumb-hover');
-      const hoverSrc = explicitHoverSrc
-        ? explicitHoverSrc
-        : (config.swapImage
-            ? img.src.replace(/thumbnail\.(png|gif)$/, `thumbnail-hover${config.hoverExt || '.png'}`)
-            : null);
-
-      const useVideo = (config.useVideo || (hoverSrc && hoverSrc.toLowerCase().endsWith('.mp4')));
+      const hoverSrc = config.swapImage 
+        ? img.src.replace(/thumbnail\.(png|gif)$/, `thumbnail-hover${config.hoverExt || '.png'}`)
+        : null;
       
       // For video hover, create video element
       let videoElement = null;
-      if (useVideo && hoverSrc) {
+      let showVideoOnReady = null;
+      if (config.useVideo && hoverSrc) {
         videoElement = document.createElement('video');
         videoElement.src = hoverSrc;
-        videoElement.autoplay = true;
         videoElement.loop = true;
         videoElement.muted = true;
         videoElement.playsInline = true;
-        videoElement.preload = 'auto';
+        videoElement.preload = 'metadata';
         videoElement.setAttribute('aria-hidden', 'true');
         videoElement.tabIndex = -1;
+        videoElement.style.pointerEvents = 'none';
         videoElement.style.cssText = img.style.cssText;
         videoElement.className = img.className;
-        videoElement.style.pointerEvents = 'none';
-        videoElement.style.opacity = '0';
+        videoElement.style.display = 'none';
         img.parentNode.insertBefore(videoElement, img.nextSibling);
 
-        // Try to kick off autoplay early (muted autoplay should be allowed)
-        videoElement.play().catch(() => {});
+        // Prime the video so the first frame can appear quickly on hover.
+        try { videoElement.load(); } catch {}
+
+        showVideoOnReady = () => {
+          // If the user already un-hovered, don't swap.
+          if (videoElement.style.display === 'none') return;
+          img.style.display = 'none';
+          videoElement.style.visibility = '';
+          videoElement.removeEventListener('loadeddata', showVideoOnReady);
+        };
       }
 
       const setGlare = (xPct, yPct) => {
@@ -446,11 +449,17 @@
         Object.assign(badge.style, { opacity: '0', transform: 'translateY(8px)' });
         [glare, chroma].forEach(el => el.style.opacity = '0');
         setGlare(50, 40);
-        if (useVideo && videoElement) {
+        if (config.useVideo && videoElement) {
+          if (showVideoOnReady) {
+            videoElement.removeEventListener('loadeddata', showVideoOnReady);
+          }
           videoElement.style.transform = '';
           videoElement.style.filter = '';
-          videoElement.style.opacity = '0';
-          img.style.opacity = '';
+          videoElement.style.display = 'none';
+          videoElement.style.visibility = '';
+          img.style.display = '';
+          videoElement.pause();
+          try { videoElement.currentTime = 0; } catch {}
         } else if (hoverSrc) {
           img.src = originalSrc;
         }
@@ -462,9 +471,22 @@
         card.style.border = '1px solid color-mix(in srgb, var(--text-primary) 20%, transparent)';
         card.style.backgroundColor = config.bg;
         Object.assign(badge.style, { opacity: '1', transform: 'translateY(0px)' });
-        if (useVideo && videoElement) {
-          img.style.opacity = '0';
-          videoElement.style.opacity = '1';
+        if (config.useVideo && videoElement) {
+          // Show video only when it has a frame ready; keep image visible until then.
+          videoElement.style.display = '';
+          videoElement.style.visibility = 'hidden';
+
+          if (showVideoOnReady) {
+            videoElement.removeEventListener('loadeddata', showVideoOnReady);
+            videoElement.addEventListener('loadeddata', showVideoOnReady, { once: true });
+          }
+
+          // If the video already has frame data, swap immediately.
+          if (videoElement.readyState >= 2) {
+            img.style.display = 'none';
+            videoElement.style.visibility = '';
+          }
+
           videoElement.play().catch(() => {});
           if (!reduceMotion) videoElement.style.transform = 'scale(1.03)';
         } else if (hoverSrc) {
@@ -479,7 +501,7 @@
       card.addEventListener('pointerleave', reset);
       card.addEventListener('pointermove', rafThrottle((e) => {
         if (reduceMotion || isTouch(e)) return;
-        const activeMedia = (useVideo && videoElement && parseFloat(videoElement.style.opacity || '0') > 0) ? videoElement : img;
+        const activeMedia = (config.useVideo && videoElement && videoElement.style.display !== 'none') ? videoElement : img;
         const { px, py, r } = applyTilt(card, activeMedia, e);
         const driftX = clamp(-px * 12, -10, 10);
         const driftY = clamp(-py * 12, -10, 10);
