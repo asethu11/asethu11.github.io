@@ -422,6 +422,7 @@
         videoElement.style.pointerEvents = 'none';
         videoElement.style.cssText = img.style.cssText;
         videoElement.className = img.className;
+        videoElement.classList.add('loaded');
         videoElement.style.display = 'none';
         img.parentNode.insertBefore(videoElement, img.nextSibling);
 
