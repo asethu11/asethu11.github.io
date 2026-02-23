@@ -2,7 +2,8 @@
 // Different word arrays for different pages
 const words = {
     index: ["hey ", "bonjour ", "வணக்கம் ", "hola ", "こんにちは "],
-    about: ["abhishek  ", "abhi  ", "not abby ", "not abshek "]
+    about: ["abhishek  ", "abhi  ", "not abby ", "not abshek "],
+    personal: ["hi ruhie ", "miss you ", "love you ", "for you ", "always "]
 };
 
 let i = 0;
@@ -174,7 +175,10 @@ function trackColorScheme() {
 // Auto-detect page type and initialize
 window.onload = function() {
     const isAboutPage = window.location.pathname.includes('about.html');
-    typingEffect(isAboutPage ? 'about' : 'index');
+    const isPersonalPage = window.location.pathname.includes('/personal');
+
+    const pageType = isAboutPage ? 'about' : (isPersonalPage ? 'personal' : 'index');
+    typingEffect(pageType);
     initLazySections();
     initGaAutoTagging();
     initSkeletonLoaders();
