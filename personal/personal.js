@@ -41,33 +41,73 @@ function setTemporaryButtonText(button, text, durationMs = 900) {
   }, durationMs);
 }
 
-function typeText(target, text, { delayMs = 250, stepMs = 55 } = {}) {
+function parseWords(value) {
+  if (!value) return [];
+  return value
+    .split('|')
+    .map((word) => word.trim())
+    .filter(Boolean);
+}
+
+function startTypewriterCycle(target, words, {
+  initialDelayMs = 250,
+  typeStepMs = 55,
+  deleteStepMs = 35,
+  holdAfterTypeMs = 900,
+  holdAfterDeleteMs = 220
+} = {}) {
   if (!target) return;
+  if (!Array.isArray(words) || words.length === 0) return;
 
   if (prefersReducedMotion()) {
-    target.textContent = text;
+    target.textContent = words[0];
     return;
   }
 
-  target.textContent = '';
-  let index = 0;
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
 
   const tick = () => {
-    target.textContent = text.slice(0, index);
-    index += 1;
-    if (index <= text.length) {
-      window.setTimeout(tick, stepMs);
+    const currentWord = words[wordIndex] || '';
+
+    if (!isDeleting) {
+      charIndex = Math.min(charIndex + 1, currentWord.length);
+      target.textContent = currentWord.slice(0, charIndex);
+
+      if (charIndex >= currentWord.length) {
+        isDeleting = true;
+        window.setTimeout(tick, holdAfterTypeMs);
+        return;
+      }
+
+      window.setTimeout(tick, typeStepMs);
+      return;
     }
+
+    charIndex = Math.max(charIndex - 1, 0);
+    target.textContent = currentWord.slice(0, charIndex);
+
+    if (charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      window.setTimeout(tick, holdAfterDeleteMs);
+      return;
+    }
+
+    window.setTimeout(tick, deleteStepMs);
   };
 
-  window.setTimeout(tick, delayMs);
+  target.textContent = '';
+  window.setTimeout(tick, initialDelayMs);
 }
 
 function initHeroTyping() {
   const target = document.getElementById('heroType');
   if (!target) return;
-  const text = target.getAttribute('data-text') || '';
-  typeText(target, text);
+
+  const words = parseWords(target.getAttribute('data-words'));
+  startTypewriterCycle(target, words);
 }
 
 function throwHearts(origin) {
