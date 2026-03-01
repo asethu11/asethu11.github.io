@@ -1,47 +1,27 @@
 {
-  "rewrites": [
-    {
-      "source": "/",
-      "has": [{ "type": "host", "value": "about.abseth.com" }],
-      "destination": "/about.html"
-    },
-    {
-      "source": "/",
-      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
-      "destination": "/blogs.html"
-    },
-    {
-      "source": "/:slug",
-      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
-      "destination": "/blogs/:slug/:slug.html"
-    },
-    {
-      "source": "/improvingAdoption",
-      "destination": "/my-works/improving-adoption/improvingAdoption.html"
-    },
-    {
-      "source": "/nextgen",
-      "destination": "/my-works/nextgen/nextgen.html"
-    },
-    {
-      "source": "/ytm",
-      "destination": "/my-works/ytm/ytm.html"
-    },
-    {
-      "source": "/LSR",
-      "destination": "/my-works/LSR/LSR.html"
-    },
-    {
-      "source": "/SODA",
-      "destination": "/my-works/hackathonSODA/SODA.html"
-    },
-    {
-      "source": "/cabKb",
-      "destination": "/my-works/KB-ET/cabKb.html"
-    },
-    {
-      "source": "/COMUT",
-      "destination": "/my-works/usertesting-mesa/COMUT.html"
-    }
+  "version": 2,
+  "routes": [
+    { "src": "^/$", "has":[{"type":"host","value":"about.abseth.com"}], "dest": "/about.html" },
+    { "src": "^/$", "has":[{"type":"host","value":"blogs.abseth.com"}], "dest": "/blogs.html" },
+
+    { "src":"^/([^/]+)/?$", "has":[{"type":"host","value":"blogs.abseth.com"}], "dest": "/blogs/$1/index.html" },
+    { "src":"^/([^/]+)/?$", "has":[{"type":"host","value":"blogs.abseth.com"}], "dest": "/blogs/$1/$1.html" },
+
+    { "src":"^/improvingAdoption/?$","dest":"/my-works/improving-adoption/improvingAdoption.html" },
+    { "src":"^/nextgen/?$","dest":"/my-works/nextgen/nextgen.html" },
+    { "src":"^/ytm/?$","dest":"/my-works/ytm/ytm.html" },
+    { "src":"^/LSR/?$","dest":"/my-works/LSR/LSR.html" },
+    { "src":"^/SODA/?$","dest":"/my-works/hackathonSODA/SODA.html" },
+    { "src":"^/cabKb/?$","dest":"/my-works/KB-ET/cabKb.html" },
+    { "src":"^/COMUT/?$","dest":"/my-works/usertesting-mesa/COMUT.html" },
+
+    { "src":"^/(.*)$", "dest": "/$1" }
+  ],
+  "redirects": [
+    { "source": "/blogs/:slug/:slug.html", "destination": "https://blogs.abseth.com/:slug", "permanent": true },
+    { "source": "/blogs/:slug/index.html", "destination": "https://blogs.abseth.com/:slug", "permanent": true },
+    { "source": "/:slug.html", "destination": "https://abseth.com/:slug", "permanent": true },
+    { "source": "/:any/index.html", "destination": "https://abseth.com/:any", "permanent": true },
+    { "source": "/:path+/", "destination": "https://:host/:path", "permanent": true }
   ]
 }

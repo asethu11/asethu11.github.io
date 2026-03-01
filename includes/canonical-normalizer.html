@@ -1,0 +1,32 @@
+<link id="canonical-link" rel="canonical" href="">
+<script>
+(function(){
+  try{
+    const u = new URL(location.href);
+    let p = u.pathname;
+
+    // normalize index.html and .html variants
+    if (p.endsWith('/index.html')) p = p.replace(/\/index\.html$/, '/');
+    const m = p.match(/^\/([^\/]+)\/\1\.html$/);
+    if (m) p = '/' + m[1];
+
+    // strip trailing slash except root
+    if (p !== '/' && p.endsWith('/')) p = p.replace(/\/+$/, '');
+
+    // lowercase simple slugs and blog slugs
+    const parts = p.split('/').filter(Boolean);
+    if (parts.length === 1 || (parts[0] === 'blogs' && parts.length === 2)) {
+      const normalized = parts.map(s => s.toLowerCase()).join('/');
+      p = '/' + normalized;
+    }
+
+    // set canonical tag (deferred until we calculate canonical)
+    const canonicalHref = u.origin + p + u.search + u.hash;
+    const canon = document.getElementById('canonical-link');
+    if (canon) canon.href = canonicalHref;
+
+    // redirect to canonical if necessary
+    if (p !== u.pathname) location.replace(canonicalHref);
+  } catch(e){ console.error('canonical normalizer error', e); }
+})();
+</script>

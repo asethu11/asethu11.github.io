@@ -1,0 +1,9 @@
+<button id="copyUrl">Share</button>
+<script>
+document.getElementById('copyUrl')?.addEventListener('click', async () => {
+  const canonical = document.querySelector("link[rel='canonical']");
+  const url = canonical ? canonical.href : window.location.href;
+  try { await navigator.clipboard.writeText(url); alert('Link copied'); }
+  catch(e){ prompt('Copy this link', url); }
+});
+</script>
