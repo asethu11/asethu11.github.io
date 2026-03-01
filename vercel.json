@@ -16,6 +16,16 @@
       "dest": "/blogs/$1/index.html"
     },
     {
+      "src": "^/blogs/?$",
+      "status": 308,
+      "headers": { "Location": "https://blogs.abseth.com/" }
+    },
+    {
+      "src": "^/blogs/(.*)$",
+      "status": 308,
+      "headers": { "Location": "https://blogs.abseth.com/$1" }
+    },
+    {
       "src": "^/improvingAdoption/?$",
       "dest": "/my-works/improving-adoption/improvingAdoption.html"
     },
