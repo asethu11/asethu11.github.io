@@ -1,26 +1,24 @@
 {
   "trailingSlash": false,
+  "routes": [
+    {
+      "src": "^/(.*)$",
+      "has": [{ "type": "host", "value": "about.abseth.com" }],
+      "dest": "/about.html"
+    },
+    {
+      "src": "^/(.*)$",
+      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
+      "dest": "/blogs.html",
+      "continue": true
+    },
+    {
+      "src": "^/([^/]+)/?$",
+      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
+      "dest": "/blogs/$1/index.html"
+    }
+  ],
   "rewrites": [
-    {
-      "source": "/",
-      "has": [{ "type": "host", "value": "about.abseth.com" }],
-      "destination": "/about.html"
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "about.abseth.com" }],
-      "destination": "/about.html"
-    },
-    {
-      "source": "/",
-      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
-      "destination": "/blogs.html"
-    },
-    {
-      "source": "/:slug",
-      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
-      "destination": "/blogs/:slug/index.html"
-    },
     {
       "source": "/improvingAdoption",
       "destination": "/my-works/improving-adoption/improvingAdoption.html"
@@ -59,17 +57,6 @@
     {
       "source": "/blogs/:slug/index.html",
       "destination": "https://blogs.abseth.com/:slug",
-      "permanent": true
-    },
-    {
-      "source": "/about.html",
-      "has": [{ "type": "host", "value": "about.abseth.com" }],
-      "destination": "https://about.abseth.com/",
-      "permanent": true
-    },
-    {
-      "source": "/about.html",
-      "destination": "https://abseth.com/about",
       "permanent": true
     }
   ]
