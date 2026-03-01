@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Canonical URL normalizer -->
+        <link id="canonical-link" rel="canonical" href="">
+        <script>
+        (function(){
+          try{
+            const u = new URL(location.href);
+            let p = u.pathname;
+            if (p.endsWith('/index.html')) p = p.replace(/\/index\.html$/, '/');
+            const m = p.match(/^\/([^\/]+)\/\1\.html$/);
+            if (m) p = '/' + m[1];
+            if (p !== '/' && p.endsWith('/')) p = p.replace(/\/+$/, '');
+            const parts = p.split('/').filter(Boolean);
+            if (parts.length === 1 || (parts[0] === 'blogs' && parts.length === 2)) {
+              const normalized = parts.map(s => s.toLowerCase()).join('/');
+              p = '/' + normalized;
+            }
+            const canonicalHref = u.origin + p + u.search + u.hash;
+            const canon = document.getElementById('canonical-link');
+            if (canon) canon.href = canonicalHref;
+            if (p !== u.pathname) location.replace(canonicalHref);
+          } catch(e){ console.error('canonical normalizer error', e); }
+        })();
+        </script>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
+
+        <!-- Clarity tracking code -->
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "vaaig4fq2o");
+        </script>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>About Abhishek Sethuraman - UX Designer & Self-Taught Creative</title>
+        <meta name="author" content="Abhishek Sethuraman">
+        <meta name="description" content="Self-taught UX & Product Designer with a multidisciplinary background. 7 years of design experience mixing disciplines, experimenting, and thinking outside the box. Based in Tempe, Arizona.">
+        <meta name="keywords" content="About Abhishek, UX Designer Biography, Self-Taught Designer, Product Designer, Arizona, Tempe, Design Philosophy">
+        <meta name="robots" content="index, follow">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="profile">
+        <meta property="og:url" content="https://asethu11.github.io/about.html">
+        <meta property="og:title" content="About Abhishek Sethuraman - UX Designer & Self-Taught Creative">
+        <meta property="og:description" content="Self-taught UX & Product Designer with 7 years of experience mixing disciplines and thinking outside the box. Based in Tempe, Arizona.">
+        <meta property="og:image" content="https://asethu11.github.io/img/Abhishek.jpg">
+        <meta property="og:image:width" content="400">
+        <meta property="og:image:height" content="400">
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:url" content="https://asethu11.github.io/about.html">
+        <meta name="twitter:title" content="About Abhishek Sethuraman - UX Designer">
+        <meta name="twitter:description" content="Self-taught UX & Product Designer with 7 years of experience. Based in Tempe, Arizona.">
+        <meta name="twitter:image" content="https://asethu11.github.io/img/Abhishek.jpg">
+
+
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <!-- Optimized font loading -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+        <script src="../script.js"></script>
+        <script src="../shared.js"></script>
+        <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+        <link rel="icon" href="../img/favicon.png" type="image/png">
+    </head>
+
+    <body>
+    <a href="../index.html" class="back-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M5 12L12 19M5 12L12 5"
+                stroke="currentColor" 
+                stroke-width="2" 
+                stroke-linecap="round"
+                stroke-linejoin="round"/>
+        </svg>
+        Home
+    </a>
+
+    <!-- Canonical URL -->
+
+        <!-- Main -->
+        <div class="container">
+
+            <!-- Header -->
+            <div class="introduction">
+                <div class="header">
+                    <div class="logo">
+                        <a href="../index.html">
+                            <div class="flex">
+                                <p class="header-sub-title" id="word"></p>
+                                <p class="header-sub-title blink">|</p>
+                            </div>
+                        </a>
+                        
+                        <h4 class="uh-bee">and that's pronounced uh-bee-shake</h4>
+                    </div>
+                </div>
+
+                <br>
+                
+                <!-- Picture -->
+                <img src="../img/Abhishek.jpg" alt="Abhishek's photo" class="profile-photo" height="400px" width="400px">
+
+                <!-- Introduction Text -->
+                <p class="introduction-text">
+                    I'm a UX & Product designer with a multidisciplinary background, based in Tempe, AZ.<br><br>
+
+                    I like to call myself a self-taught designer. Even though I studied design for 7 years, I learned all my tools through YouTube tutorials, freelance projects and a lot of messing around. I think that gives me an edge. I don't just follow conventional thought frameworks; I mix disciplines, experiment, and think outside the box to design more creative solutions.
+                </p>
+
+                <br>
+
+                <!-- Social Media Icons -->
+                <div class="socials">
+                    <div class="social-icons">
+                        <a href="https://github.com/asethu11" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" onclick="copyEmail()" aria-label="Copy email to clipboard"><i class="fas fa-envelope"></i></a>
+                        <a href="https://medium.com/@mailsofabhishek" target="_blank" aria-label="Medium"><i class="fab fa-medium"></i></a>
+                        <a href="https://www.linkedin.com/in/asethu/" target="_blank" aria-label="Medium"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                    
+                    <a href="https://docs.google.com/document/d/1IXydVGEXE5wz5FQK83--w8JfNdspRJLz7rsQewwsL6s/edit?usp=sharing" target="_blank" aria-label="LinkedIn" id="linkedin">
+                        <p id="linked">Check out my resume --></p>
+                    </a>
+                </div>
+                
+                
+
+         
+
+            <!-- Footer -->
+        <footer class="footer">
+            <br><br><br><br><br><br><br>
+            <p class="footer-text">© 2025. All rights reserved. Coded by a human in vanilla HTML, CSS, and JavaScript.</p>
+        </footer>
+        </div>
+
+    </body>
+
+
+</html>

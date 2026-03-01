@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "routes": [
     {
       "src": "^/improvingAdoption/?$",
@@ -27,6 +28,33 @@
     {
       "src": "^/COMUT/?$",
       "dest": "/my-works/usertesting-mesa/COMUT.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/blogs/:slug/:slug.html",
+      "destination": "https://blogs.abseth.com/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/blogs/:slug/index.html",
+      "destination": "https://blogs.abseth.com/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/:slug.html",
+      "destination": "https://abseth.com/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/:any/index.html",
+      "destination": "https://abseth.com/:any",
+      "permanent": true
+    },
+    {
+      "source": "/:path+/",
+      "destination": "https://:host/:path",
+      "permanent": true
     }
   ]
 }

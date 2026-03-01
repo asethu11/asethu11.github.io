@@ -20,7 +20,7 @@
       p = '/' + normalized;
     }
 
-    // set canonical tag (deferred until we calculate canonical)
+    // set canonical tag
     const canonicalHref = u.origin + p + u.search + u.hash;
     const canon = document.getElementById('canonical-link');
     if (canon) canon.href = canonicalHref;
