@@ -1,5 +1,4 @@
 {
-  "trailingSlash": false,
   "routes": [
     {
       "src": "^/(.*)$",
@@ -7,57 +6,42 @@
       "dest": "/about.html"
     },
     {
-      "src": "^/(.*)$",
+      "src": "^/$",
       "has": [{ "type": "host", "value": "blogs.abseth.com" }],
-      "dest": "/blogs.html",
-      "continue": true
+      "dest": "/blogs.html"
     },
     {
       "src": "^/([^/]+)/?$",
       "has": [{ "type": "host", "value": "blogs.abseth.com" }],
       "dest": "/blogs/$1/index.html"
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/improvingAdoption",
-      "destination": "/my-works/improving-adoption/improvingAdoption.html"
     },
     {
-      "source": "/nextgen",
-      "destination": "/my-works/nextgen/nextgen.html"
+      "src": "^/improvingAdoption/?$",
+      "dest": "/my-works/improving-adoption/improvingAdoption.html"
     },
     {
-      "source": "/ytm",
-      "destination": "/my-works/ytm/ytm.html"
+      "src": "^/nextgen/?$",
+      "dest": "/my-works/nextgen/nextgen.html"
     },
     {
-      "source": "/LSR",
-      "destination": "/my-works/LSR/LSR.html"
+      "src": "^/ytm/?$",
+      "dest": "/my-works/ytm/ytm.html"
     },
     {
-      "source": "/SODA",
-      "destination": "/my-works/hackathonSODA/SODA.html"
+      "src": "^/LSR/?$",
+      "dest": "/my-works/LSR/LSR.html"
     },
     {
-      "source": "/cabKb",
-      "destination": "/my-works/KB-ET/cabKb.html"
+      "src": "^/SODA/?$",
+      "dest": "/my-works/hackathonSODA/SODA.html"
     },
     {
-      "source": "/COMUT",
-      "destination": "/my-works/usertesting-mesa/COMUT.html"
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/blogs/:slug/:slug.html",
-      "destination": "https://blogs.abseth.com/:slug",
-      "permanent": true
+      "src": "^/cabKb/?$",
+      "dest": "/my-works/KB-ET/cabKb.html"
     },
     {
-      "source": "/blogs/:slug/index.html",
-      "destination": "https://blogs.abseth.com/:slug",
-      "permanent": true
+      "src": "^/COMUT/?$",
+      "dest": "/my-works/usertesting-mesa/COMUT.html"
     }
   ]
 }
