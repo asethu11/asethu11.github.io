@@ -1,4 +1,5 @@
 {
+  "_comment": "Host-based routing: about.abseth.com -> about.html, blogs.abseth.com -> blogs.html",
   "trailingSlash": false,
   "routes": [
     {
