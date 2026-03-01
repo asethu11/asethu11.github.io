@@ -6,6 +6,11 @@
       "destination": "/about.html"
     },
     {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "about.abseth.com" }],
+      "destination": "/about.html"
+    },
+    {
       "source": "/",
       "has": [{ "type": "host", "value": "blogs.abseth.com" }],
       "destination": "/blogs.html"
@@ -15,18 +20,56 @@
       "has": [{ "type": "host", "value": "blogs.abseth.com" }],
       "destination": "/blogs/:slug/index.html"
     },
-    { "source": "/improvingAdoption", "destination": "/my-works/improving-adoption/improvingAdoption.html" },
-    { "source": "/nextgen", "destination": "/my-works/nextgen/nextgen.html" },
-    { "source": "/ytm", "destination": "/my-works/ytm/ytm.html" },
-    { "source": "/LSR", "destination": "/my-works/LSR/LSR.html" },
-    { "source": "/SODA", "destination": "/my-works/hackathonSODA/SODA.html" },
-    { "source": "/cabKb", "destination": "/my-works/KB-ET/cabKb.html" },
-    { "source": "/COMUT", "destination": "/my-works/usertesting-mesa/COMUT.html" }
+    {
+      "source": "/improvingAdoption",
+      "destination": "/my-works/improving-adoption/improvingAdoption.html"
+    },
+    {
+      "source": "/nextgen",
+      "destination": "/my-works/nextgen/nextgen.html"
+    },
+    {
+      "source": "/ytm",
+      "destination": "/my-works/ytm/ytm.html"
+    },
+    {
+      "source": "/LSR",
+      "destination": "/my-works/LSR/LSR.html"
+    },
+    {
+      "source": "/SODA",
+      "destination": "/my-works/hackathonSODA/SODA.html"
+    },
+    {
+      "source": "/cabKb",
+      "destination": "/my-works/KB-ET/cabKb.html"
+    },
+    {
+      "source": "/COMUT",
+      "destination": "/my-works/usertesting-mesa/COMUT.html"
+    }
   ],
   "redirects": [
-    { "source": "/blogs/:slug/:slug.html", "destination": "https://blogs.abseth.com/:slug", "permanent": true },
-    { "source": "/blogs/:slug/index.html", "destination": "https://blogs.abseth.com/:slug", "permanent": true },
-    { "source": "/about.html", "destination": "https://about.abseth.com/", "permanent": true },
-    { "source": "/blogs.html", "destination": "https://blogs.abseth.com/", "permanent": true }
+    {
+      "source": "/blogs/:slug/:slug.html",
+      "destination": "https://blogs.abseth.com/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/blogs/:slug/index.html",
+      "destination": "https://blogs.abseth.com/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "has": [{ "type": "host", "value": "about.abseth.com" }],
+      "destination": "https://about.abseth.com/",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "https://abseth.com/about",
+      "permanent": true
+    }
   ]
 }
