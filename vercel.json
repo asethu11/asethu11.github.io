@@ -1,31 +1,6 @@
 {
   "routes": [
     {
-      "src": "^/(.*)$",
-      "has": [{ "type": "host", "value": "about.abseth.com" }],
-      "dest": "/about.html"
-    },
-    {
-      "src": "^/$",
-      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
-      "dest": "/blogs.html"
-    },
-    {
-      "src": "^/([^/]+)/?$",
-      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
-      "dest": "/blogs/$1/index.html"
-    },
-    {
-      "src": "^/blogs/?$",
-      "status": 308,
-      "headers": { "Location": "https://blogs.abseth.com/" }
-    },
-    {
-      "src": "^/blogs/(.*)$",
-      "status": 308,
-      "headers": { "Location": "https://blogs.abseth.com/$1" }
-    },
-    {
       "src": "^/improvingAdoption/?$",
       "dest": "/my-works/improving-adoption/improvingAdoption.html"
     },
