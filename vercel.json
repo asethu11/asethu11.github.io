@@ -10,6 +10,12 @@
   ],
   "redirects": [
     {
+      "source": "/:slug/:file.html",
+      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
+      "destination": "https://blogs.abseth.com/:slug",
+      "permanent": true
+    },
+    {
       "source": "/my-works/improving-adoption/improvingAdoption.html",
       "destination": "https://abseth.com/improvingAdoption",
       "permanent": true
