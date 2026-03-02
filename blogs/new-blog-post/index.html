@@ -1,29 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <!-- Canonical URL normalizer -->
-        <link id="canonical-link" rel="canonical" href="">
-        <script>
-        (function(){
-          try{
-            const u = new URL(location.href);
-            let p = u.pathname;
-            if (p.endsWith('/index.html')) p = p.replace(/\/index\.html$/, '/');
-            const m = p.match(/^\/([^\/]+)\/\1\.html$/);
-            if (m) p = '/' + m[1];
-            if (p !== '/' && p.endsWith('/')) p = p.replace(/\/+$/, '');
-            const parts = p.split('/').filter(Boolean);
-            if (parts.length === 1 || (parts[0] === 'blogs' && parts.length === 2)) {
-              const normalized = parts.map(s => s.toLowerCase()).join('/');
-              p = '/' + normalized;
-            }
-            const canonicalHref = u.origin + p + u.search + u.hash;
-            const canon = document.getElementById('canonical-link');
-            if (canon) canon.href = canonicalHref;
-            if (p !== u.pathname) location.replace(canonicalHref);
-          } catch(e){ console.error('canonical normalizer error', e); }
-        })();
-        </script>
+        <base href="/new-blog-post/">
+        <link rel="canonical" href="https://blogs.abseth.com/new-blog-post">
 
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
@@ -54,11 +33,11 @@
         <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
 
-        <script src="../../script.js"></script>
+        <script src="../script.js"></script>
         
         <link rel="stylesheet" href="../../blogs/blogs.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="icon" href="../../img/favicon.png" type="image/png">
+        <link rel="icon" href="../img/favicon.png" type="image/png">
 
         <script>
             function updateImages() {
@@ -85,11 +64,11 @@
         <!-- Navigation -->
         <nav id="navbar">
             <div class="nav-container">
-                <a href="../../index.html" class="nav-logo">Abhishek</a>
+                <a href="/" class="nav-logo">Abhishek</a>
                 <div class="nav-links">
-                    <a href="../../index.html">Home</a>
-                    <a href="../../about.html">About</a>
-                    <a href="../../my-works/index.html">Works</a>
+                    <a href="/">Home</a>
+                    <a href="/about">About</a>
+                    <a href="/">Works</a>
                     <a href="../blogfabnav.html">Blogs</a>
                     <a href="../../building.html">Building</a>
                 </div>

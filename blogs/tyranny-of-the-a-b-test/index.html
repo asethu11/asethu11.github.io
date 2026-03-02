@@ -1,29 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <!-- Canonical URL normalizer -->
-        <link id="canonical-link" rel="canonical" href="">
-        <script>
-        (function(){
-          try{
-            const u = new URL(location.href);
-            let p = u.pathname;
-            if (p.endsWith('/index.html')) p = p.replace(/\/index\.html$/, '/');
-            const m = p.match(/^\/([^\/]+)\/\1\.html$/);
-            if (m) p = '/' + m[1];
-            if (p !== '/' && p.endsWith('/')) p = p.replace(/\/+$/, '');
-            const parts = p.split('/').filter(Boolean);
-            if (parts.length === 1 || (parts[0] === 'blogs' && parts.length === 2)) {
-              const normalized = parts.map(s => s.toLowerCase()).join('/');
-              p = '/' + normalized;
-            }
-            const canonicalHref = u.origin + p + u.search + u.hash;
-            const canon = document.getElementById('canonical-link');
-            if (canon) canon.href = canonicalHref;
-            if (p !== u.pathname) location.replace(canonicalHref);
-          } catch(e){ console.error('canonical normalizer error', e); }
-        })();
-        </script>
+        <base href="/tyranny-of-the-a-b-test/">
+        <link rel="canonical" href="https://blogs.abseth.com/tyranny-of-the-a-b-test">
 
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
@@ -54,11 +33,11 @@
         <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
 
-        <script src="../../script.js"></script>
+        <script src="../script.js"></script>
         
-        <link rel="stylesheet" href="../../blogs/blogs.css">
+        <link rel="stylesheet" href="../blogs.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="icon" href="../../img/favicon.png" type="image/png">
+        <link rel="icon" href="../img/favicon.png" type="image/png">
 
         <script>
             function updateImages() {
@@ -82,7 +61,7 @@
     </head>
 
     <body>
-        <a href="../../index.html" class="back-button">
+        <a href="/" class="back-button">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
