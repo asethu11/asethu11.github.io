@@ -1,29 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <!-- Canonical URL normalizer -->
-        <link id="canonical-link" rel="canonical" href="">
-        <script>
-        (function(){
-          try{
-            const u = new URL(location.href);
-            let p = u.pathname;
-            if (p.endsWith('/index.html')) p = p.replace(/\/index\.html$/, '/');
-            const m = p.match(/^\/([^\/]+)\/\1\.html$/);
-            if (m) p = '/' + m[1];
-            if (p !== '/' && p.endsWith('/')) p = p.replace(/\/+$/, '');
-            const parts = p.split('/').filter(Boolean);
-            if (parts.length === 1 || (parts[0] === 'blogs' && parts.length === 2)) {
-              const normalized = parts.map(s => s.toLowerCase()).join('/');
-              p = '/' + normalized;
-            }
-            const canonicalHref = u.origin + p + u.search + u.hash;
-            const canon = document.getElementById('canonical-link');
-            if (canon) canon.href = canonicalHref;
-            if (p !== u.pathname) location.replace(canonicalHref);
-          } catch(e){ console.error('canonical normalizer error', e); }
-        })();
-        </script>
+        <link rel="canonical" href="https://abseth.com/SODA">
 
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
