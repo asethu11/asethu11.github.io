@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Canonical URL normalizer -->
+        <link id="canonical-link" rel="canonical" href="">
+        <script>
+        (function(){
+          try{
+            const u = new URL(location.href);
+            let p = u.pathname;
+            if (p.endsWith('/index.html')) p = p.replace(/\/index\.html$/, '/');
+            const m = p.match(/^\/([^\/]+)\/\1\.html$/);
+            if (m) p = '/' + m[1];
+            if (p !== '/' && p.endsWith('/')) p = p.replace(/\/+$/, '');
+            const parts = p.split('/').filter(Boolean);
+            if (parts.length === 1 || (parts[0] === 'blogs' && parts.length === 2)) {
+              const normalized = parts.map(s => s.toLowerCase()).join('/');
+              p = '/' + normalized;
+            }
+            const canonicalHref = u.origin + p + u.search + u.hash;
+            const canon = document.getElementById('canonical-link');
+            if (canon) canon.href = canonicalHref;
+            if (p !== u.pathname) location.replace(canonicalHref);
+          } catch(e){ console.error('canonical normalizer error', e); }
+        })();
+        </script>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
+
+        <!-- Clarity tracking code -->
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "vaaig4fq2o");
+        </script>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>AI-powered Data Extraction UI</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <script src="../../script.js"></script>
+        <script src="../../shared.js"></script>
+        <link rel="stylesheet" href="LSR-fixed.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="icon" href="../img/favicon.png" type="image/png">
+
+        <script>
+            function isDarkTheme() {
+                const forcedLight = document.documentElement.classList.contains('force-light');
+                const forcedDark = document.documentElement.classList.contains('force-dark');
+                if (forcedLight) return false;
+                if (forcedDark) return true;
+                return window.matchMedia("(prefers-color-scheme: dark)").matches;
+            }
+
+            function updateImages() {
+                const isDarkMode = isDarkTheme();
+                document.querySelectorAll(".theme-img").forEach(img => {
+                    const imageName = img.dataset.name;
+                    const newSrc = isDarkMode 
+                        ? `img/dk/${imageName}.png` 
+                        : `img/lt/${imageName}.png`;
+
+                    if (img.src !== newSrc) {
+                        img.src = newSrc;
+                    }
+                });
+            }
+
+            const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+            darkModeQuery.addEventListener("change", updateImages);
+
+            document.addEventListener("DOMContentLoaded", updateImages);
+
+            function openImageInNewTab(imageName) {
+                const isDarkMode = isDarkTheme();
+                const imagePath = isDarkMode 
+                    ? `img/dk/${imageName}.png` 
+                    : `img/lt/${imageName}.png`;
+                window.open(imagePath, '_blank');
+            }
+        </script>
+    </head>
+
+    <body>
+        <a href="../index.html" class="back-button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 12H5M5 12L12 19M5 12L12 5"
+                    stroke="currentColor" 
+                    stroke-width="2" 
+                    stroke-linecap="round"
+                    stroke-linejoin="round"/>
+            </svg>
+            Home
+        </a>
+
+        <!-- Sticky Table of Contents (top-right) -->
+        <aside class="toc-sticky" aria-label="Table of contents">
+            <div class="toc-wrapper">
+                <h3 class="toc-title">Contents</h3>
+                <div class="reading-progress" aria-hidden="true">
+                    <div class="reading-progress-fill"></div>
+                </div>
+                <nav class="toc-nav">
+                    <ul class="toc-list">
+                        <li><a href="#tldr" data-ga-event="click" data-ga-event-name="toc_tldr" data-ga-event-category="navigation">TL;DR</a></li>
+                        <li><a href="#human-cost" data-ga-event="click" data-ga-event-name="toc_human_cost" data-ga-event-category="navigation">The Problem</a></li>
+                        <li><a href="#challenges" data-ga-event="click" data-ga-event-name="toc_challenges" data-ga-event-category="navigation">Challenges</a></li>
+                        <li><a href="#approach" data-ga-event="click" data-ga-event-name="toc_approach" data-ga-event-category="navigation">My Approach</a></li>
+                        <li><a href="#goals" data-ga-event="click" data-ga-event-name="toc_goals" data-ga-event-category="navigation">Goals</a></li>
+                        <li><a href="#prototype" data-ga-event="click" data-ga-event-name="toc_prototype" data-ga-event-category="navigation">Prototype</a></li>
+                        <li><a href="#solution" data-ga-event="click" data-ga-event-name="toc_solution" data-ga-event-category="navigation">Final Solution</a></li>
+                        <li><a href="#reflections" data-ga-event="click" data-ga-event-name="toc_reflections" data-ga-event-category="navigation">Reflections</a></li>
+                        <li><a href="#learnings" data-ga-event="click" data-ga-event-name="toc_learnings" data-ga-event-category="navigation">Learnings</a></li>
+                    </ul>
+                </nav>
+                <a class="toc-top" href="#top" data-ga-event="click" data-ga-event-name="back_to_top" data-ga-event-category="navigation">Back to top</a>
+            </div>
+        </aside>
+
+        <div class="toast" role="alert" aria-live="polite" aria-atomic="true">
+            <div class="toast-title">This content is optimized for light mode</div>
+            <div class="toast-text">You're viewing in dark mode. Switch to light for a comfortable reading experience.</div>
+            <div class="toast-actions">
+                <button class="btn-primary" id="toast-switch-light" data-ga-event="click" data-ga-event-name="switch_to_light_mode" data-ga-event-category="theme">Switch to light mode</button>
+                <button class="btn-ghost" id="toast-dismiss" data-ga-event="click" data-ga-event-name="dismiss_toast" data-ga-event-category="notification">Dismiss</button>
+            </div>
+        </div>
+
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme" data-ga-event="click" data-ga-event-name="toggle_theme" data-ga-event-category="theme">Switch to light</button>
+
+        <div class="article-container">
+            <article class="article-body">
+                
+               <!-- Intro Section -->
+                <section class="section-1">
+                    <div class="grey-background-article image-bottom">
+                        <figure class="article-figure">
+                            <!-- Image updates based on theme -->
+                            <img class="theme-img" src="" data-name="slide1" width="100%" alt="" loading="lazy">
+                        </figure>
+                    </div>
+
+                    <h1 class="article-h1">
+                        AI-Powered Data Extraction Interface for Clinical Researchers at MayoClinic
+                    </h1>
+
+                    <p>
+                        I built an Airtable-style “smart spreadsheet” that lets doctors pull structured clinical trial data
+                        from PDFs—fast, transparently, and with full control. The tool blends AI-assisted extraction with human
+                        validation, streamlining a previously manual and error-prone workflow into a focused, fluid experience.
+                    </p>
+
+                    <div class="sub-header">
+                        <p id="intro-tags1">
+                             Mar-April 2025 | Product Designer & TL | Web-App
+                        </p>
+                    </div>
+                </section>
+                
+                <hr><!--------------------------------------------->
+
+                <!-- TL;DR Section -->
+                <section class="section-tldr">
+                    <h2 class="article-h2" id="tldr">TL;DR</h2>
+                    <p><b style="color: var(--red);">Problem</b><br>
+                        Living systematic reviews in oncology require extracting thousands of data points from clinical trials — a process that takes 100+ hours per review and remains highly error-prone.</p>
+                    
+                    <p><b style="color: var(--red);">Solution</b><br>
+                        I designed an AI-augmented extraction tool with a spreadsheet-style UI, inline evidence citations, and conflict detection alerts. I led UX research and design, from initial shadowing sessions with clinicians through hi-fi prototyping and usability testing.</p>
+                    
+                    <p><b style="color: var(--red);">Result</b><br>
+                        The final design achieved 4× faster extraction than competing methods, reduced error rates by 66%, and earned 80% clinician adoption with a SUS score of 85+.</p>
+                </section>
+
+                <hr class="intro-hr"><!--------------------------------------------->
+
+                <!-- Human Cost Section -->
+                <section class="section-human-cost">
+                    <h2 class="article-h2" id="human-cost">The Human Cost of Manual Review</h2>
+                    <p>Systematic reviews demand endless PDF scrubbing: copy, paste, alt‑tab, over and over. I shadowed Dr. Khan and Dr. Umar as they juggled trial tables and spreadsheets. Midway through the tenth paper, Dr. Khan sighed:</p>
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide2" width="100%" alt="" loading="lazy">
+                    </figure>
+
+                    <p>Multiply that by a hundred papers, and you see the issue: a process designed for machines, executed by humans.</p>
+                    <p>Existing tools like <b>Covidence</b>, <b>Rayyan</b>, or <b>DistillrSR</b> failed on usability. Doctors either abandoned them or hacked their own makeshift systems.</p>
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide3" width="100%" alt="" loading="lazy">
+                    </figure>
+                </section>
+
+                <!-- Challenges Section -->
+                <section class="section-challenges">
+                    <h2 class="article-h2" id="challenges">Challenges Faced</h2>
+                    <p>I initially understood high-level issues through informal discussions and workshops, but deeper challenges like specific error rates and AI distrust became clearer through subsequent research. These insights directly informed my detailed design and iterative approach:</p>
+                    <ul>
+                        <li><b>High Manual Workload:</b> Extracting data from 100+ PDFs per review cycle.</li>
+                        <li><b>Error-Prone Process:</b> Copy-paste fatigue led to a 15% transcription error rate.</li>
+                        <li><b>Fragmented Tools:</b> Switching between PDF readers, spreadsheets, and search interfaces disrupted workflow.</li>
+                        <li><b>AI Skepticism:</b> Lack of transparent sourcing fueled skepticism.</li>
+                    </ul>
+                </section>
+
+                <hr class="intro-hr"><!--------------------------------------------->
+
+                <!-- UX Approach Section -->
+                <section class="section-ux-approach"><br>
+
+                    <h2 class="article-h2" id="approach">My UX Approach</h2>
+                    <p>My design process unfolded across iterative phases, each building on user insights and technical feasibility:</p>
+
+                    
+
+                    <h3>Understand & Empathize</h3>
+                    <p>I began with informal conversations to understand clinicians' current workflows and deeper pain points. One clinician clearly articulated their hesitation with AI:</p>
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide4" width="100%" alt="" loading="lazy">
+                    </figure>
+
+                    <h3>Research</h3>
+                    <p>To genuinely experience doctors' workflows, I shadowed three researchers through full review sessions, logging issues from version chaos to hidden table rows.</p>
+                    <p>Concurrently, I performed heuristic and competitive audits of leading LSR tools (Covidence, Rayyan, DistillrSR), pinpointing gaps in evidence transparency and human–AI collaboration.</p>
+                    <figure class="article-figure ">
+                        <img class="theme-img" src="" data-name="slide5" width="100%" alt="" loading="lazy">
+                    </figure>
+
+                    <br>
+
+                    <h3>Brainstorming</h3>
+                    <p>I held targeted brainstorming sessions with the core team, applying the MoSCoW framework to categorize and prioritize features into Must‑haves, Should‑haves, Could‑haves, and Wonʼt‑haves.</p>
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide8" width="100%" alt="" loading="lazy">
+                    </figure>
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide9" width="100%" alt="" loading="lazy">
+                    </figure>
+                    <a href="mid-fidelity-wireframes.html" target="_blank">Link to Idea Board</a><br><br>
+                    <p>With rich insights, features prioritized and detailed task-flows, I set a clear vision.</p>
+                </section>
+
+                <hr class="intro-hr"><!--------------------------------------------->
+
+                <!-- Goals & Metrics Section -->
+                <section class="section-goals boxed">
+                    <h2 class="article-h2" id="goals">Goals & Success Metrics</h2>
+                    <p>I aimed to build an intuitive platform automating data extraction using AI/LLM, yet ensuring clear reasoning and easy human supervision. Although stakeholders proposed a cautious 50% automation goal, I set my sights higher.</p>
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide10" width="100%" alt="" loading="lazy">
+                    </figure>
+                </section>
+
+                <hr class="intro-hr"><!--------------------------------------------->
+
+                <!-- Prototype, Validate, Iterate Section -->
+                <section class="section-prototyping">
+                    <h2 class="article-h2" id="prototype">Prototype, Validate, Iterate</h2>
+                    <p>I ran 4 two-week Agile sprints:</p>
+                    
+                    <h3>Low-Fid Wireframes Roadblocks</h3>
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide11" width="100%" alt="" loading="lazy">
+                    </figure>
+
+                    
+                    <br>
+
+                    <!-- <h3>Insights from Mid-Fid Wireframes</h3> -->
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide13" width="100%" alt="" loading="lazy">
+
+                        <br><br>
+
+                    <p>During the conversations, I still faced some resistance from the clinicians. I pivoted to a spreadsheet-style interface to mirror usersʼ mental models and reduce resistance. It became clear that the solution had to feel instantly familiar and require minimal adaptation. This led me to pivot to a spreadsheet-style interface to mirror usersʼ mental models and reduce resistance.</p>
+
+
+                    <p>From there, I layered on explainability: exploring side-panel interactions that surfaced AI reasoning, dual-model comparisons, and highlighted source excerpts.</p>
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide6" width="100%" alt="" loading="lazy">
+                    </figure>
+
+
+                    <br>
+
+                    <h3>Technical Feasibility</h3>
+                    <p>The final sprint addressed technical implementation issues, specifically OCR reliability and asynchronous model call latency. Through close collaboration with developers, I validated practical solutions, such as OCR fallbacks, visual loading placeholders, and optimized asynchronous AI model calls, enhancing overall reliability and user experience.</p>
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide16" width="100%" alt="" loading="lazy">
+                    </figure>
+
+                </section>
+
+                <hr class="intro-hr"><!--------------------------------------------->
+
+                <!-- Final Solution Section -->
+                <section class="section-final-solution"><br>
+                    <h2 class="article-h2" id="solution">Final Solution</h2>
+                    <ul>
+                        <li><b>Smart Suggestion Grid:</b> Inline dual-model AI fills cells; low-confidence fields flagged for review.</li>
+                        <li><b>Evidence Panel:</b> Contextual PDF excerpts displayed beside suggestions, ensuring provenance.</li>
+                        <li><b>Confidence Alerts:</b> Voting-based system highlights conflicts, involving humans only when needed.</li>
+                        <li><b>Continuous Learning Loop:</b> User edits feed back into model retraining for improved future suggestions.</li>
+                        <li><b>Audit & Export:</b> Compliance-ready logs and CSV/API export maintain regulatory transparency.</li>
+                    </ul>
+
+                    <video loop autoplay muted width="100%"> 
+                        <source src="vid/video1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide18" width="100%" alt="" loading="lazy">
+                    </figure>
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide19" width="100%" alt="" loading="lazy">
+                    </figure>
+                    <video loop autoplay muted width="100%"> 
+                        <source src="vid/video2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p><br>
+                        The interface is thoughtfully designed to be intuitive and efficient, streamlining the data extraction process with minimal user effort. Users can configure extraction settings simultaneously as files are being uploaded, saving valuable time and eliminating unnecessary steps.
+                    </p>
+                    <p>
+                        Unlike many traditional medical tools, the interface adopts a clean, minimal design. Advanced or infrequently used settings are tucked away behind a toggle, allowing users to stay focused on their core tasks without being overwhelmed by clutter or irrelevant options.
+                    </p>
+                    <video loop autoplay muted width="100%"> 
+                        <source src="vid/video3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p><br>
+                        If a user decides to add a new column, it's as simple as clicking the "+" button. The user could either type out what they want to extract or select from a list of common extraction types. The system will then automatically generate the necessary prompts for the AI model, streamlining the process and ensuring accuracy.
+                    </p>
+                    <video loop autoplay muted width="100%"> 
+                        <source src="vid/video4.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p><br>
+                        The system highlights cells with low confidence scores, allowing users to prioritize their review efforts. This feature is particularly useful when dealing with large datasets, as it helps users quickly identify areas that require their attention.<br><br>                        
+                    </p>
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide15" width="100%" alt="" loading="lazy">
+                    </figure>
+                    <video loop autoplay muted width="100%"> 
+                        <source src="vid/video5.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p>
+                        To quickly reference the original data, users can hover over a cell to view the corresponding PDF excerpt. This feature is especially helpful when users need to verify the accuracy of the extracted information or understand the context in which it was presented. <br><br>
+
+                        The system also provides a side panel that displays the AI's reasoning for its suggestions. This transparency helps users understand how the AI arrived at its conclusions and fosters trust in the system. 
+                    </p>
+
+
+                </section>
+
+                <!-- Impact & Metrics Section -->
+                <!-- <section class="section-impact-metrics">
+                    <h2>Impact & Metrics</h2>
+                    <ul>
+                        <li><b>Extraction Speed:</b> 4× faster than typical workflows involving ChatGPT or other AI tools. Reduced the average process from 2 months to less than a week.</li>
+                        <li><b>Error Rate:</b> Reduced from 15% (manual) to 2% (pilot).</li>
+                        <li><b>Adoption:</b> 80% of clinicians found the tool highly usable and expressed a strong likelihood of incorporating it into their workflow.</li>
+                        <li><b>Usability:</b> System Usability Scale score of 85+, indicating excellent usability.</li>
+                    </ul>
+                </section> -->
+
+                <hr class="intro-hr"><!--------------------------------------------->
+                <!-- Reflections Section -->
+                <section class="section-reflections">
+                    <h2 class="article-h2" id="reflections">Reflections</h2>
+                    <p>Through this project, I learned critical lessons:</p>
+                    <ul>
+                        <li><strong>Adaptability:</strong> It's easier to adapt to user styles than expect users to learn new systems.</li>
+                        <li><strong>Transparency:</strong> Clear evidence and explanations are crucial for AI acceptance.</li>
+                        <li><strong>Early Technical Alignment:</strong> Collaborating with developers early helped mitigate late-stage surprises.</li>
+                        <li><strong>Balance:</strong> Users preferred augmenting their judgment rather than full automation.</li>
+                        <li><strong>Familiarity:</strong> Leveraging familiar mental models (e.g., spreadsheets) greatly reduced user resistance.</li>
+                    </ul>
+                </section>
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="tldr slide11" width="100%" alt="" loading="lazy">
+                    </figure>
+                
+                <!-- Learnings Section -->
+                <section class="section-detailed-learnings">
+                    <h2 class="article-h2" id="learnings">Learnings</h2>
+                    <ul>
+                        <li><b>Know your client:</b> Doctors don’t design. Wireframes needed to feel real to get useful feedback. It’s easier to adapt to their context than expect them to adapt to ours.</li>
+                        <li><b>Trust comes from transparency:</b> The side panel did more than explain—it turned AI into a collaborator.</li>
+                        <li><b>Embrace constraints early:</b> Parsing issues and latency could have derailed the project. Early collaboration with engineers helped us design around limitations, not despite them.</li>
+                        <li><b>Doctors value control over speed:</b> They didn’t want full automation—they wanted AI to augment their judgment, not override it.</li>
+                        <li><b>Familiarity is your Trojan Horse:</b> By mimicking Excel and Airtable, I lowered the learning curve and framed AI as just a smarter cell.</li>
+                    </ul>
+                </section>
+              
+                <hr class="intro-hr">
+
+                <!-- ========== NEXT STEPS ========== -->
+                <div class="next-steps">
+                    <h3 class="next-steps-title">Continue reading</h3>
+                    <div class="next-steps-grid">
+                        <a href="/LSR" class="next-step-card">
+                            <span class="next-step-label">Next Project</span>
+                            <span class="next-step-name">AI tool for Clinical Research →</span>
+                        </a>
+                        <a href="https://blogs.abseth.com/tyranny-of-the-a-b-test/tyranny-of-the-a-b-test.html" class="next-step-card">
+                            <span class="next-step-label">Check out my blogs</span>
+                            <span class="next-step-name">Tyranny of the A/B test →</span>
+                        </a>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ========== FOOTER ========== -->
+            <footer>
+                <br><br><br>
+                <hr><br>
+                <div class="footer-container">
+                <a href="#top" class="hyp-p">back to top ↑</a>
+                </div>
+
+                <br></br>
+                <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.95rem;">Site coded by a human in vanilla HTML, CSS, and JavaScript.</p>
+            </footer>
+            
+            </article>
+            
+        </div>
+
+
+        <script>
+            (function() {
+                const fill = document.querySelector('.reading-progress-fill');
+                const track = document.querySelector('.reading-progress');
+                const tocWrapper = document.querySelector('.toc-wrapper');
+                const tocNav = document.querySelector('.toc-nav');
+                const toast = document.querySelector('.toast');
+                const toastSwitch = document.getElementById('toast-switch-light');
+                const toastDismiss = document.getElementById('toast-dismiss');
+                const themeToggle = document.getElementById('theme-toggle');
+                if (!fill) return;
+
+                function updateTrackBounds() {
+                    if (!track || !tocWrapper || !tocNav) return;
+                    const wrapperRect = tocWrapper.getBoundingClientRect();
+                    const navRect = tocNav.getBoundingClientRect();
+                    const topOffset = navRect.top - wrapperRect.top;
+                    const height = navRect.height;
+                    track.style.top = `${topOffset}px`;
+                    track.style.height = `${height}px`;
+                }
+
+                function updateProgress() {
+                    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 98 : 0;
+                    fill.style.height = `${progress}%`;
+                }
+
+                function showToastIfNeeded() {
+                    if (!toast) return;
+                    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    const dismissed = sessionStorage.getItem('lightModeToastDismissed') === '1';
+                    const forcedLight = document.documentElement.classList.contains('force-light');
+                    const forcedDark = document.documentElement.classList.contains('force-dark');
+                    if (prefersDark && !dismissed && !forcedLight && !forcedDark) {
+                        toast.classList.add('show');
+                    }
+                }
+
+                function applyForcedTheme(theme) {
+                    document.documentElement.classList.remove('force-light', 'force-dark');
+                    if (theme === 'light') {
+                        document.documentElement.classList.add('force-light');
+                    } else if (theme === 'dark') {
+                        document.documentElement.classList.add('force-dark');
+                    }
+                    if (theme) {
+                        sessionStorage.setItem('forcedTheme', theme);
+                        sessionStorage.setItem('lightModeToastDismissed', '1');
+                    } else {
+                        sessionStorage.removeItem('forcedTheme');
+                    }
+                    updateImages();
+                    updateToggleLabel();
+                    if (toast) toast.classList.remove('show');
+                }
+
+                function dismissToast() {
+                    sessionStorage.setItem('lightModeToastDismissed', '1');
+                    if (toast) toast.classList.remove('show');
+                }
+
+                function updateToggleLabel() {
+                    if (!themeToggle) return;
+                    const isForcedLight = document.documentElement.classList.contains('force-light');
+                    const isForcedDark = document.documentElement.classList.contains('force-dark');
+                    const isDark = isForcedDark || (!isForcedLight && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                    themeToggle.textContent = isDark ? 'Switch to light' : 'Switch to dark';
+                    themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+                }
+
+                function toggleTheme() {
+                    const isForcedLight = document.documentElement.classList.contains('force-light');
+                    const isForcedDark = document.documentElement.classList.contains('force-dark');
+                    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                    if (isForcedLight) {
+                        applyForcedTheme('dark');
+                    } else if (isForcedDark) {
+                        applyForcedTheme('light');
+                    } else {
+                        applyForcedTheme(prefersDark ? 'light' : 'dark');
+                    }
+                }
+
+                updateTrackBounds();
+                updateProgress();
+                document.addEventListener('scroll', updateProgress, { passive: true });
+                window.addEventListener('resize', () => {
+                    updateTrackBounds();
+                    updateProgress();
+                });
+
+                if (toastSwitch) {
+                    toastSwitch.addEventListener('click', () => applyForcedTheme('light'));
+                }
+
+                if (toastDismiss) {
+                    toastDismiss.addEventListener('click', dismissToast);
+                }
+
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', toggleTheme);
+                }
+
+                const storedTheme = sessionStorage.getItem('forcedTheme');
+                if (storedTheme === 'light' || storedTheme === 'dark') {
+                    applyForcedTheme(storedTheme);
+                } else {
+                    updateToggleLabel();
+                }
+
+                showToastIfNeeded();
+            })();
+
+            // Active TOC highlighting based on scroll position
+            (function() {
+                const sections = Array.from(document.querySelectorAll('h2[id]'));
+                const tocLinks = document.querySelectorAll('.toc-list a');
+                let lastScrollY = window.scrollY;
+
+                function updateActiveLink() {
+                    const currentScrollY = window.scrollY;
+                    const scrollingUp = currentScrollY < lastScrollY;
+                    lastScrollY = currentScrollY;
+
+                    // Use different thresholds: 25% when scrolling down, 20% when scrolling up
+                    const threshold = scrollingUp ? 0.20 : 0.25;
+                    const scrollPos = currentScrollY + (window.innerHeight * threshold);
+                    let currentSection = null;
+
+                    // Find which section we're currently in
+                    for (let i = 0; i < sections.length; i++) {
+                        const section = sections[i];
+                        const nextSection = sections[i + 1];
+                        const sectionTop = section.offsetTop;
+                        const nextSectionTop = nextSection ? nextSection.offsetTop : Infinity;
+
+                        if (scrollPos >= sectionTop && scrollPos < nextSectionTop) {
+                            currentSection = section;
+                            break;
+                        }
+                    }
+
+                    // Fallback: if we're past the last section
+                    if (!currentSection && sections.length > 0) {
+                        const lastSection = sections[sections.length - 1];
+                        if (scrollPos >= lastSection.offsetTop) {
+                            currentSection = lastSection;
+                        }
+                    }
+
+                    if (currentSection) {
+                        const id = currentSection.getAttribute('id');
+                        
+                        tocLinks.forEach(link => link.classList.remove('active'));
+                        
+                        const activeLink = document.querySelector(`.toc-list a[href="#${id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                }
+
+                window.addEventListener('scroll', updateActiveLink);
+                updateActiveLink();
+            })();
+        </script>
+        <script src="../../script.js"></script>
+        <script src="../../shared.js"></script>
+    </body>
+</html>
+

@@ -8,34 +8,69 @@
     },
     {
       "src": "^/improvingAdoption/?$",
-      "dest": "/my-works/improving-adoption/improvingAdoption.html"
+      "dest": "/improvingAdoption/"
     },
     {
       "src": "^/nextgen/?$",
-      "dest": "/my-works/nextgen/nextgen.html"
+      "dest": "/nextgen/"
     },
     {
       "src": "^/ytm/?$",
-      "dest": "/my-works/ytm/ytm.html"
+      "dest": "/ytm/"
     },
     {
       "src": "^/LSR/?$",
-      "dest": "/my-works/LSR/LSR.html"
+      "dest": "/LSR/"
     },
     {
       "src": "^/SODA/?$",
-      "dest": "/my-works/hackathonSODA/SODA.html"
+      "dest": "/SODA/"
     },
     {
       "src": "^/cabKb/?$",
-      "dest": "/my-works/KB-ET/cabKb.html"
+      "dest": "/cabKb/"
     },
     {
       "src": "^/COMUT/?$",
-      "dest": "/my-works/usertesting-mesa/COMUT.html"
+      "dest": "/COMUT/"
     }
   ],
   "redirects": [
+    {
+      "source": "/my-works/improving-adoption/improvingAdoption.html",
+      "destination": "https://abseth.com/improvingAdoption",
+      "permanent": true
+    },
+    {
+      "source": "/my-works/nextgen/nextgen.html",
+      "destination": "https://abseth.com/nextgen",
+      "permanent": true
+    },
+    {
+      "source": "/my-works/ytm/ytm.html",
+      "destination": "https://abseth.com/ytm",
+      "permanent": true
+    },
+    {
+      "source": "/my-works/LSR/LSR.html",
+      "destination": "https://abseth.com/LSR",
+      "permanent": true
+    },
+    {
+      "source": "/my-works/hackathonSODA/SODA.html",
+      "destination": "https://abseth.com/SODA",
+      "permanent": true
+    },
+    {
+      "source": "/my-works/KB-ET/cabKb.html",
+      "destination": "https://abseth.com/cabKb",
+      "permanent": true
+    },
+    {
+      "source": "/my-works/usertesting-mesa/COMUT.html",
+      "destination": "https://abseth.com/COMUT",
+      "permanent": true
+    },
     {
       "source": "/blogs/:path*",
       "destination": "https://blogs.abseth.com/:path*",

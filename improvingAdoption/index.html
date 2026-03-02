@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Canonical URL normalizer -->
+        <link id="canonical-link" rel="canonical" href="">
+        <script>
+        (function(){
+          try{
+            const u = new URL(location.href);
+            let p = u.pathname;
+            if (p.endsWith('/index.html')) p = p.replace(/\/index\.html$/, '/');
+            const m = p.match(/^\/([^\/]+)\/\1\.html$/);
+            if (m) p = '/' + m[1];
+            if (p !== '/' && p.endsWith('/')) p = p.replace(/\/+$/, '');
+            const parts = p.split('/').filter(Boolean);
+            if (parts.length === 1 || (parts[0] === 'blogs' && parts.length === 2)) {
+              const normalized = parts.map(s => s.toLowerCase()).join('/');
+              p = '/' + normalized;
+            }
+            const canonicalHref = u.origin + p + u.search + u.hash;
+            const canon = document.getElementById('canonical-link');
+            if (canon) canon.href = canonicalHref;
+            if (p !== u.pathname) location.replace(canonicalHref);
+          } catch(e){ console.error('canonical normalizer error', e); }
+        })();
+        </script>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
+
+        <!-- Clarity tracking code -->
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "vaaig4fq2o");
+        </script>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Solving Adoption Crisis at Arizona State</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Transforming adoption plateau into growth through data analysis and product strategy.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Product Strategy, Data Analysis, Arizona, USA">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <!-- Skeleton Loading Styles -->
+        <style>
+            /* Base skeleton animation */
+            @keyframes shimmer {
+                0% { background-position: 200% 0; }
+                100% { background-position: -200% 0; }
+            }
+            
+            /* The class applied to the container (figure) during loading */
+            figure.media-skeleton {
+                position: relative;
+                z-index: 1; /* Ensure on top */
+                background: #e0e0e0; /* Fallback - darker */
+                background: linear-gradient(90deg, 
+                    rgba(0, 0, 0, 0.06) 25%, 
+                    rgba(0, 0, 0, 0.15) 37%, 
+                    rgba(0, 0, 0, 0.06) 63%);
+                background-size: 200% 100%;
+                animation: shimmer 1.5s ease-in-out infinite;
+                min-height: 300px; /* Placeholder height */
+                border-radius: 8px;
+                display: block;
+            }
+
+            /* Dark mode specific skeleton */
+            @media (prefers-color-scheme: dark) {
+                figure.media-skeleton {
+                    background: linear-gradient(90deg, 
+                        rgba(255, 255, 255, 0.02) 25%, 
+                        rgba(255, 255, 255, 0.08) 37%, 
+                        rgba(255, 255, 255, 0.02) 63%);
+                    background-size: 200% 100%;
+                }
+            }
+
+
+        </style>
+
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="improving-adoption.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+        <link rel="icon" href="../img/favicon.png" type="image/png">
+    </head>
+
+<script>
+    function isDarkTheme() {
+        const forcedLight = document.documentElement.classList.contains('force-light');
+        const forcedDark = document.documentElement.classList.contains('force-dark');
+        if (forcedLight) return false;
+        if (forcedDark) return true;
+        return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+
+    function updateImages() {
+        const isDarkMode = isDarkTheme();
+        document.querySelectorAll(".theme-img").forEach(img => {
+            const imageName = img.dataset.name; // Get the image name
+            const newSrc = isDarkMode 
+                ? `img/dk/${imageName}.png` 
+                : `img/lt/${imageName}.png`;
+
+            // Only update if the src has changed (prevents unnecessary reloads)
+            if (img.src !== newSrc) {
+                img.src = newSrc;
+            }
+        });
+    }
+
+    // Ensure images update on theme change
+    const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    darkModeQuery.addEventListener("change", updateImages);
+
+    // Run on page load
+    document.addEventListener("DOMContentLoaded", updateImages);
+
+    // Function to open image in new tab
+    function openImageInNewTab(imageName) {
+        const isDarkMode = isDarkTheme();
+        const imagePath = isDarkMode 
+            ? `img/dk/${imageName}.png` 
+            : `img/lt/${imageName}.png`;
+        window.open(imagePath, '_blank');
+    }
+</script>
+
+<body>
+    <a href="../index.html" class="back-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Home
+    </a>
+
+    <!-- Sticky Table of Contents (top-right) -->
+    <aside class="toc-sticky" aria-label="Table of contents">
+        <div class="toc-wrapper">
+            <h3 class="toc-title">Contents</h3>
+            <div class="reading-progress" aria-hidden="true">
+                <div class="reading-progress-fill"></div>
+            </div>
+            <nav class="toc-nav">
+                <ul class="toc-list">
+                    <li><a href="#tldr" data-ga-event="click" data-ga-event-name="toc_tldr" data-ga-event-category="navigation">TLDR</a></li>
+                    <li><a href="#problem" data-ga-event="click" data-ga-event-name="toc_problem" data-ga-event-category="navigation">Problem</a></li>
+                    <li><a href="#discovery" data-ga-event="click" data-ga-event-name="toc_discovery" data-ga-event-category="navigation">Discovery & Research</a></li>
+                    <li><a href="#stakeholder-negotiation" data-ga-event="click" data-ga-event-name="toc_stakeholder_negotiation" data-ga-event-category="navigation">Stakeholder Negotiation</a></li>
+                    <li><a href="#solution" data-ga-event="click" data-ga-event-name="toc_solution" data-ga-event-category="navigation">Solution</a></li>
+                    <li><a href="#design-rationale" data-ga-event="click" data-ga-event-name="toc_design_rationale" data-ga-event-category="navigation">Design Rationale</a></li>
+                    <li><a href="#validation" data-ga-event="click" data-ga-event-name="toc_validation" data-ga-event-category="navigation">Validation</a></li>
+                    <li><a href="#results" data-ga-event="click" data-ga-event-name="toc_results" data-ga-event-category="navigation">Results</a></li>
+                    <li><a href="#measuring-adoption" data-ga-event="click" data-ga-event-name="toc_measuring_adoption" data-ga-event-category="navigation">Measuring Adoption</a></li>
+                </ul>
+            </nav>
+            <a class="toc-top" href="#top" data-ga-event="click" data-ga-event-name="back_to_top" data-ga-event-category="navigation">Back to top</a>
+        </div>
+    </aside>
+    
+    <div class="toast" role="alert" aria-live="polite" aria-atomic="true">
+        <div class="toast-title">This content is optimized for light mode</div>
+        <div class="toast-text">You're viewing in dark mode. Switch to light for a comfortable reading experience.</div>
+        <div class="toast-actions">
+            <button class="btn-primary" id="toast-switch-light" data-ga-event="click" data-ga-event-name="switch_to_light_mode" data-ga-event-category="theme">Switch to light mode</button>
+            <button class="btn-ghost" id="toast-dismiss" data-ga-event="click" data-ga-event-name="dismiss_toast" data-ga-event-category="notification">Dismiss</button>
+        </div>
+    </div>
+
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme" data-ga-event="click" data-ga-event-name="toggle_theme" data-ga-event-category="theme">Switch to light</button>
+
+    <div class="article-container">
+        <article class="article-body">
+            <section class="section-1">
+
+                <div class="grey-background-article image-bottom">
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="thumbnail" width="100%" alt="Reframing Adoption: From Feature Problems to Activation Strategy">
+                    </figure>
+                </div>
+
+                <h1 class="article-h1">Solving Adoption Crisis (80% bounce-rate) With Limited Engineering Bandwidth</h1>
+
+                <p>CreateAI let faculty build custom AI bots for tutoring and answering student questions. Early adopters loved it, but growth stalled at 147 courses. Most new users left within minutes, unable to navigate complex setup. The challenge: non-technical faculty needed a guaranteed path to value without compromising power users.</p>
+
+                <div class="sub-header">
+                    <p id="intro-tags1">
+                        9-12 min read | UX/Product Designer | September '25 - Present | AI Platform for Edu
+                    </p>
+                </div>
+
+            </section>
+
+            <hr>
+
+            <section class="section-tldr" aria-label="TL;DR summary">
+                <h2 class="article-h2" id="tldr">TLDR</h2>
+                <p><b style="color: var(--red);">Problem</b><br> CreateAI was designed by engineers and shaped by early technical adopters. As the platform grew, non-technical faculty encountered advanced AI configuration before completing any task that demonstrated value. Adoption stalled, with most new users bouncing within minutes.</p>
+
+                <p><b style="color: var(--red);">Solution</b><br> Analysis of over 8,000 projects showed that most faculty were trying to solve a small number of predictable jobs, primarily course Q&A. Instead of simplifying the platform, we branched off a focused product with intentional constraints, automation, and guardrails. Complexity was handled by the system, not exposed to the user.</p>
+
+                <p><b style="color: var(--red);">Impact</b><br>
+                    Q&A Bot is showing measurable adoption among faculty who never engaged with the original platform. Setup time dropped to under a minute. Misconfiguration was eliminated by design, and course adoption is expanding from 147 toward 200 to 300 courses as rollout continues.</p>
+            </section>
+
+            <hr class="intro-hr">
+
+            <!--Main Content Sections-->
+            <section class="section-2">
+
+                <!-- ========== PROBLEM & CONTEXT ========== -->
+
+                <figure class="article-figure article-video">
+                    <video width="100%" controls autoplay muted style="border: 1px solid var(--border-light);">
+                        <source src="vid/existingPlatform.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <figcaption>The existing platform that was designed by developers and shaped by early-adopters that were mostly AI power-users. This led to feature bloat and unnecessary complexity that new and non-technical users did not want or understand.</figcaption>
+                </figure>
+
+                <h2 class="article-h2" id="problem">Problem & Context: Adoption Plateau Due to Complexity</h2>
+
+                <p>
+                   CreateAI offered dozens of configuration options, from model selection to RAG settings and conversation parameters. For technical users, this was empowering. For most faculty, it was overwhelming. Google Analytics showed nearly 80% of new users bounced within two minutes. Support data revealed 20 percent of tickets were caused by misconfiguration, not bugs.
+                </p>
+
+                
+
+                <div class="metric-comparison" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0; padding: 1.5rem; background: var(--background-grey); border-radius: 12px;">
+                    <div style="text-align: center; transition: opacity 0.3s ease;" class="metric-card">
+                        <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">New Users (80%)</div>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--red); margin-bottom: 0.5rem;" class="metric-number">2 min</div>
+                        <div style="width: 10%; height: 8px; background: rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden;">
+                            <div style="width: 0%; height: 100%; background: var(--red); border-radius: 4px;" class="progress-bar-element"></div>
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.75rem;" class="metric-label">Bounce before value</div>
+                    </div>
+                    <div style="text-align: center; transition: opacity 0.3s ease;" class="metric-card">
+                        <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">Returning Users</div>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem;" class="metric-number">2-3 hrs</div>
+                        <div style="width: 100%; height: 8px; background: rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden;">
+                            <div style="width: 0%; height: 100%; background: var(--primary); border-radius: 4px;" class="progress-bar-element"></div>
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.75rem;" class="metric-label">Engaged power-users</div>
+                    </div>
+                </div>
+
+                <style>
+                    @keyframes slideInLeft {
+                        from { opacity: 0; transform: translateX(-20px); }
+                        to { opacity: 1; transform: translateX(0); }
+                    }
+                    @keyframes slideInRight {
+                        from { opacity: 0; transform: translateX(20px); }
+                        to { opacity: 1; transform: translateX(0); }
+                    }
+                    @keyframes fillBar {
+                        from { width: 0 !important; }
+                        to { width: var(--bar-width, 100%) !important; }
+                    }
+                    @keyframes fadeIn {
+                        from { opacity: 0; }
+                        to { opacity: 1; }
+                    }
+                    
+                    .metric-comparison.in-view .metric-number:nth-child(1) {
+                        animation: slideInLeft 0.6s ease-out;
+                    }
+                    .metric-comparison.in-view .metric-number:nth-child(2) {
+                        animation: slideInRight 0.6s ease-out;
+                    }
+                    .metric-comparison.in-view .progress-bar-element {
+                        animation: fillBar 1s ease-out 0.3s both;
+                    }
+                    .metric-comparison.in-view .metric-label {
+                        animation: fadeIn 0.8s ease-out 0.6s both;
+                    }
+                    
+                    .metric-card:hover {
+                        opacity: 1;
+                    }
+                </style>
+
+                <script>
+                    (function() {
+                        const metricsEl = document.querySelector('.metric-comparison');
+                        if (!metricsEl) return;
+                        
+                        const observer = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting && !entry.target.classList.contains('in-view')) {
+                                    entry.target.classList.add('in-view');
+                                    observer.unobserve(entry.target);
+                                }
+                            });
+                        }, { threshold: 0.2 });
+                        
+                        observer.observe(metricsEl);
+                    })();
+                </script> <br>
+
+                <p>
+                    One English professor summarized the challenge perfectly: “What does any of this mean?” <br><br>
+
+                    She didn’t try to figure it out. She left. 
+                    <br><br>
+
+                    Early exposure to configuration complexity caused users to exit before reaching a first successful outcome.
+                </p>
+
+                <p>When I presented these findings to product leadership, their response was cautious. "We can't make drastic changes without proof. Engineering is at capacity.</p>
+
+                <!-- Jump to solution CTA -->
+                <a href="#solution" class="jump-btn" data-ga-event="click" data-ga-event-name="skip_to_solution" data-ga-event-category="navigation">
+                    Jump to Solution
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 5v14M5 12l7 7 7-7"/>
+                    </svg>
+                </a>
+
+                <hr class="intro-hr">
+
+                <!-- ========== DISCOVERY & RESEARCH ========== -->
+                <h2 class="article-h2" id="discovery">Discovery, Research & Strategic Approach</h2>
+
+                <h3>What I saw in early research</h3>
+
+                <p>
+                    I ran 20-30 moderated sessions with faculty across multiple departments. Participants entered the platform cold and tried to set up a bot while narrating their decisions. Most participants understood the goal but hesitated at nearly every step, repeatedly pausing to ask whether their actions were correct.
+                </p><br>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide2" width="100%" alt="Information Retrieval and Communication were the only jobs worth building for. Everything else was noise.">
+                    <figcaption>Information Retrieval and Communication were the only jobs worth building for. Everything else was noise.</figcaption>
+                </figure>
+
+                <p><b>Entry point confusion: Users questioned if they were in the right place</b><br>
+                    Faculty had heard about "Syllabot" through word-of-mouth but landed on "CreateAI Builder" and immediately questioned whether they were in the right product. Some assumed they needed to navigate elsewhere. Others assumed both products were the same and tried to use advanced features meant for power users. This friction happened before any setup began. It was purely about positioning and naming clarity.
+                </p>
+
+                <p><b>Feature bloat</b><br>
+                    Although the advanced settings (LLM parameters, RAG settings, and temperature controls) were optional, faculty interpreted advanced settings as a required step in the flow, which caused hesitation and abandonment before setup progressed.
+                </p>
+
+                <p><b>False failures: Users skipped critical steps without knowing consequences</b><br>
+                    A critical usability issue emerged during testing: users could complete setup without uploading course materials. Participants frequently skipped the content upload, launched the bot, received incoherent responses, and concluded the product itself was broken. The bot wasn't broken—it had no context to work with. But by that point, trust was already lost.
+                </p>
+
+                <p>
+                    The key insight was that non-technical faculty expected clarity and reassurance before taking action, not freedom to explore an open-ended system.
+                </p>
+
+                <br>
+
+                <h3>Validating at scale</h3>
+
+                <p>Analysis of over 8,000 projects confirmed the pattern. Despite dozens of possible configurations, nearly two-thirds of projects clustered around two jobs: course Q&A and communication support. Most faculty were trying predictable tasks and encountering complexity before seeing value.</p><br>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide3" width="100%" alt="Analysis of 8,000 projects showing 65% of usage clustered into two primary jobs">
+                    <figcaption>Success score was calculated by assigning weightages for metrics such as engagement rate and messages per session for each project. This allowed us to rank the best-performing project categories.</figcaption>
+                </figure>
+
+                <p>The strategic decision followed directly from this. The platform couldn't serve both audiences without compromise. Power users needed the 20 settings for complex customization. Non-technical faculty needed something that just worked. Incremental fixes like tooltips or onboarding wizards would not work.</p>
+
+                <p>Instead of simplifying the platform and risking power user workflows, we would build standalone products for specific jobs built on the existing platform infrastructure. Configuration would be automated, hidden from users, and constrained to guarantee success while preserving the original platform for advanced users.</p>
+
+               <!-- Strategic Branching Visual -->
+                <style>
+                    .strategy-visual {
+                        margin: 3rem 0;
+                        position: relative;
+                        padding: 1rem 0;
+                    }
+                    .sv-infrastructure {
+                        background: var(--background-grey);
+                        border: 1px solid rgba(128,128,128,0.2);
+                        color: var(--text-primary);
+                        padding: 0.75rem 1.5rem;
+                        border-radius: 8px;
+                        text-align: center;
+                        width: fit-content;
+                        margin: 0 auto;
+                        font-weight: 600;
+                        font-size: 0.9rem;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        position: relative;
+                        z-index: 2;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+                    }
+                    .sv-branches-container {
+                        display: flex;
+                        justify-content: center;
+                        gap: 1rem;
+                        position: relative;
+                        padding-top: 2rem;
+                    }
+                    /* Connecting lines */
+                    .sv-branches-container::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 50%;
+                        width: 1px;
+                        height: 1rem;
+                        background: rgba(128,128,128,0.3);
+                    }
+                    .sv-branches-container::after {
+                        content: '';
+                        position: absolute;
+                        top: 1rem;
+                        left: 25%;
+                        width: 50%;
+                        height: 1px;
+                        background: rgba(128,128,128,0.3);
+                    }
+                    .sv-branch {
+                        flex: 1;
+                        max-width: 45%;
+                        position: relative;
+                    }
+                    .sv-branch::before {
+                        content: '';
+                        position: absolute;
+                        top: -1rem; /* Connects to horizontal line */
+                        left: 50%;
+                        width: 1px;
+                        height: 1rem;
+                        background: rgba(128,128,128,0.3);
+                    }
+                    
+                    .sv-card {
+                        padding: 1.25rem;
+                        border-radius: 12px;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center;
+                        transition: transform 0.2s ease;
+                    }
+                    .sv-card.legacy {
+                        border: 1px dashed rgba(128,128,128,0.4);
+                        opacity: 0.8;
+                    }
+                    .sv-card.new {
+                        border: 1px solid var(--primary, #0066cc);
+                        background: rgba(0, 102, 204, 0.05);
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+                    }
+                    .sv-icon { font-size: 1.25rem; margin-bottom: 0.75rem; }
+                    .sv-title { font-weight: 700; margin-bottom: 0.25rem; font-size: 1rem; color: var(--text-primary); }
+                    .sv-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 0.75rem; }
+                    .sv-badge {
+                        font-size: 0.7rem;
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                        font-weight: 600;
+                        padding: 4px 8px;
+                        border-radius: 4px;
+                    }
+                    .legacy .sv-badge { background: rgba(128,128,128,0.1); color: var(--text-secondary); }
+                    .new .sv-badge { background: var(--primary, #0066cc); color: white; }
+                    
+                    /* Light mode adjustments */
+                    @media (prefers-color-scheme: light) {
+                        .sv-infrastructure { background: var(--background-grey); border-color: rgba(0,0,0,0.1); }
+                        .sv-card.new { background: rgba(0, 102, 204, 0.05); border-color: var(--primary, #0066cc); }
+                        .sv-card.legacy { border-color: rgba(0,0,0,0.15); }
+                        .sv-branches-container::before, .sv-branches-container::after, .sv-branch::before { background: rgba(0,0,0,0.15); }
+                    }
+                    
+                    /* Dark mode adjustments */
+                    @media (prefers-color-scheme: dark) {
+                        .sv-infrastructure { background: #1a1a1a; border-color: #444; }
+                        .sv-card.new { background: rgba(66, 165, 245, 0.1); border-color: #42a5f5; }
+                        .sv-card.legacy { border-color: #555; }
+                        .sv-branches-container::before, .sv-branches-container::after, .sv-branch::before { background: #555; }
+                    }
+                    html.force-light .sv-infrastructure { background: var(--background-grey); border-color: rgba(0,0,0,0.1); }
+                    html.force-light .sv-card.new { background: rgba(0, 102, 204, 0.05); border-color: var(--primary, #0066cc); }
+                    html.force-light .sv-card.legacy { border-color: rgba(0,0,0,0.15); }
+                    html.force-light .sv-branches-container::before, 
+                    html.force-light .sv-branches-container::after, 
+                    html.force-light .sv-branch::before { background: rgba(0,0,0,0.15); }
+                    
+                    /* Mobile Adjustment */
+                    @media (max-width: 600px) {
+                        .sv-branches-container { gap: 0.5rem; }
+                        .sv-card { padding: 1rem 0.5rem; }
+                        .sv-title { font-size: 0.9rem; }
+                        .sv-desc { font-size: 0.75rem; }
+                    }
+                </style>
+
+                <div class="strategy-visual">
+                    <div class="sv-infrastructure">
+                        <i class="fa-solid fa-layer-group"></i> Existing Infrastructure
+                    </div>
+                    <div class="sv-branches-container">
+                        <div class="sv-branch">
+                            <div class="sv-card legacy">
+                                <div class="sv-icon" style="color: var(--text-secondary);"><i class="fa-solid fa-sliders"></i></div>
+                                <div class="sv-title">Core Platform</div>
+                                <div class="sv-desc">Manual configuration.<br>Full flexibility exposed.</div>
+                                <div class="sv-badge">Power Users</div>
+                            </div>
+                        </div>
+                        <div class="sv-branch">
+                            <div class="sv-card new">
+                                <div class="sv-icon" style="color: var(--primary, #0066cc);"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                                <div class="sv-title">Focused Product</div>
+                                <div class="sv-desc">Automated setup.<br>Guardrails preventing miscofigs.</div>
+                                <div class="sv-badge">Faculty</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+
+                <p>I had full control over design direction with one strict constraint: <b>Bot should be set up with just one click.</b></p>
+
+                <br>
+
+                <!-- ========== STAKEHOLDER NEGOTIATION ========== -->
+                <h2 class="article-h2" id="stakeholder-negotiation">Stakeholder Negotiation: Making the Business Case</h2>
+
+                <p>Getting approval required reframing the problem as activation economics. That 80% bounce rate represented wasted acquisition spend. Converting even 20% of dropoffs would hit growth targets without additional marketing investment.</p>
+
+                <p>We set measurable OKRs:</p>
+                <ul>
+                    <li>Scale from 147 to 300 courses by the end of spring semester</li>
+                    <li>Reduce bounce rate from 80% to under 60%</li>
+                    <li>Decrease misconfiguration tickets from 20% to under 3%</li>
+                    <li>Achieve time-to-first-bot under 60 seconds</li>
+                </ul>
+
+                <!-- Option: Minimalist Stats Ribbon -->
+                <style>
+                    .okr-ribbon {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 2rem;
+                        justify-content: space-between;
+                        margin: 2.5rem 0;
+                        padding: 1.5rem 0;
+                        border-top: 1px solid rgba(128,128,128,0.2);
+                        border-bottom: 1px solid rgba(128,128,128,0.2);
+                    }
+                    .okr-stat-block {
+                        flex: 1;
+                        min-width: 140px;
+                        text-align: left;
+                    }
+                    .okr-stat-label {
+                        font-size: 0.8rem;
+                        color: var(--text-secondary);
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                        margin-bottom: 0.5rem;
+                        display: block;
+                    }
+                    .okr-stat-val {
+                        font-size: 1.8rem;
+                        font-weight: 800;
+                        color: var(--text-primary);
+                        line-height: 1.1;
+                        display: block;
+                        font-variant-numeric: tabular-nums;
+                    }
+                    .okr-stat-context {
+                        font-size: 0.85rem;
+                        color: var(--text-secondary);
+                        margin-top: 0.25rem;
+                    }
+                    .okr-arrow {
+                        font-size: 0.9em;
+                        vertical-align: middle;
+                    }
+                </style>
+
+                <div class="okr-ribbon">
+                    <div class="okr-stat-block">
+                        <span class="okr-stat-label">Adoption Scale</span>
+                        <span class="okr-stat-val">300+</span>
+                        <div class="okr-stat-context">Courses (from 147)</div>
+                    </div>
+                    <div class="okr-stat-block">
+                        <span class="okr-stat-label">Bounce Rate</span>
+                        <span class="okr-stat-val"><i class="fa-solid fa-arrow-down okr-arrow"></i> 60%</span>
+                        <div class="okr-stat-context">Down from 80%</div>
+                    </div>
+                    <div class="okr-stat-block">
+                        <span class="okr-stat-label">Support Tix</span>
+                        <span class="okr-stat-val">&lt; 3%</span>
+                        <div class="okr-stat-context">Miscofiguration error</div>
+                    </div>
+                    <div class="okr-stat-block">
+                        <span class="okr-stat-label">Setup Time</span>
+                        <span class="okr-stat-val">60s</span>
+                        <div class="okr-stat-context">Time-to-first-value</div>
+                    </div>
+                </div>
+
+                <p>Scope constraints kept engineering investment minimal: no core platform modifications, reuse existing RAG infrastructure, build automation layer for configuration, treat as standalone product. Approval was granted based on contained risk and clear success criteria.</p>
+
+                <hr class="intro-hr">
+
+                <!-- ========== SOLUTION ========== -->
+                <h2 class="article-h2" id="solution">Solution: Automation Over Configuration</h2>
+
+                <p>The goal was a guaranteed, friction-free first experience for faculty.</p>
+
+                <p><b>Canvas LTI integration</b> was the foundation. Q&A Bot lives directly inside course navigation, with single sign-on, automatic student enrollment, and course context delivered without faculty intervention. The bot feels like course infrastructure rather than an external tool faculty have to manage. The cognitive overhead was fully removed.</p>
+
+                <figure class="article-figure article-video">
+                    <video width="100%" controls autoplay muted style="border: 1px solid var(--border-light);">
+                        <source src="vid/full-flow.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <figcaption>Q&A Bot setup flow: automatic content sync and launch in under 60 seconds</figcaption>
+                </figure>
+
+                <p><b>All manual configuration was eliminated.</b> The system automatically syncs syllabus and course content from Canvas, selects the appropriate model, and applies retrieval settings behind the scenes. Faculty never see temperature sliders or model lists. Conversation starters are pulled directly from course materials and validated to ensure the bot can actually answer them. The result is a setup flow that goes from content sync to launch in under a minute.</p>
+
+                <p><b>Setup was reduced to one clear step:</b> materials auto-synced from Canvas with optional file upload, and launch. First-time interactions worked every time. Setup time dropped to under a minute for all users.</p>
+
+                <!-- Jump to impact CTA -->
+                <a href="#results" class="jump-btn" data-ga-event="click" data-ga-event-name="see_impact" data-ga-event-category="navigation">
+                    See the Impact
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 5v14M5 12l7 7 7-7"/>
+                    </svg>
+                </a>
+
+
+                <hr class="intro-hr">
+
+                <!-- ========== DESIGN RATIONALE ========== -->
+                <h2 class="article-h2" id="design-rationale">Design Rationale: Tradeoffs Between Simplicity and Features</h2>
+
+                <h3>Early explorations</h3>
+
+                <p>
+                    Using Cursor, I vibecoded alternate workflows, stripping down the existing app of complexity, whilst also leaving room for features, without agentic layers. These explorations guided the product and design strategy. 
+                </p>
+
+                <figure class="article-figure article-video">
+                    <video width="100%" controls autoplay muted style="border: 1px solid var(--border-light);">
+                        <source src="vid/exploration1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <figcaption>Exploration 1: Guided accordion-style workflow</figcaption>
+                </figure>
+
+                <figure class="article-figure article-video">
+                    <video width="100%" controls autoplay muted style="border: 1px solid var(--border-light);">
+                        <source src="vid/exploration1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <figcaption>Exploration 2: Step-by-Step workflow</figcaption>
+                </figure>
+                
+
+                <p>Two design decisions shaped the final product and illustrate the tension between building for scale versus building for trust.</p>
+
+                <p><b>Conversation starters and Customizations.</b><br> 
+                   As we framed requirements, I initially pushed for fully AI-generated starters because the approach scaled cleanly and minimized manual effort. The risk was AI slop. Tonality and personalization features also became a point of debate. To avoid over-investing upfront, I ultimately shipped a lean MVP without conversation starters and designed the system to scale later without reworking the core flow.</p>
+
+                <p><b>No migration path into advanced controls.</b><br> 
+                    A bigger tradeoff came up around whether Q&A Bot should offer a migration path into the main CreateAI platform. Leadership saw value in letting users "graduate" into advanced controls over time. I pushed back because it solved the wrong problem. Power users were not blocked by complexity, and non-technical faculty did not aspire to manage 20 settings later. Adding migration paths would have increased cognitive load and reframed Q&A Bot as a simplified version of the platform instead of a product designed for a specific job. We chose clarity over optionality, even though it meant saying no to a feature that looked good on a roadmap.</p>
+
+                <p>That decision ultimately protected both products. Q&A Bot stayed focused on fast, reliable course setup, while the core platform remained the place for deep customization. The tradeoff was fewer crossovers, but the upside was clear positioning and fewer confused users.</p>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide5" width="100%" >
+                    <figcaption>By mapping both happy paths and failure cases upfront, I intentionally prioritized surface-level elements and pushed secondary complexity deeper into the flow, keeping the experience scalable without overwhelming users.</figcaption>
+                </figure>
+
+                <p><b>Hero section</b><br> 
+                    I was adamant about introducing a hero section for two reasons. First, it reduced the perceived wait time while course data was being fetched from Canvas by giving users something meaningful to engage with immediately. <br><br> Second, it acted as a clear product introduction. Instead of pushing demos, FAQs, and community links into a dense tool-tip driven UI, the hero consolidated these resources into a single, scannable space. New users could quickly understand what the product does, how long setup takes, and what value they would get, while also accessing demos, support, and additional resources if needed.</p>                     
+                    
+                    <p>This significantly reduced cognitive load, set expectations upfront, and helped convert first-time users during a moment that would otherwise feel like idle waiting.</p>
+
+                
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide6" width="100%" >
+                    <figcaption>Mid Fidelity: Exploring UI for different user paths, including success and failure states. Dabbled with different layout strategies to optimize an error free user-flow</figcaption>
+                </figure>
+
+                 <p><b>Clicks vs Scrolls</b><br> 
+                    This could have been a zero-click experience, but I intentionally kept a single action. That one click prevented silent misconfigurations and gave users a moment to review synced documents, watch demo videos, or reference help content without forcing them through an onboarding modal. In practice, this was lower friction than modal-driven onboarding, which would have introduced three to four additional clicks and interrupted the flow.</p>
+
+                    <p>To support this, I explored alternate layouts focused on minimizing setup friction while still enabling a fully functional bot. The goal was to reduce clicks wherever possible, even if that meant trading clicks for scroll when it lowered decision overhead. This was the trickiest part of the design.</p>
+
+                    <p>I started by stripping away entire screens and prioritizing only the import channels required for a successful first launch. By mapping failure states early, I removed the standalone file upload page and folded file management into the initial step. Users could add or remove files without navigating away, unlike the main platform. Consolidating everything into a single view allowed all required setup elements to be visible at once and reduced bot setup to a single, deliberate action.</p>
+
+                <figure class="article-figure">
+                    <img class="theme-img" src="" data-name="slide7" width="100%" alt="Analysis of 8,000 projects showing 65% of usage clustered into two primary jobs">
+                    <figcaption>Lean screens shipped in one sprint.</figcaption>
+                </figure>
+
+                <hr class="intro-hr">
+
+                <!-- ========== VALIDATION ========== -->
+                <h2 class="article-h2" id="validation">Validation</h2>
+
+                <p>We tested the product with a mixed group of faculty. Half were experienced users of the main platform, and half had never built a bot before. Setup time was measured through observed task completion rather than self-reporting. Technical users averaged 35 seconds, non-technical users averaged 45, with a mean of 40 seconds.</p>
+
+                <style>
+                    .setup-time-chart {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr;
+                        gap: 2rem;
+                        margin: 2.5rem 0;
+                        padding: 2rem;
+                        background: var(--background-grey);
+                        border-radius: 12px;
+                    }
+                    .setup-bar-item {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    .setup-bar-label {
+                        font-size: 0.85rem;
+                        font-weight: 600;
+                        color: var(--text-secondary);
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                        margin-bottom: 1rem;
+                    }
+                    .setup-bar-container {
+                        height: 200px;
+                        background: rgba(0,0,0,0.05);
+                        border-radius: 8px;
+                        position: relative;
+                        overflow: hidden;
+                        margin-bottom: 0.5rem;
+                    }
+                    .setup-bar-fill {
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        background: linear-gradient(180deg, var(--primary, #0066cc), rgba(0, 102, 204, 0.7));
+                        border-radius: 8px 8px 0 0;
+                        display: flex;
+                        align-items: flex-end;
+                        justify-content: center;
+                        padding-bottom: 8px;
+                        color: white;
+                        font-weight: 700;
+                        font-size: 1.1rem;
+                        transition: all 0.6s ease-out;
+                    }
+                    .setup-bar-value {
+                        font-size: 1.6rem;
+                        font-weight: 800;
+                        color: var(--text-primary);
+                        margin-bottom: 0.5rem;
+                    }
+                    .setup-bar-context {
+                        font-size: 0.9rem;
+                        color: var(--text-secondary);
+                    }
+                    
+                    /* Light mode - use design system colors */
+                    @media (prefers-color-scheme: light) {
+                        .setup-time-chart { background: var(--background-grey); }
+                        .setup-bar-label {
+                            color: var(--text-primary);
+                        }
+                        .setup-bar-value {
+                            color: var(--text-primary);
+                        }
+                        .setup-bar-context {
+                            color: var(--text-secondary);
+                        }
+                        .setup-bar-container {
+                            background: rgba(0,0,0,0.1);
+                        }
+                    }
+                    
+                    /* Dark mode */
+                    @media (prefers-color-scheme: dark) {
+                        .setup-time-chart { background: #1a1a1a; }
+                        .setup-bar-container { background: rgba(255,255,255,0.05); }
+                    }
+                    html.force-light .setup-time-chart { background: var(--background-grey); }
+                    html.force-light .setup-bar-label { color: var(--text-primary); }
+                    html.force-light .setup-bar-value { color: var(--text-primary); }
+                    html.force-light .setup-bar-context { color: var(--text-secondary); }
+                    html.force-light .setup-bar-container { background: rgba(0,0,0,0.1); }
+                    
+                    /* Mobile */
+                    @media (max-width: 600px) {
+                        .setup-time-chart {
+                            grid-template-columns: 1fr;
+                            gap: 1.5rem;
+                            padding: 1.5rem;
+                        }
+                    }
+                </style>
+
+                <div class="setup-time-chart">
+                    <div class="setup-bar-item">
+                        <div class="setup-bar-label">Technical Users</div>
+                        <div class="setup-bar-container">
+                            <div class="setup-bar-fill" style="height: 78%;">35s</div>
+                        </div>
+                    </div>
+                    <div class="setup-bar-item">
+                        <div class="setup-bar-label">Non-Technical Users</div>
+                        <div class="setup-bar-container">
+                            <div class="setup-bar-fill" style="height: 100%;">45s</div>
+                        </div>
+                    </div>
+                    <div class="setup-bar-item">
+                        <div class="setup-bar-label">Mean</div>
+                        <div class="setup-bar-container">
+                            <div class="setup-bar-fill" style="height: 89%;">40s</div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    (function() {
+                        const chart = document.querySelector('.setup-time-chart');
+                        if (!chart) return;
+                        
+                        const observer = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                                    entry.target.classList.add('animated');
+                                    // Animate bars
+                                    const bars = entry.target.querySelectorAll('.setup-bar-fill');
+                                    bars.forEach((bar, idx) => {
+                                        const height = bar.style.height;
+                                        bar.style.height = '0';
+                                        setTimeout(() => {
+                                            bar.style.height = height;
+                                        }, idx * 100);
+                                    });
+                                    observer.unobserve(entry.target);
+                                }
+                            });
+                        }, { threshold: 0.3 });
+                        
+                        observer.observe(chart);
+                    })();
+                </script>
+
+                <p>Testing also validated the architecture choice. Non-technical users hesitated briefly at conversation starter selection, which led us to add previews and clearer confirmation states. Technical users, unexpectedly, preferred the simplified flow for quick course bots even though they still used the main platform for advanced work. The two products complemented each other without cannibalization.</p>
+
+                <hr class="intro-hr">
+
+                <!-- ========== RESULTS ========== -->
+                <h2 class="article-h2" id="results">Results</h2>
+
+                <p>Misconfiguration was eliminated by design. The only remaining error case is uploading the wrong documents, which is both rare and easily corrected. Adoption is growing beyond the original 147 courses as departments that never engaged with the platform begin using Q&A Bot.</p>
+
+                <p>More importantly, the work reset how the organization thinks about scaling AI internally. Instead of asking how to simplify a complex platform, teams now ask which job should exist as its own product. Communications bots are next, built on the same principle. The original platform remains powerful, but growth is now driven by clarity, not complexity.</p>
+
+                <p>Beyond metrics, the work triggered a broader shift in how the organization thinks about growth. Instead of pushing more features into a single platform, leadership aligned on building focused products tied to specific faculty jobs. That principle is now guiding roadmap decisions across the AI portfolio.</p>
+
+                <hr class="intro-hr">
+
+                <!-- ========== MEASURING ADOPTION ========== -->
+                <h2 class="article-h2" id="measuring-adoption">Measuring Adoption and Ongoing Iteration</h2>
+
+                <p>Q&A Bot is rolling out to new departments across the university. We're tracking setup completion rates, time-to-first-bot (goal: under 5 minutes), and misconfiguration support tickets (baseline: 20%, target: under 3%).</p>
+
+                <p>Early signals show Q&A Bot seeing measurable adoption among faculty groups. We're expanding to 200-300 additional courses in the next phase. This validates the strategic pivot: focused products outperform monolithic platforms for non-technical audiences.</p>
+
+                <p>We're still measuring full impact. Post-launch data is coming in. But the direction is clear: the activation problem is being solved differently than leadership initially expected. The strategy shift from "fix the complex platform" to "build focused products" is working better than incremental improvements could ever have.</p>
+
+                <hr class="intro-hr">
+
+                <!-- ========== NEXT STEPS ========== -->
+                <div class="next-steps">
+                    <h3 class="next-steps-title">Continue reading</h3>
+                    <div class="next-steps-grid">
+                        <a href="/LSR" class="next-step-card">
+                            <span class="next-step-label">Next Project</span>
+                            <span class="next-step-name">AI tool for Clinical Research →</span>
+                        </a>
+                        <a href="https://blogs.abseth.com/tyranny-of-the-a-b-test" class="next-step-card">
+                            <span class="next-step-label">Check out my blogs</span>
+                            <span class="next-step-name">Tyranny of the A/B test →</span>
+                        </a>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ========== FOOTER ========== -->
+            <footer>
+                <br><br><br>
+                <hr><br>
+                <div class="footer-container">
+                <a href="#top" class="hyp-p">back to top ↑</a>
+                </div>
+
+                <br></br>
+                <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.95rem;">Site coded by a human in vanilla HTML, CSS, and JavaScript.</p>
+            </footer>
+        </article>
+    </div>
+
+    <script>
+        (function() {
+            // Skeleton Loader Logic
+            function initSkeletonLoader() {
+                const mediaElements = document.querySelectorAll('.article-body figure img, .article-body figure video');
+                
+                mediaElements.forEach(media => {
+                    // Skip if already handled
+                    if (media.classList.contains('media-loaded-content')) return;
+
+                    const parentFigure = media.closest('figure');
+                    if (!parentFigure) return;
+
+                    // Apply initial states
+                    media.classList.add('media-loading-content');
+                    parentFigure.classList.add('media-skeleton');
+
+                    const handleLoad = () => {
+                        // Remove skeleton and fade in content
+                        parentFigure.classList.remove('media-skeleton');
+                        media.classList.remove('media-loading-content');
+                        media.classList.add('media-loaded-content');
+                        
+                        // Remove min-height enforcement after load so content dictates height
+                        parentFigure.style.minHeight = 'auto';
+                    };
+
+                    // Check if already complete
+                    if (media.tagName === 'IMG' && media.complete) {
+                        handleLoad();
+                    } else if (media.tagName === 'VIDEO' && media.readyState >= 3) {
+                        handleLoad();
+                    } else {
+                        // Add listeners
+                        media.addEventListener('load', handleLoad);
+                        media.addEventListener('loadeddata', handleLoad); // For video
+                        media.addEventListener('error', () => {
+                            parentFigure.classList.remove('media-skeleton'); // Remove skeleton even on error
+                        });
+                    }
+                });
+            }
+
+            // Run on load
+            document.addEventListener('DOMContentLoaded', initSkeletonLoader);
+            
+            // Re-run if themes change (sometimes causes img src reload)
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+                setTimeout(initSkeletonLoader, 100);
+            });
+        })();
+
+        (function() {
+            const fill = document.querySelector('.reading-progress-fill');
+            const track = document.querySelector('.reading-progress');
+            const tocWrapper = document.querySelector('.toc-wrapper');
+            const tocNav = document.querySelector('.toc-nav');
+            const toast = document.querySelector('.toast');
+            const toastSwitch = document.getElementById('toast-switch-light');
+            const toastDismiss = document.getElementById('toast-dismiss');
+            const themeToggle = document.getElementById('theme-toggle');
+            if (!fill) return;
+
+            function updateTrackBounds() {
+                if (!track || !tocWrapper || !tocNav) return;
+                const wrapperRect = tocWrapper.getBoundingClientRect();
+                const navRect = tocNav.getBoundingClientRect();
+                const topOffset = navRect.top - wrapperRect.top;
+                const height = navRect.height;
+                track.style.top = `${topOffset}px`;
+                track.style.height = `${height}px`;
+            }
+
+            function updateProgress() {
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 98 : 0;
+                fill.style.height = `${progress}%`;
+            }
+
+            function showToastIfNeeded() {
+                if (!toast) return;
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const dismissed = sessionStorage.getItem('lightModeToastDismissed') === '1';
+                const forcedLight = document.documentElement.classList.contains('force-light');
+                const forcedDark = document.documentElement.classList.contains('force-dark');
+                if (prefersDark && !dismissed && !forcedLight && !forcedDark) {
+                    toast.classList.add('show');
+                }
+            }
+
+            function applyForcedTheme(theme) {
+                document.documentElement.classList.remove('force-light', 'force-dark');
+                if (theme === 'light') {
+                    document.documentElement.classList.add('force-light');
+                } else if (theme === 'dark') {
+                    document.documentElement.classList.add('force-dark');
+                }
+                if (theme) {
+                    sessionStorage.setItem('forcedTheme', theme);
+                    sessionStorage.setItem('lightModeToastDismissed', '1');
+                } else {
+                    sessionStorage.removeItem('forcedTheme');
+                }
+                updateImages();
+                updateToggleLabel();
+                if (toast) toast.classList.remove('show');
+            }
+
+            function dismissToast() {
+                sessionStorage.setItem('lightModeToastDismissed', '1');
+                if (toast) toast.classList.remove('show');
+            }
+
+            function updateToggleLabel() {
+                if (!themeToggle) return;
+                const isForcedLight = document.documentElement.classList.contains('force-light');
+                const isForcedDark = document.documentElement.classList.contains('force-dark');
+                const isDark = isForcedDark || (!isForcedLight && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                themeToggle.textContent = isDark ? 'Switch to light' : 'Switch to dark';
+                themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+            }
+
+            function toggleTheme() {
+                const isForcedLight = document.documentElement.classList.contains('force-light');
+                const isForcedDark = document.documentElement.classList.contains('force-dark');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                if (isForcedLight) {
+                    applyForcedTheme('dark');
+                } else if (isForcedDark) {
+                    applyForcedTheme('light');
+                } else {
+                    // system state: flip
+                    applyForcedTheme(prefersDark ? 'light' : 'dark');
+                }
+            }
+
+            updateTrackBounds();
+            updateProgress();
+            document.addEventListener('scroll', updateProgress, { passive: true });
+            window.addEventListener('resize', () => {
+                updateTrackBounds();
+                updateProgress();
+            });
+
+            if (toastSwitch) {
+                toastSwitch.addEventListener('click', () => applyForcedTheme('light'));
+            }
+
+            if (toastDismiss) {
+                toastDismiss.addEventListener('click', dismissToast);
+            }
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+
+            const storedTheme = sessionStorage.getItem('forcedTheme');
+            if (storedTheme === 'light' || storedTheme === 'dark') {
+                applyForcedTheme(storedTheme);
+            } else {
+                updateToggleLabel();
+            }
+
+            showToastIfNeeded();
+        })();
+
+        // Active TOC highlighting based on scroll position
+        (function() {
+            const sections = document.querySelectorAll('h2[id]');
+            const tocLinks = document.querySelectorAll('.toc-list a');
+
+            function updateActiveLink() {
+                let currentSection = null;
+                const scrollPos = window.scrollY + (window.innerHeight * 0.5);
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollPos >= sectionTop) {
+                        currentSection = section;
+                    }
+                });
+
+                if (currentSection) {
+                    const id = currentSection.getAttribute('id');
+                    
+                    tocLinks.forEach(link => link.classList.remove('active'));
+                    
+                    const activeLink = document.querySelector(`.toc-list a[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            }
+
+            window.addEventListener('scroll', updateActiveLink);
+            updateActiveLink();
+        })();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+                <!-- <p style="text-align: center; color: var(--text-secondary); font-size: 0.95rem; margin: 2rem 0 1rem 0;">Deeper dive on thoughts, data, process</p> -->
