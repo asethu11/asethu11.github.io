@@ -1,38 +1,38 @@
 {
   "version": 2,
-  "routes": [
+  "rewrites": [
     {
-      "src": "^/(.*)$",
+      "source": "/(.*)",
       "has": [{ "type": "host", "value": "blogs.abseth.com" }],
-      "dest": "/blogs/$1"
+      "destination": "/blogs/$1"
     },
     {
-      "src": "^/improvingAdoption/?$",
-      "dest": "/improvingAdoption/"
+      "source": "/improvingAdoption",
+      "destination": "/improvingAdoption/"
     },
     {
-      "src": "^/nextgen/?$",
-      "dest": "/nextgen/"
+      "source": "/nextgen",
+      "destination": "/nextgen/"
     },
     {
-      "src": "^/ytm/?$",
-      "dest": "/ytm/"
+      "source": "/ytm",
+      "destination": "/ytm/"
     },
     {
-      "src": "^/LSR/?$",
-      "dest": "/LSR/"
+      "source": "/LSR",
+      "destination": "/LSR/"
     },
     {
-      "src": "^/SODA/?$",
-      "dest": "/SODA/"
+      "source": "/SODA",
+      "destination": "/SODA/"
     },
     {
-      "src": "^/cabKb/?$",
-      "dest": "/cabKb/"
+      "source": "/cabKb",
+      "destination": "/cabKb/"
     },
     {
-      "src": "^/COMUT/?$",
-      "dest": "/COMUT/"
+      "source": "/COMUT",
+      "destination": "/COMUT/"
     }
   ],
   "redirects": [
