@@ -2,6 +2,11 @@
   "version": 2,
   "routes": [
     {
+      "src": "^/(.*)$",
+      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
+      "dest": "/blogs/$1"
+    },
+    {
       "src": "^/improvingAdoption/?$",
       "dest": "/my-works/improving-adoption/improvingAdoption.html"
     },
@@ -31,6 +36,11 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/blogs/:path*",
+      "destination": "https://blogs.abseth.com/:path*",
+      "permanent": true
+    },
     {
       "source": "/blogs/:slug/:slug.html",
       "destination": "https://blogs.abseth.com/:slug",
