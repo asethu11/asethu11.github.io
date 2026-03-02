@@ -438,6 +438,7 @@
                     <br><br><br>
                     <hr><br>
                     <div class="footer-container">
+                        <button id="copyUrl">Share</button>
                         <a href="#top" class="headtag">back to top<span class="arr">↑</span></a>
                     </div>
                 </footer>
@@ -594,5 +595,13 @@
             })();
         </script>
         <script src="../../script.js"></script>
+        <script>
+        document.getElementById('copyUrl')?.addEventListener('click', async () => {
+          const canonical = document.querySelector("link[rel='canonical']");
+          const url = canonical ? canonical.href : window.location.href;
+          try { await navigator.clipboard.writeText(url); alert('Link copied'); }
+          catch(e){ prompt('Copy this link', url); }
+        });
+        </script>
     </body>
 </html>
