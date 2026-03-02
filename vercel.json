@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/(.*)",
@@ -96,10 +97,5 @@
       "destination": "https://abseth.com/:any",
       "permanent": true
     },
-    {
-      "source": "/:path+/",
-      "destination": "https://:host/:path",
-      "permanent": true
-    }
   ]
 }
