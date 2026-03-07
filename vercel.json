@@ -15,6 +15,38 @@
   ],
   "redirects": [
     {
+      "source": "/blogs/your-chatbot-sucks-lets-fix-that",
+      "destination": "https://blogs.abseth.com/Conversational-UX",
+      "permanent": true
+    },
+    {
+      "source": "/blogs/your-chatbot-sucks-lets-fix-that/:path*",
+      "destination": "https://blogs.abseth.com/Conversational-UX",
+      "permanent": true
+    },
+    {
+      "source": "/your-chatbot-sucks-lets-fix-that",
+      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
+      "destination": "https://blogs.abseth.com/Conversational-UX",
+      "permanent": true
+    },
+    {
+      "source": "/your-chatbot-sucks-lets-fix-that/:path*",
+      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
+      "destination": "https://blogs.abseth.com/Conversational-UX",
+      "permanent": true
+    },
+    {
+      "source": "/Conversational-UX",
+      "destination": "https://blogs.abseth.com/Conversational-UX",
+      "permanent": true
+    },
+    {
+      "source": "/Conversational-UX/:path*",
+      "destination": "https://blogs.abseth.com/Conversational-UX",
+      "permanent": true
+    },
+    {
       "source": "/:slug/:file.html",
       "has": [{ "type": "host", "value": "blogs.abseth.com" }],
       "destination": "https://blogs.abseth.com/:slug",

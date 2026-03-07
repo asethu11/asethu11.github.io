@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="/new-post-template/">
+        <link rel="canonical" href="https://blogs.abseth.com/new-post-template">
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
+
+        <!-- Clarity tracking code -->
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "vaaig4fq2o");
+        </script>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>New Post Title</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Update this description with a one-sentence summary of your blog post.">
+        <meta name="keywords" content="UX, UI, Design, relevant, keywords, here">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <script src="../script.js"></script>
+        
+        <link rel="stylesheet" href="../../blogs/blogs.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="icon" href="../img/favicon.png" type="image/png">
+
+        <script>
+            function updateImages() {
+                const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                document.querySelectorAll(".theme-img").forEach(img => {
+                    const imageName = img.dataset.name;
+                    const newSrc = isDarkMode
+                        ? `img/dk/${imageName}.png`
+                        : `img/lt/${imageName}.png`;
+
+                    if (img.src !== newSrc) {
+                        img.src = newSrc;
+                    }
+                });
+            }
+
+            const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+            darkModeQuery.addEventListener("change", updateImages);
+            document.addEventListener("DOMContentLoaded", updateImages);
+        </script>
+    </head>
+
+    <body>
+        <a href="https://abseth.com" class="back-button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Home
+        </a>
+        
+        <div class="article-container">
+            <article class="article-body">
+
+                <h1 class="article-h1">New Post Title</h1>
+                
+                <p>
+                    Write your opening paragraph here. This should hook the reader and introduce the main topic.
+                </p>
+                <br>
+                <p>
+                    Continue with your introduction. Set up the context and explain what you'll be discussing in this post.
+                </p>
+
+                <hr>
+
+                <h2 class="article-h2">First Section Heading</h2>
+                <p>
+                    Write your first main section here. Use paragraphs separated by `<br>` tags for spacing.
+                </p>
+                <br>
+                <p>
+                    Continue developing your ideas. Use `<strong>` for bold emphasis and `<em>` for italic emphasis.
+                </p>
+
+                <!-- Example image -->
+                <!-- <figure class="article-figure">
+                    <img src="img/your-image.png" class="article-image">
+                </figure> -->
+
+                <h2 class="article-h2">Second Section Heading</h2>
+                <p>
+                    Add more sections as needed. Use `<hr>` tags to separate major sections.
+                </p>
+                <br>
+                <p>
+                    You can use lists:
+                </p>
+                <ul>
+                    <li>First point</li>
+                    <li>Second point</li>
+                    <li>Third point</li>
+                </ul>
+
+                <!-- Example table -->
+                <!-- <table>
+                    <tr>
+                        <th class="table-header">Column A</th>
+                        <th class="table-header">Column B</th>
+                    </tr>
+                    <tr>
+                        <td class="table-first-col">Row 1, Col A</td>
+                        <td>Row 1, Col B</td>
+                    </tr>
+                </table> -->
+
+                <hr>
+
+                <h2 class="article-h2">Conclusion</h2>
+                <p>
+                    Wrap up your post with a conclusion that summarizes key points and leaves the reader with something to think about.
+                </p>
+
+                <footer>
+                    <br><br><br>
+                    <hr><br>
+                    <div class="footer-container">
+                        <button id="copyUrl">Share</button>
+                        <a href="#top" class="headtag">back to top<span class="arr">↑</span></a>
+                    </div>
+                </footer>
+            </article>
+        </div>
+
+        <script src="script.js"></script>
+        <script>
+        document.getElementById('copyUrl')?.addEventListener('click', async () => {
+          const canonical = document.querySelector("link[rel='canonical']");
+          const url = canonical ? canonical.href : window.location.href;
+          try { await navigator.clipboard.writeText(url); alert('Link copied'); }
+          catch(e){ prompt('Copy this link', url); }
+        });
+        </script>
+    </body>
+</html>
