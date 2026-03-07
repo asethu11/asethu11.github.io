@@ -3,6 +3,11 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
+      "destination": "/blogs.html"
+    },
+    {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "blogs.abseth.com" }],
       "destination": "/blogs/$1"
