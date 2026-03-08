@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- #region agent log -->
+        <script>
+        (function(){
+          window.addEventListener('error', function(e){
+            if(e.target && e.target !== window && (e.target.src || e.target.href)){
+              var url = e.target.src || e.target.href;
+              fetch('http://127.0.0.1:7244/ingest/e41b5235-d56a-4c96-9608-54fdf0410cbe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'blogs/index.html:resourceError',message:'Resource load failed on listing page',data:{failedUrl:url,tagName:e.target.tagName,pageHref:window.location.href},timestamp:Date.now(),hypothesisId:'H4'})}).catch(function(){});
+            }
+          }, true);
+          fetch('http://127.0.0.1:7244/ingest/e41b5235-d56a-4c96-9608-54fdf0410cbe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'blogs/index.html:pageLoad',message:'Listing page loaded',data:{pageHref:window.location.href},timestamp:Date.now(),hypothesisId:'H4'})}).catch(function(){});
+        })();
+        </script>
+        <!-- #endregion -->
         <!-- Canonical URL normalizer -->
         <link id="canonical-link" rel="canonical" href="">
         <script>

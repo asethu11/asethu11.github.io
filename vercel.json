@@ -3,7 +3,7 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/",
+      "source": "/blogs/",
       "has": [{ "type": "host", "value": "blogs.abseth.com" }],
       "destination": "/blogs/index.html"
     },
@@ -36,11 +36,6 @@
       "source": "/img/:path*",
       "has": [{ "type": "host", "value": "blogs.abseth.com" }],
       "destination": "/img/:path*"
-    },
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
-      "destination": "/blogs/$1"
     }
   ],
   "redirects": [

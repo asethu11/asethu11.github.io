@@ -4,6 +4,20 @@
         <base href="/Conversational-UX/">
         <link rel="canonical" href="https://blogs.abseth.com/Conversational-UX/">
 
+        <!-- #region agent log -->
+        <script>
+        (function(){
+          window.addEventListener('error', function(e){
+            if(e.target && e.target !== window && (e.target.src || e.target.href)){
+              var url = e.target.src || e.target.href;
+              fetch('http://127.0.0.1:7244/ingest/e41b5235-d56a-4c96-9608-54fdf0410cbe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Conversational-UX/index.html:resourceError',message:'Resource load failed',data:{failedUrl:url,tagName:e.target.tagName,pageHref:window.location.href,baseHref:document.baseURI},timestamp:Date.now(),hypothesisId:'H1-H2'})}).catch(function(){});
+            }
+          }, true);
+          fetch('http://127.0.0.1:7244/ingest/e41b5235-d56a-4c96-9608-54fdf0410cbe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Conversational-UX/index.html:pageLoad',message:'Page loaded',data:{pageHref:window.location.href,baseHref:document.baseURI},timestamp:Date.now(),hypothesisId:'H1'})}).catch(function(){});
+        })();
+        </script>
+        <!-- #endregion -->
+
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
         <script>
