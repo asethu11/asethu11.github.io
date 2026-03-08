@@ -18,6 +18,26 @@
       "destination": "/blogs/Conversational-UX/index.html"
     },
     {
+      "source": "/style.css",
+      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
+      "destination": "/style.css"
+    },
+    {
+      "source": "/script.js",
+      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
+      "destination": "/script.js"
+    },
+    {
+      "source": "/shared.js",
+      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
+      "destination": "/shared.js"
+    },
+    {
+      "source": "/img/:path*",
+      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
+      "destination": "/img/:path*"
+    },
+    {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "blogs.abseth.com" }],
       "destination": "/blogs/$1"
