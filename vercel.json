@@ -48,11 +48,13 @@
     },
     {
       "source": "/Conversational-UX",
+      "has": [{ "type": "host", "value": "abseth.com" }],
       "destination": "https://blogs.abseth.com/Conversational-UX/",
       "permanent": true
     },
     {
       "source": "/Conversational-UX/:path*",
+      "has": [{ "type": "host", "value": "abseth.com" }],
       "destination": "https://blogs.abseth.com/Conversational-UX/",
       "permanent": true
     },
