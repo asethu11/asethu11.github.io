@@ -616,6 +616,13 @@ p a.ref-inline:focus-visible {
     transition: height 0.1s linear;
 }
 
+/* Hide TOC on mobile and tablet screens */
+@media only screen and (max-width: 1227px) {
+    .toc-sticky {
+        display: none;
+    }
+}
+
 /* Theme toggle */
 .theme-toggle {
     position: fixed;
