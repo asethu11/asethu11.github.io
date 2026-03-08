@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <base href="/Conversational-UX/">
-        <link rel="canonical" href="https://blogs.abseth.com/Conversational-UX">
+        <link rel="canonical" href="https://blogs.abseth.com/Conversational-UX/">
 
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
@@ -99,6 +99,7 @@
         <div class="article-container">
             <article class="article-body">
 
+                <!-- ── ARTICLE INTRO ────────────────────────────────────────── -->
                 <h1 class="article-h1">From Chat Windows to Interaction Systems</h1>
                 
                 <p>
@@ -132,10 +133,13 @@
                     Before diving into patterns, we need to anchor the behavioral foundations that make conversational interfaces succeed, or fail.
                 </p>
 
-                <hr>
+                <!-- ── SECTION: Foundational Design Principles ─────────────── -->
+                <hr class="intro-hr">
 
                 <h2 class="article-h2" id="foundational-principles">Foundational Design Principles</h2>
 
+                <br>
+                
                 <h3>Grice's Cooperative Principle as a Design Framework</h3>
                 <p>
                     The most durable theoretical foundation for conversational UX comes from Paul Grice's Cooperative Principle (1975), which Google recommends as a basis for conversation design. The principle holds that effective communication relies on implicit cooperation between participants, governed by four maxims:
@@ -186,7 +190,7 @@
                     Building a cooperative structure is critical for a good conversational user experience.
                 </p>
 
-                <hr>
+                <hr class="intro-hr">
 
                 <h3>When Conversational UI Works, and When It Doesn't</h3>
                 <p>
@@ -213,7 +217,8 @@
                     The strongest products don't choose one modality. They layer conversation inside graphical systems strategically, which leads to the structural frames that house AI features.
                 </p>
 
-                <hr>
+                <!-- ── SECTION: Structural Layer — Three Interface Frames ──── -->
+                <hr class="intro-hr">
 
                 <h2 class="article-h2" id="structural-layer">The Structural Layer: Three Interface Frames</h2>
                 <p>
@@ -271,7 +276,8 @@
                     With these frames established, we can now move from architecture to components, the specific patterns that make conversational systems usable in practice.
                 </p>
 
-                <hr>
+                <!-- ── SECTION: Component Patterns ─────────────────────────── -->
+                <hr class="intro-hr">
 
                 <h2 class="article-h2" id="component-patterns">Component Patterns</h2>
                 <p>
@@ -287,8 +293,8 @@
                     <li>how the system responds,</li>
                     <li>and how control is maintained.</li>
                 </ul>
-                <br>
 
+                <br>
 
                 <h3>A. Wayfinders: Getting Users Started</h3>
                 <p>
@@ -361,8 +367,7 @@
                 </p>
 
 
-                <br>
-
+                <hr class="intro-hr">
 
                 <h3>Guided Conversation and Slot Filling</h3>
                 <p>
@@ -373,6 +378,409 @@
                     The <b>guided conversation pattern</b> leads users step-by-step toward a defined outcome by asking one relevant question at a time. Domino's ordering flow exemplifies this: users customize a pizza through structured prompts rather than freeform typing.
                 </p>
 
+
+                <!-- [DEMO: Pizza Ordering — Guided Conversation & Slot Filling] -->
+                <!-- Steps defined in JS: size → crust → toppings → quantity → delivery → address → payment → confirmation -->
+                <!-- Slot state stored in `slots` object; displayed live in #pizza-form-preview panel -->
+                <div style="background: transparent; border-radius: 12px; padding: 1.5rem; margin: 2rem 0; border: 1px solid var(--border-light);">
+                    <div style="display: flex; flex-direction: column; gap: 1rem; height: 400px; overflow-y: auto; padding-right: 0.5rem;" id="pizza-conversation-example">
+                        <!-- Messages will be dynamically added here -->
+                    </div>
+                    <div id="pizza-input-container" style="margin-top: 1rem; display: flex; gap: 0.5rem; align-items: center; background: var(--background); border: 1px solid var(--border-light); border-radius: 20px; padding: 0.4rem 0.6rem;">
+                        <input type="text" id="pizza-input" placeholder="Type your answer..." style="flex: 1; border: none; background: transparent; color: var(--text-primary); font-size: 0.85rem; font-family: 'Inter', sans-serif; outline: none; padding: 0.4rem 0.6rem;" />
+                        <button id="pizza-send" style="background: var(--primary); border: none; border-radius: 16px; padding: 0.4rem 0.85rem; color: white; font-size: 0.85rem; font-family: 'Inter', sans-serif; cursor: pointer; font-weight: 500; transition: opacity 0.15s ease;" onmouseover="this.style.opacity='0.9';" onmouseout="this.style.opacity='1';">
+                            Send
+                        </button>
+                    </div>
+                    <div id="pizza-form-preview" style="margin-top: 1rem; padding: 1rem; background: transparent; border: 1px solid var(--border-light); border-radius: 8px; display: none;">
+                        <p style="margin: 0 0 0.5rem 0; font-size: 0.75rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Slots (populated in background):</p>
+                        <div id="pizza-form-fields" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; font-size: 0.8rem;">
+                            <!-- Form fields will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <style>
+                #pizza-conversation-example {
+                    scrollbar-width: thin;
+                    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+                }
+                
+                #pizza-conversation-example::-webkit-scrollbar {
+                    width: 6px;
+                }
+                
+                #pizza-conversation-example::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+                
+                #pizza-conversation-example::-webkit-scrollbar-thumb {
+                    background-color: rgba(0, 0, 0, 0.2);
+                    border-radius: 3px;
+                }
+                
+                #pizza-conversation-example::-webkit-scrollbar-thumb:hover {
+                    background-color: rgba(0, 0, 0, 0.3);
+                }
+                
+                @media (prefers-color-scheme: dark) {
+                    #pizza-conversation-example {
+                        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+                    }
+                    
+                    #pizza-conversation-example::-webkit-scrollbar-thumb {
+                        background-color: rgba(255, 255, 255, 0.2);
+                    }
+                    
+                    #pizza-conversation-example::-webkit-scrollbar-thumb:hover {
+                        background-color: rgba(255, 255, 255, 0.3);
+                    }
+                }
+                </style>
+
+                <script>
+                (function() {
+                    const exampleContainer = document.getElementById('pizza-conversation-example');
+                    const input = document.getElementById('pizza-input');
+                    const sendBtn = document.getElementById('pizza-send');
+                    const inputContainer = document.getElementById('pizza-input-container');
+                    const formPreview = document.getElementById('pizza-form-preview');
+                    const formFields = document.getElementById('pizza-form-fields');
+                    
+                    let currentStep = 0;
+                    const slots = {
+                        size: '',
+                        crust: '',
+                        toppings: [],
+                        quantity: '',
+                        delivery_type: '',
+                        delivery_address: '',
+                        payment_method: ''
+                    };
+                    
+                    const steps = [
+                        {
+                            question: "Welcome! What size pizza would you like?",
+                            chips: ['Small', 'Medium', 'Large', 'Extra Large', 'Surprise me'],
+                            field: 'size',
+                            type: 'single'
+                        },
+                        {
+                            question: "Great — pick a crust.",
+                            chips: ['Thin', 'Hand-tossed', 'Stuffed', 'Gluten-free'],
+                            field: 'crust',
+                            type: 'single'
+                        },
+                        {
+                            question: "Choose toppings (tap to add).",
+                            chips: ['Pepperoni', 'Mushrooms', 'Onions', 'Sausage', 'Spinach', '+ More'],
+                            field: 'toppings',
+                            type: 'multiple'
+                        },
+                        {
+                            question: "How many pizzas?",
+                            chips: ['1', '2', '3', '4+'],
+                            field: 'quantity',
+                            type: 'single',
+                            allowInput: true
+                        },
+                        {
+                            question: "Delivery or pickup?",
+                            chips: ['Delivery', 'Pickup'],
+                            field: 'delivery_type',
+                            type: 'single'
+                        },
+                        {
+                            question: "Enter delivery address",
+                            chips: [],
+                            field: 'delivery_address',
+                            type: 'input'
+                        },
+                        {
+                            question: "Payment method?",
+                            chips: ['Card on file ending ••42', 'PayPal', 'Pay on delivery'],
+                            field: 'payment_method',
+                            type: 'single'
+                        }
+                    ];
+                    
+                    function addMessage(text, isBot, chips = null) {
+                        const messageDiv = document.createElement('div');
+                        messageDiv.style.display = 'flex';
+                        messageDiv.style.alignItems = 'flex-start';
+                        messageDiv.style.gap = '0.75rem';
+                        messageDiv.style.marginBottom = '1rem';
+                        
+                        if (isBot) {
+                            let chipsHTML = '';
+                            if (chips && chips.length > 0) {
+                                chipsHTML = '<div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">';
+                                chips.forEach(chip => {
+                                    chipsHTML += `<button class="pizza-chip" data-value="${chip}" style="background: var(--background); border: 1px solid var(--border-light); border-radius: 16px; padding: 0.4rem 0.85rem; font-size: 0.85rem; font-family: 'Inter', sans-serif; color: var(--text-secondary); cursor: pointer; transition: all 0.15s ease; font-weight: 400;" onmouseover="this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'; this.style.background='rgba(0, 112, 234, 0.05)';" onmouseout="this.style.borderColor='var(--border-light)'; this.style.color='var(--text-secondary)'; this.style.background='var(--background)';" onclick="handleChipClick(this, '${chip}')">${chip}</button>`;
+                                });
+                                chipsHTML += '</div>';
+                            }
+                            
+                            messageDiv.innerHTML = `
+                                <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <span style="color: white; font-size: 0.75rem; font-weight: 600;">bot</span>
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="background: var(--background); border: 1px solid var(--border-light); border-radius: 12px; padding: 0.85rem 1rem; max-width: 85%;">
+                                        <p style="margin: 0; color: var(--text-primary); font-size: 0.9rem; line-height: 1.5; font-family: 'Inter', sans-serif;">${text}</p>
+                                        ${chipsHTML}
+                                    </div>
+                                </div>
+                            `;
+                        } else {
+                            messageDiv.innerHTML = `
+                                <div style="flex: 1; display: flex; justify-content: flex-end;">
+                                    <div style="background: var(--background-grey); border-radius: 12px; padding: 0.85rem 1rem; max-width: 85%;">
+                                        <p style="margin: 0; color: var(--text-primary); font-size: 0.9rem; line-height: 1.5; font-family: 'Inter', sans-serif;">${text}</p>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                        
+                        exampleContainer.appendChild(messageDiv);
+                        exampleContainer.scrollTop = exampleContainer.scrollHeight;
+                        return messageDiv;
+                    }
+                    
+                    function updateFormPreview() {
+                        formPreview.style.display = 'block';
+                        formFields.innerHTML = '';
+                        
+                        Object.keys(slots).forEach(key => {
+                            const value = slots[key];
+                            if (value && (Array.isArray(value) ? value.length > 0 : value !== '')) {
+                                const fieldDiv = document.createElement('div');
+                                fieldDiv.style.padding = '0.4rem';
+                                fieldDiv.style.background = 'var(--background-grey)';
+                                fieldDiv.style.borderRadius = '4px';
+                                const displayValue = Array.isArray(value) ? value.join(', ') : value;
+                                fieldDiv.innerHTML = `
+                                    <span style="color: var(--text-secondary); font-weight: 500;">slots.${key}:</span>
+                                    <span style="color: var(--text-primary); margin-left: 0.25rem;">${displayValue}</span>
+                                `;
+                                formFields.appendChild(fieldDiv);
+                            }
+                        });
+                    }
+                    
+                    window.handleChipClick = function(button, value) {
+                        if (currentStep >= steps.length) return;
+                        
+                        const step = steps[currentStep];
+                        const displayValue = value === '+ More' ? 'More toppings...' : value;
+                        
+                        if (step.type === 'multiple' && step.field === 'toppings') {
+                            if (value === '+ More') {
+                                addMessage('More toppings...', false);
+                                inputContainer.style.display = 'flex';
+                                input.placeholder = 'Type additional toppings...';
+                                return;
+                            }
+                            if (!slots.toppings.includes(value)) {
+                                slots.toppings.push(value);
+                                button.style.background = 'rgba(0, 112, 234, 0.1)';
+                                button.style.borderColor = 'var(--primary)';
+                                button.style.color = 'var(--primary)';
+                                addMessage(value, false);
+                                updateFormPreview();
+                                
+                                // Auto-proceed after a short delay
+                                clearTimeout(window.toppingsTimeout);
+                                window.toppingsTimeout = setTimeout(() => {
+                                    if (currentStep < steps.length && steps[currentStep].field === 'toppings' && slots.toppings.length > 0) {
+                                        currentStep++;
+                                        askNextQuestion();
+                                    }
+                                }, 1500);
+                            } else {
+                                // Deselect if already selected
+                                slots.toppings = slots.toppings.filter(t => t !== value);
+                                button.style.background = 'var(--background)';
+                                button.style.borderColor = 'var(--border-light)';
+                                button.style.color = 'var(--text-secondary)';
+                                updateFormPreview();
+                                
+                                // Cancel auto-proceed if no toppings selected
+                                if (slots.toppings.length === 0) {
+                                    clearTimeout(window.toppingsTimeout);
+                                }
+                            }
+                            return;
+                        }
+                        
+                        if (step.type === 'single') {
+                            if (value === '4+' && step.allowInput) {
+                                // Show input for custom quantity
+                                inputContainer.style.display = 'flex';
+                                input.placeholder = 'Enter quantity...';
+                                input.focus();
+                                return;
+                            }
+                            
+                            slots[step.field] = value;
+                            addMessage(displayValue, false);
+                            updateFormPreview();
+                            
+                            // Disable all chips in this message
+                            const messageDiv = button.closest('.pizza-chip').parentElement.parentElement.parentElement;
+                            messageDiv.querySelectorAll('.pizza-chip').forEach(chip => {
+                                chip.style.pointerEvents = 'none';
+                                chip.style.opacity = '0.5';
+                            });
+                            
+                            currentStep++;
+                            setTimeout(() => askNextQuestion(), 500);
+                        }
+                    };
+                    
+                    function askNextQuestion() {
+                        if (currentStep < steps.length) {
+                            const step = steps[currentStep];
+                            
+                            // Skip address step if pickup was selected
+                            if (step.field === 'delivery_address' && slots.delivery_type === 'Pickup') {
+                                slots.delivery_address = 'N/A (Pickup)';
+                                currentStep++;
+                                setTimeout(() => askNextQuestion(), 300);
+                                return;
+                            }
+                            
+                            if (step.type === 'input') {
+                                inputContainer.style.display = 'flex';
+                                input.placeholder = 'Enter address...';
+                            } else if (step.allowInput) {
+                                inputContainer.style.display = 'flex';
+                                input.placeholder = 'Type or select...';
+                            } else {
+                                inputContainer.style.display = 'none';
+                            }
+                            
+                            setTimeout(() => {
+                                addMessage(step.question, true, step.chips);
+                            }, 300);
+                        } else {
+                            showConfirmation();
+                        }
+                    }
+                    
+                    function showConfirmation() {
+                        inputContainer.style.display = 'none';
+                        setTimeout(() => {
+                            const total = (slots.quantity || 1) * 18.99;
+                            const eta = slots.delivery_type === 'Delivery' ? '30-45 min' : '15-20 min';
+                            
+                            const confirmationHTML = `
+                                <div style="background: var(--background); border: 2px solid var(--primary); border-radius: 12px; padding: 1.25rem; margin-top: 1rem;">
+                                    <h4 style="margin: 0 0 1rem 0; color: var(--text-primary); font-size: 1rem; font-weight: 600;">Order Confirmation</h4>
+                                    <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; font-size: 0.85rem;">
+                                        <div style="display: flex; justify-content: space-between;"><span style="color: var(--text-secondary);">Size:</span><span style="color: var(--text-primary);">${slots.size}</span> <button onclick="editField('size')" style="background: none; border: none; color: var(--primary); cursor: pointer; font-size: 0.75rem; margin-left: 0.5rem;">Edit</button></div>
+                                        <div style="display: flex; justify-content: space-between;"><span style="color: var(--text-secondary);">Crust:</span><span style="color: var(--text-primary);">${slots.crust}</span> <button onclick="editField('crust')" style="background: none; border: none; color: var(--primary); cursor: pointer; font-size: 0.75rem; margin-left: 0.5rem;">Edit</button></div>
+                                        <div style="display: flex; justify-content: space-between;"><span style="color: var(--text-secondary);">Toppings:</span><span style="color: var(--text-primary);">${slots.toppings.join(', ')}</span> <button onclick="editField('toppings')" style="background: none; border: none; color: var(--primary); cursor: pointer; font-size: 0.75rem; margin-left: 0.5rem;">Edit</button></div>
+                                        <div style="display: flex; justify-content: space-between;"><span style="color: var(--text-secondary);">Quantity:</span><span style="color: var(--text-primary);">${slots.quantity}</span> <button onclick="editField('quantity')" style="background: none; border: none; color: var(--primary); cursor: pointer; font-size: 0.75rem; margin-left: 0.5rem;">Edit</button></div>
+                                        <div style="display: flex; justify-content: space-between;"><span style="color: var(--text-secondary);">Type:</span><span style="color: var(--text-primary);">${slots.delivery_type}</span> <button onclick="editField('delivery_type')" style="background: none; border: none; color: var(--primary); cursor: pointer; font-size: 0.75rem; margin-left: 0.5rem;">Edit</button></div>
+                                        ${slots.delivery_address ? `<div style="display: flex; justify-content: space-between;"><span style="color: var(--text-secondary);">Address:</span><span style="color: var(--text-primary);">${slots.delivery_address}</span> <button onclick="editField('delivery_address')" style="background: none; border: none; color: var(--primary); cursor: pointer; font-size: 0.75rem; margin-left: 0.5rem;">Edit</button></div>` : ''}
+                                        <div style="display: flex; justify-content: space-between;"><span style="color: var(--text-secondary);">Payment:</span><span style="color: var(--text-primary);">${slots.payment_method}</span> <button onclick="editField('payment_method')" style="background: none; border: none; color: var(--primary); cursor: pointer; font-size: 0.75rem; margin-left: 0.5rem;">Edit</button></div>
+                                    </div>
+                                    <div style="border-top: 1px solid var(--border-light); padding-top: 1rem; margin-top: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+                                            <span style="color: var(--text-secondary); font-weight: 600;">Estimated Total:</span>
+                                            <span style="color: var(--text-primary); font-weight: 600; font-size: 1.1rem;">$${total.toFixed(2)}</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.85rem;">
+                                            <span style="color: var(--text-secondary);">ETA:</span>
+                                            <span style="color: var(--text-primary);">${eta}</span>
+                                        </div>
+                                        <button style="width: 100%; background: var(--primary); border: none; border-radius: 8px; padding: 0.75rem; color: white; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: opacity 0.15s ease;" onmouseover="this.style.opacity='0.9';" onmouseout="this.style.opacity='1';">
+                                            Place order
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            const confirmationDiv = document.createElement('div');
+                            confirmationDiv.innerHTML = confirmationHTML;
+                            exampleContainer.appendChild(confirmationDiv);
+                            exampleContainer.scrollTop = exampleContainer.scrollHeight;
+                        }, 500);
+                    }
+                    
+                    function handleSend() {
+                        const value = input.value.trim();
+                        if (!value) return;
+                        
+                        if (currentStep < steps.length) {
+                            const step = steps[currentStep];
+                            
+                            // Handle toppings input
+                            if (step.type === 'multiple' && step.field === 'toppings') {
+                                if (!slots.toppings.includes(value)) {
+                                    slots.toppings.push(value);
+                                    addMessage(value, false);
+                                    updateFormPreview();
+                                    
+                                    // Auto-proceed after a short delay
+                                    clearTimeout(window.toppingsTimeout);
+                                    window.toppingsTimeout = setTimeout(() => {
+                                        if (currentStep < steps.length && steps[currentStep].field === 'toppings' && slots.toppings.length > 0) {
+                                            currentStep++;
+                                            askNextQuestion();
+                                        }
+                                    }, 1500);
+                                }
+                                input.value = '';
+                                return;
+                            }
+                            
+                            if (step.type === 'input' || (step.allowInput && !step.chips.includes(value))) {
+                                slots[step.field] = value;
+                                addMessage(value, false);
+                                input.value = '';
+                                currentStep++;
+                                updateFormPreview();
+                                askNextQuestion();
+                            }
+                        }
+                    }
+                    
+                    sendBtn.addEventListener('click', handleSend);
+                    input.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            handleSend();
+                        }
+                    });
+                    
+                    window.editField = function(field) {
+                        // Reset to the step that corresponds to this field
+                        const fieldIndex = steps.findIndex(s => s.field === field);
+                        if (fieldIndex !== -1) {
+                            currentStep = fieldIndex;
+                            // Clear the field
+                            if (field === 'toppings') {
+                                slots[field] = [];
+                            } else {
+                                slots[field] = '';
+                            }
+                            updateFormPreview();
+                            askNextQuestion();
+                        }
+                    };
+                    
+                    // Initialize
+                    setTimeout(() => {
+                        askNextQuestion();
+                    }, 300);
+                })();
+                </script>
+
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary); font-style: italic;">
+                    <b>Try it:</b> Tap the chips to make selections. Notice how each choice populates structured slots in the background. The conversation feels natural, but the system is building a complete order form behind the scenes.
+                </p>
+                <br>
                 <p>
                     The closely related <b>slot-filling pattern</b> collects required information conversationally instead of presenting a long form. Bank of America's Erica gathers structured inputs in the background while maintaining a chat-like interface. <a href="https://gapsystudio.com/blog/conversational-ui-design/" class="ref-inline" target="_blank">gapsystudio</a>
                 </p>
@@ -384,29 +792,152 @@
                 <p>
                     These patterns work particularly well when users know their goal but not the exact navigation path to reach it, reinforcing the earlier distinction between completion and exploration.
                 </p>
-
-                <br>
-
+                <hr class="intro-hr">
 
                 <h3>Templates and Prompt Builders</h3>
                 <p>
                     For more complex tasks, templates go further than chips. They provide structured, fillable formats that reduce the cognitive burden of "prompt engineering."
                 </p>
-                <br>
+                <!-- [DEMO: Tone Quadrant Selector — Verbose/Concise × Professional/Casual] -->
+                <!-- Drag the point to a zone; #tone-text updates with a contextual example phrase -->
+                <!-- texts[verbosity 0-3][tone 0-3] — zones map to 4×4 grid quadrants -->
+                <figure class="article-figure">
+                    <div style="background: var(--background); border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0;">
+                        <div style="position: relative; max-width: 420px; margin: 0 auto;">
+                            <div style="text-align: center; margin-bottom: 0.5rem;">
+                                <span style="font-size: 0.78rem; color: var(--text-secondary); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;">Verbose</span>
+                            </div>
+                            <div style="display: flex; align-items: stretch; gap: 0.75rem;">
+                                <div style="display: flex; align-items: center; justify-content: center; width: 1rem;">
+                                    <span style="writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.78rem; color: var(--text-secondary); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap;">Professional</span>
+                                </div>
+                                <div id="tone-grid" style="flex: 1; aspect-ratio: 1; position: relative; cursor: crosshair; border: 1px solid var(--border-light); border-radius: 8px; overflow: hidden; background: var(--background); user-select: none;">
+                                    <!-- Grid lines -->
+                                    <div style="position: absolute; left: 25%; top: 0; bottom: 0; width: 1px; background: var(--border-light); opacity: 0.5;"></div>
+                                    <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--border-light);"></div>
+                                    <div style="position: absolute; left: 75%; top: 0; bottom: 0; width: 1px; background: var(--border-light); opacity: 0.5;"></div>
+                                    <div style="position: absolute; top: 25%; left: 0; right: 0; height: 1px; background: var(--border-light); opacity: 0.5;"></div>
+                                    <div style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--border-light);"></div>
+                                    <div style="position: absolute; top: 75%; left: 0; right: 0; height: 1px; background: var(--border-light); opacity: 0.5;"></div>
+                                    <!-- Corner labels -->
+                                    <div style="position: absolute; top: 0.6rem; left: 0.75rem; font-size: 0.65rem; color: var(--text-secondary); opacity: 0.4; pointer-events: none; line-height: 1.3;">Verbose<br>Professional</div>
+                                    <div style="position: absolute; top: 0.6rem; right: 0.75rem; font-size: 0.65rem; color: var(--text-secondary); opacity: 0.4; pointer-events: none; line-height: 1.3; text-align: right;">Verbose<br>Casual</div>
+                                    <div style="position: absolute; bottom: 0.6rem; left: 0.75rem; font-size: 0.65rem; color: var(--text-secondary); opacity: 0.4; pointer-events: none; line-height: 1.3;">Concise<br>Professional</div>
+                                    <div style="position: absolute; bottom: 0.6rem; right: 0.75rem; font-size: 0.65rem; color: var(--text-secondary); opacity: 0.4; pointer-events: none; line-height: 1.3; text-align: right;">Concise<br>Casual</div>
+                                    <!-- Point -->
+                                    <div id="tone-point" style="position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--primary); transform: translate(-50%, -50%); left: 50%; top: 50%; pointer-events: none; box-shadow: 0 0 0 3px var(--background), 0 0 0 5px var(--primary); transition: left 0.08s ease, top 0.08s ease;"></div>
+                                </div>
+                                <div style="display: flex; align-items: center; justify-content: center; width: 1rem;">
+                                    <span style="writing-mode: vertical-rl; font-size: 0.78rem; color: var(--text-secondary); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap;">Casual</span>
+                                </div>
+                            </div>
+                            <div style="text-align: center; margin-top: 0.5rem;">
+                                <span style="font-size: 0.78rem; color: var(--text-secondary); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;">Concise</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 1.5rem; padding: 1rem 1.25rem; background: var(--background-grey); border-radius: 8px; height: 5.5rem; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                            <p id="tone-text" style="margin: 0; color: var(--text-primary); font-size: 0.9rem; line-height: 1.6; text-align: center; font-style: italic; transition: opacity 0.15s ease;">Click anywhere in the grid to select a tone</p>
+                        </div>
+                    </div>
+                </figure>
+
+                <script>
+                (function() {
+                    const grid = document.getElementById('tone-grid');
+                    const point = document.getElementById('tone-point');
+                    const toneText = document.getElementById('tone-text');
+                    let isDragging = false;
+                    let lastZoneKey = null;
+
+                    // [verbosityIndex 0-3 top→bottom][toneIndex 0-3 left→right]
+                    const texts = [
+                        [
+                            "I would like to formally request your assistance in reviewing the draft correspondence I have prepared. The communication requires considerable refinement to ensure it meets the highest standards of professional decorum and accurately conveys our organizational position on the matter at hand.",
+                            "I'm hoping you could help me take a look at this email I've written. I'd like to ensure the language is sufficiently professional and that the message is communicated clearly, as I believe it could benefit from some careful revisions.",
+                            "Hey, so I wrote this email and I was wondering if you could help me with it? I've been going back and forth on whether it sounds right — could you take a look and maybe suggest some changes? I really want to get the tone right.",
+                            "Okay so I finally wrote that email but honestly I'm not sure if it's any good lol. Could you maybe read through it and help me fix it up? I feel like it's all over the place and could use some serious help."
+                        ],
+                        [
+                            "Please review the attached email draft and provide recommendations to enhance its professional tone and clarity, ensuring it adheres to standard business communication practices.",
+                            "Could you help me review this email draft? I'd appreciate your feedback on the tone and whether the message comes across clearly and professionally to the recipient.",
+                            "Hey! Could you give this email a read? I want to make sure it sounds good and gets the point across without being too stiff or awkward.",
+                            "Can you check out this email? Not totally sure if it's landing right, and would love a second opinion before I hit send!"
+                        ],
+                        [
+                            "Please review and revise the attached email draft for professional tone and clarity.",
+                            "Could you review this email draft and suggest improvements to the tone and overall messaging?",
+                            "Hey, can you look over this email and let me know if it sounds okay?",
+                            "Can you check this email real quick? Thx"
+                        ],
+                        [
+                            "Please revise the attached draft to meet professional communication standards.",
+                            "Review this email and suggest edits.",
+                            "Does this email sound alright?",
+                            "Fix my email pls"
+                        ]
+                    ];
+
+                    function getZone(norm) {
+                        if (norm < 0.25) return 0;
+                        if (norm < 0.5) return 1;
+                        if (norm < 0.75) return 2;
+                        return 3;
+                    }
+
+                    function updateFromPosition(clientX, clientY) {
+                        const rect = grid.getBoundingClientRect();
+                        const normX = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+                        const normY = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
+
+                        point.style.left = (normX * 100) + '%';
+                        point.style.top = (normY * 100) + '%';
+
+                        const vIdx = getZone(normY);
+                        const tIdx = getZone(normX);
+                        const key = vIdx + '-' + tIdx;
+
+                        if (key !== lastZoneKey) {
+                            lastZoneKey = key;
+                            toneText.style.opacity = '0';
+                            setTimeout(() => {
+                                toneText.textContent = texts[vIdx][tIdx];
+                                toneText.style.opacity = '1';
+                            }, 150);
+                        }
+                    }
+
+                    grid.addEventListener('mousedown', function(e) {
+                        isDragging = true;
+                        updateFromPosition(e.clientX, e.clientY);
+                    });
+                    document.addEventListener('mousemove', function(e) {
+                        if (isDragging) updateFromPosition(e.clientX, e.clientY);
+                    });
+                    document.addEventListener('mouseup', function() { isDragging = false; });
+
+                    grid.addEventListener('touchstart', function(e) {
+                        e.preventDefault();
+                        isDragging = true;
+                        updateFromPosition(e.touches[0].clientX, e.touches[0].clientY);
+                    }, { passive: false });
+                    grid.addEventListener('touchmove', function(e) {
+                        e.preventDefault();
+                        updateFromPosition(e.touches[0].clientX, e.touches[0].clientY);
+                    }, { passive: false });
+                    document.addEventListener('touchend', function() { isDragging = false; });
+                })();
+                </script>
+
                 <p>
                     Notion AI's slash commands (<span style="color: var(--red); background-color: var(--background-grey); font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 0.95em; padding: 0.1em 0.3em; border-radius: 4px; margin-left: 0.2em;">/summarize</span>, <span style="color: var(--red); background-color: var(--background-grey); font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 0.95em; padding: 0.1em 0.1em; border-radius: 4px; margin-left: 0.2em;">/translate</span>, <span style="color: var(--red); background-color: var(--background-grey); font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 0.95em; padding: 0.15em 0.3em; border-radius: 4px; margin-left: 0.2em;">/rewrite</span>) are templates disguised as actions. Each represents a pre-structured prompt with clear output expectations. Users select intent rather than composing instructions from scratch. <a href="https://zapier.com/blog/how-to-use-notion-ai/" class="ref-inline" target="_blank">zapier</a>
                 </p>
-                <br>
-                <figure class="article-figure">
-                    <img src="./img/notionSlash.png" class="theme-img" width="100%" alt="Notion AI slash commands interface showing template options" loading="lazy">
-                </figure>
-
-                <br>
                 
                 <p>
                     This is intent mapping expressed in interface form: design around goals, not sample dialogue.
                 </p>
-                <br>
+                <hr class="intro-hr">
+
                 <h3>B. Prompt Actions and Inline Workflows</h3>
                 <p>
                     Once users are oriented, the next layer concerns how they act. The most momentum today is around <b>inline actions</b>, applying AI operations directly to selected content instead of describing changes in a separate chat box.
@@ -415,11 +946,132 @@
                 <p>
                     Grammarly pioneered this pattern. Underlines appear beneath text with suggested corrections, and users accept or reject with a click. When introducing "accept multiple suggestions," Grammarly found that mechanical corrections (grammar, spelling) were accepted at high rates, while tone and style suggestions required more scrutiny. The redesign bundled only high-confidence suggestions and introduced preview panels with per-suggestion revert and full undo. Activation improved significantly after introducing explicit preview and reversibility. <a href="https://www.grammarly.com/blog/engineering/accepting-multiple-suggestions/" class="ref-inline" target="_blank">grammarly</a>
                 </p>
+                <!-- [DEMO: Inline Actions — Grammarly-style suggestion underlines] -->
+                <!-- Suggestions stored in `data[]`; clicking a span shows #il-card with accept/dismiss -->
+                <!-- resolved = Set of accepted suggestion indices; count decrements on accept/dismiss -->
+                <div style="border: 1px solid var(--border-light); border-radius: 12px; padding: 1.5rem; margin: 2rem 0; background: var(--background-grey);">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-light); flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--text-secondary);">
+                            <span style="width: 18px; border-bottom: 2px solid var(--red); display: inline-block;"></span> Grammar
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--text-secondary);">
+                            <span style="width: 18px; border-bottom: 2px solid var(--primary); display: inline-block;"></span> Style
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--text-secondary);">
+                            <span style="width: 18px; border-bottom: 2px solid #f59e0b; display: inline-block;"></span> Tone
+                        </div>
+                        <span id="il-count" style="margin-left: auto; font-size: 0.78rem; color: var(--text-secondary);">4 suggestions</span>
+                    </div>
+
+                    <div style="font-size: 0.95rem; line-height: 2.2; color: var(--text-primary);">
+                        The product launch was a <span class="il-sug" data-il="0" style="text-decoration: underline wavy var(--primary); cursor: pointer;">very good</span> success. The team was <span class="il-sug" data-il="1" style="text-decoration: underline wavy #f59e0b; cursor: pointer;">happy about</span> their work, and this is <span class="il-sug" data-il="2" style="text-decoration: underline wavy var(--red); cursor: pointer;">a important</span> achievement. Moving forward, we should <span class="il-sug" data-il="3" style="text-decoration: underline wavy var(--primary); cursor: pointer;">leverage these learnings</span>.
+                    </div>
+
+                    <div id="il-card" style="display: none; margin-top: 0.85rem; padding: 0.5rem 0.65rem; background: var(--background); border-radius: 6px; border: 1px solid var(--border-light); display: none; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+                        <span id="il-badge" style="font-size: 0.65rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 3px; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; flex-shrink: 0;"></span>
+                        <span id="il-orig" style="font-size: 0.8rem; color: var(--text-secondary); text-decoration: line-through; white-space: nowrap;"></span>
+                        <span style="font-size: 0.75rem; color: var(--text-secondary);">→</span>
+                        <span id="il-sugg" style="font-size: 0.8rem; color: var(--text-primary); font-weight: 500; white-space: nowrap; flex: 1;"></span>
+                        <div style="display: flex; gap: 0.35rem; flex-shrink: 0;">
+                            <button id="il-reject" style="background: var(--background); border: 1px solid var(--border-light); border-radius: 4px; padding: 0.25rem 0.6rem; font-size: 0.75rem; font-family: 'Inter', sans-serif; color: var(--text-secondary); cursor: pointer;">Dismiss</button>
+                            <button id="il-accept" style="background: var(--primary); border: none; border-radius: 4px; padding: 0.25rem 0.6rem; font-size: 0.75rem; font-family: 'Inter', sans-serif; color: white; cursor: pointer; font-weight: 500;">Accept</button>
+                        </div>
+                        <button onclick="ilClose()" style="background: none; border: none; cursor: pointer; color: var(--text-secondary); font-size: 0.9rem; line-height: 1; padding: 0; flex-shrink: 0;">×</button>
+                    </div>
+
+                    <div id="il-done" style="display: none; margin-top: 0.85rem; font-size: 0.78rem; color: var(--text-secondary);">
+                        All suggestions resolved
+                    </div>
+                </div>
+
+                <script>
+                (function() {
+                    const data = [
+                        { id: 0, orig: 'very good',               sugg: 'exceptional',          type: 'Style',   bg: 'rgba(0,112,234,0.1)',   col: 'var(--primary)' },
+                        { id: 1, orig: 'happy about',             sugg: 'proud of',             type: 'Tone',    bg: 'rgba(245,158,11,0.12)', col: '#f59e0b' },
+                        { id: 2, orig: 'a important',             sugg: 'an important',         type: 'Grammar', bg: 'rgba(219,79,79,0.1)',   col: 'var(--red)' },
+                        { id: 3, orig: 'leverage these learnings',sugg: 'apply these insights', type: 'Style',   bg: 'rgba(0,112,234,0.1)',   col: 'var(--primary)' }
+                    ];
+
+                    let activeId = null;
+                    const resolved = new Set();
+                    const card  = document.getElementById('il-card');
+                    const badge = document.getElementById('il-badge');
+                    const orig  = document.getElementById('il-orig');
+                    const sugg  = document.getElementById('il-sugg');
+                    const count = document.getElementById('il-count');
+                    const done  = document.getElementById('il-done');
+
+                    function refreshCount() {
+                        const n = data.length - resolved.size;
+                        count.textContent = n === 0 ? 'All resolved' : `${n} suggestion${n !== 1 ? 's' : ''}`;
+                    }
+
+                    function openCard(id) {
+                        const d = data[id];
+                        activeId = id;
+                        badge.textContent = d.type;
+                        badge.style.background = d.bg;
+                        badge.style.color = d.col;
+                        orig.textContent  = d.orig;
+                        sugg.textContent  = d.sugg;
+                        card.style.display = 'flex';
+                    }
+
+                    window.ilClose = function() {
+                        card.style.display = 'none';
+                        activeId = null;
+                    };
+
+                    function resolveSpan(id, accepted) {
+                        const span = document.querySelector(`.il-sug[data-il="${id}"]`);
+                        if (!span) return;
+                        if (accepted) {
+                            span.textContent = data[id].sugg;
+                            span.style.color = 'var(--primary)';
+                            setTimeout(() => { span.style.color = ''; }, 900);
+                        }
+                        span.style.textDecoration = 'none';
+                        span.style.cursor = 'default';
+                        span.classList.remove('il-sug');
+                    }
+
+                    document.getElementById('il-accept').addEventListener('click', () => {
+                        if (activeId === null) return;
+                        resolveSpan(activeId, true);
+                        resolved.add(activeId);
+                        activeId = null;
+                        card.style.display = 'none';
+                        refreshCount();
+                        if (resolved.size === data.length) done.style.display = 'block';
+                    });
+
+                    document.getElementById('il-reject').addEventListener('click', () => {
+                        if (activeId === null) return;
+                        resolveSpan(activeId, false);
+                        resolved.add(activeId);
+                        activeId = null;
+                        card.style.display = 'none';
+                        refreshCount();
+                        if (resolved.size === data.length) done.style.display = 'block';
+                    });
+
+                    document.querySelectorAll('.il-sug').forEach(el => {
+                        el.addEventListener('click', function() {
+                            const id = parseInt(this.dataset.il);
+                            if (activeId === id) { ilClose(); } else { openCard(id); }
+                        });
+                    });
+                })();
+                </script>
                 <br>
                 <p>
                     The core principle is consistent across products: <b>preview before commit</b>.
                 </p>
                 <br>
+
+
+
                 <p>
                     ChatGPT Canvas extends this to writing and coding. Users highlight text, invoke contextual options ("suggest edits," "adjust length," "change reading level"), and review changes in a diff view before accepting. Figma Make scopes AI actions to selected areas of the design canvas. GitHub Copilot's inline commands (<span style="color: var(--red); background-color: var(--background-grey); font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 0.95em; padding: 0.15em 0.3em; border-radius: 4px; margin-left: 0.2em;">/explain</span>, <span style="color: var(--red); background-color: var(--background-grey); font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 0.95em; padding: 0.15em 0.3em; border-radius: 4px; margin-left: 0.2em;">/fix</span>) focus the model on selected code.
                 </p>
@@ -427,7 +1079,7 @@
                 <p>
                     Inline actions preserve authorship. They reduce prompt friction. And they reinforce Quality and Manner by making changes visible and reversible.
                 </p>
-                <br>
+                <hr class="intro-hr">
 
                 <h3>Auto-Fill and Embedded Intelligence</h3>
                 <p>
@@ -437,6 +1089,131 @@
                     When a new entry is created in a Notion database, AI properties automatically populate, summaries, key info, translations, or custom fields driven by user-defined prompts. The user doesn't open a chat window. The intelligence is embedded into the data structure itself. <a href="https://www.notion.com/help/autofill" class="ref-inline" target="_blank">notion</a>
                 </p>
                 <br>
+
+                <!-- [DEMO: Auto-Fill — Notion-style embedded intelligence in a table] -->
+                <!-- Typing in #af-title-text triggers shimmer then auto-populates summary, category, priority -->
+                <!-- Cycles through `entries[]`; resets and loops after last entry -->
+                <div style="border: 1px solid var(--border-light); border-radius: 12px; overflow: hidden; margin: 2rem 0; font-size: 0.82rem; font-family: 'Inter', sans-serif;">
+                    <!-- Table header -->
+                    <div style="display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; background: var(--background-grey); border-bottom: 1px solid var(--border-light);">
+                        <div style="padding: 0.5rem 0.85rem; color: var(--text-secondary); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em;">Name</div>
+                        <div style="padding: 0.5rem 0.85rem; color: var(--text-secondary); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; border-left: 1px solid var(--border-light); display: flex; align-items: center; gap: 0.3rem;">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Summary
+                        </div>
+                        <div style="padding: 0.5rem 0.85rem; color: var(--text-secondary); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; border-left: 1px solid var(--border-light); display: flex; align-items: center; gap: 0.3rem;">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Category
+                        </div>
+                        <div style="padding: 0.5rem 0.85rem; color: var(--text-secondary); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; border-left: 1px solid var(--border-light); display: flex; align-items: center; gap: 0.3rem;">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Priority
+                        </div>
+                    </div>
+                    <!-- Existing rows -->
+                    <div class="af-row" style="display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; border-bottom: 1px solid var(--border-light);">
+                        <div style="padding: 0.6rem 0.85rem; color: var(--text-primary);">Redesign onboarding flow</div>
+                        <div style="padding: 0.6rem 0.85rem; color: var(--text-secondary); border-left: 1px solid var(--border-light);">Simplify first-run UX to reduce drop-off</div>
+                        <div style="padding: 0.6rem 0.85rem; border-left: 1px solid var(--border-light);"><span style="background: rgba(0,112,234,0.1); color: var(--primary); border-radius: 4px; padding: 0.15rem 0.5rem; font-size: 0.72rem; font-weight: 500;">UX</span></div>
+                        <div style="padding: 0.6rem 0.85rem; border-left: 1px solid var(--border-light);"><span style="background: rgba(219,79,79,0.1); color: var(--red); border-radius: 4px; padding: 0.15rem 0.5rem; font-size: 0.72rem; font-weight: 500;">High</span></div>
+                    </div>
+                    <div class="af-row" style="display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; border-bottom: 1px solid var(--border-light);">
+                        <div style="padding: 0.6rem 0.85rem; color: var(--text-primary);">Fix API rate limiting</div>
+                        <div style="padding: 0.6rem 0.85rem; color: var(--text-secondary); border-left: 1px solid var(--border-light);">Add throttle logic to prevent 429 errors</div>
+                        <div style="padding: 0.6rem 0.85rem; border-left: 1px solid var(--border-light);"><span style="background: rgba(245,158,11,0.1); color: #f59e0b; border-radius: 4px; padding: 0.15rem 0.5rem; font-size: 0.72rem; font-weight: 500;">Eng</span></div>
+                        <div style="padding: 0.6rem 0.85rem; border-left: 1px solid var(--border-light);"><span style="background: rgba(219,79,79,0.1); color: var(--red); border-radius: 4px; padding: 0.15rem 0.5rem; font-size: 0.72rem; font-weight: 500;">High</span></div>
+                    </div>
+                    <!-- New row (being typed) -->
+                    <div style="display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; border-bottom: 1px solid var(--border-light); background: rgba(0,112,234,0.02);">
+                        <div style="padding: 0.6rem 0.85rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.4rem;">
+                            <span id="af-title-text"></span><span id="af-cursor" style="display: inline-block; width: 1px; height: 0.9em; background: var(--primary); animation: afBlink 1s step-end infinite; vertical-align: text-bottom;"></span>
+                        </div>
+                        <div id="af-summary-cell" style="padding: 0.6rem 0.85rem; border-left: 1px solid var(--border-light); color: var(--text-secondary); font-style: italic; opacity: 0; transition: opacity 0.4s ease;"></div>
+                        <div id="af-category-cell" style="padding: 0.6rem 0.85rem; border-left: 1px solid var(--border-light); opacity: 0; transition: opacity 0.4s ease;"></div>
+                        <div id="af-priority-cell" style="padding: 0.6rem 0.85rem; border-left: 1px solid var(--border-light); opacity: 0; transition: opacity 0.4s ease;"></div>
+                    </div>
+                    <!-- Add row button -->
+                    <div style="padding: 0.5rem 0.85rem; color: var(--text-secondary); font-size: 0.78rem; cursor: default;">+ New</div>
+                </div>
+
+                <style>
+                @keyframes afBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+                @keyframes afShimmer { 0% { background-position: -200px 0; } 100% { background-position: calc(200px + 100%) 0; } }
+                .af-shimmer {
+                    background: linear-gradient(90deg, var(--background-grey) 25%, var(--border-light) 50%, var(--background-grey) 75%);
+                    background-size: 200px 100%;
+                    animation: afShimmer 1.2s infinite;
+                    border-radius: 4px;
+                    height: 0.75em;
+                    display: inline-block;
+                }
+                </style>
+
+                <script>
+                (function() {
+                    const titleEl    = document.getElementById('af-title-text');
+                    const cursorEl   = document.getElementById('af-cursor');
+                    const summaryCell  = document.getElementById('af-summary-cell');
+                    const categoryCell = document.getElementById('af-category-cell');
+                    const priorityCell = document.getElementById('af-priority-cell');
+
+                    const title    = 'Write Q3 release notes';
+                    const summary  = 'Compile feature updates and fixes for public changelog';
+                    const category = '<span style="background:rgba(0,112,234,0.1);color:var(--primary);border-radius:4px;padding:0.15rem 0.5rem;font-size:0.72rem;font-weight:500;">Docs</span>';
+                    const priority = '<span style="background:rgba(245,158,11,0.1);color:#f59e0b;border-radius:4px;padding:0.15rem 0.5rem;font-size:0.72rem;font-weight:500;">Medium</span>';
+
+                    let charIdx = 0;
+                    let phase = 'typing'; // typing → filling → done → reset
+
+                    function shimmer(el, width) {
+                        el.innerHTML = `<span class="af-shimmer" style="width:${width}px;"></span>`;
+                        el.style.opacity = '1';
+                    }
+
+                    function nextCycle() {
+                        charIdx = 0; phase = 'typing';
+                        titleEl.textContent = '';
+                        cursorEl.style.display = 'inline-block';
+                        summaryCell.style.opacity = '0';
+                        categoryCell.style.opacity = '0';
+                        priorityCell.style.opacity = '0';
+                        summaryCell.textContent = '';
+                        categoryCell.innerHTML = '';
+                        priorityCell.innerHTML = '';
+                        setTimeout(typeNext, 600);
+                    }
+
+                    function typeNext() {
+                        if (charIdx < title.length) {
+                            titleEl.textContent = title.slice(0, ++charIdx);
+                            setTimeout(typeNext, 55 + Math.random() * 40);
+                        } else {
+                            cursorEl.style.display = 'none';
+                            setTimeout(startFill, 400);
+                        }
+                    }
+
+                    function startFill() {
+                        shimmer(summaryCell, 140);
+                        shimmer(categoryCell, 44);
+                        shimmer(priorityCell, 44);
+                        setTimeout(() => {
+                            summaryCell.textContent = summary;
+                            summaryCell.style.opacity = '1';
+                            setTimeout(() => {
+                                categoryCell.innerHTML = category;
+                                categoryCell.style.opacity = '1';
+                                setTimeout(() => {
+                                    priorityCell.innerHTML = priority;
+                                    priorityCell.style.opacity = '1';
+                                    setTimeout(nextCycle, 3200);
+                                }, 200);
+                            }, 200);
+                        }, 1100);
+                    }
+
+                    setTimeout(typeNext, 800);
+                })();
+                </script>
+                <hr class="intro-hr">
+
                 <h3>Regenerate and Variations</h3>
                 <p>
                     The regenerate button is now standard, but a more advanced pattern is <b>variations</b>, presenting multiple outputs simultaneously.
@@ -448,13 +1225,107 @@
                     Variations reduce the cognitive burden of iterative prompting and shift the task from "describe the perfect output" to "select the best candidate."
                 </p>
 
-                <hr>
+                <!-- [DEMO: Regenerate and Variations — subject line generator with 2×2 grid] -->
+                <!-- `sets[]` holds batches of 4 options; #var-regen cycles through them -->
+                <!-- Clicking a card shows it in #var-selected; highlights selected state -->
+                <div style="border: 1px solid var(--border-light); border-radius: 12px; padding: 1.25rem; margin: 2rem 0; background: var(--background-grey);">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border-light);">
+                        <span style="font-size: 0.78rem; color: var(--text-secondary);">Prompt:</span>
+                        <span style="font-size: 0.82rem; color: var(--text-primary); font-style: italic; flex: 1;">Write a subject line for a product launch email</span>
+                        <button id="var-regen" style="background: var(--background-grey); border: 1px solid var(--border-light); border-radius: 6px; padding: 0.3rem 0.65rem; font-size: 0.75rem; font-family: 'Inter', sans-serif; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; gap: 0.35rem; white-space: nowrap; flex-shrink: 0;" onmouseover="this.style.borderColor='var(--text-secondary)'" onmouseout="this.style.borderColor='var(--border-light)'">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                            Regenerate
+                        </button>
+                    </div>
+                    <div id="var-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;"></div>
+                    <div id="var-selected" style="display: none; margin-top: 0.85rem; padding: 0.6rem 0.85rem; background: rgba(0,112,234,0.06); border: 1px solid rgba(0,112,234,0.2); border-radius: 6px; font-size: 0.82rem; color: var(--text-primary); display: none; align-items: center; gap: 0.5rem;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span id="var-selected-text"></span>
+                    </div>
+                </div>
+
+                <script>
+                (function() {
+                    const sets = [
+                        [
+                            "Introducing what you've been waiting for",
+                            "Your workflow just got an upgrade",
+                            "Something new is here — and it's built for you",
+                            "Meet the feature our users asked for most"
+                        ],
+                        [
+                            "We shipped it. Here's what changed.",
+                            "New: the thing that fixes that thing",
+                            "Changelog drop — bigger than usual",
+                            "Just launched: the update worth opening"
+                        ],
+                        [
+                            "The wait is over. Seriously.",
+                            "You asked. We built it. It's live.",
+                            "Launch day. Open this one.",
+                            "Our biggest release yet is live"
+                        ]
+                    ];
+
+                    let setIdx = 0;
+                    let selectedIdx = null;
+                    const grid = document.getElementById('var-grid');
+                    const selectedBar = document.getElementById('var-selected');
+                    const selectedText = document.getElementById('var-selected-text');
+
+                    function render(items, animate) {
+                        selectedBar.style.display = 'none';
+                        selectedIdx = null;
+                        grid.innerHTML = '';
+                        items.forEach((text, i) => {
+                            const card = document.createElement('div');
+                            card.style.cssText = `padding: 0.65rem 0.85rem; border: 1px solid var(--border-light); border-radius: 8px; font-size: 0.82rem; color: var(--text-primary); cursor: pointer; transition: border-color 0.15s ease, background 0.15s ease; line-height: 1.5; background: var(--background);`;
+                            if (animate) {
+                                card.style.opacity = '0';
+                                card.style.transform = 'translateY(4px)';
+                                card.style.transition = 'opacity 0.2s ease, transform 0.2s ease, border-color 0.15s ease, background 0.15s ease';
+                                setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'none'; }, i * 80);
+                            }
+                            card.textContent = text;
+                            card.addEventListener('mouseenter', () => { if (selectedIdx !== i) card.style.borderColor = 'var(--text-secondary)'; });
+                            card.addEventListener('mouseleave', () => { if (selectedIdx !== i) card.style.borderColor = 'var(--border-light)'; });
+                            card.addEventListener('click', () => {
+                                // Deselect all
+                                grid.querySelectorAll('div').forEach((c, j) => {
+                                    c.style.borderColor = 'var(--border-light)';
+                                    c.style.background = 'var(--background)';
+                                    c.style.color = 'var(--text-primary)';
+                                });
+                                // Select this
+                                card.style.borderColor = 'var(--primary)';
+                                card.style.background = 'rgba(0,112,234,0.04)';
+                                selectedIdx = i;
+                                selectedText.textContent = text;
+                                selectedBar.style.display = 'flex';
+                            });
+                            grid.appendChild(card);
+                        });
+                    }
+
+                    document.getElementById('var-regen').addEventListener('click', () => {
+                        setIdx = (setIdx + 1) % sets.length;
+                        render(sets[setIdx], true);
+                    });
+
+                    render(sets[0], false);
+                })();
+                </script>
+
+                <!-- ── SECTION: Feedback and Loading ───────────────────────── -->
+                <hr class="intro-hr">
 
                 <h2 class="article-h2" id="feedback-loading">Feedback and Loading: While the AI Works</h2>
                 <p>
                     AI systems take time to respond. How that time is handled dramatically affects perceived quality.
                 </p>
+
                 <br>
+
                 <h3>Streaming Text</h3>
                 <p>
                     Token-by-token rendering has become standard for LLM responses. Text appears progressively rather than after a spinner.
@@ -463,12 +1334,14 @@
                 <p>
                     This does more than mimic typing. It gives users something to read immediately and dramatically reduces perceived wait time compared to a spinner followed by a wall of text. The Vercel AI SDK provides production-ready components for streaming markdown, tool execution displays, and reasoning blocks. <a href="https://dev.to/pockit_tools/vercel-ai-sdk-complete-guide-building-production-ready-ai-chat-apps-with-nextjs-4cp6" class="ref-inline" target="_blank">dev</a>
                 </p>
-                <br>
+                <hr class="intro-hr">
+
                 <h3>Skeleton and Shimmer States</h3>
                 <p>
                     For non-streaming content (cards, dashboards, structured outputs), skeleton screens outperform spinners at reducing perceived wait time. The skeleton matches the shape of the eventual content with grey placeholder blocks that pulse or shimmer. Facebook, LinkedIn, and Uber all use this pattern extensively. In AI products, this is increasingly used for structured outputs like comparison tables or data cards that can't be streamed token by token. <a href="https://blog.logrocket.com/ux-design/skeleton-loading-screen-design/" class="ref-inline" target="_blank">blog.logrocket</a>
                 </p>
-                <br>
+                <hr class="intro-hr">
+
                 <h3>Reasoning Displays</h3>
                 <p>
                     As models incorporate chain-of-thought reasoning, products vary in how much of that reasoning they reveal.
@@ -525,12 +1398,14 @@
                     With these feedback patterns established, the next critical layer concerns control, ensuring that as systems become more capable, humans remain meaningfully in charge.
                 </p>
 
-                <hr>
+                <!-- ── SECTION: Governors — Keeping Humans in Control ───────── -->
+                <hr class="intro-hr">
 
                 <h2 class="article-h2" id="governors">Governors: Keeping Humans in Control</h2>
                 <p>
                     As AI systems move from suggestion to execution, control mechanisms become the defining UX layer. The difference between a helpful assistant and a risky one is rarely capability, it's governance.
                 </p>
+
                 <br>
 
                 <h3>Action Plans</h3>
@@ -549,7 +1424,7 @@
                 <p>
                     This pattern becomes essential as autonomy increases. It transforms opaque execution into inspectable intent.
                 </p>
-                <br>
+                <hr class="intro-hr">
 
                 <h3>Verification and Undo</h3>
                 <p>
@@ -567,7 +1442,8 @@
                 <p>
                     If the AI changes something, the user must be able to revert it.
                 </p>
-                <br>
+                <hr class="intro-hr">
+
                 <h3>Citations and Source References</h3>
                 <p>
                     For factual outputs, citations have become a baseline expectation and an industry standard.
@@ -584,7 +1460,8 @@
                 <p>
                     This directly reinforces the Quality maxim.
                 </p>
-                <br>
+                <hr class="intro-hr">
+
                 <h3>Memory and Personalization Architecture</h3>
                 <p>
                     Persistent memory increases usefulness, but it also raises trust risk.
@@ -657,7 +1534,8 @@
                     </tr>
                 </table>
 
-                <hr>
+                <!-- ── SECTION: Trust, Transparency, and Error Recovery ─────── -->
+                <hr class="intro-hr">
 
                 <h2 class="article-h2" id="trust-transparency-error-recovery">Trust, Transparency, and Error Recovery</h2>
                 <p>
@@ -677,7 +1555,8 @@
                 <p>
                     Interface design determines whether those pillars feel solid or fragile.
                 </p>
-                <br>
+                <hr class="intro-hr">
+
                 <h3>Confidence Indicators</h3>
                 <p>
                     The pattern is straightforward: show how certain the AI is about its output.
@@ -694,7 +1573,7 @@
                 <p>
                     In practice, calibration often matters more than raw accuracy. Users anchor on early experiences and are slow to update trust, even as system performance changes.
                 </p>
-                <br>
+                <hr class="intro-hr">
 
                 <h3>Error Recovery</h3>
                 <p>
@@ -717,7 +1596,7 @@
                 <p>
                     Industry data suggests that a large percentage of failed conversations can be recovered through thoughtful fallback design. The key is forward momentum.
                 </p>
-                <br>
+                <hr class="intro-hr">
 
                 <h3>Disclosure and AI Signaling</h3>
                 <p>
@@ -736,7 +1615,8 @@
                     Trust is reinforced not by novelty signals, but by predictable behavior.With trust mechanisms defined, the next layer addresses one of the most complex system-level design challenges: memory and personalization.
                 </p>
 
-                <hr>
+                <!-- ── SECTION: The Autonomy Spectrum ─────────────────────── -->
+                <hr class="intro-hr">
 
                 <h2 class="article-h2" id="autonomy-spectrum">The Autonomy Spectrum</h2>
                 <p>
@@ -804,8 +1684,7 @@
                 <p>
                     Designing autonomy is about calibrating control, not maximizing automation.
                 </p>
-                <br>
-
+                <hr class="intro-hr">
 
                 <h3>Progressive Autonomy</h3>
                 <p>
@@ -820,7 +1699,7 @@
                 <p>
                     This prevents cognitive overload and preserves trust. Progressive autonomy mirrors how users build confidence. The system earns the right to act more independently.
                 </p>
-                <br>
+                <hr class="intro-hr">
 
                 <h3>From Reactive to Proactive</h3>
                 <p>
@@ -869,7 +1748,7 @@
                     <li>Background agents continue work while the user focuses elsewhere.</li>
                     <li>Escalation triggers anticipate frustration before abandonment.</li>
                 </ul>
-                <br>
+                <hr class="intro-hr">
 
                 <h3>Practical Implementation</h3>
                 <p>
@@ -885,16 +1764,21 @@
                     Success metrics include time saved, conversion lift, error reduction, and user satisfaction ratings. Qualitative feedback is equally important, asking users whether features felt helpful or intrusive reveals whether the system is anticipating correctly or being presumptuous.
                 </p>
 
-                <hr>
+                <!-- ── SECTION: Multimodal Conversational Interfaces ───────── -->
+                <hr class="intro-hr">
 
                 <h2 class="article-h2" id="multimodal">Multimodal Conversational Interfaces</h2>
                 <p>
                     Modern conversational AI increasingly blends voice, vision, and typed inputs. The design challenge is creating fluid transitions between modalities, a user may start by typing, continue with speech, and finish with visual confirmation.
                 </p>
 
-                <hr>
+                <!-- ── SECTION: Measurement Framework ─────────────────────── -->
+                <hr class="intro-hr">
 
                 <h2 class="article-h2" id="measurement-framework">Measurement Framework</h2>
+                
+                <br>
+
                 <h3>Core Metrics</h3>
                 <p>
                     Conversational UI success must be measured beyond engagement, focusing on business impact, efficiency, and user outcomes:
@@ -946,21 +1830,22 @@
                 <p>
                     A critical insight: high containment rate with low CSAT indicates automation is resolving tickets but not satisfying users, a common failure mode.
                 </p>
-                <br>
+                <hr class="intro-hr">
 
                 <h3>Conversation Length</h3>
                 <p>
                     A CHI 2024 study using GPT-4-powered Slack chatbots tested conversation turns of 0, 3, 5, and 7. Quality did not differ drastically across conditions, but participants had mixed reactions. The finding suggests that adaptive conversation length, calibrated to user need and question type, is more effective than a fixed strategy.
                 </p>
 
-                <hr>
+                <!-- ── SECTION: Agentic Patterns Shipping Now ─────────────── -->
+                <hr class="intro-hr">
 
                 <h2 class="article-h2" id="agentic-patterns">Agentic Patterns Shipping Now</h2>
                 <p>
                     The shift from copilots (AI suggests, human acts) to agents (AI acts, human oversees) is already happening in production systems.
                 </p>
+                
                 <br>
-
 
                 <h3>Background Agents</h3>
                 <p>
@@ -981,8 +1866,7 @@
                 <p>
                     The governing model remains L4: autonomous execution with human approval and review.
                 </p>
-                <br>
-
+                <hr class="intro-hr">
 
                 <h3>Agentic Commerce</h3>
                 <p>
@@ -997,8 +1881,7 @@
                     This compresses discovery, evaluation, and transaction into a single interaction surface.
                 </p>
 
-                <br>
-
+                <hr class="intro-hr">
 
                 <h3>Conversational Shopping</h3>
                 <p>
@@ -1014,8 +1897,7 @@
                     Here, memory and anticipation intersect with commerce. The system recalls purchase history and contextual details to reduce multi-step workflows to a single conversational turn.
                 </p>
 
-                <br>
-
+                <hr class="intro-hr">
 
                 <h3>Resolution-Based Support</h3>
                 <p>
@@ -1025,7 +1907,8 @@
                     The measurable gains, response speed, containment, cost reduction, are significant. But as history shows, containment alone is not the success metric.
                 </p>
 
-                <hr>
+                <!-- ── SECTION: Notable Platform Teardowns ────────────────── -->
+                <hr class="intro-hr">
 
                 <h2 class="article-h2" id="platform-teardowns">Notable Platform Teardowns</h2>
                 <p>
@@ -1088,7 +1971,8 @@
                     The most successful chatbot UIs share a common trait: they do not try to sound human. Instead, they predict instead of wait, guide instead of interrupt, and when tone and context align, the conversation flows naturally.
                 </p>
 
-                <hr>
+                <!-- ── SECTION: Patent Landscape ──────────────────────────── -->
+                <hr class="intro-hr">
 
                 <h2 class="article-h2" id="patent-landscape">Patent Landscape</h2>
                 <p>
@@ -1137,7 +2021,8 @@
                     These patents converge on three themes: proactive intent prediction (acting before the user asks), contextual memory across turns (maintaining coherent dialogue), and dynamic interface generation (adapting the UI to the conversation state).
                 </p>
 
-                <hr>
+                <!-- ── SECTION: The Klarna Cautionary Tale ────────────────── -->
+                <hr class="intro-hr">
 
                 <h2 class="article-h2" id="klarna-cautionary-tale">The Klarna Cautionary Tale</h2>
                 <p>
@@ -1156,7 +2041,8 @@
                     The lesson for conversational UX design: <b>measure outcomes, not containment</b>. Build escalation paths that are easy to find, not buried. And treat "I don't know, let me connect you to a person" as a feature, not a failure.
                 </p>
 
-                <hr>
+                <!-- ── SECTION: Conclusion ─────────────────────────────────── -->
+                <hr class="intro-hr">
 
                 <h2 class="article-h2" id="conclusion">Conclusion</h2>
                 <p>
@@ -1177,10 +2063,10 @@
 
                 <footer>
                     <br><br><br>
-                    <hr><br>
+                    <hr class="intro-hr"><br>
                     <div class="footer-container">
                         <button id="copyUrl">Share</button>
-                        <a href="#top" class="headtag">back to top<span class="arr">↑</span></a>
+                        <a href="#top" class="headtag"><span class="arr">↑ &nbsp;</span> back to top</a>
                     </div>
                 </footer>
             </article>

@@ -27,10 +27,7 @@
     }
 
     hr {
-        margin-top: 4rem;
-        margin-bottom: 2rem;
-        border: 0;
-        border-top: 1px solid var(--background-grey);
+        border-color: var(--background-grey);
     }
 }
 
@@ -155,11 +152,29 @@ p {
     color: var(--text-secondary) !important;
 }
 
+/* ========== DIVIDERS & SEPARATORS ========== */
+
+/* Introduction section divider */
 .intro-hr {
     margin-top: 4rem;
     margin-bottom: 2rem;
     border: 0;
-    border-top: 1px solid var(--background-grey);
+    border-top: 2px solid #cccccc;
+}
+
+@media (prefers-color-scheme: dark) {
+    .intro-hr {
+        border-top: 2px solid #2B2C2E;
+    }
+}
+
+/* Forced theme overrides for divider */
+html.force-light .intro-hr {
+    border-top: 2px solid #cccccc;
+}
+
+html.force-dark .intro-hr {
+    border-top: 2px solid #2B2C2E;
 }
 
 pre {
