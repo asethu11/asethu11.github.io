@@ -5,7 +5,17 @@
     {
       "source": "/",
       "has": [{ "type": "host", "value": "blogs.abseth.com" }],
-      "destination": "/blogs.html"
+      "destination": "/blogs/index.html"
+    },
+    {
+      "source": "/Conversational-UX",
+      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
+      "destination": "/blogs/Conversational-UX/index.html"
+    },
+    {
+      "source": "/Conversational-UX/",
+      "has": [{ "type": "host", "value": "blogs.abseth.com" }],
+      "destination": "/blogs/Conversational-UX/index.html"
     },
     {
       "source": "/(.*)",
