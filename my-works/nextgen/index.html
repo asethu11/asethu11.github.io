@@ -63,7 +63,7 @@
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Big+Shoulders+Display:wght@650&display=swap">
         
-        <link rel="stylesheet" href="nextgen.css">
+        <link rel="stylesheet" href="/my-works/nextgen/nextgen.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="icon" href="../../img/favicon.png" type="image/png">
 
@@ -81,8 +81,8 @@
                 document.querySelectorAll(".theme-img").forEach(img => {
                     const imageName = img.dataset.name;
                     const newSrc = isDarkMode 
-                        ? `img/dk/${imageName}.png` 
-                        : `img/lt/${imageName}.png`;
+                        ? `/my-works/nextgen/img/dk/${imageName}.png` 
+                        : `/my-works/nextgen/img/lt/${imageName}.png`;
                     if (img.src !== newSrc) {
                         img.src = newSrc;
                     }
@@ -96,8 +96,8 @@
             function openImageInNewTab(imageName) {
                 const isDarkMode = isDarkTheme();
                 const imagePath = isDarkMode 
-                    ? `img/dk/${imageName}.png` 
-                    : `img/lt/${imageName}.png`;
+                    ? `/my-works/nextgen/img/dk/${imageName}.png` 
+                    : `/my-works/nextgen/img/lt/${imageName}.png`;
                 window.open(imagePath, '_blank');
             }
         </script>
@@ -153,7 +153,7 @@
 
                 <div class="grey-background-article image-bottom">
                     <figure class="article-figure">
-                        <img src="thumbnail.png" width="100%" alt="NextGen Badge VR Training Platform" loading="lazy">
+                        <img src="/my-works/nextgen/thumbnail.png" width="100%" alt="NextGen Badge VR Training Platform" loading="lazy">
                     </figure>
                 </div>
 
@@ -297,7 +297,7 @@
 
                 <figure class="article-figure">
                     <video class="article-video" controls>
-                        <source src="vid/UE5 VR Simulation - UI Interaction, MetaHuman Character Selection & Level Portal.mp4" type="video/mp4">
+                        <source src="/my-works/nextgen/vid/UE5 VR Simulation - UI Interaction, MetaHuman Character Selection & Level Portal.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <figcaption>UI Interaction, MetaHuman Character Selection & Level Portal</figcaption>
@@ -305,7 +305,7 @@
 
                 <figure class="article-figure">
                     <video class="article-video" controls>
-                        <source src="vid/UE5 VR Simulation Snippet - Raycast Observation & UI Interactions in Police Training (1).mp4" type="video/mp4">
+                        <source src="/my-works/nextgen/vid/UE5 VR Simulation Snippet - Raycast Observation & UI Interactions in Police Training (1).mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <figcaption>Raycast Observation & UI Interactions in Police Training</figcaption>

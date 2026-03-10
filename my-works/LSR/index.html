@@ -59,7 +59,7 @@
 
         <script src="../../script.js"></script>
         <script src="../../shared.js"></script>
-        <link rel="stylesheet" href="LSR-fixed.css">
+        <link rel="stylesheet" href="/my-works/LSR/LSR-fixed.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="icon" href="../../img/favicon.png" type="image/png">
 
@@ -77,8 +77,8 @@
                 document.querySelectorAll(".theme-img").forEach(img => {
                     const imageName = img.dataset.name;
                     const newSrc = isDarkMode 
-                        ? `img/dk/${imageName}.png` 
-                        : `img/lt/${imageName}.png`;
+                        ? `/my-works/LSR/img/dk/${imageName}.png` 
+                        : `/my-works/LSR/img/lt/${imageName}.png`;
 
                     if (img.src !== newSrc) {
                         img.src = newSrc;
@@ -94,8 +94,8 @@
             function openImageInNewTab(imageName) {
                 const isDarkMode = isDarkTheme();
                 const imagePath = isDarkMode 
-                    ? `img/dk/${imageName}.png` 
-                    : `img/lt/${imageName}.png`;
+                    ? `/my-works/LSR/img/dk/${imageName}.png` 
+                    : `/my-works/LSR/img/lt/${imageName}.png`;
                 window.open(imagePath, '_blank');
             }
         </script>
@@ -327,7 +327,7 @@
                     </ul>
 
                     <video loop autoplay muted width="100%"> 
-                        <source src="vid/video1.mp4" type="video/mp4">
+                        <source src="/my-works/LSR/vid/video1.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <figure class="article-figure">
@@ -338,7 +338,7 @@
                         <img class="theme-img" src="" data-name="slide19" width="100%" alt="" loading="lazy">
                     </figure>
                     <video loop autoplay muted width="100%"> 
-                        <source src="vid/video2.mp4" type="video/mp4">
+                        <source src="/my-works/LSR/vid/video2.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <p><br>
@@ -348,14 +348,14 @@
                         Unlike many traditional medical tools, the interface adopts a clean, minimal design. Advanced or infrequently used settings are tucked away behind a toggle, allowing users to stay focused on their core tasks without being overwhelmed by clutter or irrelevant options.
                     </p>
                     <video loop autoplay muted width="100%"> 
-                        <source src="vid/video3.mp4" type="video/mp4">
+                        <source src="/my-works/LSR/vid/video3.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <p><br>
                         If a user decides to add a new column, it's as simple as clicking the "+" button. The user could either type out what they want to extract or select from a list of common extraction types. The system will then automatically generate the necessary prompts for the AI model, streamlining the process and ensuring accuracy.
                     </p>
                     <video loop autoplay muted width="100%"> 
-                        <source src="vid/video4.mp4" type="video/mp4">
+                        <source src="/my-works/LSR/vid/video4.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <p><br>
@@ -365,7 +365,7 @@
                         <img class="theme-img" src="" data-name="slide15" width="100%" alt="" loading="lazy">
                     </figure>
                     <video loop autoplay muted width="100%"> 
-                        <source src="vid/video5.mp4" type="video/mp4">
+                        <source src="/my-works/LSR/vid/video5.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <p>

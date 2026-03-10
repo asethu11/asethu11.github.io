@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Static portfolio site",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "build": "echo 'No build required for static site'"
+  },
   "dependencies": {},
   "devDependencies": {},
   "keywords": [],

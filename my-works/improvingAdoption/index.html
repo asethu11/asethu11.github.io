@@ -92,8 +92,8 @@
 
         </style>
 
-        <script src="script.js"></script>
-        <link rel="stylesheet" href="improving-adoption.css">
+        <script src="/my-works/improvingAdoption/script.js"></script>
+        <link rel="stylesheet" href="/my-works/improvingAdoption/improving-adoption.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
         <link rel="icon" href="../../img/favicon.png" type="image/png">
@@ -113,8 +113,8 @@
         document.querySelectorAll(".theme-img").forEach(img => {
             const imageName = img.dataset.name; // Get the image name
             const newSrc = isDarkMode 
-                ? `img/dk/${imageName}.png` 
-                : `img/lt/${imageName}.png`;
+                ? `/my-works/improvingAdoption/img/dk/${imageName}.png` 
+                : `/my-works/improvingAdoption/img/lt/${imageName}.png`;
 
             // Only update if the src has changed (prevents unnecessary reloads)
             if (img.src !== newSrc) {
@@ -134,8 +134,8 @@
     function openImageInNewTab(imageName) {
         const isDarkMode = isDarkTheme();
         const imagePath = isDarkMode 
-            ? `img/dk/${imageName}.png` 
-            : `img/lt/${imageName}.png`;
+            ? `/my-works/improvingAdoption/img/dk/${imageName}.png` 
+            : `/my-works/improvingAdoption/img/lt/${imageName}.png`;
         window.open(imagePath, '_blank');
     }
 </script>
@@ -226,7 +226,7 @@
 
                 <figure class="article-figure article-video">
                     <video width="100%" controls autoplay muted style="border: 1px solid var(--border-light);">
-                        <source src="vid/existingPlatform.mp4" type="video/mp4">
+                        <source src="/my-works/improvingAdoption/vid/existingPlatform.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <figcaption>The existing platform that was designed by developers and shaped by early-adopters that were mostly AI power-users. This led to feature bloat and unnecessary complexity that new and non-technical users did not want or understand.</figcaption>
@@ -632,7 +632,7 @@
 
                 <figure class="article-figure article-video">
                     <video width="100%" controls autoplay muted style="border: 1px solid var(--border-light);">
-                        <source src="vid/full-flow.mp4" type="video/mp4">
+                        <source src="/my-works/improvingAdoption/vid/full-flow.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <figcaption>Q&A Bot setup flow: automatic content sync and launch in under 60 seconds</figcaption>
@@ -664,7 +664,7 @@
 
                 <figure class="article-figure article-video">
                     <video width="100%" controls autoplay muted style="border: 1px solid var(--border-light);">
-                        <source src="vid/exploration1.mp4" type="video/mp4">
+                        <source src="/my-works/improvingAdoption/vid/exploration1.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <figcaption>Exploration 1: Guided accordion-style workflow</figcaption>
@@ -672,7 +672,7 @@
 
                 <figure class="article-figure article-video">
                     <video width="100%" controls autoplay muted style="border: 1px solid var(--border-light);">
-                        <source src="vid/exploration1.mp4" type="video/mp4">
+                        <source src="/my-works/improvingAdoption/vid/exploration1.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <figcaption>Exploration 2: Step-by-Step workflow</figcaption>

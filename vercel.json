@@ -1,6 +1,7 @@
 {
   "version": 2,
   "trailingSlash": false,
+  "outputDirectory": ".",
   "rewrites": [
     {
       "source": "/blogs/",

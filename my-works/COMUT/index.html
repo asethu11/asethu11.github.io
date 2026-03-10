@@ -56,7 +56,7 @@
 
         <script src="../../script.js"></script>
         <script src="../../shared.js"></script>
-        <link rel="stylesheet" href="COMUT.css">
+        <link rel="stylesheet" href="/my-works/COMUT/COMUT.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="icon" href="../../img/favicon.png" type="image/png">
     </head>
@@ -75,8 +75,8 @@
         document.querySelectorAll(".theme-img").forEach(img => {
             const imageName = img.dataset.name;
             const newSrc = isDarkMode 
-                ? `img/dk/${imageName}.png` 
-                : `img/lt/${imageName}.png`;
+                ? `/my-works/COMUT/img/dk/${imageName}.png` 
+                : `/my-works/COMUT/img/lt/${imageName}.png`;
 
             if (img.src !== newSrc) {
                 img.src = newSrc;
@@ -92,8 +92,8 @@
     function openImageInNewTab(imageName) {
         const isDarkMode = isDarkTheme();
         const imagePath = isDarkMode 
-            ? `img/dk/${imageName}.png` 
-            : `img/lt/${imageName}.png`;
+            ? `/my-works/COMUT/img/dk/${imageName}.png` 
+            : `/my-works/COMUT/img/lt/${imageName}.png`;
         window.open(imagePath, '_blank');
     }
 </script>

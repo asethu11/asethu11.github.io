@@ -1,0 +1,308 @@
+/* =============================================================================
+   Card Components - Project cards, skeleton loaders, and animations
+   ============================================================================= */
+
+/* Stagger Fade Animation */
+.stagger-fade {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: staggerFadeIn 0.6s ease forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 100ms);
+}
+
+@keyframes staggerFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header Project Styles */
+.headerproject {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border-radius: 16px;
+  margin-top: 2rem;
+}
+
+.headerprojectbg {
+  width: 300px;
+  height: 225px!important;
+}
+
+@media only screen and (max-width: 768px) {
+  .headerproject {
+      flex-direction: column;
+      gap: 4px;
+  }
+
+  .headerproject a{
+      width: 100%;
+  }
+  .headerprojectbg {
+      width: 100%!important;
+      height: 280px!important;
+  }
+
+  .headerprojectbg img {
+      width: 100%;
+      height: 85%;
+      object-fit: cover;
+  }
+
+  
+  .headerprojectbg video {
+    width: 100%;
+    height: 85%;
+    object-fit: cover;
+  }
+
+}
+
+
+/* -------------  Projects  ------------- */
+
+.project {
+  flex: 1 1 calc(50% - 80px); 
+  margin-bottom: 1rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .project {
+      max-width: calc(50% - 80px); 
+  }
+}
+
+.grey-background {
+  background-color: var(--background-grey);
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  min-width: 180px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+
+}
+
+@media only screen and (max-width: 480px) {
+  .grey-background {
+      height: 200px;
+  }
+}
+
+.image-bottom{
+  align-items: end!important;
+ 
+}
+
+.grey-background:hover .project-image {
+  width: 90%;
+  transition: width 200ms, transform 200ms;
+}
+
+.white-circle {
+  width: 110px;
+  height: 110px;
+  background-color: var(--background);
+  border-radius: 100px;
+  position: absolute;
+
+}
+
+.project-image {
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  position: absolute;
+  will-change: transform;
+  transition: width 450ms, transform 450ms;
+}
+
+#project-1 {
+  width: 100%;
+}
+
+
+.project-text {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.project-description {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.project-title{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* =============================================================================
+   Skeleton Loaders
+   ============================================================================= */
+
+/* Base skeleton styles */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--background-grey) 25%,
+    rgba(255, 255, 255, 0.15) 50%,
+    var(--background-grey) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--background-grey) 25%,
+      rgba(255, 255, 255, 0.08) 50%,
+      var(--background-grey) 75%
+    );
+    background-size: 200% 100%;
+  }
+}
+
+/* Skeleton for project images */
+.skeleton-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* Skeleton for text lines */
+.skeleton-text {
+  height: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-text.title {
+  width: 70%;
+  height: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.skeleton-text.short {
+  width: 40%;
+}
+
+.skeleton-text.medium {
+  width: 60%;
+}
+
+.skeleton-text.long {
+  width: 90%;
+}
+
+/* Skeleton for project cards */
+.skeleton-project {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 2rem;
+}
+
+.skeleton-project-image {
+  width: 300px;
+  height: 225px;
+  border-radius: 16px;
+  flex-shrink: 0;
+}
+
+.skeleton-project-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .skeleton-project {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .skeleton-project-image {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .skeleton-project-content {
+    width: 100%;
+  }
+}
+
+/* Skeleton for other projects list */
+.skeleton-row {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--background-grey);
+}
+
+.skeleton-row-title {
+  height: 1.1rem;
+  width: 60%;
+  margin-bottom: 0.75rem;
+}
+
+.skeleton-row-tags {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.skeleton-tag {
+  height: 0.8rem;
+  width: 60px;
+  border-radius: 4px;
+}
+
+/* Hide skeletons when content loads */
+.loaded .skeleton,
+.loaded .skeleton-project,
+.loaded .skeleton-row {
+  display: none;
+}
+
+/* Hide actual content until loaded */
+.project-image {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-image.loaded {
+  opacity: 1;
+}
+
+/* Skeleton for section titles */
+.skeleton-section-title {
+  height: 1.3rem;
+  width: 120px;
+  margin-bottom: 1.5rem;
+}
+
+/* Skeleton wrapper - maintains layout space */
+.skeleton-wrapper {
+  position: relative;
+}
