@@ -1,0 +1,12 @@
+[     110ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/my-works/improvingAdoption/script.js:0
+[     113ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/my-works/script.js:0
+[     322ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/my-works/img/lt/thumbnail.png:0
+[     325ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/my-works/vid/existingPlatform.mp4:0
+[     327ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/my-works/vid/exploration1.mp4:0
+[     336ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/my-works/vid/full-flow.mp4:0
+[     337ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/my-works/img/lt/slide2.png:0
+[     372ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/my-works/img/lt/slide6.png:0
+[     375ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/my-works/img/lt/slide3.png:0
+[     378ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/my-works/vid/exploration1.mp4:0
+[     380ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/my-works/img/lt/slide7.png:0
+[     386ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/my-works/img/lt/slide5.png:0

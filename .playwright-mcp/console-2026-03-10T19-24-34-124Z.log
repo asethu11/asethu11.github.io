@@ -1,0 +1,4 @@
+[     127ms] Identifier 'words' has already been declared
+[     165ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/my-works/img/lt/slide1.png:0
+[     168ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/my-works/img/lt/slide2.png:0
+[     171ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/my-works/img/lt/slide3.png:0

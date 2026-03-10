@@ -4,6 +4,46 @@
   "outputDirectory": ".",
   "rewrites": [
     {
+      "source": "/improvingAdoption",
+      "destination": "/my-works/improvingAdoption/index.html"
+    },
+    {
+      "source": "/improvingadoption",
+      "destination": "/my-works/improvingAdoption/index.html"
+    },
+    {
+      "source": "/LSR",
+      "destination": "/my-works/LSR/index.html"
+    },
+    {
+      "source": "/lsr",
+      "destination": "/my-works/LSR/index.html"
+    },
+    {
+      "source": "/COMUT",
+      "destination": "/my-works/COMUT/index.html"
+    },
+    {
+      "source": "/comut",
+      "destination": "/my-works/COMUT/index.html"
+    },
+    {
+      "source": "/nextgen",
+      "destination": "/my-works/nextgen/index.html"
+    },
+    {
+      "source": "/ytm",
+      "destination": "/my-works/ytm/index.html"
+    },
+    {
+      "source": "/SODA",
+      "destination": "/my-works/SODA/index.html"
+    },
+    {
+      "source": "/soda",
+      "destination": "/my-works/SODA/index.html"
+    },
+    {
       "source": "/blogs/",
       "has": [{ "type": "host", "value": "blogs.abseth.com" }],
       "destination": "/blogs/index.html"
@@ -78,41 +118,6 @@
       "source": "/:slug/:file.html",
       "has": [{ "type": "host", "value": "blogs.abseth.com" }],
       "destination": "https://blogs.abseth.com/:slug",
-      "permanent": true
-    },
-    {
-      "source": "/my-works/improving-adoption/improvingAdoption.html",
-      "destination": "https://abseth.com/improvingAdoption",
-      "permanent": true
-    },
-    {
-      "source": "/my-works/nextgen/nextgen.html",
-      "destination": "https://abseth.com/nextgen",
-      "permanent": true
-    },
-    {
-      "source": "/my-works/ytm/ytm.html",
-      "destination": "https://abseth.com/ytm",
-      "permanent": true
-    },
-    {
-      "source": "/my-works/LSR/LSR.html",
-      "destination": "https://abseth.com/LSR",
-      "permanent": true
-    },
-    {
-      "source": "/my-works/hackathonSODA/SODA.html",
-      "destination": "https://abseth.com/SODA",
-      "permanent": true
-    },
-    {
-      "source": "/my-works/KB-ET/cabKb.html",
-      "destination": "https://abseth.com/cabKb",
-      "permanent": true
-    },
-    {
-      "source": "/my-works/usertesting-mesa/COMUT.html",
-      "destination": "https://abseth.com/COMUT",
       "permanent": true
     },
     {
