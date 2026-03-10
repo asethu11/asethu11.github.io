@@ -121,12 +121,12 @@
     },
     {
       "source": "/:slug.html",
-      "destination": "https://abseth.com/:slug",
+      "destination": "/:slug",
       "permanent": true
     },
     {
-      "source": "/:any/index.html",
-      "destination": "https://abseth.com/:any",
+      "source": "/:path+/index.html",
+      "destination": "/:path*",
       "permanent": true
     }
   ]
