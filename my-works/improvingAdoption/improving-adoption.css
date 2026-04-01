@@ -38,6 +38,33 @@
         border-color: var(--background-grey);
     }
 }
+
+/* ========== TEXT SELECTION ========== */
+
+/* Default (light mode) text selection */
+/* ::selection {
+    background-color: var(--primary);
+    color: #d4d4d4;
+}
+
+::-moz-selection {
+    background-color: var(--primary);
+    color: #d4d4d4;
+} */
+
+/* Dark mode text selection */
+/* @media (prefers-color-scheme: dark) {
+    ::selection {
+        background-color: var(--primary);
+        color: #363636;
+    }
+
+    ::-moz-selection {
+        background-color: var(--primary);
+        color: #363636;
+    }
+} */
+
 /* Forced theme overrides (manual toggle) */
 html.force-light {
     --background: #FCFCFC;
@@ -52,6 +79,16 @@ html.force-light {
     color-scheme: light;
 }
 
+/* html.force-light ::selection {
+    background-color: var(--primary);
+    color: #d4d4d4;
+}
+
+html.force-light ::-moz-selection {
+    background-color: var(--primary);
+    color: #d4d4d4;
+} */
+
 html.force-dark {
     --background: #040404;
     --background-grey: #2B2C2E;
@@ -64,6 +101,16 @@ html.force-dark {
     --red: #db4f4f;
     color-scheme: dark;
 }
+
+/* html.force-dark ::selection {
+    background-color: #5c5c5c;
+    color: #363636;
+}
+
+html.force-dark ::-moz-selection {
+    background-color: var(--primary);
+    color: #363636;
+} */
 
 
 /* ========== BASE STYLES ========== */
