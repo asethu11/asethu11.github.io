@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Canonical URL normalizer -->
+        <link id="canonical-link" rel="canonical" href="">
+        <script>
+        (function(){
+          try{
+            const u = new URL(location.href);
+            let p = u.pathname;
+            if (p.endsWith('/index.html')) p = p.replace(/\/index\.html$/, '/');
+            const m = p.match(/^\/([^\/]+)\/\1\.html$/);
+            if (m) p = '/' + m[1];
+            if (p !== '/' && p.endsWith('/')) p = p.replace(/\/+$/, '');
+            const parts = p.split('/').filter(Boolean);
+            if (parts.length === 1 || (parts[0] === 'blogs' && parts.length === 2)) {
+              const normalized = parts.map(s => s.toLowerCase()).join('/');
+              p = '/' + normalized;
+            }
+            const canonicalHref = u.origin + p + u.search + u.hash;
+            const canon = document.getElementById('canonical-link');
+            if (canon) canon.href = canonicalHref;
+            if (p !== u.pathname) location.replace(canonicalHref);
+          } catch(e){ console.error('canonical normalizer error', e); }
+        })();
+        </script>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'G-98H0ZTK0T4');
+        </script>
+
+        <!-- Clarity tracking code -->
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "vaaig4fq2o");
+        </script>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Vertex Hub Payroll Module</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Designing a structured payroll module for an existing operations platform.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Payroll, Enterprise, B2B, SaaS">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <script src="/script.js"></script>
+        <script src="/shared.js"></script>
+        <link rel="stylesheet" href="/my-works/payrollModule/payrollModule.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="icon" href="/img/favicon.png" type="image/png">
+
+        <script>
+            function isDarkTheme() {
+                const forcedLight = document.documentElement.classList.contains('force-light');
+                const forcedDark = document.documentElement.classList.contains('force-dark');
+                if (forcedLight) return false;
+                if (forcedDark) return true;
+                return window.matchMedia("(prefers-color-scheme: dark)").matches;
+            }
+
+            function updateImages() {
+                const isDarkMode = isDarkTheme();
+                document.querySelectorAll(".theme-img").forEach(img => {
+                    const imageName = img.dataset.name;
+                    const newSrc = isDarkMode
+                        ? `/my-works/payrollModule/img/dk/${imageName}.png`
+                        : `/my-works/payrollModule/img/lt/${imageName}.png`;
+                    if (img.src !== newSrc) img.src = newSrc;
+                });
+            }
+
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateImages);
+            document.addEventListener("DOMContentLoaded", updateImages);
+
+            function openImageInNewTab(imageName) {
+                const isDarkMode = isDarkTheme();
+                const imagePath = isDarkMode
+                    ? `/my-works/payrollModule/img/dk/${imageName}.png`
+                    : `/my-works/payrollModule/img/lt/${imageName}.png`;
+                window.open(imagePath, '_blank');
+            }
+        </script>
+    </head>
+
+    <body>
+        <a href="/" class="back-button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Home
+        </a>
+
+        <!-- Sticky TOC -->
+        <aside class="toc-sticky" aria-label="Table of contents">
+            <div class="toc-wrapper">
+                <h3 class="toc-title">Contents</h3>
+                <div class="reading-progress" aria-hidden="true">
+                    <div class="reading-progress-fill"></div>
+                </div>
+                <nav class="toc-nav">
+                    <ul class="toc-list">
+                        <li><a href="#tldr" data-ga-event="click" data-ga-event-name="toc_tldr" data-ga-event-category="navigation">TL;DR</a></li>
+                        <li><a href="#context" data-ga-event="click" data-ga-event-name="toc_context" data-ga-event-category="navigation">Context</a></li>
+                        <li><a href="#challenges" data-ga-event="click" data-ga-event-name="toc_challenges" data-ga-event-category="navigation">Challenges</a></li>
+                        <li><a href="#approach" data-ga-event="click" data-ga-event-name="toc_approach" data-ga-event-category="navigation">My Approach</a></li>
+                        <li><a href="#module" data-ga-event="click" data-ga-event-name="toc_module" data-ga-event-category="navigation">The Module</a></li>
+                        <li><a href="#decisions" data-ga-event="click" data-ga-event-name="toc_decisions" data-ga-event-category="navigation">Design Decisions</a></li>
+                        <li><a href="#outcomes" data-ga-event="click" data-ga-event-name="toc_outcomes" data-ga-event-category="navigation">Outcomes</a></li>
+                        <li><a href="#reflections" data-ga-event="click" data-ga-event-name="toc_reflections" data-ga-event-category="navigation">Reflections</a></li>
+                        <li><a href="#next" data-ga-event="click" data-ga-event-name="toc_next" data-ga-event-category="navigation">What's Next</a></li>
+                    </ul>
+                </nav>
+                <a class="toc-top" href="#top" data-ga-event="click" data-ga-event-name="back_to_top" data-ga-event-category="navigation">Back to top</a>
+            </div>
+        </aside>
+
+        <div class="toast" role="alert" aria-live="polite" aria-atomic="true">
+            <div class="toast-title">This content is optimized for light mode</div>
+            <div class="toast-text">You're viewing in dark mode. Switch to light for a comfortable reading experience.</div>
+            <div class="toast-actions">
+                <button class="btn-primary" id="toast-switch-light">Switch to light mode</button>
+                <button class="btn-ghost" id="toast-dismiss">Dismiss</button>
+            </div>
+        </div>
+
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">Switch to light</button>
+
+        <div class="article-container">
+            <article class="article-body">
+
+                <!-- Intro -->
+                <section class="section-1">
+                    <div class="grey-background-article image-bottom">
+                        <figure class="article-figure">
+                            <img class="theme-img" src="" data-name="cover" width="100%" alt="Vertex Hub Payroll Module" loading="lazy">
+                        </figure>
+                    </div>
+
+                    <h1 class="article-h1">
+                        Vertex Hub Payroll: Designing a Structured Payroll Module for an existing Operations Platform
+                    </h1>
+
+                    <p>
+                        I designed a payroll module for Vertex Hub that replaced email-and-spreadsheet coordination with structured submission and review workflows. The module extends Vertex Hub's existing operations platform, introducing dual-path data entry, exception-focused review interfaces, and formal approval workflows while integrating with the platform's authentication, navigation, and design system.
+                    </p>
+
+                    <div class="sub-header">
+                        <p id="intro-tags1">Mar&ndash;Apr 2026 &nbsp;|&nbsp; Product Manager + Product Designer &nbsp;|&nbsp; B2B SaaS Platform Extension</p>
+                    </div>
+                </section>
+
+                <hr>
+
+                <!-- TL;DR -->
+                <section class="section-tldr">
+                    <h2 class="article-h2" id="tldr">TL;DR</h2>
+
+                    <p><b style="color: var(--red);">Problem</b><br>
+                    Vertex Education's payroll team spent 9,000+ hours annually managing spreadsheets across five payroll systems. Schools submitted data via email with 75% first-pass accuracy, forcing manual interpretation and double data entry. The process had no centralized visibility, audit trails, or structured validation&mdash;everything that Vertex Hub provided for other operations was missing for payroll.</p>
+
+                    <p><b style="color: var(--red);">Solution</b><br>
+                    I led discovery, design, and requirements definition for a new payroll module within Vertex Hub. I conducted stakeholder interviews, mapped entity-specific workflows across EdTec and Pennsylvania operations, and validated design concepts with schools and internal teams. The module introduces structured submission flows (web forms + file upload), exception-focused review grids, and formal approval workflows while maintaining flexibility for existing Excel-based processes.</p>
+
+                    <p><b style="color: var(--red);">Result</b><br>
+                    The module launched with 150+ functional requirements, targeting &gt;80% school adoption, &gt;50% email reduction, and &lt;24-hour review cycles. Early rollout shows schools completing submissions in under 3 minutes versus the previous 20&ndash;30 minute email-and-spreadsheet process. Projected impact: 9,000+ annual hours saved across payroll operations.</p>
+                </section>
+
+                <hr class="intro-hr">
+
+                <!-- Context -->
+                <section class="section-context">
+                    <h2 class="article-h2" id="context">Context: Why Payroll Wasn't in the Hub</h2>
+                    <p>Vertex Hub already served as the operations platform for school management&mdash;everything from enrollment to compliance lived there. But payroll remained outside the system, trapped in a 17-step process involving email reminders, Excel templates, Box uploads, manual reviews, and fragmented approval workflows across five different payroll systems (Paylocity, iSolved, ADP, Paycore, and vendor-specific tools).</p>
+
+                    <p>The payroll team was spending:</p>
+                    <ul>
+                        <li><b>24% of EdTec team time</b> (4,000+ hours/year) managing spreadsheets</li>
+                        <li><b>53% of PA team time</b> (5,000+ hours/year) on the same work</li>
+                    </ul>
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide1" width="100%" alt="The existing 17-step payroll process" loading="lazy">
+                        <figcaption>The existing 17-step process&mdash;email reminders, Excel templates, Box uploads, manual tracking, double entry.</figcaption>
+                    </figure>
+
+                    <p>This wasn't just about efficiency. Schools submitted data with 75% first-pass accuracy, often arriving less than 24 hours before payroll deadlines. The payroll team would download files, manually interpret submissions, enter data into an internal tracking spreadsheet, then re-enter the same information into the actual payroll system. Double entry wasn't a mistake&mdash;it was the reliability mechanism.</p>
+
+                    <blockquote class="pull-quote">
+                        "The first round of information that we get from them is about 75% either accurate or in entirety."
+                        <cite>&mdash; Danielle Kabak, Payroll Operations Lead</cite>
+                    </blockquote>
+
+                    <p>That 25% gap meant constant back-and-forth to reconstruct missing context. The challenge wasn't just digitizing this process&mdash;it was bringing it into Vertex Hub in a way that worked with the platform's existing patterns while addressing the unique constraints of payroll operations.</p>
+
+                    <a href="#module" class="jump-btn" data-ga-event="click" data-ga-event-name="skip_to_module" data-ga-event-category="navigation">
+                        Jump to The Solution
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 5v14M5 12l7 7 7-7"/>
+                        </svg>
+                    </a>
+                </section>
+
+                <hr class="intro-hr">
+
+                <!-- Challenges -->
+                <section class="section-challenges">
+                    <h2 class="article-h2" id="challenges">Challenges</h2>
+
+                    <h3>Entity-Specific Process Variations</h3>
+                    <p>EdTec and Pennsylvania operations followed fundamentally different workflows. EdTec was Paylocity-centered with standardized processes. PA used multiple systems, relied on school-maintained spreadsheets with complex formulas, and had account-manager-driven QC. I couldn't design for an average&mdash;I had to accommodate both while establishing patterns that could eventually converge.</p>
+
+                    <h3>Trust Requirements in a High-Stakes Domain</h3>
+                    <p>Dawn Carey stated it directly: <em>"Payroll can't get wrong, it can't be wrong."</em> This meant the module needed version history, audit trails, comment persistence, and human oversight at every decision point. The team preserved every interaction because they might need it later for corrections, disputes, or compliance reviews.</p>
+
+                    <h3>Excel Power Users vs. Simple Submitters</h3>
+                    <p>Some schools used VLOOKUPs, external system joins, and embedded formulas in their payroll spreadsheets. Others just needed to submit basic salary changes. Forcing everyone into a single interaction model would guarantee low adoption from at least one segment.</p>
+
+                    <h3>Scoping Pressure</h3>
+                    <p>Every stakeholder conversation surfaced adjacent needs: Asana integration, SharePoint migration, state-specific retirement checklists, auditor access controls, KPI dashboards. All legitimate, but well beyond what could ship in Q2. The most critical early decision was defining what v1 actually meant versus deferring to future phases.</p>
+
+                    <h3>No Direct Payroll System Integration</h3>
+                    <p>The module couldn't connect directly to Paylocity, ADP, or other payroll systems in v1. Manual export and data entry would continue for the immediate term. The design had to create value in the school-facing experience and review workflows while building toward future automation without painting us into architectural corners.</p>
+                </section>
+
+                <hr class="intro-hr">
+
+                <!-- Approach -->
+                <section class="section-approach">
+                    <h2 class="article-h2" id="approach">My Approach</h2>
+
+                    <h3>Discovery: Understanding Three Time Horizons</h3>
+                    <p>I started with stakeholder interviews across payroll operations&mdash;3&ndash;5 internal sessions with specialists from both entities and 3&ndash;5 sessions with schools representing different complexity levels. I intentionally avoided showing prototypes first. I needed to understand their current reality before proposing solutions.</p>
+                    <p>One school walked me through their Excel workflow: they pulled data from an external HR system, used VLOOKUPs to map employee IDs, calculated prorated salaries with embedded formulas, then uploaded the file. Another school just filled in basic rows with salary changes and submission dates.</p>
+                    <p>The critical insight from discovery was that I needed to hold three distinct states simultaneously:</p>
+                    <ol>
+                        <li><b>Current reality</b> &mdash; the literal 17-step process happening today, with entity-specific variations</li>
+                        <li><b>Near-term transition</b> &mdash; PA was already adopting standardized forms EdTec had been using, independent of my work</li>
+                        <li><b>Target future state</b> &mdash; where structured data and system integrations replace manual coordination</li>
+                    </ol>
+                    <p>Designing for "current state" alone would digitize behaviors already being phased out. Designing for "ideal future state" would ignore Q2 feasibility constraints. The module had to accommodate the hybrid reality while creating a migration path forward.</p>
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide2" width="100%" alt="Three time horizons framing" loading="lazy">
+                        <figcaption>Mapping the three time horizons&mdash;current reality, near-term transition, and target future state.</figcaption>
+                    </figure>
+
+                    <h3>Mapping the Review Workflow</h3>
+                    <p>One of the most valuable outputs was understanding how payroll specialists actually reviewed submissions. They didn't need to see every employee in every submission&mdash;they needed to see <b>exceptions</b>: new hires, terminations, large salary changes (&gt;20%), validation errors, missing required data.</p>
+                    <p>My initial concept showed a full roster comparison with change highlighting. Dawn Carey pushed back:</p>
+
+                    <blockquote class="pull-quote">
+                        "I don't want to see a bunch of people on a list if they didn't have data."
+                        <cite>&mdash; Dawn Carey, Payroll Operations</cite>
+                    </blockquote>
+
+                    <p>She was right. A full-roster comparison increased cognitive load without adding value. This led to the exception-focused grid pattern that became central to the design: tabs for All Employees, New, Terminated, Modified, and Flagged&mdash;with automatic filtering to show only relevant records in each view.</p>
+
+                    <h3>School Validation and the Dual-Path Decision</h3>
+                    <p>When I started testing concepts with schools, a critical adoption risk emerged:</p>
+
+                    <blockquote class="pull-quote">
+                        "Clients aren't going to want to enter things directly. They're going to want to have a form that they can download, complete, and then upload. We need those two options to be available."
+                        <cite>&mdash; School stakeholder interview</cite>
+                    </blockquote>
+
+                    <p>I'd been designing toward a pure web-based experience. But forcing schools to abandon Excel workflows overnight would guarantee low adoption from power users who relied on formulas and external data integration. The solution was dual-path submission: structured web forms for salary changes, and file upload for hours and complex scenarios&mdash;both paths feeding into the same review workflow.</p>
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide3" width="100%" alt="Dual-path submission decision" loading="lazy">
+                        <figcaption>Dual-path entry&mdash;web forms and file upload converge at the same review workflow.</figcaption>
+                    </figure>
+
+                    <h3>Designing for Trust: Validation Architecture</h3>
+                    <p>The validation model needed to catch errors at intake without blocking legitimate submissions that required human judgment. I designed a three-tier system:</p>
+                    <ul>
+                        <li><b>Errors (blocking)</b> &mdash; missing required fields (SSN for new hires), invalid data formats, unknown employee IDs</li>
+                        <li><b>Warnings (flagged for review)</b> &mdash; large salary changes (&gt;20%), excessive hours (&gt;80/week), unusually high stipends</li>
+                        <li><b>Information</b> &mdash; field-level changes with percentage calculations, modified records with prior-cycle comparison</li>
+                    </ul>
+                    <p>This gave payroll specialists control over what warranted attention versus what could auto-approve. The system surfaced issues but didn't override human judgment in ambiguous cases.</p>
+
+                    <h3>Technical Alignment and AI Deferral</h3>
+                    <p>During technical feasibility discussions, the team explored AI-assisted document interpretation for uploaded files. Austin de Rossi's assessment was pragmatic:</p>
+
+                    <blockquote class="pull-quote">
+                        "That is a cool concept, but I think as a v1, it would cause a lot more confusion than actually be a benefit."
+                        <cite>&mdash; Austin de Rossi, Engineering</cite>
+                    </blockquote>
+
+                    <p>Trust requirements in payroll meant any AI errors would destroy confidence. Building fallback flows for AI failures would add complexity, and the Q2 timeline didn't allow for adequate testing. We deferred AI interpretation to v2, focusing v1 on structured intake with deterministic validation.</p>
+                </section>
+
+                <hr class="intro-hr">
+
+                <!-- The Module -->
+                <section class="section-module">
+                    <h2 class="article-h2" id="module">The Module Design</h2>
+
+                    <h3>School Experience: Magic Link Access + Dual-Path Submission</h3>
+                    <p>The module introduces a tokenized magic link access model&mdash;schools receive cycle-specific links via email, no account creation required. Links expire after 14 days and scope access to a single cycle, balancing convenience with security.</p>
+                    <p>Schools choose one of two paths:</p>
+                    <ul>
+                        <li><b>Path 1: Structured Salary Changes</b> &mdash; a form-based interface where selecting change type (New Hire, Termination, Salary Change, Status Change) dynamically reveals relevant fields. Inline validation prevents common errors before submission.</li>
+                        <li><b>Path 2: File Upload</b> &mdash; schools upload Excel or CSV. The system validates on upload, checking required columns, flagging excessive hours (&gt;80/week), surfacing missing employee IDs. A preview screen shows parsed data with issues highlighted before commit.</li>
+                    </ul>
+                    <p>Both paths converge at a review screen showing all changes with validation status. Submission triggers an instant notification to the Vertex team and updates cycle status from "Waiting on School" to "Needs Review."</p>
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide4" width="100%" alt="School submission flow" loading="lazy">
+                        <figcaption>School submission&mdash;magic link landing, dual-path entry, converging review before submit.</figcaption>
+                    </figure>
+
+                    <h3>Internal Review: Exception-Focused Workspace</h3>
+                    <p><b>Work Queue</b> lists all active cycles with school names, due dates, status, and issue counts. <b>Cycle Workspace</b> uses a spreadsheet-style grid with tabs: All Employees, New, Terminated, Modified, and Flagged. The interface only shows exceptions by default&mdash;unchanged employees don't appear unless explicitly requested.</p>
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide5" width="100%" alt="Internal review workspace" loading="lazy">
+                        <figcaption>Exception-focused review grid&mdash;tabs surface only what needs attention, drill-down for full context.</figcaption>
+                    </figure>
+
+                    <p><b>Changes-Requested Loop:</b> When specialists need clarification, they flag specific employees with comments. Schools re-enter seeing only flagged employees&mdash;not the full submission&mdash;replacing the back-and-forth that previously happened via email.</p>
+
+                    <h3>Approval Workflow: Document Upload + Review</h3>
+                    <p>When payroll processing is complete, specialists upload three required documents and send the cycle to schools for final approval via a three-tab interface: Employees (approve/flag per row), Financial Summary (total cost, variance indicators), and Documents (upload confirmation). Gating logic enforces that all employees must be resolved before final submission.</p>
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide6" width="100%" alt="Approval workflow" loading="lazy">
+                        <figcaption>School-facing approval&mdash;three-tab structure covering employees, financials, and documents.</figcaption>
+                    </figure>
+
+                    <h3>Export and Downstream Workflow</h3>
+                    <p>Specialists can export in multiple formats (CSV, Excel, JSON) with configurable column sets and QC checklist columns, supporting the continued reality that manual entry into payroll systems persists in v1. Export formats map cleanly to payroll system import templates, reducing manual reformatting.</p>
+
+                    <a href="#outcomes" class="jump-btn" data-ga-event="click" data-ga-event-name="skip_to_outcomes" data-ga-event-category="navigation">
+                        See the Outcomes
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 5v14M5 12l7 7 7-7"/>
+                        </svg>
+                    </a>
+                </section>
+
+                <hr class="intro-hr">
+
+                <!-- Design Decisions -->
+                <section class="section-decisions">
+                    <h2 class="article-h2" id="decisions">Design Decisions and Rationale</h2>
+
+                    <h3>Comparison View &rarr; Exception View</h3>
+                    <p>My initial design showed full roster comparisons with change highlighting. Dawn's feedback&mdash;not wanting to see employees without data&mdash;revealed this added cognitive load without value. Switching to exception-focused tabs reduced visual noise and focused attention on what mattered.</p>
+
+                    <h3>Pure Web Forms &rarr; Dual-Path Entry</h3>
+                    <p>School validation showed forcing everyone into structured forms would kill adoption among Excel power users. Supporting both web and upload paths increased development complexity but solved a real adoption barrier.</p>
+
+                    <h3>AI Interpretation &rarr; Manual Validation</h3>
+                    <p>The "cool concept" of AI document parsing failed the trust test. Payroll can't be wrong, and AI errors would destroy confidence. Deferring to v2 kept v1 scope achievable while maintaining reliability standards.</p>
+
+                    <h3>Single Integration Surface &rarr; Export Bridge</h3>
+                    <p>Direct payroll system integration wasn't feasible in Q2. Rather than block the project, export functionality bridges to existing manual processes while the architecture supports future API connections.</p>
+
+                    <h3>Account Creation &rarr; Magic Links</h3>
+                    <p>Requiring school users to create accounts would add friction at the entry point. Magic links with 14-day expiry and cycle scoping balanced convenience with security, matching patterns from other Vertex Hub school-facing features.</p>
+                </section>
+
+                <hr class="intro-hr">
+
+                <!-- Outcomes -->
+                <section class="section-outcomes">
+                    <h2 class="article-h2" id="outcomes">Outcomes</h2>
+                    <p>The module launched with 150+ functional requirements, non-functional constraints, success metrics, and a phase 2+ roadmap&mdash;aligned across cross-functional stakeholders on v1 scope.</p>
+
+                    <figure class="article-figure">
+                        <img class="theme-img" src="" data-name="slide7" width="100%" alt="Outcome metrics" loading="lazy">
+                    </figure>
+
+                    <h3>Success Metric Targets</h3>
+                    <ul>
+                        <li><b>&gt;80% school adoption</b> within 90 days of launch</li>
+                        <li><b>&gt;50% email reduction</b> in payroll-related communication</li>
+                        <li><b>&lt;24 hours</b> average time from submission to review complete</li>
+                        <li><b>&gt;90% approvals</b> completed through Hub vs external processes</li>
+                        <li><b>&gt;4.0/5.0 user satisfaction</b> from both schools and internal teams</li>
+                    </ul>
+
+                    <h3>Early Signals</h3>
+                    <p>Schools completing submissions in under 3 minutes versus the previous 20&ndash;30 minute process. The module is rolling out to departments never engaged with payroll via Vertex Hub before, expanding from 147 courses toward 200&ndash;300 as rollout continues.</p>
+
+                    <blockquote class="pull-quote">
+                        "The whole value is a structured request that we can eventually use to send off API calls."
+                        <cite>&mdash; Jose Castellanos</cite>
+                    </blockquote>
+                </section>
+
+                <hr class="intro-hr">
+
+                <!-- Reflections -->
+                <section class="section-reflections">
+                    <h2 class="article-h2" id="reflections">Reflections</h2>
+                    <ul>
+                        <li><b>Entity variation wasn't resistance&mdash;it was reality.</b> Dawn's consistent pushback on generalizations forced me to accommodate actual process differences rather than designing for an imaginary average. That constraint produced a more flexible system.</li>
+                        <li><b>Trust requirements shaped every decision.</b> The "can't be wrong" standard meant validation architecture, audit trails, and human oversight checkpoints weren't nice-to-haves. They were the foundation.</li>
+                        <li><b>Adoption risks are scoping constraints.</b> Meeting users where they are (Excel workflows, familiar mental models) while creating migration paths was more effective than mandating behavior change.</li>
+                        <li><b>Strategic architecture matters more than v1 features.</b> Building less in v1 with clear extension architecture was better than building more features with no path to automation.</li>
+                        <li><b>Scoping is product work.</b> Every conversation surfaced legitimate adjacent needs, but protecting v1 scope was what made it shippable.</li>
+                    </ul>
+                </section>
+
+                <!-- What's Next -->
+                <section class="section-next">
+                    <h2 class="article-h2" id="next">What's Next</h2>
+                    <ul>
+                        <li><b>Phase 2:</b> Direct payroll system integrations &mdash; Paylocity, ADP, iSolved APIs</li>
+                        <li><b>Phase 3:</b> Retirement of internal payroll spreadsheet once structured data fully replaces it</li>
+                        <li><b>Phase 4:</b> GL system automation for downstream financial workflows</li>
+                        <li><b>Phase 5:</b> Advanced analytics, predictive validation, anomaly detection</li>
+                    </ul>
+                </section>
+
+                <hr class="intro-hr">
+
+                <!-- Continue reading -->
+                <div class="next-steps">
+                    <h3 class="next-steps-title">Continue reading</h3>
+                    <div class="next-steps-grid">
+                        <a href="/improvingAdoption" class="next-step-card">
+                            <span class="next-step-label">Next Project</span>
+                            <span class="next-step-name">Solving an 80% Bounce-Rate for an Enterprise Tool &rarr;</span>
+                        </a>
+                        <a id="random-blog-card" href="#" class="next-step-card">
+                            <span class="next-step-label">Read a blog</span>
+                            <span class="next-step-name" id="random-blog-title">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ── Blog list: add/remove entries here to update the random card above ── -->
+                <script>
+                    var BLOGS = [
+                        { title: "From Chat Windows to Interaction Systems", url: "https://blogs.abseth.com/Conversational-UX" },
+                        { title: "Designing AI Answers Around How People Actually Read Them", url: "https://blogs.abseth.com/designing-ai-human-interaction-2026" },
+                        { title: "Tyranny of the A/B Test", url: "https://blogs.abseth.com/tyranny-of-the-a-b-test" },
+                        { title: "Stop Leveling Up Prototyping Skills", url: "https://blogs.abseth.com/stopLevelingUpPrototypingSkills" },
+                        { title: "Personalized Interfaces", url: "https://blogs.abseth.com/personalizedInterfaces" },
+                        { title: "Why Voice Interfaces Keep Failing", url: "https://blogs.abseth.com/whyVoiceInterfacesKeepFailing" },
+                        { title: "Follow the Vibe of the Tribe", url: "https://blogs.abseth.com/followTheVibeOfTheTribe" },
+                        { title: "Why I Start in High-Fidelity", url: "https://blogs.abseth.com/why-i-start-in-high-fidelity" },
+                    ];
+                    // ─────────────────────────────────────────────────────────────────────────
+                    (function() {
+                        var pick = BLOGS[Math.floor(Math.random() * BLOGS.length)];
+                        var card = document.getElementById('random-blog-card');
+                        var titleEl = document.getElementById('random-blog-title');
+                        if (card && pick) {
+                            card.href = pick.url;
+                            titleEl.textContent = pick.title + ' →';
+                        }
+                    })();
+                </script>
+
+                <footer>
+                    <br><br><br>
+                    <hr><br>
+                    <div class="footer-container">
+                        <a href="#top" class="hyp-p">back to top &uarr;</a>
+                    </div>
+                    <br>
+                    <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.95rem;">Site coded by a human in vanilla HTML, CSS, and JavaScript.</p>
+                </footer>
+
+            </article>
+        </div>
+
+        <script>
+            (function() {
+                const fill = document.querySelector('.reading-progress-fill');
+                const track = document.querySelector('.reading-progress');
+                const tocWrapper = document.querySelector('.toc-wrapper');
+                const tocNav = document.querySelector('.toc-nav');
+                const toast = document.querySelector('.toast');
+                const toastSwitch = document.getElementById('toast-switch-light');
+                const toastDismiss = document.getElementById('toast-dismiss');
+                const themeToggle = document.getElementById('theme-toggle');
+                if (!fill) return;
+
+                function updateTrackBounds() {
+                    if (!track || !tocWrapper || !tocNav) return;
+                    const wrapperRect = tocWrapper.getBoundingClientRect();
+                    const navRect = tocNav.getBoundingClientRect();
+                    track.style.top = `${navRect.top - wrapperRect.top}px`;
+                    track.style.height = `${navRect.height}px`;
+                }
+
+                function updateProgress() {
+                    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    fill.style.height = `${scrollHeight > 0 ? (scrollTop / scrollHeight) * 98 : 0}%`;
+                }
+
+                function showToastIfNeeded() {
+                    if (!toast) return;
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    const dismissed = sessionStorage.getItem('lightModeToastDismissed') === '1';
+                    const forcedLight = document.documentElement.classList.contains('force-light');
+                    const forcedDark = document.documentElement.classList.contains('force-dark');
+                    if (prefersDark && !dismissed && !forcedLight && !forcedDark) toast.classList.add('show');
+                }
+
+                function applyForcedTheme(theme) {
+                    document.documentElement.classList.remove('force-light', 'force-dark');
+                    if (theme === 'light') document.documentElement.classList.add('force-light');
+                    else if (theme === 'dark') document.documentElement.classList.add('force-dark');
+                    if (theme) {
+                        sessionStorage.setItem('forcedTheme', theme);
+                        sessionStorage.setItem('lightModeToastDismissed', '1');
+                    } else {
+                        sessionStorage.removeItem('forcedTheme');
+                    }
+                    updateImages();
+                    updateToggleLabel();
+                    if (toast) toast.classList.remove('show');
+                }
+
+                function dismissToast() {
+                    sessionStorage.setItem('lightModeToastDismissed', '1');
+                    if (toast) toast.classList.remove('show');
+                }
+
+                function updateToggleLabel() {
+                    if (!themeToggle) return;
+                    const isForcedLight = document.documentElement.classList.contains('force-light');
+                    const isForcedDark = document.documentElement.classList.contains('force-dark');
+                    const isDark = isForcedDark || (!isForcedLight && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                    themeToggle.textContent = isDark ? 'Switch to light' : 'Switch to dark';
+                    themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+                }
+
+                function toggleTheme() {
+                    const isForcedLight = document.documentElement.classList.contains('force-light');
+                    const isForcedDark = document.documentElement.classList.contains('force-dark');
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    if (isForcedLight) applyForcedTheme('dark');
+                    else if (isForcedDark) applyForcedTheme('light');
+                    else applyForcedTheme(prefersDark ? 'light' : 'dark');
+                }
+
+                updateTrackBounds();
+                updateProgress();
+                document.addEventListener('scroll', updateProgress, { passive: true });
+                window.addEventListener('resize', () => { updateTrackBounds(); updateProgress(); });
+
+                if (toastSwitch) toastSwitch.addEventListener('click', () => applyForcedTheme('light'));
+                if (toastDismiss) toastDismiss.addEventListener('click', dismissToast);
+                if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+
+                const storedTheme = sessionStorage.getItem('forcedTheme');
+                if (storedTheme === 'light' || storedTheme === 'dark') applyForcedTheme(storedTheme);
+                else updateToggleLabel();
+
+                showToastIfNeeded();
+            })();
+
+            (function() {
+                const sections = document.querySelectorAll('h2[id]');
+                const tocLinks = document.querySelectorAll('.toc-list a');
+
+                function updateActiveLink() {
+                    let currentSection = null;
+                    const scrollPos = window.scrollY + (window.innerHeight * 0.5);
+
+                    sections.forEach(section => {
+                        if (scrollPos >= section.offsetTop) {
+                            currentSection = section;
+                        }
+                    });
+
+                    if (currentSection) {
+                        const id = currentSection.getAttribute('id');
+                        tocLinks.forEach(link => link.classList.remove('active'));
+                        const activeLink = document.querySelector(`.toc-list a[href="#${id}"]`);
+                        if (activeLink) activeLink.classList.add('active');
+                    }
+                }
+
+                window.addEventListener('scroll', updateActiveLink);
+                updateActiveLink();
+            })();
+        </script>
+        <script src="../../script.js"></script>
+        <script src="../../shared.js"></script>
+    </body>
+</html>
