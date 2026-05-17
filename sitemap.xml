@@ -12,13 +12,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
-  <url>
-    <loc>https://abseth.com/my-works/payrollModule/</loc>
-    <lastmod>2026-05-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
+<url>
     <loc>https://abseth.com/my-works/improvingAdoption/</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
