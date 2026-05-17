@@ -954,3 +954,8 @@ table td:first-child {
         display: none;
     }
 }
+
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}

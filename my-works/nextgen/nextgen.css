@@ -947,3 +947,8 @@ table tr:last-child td {
         height: 200px;
     }
 }
+
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}

@@ -44,6 +44,14 @@
       "destination": "/my-works/SODA/index.html"
     },
     {
+      "source": "/payrollModule",
+      "destination": "/my-works/payrollModule/index.html"
+    },
+    {
+      "source": "/payrollmodule",
+      "destination": "/my-works/payrollModule/index.html"
+    },
+    {
       "source": "/blogs/",
       "has": [{ "type": "host", "value": "blogs.abseth.com" }],
       "destination": "/blogs/index.html"
