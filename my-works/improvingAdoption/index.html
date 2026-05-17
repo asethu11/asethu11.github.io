@@ -17,7 +17,7 @@
               const normalized = parts.map(s => s.toLowerCase()).join('/');
               p = '/' + normalized;
             }
-            const canonicalHref = u.origin + p + u.search + u.hash;
+            const canonicalHref = 'https://abseth.com' + p + u.search + u.hash;
             const canon = document.getElementById('canonical-link');
             if (canon) canon.href = canonicalHref;
             if (p !== u.pathname) location.replace(canonicalHref);
@@ -46,13 +46,45 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Solving Adoption Crisis at Arizona State</title>
-        <meta name="author" content="asethu11">
-        <meta name="description" content="Transforming adoption plateau into growth through data analysis and product strategy.">
-        <meta name="keywords" content="UX, UI, Design, Portfolio, Product Strategy, Data Analysis, Arizona, USA">
+        <title>Solving an Adoption Crisis at Arizona State — Product Strategy Case Study</title>
+        <meta name="author" content="Abhishek Sethuraman">
+        <meta name="description" content="Turned a stalled adoption curve into renewed growth at Arizona State by combining data analysis, product strategy, and UX redesign to lift activation across 220K+ users.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Product Strategy, Data Analysis, Adoption, Activation, Arizona, USA">
         <meta name="robots" content="index, follow">
         <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://abseth.com/my-works/improvingAdoption/">
+        <meta property="og:title" content="Solving an Adoption Crisis at Arizona State — Product Strategy Case Study">
+        <meta property="og:description" content="Turned a stalled adoption curve into renewed growth at Arizona State by combining data analysis, product strategy, and UX redesign to lift activation across 220K+ users.">
+        <meta property="og:image" content="https://abseth.com/my-works/improvingAdoption/thumbnail.png">
+        <meta property="og:site_name" content="Abhishek Sethuraman Portfolio">
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Solving an Adoption Crisis at Arizona State — Product Strategy Case Study">
+        <meta name="twitter:description" content="Turned a stalled adoption curve into renewed growth at Arizona State — data analysis + product strategy + UX redesign across 220K+ users.">
+        <meta name="twitter:image" content="https://abseth.com/my-works/improvingAdoption/thumbnail.png">
+
+        <!-- JSON-LD Structured Data -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          "name": "Solving an Adoption Crisis at Arizona State",
+          "url": "https://abseth.com/my-works/improvingAdoption/",
+          "image": "https://abseth.com/my-works/improvingAdoption/thumbnail.png",
+          "description": "Turned a stalled adoption curve into renewed growth at Arizona State by combining data analysis, product strategy, and UX redesign to lift activation across 220K+ users.",
+          "author": {
+            "@type": "Person",
+            "name": "Abhishek Sethuraman",
+            "url": "https://abseth.com/"
+          },
+          "datePublished": "2024"
+        }
+        </script>
 
         <!-- Skeleton Loading Styles -->
         <style>
@@ -690,7 +722,7 @@
                 <p>That decision ultimately protected both products. Q&A Bot stayed focused on fast, reliable course setup, while the core platform remained the place for deep customization. The tradeoff was fewer crossovers, but the upside was clear positioning and fewer confused users.</p>
 
                 <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="slide5" width="100%" >
+                    <img class="theme-img" src="" data-name="slide5" width="100%" alt="Information architecture diagram mapping happy paths and failure cases, prioritizing surface-level elements while pushing secondary complexity deeper in the flow">
                     <figcaption>By mapping both happy paths and failure cases upfront, I intentionally prioritized surface-level elements and pushed secondary complexity deeper into the flow, keeping the experience scalable without overwhelming users.</figcaption>
                 </figure>
 
@@ -701,7 +733,7 @@
 
                 
                 <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="slide6" width="100%" >
+                    <img class="theme-img" src="" data-name="slide6" width="100%" alt="Mid-fidelity wireframes exploring layouts for different user paths including success and failure states, optimizing for an error-free user flow">
                     <figcaption>Mid Fidelity: Exploring UI for different user paths, including success and failure states. Dabbled with different layout strategies to optimize an error free user-flow</figcaption>
                 </figure>
 
@@ -1051,15 +1083,19 @@
                 const isForcedLight = document.documentElement.classList.contains('force-light');
                 const isForcedDark = document.documentElement.classList.contains('force-dark');
                 const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const target = isForcedLight ? 'dark' : isForcedDark ? 'light' : (prefersDark ? 'light' : 'dark');
 
-                if (isForcedLight) {
-                    applyForcedTheme('dark');
-                } else if (isForcedDark) {
-                    applyForcedTheme('light');
-                } else {
-                    // system state: flip
-                    applyForcedTheme(prefersDark ? 'light' : 'dark');
+                if (!document.startViewTransition) {
+                    applyForcedTheme(target);
+                    return;
                 }
+                const t = document.startViewTransition(() => applyForcedTheme(target));
+                t.ready.then(() => {
+                    document.documentElement.animate(
+                        { clipPath: ["inset(0 0 100% 0)", "inset(0)"] },
+                        { pseudoElement: "::view-transition-new(root)", duration: 600, easing: "ease-in-out" }
+                    );
+                });
             }
 
             updateTrackBounds();

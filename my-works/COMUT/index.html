@@ -17,7 +17,7 @@
               const normalized = parts.map(s => s.toLowerCase()).join('/');
               p = '/' + normalized;
             }
-            const canonicalHref = u.origin + p + u.search + u.hash;
+            const canonicalHref = 'https://abseth.com' + p + u.search + u.hash;
             const canon = document.getElementById('canonical-link');
             if (canon) canon.href = canonicalHref;
             if (p !== u.pathname) location.replace(canonicalHref);
@@ -46,13 +46,45 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>User Testing for Safety Messaging</title>
-        <meta name="author" content="asethu11">
-        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
-        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
+        <title>City of Mesa Safety Messaging — User Testing & 3× Recall Case Study</title>
+        <meta name="author" content="Abhishek Sethuraman">
+        <meta name="description" content="Tested transit-safety messaging variants with City of Mesa residents through moderated user research — driving 3× message recall via clearer typography and contrast.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, User Research, Safety Messaging, City of Mesa, Transit, Public Sector">
         <meta name="robots" content="index, follow">
         <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://abseth.com/my-works/COMUT/">
+        <meta property="og:title" content="City of Mesa Safety Messaging — User Testing & 3× Recall Case Study">
+        <meta property="og:description" content="Tested transit-safety messaging variants with City of Mesa residents through moderated user research — driving 3× message recall via clearer typography and contrast.">
+        <meta property="og:image" content="https://abseth.com/my-works/COMUT/com-presentation.jpg">
+        <meta property="og:site_name" content="Abhishek Sethuraman Portfolio">
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="City of Mesa Safety Messaging — User Testing Case Study">
+        <meta name="twitter:description" content="Tested transit-safety messaging variants for City of Mesa residents — 3× message recall through clearer typography and contrast.">
+        <meta name="twitter:image" content="https://abseth.com/my-works/COMUT/com-presentation.jpg">
+
+        <!-- JSON-LD Structured Data -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          "name": "City of Mesa Safety Messaging — User Testing",
+          "url": "https://abseth.com/my-works/COMUT/",
+          "image": "https://abseth.com/my-works/COMUT/com-presentation.jpg",
+          "description": "Tested transit-safety messaging variants with City of Mesa residents through moderated user research — driving 3× message recall via clearer typography and contrast.",
+          "author": {
+            "@type": "Person",
+            "name": "Abhishek Sethuraman",
+            "url": "https://abseth.com/"
+          },
+          "datePublished": "2023"
+        }
+        </script>
 
         <script src="/script.js"></script>
         <script src="/shared.js"></script>
@@ -438,14 +470,19 @@
                 const isForcedLight = document.documentElement.classList.contains('force-light');
                 const isForcedDark = document.documentElement.classList.contains('force-dark');
                 const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const target = isForcedLight ? 'dark' : isForcedDark ? 'light' : (prefersDark ? 'light' : 'dark');
 
-                if (isForcedLight) {
-                    applyForcedTheme('dark');
-                } else if (isForcedDark) {
-                    applyForcedTheme('light');
-                } else {
-                    applyForcedTheme(prefersDark ? 'light' : 'dark');
+                if (!document.startViewTransition) {
+                    applyForcedTheme(target);
+                    return;
                 }
+                const t = document.startViewTransition(() => applyForcedTheme(target));
+                t.ready.then(() => {
+                    document.documentElement.animate(
+                        { clipPath: ["inset(0 0 100% 0)", "inset(0)"] },
+                        { pseudoElement: "::view-transition-new(root)", duration: 600, easing: "ease-in-out" }
+                    );
+                });
             }
 
             updateTrackBounds();

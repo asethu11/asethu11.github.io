@@ -17,7 +17,7 @@
               const normalized = parts.map(s => s.toLowerCase()).join('/');
               p = '/' + normalized;
             }
-            const canonicalHref = u.origin + p + u.search + u.hash;
+            const canonicalHref = 'https://abseth.com' + p + u.search + u.hash;
             const canon = document.getElementById('canonical-link');
             if (canon) canon.href = canonicalHref;
             if (p !== u.pathname) location.replace(canonicalHref);
@@ -49,13 +49,45 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Meeting Assistant for PMs</title>
-        <meta name="author" content="asethu11">
-        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
-        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
+        <title>SODA — AI Meeting Assistant for Product Managers | UX Case Study</title>
+        <meta name="author" content="Abhishek Sethuraman">
+        <meta name="description" content="Designed SODA, an AI meeting assistant tailored to product managers — capturing decisions, action items, and follow-ups without breaking flow during calls.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, AI, Meeting Assistant, Product Management, Productivity">
         <meta name="robots" content="index, follow">
         <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://abseth.com/my-works/SODA/">
+        <meta property="og:title" content="SODA — AI Meeting Assistant for Product Managers | UX Case Study">
+        <meta property="og:description" content="Designed SODA, an AI meeting assistant tailored to product managers — capturing decisions, action items, and follow-ups without breaking flow during calls.">
+        <meta property="og:image" content="https://abseth.com/my-works/SODA/thumbnail.jpeg">
+        <meta property="og:site_name" content="Abhishek Sethuraman Portfolio">
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="SODA — AI Meeting Assistant for Product Managers">
+        <meta name="twitter:description" content="An AI meeting assistant tailored to PMs — captures decisions, action items, and follow-ups without breaking flow during calls.">
+        <meta name="twitter:image" content="https://abseth.com/my-works/SODA/thumbnail.jpeg">
+
+        <!-- JSON-LD Structured Data -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          "name": "SODA — AI Meeting Assistant for Product Managers",
+          "url": "https://abseth.com/my-works/SODA/",
+          "image": "https://abseth.com/my-works/SODA/thumbnail.jpeg",
+          "description": "Designed SODA, an AI meeting assistant tailored to product managers — capturing decisions, action items, and follow-ups without breaking flow during calls.",
+          "author": {
+            "@type": "Person",
+            "name": "Abhishek Sethuraman",
+            "url": "https://abseth.com/"
+          },
+          "datePublished": "2024"
+        }
+        </script>
 
         <script src="/script.js"></script>
         <script src="/shared.js"></script>

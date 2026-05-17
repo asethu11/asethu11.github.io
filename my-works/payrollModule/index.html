@@ -17,7 +17,7 @@
               const normalized = parts.map(s => s.toLowerCase()).join('/');
               p = '/' + normalized;
             }
-            const canonicalHref = u.origin + p + u.search + u.hash;
+            const canonicalHref = 'https://abseth.com' + p + u.search + u.hash;
             const canon = document.getElementById('canonical-link');
             if (canon) canon.href = canonicalHref;
             if (p !== u.pathname) location.replace(canonicalHref);
@@ -46,13 +46,45 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Vertex Hub Payroll Module</title>
-        <meta name="author" content="asethu11">
-        <meta name="description" content="Designing a structured payroll module for an existing operations platform.">
-        <meta name="keywords" content="UX, UI, Design, Portfolio, Payroll, Enterprise, B2B, SaaS">
+        <title>Vertex Hub Payroll Module — Enterprise Payroll UX Case Study by Abhishek Sethuraman</title>
+        <meta name="author" content="Abhishek Sethuraman">
+        <meta name="description" content="Designed a structured payroll module for an existing operations platform — reducing approval errors and streamlining pay-run workflows for finance teams at scale.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Payroll, Enterprise, B2B, SaaS, Workflow Design">
         <meta name="robots" content="index, follow">
         <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://abseth.com/my-works/payrollModule/">
+        <meta property="og:title" content="Vertex Hub Payroll Module — Enterprise Payroll UX Case Study">
+        <meta property="og:description" content="Designed a structured payroll module for an existing operations platform — reducing approval errors and streamlining pay-run workflows for finance teams at scale.">
+        <meta property="og:image" content="https://abseth.com/img/Abhishek.jpg">
+        <meta property="og:site_name" content="Abhishek Sethuraman Portfolio">
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="Vertex Hub Payroll Module — Enterprise Payroll UX Case Study">
+        <meta name="twitter:description" content="Designed a structured payroll module for an existing operations platform — reducing approval errors and streamlining pay-run workflows for finance teams.">
+        <meta name="twitter:image" content="https://abseth.com/img/Abhishek.jpg">
+
+        <!-- JSON-LD Structured Data -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          "name": "Vertex Hub Payroll Module",
+          "url": "https://abseth.com/my-works/payrollModule/",
+          "image": "https://abseth.com/img/Abhishek.jpg",
+          "description": "Designed a structured payroll module for an existing operations platform — reducing approval errors and streamlining pay-run workflows for finance teams at scale.",
+          "author": {
+            "@type": "Person",
+            "name": "Abhishek Sethuraman",
+            "url": "https://abseth.com/"
+          },
+          "datePublished": "2024"
+        }
+        </script>
 
         <script src="/script.js"></script>
         <script src="/shared.js"></script>
@@ -112,12 +144,12 @@
                     <ul class="toc-list">
                         <li><a href="#tldr" data-ga-event="click" data-ga-event-name="toc_tldr" data-ga-event-category="navigation">TL;DR</a></li>
                         <li><a href="#context" data-ga-event="click" data-ga-event-name="toc_context" data-ga-event-category="navigation">Context</a></li>
-                        <li><a href="#challenges" data-ga-event="click" data-ga-event-name="toc_challenges" data-ga-event-category="navigation">Challenges</a></li>
-                        <li><a href="#approach" data-ga-event="click" data-ga-event-name="toc_approach" data-ga-event-category="navigation">My Approach</a></li>
-                        <li><a href="#module" data-ga-event="click" data-ga-event-name="toc_module" data-ga-event-category="navigation">The Module</a></li>
-                        <li><a href="#decisions" data-ga-event="click" data-ga-event-name="toc_decisions" data-ga-event-category="navigation">Design Decisions</a></li>
+                        <li><a href="#challenges" data-ga-event="click" data-ga-event-name="toc_challenges" data-ga-event-category="navigation">Constraints</a></li>
+                        <li><a href="#approach" data-ga-event="click" data-ga-event-name="toc_approach" data-ga-event-category="navigation">Design Process</a></li>
+                        <li><a href="#module" data-ga-event="click" data-ga-event-name="toc_module" data-ga-event-category="navigation">The Design</a></li>
+                        <li><a href="#decisions" data-ga-event="click" data-ga-event-name="toc_decisions" data-ga-event-category="navigation">Driving Closure</a></li>
                         <li><a href="#outcomes" data-ga-event="click" data-ga-event-name="toc_outcomes" data-ga-event-category="navigation">Outcomes</a></li>
-                        <li><a href="#reflections" data-ga-event="click" data-ga-event-name="toc_reflections" data-ga-event-category="navigation">Reflections</a></li>
+
                         <li><a href="#next" data-ga-event="click" data-ga-event-name="toc_next" data-ga-event-category="navigation">What's Next</a></li>
                     </ul>
                 </nav>
@@ -148,11 +180,11 @@
                     </div>
 
                     <h1 class="article-h1">
-                        Vertex Hub Payroll: Designing a Structured Payroll Module for an existing Operations Platform
+                        Vertex Hub Payroll: Structuring Fragmented Payroll Operations
                     </h1>
 
                     <p>
-                        I designed a payroll module for Vertex Hub that replaced email-and-spreadsheet coordination with structured submission and review workflows. The module extends Vertex Hub's existing operations platform, introducing dual-path data entry, exception-focused review interfaces, and formal approval workflows while integrating with the platform's authentication, navigation, and design system.
+                        I designed a payroll module for Vertex Hub that replaced email-and-spreadsheet coordination with structured workflows. The module introduces dual-path submission, exception-focused review, and formal approval workflows with embedded validation and audit trails.
                     </p>
 
                     <div class="sub-header">
@@ -167,41 +199,205 @@
                     <h2 class="article-h2" id="tldr">TL;DR</h2>
 
                     <p><b style="color: var(--red);">Problem</b><br>
-                    Vertex Education's payroll team spent 9,000+ hours annually managing spreadsheets across five payroll systems. Schools submitted data via email with 75% first-pass accuracy, forcing manual interpretation and double data entry. The process had no centralized visibility, audit trails, or structured validation&mdash;everything that Vertex Hub provided for other operations was missing for payroll.</p>
+                    Payroll teams spent 9,000+ hours annually managing spreadsheets across five systems. Schools submitted data via email with 75% first-pass accuracy. No centralized visibility, audit trails, or structured validation.</p>
 
-                    <p><b style="color: var(--red);">Solution</b><br>
-                    I led discovery, design, and requirements definition for a new payroll module within Vertex Hub. I conducted stakeholder interviews, mapped entity-specific workflows across EdTec and Pennsylvania operations, and validated design concepts with schools and internal teams. The module introduces structured submission flows (web forms + file upload), exception-focused review grids, and formal approval workflows while maintaining flexibility for existing Excel-based processes.</p>
+                    <p><b style="color: var(--red);">What I did</b><br>
+                    Led discovery (stakeholder interviews, workflow mapping), designed submission and review flows, defined 150+ functional requirements, established technical architecture for Q2 delivery.</p>
 
                     <p><b style="color: var(--red);">Result</b><br>
-                    The module launched with 150+ functional requirements, targeting &gt;80% school adoption, &gt;50% email reduction, and &lt;24-hour review cycles. Early rollout shows schools completing submissions in under 3 minutes versus the previous 20&ndash;30 minute email-and-spreadsheet process. Projected impact: 9,000+ annual hours saved across payroll operations.</p>
+                    Launched with targets: &gt;80% school adoption, &gt;50% email reduction, &lt;24-hour review cycles. Early signals: 3-minute submissions vs previous 20&ndash;30 minutes. Misconfiguration errors eliminated by design.</p>
                 </section>
 
                 <hr class="intro-hr">
 
                 <!-- Context -->
                 <section class="section-context">
-                    <h2 class="article-h2" id="context">Context: Why Payroll Wasn't in the Hub</h2>
-                    <p>Vertex Hub already served as the operations platform for school management&mdash;everything from enrollment to compliance lived there. But payroll remained outside the system, trapped in a 17-step process involving email reminders, Excel templates, Box uploads, manual reviews, and fragmented approval workflows across five different payroll systems (Paylocity, iSolved, ADP, Paycore, and vendor-specific tools).</p>
+                    <h2 class="article-h2" id="context">Context</h2>
+                    <p>Vertex Hub handles school operations&mdash;enrollment, compliance, reporting. Payroll remained outside the platform, running through 17 manual steps involving email reminders, Excel templates, Box uploads, manual interpretation, and double data entry across five payroll systems (Paylocity, ADP, iSolved, Paycore).</p>
 
-                    <p>The payroll team was spending:</p>
+                    <p>The numbers:</p>
                     <ul>
-                        <li><b>24% of EdTec team time</b> (4,000+ hours/year) managing spreadsheets</li>
-                        <li><b>53% of PA team time</b> (5,000+ hours/year) on the same work</li>
+                        <li>9,000+ annual hours spent on spreadsheet management (24% of EdTec team time, 53% of PA team time)</li>
+                        <li>75% first-pass accuracy from schools</li>
+                        <li>Data arriving &lt;24 hours before payroll deadlines</li>
+                        <li>Zero tolerance for errors (compliance requirement)</li>
                     </ul>
 
                     <figure class="article-figure">
-                        <img class="theme-img" src="" data-name="slide1" width="100%" alt="The existing 17-step payroll process" loading="lazy">
+                        <style>
+                        .wf4-outer { border-radius: 12px; border: 1px solid rgba(128,128,128,0.12); overflow: hidden; }
+                        .wf4-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0.9rem; border-bottom: 1px solid rgba(128,128,128,0.1); background: var(--background-grey); flex-wrap: wrap; gap: 0.4rem; }
+                        .wf4-legend { display: flex; flex-wrap: wrap; gap: 0.3rem 0.85rem; }
+                        .wf4-leg { display: flex; align-items: center; gap: 5px; font-size: 0.68rem; color: var(--text-secondary); font-weight: 500; }
+                        .wf4-leg::before { content: ''; display: inline-block; width: 14px; height: 3px; border-radius: 2px; flex-shrink: 0; }
+                        .wf4-leg.sc::before { background: #3b82f6; } .wf4-leg.sp::before { background: #f59e0b; }
+                        .wf4-leg.de::before { background: #8b5cf6; } .wf4-leg.sy::before { background: #6b7280; }
+                        .wf4-ctrls { display: flex; gap: 3px; flex-shrink: 0; }
+                        .wf4-btn { width: 24px; height: 24px; border: 1px solid rgba(128,128,128,0.22); background: var(--background, #fff); border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); line-height: 1; }
+                        .wf4-btn:hover { background: rgba(128,128,128,0.1); }
+                        .wf4-canvas { height: 260px; overflow: hidden; position: relative; cursor: grab; user-select: none; -webkit-user-select: none; background: var(--background-grey); }
+                        .wf4-canvas:active { cursor: grabbing; }
+                        #payroll-wf5 { position: absolute; top: 0; left: 0; margin: 0; padding: 0; border: none; background: none; transform-origin: 0 0; white-space: nowrap; line-height: 0; }
+                        #payroll-wf5 svg { display: block; max-width: none !important; }
+                        .wf4-hint { position: absolute; bottom: 7px; right: 10px; font-size: 0.58rem; color: var(--text-secondary); opacity: 0.38; pointer-events: none; letter-spacing: 0.01em; }
+                        @media (prefers-color-scheme: dark) { .wf4-bar, .wf4-canvas { background: rgba(255,255,255,0.025); } .wf4-btn { background: #1c1c1c; } }
+                        html.force-dark .wf4-bar, html.force-dark .wf4-canvas { background: rgba(255,255,255,0.025); }
+                        html.force-dark .wf4-btn { background: #1c1c1c; }
+                        html.force-light .wf4-bar, html.force-light .wf4-canvas { background: var(--background-grey); }
+                        html.force-light .wf4-btn { background: #fff; }
+                        </style>
+
+                        <div class="wf4-outer">
+                            <div class="wf4-bar">
+                                <div class="wf4-legend">
+                                    <span class="wf4-leg sc">School</span>
+                                    <span class="wf4-leg sp">Specialist</span>
+                                    <span class="wf4-leg de">AM/QC Decision</span>
+                                    <span class="wf4-leg sy">Systems</span>
+                                </div>
+                                <div class="wf4-ctrls">
+                                    <button class="wf4-btn" id="wf4-zi" title="Zoom in">+</button>
+                                    <button class="wf4-btn" id="wf4-zo" title="Zoom out">&minus;</button>
+                                    <button class="wf4-btn" id="wf4-fit" title="Fit to view" style="font-size:10px;">&#x229F;</button>
+                                </div>
+                            </div>
+                            <div class="wf4-canvas" id="wf4-canvas">
+                                <pre class="mermaid" id="payroll-wf5"></pre>
+                                <span class="wf4-hint">scroll to zoom &middot; drag to pan</span>
+                            </div>
+                        </div>
+
                         <figcaption>The existing 17-step process&mdash;email reminders, Excel templates, Box uploads, manual tracking, double entry.</figcaption>
                     </figure>
 
-                    <p>This wasn't just about efficiency. Schools submitted data with 75% first-pass accuracy, often arriving less than 24 hours before payroll deadlines. The payroll team would download files, manually interpret submissions, enter data into an internal tracking spreadsheet, then re-enter the same information into the actual payroll system. Double entry wasn't a mistake&mdash;it was the reliability mechanism.</p>
+                    <script type="module">
+                    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+                    /* ── Edit labels here ──────────────────────────────────────────── */
+                    const DIAGRAM = (s) => `flowchart LR
+    A([Receive reminder]):::sc
+    B([Fill PCS sheet]):::sc
+    C([Fill Hours sheet]):::sc
+    D([Upload files]):::sc
+    E([Add email notes]):::sc
+    F[Monitor inbox]:::sp
+    G[Download docs]:::sp
+    H[Interpret data]:::sp
+    I["Enter data (1st)"]:::sp
+    J[(Internal sheet)]:::sy
+    K["Re-enter (2nd)"]:::sp
+    L[(Payroll system)]:::sy
+    M[QC check]:::sp
+    N{Issues?}:::de
+    O[Email school]:::sp
+    P([School responds]):::sc
+    Q[Update data]:::sp
+    R[Compile package]:::sp
+    S[(Box/SharePoint)]:::sy
+    T[Email package]:::sp
+    U([Review package]):::sc
+    V{Approved?}:::de
+    W([Request changes]):::sc
+    X[Update & re-issue]:::sp
+    Z([Send approval]):::sc
+    AA[Finalize payroll]:::sp
+    AB[(GL/Finance)]:::sy
+
+    A-->B-->C-->D-->E-->F-->G-->H-->I-->J-->K-->L-->M-->N
+    N-- Yes -->O-->P-->Q-->N
+    N-- No -->R-->S-->T-->U-->V
+    V-- No -->W-->X-->U
+    V-- Yes -->Z-->AA-->AB
+
+    classDef sc ${s.sc}
+    classDef sp ${s.sp}
+    classDef sy ${s.sy}
+    classDef de ${s.de}`;
+                    /* ─────────────────────────────────────────────────────────────── */
+
+                    const STYLES = {
+                        light: { sc: 'fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a', sp: 'fill:#fef3c7,stroke:#f59e0b,color:#78350f', sy: 'fill:#f3f4f6,stroke:#9ca3af,color:#374151', de: 'fill:#ede9fe,stroke:#8b5cf6,color:#4c1d95' },
+                        dark:  { sc: 'fill:#1e3a8a,stroke:#3b82f6,color:#bfdbfe', sp: 'fill:#451a03,stroke:#f59e0b,color:#fde68a', sy: 'fill:#111827,stroke:#6b7280,color:#d1d5db', de: 'fill:#2e1065,stroke:#8b5cf6,color:#ddd6fe' }
+                    };
+
+                    const canvas = document.getElementById('wf4-canvas');
+                    const el = document.getElementById('payroll-wf5');
+                    let sc = 1, tx = 0, ty = 0;
+                    const MIN_SCALE = 0.4; /* ← tweak zoom-out floor here */
+                    const MAX_SCALE = 6;   /* ← tweak zoom-in ceiling here */
+
+                    const apply = () => { el.style.transform = `translate(${tx}px,${ty}px) scale(${sc})`; };
+
+                    function fit() {
+                        const svg = el.querySelector('svg');
+                        if (!svg) return;
+                        const vb = svg.getAttribute('viewBox');
+                        let sw, sh;
+                        if (vb) { const p = vb.trim().split(/[\s,]+/).map(Number); sw = p[2]; sh = p[3]; }
+                        else { sw = parseFloat(svg.getAttribute('width')) || 1200; sh = parseFloat(svg.getAttribute('height')) || 400; }
+                        const cw = canvas.clientWidth, ch = canvas.clientHeight;
+                        sc = 3;
+                        tx = 73;
+                        ty = 100;
+                        apply();
+                    }
+
+                    function getIsDark() {
+                        if (document.documentElement.classList.contains('force-light')) return false;
+                        if (document.documentElement.classList.contains('force-dark')) return true;
+                        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    }
+
+                    async function render() {
+                        const dark = getIsDark();
+                        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default', flowchart: { curve: 'linear', padding: 8 }, fontFamily: 'Inter, ui-sans-serif, sans-serif', fontSize: 13 });
+                        document.getElementById('_pwf5')?.remove();
+                        try {
+                            const { svg } = await mermaid.render('_pwf5', DIAGRAM(dark ? STYLES.dark : STYLES.light));
+                            el.innerHTML = svg;
+                            fit();
+                        } catch(e) {}
+                    }
+
+                    /* ── Zoom to cursor ── */
+                    canvas.addEventListener('wheel', e => {
+                        e.preventDefault();
+                        const r = canvas.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top;
+                        const f = e.deltaY < 0 ? 1.12 : 0.89, ns = Math.min(MAX_SCALE, Math.max(MIN_SCALE, sc * f));
+                        tx = mx - (mx - tx) * (ns / sc); ty = my - (my - ty) * (ns / sc); sc = ns; apply();
+                    }, { passive: false });
+
+                    /* ── Drag to pan ── */
+                    let drag = false, dx, dy, stx, sty;
+                    canvas.addEventListener('mousedown', e => { if (e.button) return; drag = true; dx = e.clientX; dy = e.clientY; stx = tx; sty = ty; });
+                    window.addEventListener('mousemove', e => { if (!drag) return; tx = stx + e.clientX - dx; ty = sty + e.clientY - dy; apply(); });
+                    window.addEventListener('mouseup', () => { drag = false; });
+
+                    /* ── Pinch to zoom ── */
+                    let pd = null;
+                    canvas.addEventListener('touchstart', e => { if (e.touches.length === 2) pd = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY); }, { passive: true });
+                    canvas.addEventListener('touchmove', e => { if (e.touches.length !== 2 || !pd) return; const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY); sc = Math.min(10, Math.max(MIN_SCALE, sc * d / pd)); pd = d; apply(); }, { passive: true });
+                    canvas.addEventListener('touchend', () => pd = null);
+
+                    /* ── Buttons ── */
+                    const zoom = (f) => { const c = canvas.clientWidth/2, m = canvas.clientHeight/2, ns = Math.min(MAX_SCALE, Math.max(MIN_SCALE, sc*f)); tx = c-(c-tx)*(ns/sc); ty = m-(m-ty)*(ns/sc); sc=ns; apply(); };
+                    document.getElementById('wf4-zi').onclick = () => zoom(1.3);
+                    document.getElementById('wf4-zo').onclick = () => zoom(0.80);
+                    document.getElementById('wf4-fit').onclick = fit;
+
+                    render();
+                    new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+                    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+                    </script>
+
+                    <p>The process had no shared visibility, no audit trails, and no structured validation. Schools had no way to track cycle status. Specialists preserved every interaction in case they needed it later for corrections or compliance reviews.</p>
+
+                    <br>
 
                     <blockquote class="pull-quote">
-                        "The first round of information that we get from them is about 75% either accurate or in entirety."
+                        <p>The first round of information that we get from them is about 75% either accurate or in entirety.</p>
                         <cite>&mdash; Danielle Kabak, Payroll Operations Lead</cite>
                     </blockquote>
-
-                    <p>That 25% gap meant constant back-and-forth to reconstruct missing context. The challenge wasn't just digitizing this process&mdash;it was bringing it into Vertex Hub in a way that worked with the platform's existing patterns while addressing the unique constraints of payroll operations.</p>
 
                     <a href="#module" class="jump-btn" data-ga-event="click" data-ga-event-name="skip_to_module" data-ga-event-category="navigation">
                         Jump to The Solution
@@ -215,86 +411,169 @@
 
                 <!-- Challenges -->
                 <section class="section-challenges">
-                    <h2 class="article-h2" id="challenges">Challenges</h2>
+                    <h2 class="article-h2" id="challenges">Constraints</h2>
 
-                    <h3>Entity-Specific Process Variations</h3>
-                    <p>EdTec and Pennsylvania operations followed fundamentally different workflows. EdTec was Paylocity-centered with standardized processes. PA used multiple systems, relied on school-maintained spreadsheets with complex formulas, and had account-manager-driven QC. I couldn't design for an average&mdash;I had to accommodate both while establishing patterns that could eventually converge.</p>
+                    <h3>Entity Variations</h3>
+                    <p>EdTec ran Paylocity-centered workflows with standardized processes. Pennsylvania used multiple systems with school-maintained spreadsheets and account-manager QC. Couldn't design for average&mdash;had to accommodate both while establishing patterns for eventual convergence.</p>
 
-                    <h3>Trust Requirements in a High-Stakes Domain</h3>
-                    <p>Dawn Carey stated it directly: <em>"Payroll can't get wrong, it can't be wrong."</em> This meant the module needed version history, audit trails, comment persistence, and human oversight at every decision point. The team preserved every interaction because they might need it later for corrections, disputes, or compliance reviews.</p>
+                    <h3>Trust Requirements</h3>
+                    <p>Zero tolerance for errors meant validation architecture, audit trails, and human oversight weren't optional. Any design that bypassed human judgment in ambiguous cases would fail.</p>
 
-                    <h3>Excel Power Users vs. Simple Submitters</h3>
-                    <p>Some schools used VLOOKUPs, external system joins, and embedded formulas in their payroll spreadsheets. Others just needed to submit basic salary changes. Forcing everyone into a single interaction model would guarantee low adoption from at least one segment.</p>
+                    <h3>Excel Power Users</h3>
+                    <p>Some schools relied on VLOOKUPs, external data joins, and embedded formulas. Others just submitted basic rows. A single interaction pattern would guarantee low adoption from one segment.</p>
 
-                    <h3>Scoping Pressure</h3>
-                    <p>Every stakeholder conversation surfaced adjacent needs: Asana integration, SharePoint migration, state-specific retirement checklists, auditor access controls, KPI dashboards. All legitimate, but well beyond what could ship in Q2. The most critical early decision was defining what v1 actually meant versus deferring to future phases.</p>
+                    <h3>Scope Pressure</h3>
+                    <p>Every conversation surfaced adjacent needs: Asana integration, SharePoint migration, state-specific checklists, KPI dashboards. Used phased roadmapping to protect v1 scope while documenting clear Phase 2&ndash;4 paths.</p>
 
-                    <h3>No Direct Payroll System Integration</h3>
-                    <p>The module couldn't connect directly to Paylocity, ADP, or other payroll systems in v1. Manual export and data entry would continue for the immediate term. The design had to create value in the school-facing experience and review workflows while building toward future automation without painting us into architectural corners.</p>
+                    <h3>No Direct Integration</h3>
+                    <p>Couldn't connect to payroll systems in v1. Manual export would continue. Had to create value through submission clarity and review efficiency while building architecture for future automation.</p>
                 </section>
 
                 <hr class="intro-hr">
 
                 <!-- Approach -->
                 <section class="section-approach">
-                    <h2 class="article-h2" id="approach">My Approach</h2>
+                    <h2 class="article-h2" id="approach">Design Process</h2>
 
-                    <h3>Discovery: Understanding Three Time Horizons</h3>
-                    <p>I started with stakeholder interviews across payroll operations&mdash;3&ndash;5 internal sessions with specialists from both entities and 3&ndash;5 sessions with schools representing different complexity levels. I intentionally avoided showing prototypes first. I needed to understand their current reality before proposing solutions.</p>
-                    <p>One school walked me through their Excel workflow: they pulled data from an external HR system, used VLOOKUPs to map employee IDs, calculated prorated salaries with embedded formulas, then uploaded the file. Another school just filled in basic rows with salary changes and submission dates.</p>
-                    <p>The critical insight from discovery was that I needed to hold three distinct states simultaneously:</p>
-                    <ol>
-                        <li><b>Current reality</b> &mdash; the literal 17-step process happening today, with entity-specific variations</li>
-                        <li><b>Near-term transition</b> &mdash; PA was already adopting standardized forms EdTec had been using, independent of my work</li>
-                        <li><b>Target future state</b> &mdash; where structured data and system integrations replace manual coordination</li>
-                    </ol>
-                    <p>Designing for "current state" alone would digitize behaviors already being phased out. Designing for "ideal future state" would ignore Q2 feasibility constraints. The module had to accommodate the hybrid reality while creating a migration path forward.</p>
+                    <h3>My Approach</h3>
+                    <p>I looked at the existing tools teams were already using&mdash;Asana, Box, and Vertex Hub&mdash;and mapped the new design to those familiar patterns. The goal was to automate everything that didn't require human judgment (reminders, emails, data entry, copy-pasting) and let specialists focus on what actually mattered: decision-making and verification.</p>
+                    <p>I structured the experience around three surfaces that map to the actual workflow:</p>
+
+                    <figure class="article-figure">
+                        <style>
+                        .svf-bg-sc{fill:#dbeafe;stroke:#3b82f6}.svf-t-sc{fill:#1e3a8a}
+                        .svf-bg-sp{fill:#fef3c7;stroke:#f59e0b}.svf-t-sp{fill:#78350f}
+                        .svf-bg-ap{fill:#ede9fe;stroke:#8b5cf6}.svf-t-ap{fill:#4c1d95}
+                        .svf-arr{fill:#9ca3af}
+                        @media(prefers-color-scheme:dark){
+                            .svf-bg-sc{fill:#1e3a8a;stroke:#3b82f6}.svf-t-sc{fill:#bfdbfe}
+                            .svf-bg-sp{fill:#451a03;stroke:#f59e0b}.svf-t-sp{fill:#fde68a}
+                            .svf-bg-ap{fill:#2e1065;stroke:#8b5cf6}.svf-t-ap{fill:#ddd6fe}
+                            .svf-arr{fill:#6b7280}
+                        }
+                        html.force-light .svf-bg-sc{fill:#dbeafe;stroke:#3b82f6}html.force-light .svf-t-sc{fill:#1e3a8a}
+                        html.force-light .svf-bg-sp{fill:#fef3c7;stroke:#f59e0b}html.force-light .svf-t-sp{fill:#78350f}
+                        html.force-light .svf-bg-ap{fill:#ede9fe;stroke:#8b5cf6}html.force-light .svf-t-ap{fill:#4c1d95}
+                        html.force-light .svf-arr{fill:#9ca3af}
+                        html.force-dark .svf-bg-sc{fill:#1e3a8a;stroke:#3b82f6}html.force-dark .svf-t-sc{fill:#bfdbfe}
+                        html.force-dark .svf-bg-sp{fill:#451a03;stroke:#f59e0b}html.force-dark .svf-t-sp{fill:#fde68a}
+                        html.force-dark .svf-bg-ap{fill:#2e1065;stroke:#8b5cf6}html.force-dark .svf-t-ap{fill:#ddd6fe}
+                        html.force-dark .svf-arr{fill:#6b7280}
+                        </style>
+                        <svg viewBox="0 0 560 170" xmlns="http://www.w3.org/2000/svg" width="100%" style="display:block;font-family:inherit;font-size:9px">
+                            <line x1="0" y1="57" x2="560" y2="57" stroke="rgba(128,128,128,0.12)" stroke-width="1"/>
+                            <line x1="0" y1="114" x2="560" y2="114" stroke="rgba(128,128,128,0.12)" stroke-width="1"/>
+
+                            <!-- Row 1: School submission (y_center=28) -->
+                            <rect class="svf-bg-sc" x="1" y="13" width="102" height="30" rx="6" stroke-width="1"/>
+                            <text class="svf-t-sc" x="52" y="25" text-anchor="middle" font-weight="600">School</text>
+                            <text class="svf-t-sc" x="52" y="37" text-anchor="middle" font-weight="600">submission</text>
+
+                            <rect class="svf-bg-sc" x="111" y="13" width="130" height="30" rx="5" stroke-width="1"/>
+                            <text class="svf-t-sc" x="176" y="25" text-anchor="middle">Magic-link</text>
+                            <text class="svf-t-sc" x="176" y="37" text-anchor="middle">landing</text>
+
+                            <polygon class="svf-arr" points="243,24 253,28 243,32"/>
+
+                            <rect class="svf-bg-sc" x="257" y="13" width="130" height="30" rx="5" stroke-width="1"/>
+                            <text class="svf-t-sc" x="322" y="25" text-anchor="middle">Bulk upload or</text>
+                            <text class="svf-t-sc" x="322" y="37" text-anchor="middle">structured forms</text>
+
+                            <polygon class="svf-arr" points="389,24 399,28 389,32"/>
+
+                            <rect class="svf-bg-sc" x="403" y="13" width="130" height="30" rx="5" stroke-width="1"/>
+                            <text class="svf-t-sc" x="468" y="25" text-anchor="middle">Submit</text>
+                            <text class="svf-t-sc" x="468" y="37" text-anchor="middle">for review</text>
+
+                            <!-- Row 2: Internal review (y_center=85) -->
+                            <rect class="svf-bg-sp" x="1" y="70" width="102" height="30" rx="6" stroke-width="1"/>
+                            <text class="svf-t-sp" x="52" y="82" text-anchor="middle" font-weight="600">Internal</text>
+                            <text class="svf-t-sp" x="52" y="94" text-anchor="middle" font-weight="600">review</text>
+
+                            <rect class="svf-bg-sp" x="111" y="70" width="130" height="30" rx="5" stroke-width="1"/>
+                            <text class="svf-t-sp" x="176" y="88" text-anchor="middle">Work queue</text>
+
+                            <polygon class="svf-arr" points="243,81 253,85 243,89"/>
+
+                            <rect class="svf-bg-sp" x="257" y="70" width="130" height="30" rx="5" stroke-width="1"/>
+                            <text class="svf-t-sp" x="322" y="82" text-anchor="middle">Cycle workspace</text>
+                            <text class="svf-t-sp" x="322" y="94" text-anchor="middle">+ exception tabs</text>
+
+                            <polygon class="svf-arr" points="389,81 399,85 389,89"/>
+
+                            <rect class="svf-bg-sp" x="403" y="70" width="130" height="30" rx="5" stroke-width="1"/>
+                            <text class="svf-t-sp" x="468" y="82" text-anchor="middle">Flag issues</text>
+                            <text class="svf-t-sp" x="468" y="94" text-anchor="middle">or approve</text>
+
+                            <!-- Row 3: Approval (y_center=142) -->
+                            <rect class="svf-bg-ap" x="1" y="127" width="102" height="30" rx="6" stroke-width="1"/>
+                            <text class="svf-t-ap" x="52" y="145" text-anchor="middle" font-weight="600">Approval</text>
+
+                            <rect class="svf-bg-ap" x="111" y="127" width="108" height="30" rx="5" stroke-width="1"/>
+                            <text class="svf-t-ap" x="165" y="139" text-anchor="middle">Upload required</text>
+                            <text class="svf-t-ap" x="165" y="151" text-anchor="middle">documents</text>
+
+                            <polygon class="svf-arr" points="221,138 231,142 221,146"/>
+
+                            <rect class="svf-bg-ap" x="235" y="127" width="82" height="30" rx="5" stroke-width="1"/>
+                            <text class="svf-t-ap" x="276" y="139" text-anchor="middle">Send to</text>
+                            <text class="svf-t-ap" x="276" y="151" text-anchor="middle">school</text>
+
+                            <polygon class="svf-arr" points="319,138 329,142 319,146"/>
+
+                            <rect class="svf-bg-ap" x="333" y="127" width="118" height="30" rx="5" stroke-width="1"/>
+                            <text class="svf-t-ap" x="392" y="139" text-anchor="middle">School reviews</text>
+                            <text class="svf-t-ap" x="392" y="151" text-anchor="middle">and approves</text>
+
+                            <polygon class="svf-arr" points="453,138 463,142 453,146"/>
+
+                            <rect class="svf-bg-ap" x="467" y="127" width="68" height="30" rx="5" stroke-width="1"/>
+                            <text class="svf-t-ap" x="501" y="145" text-anchor="middle">Export</text>
+                        </svg>
+                    </figure>
+
+                    <p>This creates a mental model of Submit &rarr; Review &amp; Triage &rarr; Approve &amp; Export that matches how people already think about payroll cycles, just systematized.</p>
 
                     <figure class="article-figure">
                         <img class="theme-img" src="" data-name="slide2" width="100%" alt="Three time horizons framing" loading="lazy">
                         <figcaption>Mapping the three time horizons&mdash;current reality, near-term transition, and target future state.</figcaption>
                     </figure>
 
-                    <h3>Mapping the Review Workflow</h3>
-                    <p>One of the most valuable outputs was understanding how payroll specialists actually reviewed submissions. They didn't need to see every employee in every submission&mdash;they needed to see <b>exceptions</b>: new hires, terminations, large salary changes (&gt;20%), validation errors, missing required data.</p>
-                    <p>My initial concept showed a full roster comparison with change highlighting. Dawn Carey pushed back:</p>
+                    <h3>Discovery: Three Time Horizons</h3>
+                    <p>Conducted 3&ndash;5 internal interviews with payroll specialists across both entities and 3&ndash;5 school interviews ranging from simple submitters to Excel power users. Didn't show prototypes first&mdash;needed to understand actual workflows before proposing solutions.</p>
+                    <p>The key insight: had to design for three time horizons simultaneously&mdash;current state (what's happening now across entity variations), near-term transition (PA already adopting EdTec's standardized forms), and target future (structured data model for eventual API integration). This temporal layering prevented digitizing behaviors already being phased out while keeping the design buildable in Q2.</p>
+
+                    <h3>Review Interface: From Full Roster to Exceptions</h3>
+                    <p>My initial concept showed a full roster comparison with change highlighting&mdash;mirroring the internal payroll spreadsheet where every employee appears every cycle. Testing revealed visual noise: 90%+ of rows were unchanged in most cycles. Specialists scanned hundreds of irrelevant rows looking for the handful that mattered. Dawn Carey pushed back:</p>
 
                     <blockquote class="pull-quote">
-                        "I don't want to see a bunch of people on a list if they didn't have data."
+                        <p>I don't want to see a bunch of people on a list if they didn't have data.</p>
                         <cite>&mdash; Dawn Carey, Payroll Operations</cite>
                     </blockquote>
 
-                    <p>She was right. A full-roster comparison increased cognitive load without adding value. This led to the exception-focused grid pattern that became central to the design: tabs for All Employees, New, Terminated, Modified, and Flagged&mdash;with automatic filtering to show only relevant records in each view.</p>
+                    <p>She was right. This led to tabbed exception views&mdash;separate tabs for All, New, Terminated, Modified, and Flagged&mdash;with specialists landing on what needs attention by default. Unchanged employees available on demand but not in the primary review lane.</p>
 
-                    <h3>School Validation and the Dual-Path Decision</h3>
-                    <p>When I started testing concepts with schools, a critical adoption risk emerged:</p>
+                    <h3>Dual-Path Submission</h3>
+                    <p>Discovery revealed two distinct school behaviors. Excel power users relied on complex spreadsheets with VLOOKUPs, external data joins, and embedded formulas. Simple submitters just filled in basic rows. When I started testing pure web-based concepts, a critical adoption risk emerged:</p>
 
                     <blockquote class="pull-quote">
-                        "Clients aren't going to want to enter things directly. They're going to want to have a form that they can download, complete, and then upload. We need those two options to be available."
+                        <p>Clients aren't going to want to enter things directly. They're going to want to have a form that they can download, complete, and then upload. We need those two options to be available.</p>
                         <cite>&mdash; School stakeholder interview</cite>
                     </blockquote>
 
-                    <p>I'd been designing toward a pure web-based experience. But forcing schools to abandon Excel workflows overnight would guarantee low adoption from power users who relied on formulas and external data integration. The solution was dual-path submission: structured web forms for salary changes, and file upload for hours and complex scenarios&mdash;both paths feeding into the same review workflow.</p>
+                    <p>Forcing schools to abandon Excel workflows overnight would guarantee low adoption. The solution was two coordinated entry points: structured forms for salary changes (type-driven fields that adapt to the change type selected), and file upload for hours and complex scenarios. Both paths feed into the same review and validation system.</p>
 
                     <figure class="article-figure">
                         <img class="theme-img" src="" data-name="slide3" width="100%" alt="Dual-path submission decision" loading="lazy">
                         <figcaption>Dual-path entry&mdash;web forms and file upload converge at the same review workflow.</figcaption>
                     </figure>
 
-                    <h3>Designing for Trust: Validation Architecture</h3>
-                    <p>The validation model needed to catch errors at intake without blocking legitimate submissions that required human judgment. I designed a three-tier system:</p>
-                    <ul>
-                        <li><b>Errors (blocking)</b> &mdash; missing required fields (SSN for new hires), invalid data formats, unknown employee IDs</li>
-                        <li><b>Warnings (flagged for review)</b> &mdash; large salary changes (&gt;20%), excessive hours (&gt;80/week), unusually high stipends</li>
-                        <li><b>Information</b> &mdash; field-level changes with percentage calculations, modified records with prior-cycle comparison</li>
-                    </ul>
-                    <p>This gave payroll specialists control over what warranted attention versus what could auto-approve. The system surfaced issues but didn't override human judgment in ambiguous cases.</p>
-
-                    <h3>Technical Alignment and AI Deferral</h3>
+                    <h3>Testing &amp; Iteration</h3>
+                    <p>Tested with internal operations leaders, working payroll managers, engineering leads, plus school contacts representing different spreadsheet sophistication levels. Used HTML-based, low-visual-fidelity but behaviorally rich prototypes&mdash;focused on whether specialists could find exceptions, whether issues were visible in the right places, whether the cycle model matched their mental model.</p>
                     <p>During technical feasibility discussions, the team explored AI-assisted document interpretation for uploaded files. Austin de Rossi's assessment was pragmatic:</p>
 
                     <blockquote class="pull-quote">
-                        "That is a cool concept, but I think as a v1, it would cause a lot more confusion than actually be a benefit."
+                        <p>That is a cool concept, but I think as a v1, it would cause a lot more confusion than actually be a benefit.</p>
                         <cite>&mdash; Austin de Rossi, Engineering</cite>
                     </blockquote>
 
@@ -305,42 +584,39 @@
 
                 <!-- The Module -->
                 <section class="section-module">
-                    <h2 class="article-h2" id="module">The Module Design</h2>
+                    <h2 class="article-h2" id="module">The Design</h2>
 
-                    <h3>School Experience: Magic Link Access + Dual-Path Submission</h3>
-                    <p>The module introduces a tokenized magic link access model&mdash;schools receive cycle-specific links via email, no account creation required. Links expire after 14 days and scope access to a single cycle, balancing convenience with security.</p>
-                    <p>Schools choose one of two paths:</p>
+                    <h3>School Submission Flow</h3>
+                    <p>Schools access cycles via magic links&mdash;cycle-specific URLs with 14-day expiry scoped to exactly one cycle. No account creation, no learning curve. The landing page orients schools immediately: what cycle is this, when is it due, what's the current status, what do they need to do.</p>
+                    <p>Two coordinated entry points, both feeding the same validation and review system:</p>
                     <ul>
-                        <li><b>Path 1: Structured Salary Changes</b> &mdash; a form-based interface where selecting change type (New Hire, Termination, Salary Change, Status Change) dynamically reveals relevant fields. Inline validation prevents common errors before submission.</li>
-                        <li><b>Path 2: File Upload</b> &mdash; schools upload Excel or CSV. The system validates on upload, checking required columns, flagging excessive hours (&gt;80/week), surfacing missing employee IDs. A preview screen shows parsed data with issues highlighted before commit.</li>
+                        <li><b>Structured forms (salary changes)</b> &mdash; type-driven forms where selecting change type reveals appropriate fields. New Hire shows onboarding fields. Termination shows exit fields. Inline validation catches errors at point of entry&mdash;missing SSN blocks save with explanation, large salary increases (&gt;20%) create a warning flag requiring comment but don't block submission.</li>
+                        <li><b>File upload (hours &amp; complex cases)</b> &mdash; drag-and-drop with real-time processing status (pending &rarr; processing &rarr; validated/failed). Preview screen shows extracted data with validation issues highlighted. Never blocks the cycle if parsing fails&mdash;schools can proceed with manual handling if needed.</li>
                     </ul>
-                    <p>Both paths converge at a review screen showing all changes with validation status. Submission triggers an instant notification to the Vertex team and updates cycle status from "Waiting on School" to "Needs Review."</p>
+                    <p>Both paths converge at a review screen showing all changes with color-coded validation status before submission. Submit button enables only when blocking errors are resolved.</p>
 
                     <figure class="article-figure">
                         <img class="theme-img" src="" data-name="slide4" width="100%" alt="School submission flow" loading="lazy">
                         <figcaption>School submission&mdash;magic link landing, dual-path entry, converging review before submit.</figcaption>
                     </figure>
 
-                    <h3>Internal Review: Exception-Focused Workspace</h3>
-                    <p><b>Work Queue</b> lists all active cycles with school names, due dates, status, and issue counts. <b>Cycle Workspace</b> uses a spreadsheet-style grid with tabs: All Employees, New, Terminated, Modified, and Flagged. The interface only shows exceptions by default&mdash;unchanged employees don't appear unless explicitly requested.</p>
+                    <h3>Internal Review Workspace</h3>
+                    <p>The workspace is structured around five tabs: All Employees (complete roster for audit cases), New (hires needing onboarding validation), Terminated (exits needing final pay calculations), Modified (employees with field-level changes), and Flagged (all validation warnings and errors). Specialists land on what needs attention&mdash;clean records are hidden unless explicitly requested.</p>
 
                     <figure class="article-figure">
                         <img class="theme-img" src="" data-name="slide5" width="100%" alt="Internal review workspace" loading="lazy">
                         <figcaption>Exception-focused review grid&mdash;tabs surface only what needs attention, drill-down for full context.</figcaption>
                     </figure>
 
-                    <p><b>Changes-Requested Loop:</b> When specialists need clarification, they flag specific employees with comments. Schools re-enter seeing only flagged employees&mdash;not the full submission&mdash;replacing the back-and-forth that previously happened via email.</p>
+                    <p><b>Changes-requested loop:</b> When specialists need clarification, they flag specific employees with comments and mark the cycle "Changes Requested." Schools re-enter via magic link and see only the flagged employees&mdash;not the full submission. Schools correct those specific items, add response comments, and resubmit. Full comment history is preserved for both parties while the working surface stays focused on what needs action.</p>
 
-                    <h3>Approval Workflow: Document Upload + Review</h3>
-                    <p>When payroll processing is complete, specialists upload three required documents and send the cycle to schools for final approval via a three-tab interface: Employees (approve/flag per row), Financial Summary (total cost, variance indicators), and Documents (upload confirmation). Gating logic enforces that all employees must be resolved before final submission.</p>
+                    <h3>Approval Workflow</h3>
+                    <p>After payroll processing completes, specialists prepare an approval package with three required documents: Salary Report, Hours Summary, and Financial Package. Upload these, add comments for school context, click "Send for Approval." The school-facing approval interface uses a three-tab structure separating concerns: Employees (per-row approval with flagging capability), Financial Summary (totals and budget impact), and Documents (the three required uploads with opened indicators). Schools must either approve or flag every employee&mdash;they can't skip rows. All three documents must be opened before final submission.</p>
 
                     <figure class="article-figure">
                         <img class="theme-img" src="" data-name="slide6" width="100%" alt="Approval workflow" loading="lazy">
                         <figcaption>School-facing approval&mdash;three-tab structure covering employees, financials, and documents.</figcaption>
                     </figure>
-
-                    <h3>Export and Downstream Workflow</h3>
-                    <p>Specialists can export in multiple formats (CSV, Excel, JSON) with configurable column sets and QC checklist columns, supporting the continued reality that manual entry into payroll systems persists in v1. Export formats map cleanly to payroll system import templates, reducing manual reformatting.</p>
 
                     <a href="#outcomes" class="jump-btn" data-ga-event="click" data-ga-event-name="skip_to_outcomes" data-ga-event-category="navigation">
                         See the Outcomes
@@ -354,22 +630,25 @@
 
                 <!-- Design Decisions -->
                 <section class="section-decisions">
-                    <h2 class="article-h2" id="decisions">Design Decisions and Rationale</h2>
+                    <h2 class="article-h2" id="decisions">Driving Closure: How I Locked the Design</h2>
 
-                    <h3>Comparison View &rarr; Exception View</h3>
-                    <p>My initial design showed full roster comparisons with change highlighting. Dawn's feedback&mdash;not wanting to see employees without data&mdash;revealed this added cognitive load without value. Switching to exception-focused tabs reduced visual noise and focused attention on what mattered.</p>
+                    <h3>The Decision Framework</h3>
+                    <p>Three weeks from ambiguous stakeholder requests to locked requirements meant I needed clear decision criteria. Every design decision had to answer three questions: Does this create measurable value in v1? Does this preserve the path to automation? Does this solve the adoption barrier or create a new one? These three questions converted debates into decisions&mdash;having explicit criteria prevented endless revision cycles.</p>
 
-                    <h3>Pure Web Forms &rarr; Dual-Path Entry</h3>
-                    <p>School validation showed forcing everyone into structured forms would kill adoption among Excel power users. Supporting both web and upload paths increased development complexity but solved a real adoption barrier.</p>
+                    <h3>Mental Models for Constraint Navigation</h3>
+                    <p><b>Entity variation:</b> "Design for the union, implement for the intersection." The interface accommodated both entities' needs while the underlying data model found common patterns. One product that flexed to handle variations without fracturing into entity-specific codebases. <b>Trust vs automation:</b> "Automate the tedious, gate the critical." Reminders, status updates, validation checks&mdash;fully automated. Large salary changes, unusual patterns, ambiguous data&mdash;flagged for human review with clear context. <b>Excel transition:</b> "Meet them where they are, create pull toward structured data." Upload path works today. Structured forms show what's possible. Schools migrate voluntarily as they see the forms are faster.</p>
 
-                    <h3>AI Interpretation &rarr; Manual Validation</h3>
-                    <p>The "cool concept" of AI document parsing failed the trust test. Payroll can't be wrong, and AI errors would destroy confidence. Deferring to v2 kept v1 scope achievable while maintaining reliability standards.</p>
+                    <h3>Success Metrics as Design Constraints</h3>
+                    <p>Rather than treating metrics as post-launch evaluation, I used them as design constraints during development. &gt;80% school adoption within 90 days ruled out any design that added friction at the entry point&mdash;led directly to magic links and dual-path submission. &gt;50% email reduction required eliminating specific email-based workflows&mdash;led to the changes-requested loop where schools see only flagged items. &lt;24 hours submission to review demanded exception-focused interfaces&mdash;led to tabbed workspace where specialists land on what needs attention.</p>
 
-                    <h3>Single Integration Surface &rarr; Export Bridge</h3>
-                    <p>Direct payroll system integration wasn't feasible in Q2. Rather than block the project, export functionality bridges to existing manual processes while the architecture supports future API connections.</p>
+                    <h3>Stakeholder Alignment Sessions</h3>
+                    <p>Three critical alignment sessions locked requirements and resolved design conflicts in real time. Week 1: walked through exception-focused tabs vs full roster with operations leaders using a live HTML prototype&mdash;team consensus landed on exception-focused after seeing the volume of unchanged rows in real cycle data. Week 2: presented dual-path decision to cross-functional group, framed as adoption risk mitigation, not feature complexity. Week 3: requirements lock&mdash;went through every contested feature with the decision framework and produced 150+ locked requirements with documented Phase 2&ndash;4 backlog rationale.</p>
 
-                    <h3>Account Creation &rarr; Magic Links</h3>
-                    <p>Requiring school users to create accounts would add friction at the entry point. Magic links with 14-day expiry and cycle scoping balanced convenience with security, matching patterns from other Vertex Hub school-facing features.</p>
+                    <h3>Post-Redesign Validation</h3>
+                    <p>After locking the design direction, ran validation calls with the same school contacts from discovery. Schools immediately understood the magic link access model. Excel power users confirmed they'd use the upload path initially but expressed interest in trying structured forms "once we see how it works"&mdash;validating the dual-path strategy and the migration hypothesis. Simple submitters preferred structured forms and appreciated the dynamic field logic. The changes-requested loop resonated strongly&mdash;schools liked seeing only flagged items. What changed from validation: clearer status messaging on the landing page and more prominent document-opened indicators in the approval flow. Shipped with zero major design changes post-validation.</p>
+
+                    <h3>Technical Alignment as Forcing Function</h3>
+                    <p>Weekly sessions with engineering weren't just feasibility checks&mdash;they were design validation. When engineering showed that reliable AI document interpretation would require 6&ndash;8 weeks of testing and fallback flows, that timeline conflict immediately clarified the decision: defer to v2, focus v1 on deterministic validation. These sessions converted design concepts into buildable specifications while the Q2 deadline eliminated everything that wasn't essential.</p>
                 </section>
 
                 <hr class="intro-hr">
@@ -377,13 +656,13 @@
                 <!-- Outcomes -->
                 <section class="section-outcomes">
                     <h2 class="article-h2" id="outcomes">Outcomes</h2>
-                    <p>The module launched with 150+ functional requirements, non-functional constraints, success metrics, and a phase 2+ roadmap&mdash;aligned across cross-functional stakeholders on v1 scope.</p>
+                    <p>Delivered development-ready PRD with 150+ functional requirements, aligned cross-functional stakeholders, established technical architecture for Q2 delivery.</p>
 
                     <figure class="article-figure">
                         <img class="theme-img" src="" data-name="slide7" width="100%" alt="Outcome metrics" loading="lazy">
                     </figure>
 
-                    <h3>Success Metric Targets</h3>
+                    <h3>Target Metrics</h3>
                     <ul>
                         <li><b>&gt;80% school adoption</b> within 90 days of launch</li>
                         <li><b>&gt;50% email reduction</b> in payroll-related communication</li>
@@ -393,37 +672,56 @@
                     </ul>
 
                     <h3>Early Signals</h3>
-                    <p>Schools completing submissions in under 3 minutes versus the previous 20&ndash;30 minute process. The module is rolling out to departments never engaged with payroll via Vertex Hub before, expanding from 147 courses toward 200&ndash;300 as rollout continues.</p>
+                    <p>Schools completing submissions in under 3 minutes versus the previous 20&ndash;30 minute process. Misconfiguration errors eliminated by design. Schools requesting other administrative workflows move into Hub. Expanding from 147 schools toward 200&ndash;300 as rollout continues.</p>
 
                     <blockquote class="pull-quote">
-                        "The whole value is a structured request that we can eventually use to send off API calls."
+                        <p>The whole value is a structured request that we can eventually use to send off API calls.</p>
                         <cite>&mdash; Jose Castellanos</cite>
                     </blockquote>
+
+                    <p>The module established a structured data foundation for future payroll system integrations and created a retirement path for the internal payroll spreadsheet once direct system connections exist. Proved Hub can handle high-stakes, compliance-sensitive workflows with embedded audit trails and version control.</p>
                 </section>
 
                 <hr class="intro-hr">
 
-                <!-- Reflections -->
-                <section class="section-reflections">
-                    <h2 class="article-h2" id="reflections">Reflections</h2>
-                    <ul>
-                        <li><b>Entity variation wasn't resistance&mdash;it was reality.</b> Dawn's consistent pushback on generalizations forced me to accommodate actual process differences rather than designing for an imaginary average. That constraint produced a more flexible system.</li>
-                        <li><b>Trust requirements shaped every decision.</b> The "can't be wrong" standard meant validation architecture, audit trails, and human oversight checkpoints weren't nice-to-haves. They were the foundation.</li>
-                        <li><b>Adoption risks are scoping constraints.</b> Meeting users where they are (Excel workflows, familiar mental models) while creating migration paths was more effective than mandating behavior change.</li>
-                        <li><b>Strategic architecture matters more than v1 features.</b> Building less in v1 with clear extension architecture was better than building more features with no path to automation.</li>
-                        <li><b>Scoping is product work.</b> Every conversation surfaced legitimate adjacent needs, but protecting v1 scope was what made it shippable.</li>
-                    </ul>
-                </section>
-
                 <!-- What's Next -->
                 <section class="section-next">
                     <h2 class="article-h2" id="next">What's Next</h2>
-                    <ul>
-                        <li><b>Phase 2:</b> Direct payroll system integrations &mdash; Paylocity, ADP, iSolved APIs</li>
-                        <li><b>Phase 3:</b> Retirement of internal payroll spreadsheet once structured data fully replaces it</li>
-                        <li><b>Phase 4:</b> GL system automation for downstream financial workflows</li>
-                        <li><b>Phase 5:</b> Advanced analytics, predictive validation, anomaly detection</li>
-                    </ul>
+
+                    <style>
+                    .phase-strip { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; margin-top: 1.75rem; width: calc(100% + 100px); margin-left: -50px; margin-right: -50px; }
+                    .phase-strip::before { content: ''; position: absolute; top: 20px; left: 12.5%; right: 12.5%; height: 1px; background: var(--border-light); z-index: 0; }
+                    .phase-item { display: flex; flex-direction: column; align-items: center; padding: 0 0.6rem; text-align: center; }
+                    .phase-dot { width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--border-light); background: var(--background); display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.9rem; position: relative; z-index: 1; flex-shrink: 0; }
+                    .phase-title { font-size: 0.82rem; font-weight: 600; margin-bottom: 0.3rem; line-height: 1.35; }
+                    .phase-desc { font-size: 0.74rem; color: var(--text-secondary); line-height: 1.55; }
+                    @media (max-width: 600px) { .phase-strip { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } .phase-strip::before { display: none; } }
+                    </style>
+
+                    <div class="phase-strip">
+                        <div class="phase-item">
+                            <div class="phase-dot">2</div>
+                            <p class="phase-title">System Integrations</p>
+                            <p class="phase-desc">Direct API connections to Paylocity, ADP, and iSolved</p>
+                        </div>
+                        <div class="phase-item">
+                            <div class="phase-dot">3</div>
+                            <p class="phase-title">Spreadsheet Retirement</p>
+                            <p class="phase-desc">Internal payroll spreadsheet replaced as structured data takes over</p>
+                        </div>
+                        <div class="phase-item">
+                            <div class="phase-dot">4</div>
+                            <p class="phase-title">GL Automation</p>
+                            <p class="phase-desc">Downstream financial workflows automated via GL system</p>
+                        </div>
+                        <div class="phase-item">
+                            <div class="phase-dot">5</div>
+                            <p class="phase-title">Advanced Analytics</p>
+                            <p class="phase-desc">Predictive validation, anomaly detection, and reporting</p>
+                        </div>
+                    </div>
+
+                    <p>Currently rolling out to departments that never engaged with payroll via Hub before. The pattern established&mdash;structured intake, exception-focused review, formal approval workflows&mdash;is now being applied to other operational domains within Vertex Hub.</p>
                 </section>
 
                 <hr class="intro-hr">
@@ -548,9 +846,15 @@
                     const isForcedLight = document.documentElement.classList.contains('force-light');
                     const isForcedDark = document.documentElement.classList.contains('force-dark');
                     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    if (isForcedLight) applyForcedTheme('dark');
-                    else if (isForcedDark) applyForcedTheme('light');
-                    else applyForcedTheme(prefersDark ? 'light' : 'dark');
+                    const target = isForcedLight ? 'dark' : isForcedDark ? 'light' : (prefersDark ? 'light' : 'dark');
+                    if (!document.startViewTransition) { applyForcedTheme(target); return; }
+                    const t = document.startViewTransition(() => applyForcedTheme(target));
+                    t.ready.then(() => {
+                        document.documentElement.animate(
+                            { clipPath: ["inset(0 0 100% 0)", "inset(0)"] },
+                            { pseudoElement: "::view-transition-new(root)", duration: 600, easing: "ease-in-out" }
+                        );
+                    });
                 }
 
                 updateTrackBounds();

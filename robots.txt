@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /archive/
+Disallow: /building.html
+
+Sitemap: https://abseth.com/sitemap.xml
