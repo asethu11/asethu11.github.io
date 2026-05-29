@@ -738,44 +738,6 @@ pre > code {
   position: relative;
 }
 
-/* Skeleton for background image cards */
-.image-background::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    90deg,
-    var(--background-grey) 25%,
-    rgba(255, 255, 255, 0.15) 50%,
-    var(--background-grey) 75%
-  );
-  background-size: 200% 100%;
-  animation: skeleton-shimmer 1.5s ease-in-out infinite;
-  border-radius: 16px;
-  z-index: 0;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-@media (prefers-color-scheme: dark) {
-  .image-background::before {
-    background: linear-gradient(
-      90deg,
-      var(--background-grey) 25%,
-      rgba(255, 255, 255, 0.08) 50%,
-      var(--background-grey) 75%
-    );
-    background-size: 200% 100%;
-  }
-}
-
-.image-background.bg-loaded::before {
-  opacity: 0;
-}
-
 .bg1 {
   background-image: url("/side-quests/asuPocket/Thumbnail.jpeg");
 }
@@ -1088,20 +1050,6 @@ li pre {
 @media only screen and (max-width: 1200px) {
   .project-preview {
       width: 400px;
-  }
-}
-
-/* ============================================
-   SKELETON LOADERS
-   ============================================ */
-
-/* Base skeleton shimmer animation */
-@keyframes skeleton-shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
   }
 }
 

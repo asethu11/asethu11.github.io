@@ -73,45 +73,6 @@ function initLazySections() {
     }
 }
 
-// Initialize skeleton loaders for background images
-function initSkeletonLoaders() {
-    // Handle CSS background images
-    const bgElements = document.querySelectorAll('.image-background[class*="bg"]');
-    
-    bgElements.forEach(el => {
-        // Get computed background-image URL
-        const style = window.getComputedStyle(el);
-        const bgImage = style.backgroundImage;
-        
-        if (bgImage && bgImage !== 'none') {
-            // Extract URL from background-image
-            const urlMatch = bgImage.match(/url\(["']?([^"')]+)["']?\)/);
-            if (urlMatch && urlMatch[1]) {
-                const img = new Image();
-                img.onload = function() {
-                    el.classList.add('bg-loaded');
-                };
-                img.onerror = function() {
-                    // Still hide skeleton on error
-                    el.classList.add('bg-loaded');
-                };
-                img.src = urlMatch[1];
-            }
-        }
-    });
-
-    // Handle already-cached images (may have loaded before JS runs)
-    document.querySelectorAll('.project-image').forEach(img => {
-        if (img.complete && img.naturalHeight !== 0) {
-            img.classList.add('loaded');
-            const skeleton = img.previousElementSibling;
-            if (skeleton && skeleton.classList.contains('skeleton')) {
-                skeleton.style.display = 'none';
-            }
-        }
-    });
-}
-
 // Global GA4 click tracking (auto-tags common interactive elements)
 function initGaAutoTagging() {
     if (window.__gaAutoTaggingInitialized) return;
@@ -181,7 +142,6 @@ window.onload = function() {
     typingEffect(pageType);
     initLazySections();
     initGaAutoTagging();
-    initSkeletonLoaders();
     trackColorScheme();
 };
 
