@@ -161,7 +161,7 @@ a:visited {
         margin-top: var(--space-3xl);
         margin-bottom: var(--space-xl);
         border: 0;
-        border-top: 2px solid #cccccc;
+        border-top: 2px solid var(--border);
     }
 
 @media (prefers-color-scheme: dark) {
@@ -171,7 +171,7 @@ a:visited {
 }
     /* Ensure forced themes also control the intro rule color */
     html.force-light .intro-hr {
-        border-top: 2px solid #cccccc;
+        border-top: 2px solid var(--border);
     }
 
     html.force-dark .intro-hr {
@@ -483,7 +483,7 @@ html.force-dark {
 
 /* Ensure forced themes also control the intro rule color */
 html.force-light .intro-hr {
-    border-top: 2px solid #cccccc;
+    border-top: 2px solid var(--border);
 }
 
 html.force-dark .intro-hr {
