@@ -92,7 +92,7 @@ body {
 /* Heading styles */
 h1 {
     font-family: "Big Shoulders Display", serif;
-    font-size: 3rem !important;
+    font-size: var(--font-size-3xl) !important;
     margin-top: var(--space-xl);
     margin-bottom: var(--space-md);
     letter-spacing: -0.3px;
@@ -104,7 +104,7 @@ h2, h3, h4, h5, h6, p {
 }
 
 h2 {
-    font-size: 1.3rem;
+    font-size: var(--font-size-xl);
     font-weight: 600;
     margin-bottom: var(--space-md);
     letter-spacing: -0.3px;
@@ -112,7 +112,7 @@ h2 {
 }
 
 h3 {
-    font-size: 1.1rem;
+    font-size: var(--font-size-lg);
     font-weight: 600;
     margin: 1.8rem 0 0.8rem;
     line-height: 1.6rem;
@@ -199,7 +199,7 @@ p a:hover {
 
 /* Article-specific heading adjustments */
 .article-h1 {
-    font-size: 2rem;
+    font-size: var(--font-size-2xl);
     letter-spacing: -0.05rem;
     margin-bottom: var(--space-xl);
     margin-top: var(--space-xl);
@@ -246,7 +246,7 @@ p a:hover {
 
 .article-figure figcaption, .article-video figcaption  {
     margin-top: var(--space-sm);
-    font-size: 0.9rem;
+    font-size: var(--font-size-sm);
     color: var(--text-secondary);
 }
 
@@ -304,7 +304,7 @@ p a:hover {
 
 /* Code block container */
 pre {
-    font-size: 0.8rem;
+    font-size: var(--font-size-xs);
     line-height: 1.6rem;
     margin: 0;
     padding: 0;
@@ -378,7 +378,7 @@ html.force-dark .intro-hr {
     padding: 0.75rem var(--space-md);
     border-radius: var(--radius-md);
     color: var(--text-primary) !important;
-    font-size: 0.9rem;
+    font-size: var(--font-size-sm);
     font-weight: 500;
     text-decoration: none;
     transition: all 0.2s ease;
@@ -403,7 +403,7 @@ html.force-dark .intro-hr {
     text-decoration: none;
     border-radius: var(--radius-md);
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: var(--font-size-base);
     transition: all 0.2s ease;
     border: 1px solid var(--primary);
 }
@@ -467,7 +467,7 @@ html.force-dark .intro-hr {
     padding: var(--space-xs) 0 var(--space-xs) var(--space-sm);
     border-left: 2px solid transparent;
     color: rgba(128, 128, 128, 0.6);
-    font-size: 0.9rem;
+    font-size: var(--font-size-sm);
     text-decoration: none;
     transition: all 0.2s ease;
 }
@@ -529,12 +529,12 @@ table {
 table th {
     text-align: left;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: var(--font-size-base);
 }
 
 /* Table data cell styling */
 table td {
-    font-size: 0.95rem;
+    font-size: var(--font-size-base);
     line-height: 1.5;
 }
 
@@ -648,7 +648,7 @@ table tr:last-child td {
 }
 
 .next-steps-title {
-    font-size: 0.8rem;
+    font-size: var(--font-size-xs);
     font-weight: 500;
     color: var(--text-secondary);
     text-transform: uppercase;
@@ -688,7 +688,7 @@ table tr:last-child td {
 }
 
 .next-step-name {
-    font-size: 1rem;
+    font-size: var(--font-size-md);
     font-weight: 500;
     color: var(--text-primary);
 }
@@ -698,7 +698,7 @@ table tr:last-child td {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    font-size: 0.9rem;
+    font-size: var(--font-size-sm);
 }
 
 .next-steps-links a {
@@ -802,13 +802,13 @@ table tr:last-child td {
 
 /* Toast title */
 .toast-title {
-    font-size: 0.95rem;
+    font-size: var(--font-size-base);
     font-weight: 700;
 }
 
 /* Toast message text */
 .toast-text {
-    font-size: 0.9rem;
+    font-size: var(--font-size-sm);
     color: #e0e0e0;
     line-height: 1.4;
 }
@@ -826,7 +826,7 @@ table tr:last-child td {
     border: none;
     border-radius: var(--radius-md);
     padding: var(--space-sm) 12px;
-    font-size: 0.9rem;
+    font-size: var(--font-size-sm);
     font-weight: 600;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }

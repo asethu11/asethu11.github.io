@@ -69,7 +69,7 @@ b {
 
 h1 {
     font-family: "Big Shoulders Display", serif;
-    font-size: 3rem !important;
+    font-size: var(--font-size-3xl) !important;
     margin-top: var(--space-md);
     margin-bottom: var(--space-md);
     letter-spacing: -0.3px;
@@ -200,7 +200,7 @@ p {
 }
 
 pre {
-    font-size: 0.8rem;
+    font-size: var(--font-size-xs);
     line-height: 1.6rem;
     margin: 0;
     padding: 0;
@@ -266,7 +266,7 @@ pre > code {
 
 .article-figure figcaption {
     margin-top: var(--space-sm);
-    font-size: 0.9rem;
+    font-size: var(--font-size-sm);
     color: var(--text-secondary);
 }
 
@@ -282,7 +282,7 @@ ol li {
 
 
 .article-h1{
-    font-size: 2rem;
+    font-size: var(--font-size-2xl);
     letter-spacing: -0.05rem;
     margin-bottom: var(--space-xl);
     margin-top: var(--space-xl);
@@ -346,7 +346,7 @@ li pre {
     padding: 0.75rem var(--space-md);
     border-radius: var(--radius-md);
     color: var(--text-primary) !important;
-    font-size: 0.9rem;
+    font-size: var(--font-size-sm);
     font-weight: 500;
     text-decoration: none;
     transition: all 0.2s ease;
@@ -405,7 +405,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin: var(--space-lg) 0;
-    font-size: 1rem;
+    font-size: var(--font-size-md);
 }
 
 thead th {
@@ -494,7 +494,7 @@ video {
     gap: 0.3rem;
     align-items: center;
     justify-content: space-between;
-    font-size: 0.9rem;
+    font-size: var(--font-size-sm);
 }
 
 .tech-tool {
@@ -503,7 +503,7 @@ video {
     padding: 0.2rem var(--space-sm);
     border-radius: 6px;
     font-weight: 500;
-    font-size: 0.8rem;
+    font-size: var(--font-size-xs);
     white-space: nowrap;
     margin: 0.1rem;
 }

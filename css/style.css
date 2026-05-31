@@ -77,7 +77,7 @@ body {
 }
 
 .view-all-link {
-  font-size: 0.9rem;
+  font-size: var(--font-size-sm);
   color: var(--text-secondary);
   text-decoration: none;
   transition: color 0.2s ease;
@@ -105,7 +105,7 @@ body {
 h1 {
   font-family: "Big Shoulders Display", serif;
   letter-spacing: -0.04em;
-  font-size: 80px;
+  font-size: var(--font-size-hero);
   font-weight: 650;
   font-style: normal;
   text-align: left;
@@ -121,14 +121,14 @@ h1 {
 }
 
 h2 {
-  font-size: 1.1rem;
+  font-size: var(--font-size-lg);
   font-weight: 500;
   margin-bottom: var(--space-md);
   letter-spacing: -0.3px;
 }
 
 h3 {
-  font-size: 1rem;
+  font-size: var(--font-size-md);
   font-weight: 500;
   margin-bottom: var(--space-md);
   line-height: 1.6rem;
@@ -154,7 +154,7 @@ p {
 }
 
 pre {
-  font-size: 0.8rem;
+  font-size: var(--font-size-xs);
   line-height: 1.6rem;
   margin: 0;
   padding: 0;
@@ -204,7 +204,7 @@ pre > code {
 }
 .introduction-text {
   width: 60%;
-  font-size: 1rem;
+  font-size: var(--font-size-md);
   line-height: 1.5rem;
   margin-top: var(--space-lg);
 }
@@ -667,7 +667,7 @@ pre > code {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: var(--font-size-2xl);
   width: 50px;
   height: 50px;
   border-radius: 99px;
@@ -914,7 +914,7 @@ pre > code {
 
 .article-figure figcaption {
   margin-top: var(--space-sm);
-  font-size: 0.9rem;
+  font-size: var(--font-size-sm);
   color: var(--text-secondary);
 }
 
@@ -937,7 +937,7 @@ ol li {
 }
 
 .article-h1{
-  font-size: 2rem;
+  font-size: var(--font-size-2xl);
   letter-spacing: -0.05rem;
   margin-bottom: var(--space-xl);
   margin-top: var(--space-md);
@@ -1001,7 +1001,7 @@ li pre {
   padding: 0.75rem var(--space-md);
   border-radius: var(--radius-md);
   color: var(--text-primary) !important;
-  font-size: 0.9rem;
+  font-size: var(--font-size-sm);
   font-weight: 500;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -1106,13 +1106,13 @@ li pre {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.9rem;
+  font-size: var(--font-size-sm);
   font-weight: 500;
 }
 
 .email-toast-content i {
   color: #4ade80;
-  font-size: 1.1rem;
+  font-size: var(--font-size-lg);
 }
 
 .email-toast-error .email-toast-content i {
