@@ -3,7 +3,7 @@
 
 :root {
   --background: #FCFCFC;
-  --background-grey: #eff1f3;
+  --background-grey: #F3F5F7; /* aligned with system --surface (--gray-50) */
   --text-primary: #262628; 
   --text-secondary: #737373; 
   --primary: #0070EA; 
