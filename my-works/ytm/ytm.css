@@ -148,24 +148,9 @@ a:visited {
         border-color: var(--background-grey);
     }
 
-.headtag {
-    display: inline-flex;
-    height: 20px;
-  }
-  
-  .arr {
-    display: none;
-    color: var(--red);
-  }
-  
-  .headtag:hover .arr {
-    display: flex;
-    margin-left: 10px;
-  }
-  
-  .headtag:hover {
-    color: var(--red);
-  }
+/* .headtag styles now come from design-system/components.css.
+   The system version uses opacity + translateX for smoother arrow reveal
+   (vs. display:none/flex toggle) and properly scopes .arr to .headtag. */
 
 
 
