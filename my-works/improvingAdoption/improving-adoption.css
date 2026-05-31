@@ -139,7 +139,7 @@ body {
 /* Heading styles */
 h1 {
     font-family: "Big Shoulders Display", serif;
-    font-size: var(--font-size-3xl) !important;
+    font-size: var(--font-size-3xl);
     margin-top: var(--space-xl);
     margin-bottom: var(--space-md);
     letter-spacing: -0.3px;
