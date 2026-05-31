@@ -1,0 +1,253 @@
+/* =============================================================================
+   ABSETH DESIGN SYSTEM — Color & Type Foundations
+   Abhishek Sethuraman · abseth.com (portfolio) · blogs.abseth.com (writing)
+   -----------------------------------------------------------------------------
+   A constraint-based, theme-aware system. Two typefaces, eight core colors,
+   an 8px spacing rhythm. Variables are named for PURPOSE, not appearance, so
+   light/dark switching is automatic. Import this file and build with the vars.
+   ============================================================================= */
+
+/* ---- Fonts (both available free on Google Fonts) ------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+  /* ===== CORE COLOR TOKENS (light) ======================================= */
+  /* The whole palette is really eight decisions. That's the point.
+     The two canvas values (#FCFCFC / #040404) are the only greys NOT on the
+     numbered ramp — they are the absolute extremes by design. Every OTHER grey
+     in the system is a named ramp step. Never hand-pick a grey hex. */
+  --background:        #FCFCFC;  /* page canvas — a hair off pure white      */
+  --text-primary:      #262628;  /* body copy            (= gray-ish, light) */
+  --text-secondary:    #737373;  /* metadata, captions   (light = gray-600)  */
+  --text-bold:         #0A0A0A;  /* <b> spans, strong emphasis               */
+  --primary:           #0070EA;  /* the ONE interactive blue — links, focus  */
+  --red:               #DB4F4F;  /* section labels, hover, destructive       */
+  --code-text:         #8B5CF6;  /* inline <code> violet                     */
+
+  /* ===== GRAY RAMP — the SINGLE source of every grey (11 steps) ==========
+     Light: 50 = lightest → 950 = darkest. The dark block below remaps the
+     SAME step names to dark-appropriate values, so semantic tokens follow
+     automatically. Pick greys from here or from the semantic aliases — never
+     a raw hex. (#eff1f3, #2B2C2E-as-literal, #F2F2F250 etc. are all retired.) */
+  --gray-50:  #F3F5F7;   /* everyday grey fill (cards, code, callouts)        */
+  --gray-100: #E6E6E6;   /* raised panel                                     */
+  --gray-200: #CCCCCC;   /* hairline border  (the workhorse outline)         */
+  --gray-300: #B3B3B3;   /* strong border / divider                          */
+  --gray-400: #999999;   /* disabled, muted text                             */
+  --gray-500: #808080;   /* tertiary text, placeholders                      */
+  --gray-600: #666666;   /* secondary text                                   */
+  --gray-700: #4D4D4D;
+  --gray-800: #333333;
+  --gray-900: #1A1A1A;
+  --gray-950: #121212;   /* deepest well                                     */
+
+  /* ===== CANONICAL GREY ALIASES — use THESE in components ================
+     One concept, one name. --surface and --border are the everyday workhorses;
+     the *-raised / *-strong steps are a finer ladder for when you truly need it.
+     background-grey / border-light are kept as aliases so legacy markup still
+     resolves to the exact same value (no drift). */
+  --surface:         var(--gray-50);    /* the grey fill that sets content apart */
+  --surface-raised:  var(--gray-100);   /* one step more elevated                */
+  --surface-sunken:  var(--gray-100);   /* wells/insets (light: a touch darker)  */
+  --border:          var(--gray-200);   /* hairline outline                      */
+  --border-strong:   var(--gray-300);   /* emphasized outline, dividers          */
+  --text-tertiary:   var(--gray-500);
+  --text-muted:      var(--gray-400);
+  --divider:         var(--gray-300);
+  --disabled:        var(--gray-400);
+  --focus-ring:      var(--primary);
+  --skeleton:        var(--gray-100);   /* content-shaped placeholders           */
+
+  /* Back-compat aliases (point at the canonical tokens above) */
+  --background-grey: var(--surface);
+  --border-light:    var(--border);
+  --surface-base:    var(--surface);
+  --surface-overlay: var(--gray-200);
+  --border-subtle:   var(--gray-100);
+  --border-default:  var(--border);
+  --text-inverse:    var(--gray-50);
+  --hover-overlay:   var(--gray-100);
+  --active-overlay:  var(--gray-200);
+
+  /* ===== TYPE ============================================================ */
+  --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif; /* headlines ONLY */
+  --font-sans:    "Inter", system-ui, -apple-system, sans-serif;       /* everything else */
+  --font-mono:    "Monaco", "Menlo", "Consolas", monospace;            /* code */
+
+  /* Display weight used across the brand */
+  --display-weight: 650;
+  --display-tracking: -0.04em;   /* portfolio big headlines  */
+  --heading-tracking: -0.3px;    /* h2 / h3 in body          */
+
+  /* Font-size scale */
+  --font-size-xs:   0.8rem;   /* ~13px  captions, footnotes        */
+  --font-size-sm:   0.9rem;   /* ~14px  secondary text, tables     */
+  --font-size-base: 0.95rem;  /* ~15px  body                       */
+  --font-size-md:   1rem;     /* 16px   standard text, inputs      */
+  --font-size-lg:   1.1rem;   /* ~18px  h3                         */
+  --font-size-xl:   1.3rem;   /* ~21px  h2                         */
+  --font-size-2xl:  2rem;     /* 32px   article h1                 */
+  --font-size-3xl:  3rem;     /* 48px   page h1 (blog)             */
+  --font-size-hero: 80px;     /* portfolio hero "i'm abhishek."    */
+
+  /* ===== SPACING (8px base) ============================================== */
+  --space-xs:  0.25rem;  /*  4px */
+  --space-sm:  0.5rem;   /*  8px */
+  --space-md:  1rem;     /* 16px */
+  --space-lg:  1.5rem;   /* 24px */
+  --space-xl:  2rem;     /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4rem;     /* 64px */
+  /* non-standard values come from calc(): calc(var(--space-sm) + var(--space-xs)) = 12px */
+
+  /* ===== RADII =========================================================== */
+  --radius-sm: 4px;   /* badges, chips, inline      */
+  --radius-md: 8px;   /* cards, buttons, images     */
+  --radius-lg: 12px;  /* large containers, previews */
+  --radius-xl: 16px;  /* hero media, image-cards    */
+
+  /* ===== MOTION TOKENS — durations + easings (single source of truth).
+     Keyframes, .fx-* utilities and reduced-motion live in motion.css. ===== */
+  --dur-instant: 50ms;    /* button press / primary feedback   */
+  --dur-fast:    100ms;   /* ghost button, secondary feedback  */
+  --dur-base:    200ms;   /* standard hover (color/opacity/bg) */
+  --dur-slow:    300ms;   /* entrances, toasts, cross-fades    */
+  --dur-tilt:    140ms;   /* 3D thumbnail tilt tracking        */
+  --dur-reveal:  825ms;   /* deliberate "play" rotate-in       */
+  --ease-standard: ease;                        /* the workhorse */
+  --ease-snap:     cubic-bezier(.2, .8, .2, 1); /* decisive UI   */
+  --ease-emphasis: cubic-bezier(.4, 0, .2, 1);  /* toast / slide */
+  --ease-linear:   linear;                      /* spinners only */
+}
+
+/* ===== DARK MODE — the ramp REMAPS (real surface/border values are now
+   named steps: gray-200 = #2B2C2E surface, gray-300 = #333435 border,
+   gray-700 = #ADABAB secondary text, gray-950 = #F0F0F0 body). Semantic
+   aliases are re-pinned to dark-appropriate indices; back-compat aliases
+   (--background-grey, --border-light, …) follow automatically. ========== */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background:      #040404;
+    --text-primary:    var(--gray-950);
+    --text-secondary:  var(--gray-700);
+    --text-bold:       #FFFFFF;
+    --primary:         #0A84FF;
+    --red:             #DB4F4F;
+    --code-text:       #A78BFA;
+
+    --gray-50:  #121212;
+    --gray-100: #1F2022;
+    --gray-200: #2B2C2E;   /* surface — REAL site value */
+    --gray-300: #333435;   /* hairline border — REAL    */
+    --gray-400: #4A4B4D;
+    --gray-500: #6E6F71;
+    --gray-600: #909193;
+    --gray-700: #ADABAB;   /* secondary text — REAL     */
+    --gray-800: #CFCFCF;
+    --gray-900: #E6E6E6;
+    --gray-950: #F0F0F0;   /* body text — REAL          */
+
+    /* re-pin the canonical greys to dark-appropriate steps */
+    --surface:         var(--gray-200);
+    --surface-raised:  var(--gray-300);
+    --surface-sunken:  var(--gray-50);
+    --border:          var(--gray-300);
+    --border-strong:   var(--gray-400);
+    --text-tertiary:   var(--gray-600);
+    --text-muted:      var(--gray-500);
+    --divider:         var(--gray-400);
+    --skeleton:        var(--gray-100);
+    --surface-overlay: var(--gray-400);
+    --border-subtle:   var(--gray-200);
+    --hover-overlay:   var(--gray-300);
+    --active-overlay:  var(--gray-400);
+  }
+}
+
+/* Manual overrides: <html data-theme="light"> / "dark" — same remap. */
+html[data-theme="dark"] {
+  --background: #040404;
+  --text-primary: var(--gray-950); --text-secondary: var(--gray-700); --text-bold: #FFFFFF;
+  --primary: #0A84FF; --code-text: #A78BFA;
+  --gray-50:#121212; --gray-100:#1F2022; --gray-200:#2B2C2E; --gray-300:#333435;
+  --gray-400:#4A4B4D; --gray-500:#6E6F71; --gray-600:#909193; --gray-700:#ADABAB;
+  --gray-800:#CFCFCF; --gray-900:#E6E6E6; --gray-950:#F0F0F0;
+  --surface: var(--gray-200); --surface-raised: var(--gray-300); --surface-sunken: var(--gray-50);
+  --border: var(--gray-300); --border-strong: var(--gray-400);
+  --text-tertiary: var(--gray-600); --text-muted: var(--gray-500); --divider: var(--gray-400);
+  --skeleton: var(--gray-100); --surface-overlay: var(--gray-400); --border-subtle: var(--gray-200);
+  --hover-overlay: var(--gray-300); --active-overlay: var(--gray-400);
+  color-scheme: dark;
+}
+
+/* =============================================================================
+   SEMANTIC ELEMENT STYLES — the "h1 / h2 / p / code" layer.
+   Mirrors how type renders on the site. Scope under .abseth-type to opt in.
+   ============================================================================= */
+.abseth-type {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-md);
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* Portfolio hero headline — Big Shoulders, huge, tight, lowercase */
+.abseth-type .hero,
+.abseth-type h1 {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--display-tracking);
+  font-size: var(--font-size-3xl);
+  line-height: 1.0;
+  margin: var(--space-md) 0;
+  color: var(--text-primary);
+}
+.abseth-type .hero { font-size: var(--font-size-hero); }
+
+/* Article title — Big Shoulders, dialed back for reading density */
+.abseth-type .article-h1 {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--font-size-2xl);
+  letter-spacing: -0.05rem;
+  margin: var(--space-md) 0 var(--space-xl);
+}
+
+/* Section + sub headings — Inter, restrained */
+.abseth-type h2 {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  letter-spacing: var(--heading-tracking);
+  color: var(--text-bold);
+  margin: var(--space-md) 0;
+}
+.abseth-type h3 {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--text-bold);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-md);
+}
+
+/* Section eyebrow label — the signature red, used on the portfolio */
+.abseth-type .section-t {
+  color: var(--red);
+  font-weight: 600;
+  font-size: var(--font-size-md);
+}
+
+.abseth-type p { line-height: 1.5; margin-top: 0; }
+.abseth-type b, .abseth-type strong { font-weight: 600; color: var(--text-bold); }
+.abseth-type a { color: var(--primary); text-decoration: none; }
+.abseth-type a:hover { color: var(--red); }
+
+.abseth-type code {
+  font-family: var(--font-mono);
+  color: var(--code-text);
+  font-size: 0.9em;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-sm);
+}

@@ -1,0 +1,241 @@
+/* =============================================================================
+   ABSETH BLOG — Custom Components
+   For use inside .article-body. Requires colors_and_type.css + components.css.
+   
+   Components in this file:
+     .pull-quote        Large extracted quote — Big Shoulders, red left rule
+     .insight           Callout variant with a typed eyebrow label
+     .compare           Two-column before/after grid
+     .fig               Figure + figcaption treatment
+     .stat-row          One or more big stat numbers side by side
+     .steps             Numbered process steps
+     .section-break     Visual divider with optional center label
+     .hl                Inline text highlight (pale fill, editorial)
+     .takeaway          Closing summary block — stronger weight than callout
+   ============================================================================= */
+
+/* ---- Pull quote ---------------------------------------------------------- */
+.pull-quote {
+  margin: var(--space-2xl) 0;
+  padding-left: var(--space-xl);
+  border-left: 3px solid var(--red);
+}
+.pull-quote p {
+  font-family: var(--font-display);
+  font-weight: 650;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-sm);
+}
+.pull-quote cite {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  display: block;
+}
+
+/* ---- Insight callout ----------------------------------------------------- */
+.insight {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin: var(--space-xl) 0;
+}
+.insight-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  color: var(--red);
+  margin: 0 0 var(--space-sm);
+  display: block;
+}
+.insight p { margin: 0; font-size: var(--font-size-base); line-height: 1.6; }
+.insight p + p { margin-top: var(--space-sm); }
+
+/* ---- Comparison grid ---------------------------------------------------- */
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+  margin: var(--space-xl) 0;
+}
+.compare-col {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.compare-header {
+  padding: var(--space-sm) var(--space-md);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.compare-header.before { color: var(--text-secondary); }
+.compare-header.after  { color: var(--primary); }
+.compare-body {
+  padding: var(--space-md);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+@media (max-width: 540px) {
+  .compare { grid-template-columns: 1fr; }
+}
+
+/* ---- Figure + caption --------------------------------------------------- */
+.fig {
+  margin: var(--space-2xl) 0;
+}
+.fig img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  display: block;
+  background: var(--surface); /* placeholder fill before load */
+}
+.fig figcaption {
+  margin-top: var(--space-sm);
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* ---- Stat row ------------------------------------------------------------ */
+.stat-row {
+  display: flex;
+  gap: var(--space-2xl);
+  flex-wrap: wrap;
+  margin: var(--space-xl) 0;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.stat-number {
+  font-family: var(--font-display);
+  font-weight: 650;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text-primary);
+  margin: 0;
+}
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ---- Process steps ------------------------------------------------------ */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin: var(--space-xl) 0;
+  counter-reset: step-counter;
+}
+.step {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+  counter-increment: step-counter;
+}
+.step-num {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  border: 1.5px solid var(--primary);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600;
+  color: var(--primary);
+  font-family: var(--font-mono);
+  margin-top: 2px;
+}
+.step-content {}
+.step-title {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-bold);
+  margin: 0 0 4px;
+}
+.step-desc {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ---- Section break ------------------------------------------------------- */
+.section-break {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin: var(--space-2xl) 0;
+  color: var(--text-muted);
+}
+.section-break::before,
+.section-break::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.section-break-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+/* Without a label: just a plain hr  */
+.section-break.plain::before { flex: 1; }
+.section-break.plain { gap: 0; }
+
+/* ---- Inline highlight ---------------------------------------------------- */
+/* Usage: <span class="hl">text</span> */
+.hl {
+  padding: 1px 4px;
+  margin: 0 -1px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--red) 10%, transparent);
+  color: var(--text-primary);
+  transition: background var(--dur-base) ease;
+}
+
+/* ---- Takeaway ------------------------------------------------------------ */
+.takeaway {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin: var(--space-2xl) 0;
+  background: var(--background);
+}
+.takeaway-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-sm);
+  display: block;
+}
+.takeaway p {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin: 0;
+}
+.takeaway p + p { margin-top: var(--space-sm); }
+.takeaway b { color: var(--text-bold); }

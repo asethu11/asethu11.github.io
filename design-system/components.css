@@ -1,0 +1,116 @@
+/* =============================================================================
+   ABSETH DESIGN SYSTEM — Components
+   Lifted from the live site. Requires colors_and_type.css for tokens.
+   ============================================================================= */
+
+/* ---- Buttons -------------------------------------------------------------
+   Signature interaction: radius morphs 15px → 8px and color shifts to RED on
+   hover. Primary = outlined blue; Ghost = filled grey. */
+.btn-primary, .btn-ghost {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  padding: calc(var(--space-sm) + var(--space-xs)) var(--space-lg);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all var(--dur-instant) var(--ease-standard);
+}
+.btn-primary {
+  background: var(--background);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+.btn-primary:hover {
+  background: var(--surface);
+  border-color: var(--red);
+  color: var(--red);
+  border-radius: var(--radius-md);
+}
+.btn-ghost {
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  transition: all var(--dur-fast) var(--ease-standard);
+}
+.btn-ghost:hover {
+  background: var(--background);
+  border-color: var(--red);
+  border-radius: var(--radius-md);
+}
+.btn-primary:disabled, .btn-ghost:disabled,
+.btn-primary[disabled], .btn-ghost[disabled] {
+  opacity: 0.5; cursor: not-allowed; pointer-events: none;
+}
+.btn-sm { padding: var(--space-sm) var(--space-md); font-size: 0.85rem; }
+.btn-md { padding: calc(var(--space-sm) + var(--space-xs)) var(--space-lg); font-size: var(--font-size-sm); }
+.btn-lg { padding: var(--space-md) var(--space-xl); font-size: 1rem; }
+
+.btn-loading { position: relative; color: transparent !important; pointer-events: none; }
+.btn-loading::after {
+  content: ''; position: absolute; width: 16px; height: 16px; top: 50%; left: 50%;
+  margin: -8px 0 0 -8px; border: 2px solid var(--primary); border-radius: 50%;
+  border-top-color: transparent; animation: btn-spin 0.6s linear infinite;
+}
+.btn-ghost.btn-loading::after { border-color: var(--text-primary); border-top-color: transparent; }
+@keyframes btn-spin { to { transform: rotate(360deg); } }
+
+/* ---- Links & references -------------------------------------------------- */
+.ds-link { color: var(--primary); text-decoration: none; transition: color var(--dur-base) var(--ease-standard); }
+.ds-link:hover { color: var(--red); }
+.ds-link[disabled], .ds-link.disabled { color: var(--disabled); pointer-events: none; opacity: 0.6; }
+
+.ref-inline {
+  display: inline-flex; align-items: center;
+  margin-left: var(--space-xs); padding: 0.2rem 0.6rem;
+  border: 1px solid var(--border); border-radius: 7px;
+  background: var(--surface); color: var(--text-primary);
+  font-size: 0.7rem; font-weight: 500; line-height: 1;
+  text-decoration: none; vertical-align: middle;
+  transition: color var(--dur-base) var(--ease-standard), border-color var(--dur-base) var(--ease-standard), background var(--dur-base) var(--ease-standard);
+}
+/* Arrow unfurls to the right on hover. Markup: <a class="ref-inline">7<span class="ref-arr">→</span></a> */
+.ref-inline .ref-arr {
+  overflow: hidden; max-width: 0; opacity: 0; margin-left: 0;
+  transition: max-width 150ms ease, opacity 120ms ease, margin-left 120ms ease;
+  white-space: nowrap;
+}
+.ref-inline:hover {
+  color: var(--primary);
+  border-color: color-mix(in srgb, var(--primary) 35%, var(--border));
+  background: color-mix(in srgb, var(--primary) 7%, var(--background));
+}
+.ref-inline:hover .ref-arr { max-width: 14px; opacity: 1; margin-left: 3px; }
+
+/* Arrow link — "read more -->".
+   The .arr span MUST always be in the DOM (not conditionally rendered);
+   the CSS handles visibility via opacity + translateX so the transition fires. */
+.headtag {
+  display: inline-flex; align-items: center;
+  color: var(--text-primary); text-decoration: none;
+  transition: color var(--dur-base) var(--ease-standard);
+}
+.headtag .arr {
+  color: var(--red); margin-left: 6px;
+  opacity: 0; transform: translateX(-8px);
+  transition: opacity 150ms var(--ease-standard), transform 150ms var(--ease-snap);
+  display: inline; /* always in DOM — never conditionally rendered */
+}
+.headtag:hover { color: var(--red); }
+.headtag:hover .arr { opacity: 1; transform: translateX(0); }
+
+/* ---- Surfaces: cards & callouts ------------------------------------------ */
+.card-surface { background: var(--surface); padding: var(--space-lg); border-radius: var(--radius-md); }
+.callout { background: var(--surface); padding: var(--space-lg); border-radius: var(--radius-md); margin: var(--space-lg) 0; }
+.callout-border { background: var(--background); border: 1px solid var(--border); padding: var(--space-lg); border-radius: var(--radius-md); margin: var(--space-lg) 0; }
+.component-div { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-md); margin: var(--space-xl) 0; }
+
+/* ---- Tags / metadata ----------------------------------------------------- */
+.project-tag { font-size: 14px; color: var(--text-secondary); }
+
+/* ---- Code block ---------------------------------------------------------- */
+.code-block {
+  font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.6;
+  background: var(--surface); border-radius: var(--radius-md);
+  padding: var(--space-lg); color: var(--text-primary); overflow-x: auto;
+}
+.code-block .tok-code { color: var(--code-text); }

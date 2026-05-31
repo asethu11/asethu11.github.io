@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_card.css">
+<style>
+  .ramp { display: grid; grid-template-columns: 36px repeat(11, 1fr); gap: 0; }
+  .ramp-label { display: grid; grid-template-columns: 36px repeat(11, 1fr); gap: 0; margin-top: 5px; }
+  .ramp-label span { font-size: 9px; text-align: center; }
+  .row-label { font-size: 9.5px; display: flex; align-items: center; padding-right: 6px; }
+  .chip { height: 36px; }
+  .light .chip:nth-child(1)  { background:#F3F5F7; }
+  .light .chip:nth-child(2)  { background:#E6E6E6; }
+  .light .chip:nth-child(3)  { background:#CCCCCC; }
+  .light .chip:nth-child(4)  { background:#B3B3B3; }
+  .light .chip:nth-child(5)  { background:#999999; }
+  .light .chip:nth-child(6)  { background:#808080; }
+  .light .chip:nth-child(7)  { background:#666666; }
+  .light .chip:nth-child(8)  { background:#4D4D4D; }
+  .light .chip:nth-child(9)  { background:#333333; }
+  .light .chip:nth-child(10) { background:#1A1A1A; }
+  .light .chip:nth-child(11) { background:#121212; }
+  .dark  .chip:nth-child(1)  { background:#121212; }
+  .dark  .chip:nth-child(2)  { background:#1F2022; }
+  .dark  .chip:nth-child(3)  { background:#2B2C2E; }
+  .dark  .chip:nth-child(4)  { background:#333435; }
+  .dark  .chip:nth-child(5)  { background:#4A4B4D; }
+  .dark  .chip:nth-child(6)  { background:#6E6F71; }
+  .dark  .chip:nth-child(7)  { background:#909193; }
+  .dark  .chip:nth-child(8)  { background:#ADABAB; }
+  .dark  .chip:nth-child(9)  { background:#CFCFCF; }
+  .dark  .chip:nth-child(10) { background:#E6E6E6; }
+  .dark  .chip:nth-child(11) { background:#F0F0F0; }
+  .row-light { border-radius: 6px 0 0 0; overflow: hidden; display: contents; }
+  .ramp-row { display: contents; }
+  .light .chip:first-child  { border-radius: 5px 0 0 5px; }
+  .light .chip:last-child   { border-radius: 0 5px 5px 0; }
+  .dark  .chip:first-child  { border-radius: 5px 0 0 5px; }
+  .dark  .chip:last-child   { border-radius: 0 5px 5px 0; }
+  .swatch-row { display: flex; gap: 1px; margin: 1px 0; }
+  .swatch-row .chip { flex: 1; }
+  .modes { display: flex; flex-direction: column; gap: 6px; }
+  .mode-row { display: flex; gap: 6px; align-items: center; }
+  .mode-lbl { font-size: 9.5px; width: 32px; flex-shrink: 0; }
+  .annotations { display: grid; grid-template-columns: 38px repeat(11, 1fr); gap: 0; margin-top: 3px; }
+  .ann { font-size: 8px; text-align: center; line-height: 1.3; padding: 0 1px; }
+  .ann.hi { color: var(--primary); font-weight: 600; }
+</style></head>
+<body>
+  <p class="card-label">Gray ramp — same 11 step names, theme-mapped values. Never use raw hex.</p>
+
+  <div class="modes">
+    <div class="mode-row">
+      <span class="mode-lbl mono muted">light</span>
+      <div class="swatch-row light" style="flex:1">
+        <div class="chip"></div><div class="chip"></div><div class="chip"></div>
+        <div class="chip"></div><div class="chip"></div><div class="chip"></div>
+        <div class="chip"></div><div class="chip"></div><div class="chip"></div>
+        <div class="chip"></div><div class="chip"></div>
+      </div>
+    </div>
+    <div class="mode-row">
+      <span class="mode-lbl mono muted">dark</span>
+      <div class="swatch-row dark" style="flex:1">
+        <div class="chip"></div><div class="chip"></div><div class="chip"></div>
+        <div class="chip"></div><div class="chip"></div><div class="chip"></div>
+        <div class="chip"></div><div class="chip"></div><div class="chip"></div>
+        <div class="chip"></div><div class="chip"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annotations">
+    <span></span>
+    <span class="ann mono muted">50</span>
+    <span class="ann mono muted">100</span>
+    <span class="ann mono hi">200<br>surface</span>
+    <span class="ann mono hi">300<br>border</span>
+    <span class="ann mono muted">400</span>
+    <span class="ann mono muted">500</span>
+    <span class="ann mono muted">600</span>
+    <span class="ann mono hi">700<br>text-2°</span>
+    <span class="ann mono muted">800</span>
+    <span class="ann mono muted">900</span>
+    <span class="ann mono hi">950<br>text-1°</span>
+  </div>
+
+  <p style="font-size:10.5px; margin-top:14px" class="muted">Highlighted steps are <strong>canonical semantic aliases</strong> — use <span class="mono">--surface</span>, <span class="mono">--border</span>, <span class="mono">--text-primary</span>, <span class="mono">--text-secondary</span> in components, never the step number directly.</p>
+</body></html>

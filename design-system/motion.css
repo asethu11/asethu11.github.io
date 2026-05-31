@@ -1,0 +1,146 @@
+/* =============================================================================
+   ABSETH DESIGN SYSTEM — Motion & Animation
+   Requires colors_and_type.css. Motion here is FUNCTIONAL: it confirms input,
+   shows state, and guides the eye. It is never decorative and never bouncy.
+   Principle: feedback fires before the user finishes the thought (~50ms),
+   ambient loops are slow and quiet, and everything yields to reduced-motion.
+   ============================================================================= */
+
+:root {
+  /* Duration + easing tokens are the single source of truth in
+     colors_and_type.css. Only the ambient-loop timings live here. */
+  --loop-blink:    0.5s;   /* cursor                    */
+  --loop-words:    3.3s;   /* "Previously in…" rotator  */
+  --loop-spin:     0.6s;   /* button loader             */
+  --loop-shimmer:  1.5s;   /* skeleton placeholders     */
+}
+
+/* =============================================================================
+   NAMED KEYFRAMES — the complete vocabulary. Don't invent new ones.
+   ============================================================================= */
+
+/* Cursor blink (hero typed line) */
+@keyframes blink { to { opacity: 0; } }
+
+/* Vertical word rotator — 5 stops, hard holds, no easing wobble */
+@keyframes word-spin {
+  10%  { transform: translateY(-102%); } 25%  { transform: translateY(-100%); }
+  35%  { transform: translateY(-202%); } 50%  { transform: translateY(-200%); }
+  60%  { transform: translateY(-302%); } 75%  { transform: translateY(-300%); }
+  85%  { transform: translateY(-402%); } 100% { transform: translateY(-400%); }
+}
+
+/* Button loader */
+@keyframes btn-spin { to { transform: rotate(360deg); } }
+
+/* Skeleton shimmer — moves left-to-right (reading direction) */
+@keyframes skeleton-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+/* Entrance: staggered fade-up (sections, project list) */
+@keyframes fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* Toast slide-in */
+@keyframes toast-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+
+/* =============================================================================
+   STANDARD INTERACTION PATTERNS — apply these, don't reinvent.
+   ============================================================================= */
+
+/* HOVER — link: shift to red. (Body links.) */
+.fx-link { transition: color var(--dur-base) var(--ease-standard); }
+.fx-link:hover { color: var(--red); }
+
+/* HOVER — social icon: lift 5px + turn blue. */
+.fx-lift { transition: transform var(--dur-instant) var(--ease-standard), color var(--dur-instant) var(--ease-standard); }
+.fx-lift:hover { transform: translateY(-5px); color: var(--primary); }
+
+/* HOVER — list row: background tint (no movement). */
+.fx-row { transition: background-color var(--dur-base) var(--ease-standard); border-radius: var(--radius-md); }
+.fx-row:hover { background: var(--surface); }
+
+/* PRESS — the system has no shrink-on-press; instead the BUTTON morphs:
+   radius 15→8px + color → red. This IS the press/affordance language. */
+.fx-morph { border-radius: 15px; transition: all var(--dur-instant) var(--ease-standard); }
+.fx-morph:hover { border-radius: var(--radius-md); }
+
+/* REVEAL — "play" affordance: hidden → rotate(-45°) scale up, slowly. */
+.fx-play { opacity: 0; transition: transform var(--dur-instant) var(--ease-standard), opacity var(--dur-base) var(--ease-standard); }
+.fx-play-host:hover .fx-play { opacity: 1; transform: rotate(-45deg) scale(1.1); transition-duration: var(--dur-reveal); }
+
+/* TILT — 3D thumbnail. JS sets the transform; CSS owns the easing only. */
+.fx-tilt { transform-style: preserve-3d; transition: transform var(--dur-tilt) var(--ease-snap); will-change: transform; }
+
+/* ENTRANCE — staggered fade-up. Set style="--stagger-delay:N" (0,1,2…) on
+   each child. Used as the RESOLVE step when skeleton → real content. */
+.fx-stagger {
+  opacity: 0;
+  animation: fade-up var(--dur-slow) var(--ease-snap) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 80ms);
+}
+
+/* =============================================================================
+   LOADING — Content-shaped skeleton placeholders
+   
+   Rules:
+   1. Shape MUST match the real content: heading ~70% wide, meta ~35%.
+      Image placeholders preserve aspect-ratio. Never generic full-width bars.
+   2. Page stays fully SCROLLABLE and interactive while loading.
+   3. RESOLVE via diagonal wipe: real content starts with clip-path collapsed
+      and opens diagonally (left→right, slight slash angle) row by row at
+      110ms stagger. Skeleton fades out simultaneously.
+   4. No shimmer. Flat fill only — motion lives in the wipe, not the wait.
+   
+   Usage: .sk-heading / .sk-line / .sk-meta / .sk-image / .sk-avatar
+   for shape. Size width inline. Wrap rows in position:relative — real
+   content sits z:1 with clip-path, skeleton overlay sits z:2.
+   
+   Resolve (JS pattern):
+     rows.forEach((row, i) => setTimeout(() => {
+       row.querySelector('.rc').classList.add('sk-revealed');
+       row.querySelector('.sk').classList.add('sk-gone');
+     }, i * 110));
+   ============================================================================= */
+
+/* Skeleton shape classes — flat fill, no animation */
+.sk-heading,
+.sk-line,
+.sk-meta,
+.sk-image,
+.sk-avatar {
+  background: var(--surface);
+}
+.sk-heading { height: 14px; border-radius: var(--radius-sm); }
+.sk-line    { height: 11px; border-radius: var(--radius-sm); }
+.sk-meta    { height: 10px; border-radius: var(--radius-sm); }
+.sk-image   { border-radius: var(--radius-xl); }
+.sk-avatar  { border-radius: 50%; }
+
+/* Skeleton overlay — absolute, fades out on resolve */
+.sk-overlay {
+  position: absolute; inset: 0; z-index: 2;
+  background: var(--background);
+  transition: opacity var(--dur-base) var(--ease-standard);
+}
+.sk-overlay.sk-gone { opacity: 0; pointer-events: none; }
+
+/* Real content reveal — diagonal wipe clip-path */
+.sk-content {
+  clip-path: polygon(-10% 0%, -10% 0%, -10% 100%, -10% 100%);
+  transition: clip-path 360ms cubic-bezier(.55, 0, .1, 1);
+  position: relative; z-index: 1;
+}
+.sk-content.sk-revealed {
+  /* 115% top, 103% bottom = ~12° diagonal slash */
+  clip-path: polygon(-10% 0%, 115% 0%, 103% 100%, -10% 100%);
+}
+
+/* =============================================================================
+   ACCESSIBILITY — always honor reduced motion. Non-negotiable.
+   ============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

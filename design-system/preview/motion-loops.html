@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../motion.css">
+<link rel="stylesheet" href="_card.css">
+<style>
+  body { font-size: 14px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .cell { border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px; }
+  .lab { font-size: 10px; margin-bottom: 10px; }
+
+  /* Cursor blink demo */
+  .blink-demo { font-family: var(--font-display); font-weight: 650; font-size: 28px; letter-spacing: -0.03em; display: flex; align-items: center; }
+  .cursor { display: inline-block; width: 3px; height: 28px; background: var(--text-primary); animation: blink var(--loop-blink) infinite; margin-left: 1px; }
+
+  /* Word rotator demo */
+  .rot { font-family: var(--font-sans); font-size: 14px; display: flex; align-items: center; }
+  .rot-fixed { white-space: nowrap; }
+  .words { overflow: hidden; height: 20px; margin-left: 5px; }
+  .word { display: block; height: 20px; line-height: 20px; color: var(--red); font-weight: 500; animation: word-spin var(--loop-words) infinite; }
+</style></head>
+<body>
+  <p class="card-label">Brand ambient loops — the real ones used on the site</p>
+  <div class="grid">
+    <div class="cell">
+      <p class="lab muted mono">hero cursor · blink 0.5s · infinite</p>
+      <div class="blink-demo">hi there<span class="cursor"></span></div>
+    </div>
+    <div class="cell">
+      <p class="lab muted mono">word rotator · 3.3s · hard holds</p>
+      <div class="rot">
+        <span class="rot-fixed">Previously in</span>
+        <div class="words">
+          <span class="word">Conversion B2C</span>
+          <span class="word">SaaS</span>
+          <span class="word">VR/XR</span>
+          <span class="word">Healthcare</span>
+          <span class="word">Conversion B2C</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:10.5px; margin-top:14px" class="muted">These are the <em>only</em> ambient loops on the site. No spinners — loading states use content-shaped skeletons (see Skeleton card). No bouncing or decorative motion.</p>
+</body></html>

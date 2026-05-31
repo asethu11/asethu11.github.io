@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_card.css">
+<style>
+  .radii { display: flex; gap: 22px; align-items: flex-end; }
+  .r { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .box { width: 84px; height: 84px; background: var(--background-grey); border: 1px solid var(--border-light); }
+  .nm { font-size: 11px; }
+</style></head>
+<body>
+  <p class="card-label">Corner radii — 4 / 8 / 12 / 16px</p>
+  <div class="radii">
+    <div class="r"><div class="box" style="border-radius:4px"></div><span class="nm mono muted">sm · 4</span></div>
+    <div class="r"><div class="box" style="border-radius:8px"></div><span class="nm mono muted">md · 8</span></div>
+    <div class="r"><div class="box" style="border-radius:12px"></div><span class="nm mono muted">lg · 12</span></div>
+    <div class="r"><div class="box" style="border-radius:16px"></div><span class="nm mono muted">xl · 16</span></div>
+  </div>
+</body></html>

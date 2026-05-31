@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abhishek Sethuraman — Portfolio (UI kit)</title>
+  <link rel="stylesheet" href="../../colors_and_type.css">
+  <link rel="stylesheet" href="portfolio.css">
+  <link rel="icon" href="../../assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body id="top">
+  <div id="root"></div>
+
+  <script type="text/babel" src="Hero.jsx"></script>
+  <script type="text/babel" src="Sections.jsx"></script>
+  <script type="text/babel">
+    const { useState } = React;
+
+    const MAIN_WORK = [
+      { img: '../../assets/projects/improving-adoption.png', badge: '220K+ users',
+        title: 'Solving Adoption Crisis (80% bounce-rate) for an Enterprise Tool with Limited Engineering Bandwidth',
+        description: 'Redesigned workflows, added new entry points and guardrails to reduce intimidation and misconfigurations for 220k+ users.' },
+      { img: '../../assets/projects/lsr.png', badge: 'RAG + LLMs',
+        title: "Accelerating MayoClinic's Medical Research with RAG + LLMs",
+        description: 'Designed a RAG-based system automating clinical data extraction for oncology research, replacing months of manual work with automated processing.' },
+      { img: '../../assets/projects/nextgen.png', badge: 'Unreal Engine 5',
+        title: "VR Training Platform for Minnesota's Law Enforcement Trainees",
+        description: 'Built in Unreal Engine 5, NextGen Badge creates a safe, repeatable space for law-enforcement trainees to test technical skills and emotional resilience.' },
+      { img: '../../assets/projects/comut.jpg', badge: '3× recall',
+        title: "Improving City of Mesa's Safety Messaging for 100K+ residents",
+        description: 'User research and content strategy informed a redesign of a public safety letter, improving critical safety recall by 3×.' },
+    ];
+
+    const OTHER = [
+      { title: 'Redesigning YouTube Music', tags: ['Mar–April 2025', 'UI Design', 'Figma'], preview: '../../assets/projects/nextgen.png' },
+      { title: 'AI-powered Project Management Tool', tags: ['2025', 'Hackathon @ ASU', 'React, FastAPI, SQLite'], preview: '../../assets/projects/lsr.png' },
+      { title: "Restructuring Courses in ASU's LMS Platform", tags: ['2024', 'LXD', 'HTML, CSS, Adobe CS'], preview: '../../assets/projects/improving-adoption.png' },
+      { title: 'Messing Around with Typography', tags: ['2024', 'Graphic Design', 'Ps, Ai, Ae'], preview: '../../assets/projects/comut.jpg' },
+      { title: 'Gamifying Quizzes for Learning', tags: ['2024', 'UI/UX', 'Figma'], preview: '../../assets/projects/nextgen.png' },
+    ];
+
+    const SIDE_QUESTS = [
+      { title: "Master's Graduation", desc: 'MS. User Experience (HCI),<br>Arizona State University, 2025' },
+      { title: 'AI Prompt Library/Marketplace (building)', desc: 'Web App, 2025' },
+      { title: "Hacking for ASU's DigiWallet App", desc: 'Arizona, 2025' },
+      { title: '5 certifications in UX in 2025', desc: 'IxDF Certification, 2025' },
+    ];
+
+    const WRITINGS = [
+      { title: 'From Chat Windows to Interaction Systems', date: 'Analytical Essay, March 2026 · 15 min read' },
+      { title: 'Designing AI Answers Around How People Actually Read Them', date: 'Analytical Essay, January 2026 · 12 min read' },
+      { title: 'Tyranny of the A/B Test', date: 'Opinion, January 2026 · 5 min read' },
+      { title: 'Stop Leveling Up Prototyping Skills', date: 'Opinion, December 2025 · 4 min read' },
+      { title: 'Personalized Interfaces', date: 'Analytical Essay, December 2025 · 8 min read' },
+      { title: 'Why I Start in High-Fidelity', date: 'Opinion, November 2025 · 3 min read' },
+    ];
+
+    function EmailToast({ show }) {
+      return (
+        <div className={'email-toast' + (show ? ' show' : '')}>
+          <i className="fas fa-check-circle"></i> Email copied to clipboard
+        </div>
+      );
+    }
+
+    function App() {
+      const [toast, setToast] = useState(false);
+      const copyEmail = () => {
+        const email = 'mailsofabhishek@gmail.com';
+        if (navigator.clipboard) navigator.clipboard.writeText(email).catch(() => {});
+        setToast(true);
+        setTimeout(() => setToast(false), 2200);
+      };
+      return (
+        <React.Fragment>
+          <HumanCodedBadge />
+          <ThemeToggle />
+          <div className="container">
+            <div className="introduction">
+              <Hero onCopyEmail={copyEmail} />
+              <div className="header2">
+                <h2 className="section-t" style={{ marginBottom: '2rem' }}>Main work</h2>
+                {MAIN_WORK.map((p, i) => <ProjectCard key={i} {...p} />)}
+              </div>
+            </div>
+            <OtherProjects items={OTHER} />
+            <SideQuests items={SIDE_QUESTS} />
+            <Writings items={WRITINGS} />
+            <Footer />
+          </div>
+          <EmailToast show={toast} />
+        </React.Fragment>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

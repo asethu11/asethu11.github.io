@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abseth Blog — Article (UI kit)</title>
+  <link rel="stylesheet" href="../../colors_and_type.css">
+  <link rel="stylesheet" href="../../components.css">
+  <link rel="stylesheet" href="blog.css">
+  <link rel="icon" href="../../assets/logo.png" type="image/png">
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body id="top">
+  <div id="root"></div>
+  <script type="text/babel" src="Article.jsx"></script>
+  <script type="text/babel">
+    const TOC_ITEMS = [
+      { id: 'intro', label: 'Why high-fidelity' },
+      { id: 'cost', label: 'The cost myth' },
+      { id: 'system', label: 'Designing in-system' },
+      { id: 'handoff', label: 'Handoff' },
+    ];
+
+    function App() {
+      return (
+        <React.Fragment>
+          <BackButton label="Blogs" />
+          <ThemeToggle />
+          <TOC items={TOC_ITEMS} />
+          <div className="article-container">
+            <article className="article-body">
+              <h1 className="article-h1">Why I Start in High-Fidelity</h1>
+
+              <p id="intro">
+                Most teams treat fidelity as a finish line — something you earn after the wireframes are
+                blessed. I work the other way around. I start high, because the questions worth answering
+                only show up once the pixels are real<a href="#" className="ref-inline">1<span className="ref-arr">&rarr;</span></a>.
+              </p>
+              <br />
+              <p>
+                A grey box labelled "hero image" never lies to you, and that's exactly the problem. It
+                agrees with every idea. Real type, real spacing, and real color start pushing back
+                immediately — and that friction is the work.
+              </p>
+
+              <h2 className="article-h2" id="cost">The cost myth</h2>
+              <p>
+                The usual objection is that high-fidelity is expensive to throw away. It isn't, if you build
+                from a system. When every spacing value is a token and every color is a variable, a screen is
+                cheap to assemble and cheaper to discard.
+              </p>
+
+              <Callout>
+                <b>Rule of thumb:</b> if a mock takes more than an afternoon to build, the system is too
+                loose — not the fidelity too high.
+              </Callout>
+
+              <h2 className="article-h2" id="system">Designing in-system</h2>
+              <p>
+                Everything here is composed from the same constrained set: two typefaces, eight colors, an
+                8px spacing rhythm. New patterns reuse existing tokens instead of inventing values<a href="#" className="ref-inline">2<span className="ref-arr">&rarr;</span></a>.
+              </p>
+
+              <CodeBlock>{`.case-study {
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  gap: var(--space-md);
+}`}</CodeBlock>
+
+              <p>
+                Because the tokens are semantic, the same component adapts to dark mode with zero extra work.
+                Try the toggle in the corner.
+              </p>
+
+              <h2 className="article-h2" id="handoff">Handoff</h2>
+              <p>
+                When the prototype already speaks the system's language, handoff stops being a translation
+                step. Engineers read the same variables they'd ship.
+              </p>
+
+              <div className="callout-border">
+                <h4 style={{ marginTop: 0 }}>Takeaway</h4>
+                <p style={{ marginBottom: 0 }}>Fidelity isn't polish. It's the fastest way to find out if an idea survives contact with reality.</p>
+              </div>
+
+              <div style={{ display: 'flex', gap: 'var(--space-md)', marginTop: 'var(--space-xl)' }}>
+                <button className="btn-primary">Share</button>
+                <button className="btn-ghost">Next post</button>
+              </div>
+
+              <hr className="intro-hr" />
+              <a href="#top" className="headtag" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+                <span className="arr">↑ &nbsp;</span>back to top
+              </a>
+            </article>
+          </div>
+        </React.Fragment>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<link rel="stylesheet" href="../motion.css">
+<link rel="stylesheet" href="_card.css">
+<style>
+  body { font-size: 14px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; align-items: center; }
+  .lab { font-size: 10.5px; margin-bottom: 8px; }
+  .icons a { font-size: 20px; color: var(--text-primary); margin-right: 16px; }
+  .hint { font-size: 11px; margin-top: 16px; }
+</style></head>
+<body>
+  <p class="card-label">Hover & press patterns — try them</p>
+  <div class="grid">
+    <div><p class="lab muted mono">.fx-link → red</p><a class="fx-link" style="color:var(--primary)">hover this link</a></div>
+    <div><p class="lab muted mono">.fx-morph → radius+red</p><button class="btn-primary">Primary</button></div>
+    <div><p class="lab muted mono">.fx-lift → up + blue</p><span class="icons"><a class="fx-lift">●</a><a class="fx-lift">●</a><a class="fx-lift">●</a></span></div>
+    <div><p class="lab muted mono">.fx-row → bg tint</p><a class="fx-row" style="display:block;padding:8px 12px;margin:0 -12px">list row item</a></div>
+  </div>
+  <p class="hint muted">No shrink-on-press: the button's radius+color morph <em>is</em> the press language.</p>
+</body></html>
