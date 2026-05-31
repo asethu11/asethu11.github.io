@@ -49,6 +49,7 @@ body {
 }
 
 .footer {
+  /* 7.8rem / 5.2rem: intentional hero-section breathing room — sits above the system --space-3xl (4rem) max by design. Don't tokenize. */
   margin-top: 7.8rem;
   margin-bottom: 5.2rem;
 }
@@ -199,6 +200,7 @@ pre > code {
 
 /* -------------  introduction  ------------- */
 .introduction {
+  /* 7.8rem: intentional hero/section breathing room — exceeds the system --space-3xl (4rem) max on purpose. */
   margin-top: 7.8rem;
   margin-bottom: 7.8rem;
 }
@@ -644,6 +646,7 @@ pre > code {
 
 /* -------------  KEYNOTES  ------------- */
 .section-keynotes {
+  /* 7.8rem: intentional section breathing room above --space-3xl (see .introduction). */
   margin-top: 7.8rem;
   width: 75%;
   content-visibility: auto;
@@ -797,6 +800,7 @@ pre > code {
 
 /* -------------  WRITINGS  ------------- */
 .section-writings {
+  /* 7.8rem: intentional section breathing room above --space-3xl (see .introduction). */
   margin-top: 7.8rem;
   margin-bottom: 7.8rem;
   content-visibility: auto;
