@@ -157,12 +157,11 @@ p {
 pre {
   font-size: var(--font-size-xs);
   line-height: 1.6rem;
-  margin: 0;
+  margin: var(--space-lg) 0;
   padding: 0;
-  background-color: #1E1E1E;
+  background-color: var(--surface);
   border-radius: var(--radius-md);
   width: 100%;
-  margin: var(--space-lg) 0;
 }
 
 code {
@@ -170,8 +169,8 @@ code {
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-x: visible;
-  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
-  color: #D4D4D4;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
   display: block;
   border-radius: var(--radius-md);
 }
