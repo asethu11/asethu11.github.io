@@ -193,7 +193,7 @@ pre {
     margin: 0;
     padding: 0;
     background-color: #1E1E1E;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     width: 100%;
     margin: 1.5rem 0;
 }
@@ -206,7 +206,7 @@ code {
     font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
     color: #D4D4D4;
     display: block;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
 }
 
 pre > code {
@@ -255,7 +255,7 @@ pre > code {
 .article-figure img {
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
 }
 
 .article-figure figcaption {
@@ -278,7 +278,7 @@ ol li {
     width: 100%;
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     margin: 1rem 0;
 }
 
@@ -295,7 +295,7 @@ ol li {
 
 .grey-background-article {
     background-color: var(--background-grey);
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -345,7 +345,7 @@ li pre {
     justify-content: center;
     gap: 0.5rem;
     padding: 0.75rem 1rem;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     color: var(--text-primary) !important;
     font-size: 0.9rem;
     font-weight: 500;
@@ -439,7 +439,7 @@ justify-content: space-between;
     margin-bottom: 6rem;
     background-color: var(--background-grey);
     border: var(--background-grey);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     overflow: visible;
     padding: 1% 10%;
     width: 100%;
@@ -457,7 +457,7 @@ justify-content: space-between;
 .boxed {
     background-color: var(--background-grey);
     border: var(--background-grey);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     overflow: visible;
     padding: 3% 3%;
     width: 100%;

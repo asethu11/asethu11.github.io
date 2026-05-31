@@ -22,7 +22,7 @@
   display: flex;
   align-items: center;
   gap: 24px;
-  border-radius: 16px;
+  border-radius: var(--radius-xl);
   margin-top: 2rem;
 }
 
@@ -76,7 +76,7 @@
 
 .grey-background {
   background-color: var(--background-grey);
-  border-radius: 16px;
+  border-radius: var(--radius-xl);
   display: flex;
   justify-content: center;
   align-items: center;

@@ -140,7 +140,7 @@ p {
     justify-content: center;
     gap: 0.5rem;
     padding: 0.75rem 1rem;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     color: var(--text-primary) !important;
     font-size: 0.9rem;
     font-weight: 500;
@@ -208,7 +208,7 @@ pre {
     margin: 0;
     padding: 0;
     background-color: #1E1E1E;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     width: 100%;
     margin: 1.5rem 0;
 }
@@ -221,7 +221,7 @@ code {
     font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
     color: #D4D4D4;
     display: block;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
 }
 
 pre > code {
@@ -434,7 +434,7 @@ pre > code {
     height: 26px;
     
     display: flex;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
   }
   
   .words {
@@ -624,7 +624,7 @@ pre > code {
     background-size: cover;
     background-color: var(--background-grey);
     background-position: center center;
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -738,7 +738,7 @@ pre > code {
     opacity: 0;
     transition: opacity 0.3s ease;
     background-color: var(--background-grey);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     visibility: hidden;
     left: 0;
     /* Center vertically within container */
@@ -751,7 +751,7 @@ pre > code {
     width: 100%;
     height: auto;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     display: block;
   }
   
@@ -779,7 +779,7 @@ pre > code {
     align-items: start;
     margin: 0 -12px;
     padding: 8px 12px;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     transition: background-color 0.2s ease;
   }
   

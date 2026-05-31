@@ -215,7 +215,7 @@ pre {
     margin: 0;
     padding: 0;
     background-color: #1E1E1E;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     width: 100%;
     margin: 1.5rem 0;
 }
@@ -228,7 +228,7 @@ code {
     font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
     color: #D4D4D4;
     display: block;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
 }
 
 pre > code {
@@ -275,7 +275,7 @@ pre > code {
 .article-figure img {
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
 }
 
 .article-figure figcaption {
@@ -319,7 +319,7 @@ ul li {
 
 .grey-background-article {
     background-color: var(--background-grey);
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -382,7 +382,7 @@ li pre {
     justify-content: center;
     gap: 0.5rem;
     padding: 0.75rem 1rem;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     color: var(--text-primary) !important;
     font-size: 0.9rem;
     font-weight: 500;
@@ -497,7 +497,7 @@ html.force-dark .intro-hr {
     right: 24px;
     max-width: 320px;
     padding: 14px 16px;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     background: rgba(20, 20, 20, 0.92);
     color: #f7f7f7;
     box-shadow: 0 12px 30px rgba(0,0,0,0.18);
@@ -532,7 +532,7 @@ html.force-dark .intro-hr {
 .toast button {
     cursor: pointer;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     padding: 8px 12px;
     font-size: 0.9rem;
     font-weight: 600;
@@ -564,7 +564,7 @@ html.force-dark .intro-hr {
     bottom: 20px;
     right: 20px;
     padding: 8px 12px;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     background: rgba(0, 0, 0, 0.12);
     color: var(--text-primary);
     font-weight: 600;
@@ -640,7 +640,7 @@ html.force-dark .intro-hr {
     padding-left: 22px;
     background: var(--background);
     border: none;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     padding: 14px 16px 14px 22px;
     box-shadow: none;
     transition: transform 0.2s ease;
@@ -707,7 +707,7 @@ table {
     border-collapse: collapse;
     margin: 1.5rem 0;
     border: 1px solid var(--background-grey);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     overflow: hidden;
 }
 
@@ -894,7 +894,7 @@ table td:first-child {
     flex-direction: column;
     padding: 1.25rem 1.5rem;
     border: 1px solid var(--background-grey);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     text-decoration: none;
     transition: border-color 0.2s ease, background-color 0.2s ease;
 }
