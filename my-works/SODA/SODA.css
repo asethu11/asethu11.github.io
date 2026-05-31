@@ -70,8 +70,8 @@ b {
 h1 {
     font-family: "Big Shoulders Display", serif;
     font-size: 3rem !important;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-md);
     letter-spacing: -0.3px;
 }
 
@@ -83,14 +83,14 @@ h2, h3, h4, h5, h6, p{
 h2 {
     font-size: 1.rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
     letter-spacing: -0.3px;
 }
 
 h3 {
     font-size: 1.2rem;
     font-weight: 500;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
     line-height: 1.6rem;
 }
 
@@ -156,7 +156,7 @@ a:visited {
 
 
 #intro-tags1 {
-    margin-top: 3rem;
+    margin-top: var(--space-2xl);
     color: var(--text-secondary) !important;
 }
 
@@ -164,8 +164,8 @@ a:visited {
 
 
 hr {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
     border: 0;
     border-top: 1px solid var(--background-grey);
 }
@@ -196,7 +196,7 @@ a:link {
 p {
     line-height: 24px;
     margin-top: 0rem;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
 }
 
 pre {
@@ -207,11 +207,11 @@ pre {
     background-color: #1E1E1E;
     border-radius: var(--radius-md);
     width: 100%;
-    margin: 1.5rem 0;
+    margin: var(--space-lg) 0;
 }
 
 code {
-    padding: 1.5rem;
+    padding: var(--space-lg);
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow-x: visible;
@@ -243,12 +243,12 @@ pre > code {
 .article-body {
     max-width: 800px;
     width: 100%;
-    padding: 0 1rem;
+    padding: 0 var(--space-md);
     box-sizing: border-box;
 }
 
 .article-figure {
-    margin: 2rem 0;
+    margin: var(--space-xl) 0;
 }
 
 
@@ -265,31 +265,31 @@ pre > code {
 }
 
 .article-figure figcaption {
-    margin-top: 0.5rem;
+    margin-top: var(--space-sm);
     font-size: 0.9rem;
     color: var(--text-secondary);
 }
 
 ol {
-    padding-left: 1.5rem;
-    margin: 1rem 0;
+    padding-left: var(--space-lg);
+    margin: var(--space-md) 0;
 }
 
 ol li {
     line-height: 1.5;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--space-sm);
 }
 
 
 .article-h1{
     font-size: 2rem;
     letter-spacing: -0.05rem;
-    margin-bottom: 2rem;
-    margin-top: 2rem;
+    margin-bottom: var(--space-xl);
+    margin-top: var(--space-xl);
 }
 
 .article-h2{
-    margin-top: 4rem;
+    margin-top: var(--space-3xl);
 }
 
 .grey-background-article {
@@ -337,13 +337,13 @@ li pre {
 
 .back-button {
     position: fixed;
-    top: 2rem;
-    left: 2rem;
+    top: var(--space-xl);
+    left: var(--space-xl);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1rem;
+    gap: var(--space-sm);
+    padding: 0.75rem var(--space-md);
     border-radius: var(--radius-md);
     color: var(--text-primary) !important;
     font-size: 0.9rem;
@@ -368,8 +368,8 @@ li pre {
 
 @media only screen and (max-width: 768px) {
     .back-button {
-        top: 1rem;
-        left: 1rem;
+        top: var(--space-md);
+        left: var(--space-md);
     }
 }
 
@@ -404,7 +404,7 @@ li pre {
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 1.5rem 0;
+    margin: var(--space-lg) 0;
     font-size: 1rem;
 }
 
@@ -474,7 +474,7 @@ th {
 }
 
 video {
-    margin: 1rem 0;
+    margin: var(--space-md) 0;
     height: auto;
     border-radius: var(--radius-md);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -483,9 +483,9 @@ video {
 /* COMPACT: 1-2 Line Layout */
 .tech-stack {
     background-color: var(--background-grey);
-    padding: 1rem;
+    padding: var(--space-md);
     border-radius: var(--radius-lg);
-    margin: 1.5rem 0;
+    margin: var(--space-lg) 0;
 }
 
 .tech-compact {
@@ -500,7 +500,7 @@ video {
 .tech-tool {
     background-color: var(--text-secondary);
     color: var(--background);
-    padding: 0.2rem 0.5rem;
+    padding: 0.2rem var(--space-sm);
     border-radius: 6px;
     font-weight: 500;
     font-size: 0.8rem;

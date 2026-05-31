@@ -21,9 +21,9 @@
 .headerproject {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: var(--space-lg);
   border-radius: var(--radius-xl);
-  margin-top: 2rem;
+  margin-top: var(--space-xl);
 }
 
 .headerprojectbg {
@@ -34,7 +34,7 @@
 @media only screen and (max-width: 768px) {
   .headerproject {
       flex-direction: column;
-      gap: 4px;
+      gap: var(--space-xs);
   }
 
   .headerproject a{
@@ -65,7 +65,7 @@
 
 .project {
   flex: 1 1 calc(50% - 80px); 
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 @media only screen and (min-width: 768px) {
@@ -129,13 +129,13 @@
 
 
 .project-text {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: var(--space-sm);
+  padding-right: var(--space-sm);
 }
 
 .project-description {
   color: var(--text-secondary);
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 .project-title{

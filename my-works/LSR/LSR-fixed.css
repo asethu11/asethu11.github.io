@@ -93,8 +93,8 @@ body {
 h1 {
     font-family: "Big Shoulders Display", serif;
     font-size: 3rem !important;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-md);
     letter-spacing: -0.3px;
     color: var(--text-bold);
 }
@@ -106,7 +106,7 @@ h2, h3, h4, h5, h6, p {
 h2 {
     font-size: 1.3rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
     letter-spacing: -0.3px;
     color: var(--text-bold);
 }
@@ -128,7 +128,7 @@ b {
 /* Paragraph styles */
 p {
     line-height: 1.5;
-    margin: 1rem 0;
+    margin: var(--space-md) 0;
     color: var(--text-primary);
 }
 
@@ -189,20 +189,20 @@ p a:hover {
 .article-body {
     max-width: 700px;
     width: 100%;
-    padding: 0 1rem;
+    padding: 0 var(--space-md);
     box-sizing: border-box;
 }
 
 .article-body > section + section {
-    margin-top: 3rem;
+    margin-top: var(--space-2xl);
 }
 
 /* Article-specific heading adjustments */
 .article-h1 {
     font-size: 2rem;
     letter-spacing: -0.05rem;
-    margin-bottom: 2rem;
-    margin-top: 2rem;
+    margin-bottom: var(--space-xl);
+    margin-top: var(--space-xl);
     line-height: 1.25;
 }
 
@@ -226,7 +226,7 @@ p a:hover {
 
 /* Figure container with breakout layout */
 .article-figure {
-    margin: 2rem auto;
+    margin: var(--space-xl) auto;
     max-width: 800px;
     width: calc(100% + 100px);
     margin-left: -40px;
@@ -245,7 +245,7 @@ p a:hover {
 }
 
 .article-figure figcaption, .article-video figcaption  {
-    margin-top: 0.5rem;
+    margin-top: var(--space-sm);
     font-size: 0.9rem;
     color: var(--text-secondary);
 }
@@ -270,8 +270,8 @@ p a:hover {
 /* Video styling */
 .article-video {
     border-radius: var(--radius-md);
-    margin: 1rem 0;
-    margin: 2rem auto;
+    margin: var(--space-md) 0;
+    margin: var(--space-xl) auto;
     max-width: 800px;
     width: calc(100% + 100px);
     margin-left: -50px;
@@ -311,12 +311,12 @@ pre {
     background-color: #1E1E1E;
     border-radius: var(--radius-md);
     width: 100%;
-    margin: 1.5rem 0;
+    margin: var(--space-lg) 0;
 }
 
 /* Code element styling */
 code {
-    padding: 1.5rem;
+    padding: var(--space-lg);
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow-x: visible;
@@ -342,8 +342,8 @@ li pre {
 
 /* Introduction section divider */
 .intro-hr {
-    margin-top: 4rem;
-    margin-bottom: 2rem;
+    margin-top: var(--space-3xl);
+    margin-bottom: var(--space-xl);
     border: 0;
     border-top: 2px solid #cccccc;
 }
@@ -369,13 +369,13 @@ html.force-dark .intro-hr {
 /* Back button (fixed top-left) */
 .back-button {
     position: fixed;
-    top: 2rem;
-    left: 2rem;
+    top: var(--space-xl);
+    left: var(--space-xl);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1rem;
+    gap: var(--space-sm);
+    padding: 0.75rem var(--space-md);
     border-radius: var(--radius-md);
     color: var(--text-primary) !important;
     font-size: 0.9rem;
@@ -395,8 +395,8 @@ html.force-dark .intro-hr {
 .jump-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    margin: 2rem 0 0 0;
+    gap: var(--space-sm);
+    margin: var(--space-xl) 0 0 0;
     padding: 10px 20px;
     background: transparent;
     color: var(--primary);
@@ -420,8 +420,8 @@ html.force-dark .intro-hr {
 /* Sticky TOC positioning */
 .toc-sticky {
     position: fixed;
-    top: 2rem;
-    right: 24px;
+    top: var(--space-xl);
+    right: var(--space-lg);
     width: 220px;
     z-index: 110;
 }
@@ -433,7 +433,7 @@ html.force-dark .intro-hr {
     background: var(--background);
     border: none;
     border-radius: var(--radius-lg);
-    padding: 14px 16px;
+    padding: 14px var(--space-md);
     box-shadow: none;
     transition: transform 0.2s ease;
 }
@@ -447,7 +447,7 @@ html.force-dark .intro-hr {
     font-size: 0.78rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    margin: 0 0 8px 0;
+    margin: 0 0 var(--space-sm) 0;
     color: var(--text-secondary);
 }
 
@@ -464,7 +464,7 @@ html.force-dark .intro-hr {
 
 .toc-list a {
     display: block;
-    padding: 4px 0 4px 8px;
+    padding: var(--space-xs) 0 var(--space-xs) var(--space-sm);
     border-left: 2px solid transparent;
     color: rgba(128, 128, 128, 0.6);
     font-size: 0.9rem;
@@ -519,7 +519,7 @@ html.force-dark .intro-hr {
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 1.5rem 0;
+    margin: var(--space-lg) 0;
     border: 1px solid var(--background-grey);
     border-radius: var(--radius-md);
     overflow: hidden;
@@ -540,7 +540,7 @@ table td {
 
 /* Cell padding and borders */
 table th, table td {
-    padding: 0.75rem 1rem;
+    padding: 0.75rem var(--space-md);
     vertical-align: top;
     border-bottom: 1px solid var(--background-grey);
 }
@@ -615,7 +615,7 @@ table tr:last-child td {
     height: 12px;
     background: var(--text-primary);
     border-radius: 50%;
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-lg);
 }
 
 /* Timeline date label */
@@ -635,7 +635,7 @@ table tr:last-child td {
     color: var(--text-primary);
     line-height: 1.35;
     font-weight: 400;
-    padding-right: 1rem;
+    padding-right: var(--space-md);
     max-width: none;
 }
 
@@ -644,7 +644,7 @@ table tr:last-child td {
 
 /* Next steps section */
 .next-steps {
-    margin: 3rem 0 2rem;
+    margin: var(--space-2xl) 0 var(--space-xl);
 }
 
 .next-steps-title {
@@ -660,15 +660,15 @@ table tr:last-child td {
 .next-steps-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
 }
 
 /* Individual next step card */
 .next-step-card {
     display: flex;
     flex-direction: column;
-    padding: 1.25rem 1.5rem;
+    padding: 1.25rem var(--space-lg);
     border: 1px solid var(--border-light);
     border-radius: var(--radius-md);
     text-decoration: none;
@@ -683,7 +683,7 @@ table tr:last-child td {
 .next-step-label {
     font-size: 0.75rem;
     color: var(--text-secondary);
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--space-sm);
     letter-spacing: 0.02em;
 }
 
@@ -721,7 +721,7 @@ table tr:last-child td {
 
 /* Intro tags styling */
 #intro-tags1 {
-    margin-top: 3rem;
+    margin-top: var(--space-2xl);
     color: var(--text-secondary) !important;
 }
 
@@ -749,7 +749,7 @@ table tr:last-child td {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    padding: 8px 12px;
+    padding: var(--space-sm) 12px;
     border-radius: var(--radius-md);
     background: rgba(0, 0, 0, 0.12);
     color: var(--text-primary);
@@ -781,10 +781,10 @@ table tr:last-child td {
 /* Toast container (fixed bottom-right) */
 .toast {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
+    bottom: var(--space-lg);
+    right: var(--space-lg);
     max-width: 320px;
-    padding: 14px 16px;
+    padding: 14px var(--space-md);
     border-radius: var(--radius-lg);
     background: rgba(20, 20, 20, 0.92);
     color: #f7f7f7;
@@ -825,7 +825,7 @@ table tr:last-child td {
     cursor: pointer;
     border: none;
     border-radius: var(--radius-md);
-    padding: 8px 12px;
+    padding: var(--space-sm) 12px;
     font-size: 0.9rem;
     font-weight: 600;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -886,8 +886,8 @@ table tr:last-child td {
     .back-button {
         position: relative;
         display: inline-flex;
-        top: 1rem;
-        left: 1rem;
+        top: var(--space-md);
+        left: var(--space-md);
     }
 
     /* Table adjustments */
@@ -897,18 +897,18 @@ table tr:last-child td {
     
     table th,
     table td {
-        padding: 0.75rem 0.25rem;
+        padding: 0.75rem var(--space-xs);
     }
 
     /* Timeline becomes vertical on mobile */
     .timeline-container {
-        margin: 2rem 0;
+        margin: var(--space-xl) 0;
     }
 
     .timeline-items {
         flex-direction: column;
         gap: 1.25rem;
-        padding-left: 1.5rem;
+        padding-left: var(--space-lg);
     }
 
     .timeline-line {
@@ -922,14 +922,14 @@ table tr:last-child td {
     .timeline-item {
         flex-direction: row;
         align-items: flex-start;
-        gap: 1rem;
+        gap: var(--space-md);
         min-width: auto;
     }
 
     .timeline-dot {
         flex-shrink: 0;
         margin-bottom: 0;
-        margin-top: 4px;
+        margin-top: var(--space-xs);
         width: 10px;
         height: 10px;
     }
@@ -960,7 +960,7 @@ table tr:last-child td {
     .next-steps-links {
         flex-direction: column;
         align-items: flex-start;
-        gap: 0.5rem;
+        gap: var(--space-sm);
     }
 
     .next-steps-links .divider {

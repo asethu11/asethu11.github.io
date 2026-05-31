@@ -51,8 +51,8 @@ body {
 h1 {
     font-family: "Big Shoulders Display", serif;
     font-size: 3rem !important;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-md);
     letter-spacing: -0.3px;
 }
 
@@ -64,14 +64,14 @@ h2, h3, h4, h5, h6, p{
 h2 {
     font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
     letter-spacing: -0.3px;
 }
 
 h3 {
     font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
     line-height: 1.6rem;
 }
 
@@ -115,7 +115,7 @@ a:hover {
 
 li {
     line-height: 1.5;
-    margin-top: 0.5rem;
+    margin-top: var(--space-sm);
 }
 
 p {
@@ -133,13 +133,13 @@ p {
 
 .back-button {
     position: relative;
-    top: 2rem;
-    left: 2rem;
+    top: var(--space-xl);
+    left: var(--space-xl);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1rem;
+    gap: var(--space-sm);
+    padding: 0.75rem var(--space-md);
     border-radius: var(--radius-md);
     color: var(--text-primary) !important;
     font-size: 0.9rem;
@@ -164,8 +164,8 @@ p {
 
 @media only screen and (max-width: 768px) {
     .back-button {
-        top: 1rem;
-        left: 1rem;
+        top: var(--space-md);
+        left: var(--space-md);
     }
 }
 
@@ -210,11 +210,11 @@ pre {
     background-color: #1E1E1E;
     border-radius: var(--radius-md);
     width: 100%;
-    margin: 1.5rem 0;
+    margin: var(--space-lg) 0;
 }
 
 code {
-    padding: 1.5rem;
+    padding: var(--space-lg);
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow-x: visible;
@@ -291,14 +291,14 @@ pre > code {
 
   /* -------------  introduction  ------------- */
 .introduction {
-    margin-top: 2rem;
+    margin-top: var(--space-xl);
 
   }
   .introduction-text {
     width: 60%;
     font-size: 1rem;
     line-height: 1.5rem;
-    margin-top: 1.5rem;
+    margin-top: var(--space-lg);
   }
   
   @media only screen and (max-width: 768px) and (min-width: 481px) {
@@ -363,7 +363,7 @@ pre > code {
   
   .social-icons {
     display: flex;
-    gap: 16px;
+    gap: var(--space-md);
     margin-bottom: ;
   }
   
@@ -545,16 +545,16 @@ pre > code {
   }
   
   .keynotes {
-    margin-top: 2rem;
+    margin-top: var(--space-xl);
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: var(--space-lg);
   }
   
   .video {
     display: flex;
     flex-direction: row;
-    gap: 32px;
+    gap: var(--space-xl);
   }
   
   .play {
@@ -656,7 +656,7 @@ pre > code {
         width: 100%;
     }
     .video {
-        gap: 16px;
+        gap: var(--space-md);
     }
   }
   
@@ -666,7 +666,7 @@ pre > code {
         width: 100%;
     }
     .video {
-        gap: 16px;
+        gap: var(--space-md);
     }
   }
   
@@ -677,7 +677,7 @@ pre > code {
   
     .video {
         flex-direction: column;
-        gap: 8px;
+        gap: var(--space-sm);
     }
     .image-background{
         width: 100%;
@@ -706,19 +706,19 @@ pre > code {
   }
   
   .other-projects h2 {
-    margin-bottom: 2rem;
+    margin-bottom: var(--space-xl);
   }
   
   .columns-container {
     display: flex;
-    gap: 32px;
+    gap: var(--space-xl);
   }
   
   /* Left column with project rows */
   .projects {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--space-sm);
     width: 50%;
   }
   
@@ -775,10 +775,10 @@ pre > code {
     color: var(--text-primary);
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: var(--space-xs);
     align-items: start;
     margin: 0 -12px;
-    padding: 8px 12px;
+    padding: var(--space-sm) 12px;
     border-radius: var(--radius-md);
     transition: background-color 0.2s ease;
   }
@@ -804,7 +804,7 @@ pre > code {
   .project-row-sub-title{
     display: flex;
     flex-direction: row;
-    gap: 8px;
+    gap: var(--space-sm);
     align-items: center;
     justify-content: start;
   }

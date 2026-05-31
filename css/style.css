@@ -56,7 +56,7 @@ body {
 .footer-text {
   font-size: 14px;
   color: var(--text-secondary);
-  margin-top: 1.5rem;
+  margin-top: var(--space-lg);
 }
 
 
@@ -73,7 +73,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 1rem;
+  gap: var(--space-md);
 }
 
 .view-all-link {
@@ -123,14 +123,14 @@ h1 {
 h2 {
   font-size: 1.1rem;
   font-weight: 500;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
   letter-spacing: -0.3px;
 }
 
 h3 {
   font-size: 1rem;
   font-weight: 500;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
   line-height: 1.6rem;
 }
 
@@ -161,11 +161,11 @@ pre {
   background-color: #1E1E1E;
   border-radius: var(--radius-md);
   width: 100%;
-  margin: 1.5rem 0;
+  margin: var(--space-lg) 0;
 }
 
 code {
-  padding: 1.5rem;
+  padding: var(--space-lg);
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-x: visible;
@@ -206,7 +206,7 @@ pre > code {
   width: 60%;
   font-size: 1rem;
   line-height: 1.5rem;
-  margin-top: 1.5rem;
+  margin-top: var(--space-lg);
 }
 
 @media only screen and (max-width: 768px) and (min-width: 481px) {
@@ -267,7 +267,7 @@ pre > code {
 
 .social-icons {
   display: flex;
-  gap: 16px;
+  gap: var(--space-md);
 }
 
 .social-icons a {
@@ -285,7 +285,7 @@ pre > code {
 
 .socials {
   display: flex;
-  gap: 16px;
+  gap: var(--space-md);
 }
 
 
@@ -515,11 +515,11 @@ pre > code {
   .project-title{
       flex-direction: column;
       align-items: start;
-      margin-bottom: 1rem;
+      margin-bottom: var(--space-md);
   }
 
   .project-title h3{
-      margin-bottom: 0.5rem;
+      margin-bottom: var(--space-sm);
   }
 }
 
@@ -532,19 +532,19 @@ pre > code {
 }
 
 .other-projects h2 {
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-xl);
 }
 
 .columns-container {
   display: flex;
-  gap: 32px;
+  gap: var(--space-xl);
 }
 
 /* Left column with project rows */
 .projects {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-sm);
   width: 50%;
 }
 
@@ -602,10 +602,10 @@ pre > code {
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--space-xs);
   align-items: start;
   margin: 0 -12px;
-  padding: 8px 12px;
+  padding: var(--space-sm) 12px;
   border-radius: var(--radius-md);
   transition: background-color 0.2s ease;
 }
@@ -631,7 +631,7 @@ pre > code {
 .project-row-sub-title{
   display: flex;
   flex-direction: row;
-  gap: 8px;
+  gap: var(--space-sm);
   align-items: center;
   justify-content: start;
 }
@@ -651,16 +651,16 @@ pre > code {
 }
 
 .keynotes {
-  margin-top: 2rem;
+  margin-top: var(--space-xl);
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--space-lg);
 }
 
 .video {
   display: flex;
   flex-direction: row;
-  gap: 32px;
+  gap: var(--space-xl);
 }
 
 .play {
@@ -765,7 +765,7 @@ pre > code {
       width: 100%;
   }
   .video {
-      gap: 16px;
+      gap: var(--space-md);
   }
 }
 
@@ -775,7 +775,7 @@ pre > code {
       width: 100%;
   }
   .video {
-      gap: 16px;
+      gap: var(--space-md);
   }
 }
 
@@ -786,7 +786,7 @@ pre > code {
 
   .video {
       flex-direction: column;
-      gap: 8px;
+      gap: var(--space-sm);
   }
   .image-background{
       width: 100%;
@@ -804,13 +804,13 @@ pre > code {
 }
 
 .writings {
-  margin-top: 2rem;
+  margin-top: var(--space-xl);
 }
 
 .article {
   display: flex;
   flex-direction: row;
-  gap: 16px;  
+  gap: var(--space-md);  
 }
 
 .article:visited {
@@ -898,12 +898,12 @@ pre > code {
 .article-body {
   max-width: 700px;
   width: 100%;
-  padding: 0 1rem;
+  padding: 0 var(--space-md);
   box-sizing: border-box;
 }
 
 .article-figure {
-  margin: 2rem 0;
+  margin: var(--space-xl) 0;
 }
 
 .article-figure img {
@@ -913,19 +913,19 @@ pre > code {
 }
 
 .article-figure figcaption {
-  margin-top: 0.5rem;
+  margin-top: var(--space-sm);
   font-size: 0.9rem;
   color: var(--text-secondary);
 }
 
 ol {
-  padding-left: 1.5rem;
-  margin: 1rem 0;
+  padding-left: var(--space-lg);
+  margin: var(--space-md) 0;
 }
 
 ol li {
   line-height: 1.5;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-sm);
 }
 
 .article-video {
@@ -933,18 +933,18 @@ ol li {
   max-width: 100%;
   height: auto;
   border-radius: var(--radius-md);
-  margin: 1rem 0;
+  margin: var(--space-md) 0;
 }
 
 .article-h1{
   font-size: 2rem;
   letter-spacing: -0.05rem;
-  margin-bottom: 2rem;
-  margin-top: 1rem;
+  margin-bottom: var(--space-xl);
+  margin-top: var(--space-md);
 }
 
 .article-h2{
-  margin-top: 4rem;
+  margin-top: var(--space-3xl);
 }
 
 .grey-background-article {
@@ -992,13 +992,13 @@ li pre {
 
 .back-button {
   position: fixed;
-  top: 2rem;
-  left: 2rem;
+  top: var(--space-xl);
+  left: var(--space-xl);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
+  gap: var(--space-sm);
+  padding: 0.75rem var(--space-md);
   border-radius: var(--radius-md);
   color: var(--text-primary) !important;
   font-size: 0.9rem;
@@ -1023,8 +1023,8 @@ li pre {
 
 @media only screen and (max-width: 768px) {
   .back-button {
-      top: 1rem;
-      left: 1rem;
+      top: var(--space-md);
+      left: var(--space-md);
   }
 }
 
@@ -1083,8 +1083,8 @@ li pre {
 /* Email Toast Notification */
 .email-toast {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: var(--space-lg);
+  right: var(--space-lg);
   background: rgba(20, 20, 20, 0.95);
   color: #f7f7f7;
   padding: 14px 20px;
@@ -1121,9 +1121,9 @@ li pre {
 
 @media only screen and (max-width: 480px) {
   .email-toast {
-    bottom: 16px;
-    right: 16px;
-    left: 16px;
-    padding: 12px 16px;
+    bottom: var(--space-md);
+    right: var(--space-md);
+    left: var(--space-md);
+    padding: 12px var(--space-md);
   }
 }
