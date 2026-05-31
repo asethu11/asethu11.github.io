@@ -91,42 +91,18 @@
         }
         </script>
 
-        <!-- Skeleton Loading Styles -->
+        <!-- Skeleton Loading Styles — uses design system tokens (.sk-image visual) -->
         <style>
-            /* Base skeleton animation */
-            @keyframes shimmer {
-                0% { background-position: 200% 0; }
-                100% { background-position: -200% 0; }
-            }
-            
-            /* The class applied to the container (figure) during loading */
+            /* Loading placeholder — flat surface fill, theme-aware via --surface.
+               Matches the design system's .sk-image semantics (no shimmer). */
             figure.media-skeleton {
                 position: relative;
-                z-index: 1; /* Ensure on top */
-                background: #e0e0e0; /* Fallback - darker */
-                background: linear-gradient(90deg, 
-                    rgba(0, 0, 0, 0.06) 25%, 
-                    rgba(0, 0, 0, 0.15) 37%, 
-                    rgba(0, 0, 0, 0.06) 63%);
-                background-size: 200% 100%;
-                animation: shimmer 1.5s ease-in-out infinite;
-                min-height: 300px; /* Placeholder height */
-                border-radius: 8px;
+                z-index: 1;
+                background: var(--surface);
+                min-height: 300px;
+                border-radius: var(--radius-md);
                 display: block;
             }
-
-            /* Dark mode specific skeleton */
-            @media (prefers-color-scheme: dark) {
-                figure.media-skeleton {
-                    background: linear-gradient(90deg, 
-                        rgba(255, 255, 255, 0.02) 25%, 
-                        rgba(255, 255, 255, 0.08) 37%, 
-                        rgba(255, 255, 255, 0.02) 63%);
-                    background-size: 200% 100%;
-                }
-            }
-
-
         </style>
 
         <script src="/my-works/improvingAdoption/script.js"></script>
