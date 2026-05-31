@@ -386,16 +386,7 @@ pre > code {
     gap: 100px;
   }
   
-  #linked  {
-    font-size: 16px;
-  }
-  
-  #linkedin {
-    display: flex;
-    gap: 15px;
-    height: 16px;
-    margin: 0;
-  }
+  /* #linked / #linkedin: deprecated — resume CTA now uses system .btn-primary */
   
   #linklog {
     margin-top: 3px;
