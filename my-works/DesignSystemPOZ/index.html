@@ -26,6 +26,18 @@
 })();
 </script>
 
+<!-- Theme init — respect system / stored preference before paint (matches portfolio case studies) -->
+<script>
+(function(){
+  try{
+    var stored = sessionStorage.getItem('pozTheme');
+    var t = (stored === 'light' || stored === 'dark') ? stored
+            : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', t);
+  }catch(e){}
+})();
+</script>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
 <script>
@@ -1501,6 +1513,39 @@ body { margin: 0; min-height: 100vh; overflow-x: hidden; }
 .skip-link { position: absolute; left: 16px; top: 16px; transform: translateY(-150%); padding: 10px 16px; background: var(--brand); color: var(--brand-foreground); border-radius: var(--radius-md); font: var(--font-button); font-weight: var(--weight-button); text-decoration: none; z-index: 100; transition: transform var(--dur-fast) var(--ease-out); }
 .skip-link:focus { transform: translateY(0); }
 
+/* Portfolio chrome — fixed back-button (top-left) + theme toggle (bottom-right),
+   matching the rest of the case studies but styled in POZ tokens so it reads native. */
+.back-button {
+  position: fixed; top: 20px; left: 20px; z-index: 50;
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 40px; padding: 0 16px 0 14px;
+  background: var(--canvas-blur); backdrop-filter: blur(10px);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-full);
+  color: var(--foreground); font: var(--font-button); font-weight: var(--weight-button);
+  text-decoration: none; box-shadow: var(--shadow-sm);
+  transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.back-button:hover { border-color: var(--border-strong); transform: translateY(-1px); text-decoration: none; }
+.back-button svg { width: 18px; height: 18px; flex: none; }
+
+.theme-toggle {
+  position: fixed; bottom: 20px; right: 20px; z-index: 50;
+  height: 40px; padding: 0 16px;
+  background: var(--canvas-blur); backdrop-filter: blur(10px);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-full);
+  color: var(--foreground); font: var(--font-button); font-weight: var(--weight-button);
+  cursor: pointer; box-shadow: var(--shadow-sm);
+  transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.theme-toggle:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+
+/* The wide showcase sections begin below the fixed back-button. */
+.head { padding-top: 84px; }
+@media (max-width: 600px) {
+  .back-button span.lbl { display: none; }
+  .back-button { padding: 0; width: 40px; justify-content: center; }
+}
+
 /* HERO */
 .head-wrap { position: relative; }
 .head-veil { position: absolute; inset: 0; background: var(--gradient-hero-veil); pointer-events: none; }
@@ -1702,17 +1747,16 @@ article aside.result p { font: var(--font-body-sm); color: var(--foreground-mute
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<nav class="site-nav">
-  <div class="site-nav-inner">
-    <a class="brand-mark" href="/" style="text-decoration:none">
-      point one zero<span class="crumb">Work</span>
-    </a>
-    <div class="nav-right">
-      <a href="/" class="btn btn-secondary btn-sm" style="text-decoration:none">All work</a>
-      <a href="mailto:admin@pointonezero.com" class="btn btn-primary btn-sm" style="text-decoration:none">Let's talk</a>
-    </div>
-  </div>
-</nav>
+<!-- Portfolio back-button (matches every case study) -->
+<a href="/" class="back-button" aria-label="Back to home">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span class="lbl">Home</span>
+</a>
+
+<!-- Portfolio theme toggle (matches every case study) -->
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">Switch to dark</button>
 
 <main id="main">
 
@@ -1731,6 +1775,9 @@ article aside.result p { font: var(--font-body-sm); color: var(--foreground-mute
     <h1>A design language that holds in <span class="brand-word">12 formats</span>.</h1>
     <p class="lead">One CSS file. 32 components. 12 production UI kits spanning web, print, social, and slide decks — all governed by a single token layer and one quiet brand accent.</p>
     <div class="byline">Design system designed by <strong>Abhishek Sethuraman</strong> for Point One Zero.</div>
+    <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+      <a href="/pointonezero/" class="btn btn-primary btn-lg" style="text-decoration:none">Explore the live site →</a>
+    </div>
     <div class="summary">
       <div class="item">
         <div class="label">Client</div>
@@ -1815,7 +1862,7 @@ article aside.result p { font: var(--font-body-sm); color: var(--foreground-mute
   </article>
 
   <aside class="toc">
-    <div class="toc-eyebrow">In this post</div>
+    <div class="toc-eyebrow">Contents</div>
     <ul>
       <li><a href="#brief" class="active">The brief</a></li>
       <li><a href="#decisions">Key decisions</a></li>
@@ -1844,6 +1891,7 @@ article aside.result p { font: var(--font-body-sm); color: var(--foreground-mute
   <div class="section-head">
     <span class="eyebrow">The work</span>
     <h2>12 kits. One system.</h2>
+    <p style="font:var(--font-body);color:var(--foreground-muted);max-width:640px;margin:14px 0 0">The web kits below are live. <a href="/pointonezero/" style="color:var(--foreground);text-decoration:underline;text-decoration-color:var(--brand);text-underline-offset:4px">Explore the running Point One Zero site →</a></p>
   </div>
 
   <!-- 1. MARKETING — full width -->
@@ -2424,9 +2472,13 @@ article aside.result p { font: var(--font-body-sm); color: var(--foreground-mute
 </main>
 
 <footer class="foot">
-  <div class="foot-inner">
-    <div>© Point One Zero · 25 Palmer Square, Princeton, NJ 08542</div>
-    <div class="mono">CS-2026-DS-01 · design systems · v0.6.4</div>
+  <div class="foot-inner" style="flex-direction:column;align-items:flex-start;gap:20px">
+    <a href="/" class="btn btn-secondary btn-sm" style="text-decoration:none">← Back to home</a>
+    <div style="display:flex;justify-content:space-between;width:100%;gap:16px;flex-wrap:wrap">
+      <div>© Point One Zero · 25 Palmer Square, Princeton, NJ 08542</div>
+      <div class="mono">CS-2026-DS-01 · design systems · v0.6.4</div>
+    </div>
+    <div style="font:var(--font-caption);color:var(--foreground-subtle)">Site coded by a human in vanilla HTML, CSS, and JavaScript.</div>
   </div>
 </footer>
 
@@ -2443,6 +2495,25 @@ function updateToc() {
 }
 window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(() => { updateToc(); ticking = false; }); ticking = true; }});
 updateToc();
+
+/* Theme toggle — manual override on top of the system default (matches portfolio case studies) */
+(function(){
+  var root = document.documentElement;
+  var btn = document.getElementById('theme-toggle');
+  function label(){ if (btn) btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Switch to light' : 'Switch to dark'; }
+  label();
+  if (btn) btn.addEventListener('click', function(){
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { sessionStorage.setItem('pozTheme', next); } catch(e){}
+    label();
+  });
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e){
+    try { if (sessionStorage.getItem('pozTheme')) return; } catch(_){}
+    root.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+    label();
+  });
+})();
 </script>
 </body>
 </html>
