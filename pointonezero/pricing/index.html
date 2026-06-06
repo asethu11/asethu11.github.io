@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>Engagements — Point One Zero</title>
+<link rel="icon" href="../../assets/favicon.svg" />
+<link rel="stylesheet" href="../../colors_and_type.css" />
+<style>
+  :root { --container: 1280px; --pad: 56px; }
+  body { margin: 0; min-height: 100vh; overflow-x: hidden; }
+
+  /* ---------------- NAV ---------------- */
+  .brand-mark { font: var(--font-body); font-weight: var(--weight-medium); color: var(--foreground); letter-spacing: -0.2px; }
+  .nav-center { display: flex; gap: 28px; position: absolute; left: 50%; transform: translateX(-50%); }
+  .nav-center a { font: var(--font-body-sm); font-weight: var(--weight-medium); color: var(--foreground-subtle); }
+  .nav-center a:hover { color: var(--foreground); text-decoration: none; }
+  .nav-center a.current { color: var(--foreground); }
+  .nav-right { display: flex; gap: 8px; }
+
+  /* ---------------- HEADER ---------------- */
+  .header-wrap { position: relative; }
+  .header-veil { position: absolute; inset: 0; background: var(--gradient-hero-veil); pointer-events: none; }
+  .header { position: relative; max-width: var(--container); margin: 0 auto; padding: 128px var(--pad) 56px; text-align: center; }
+  .header .eyebrow .brand-dot { box-shadow: var(--brand-glow); }
+  .header h1 {
+    font: var(--font-display-xl);
+    letter-spacing: var(--track-display-xl);
+    font-weight: var(--weight-display-xl);
+    margin: 24px auto 0;
+    max-width: 980px;
+    text-wrap: balance;
+  }
+  .header h1 .brand-word { color: var(--brand); }
+  .header .lead {
+    font: var(--font-subhead);
+    letter-spacing: var(--track-subhead);
+    color: var(--foreground-muted);
+    max-width: 640px;
+    margin: 28px auto 0;
+    text-wrap: pretty;
+  }
+
+  /* Toggle */
+  .toggle-wrap { display: flex; justify-content: center; margin-top: 40px; }
+
+  /* ---------------- TIER GRID ---------------- */
+  .tiers {
+    max-width: var(--container); margin: 56px auto 0;
+    padding: 0 var(--pad);
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .tier {
+    position: relative;
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 40px 32px 32px;
+    display: flex; flex-direction: column;
+    box-shadow: var(--edge-highlight);
+    overflow: hidden;
+  }
+  .tier.featured {
+    background: var(--surface-2);
+    border-color: var(--border-default);
+  }
+  .tier.featured::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--gradient-card-featured);
+    pointer-events: none; border-radius: inherit;
+  }
+  .tier > * { position: relative; z-index: 1; }
+  .tier .tier-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .tier h3 {
+    font: var(--font-headline);
+    letter-spacing: var(--track-headline);
+    font-weight: var(--weight-headline);
+    color: var(--foreground);
+    margin: 0;
+  }
+  .tier .pill-featured {
+    font: var(--font-mono-md); font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: var(--radius-xs);
+    background: var(--brand-soft);
+    color: var(--brand);
+  }
+  .tier .desc {
+    font: var(--font-body-sm);
+    color: var(--foreground-muted);
+    margin: 18px 0 0;
+    min-height: 42px;
+    text-wrap: pretty;
+  }
+
+  .tier .price {
+    margin: 28px 0 0;
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  .tier .price .stat-num {
+    font-size: 56px; letter-spacing: -2px;
+  }
+  .tier .price .unit {
+    font: var(--font-body-sm); color: var(--foreground-subtle);
+  }
+  .tier .price-meta {
+    font: var(--font-mono-md);
+    color: var(--foreground-subtle);
+    margin-top: 8px;
+  }
+
+  .tier .actions { margin-top: 28px; }
+  .tier .btn { width: 100%; }
+
+  .tier .feature-eyebrow {
+    margin: 36px 0 16px;
+    font: var(--font-eyebrow);
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--foreground-subtle);
+  }
+  .features {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column;
+  }
+  .features li {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 10px; align-items: flex-start;
+    padding: 10px 0;
+    font: var(--font-body-sm);
+    color: var(--foreground);
+    border-top: 1px solid var(--border-subtle);
+  }
+  .features li:first-child { border-top: 0; }
+  .features li .check {
+    margin-top: 4px;
+    color: var(--foreground-subtle);
+  }
+  .features li .check.brand { color: var(--brand); }
+  .features li small {
+    display: block;
+    color: var(--foreground-subtle);
+    font: var(--font-caption);
+    margin-top: 4px;
+  }
+
+  /* ---------------- COMPARE TABLE ---------------- */
+  .section { max-width: var(--container); margin: 96px auto 0; padding: 0 var(--pad); }
+  .section-header { max-width: 680px; margin: 0 auto; text-align: center; }
+  .section-title {
+    font: var(--font-display-md);
+    letter-spacing: var(--track-display-md);
+    font-weight: var(--weight-display-md);
+    margin: 16px 0 0;
+  }
+  .section-lead {
+    font: var(--font-body-lg);
+    letter-spacing: var(--track-body-lg);
+    color: var(--foreground-muted);
+    margin-top: 18px;
+    text-wrap: pretty;
+  }
+
+  .compare {
+    margin-top: 48px;
+  }
+  .compare th:first-child, .compare td:first-child { width: 38%; }
+  .compare th { font: var(--font-eyebrow) !important; }
+  .compare th.featured-col {
+    color: var(--brand);
+    background: var(--surface-2) !important;
+  }
+  .compare td.featured-col { background: var(--surface-2); color: var(--foreground); }
+  .compare td .check {
+    color: var(--success);
+  }
+  .compare td .dash {
+    color: var(--foreground-faint);
+  }
+  .compare .row-label { color: var(--foreground); font-weight: var(--weight-medium); }
+  .compare .row-label small { display: block; color: var(--foreground-subtle); font: var(--font-caption); margin-top: 2px; }
+
+  /* ---------------- FAQ ---------------- */
+  .faq {
+    margin-top: 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px 48px;
+  }
+  .faq .qa {
+    border-top: 1px solid var(--border-subtle);
+    padding: 24px 0 28px;
+  }
+  .faq .qa h4 {
+    font: var(--font-card-title);
+    letter-spacing: var(--track-card-title);
+    font-weight: var(--weight-card-title);
+    color: var(--foreground);
+    margin: 0;
+  }
+  .faq .qa p {
+    font: var(--font-body-sm);
+    color: var(--foreground-muted);
+    margin: 10px 0 0;
+    max-width: 480px;
+    text-wrap: pretty;
+  }
+
+  /* ---------------- CTA / FOOTER ---------------- */
+  .cta-wrap { position: relative; margin-top: 96px; border-top: 1px solid var(--border-subtle); }
+  .cta-veil { position: absolute; inset: 0; background: var(--gradient-hero-veil); pointer-events: none; }
+  .cta { position: relative; max-width: var(--container); margin: 0 auto; padding: 96px var(--pad); text-align: center; }
+  .cta h2 { font: var(--font-display-lg); letter-spacing: var(--track-display-lg); font-weight: var(--weight-display-lg); }
+  .cta h2 .brand-word { color: var(--brand); }
+  .cta p { color: var(--foreground-muted); margin: 18px auto 0; max-width: 560px; font: var(--font-subhead); letter-spacing: var(--track-subhead); }
+  .cta .actions { margin-top: 36px; display: inline-flex; gap: 12px; }
+
+  .foot { border-top: 1px solid var(--border-subtle); }
+  .foot-inner { max-width: var(--container); margin: 0 auto; padding: 32px var(--pad); display: flex; justify-content: space-between; align-items: center; font: var(--font-caption); color: var(--foreground-subtle); }
+  .foot-inner .mono { font-family: var(--font-mono); }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <div class="brand-mark">point one zero</div>
+    <div class="nav-center">
+      <a href="../marketing/index.html">Home</a>
+      <a href="#" class="current">Engagements</a>
+      <a href="../case-study/index.html">Case studies</a>
+      <a href="../about/index.html">About</a>
+    </div>
+    <div class="nav-right">
+      <button class="btn btn-secondary btn-sm">Sign in</button>
+      <button class="btn btn-primary btn-sm">Let's talk</button>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+<!-- ============ HEADER ============ -->
+<section class="header-wrap">
+  <div class="header-veil"></div>
+  <div class="header">
+    <span class="eyebrow"><span class="brand-dot"></span>Engagements</span>
+    <h1>How we <span class="brand-word">work</span> with you.</h1>
+    <p class="lead">Three engagement shapes. Same lean collective. Pick the depth that matches the problem — we'll scope the rest.</p>
+    <div class="toggle-wrap">
+      <div class="btn-group">
+        <button class="seg active">Monthly</button>
+        <button class="seg">Quarterly</button>
+        <button class="seg">Outcome-based</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIERS ============ -->
+<div class="tiers">
+
+  <!-- Tier 1 -->
+  <div class="tier">
+    <div class="tier-head">
+      <h3>Sprint</h3>
+    </div>
+    <p class="desc">For a sharp, time-boxed problem. We move fast on a defined question.</p>
+    <div class="price">
+      <span class="stat-num">$75<small>k</small></span>
+      <span class="unit">/ engagement</span>
+    </div>
+    <div class="price-meta">2-week sprint · fixed scope</div>
+    <div class="actions">
+      <button class="btn btn-secondary">Start a sprint</button>
+    </div>
+    <div class="feature-eyebrow">What's included</div>
+    <ul class="features">
+      <li><span class="check">✓</span><div>One AI-powered prototype<small>From idea to working artifact in 17 hours</small></div></li>
+      <li><span class="check">✓</span><div>Strategy &amp; user research synthesis</div></li>
+      <li><span class="check">✓</span><div>Design &amp; engineering pod<small>2 senior practitioners, partner-led</small></div></li>
+      <li><span class="check">✓</span><div>Decision-grade deliverable<small>Prototype, system map, or strategic brief</small></div></li>
+      <li><span class="check">✓</span><div>Optional handoff package</div></li>
+    </ul>
+  </div>
+
+  <!-- Tier 2 — Featured -->
+  <div class="tier featured">
+    <div class="tier-head">
+      <h3>Build</h3>
+      <span class="pill-featured">Most chosen</span>
+    </div>
+    <p class="desc">Ship an AI-powered product or system end to end. The signature engagement.</p>
+    <div class="price">
+      <span class="stat-num brand">$45<small>k</small></span>
+      <span class="unit">/ month · 8-12 weeks</span>
+    </div>
+    <div class="price-meta">3-month minimum · roll-on indefinitely</div>
+    <div class="actions">
+      <button class="btn btn-primary">Scope a build</button>
+    </div>
+    <div class="feature-eyebrow">Everything in Sprint, plus</div>
+    <ul class="features">
+      <li><span class="check brand">✓</span><div>Full-stack pod<small>Strategist, designer, engineer — partner-led, 4-6 senior practitioners</small></div></li>
+      <li><span class="check brand">✓</span><div>Production-ready AI integration<small>Access to 92+ reusable agents</small></div></li>
+      <li><span class="check brand">✓</span><div>Weekly demos and decision points</div></li>
+      <li><span class="check brand">✓</span><div>Launch, support, and monitoring<small>Through first 4 weeks of production</small></div></li>
+      <li><span class="check brand">✓</span><div>System &amp; architecture docs</div></li>
+      <li><span class="check brand">✓</span><div>Direct Slack channel with the team</div></li>
+    </ul>
+  </div>
+
+  <!-- Tier 3 -->
+  <div class="tier">
+    <div class="tier-head">
+      <h3>Embed</h3>
+    </div>
+    <p class="desc">Long-term partnership. We sit alongside your team on the hardest things.</p>
+    <div class="price">
+      <span class="stat-num">Custom</span>
+    </div>
+    <div class="price-meta">12-month minimum · outcome-aligned pricing</div>
+    <div class="actions">
+      <button class="btn btn-secondary">Talk to a partner</button>
+    </div>
+    <div class="feature-eyebrow">Everything in Build, plus</div>
+    <ul class="features">
+      <li><span class="check">✓</span><div>Dedicated multi-pod collective<small>Scaled to portfolio of products</small></div></li>
+      <li><span class="check">✓</span><div>Strategic operating cadence<small>Quarterly off-sites, exec readouts</small></div></li>
+      <li><span class="check">✓</span><div>Custom agent development<small>Built for your domain, owned by you</small></div></li>
+      <li><span class="check">✓</span><div>Talent &amp; org strategy</div></li>
+      <li><span class="check">✓</span><div>Exec-level priority access</div></li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ============ COMPARE TABLE ============ -->
+<section class="section">
+  <div class="section-header">
+    <div class="eyebrow">Comparison</div>
+    <h2 class="section-title">Side by side.</h2>
+    <p class="section-lead">A practical look at what changes as the engagement deepens. Use it to decide where to start.</p>
+  </div>
+
+  <div class="table-wrap compare">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Sprint</th>
+          <th class="featured-col">Build</th>
+          <th>Embed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">Duration<small>How long we're with you</small></td>
+          <td>2 weeks</td>
+          <td class="featured-col strong">3–12 months</td>
+          <td>12+ months</td>
+        </tr>
+        <tr>
+          <td class="row-label">Team size<small>Senior practitioners per pod</small></td>
+          <td>2</td>
+          <td class="featured-col strong">4–6</td>
+          <td>6+, multi-pod</td>
+        </tr>
+        <tr>
+          <td class="row-label">AI agents deployed<small>From the reusable library</small></td>
+          <td>Up to 5</td>
+          <td class="featured-col strong">Up to 25</td>
+          <td>Unlimited · custom</td>
+        </tr>
+        <tr>
+          <td class="row-label">Production launch</td>
+          <td><span class="dash">—</span></td>
+          <td class="featured-col"><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="row-label">Post-launch support<small>Monitoring &amp; iteration</small></td>
+          <td><span class="dash">—</span></td>
+          <td class="featured-col">4 weeks</td>
+          <td>Continuous</td>
+        </tr>
+        <tr>
+          <td class="row-label">Exec advisory<small>Quarterly readouts, strategic input</small></td>
+          <td><span class="dash">—</span></td>
+          <td class="featured-col"><span class="dash">—</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="row-label">Direct Slack access</td>
+          <td><span class="dash">—</span></td>
+          <td class="featured-col"><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="row-label">Roll-on commitment</td>
+          <td>Per sprint</td>
+          <td class="featured-col">Month-to-month after Q1</td>
+          <td>Annual</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section">
+  <div class="section-header">
+    <div class="eyebrow">Common questions</div>
+    <h2 class="section-title">What clients ask first.</h2>
+  </div>
+
+  <div class="faq">
+    <div class="qa">
+      <h4>What if we don't know which engagement fits?</h4>
+      <p>Start with a 30-minute call. We'll listen, ask three questions, and recommend the shape that fits the problem. There's no wrong starting point — we move between them.</p>
+    </div>
+    <div class="qa">
+      <h4>Who actually does the work?</h4>
+      <p>Senior practitioners, partner-led. No subcontracting, no offshore handoff. The pod that scopes the work ships the work.</p>
+    </div>
+    <div class="qa">
+      <h4>How do the 92+ AI agents factor in?</h4>
+      <p>They are the leverage. Reusable, domain-purpose agents do the heavy lifting so the human team focuses on the irreducible parts — strategy, judgment, design.</p>
+    </div>
+    <div class="qa">
+      <h4>Do you sign NDAs and security agreements?</h4>
+      <p>Yes. SOC 2 Type II, ISO 27001, HIPAA-aligned. Mutual NDAs are standard before scoping calls.</p>
+    </div>
+    <div class="qa">
+      <h4>What happens after the engagement ends?</h4>
+      <p>You own everything — code, prompts, agents, system docs. We hand off cleanly, on the cadence you choose. Many clients roll on; many do not. Either is fine.</p>
+    </div>
+    <div class="qa">
+      <h4>Can we hire your people directly?</h4>
+      <p>No. The model is collective; the partnership is with Point One Zero. That's how we keep the lean structure that makes the work possible.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta-wrap">
+  <div class="cta-veil"></div>
+  <div class="cta">
+    <span class="eyebrow">Next step</span>
+    <h2 style="margin-top: 18px">Tell us about the <span class="brand-word">problem</span>.</h2>
+    <p>A 30-minute call. We'll listen, ask three questions, and tell you which engagement fits — or whether we're not the right partner.</p>
+    <div class="actions">
+      <button class="btn btn-primary btn-lg">Book a call</button>
+      <button class="btn btn-secondary btn-lg">See the work</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-inner">
+    <div>© Point One Zero · 25 Palmer Square, Princeton, NJ 08542</div>
+    <div class="mono">v0.4.0 · engagements</div>
+  </div>
+</footer>
+
+</body>
+</html>

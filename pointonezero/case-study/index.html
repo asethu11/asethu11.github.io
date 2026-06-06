@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>Northwind Capital — From idea to production in 17 hours · Case study</title>
+<link rel="icon" href="../../assets/favicon.svg" />
+<link rel="stylesheet" href="../../colors_and_type.css" />
+<style>
+  :root { --container: 1280px; --pad: 56px; --measure: 38em; }
+  body { margin: 0; min-height: 100vh; overflow-x: hidden; }
+
+  /* ---------------- NAV ---------------- */
+  .brand-mark { font: var(--font-body); font-weight: var(--weight-medium); color: var(--foreground); letter-spacing: -0.2px; display: inline-flex; align-items: center; gap: 10px; }
+  .brand-mark .crumb { font: var(--font-mono-md); color: var(--foreground-subtle); padding-left: 14px; border-left: 1px solid var(--border-subtle); }
+  .nav-right { display: flex; gap: 8px; }
+
+  /* ---------------- HEADER ---------------- */
+  .head-wrap { position: relative; }
+  .head-veil { position: absolute; inset: 0; background: var(--gradient-hero-veil); pointer-events: none; }
+  .head {
+    position: relative; max-width: var(--container); margin: 0 auto;
+    padding: 96px var(--pad) 48px;
+  }
+  .crumbs-line { color: var(--foreground-subtle); margin-bottom: 24px; }
+  .head h1 {
+    font: var(--font-display-lg);
+    letter-spacing: var(--track-display-lg);
+    font-weight: var(--weight-display-lg);
+    margin: 18px 0 0;
+    max-width: 940px;
+    text-wrap: balance;
+  }
+  .head h1 .brand-word { color: var(--brand); }
+  .head .lead {
+    font: var(--font-subhead);
+    letter-spacing: var(--track-subhead);
+    color: var(--foreground-muted);
+    max-width: 680px;
+    margin: 28px 0 0;
+    text-wrap: pretty;
+  }
+  .head .summary {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-subtle);
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+  }
+  .head .summary .item {
+    display: flex; flex-direction: column;
+  }
+  .head .summary .item .label {
+    font: var(--font-eyebrow);
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--foreground-subtle);
+  }
+  .head .summary .item .value {
+    margin-top: 8px;
+    font: var(--font-body); font-weight: var(--weight-medium);
+    color: var(--foreground);
+  }
+  .head .summary .item .value.mono { font-family: var(--font-mono); }
+
+  /* ---------------- METRICS BANNER ---------------- */
+  .metrics-wrap {
+    position: relative;
+    background: var(--surface-1);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    overflow: hidden;
+  }
+  .metrics-wrap::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--gradient-card-featured);
+    pointer-events: none;
+  }
+  .metrics {
+    position: relative;
+    max-width: var(--container); margin: 0 auto;
+    padding: 56px var(--pad);
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  }
+  .metric { padding: 0 24px; border-left: 1px solid var(--border-subtle); }
+  .metric:first-child { border-left: 0; padding-left: 0; }
+  .metric .stat-num { color: var(--foreground); }
+  .metric.featured .stat-num { color: var(--brand); }
+  .metric .stat-label { margin-top: 10px; }
+  .metric .desc { font: var(--font-caption); color: var(--foreground-subtle); margin-top: 10px; }
+
+  /* ---------------- MAIN BODY ---------------- */
+  .body-wrap {
+    max-width: var(--container); margin: 0 auto;
+    padding: 96px var(--pad);
+    display: grid; grid-template-columns: minmax(0, 1fr) 240px;
+    gap: 80px; align-items: start;
+  }
+
+  article { max-width: var(--measure); color: var(--foreground-muted); font: var(--font-body-lg); letter-spacing: var(--track-body-lg); }
+  article > * + * { margin-top: 24px; }
+  article p { margin: 0; text-wrap: pretty; }
+  article p strong { color: var(--foreground); font-weight: var(--weight-semibold); }
+
+  article h2 {
+    font: var(--font-display-md);
+    letter-spacing: var(--track-display-md);
+    font-weight: var(--weight-display-md);
+    color: var(--foreground);
+    margin: 64px 0 0;
+    text-wrap: balance;
+  }
+  article h2 + p { margin-top: 20px; }
+
+  article h3 {
+    font: var(--font-card-title);
+    letter-spacing: var(--track-card-title);
+    font-weight: var(--weight-card-title);
+    color: var(--foreground);
+    margin: 36px 0 0;
+  }
+
+  article blockquote {
+    margin: 16px 0 0;
+    padding: 28px 0;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  article blockquote > p {
+    font: var(--font-display-md);
+    letter-spacing: var(--track-display-md);
+    font-weight: var(--weight-display-md);
+    color: var(--foreground);
+    text-wrap: balance;
+    margin: 0;
+  }
+  article blockquote .qm { color: var(--brand); font-size: 40px; line-height: 0.5; font-weight: 600; display: block; margin-bottom: 14px; }
+  article blockquote cite {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 22px;
+    font: var(--font-body-sm);
+    font-style: normal;
+    color: var(--foreground-subtle);
+  }
+  article blockquote cite .who { color: var(--foreground); font-weight: var(--weight-medium); }
+
+  article ul { margin: 0; padding: 0; list-style: none; }
+  article ul > li {
+    padding: 12px 0 12px 28px;
+    position: relative;
+    border-top: 1px solid var(--border-subtle);
+  }
+  article ul > li:first-child { border-top: 0; padding-top: 4px; }
+  article ul > li::before {
+    content: '';
+    position: absolute; left: 10px; top: 22px;
+    width: 6px; height: 6px;
+    border-radius: 9999px;
+    background: var(--brand);
+  }
+  article ul > li:first-child::before { top: 14px; }
+
+  article a {
+    color: var(--foreground);
+    text-decoration: underline;
+    text-decoration-color: var(--brand);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+  }
+
+  /* Result callout — inline aside inside the article body.
+     Uses surface-1 (not surface-2): it isn't a peer of a featured
+     card row, just an inline callout. The metrics banner already
+     holds the one-featured-per-page slot. */
+  article aside.result {
+    margin: 32px 0 0;
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--edge-highlight);
+  }
+  article aside.result::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--gradient-card-hover);
+    pointer-events: none; border-radius: inherit;
+  }
+  article aside.result > * { position: relative; z-index: 1; }
+  article aside.result .eyebrow { color: var(--foreground-subtle); }
+  article aside.result .stat-num { color: var(--foreground); margin-top: 14px; }
+  article aside.result p { font: var(--font-body-sm); color: var(--foreground-muted); margin-top: 12px; }
+
+  /* Before / after */
+  .ba-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin-top: 28px;
+  }
+  .ba-grid .ba {
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--edge-highlight);
+  }
+  .ba-grid .ba .eyebrow { color: var(--foreground-subtle); }
+  .ba-grid .ba h4 {
+    font: var(--font-card-title);
+    letter-spacing: var(--track-card-title);
+    font-weight: var(--weight-card-title);
+    margin: 14px 0 0;
+  }
+  .ba-grid .ba p {
+    font: var(--font-body-sm); color: var(--foreground-muted);
+    margin-top: 10px; max-width: none;
+  }
+  /* Both before AND after sit on surface-1. The eyebrow labels
+     ("BEFORE" / "AFTER") carry the differentiation — no need to
+     lift one card to surface-2 for a binary semantic distinction. */
+  .ba-grid .ba.after {
+    border-color: var(--border-default);
+  }
+
+  /* ---------------- TOC RAIL ---------------- */
+  .toc { position: sticky; top: 88px; align-self: start; font: var(--font-body-sm); }
+  .toc .toc-eyebrow {
+    font: var(--font-eyebrow); letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase; color: var(--foreground-subtle);
+    padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 4px;
+  }
+  .toc ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
+  .toc li a {
+    display: block; padding: 9px 0 9px 14px;
+    margin-left: -14px;
+    color: var(--foreground-subtle);
+    border-left: 1px solid transparent;
+    text-decoration: none;
+  }
+  .toc li a:hover { color: var(--foreground); }
+  .toc li a.active { color: var(--foreground); border-left-color: var(--brand); }
+
+  /* TEAM */
+  .team-card {
+    margin-top: 24px;
+    padding: 18px;
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+  }
+  .team-card .label { font: var(--font-eyebrow); letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--foreground-subtle); }
+  .team-card .roles { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; font: var(--font-body-sm); color: var(--foreground); }
+  .team-card .roles .role { color: var(--foreground-subtle); }
+
+  /* ---------------- RELATED + FOOTER ---------------- */
+  .related { max-width: var(--container); margin: 0 auto; padding: 0 var(--pad) 96px; }
+  .related .eyebrow { color: var(--foreground-subtle); }
+  .related h3 {
+    font: var(--font-headline); letter-spacing: var(--track-headline);
+    font-weight: var(--weight-headline);
+    margin: 14px 0 24px;
+  }
+  .related-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .related-grid .card {
+    padding: 24px; text-decoration: none; color: var(--foreground);
+    display: flex; flex-direction: column; min-height: 168px;
+  }
+  .related-grid .card .r-meta { margin-top: auto; padding-top: 24px; font: var(--font-caption); color: var(--foreground-subtle); }
+  .related-grid .card .r-title {
+    margin-top: 12px;
+    font: var(--font-card-title); letter-spacing: var(--track-card-title);
+    font-weight: var(--weight-card-title);
+    text-wrap: balance;
+  }
+
+  .foot { border-top: 1px solid var(--border-subtle); }
+  .foot-inner { max-width: var(--container); margin: 0 auto; padding: 32px var(--pad); display: flex; justify-content: space-between; align-items: center; font: var(--font-caption); color: var(--foreground-subtle); }
+  .foot-inner .mono { font-family: var(--font-mono); }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <div class="brand-mark">
+      point one zero
+      <span class="crumb">Case study</span>
+    </div>
+    <div class="nav-right">
+      <button class="btn btn-secondary btn-sm">All case studies</button>
+      <button class="btn btn-primary btn-sm">Let's talk</button>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+<!-- ============ HEAD ============ -->
+<section class="head-wrap">
+  <div class="head-veil"></div>
+  <div class="head">
+    <div class="crumbs-line">
+      <span class="crumbs">
+        <a href="../case-study/index.html">Case studies</a>
+        <span class="sep">/</span>
+        <span class="current">Northwind Capital</span>
+      </span>
+    </div>
+    <span class="eyebrow"><span class="brand-dot"></span>Financial services · 2026</span>
+    <h1>How Northwind Capital went from idea to production in <span class="brand-word">17 hours</span>.</h1>
+    <p class="lead">A six-week engagement that compressed a year-long roadmap into a single AI-native prototype, then shipped it to 14,000 advisors.</p>
+
+    <div class="summary">
+      <div class="item">
+        <div class="label">Client</div>
+        <div class="value">Northwind Capital</div>
+      </div>
+      <div class="item">
+        <div class="label">Engagement</div>
+        <div class="value">Build · 6 weeks</div>
+      </div>
+      <div class="item">
+        <div class="label">Industry</div>
+        <div class="value">Wealth management</div>
+      </div>
+      <div class="item">
+        <div class="label">Filed</div>
+        <div class="value mono">CS-2026-04</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ METRICS BANNER ============ -->
+<section class="metrics-wrap">
+  <div class="metrics">
+    <div class="metric featured">
+      <div class="stat-num stat-num-lg">17<small>hours</small></div>
+      <div class="stat-label">Idea to working prototype</div>
+      <div class="desc">A six-stage research-and-design loop, condensed.</div>
+    </div>
+    <div class="metric">
+      <div class="stat-num stat-num-lg">14,000</div>
+      <div class="stat-label">Advisors using it daily</div>
+      <div class="desc">Within eight weeks of launch.</div>
+    </div>
+    <div class="metric">
+      <div class="stat-num stat-num-lg">41<small>%</small></div>
+      <div class="stat-label">Reduction in research time</div>
+      <div class="desc">Per client meeting, measured month over month.</div>
+    </div>
+    <div class="metric">
+      <div class="stat-num stat-num-lg">8</div>
+      <div class="stat-label">AI agents in production</div>
+      <div class="desc">From the reusable 92+ library.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAIN BODY ============ -->
+<div class="body-wrap">
+
+  <article>
+    <h2 id="challenge">The challenge</h2>
+    <p>Northwind's 14,000 financial advisors spent the first 25 minutes of every client meeting preparing for it — pulling holdings, rebalancing rules, market context, and personal notes from six disconnected systems. The internal proposal to fix this had been on the roadmap for fourteen months. Nothing had shipped.</p>
+    <p>The asks were not unreasonable. They were simply too many. A new advisor portal. A market-data integration. A research summarizer. A CRM consolidation. Each of these would have taken a quarter on its own. None of them, individually, would have solved the meeting-prep problem.</p>
+
+    <aside class="result">
+      <div class="eyebrow">Reframing</div>
+      <div class="stat-num">25 → 4 min</div>
+      <p>Once we defined the problem as "shorten the 25-minute prep window to under five minutes," the solution stopped looking like four products and started looking like one.</p>
+    </aside>
+
+    <h2 id="frame">The frame</h2>
+    <p>We brought the POINT / ONE / ZERO model into the engagement on day one.</p>
+    <p><strong>POINT.</strong> The sharper tip of the sphere — the meeting-prep window — became the only thing the engagement would touch.</p>
+    <p><strong>ONE.</strong> A six-person pod: one partner, one strategist, one designer, two engineers, and one advisor from Northwind embedded full-time for the duration.</p>
+    <p><strong>ZERO.</strong> The zero-based model meant we asked, at every stage, "what's the smallest thing that solves this?" — and answered it with reusable agents from the library, not bespoke builds.</p>
+
+    <h2 id="approach">The approach</h2>
+    <p>We compressed Northwind's traditional six-stage research process into 17 hours of synthetic prototyping. The pod ran four loops in parallel:</p>
+
+    <ul>
+      <li><strong>User research.</strong> 12 advisor interviews, synthesized by an agent into the three meeting-prep tasks that mattered.</li>
+      <li><strong>Data integration.</strong> A single API surface — assembled from existing internal endpoints — that fed every downstream agent.</li>
+      <li><strong>Agent orchestration.</strong> Eight agents from the reusable library: a holdings summarizer, a news brief, a regulatory check, a rebalancing recommender, and four more.</li>
+      <li><strong>Interface design.</strong> A single-screen briefing layout, designed in the system we use for every engagement.</li>
+    </ul>
+
+    <p>By the end of week one, advisors were testing a working prototype against real client meetings the next morning.</p>
+
+    <blockquote>
+      <span class="qm">"</span>
+      <p>We had been talking about this for over a year. Point One Zero had a working version in our hands by Friday.</p>
+      <cite>
+        <span class="avatar avatar-sm">SP</span>
+        <span><span class="who">Sarah Park</span> · Chief Innovation Officer, Northwind Capital</span>
+      </cite>
+    </blockquote>
+
+    <h3 id="before-after">Before &amp; after</h3>
+
+    <div class="ba-grid">
+      <div class="ba">
+        <div class="eyebrow">Before</div>
+        <h4>Six systems, 25 minutes</h4>
+        <p>Advisors switched between portfolio analytics, CRM notes, market data, internal research, regulatory filings, and the client's personal household summary — manually reconciling the answers into a printout.</p>
+      </div>
+      <div class="ba after">
+        <div class="eyebrow">After</div>
+        <h4>One briefing, four minutes</h4>
+        <p>A single briefing surface, generated on demand for any client meeting. Eight agents fetch and synthesize in the background; the advisor reads, adjusts, and walks in prepared.</p>
+      </div>
+    </div>
+
+    <h2 id="outcome">The outcome</h2>
+    <p>Six weeks from kickoff to production. Eight weeks after launch, every advisor in the firm was using it daily — adoption was not mandated; it happened because the prep window collapsed.</p>
+    <p>The internal cost figure that mattered most to the Northwind leadership was advisor retention: prep-time was the most-cited reason for advisors leaving the firm. In the two quarters since launch, voluntary attrition is down a third.</p>
+
+    <aside class="result">
+      <div class="eyebrow">Two quarters in</div>
+      <div class="stat-num">−33<small>%</small></div>
+      <p>Voluntary advisor attrition, comparing the two quarters post-launch to the trailing four. The single biggest secondary outcome — and the one nobody scoped for.</p>
+    </aside>
+
+    <h2 id="next">What's next</h2>
+    <p>The briefing surface is the first of three planned compressions inside Northwind. The same pod has begun a second engagement: replacing the eight-hour quarterly portfolio review with a continuously-updated thirty-minute one. The pattern, again, is reframing — not building.</p>
+  </article>
+
+  <aside class="toc">
+    <div class="toc-eyebrow">In this study</div>
+    <ul>
+      <li><a href="#challenge" class="active">The challenge</a></li>
+      <li><a href="#frame">The frame</a></li>
+      <li><a href="#approach">The approach</a></li>
+      <li><a href="#before-after" style="padding-left: 28px;">Before &amp; after</a></li>
+      <li><a href="#outcome">The outcome</a></li>
+      <li><a href="#next">What's next</a></li>
+    </ul>
+
+    <div class="team-card">
+      <div class="label">The pod</div>
+      <div class="roles">
+        <div><span class="role">Partner</span> &nbsp;Maya Lindgren</div>
+        <div><span class="role">Strategy</span> &nbsp;Ben Otieno</div>
+        <div><span class="role">Design</span> &nbsp;Hana Reyes</div>
+        <div><span class="role">Engineering</span> &nbsp;Theo Aaron</div>
+        <div><span class="role">Engineering</span> &nbsp;Priya Vasquez</div>
+        <div><span class="role">Client</span> &nbsp;Daniel Park</div>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- ============ RELATED ============ -->
+<section class="related">
+  <div class="section-header">
+    <div class="eyebrow">Continue</div>
+    <h3>More case studies.</h3>
+  <div class="related-grid">
+    <a class="card">
+      <span class="eyebrow">Healthcare · 2025</span>
+      <span class="r-title">A reimbursement audit that found $14M in 11 days.</span>
+      <span class="r-meta">Build · 11 days · CS-2025-09</span>
+    </a>
+    <a class="card card-featured">
+      <span class="eyebrow">Retail · 2025</span>
+      <span class="r-title">Demand-forecasting agents that cut stockouts by 38%.</span>
+      <span class="r-meta">Embed · 9 months · CS-2025-07</span>
+    </a>
+    <a class="card">
+      <span class="eyebrow">Industrial · 2024</span>
+      <span class="r-title">From paper service tickets to predictive routing.</span>
+      <span class="r-meta">Build · 14 weeks · CS-2024-12</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-inner">
+    <div>© Point One Zero · 25 Palmer Square, Princeton, NJ 08542</div>
+    <div class="mono">CS-2026-04 · case study · v0.4.0</div>
+  </div>
+</footer>
+
+</body>
+</html>

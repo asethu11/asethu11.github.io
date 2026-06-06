@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Page not found — Point One Zero</title>
+<link rel="icon" href="../../assets/favicon.svg" />
+<link rel="stylesheet" href="../../colors_and_type.css" />
+<style>
+  html, body {
+    margin: 0; min-height: 100vh;
+    display: flex; align-items: stretch; justify-content: center;
+  }
+  body {
+    flex-direction: column;
+    background: var(--canvas);
+    position: relative;
+    overflow: hidden;
+  }
+  .veil {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 50% 50% at 50% 30%, rgba(0,159,239,0.08), transparent 65%),
+      radial-gradient(ellipse 60% 40% at 50% 90%, rgba(0,159,239,0.06), transparent 70%);
+    pointer-events: none;
+  }
+  main {
+    position: relative; z-index: 1;
+    margin: auto; padding: 96px 24px;
+    text-align: center;
+    max-width: 720px;
+  }
+  .code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--foreground-subtle);
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+  }
+  .code .brand-dot { box-shadow: var(--brand-glow); }
+  h1 {
+    font-size: 156px; line-height: 0.96;
+    letter-spacing: -7px; font-weight: var(--weight-semibold);
+    color: var(--foreground);
+    margin: 36px 0 0;
+    font-variant-numeric: tabular-nums;
+  }
+  h1 .dot { color: var(--brand); }
+  p.lead {
+    font: var(--font-subhead);
+    letter-spacing: var(--track-subhead);
+    color: var(--foreground-muted);
+    margin: 32px auto 0;
+    max-width: 480px;
+    text-wrap: pretty;
+  }
+  .actions {
+    margin-top: 40px;
+    display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+  }
+  footer {
+    position: relative; z-index: 1;
+    border-top: 1px solid var(--border-subtle);
+    padding: 24px 56px;
+    display: flex; justify-content: space-between; align-items: center;
+    font: var(--font-caption); color: var(--foreground-subtle);
+  }
+  footer .mono { font-family: var(--font-mono); }
+</style>
+</head>
+<body>
+
+<div class="veil"></div>
+
+<main>
+  <div class="code">
+    <span class="brand-dot"></span>
+    HTTP 404 · No such page
+  </div>
+  <h1>4<span class="dot">0</span>4</h1>
+  <p class="lead">This page doesn't exist — or doesn't yet. The system is intentionally small, which makes pages easy to lose track of.</p>
+  <div class="actions">
+    <a class="btn btn-primary btn-lg" href="../marketing/index.html">Back home</a>
+    <a class="btn btn-secondary btn-lg" href="../docs/index.html">Read the notes</a>
+  </div>
+</main>
+
+<footer>
+  <div>© Point One Zero · 25 Palmer Square, Princeton, NJ 08542</div>
+  <div class="mono">v0.4.0 · 404</div>
+</footer>
+
+</body>
+</html>

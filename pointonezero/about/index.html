@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>About — Point One Zero</title>
+<link rel="icon" href="../../assets/favicon.svg" />
+<link rel="stylesheet" href="../../colors_and_type.css" />
+<style>
+  :root { --container: 1280px; --pad: 56px; }
+  body { margin: 0; min-height: 100vh; overflow-x: hidden; }
+
+  /* ---------------- NAV ---------------- */
+  .brand-mark { font: var(--font-body); font-weight: var(--weight-medium); color: var(--foreground); letter-spacing: -0.2px; }
+  .nav-center { display: flex; gap: 28px; position: absolute; left: 50%; transform: translateX(-50%); }
+  .nav-center a { font: var(--font-body-sm); font-weight: var(--weight-medium); color: var(--foreground-subtle); }
+  .nav-center a:hover { color: var(--foreground); text-decoration: none; }
+  .nav-center a.current { color: var(--foreground); }
+  .nav-right { display: flex; gap: 8px; }
+
+  /* ---------------- HEADER ---------------- */
+  .head-wrap { position: relative; }
+  .head-veil { position: absolute; inset: 0; background: var(--gradient-hero-veil); pointer-events: none; }
+  .head {
+    position: relative; max-width: var(--container); margin: 0 auto;
+    padding: 144px var(--pad) 64px;
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: end;
+  }
+  .head h1 {
+    font: var(--font-display-xl);
+    letter-spacing: var(--track-display-xl);
+    font-weight: var(--weight-display-xl);
+    margin: 24px 0 0;
+    text-wrap: balance;
+  }
+  .head h1 .brand-word { color: var(--brand); }
+  .head .lead {
+    font: var(--font-subhead);
+    letter-spacing: var(--track-subhead);
+    color: var(--foreground-muted);
+    text-wrap: pretty;
+  }
+  .head .lead p + p { margin-top: 20px; }
+  .head .lead .more {
+    margin-top: 32px;
+    display: inline-flex; align-items: center; gap: 8px;
+    font: var(--font-button); font-weight: var(--weight-button);
+    color: var(--foreground); text-decoration: underline;
+    text-decoration-color: var(--brand); text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  /* ---------------- SECTION ---------------- */
+  .section { max-width: var(--container); margin: 0 auto; padding: 96px var(--pad) 0; }
+  .section-header { max-width: 720px; }
+  .section-title {
+    font: var(--font-display-md);
+    letter-spacing: var(--track-display-md);
+    font-weight: var(--weight-display-md);
+    margin: 16px 0 0;
+    text-wrap: balance;
+  }
+  .section-lead {
+    font: var(--font-body-lg);
+    letter-spacing: var(--track-body-lg);
+    color: var(--foreground-muted);
+    margin-top: 18px;
+    text-wrap: pretty;
+  }
+
+  /* ---------------- PILLARS (POINT/ONE/ZERO) ---------------- */
+  .pillars-wrap {
+    margin-top: 64px;
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--edge-highlight);
+    overflow: hidden;
+  }
+  .pillars {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+  }
+  .pillar {
+    padding: 48px 48px 56px;
+    border-left: 1px solid var(--border-subtle);
+    position: relative;
+  }
+  .pillar:first-child { border-left: 0; }
+  .pillar .word {
+    font-size: 120px; line-height: 0.95;
+    letter-spacing: -5px; font-weight: var(--weight-semibold);
+    color: var(--foreground);
+  }
+  .pillar .dot {
+    position: absolute; right: 36px; top: 56px;
+    width: 8px; height: 8px; border-radius: 9999px;
+    background: var(--brand); box-shadow: var(--brand-glow);
+  }
+  .pillar .pillar-title {
+    font: var(--font-card-title);
+    letter-spacing: var(--track-card-title);
+    font-weight: var(--weight-card-title);
+    margin-top: 36px;
+    color: var(--foreground);
+  }
+  .pillar p {
+    font: var(--font-body-sm);
+    color: var(--foreground-muted);
+    margin: 12px 0 0;
+    max-width: 320px;
+    text-wrap: pretty;
+  }
+
+  /* ---------------- METRICS ---------------- */
+  .metrics-row {
+    margin-top: 96px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--edge-highlight);
+  }
+  .metric-cell {
+    padding: 36px 32px;
+    border-left: 1px solid var(--border-subtle);
+  }
+  .metric-cell:first-child { border-left: 0; }
+  .metric-cell .stat-num { color: var(--foreground); }
+  .metric-cell.featured .stat-num { color: var(--brand); }
+  .metric-cell p {
+    font: var(--font-body-sm); color: var(--foreground-muted);
+    margin: 8px 0 0; max-width: 240px; text-wrap: pretty;
+  }
+
+  /* ---------------- TEAM ---------------- */
+  .team-grid {
+    margin-top: 64px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  }
+  .person {
+    padding: 24px;
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--edge-highlight);
+    display: flex; flex-direction: column;
+    min-height: 280px;
+    transition: border-color var(--dur-fast) var(--ease-out);
+  }
+  .person:hover { border-color: var(--border-default); }
+  .person .portrait {
+    width: 64px; height: 64px;
+    border-radius: var(--radius-full);
+    background: var(--surface-3);
+    display: inline-flex; align-items: center; justify-content: center;
+    font: var(--font-card-title); font-weight: var(--weight-semibold);
+    color: var(--foreground);
+    border: 1px solid var(--border-subtle);
+    margin-bottom: 24px;
+  }
+  .person .name {
+    font: var(--font-card-title);
+    letter-spacing: var(--track-card-title);
+    font-weight: var(--weight-card-title);
+    color: var(--foreground);
+  }
+  .person .role {
+    font: var(--font-body-sm);
+    color: var(--foreground-subtle);
+    margin-top: 4px;
+  }
+  .person .bio {
+    font: var(--font-body-sm); color: var(--foreground-muted);
+    margin-top: 14px; flex: 1;
+    text-wrap: pretty;
+  }
+  .person .meta {
+    display: flex; gap: 8px;
+    margin-top: 18px;
+  }
+  .person .meta .tag { font-size: 10px; }
+
+  /* Founder is featured */
+  .person.founder {
+    background: var(--surface-2);
+    border-color: var(--border-default);
+    position: relative; overflow: hidden;
+  }
+  .person.founder::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--gradient-card-featured);
+    pointer-events: none; border-radius: inherit;
+  }
+  .person.founder > * { position: relative; z-index: 1; }
+
+  /* ---------------- PRINCIPLES ---------------- */
+  .principles {
+    margin-top: 56px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .principle {
+    padding: 32px;
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--edge-highlight);
+  }
+  .principle .n {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--brand);
+  }
+  .principle h4 {
+    font: var(--font-headline);
+    letter-spacing: var(--track-headline);
+    font-weight: var(--weight-headline);
+    margin: 18px 0 0;
+    text-wrap: balance;
+  }
+  .principle p {
+    font: var(--font-body-sm); color: var(--foreground-muted);
+    margin-top: 14px; max-width: 480px; text-wrap: pretty;
+  }
+
+  /* ---------------- TIMELINE ---------------- */
+  .timeline {
+    margin-top: 64px;
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--edge-highlight);
+    padding: 40px 48px;
+  }
+  .timeline ol {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column;
+  }
+  .timeline ol li {
+    padding: 24px 0;
+    display: grid;
+    grid-template-columns: 96px 1fr auto;
+    gap: 32px; align-items: baseline;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .timeline ol li:first-child { border-top: 0; padding-top: 0; }
+  .timeline ol li .when {
+    font: var(--font-mono-md);
+    color: var(--foreground-subtle);
+  }
+  .timeline ol li .what {
+    font: var(--font-body); font-weight: var(--weight-medium);
+    color: var(--foreground);
+    max-width: 600px;
+    text-wrap: pretty;
+  }
+  .timeline ol li .what small {
+    display: block;
+    font: var(--font-body-sm);
+    font-weight: 400;
+    color: var(--foreground-muted);
+    margin-top: 6px;
+  }
+  .timeline ol li .place {
+    font: var(--font-mono-md); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--foreground-subtle);
+  }
+  .timeline ol li.now .when { color: var(--brand); }
+  .timeline ol li.now .place {
+    background: var(--brand-soft); color: var(--brand);
+    padding: 2px 8px; border-radius: var(--radius-xs);
+  }
+
+  /* ---------------- CTA ---------------- */
+  .cta-wrap { position: relative; margin-top: 96px; border-top: 1px solid var(--border-subtle); }
+  .cta-veil { position: absolute; inset: 0; background: var(--gradient-hero-veil); pointer-events: none; }
+  .cta {
+    position: relative; max-width: var(--container); margin: 0 auto;
+    padding: 96px var(--pad);
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: start;
+  }
+  .cta h2 { font: var(--font-display-lg); letter-spacing: var(--track-display-lg); font-weight: var(--weight-display-lg); }
+  .cta h2 .brand-word { color: var(--brand); }
+  .cta p { color: var(--foreground-muted); margin: 20px 0 0; max-width: 480px; font: var(--font-subhead); letter-spacing: var(--track-subhead); }
+  .cta .actions { margin-top: 36px; display: flex; gap: 12px; }
+  .cta .contact { display: flex; flex-direction: column; gap: 4px; }
+  .cta .contact .label { font: var(--font-eyebrow); letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--foreground-subtle); margin-bottom: 12px; }
+
+  /* ---------------- FOOTER ---------------- */
+  .foot { border-top: 1px solid var(--border-subtle); }
+  .foot-inner { max-width: var(--container); margin: 0 auto; padding: 32px var(--pad); display: flex; justify-content: space-between; align-items: center; font: var(--font-caption); color: var(--foreground-subtle); }
+  .foot-inner .mono { font-family: var(--font-mono); }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <div class="brand-mark">point one zero</div>
+    <div class="nav-center">
+      <a href="../marketing/index.html">Home</a>
+      <a href="../pricing/index.html">Engagements</a>
+      <a href="../case-study/index.html">Case studies</a>
+      <a href="#" class="current">About</a>
+    </div>
+    <div class="nav-right">
+      <button class="btn btn-secondary btn-sm">Sign in</button>
+      <button class="btn btn-primary btn-sm">Let's talk</button>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+<!-- ============ HEAD ============ -->
+<section class="head-wrap">
+  <div class="head-veil"></div>
+  <div class="head">
+    <div>
+      <span class="eyebrow"><span class="brand-dot"></span>About</span>
+      <h1>An AI-native firm at the <span class="brand-word">intersection</span>.</h1>
+    </div>
+    <div class="lead">
+      <p>Point One Zero exists because the gap between strategy, design, and engineering is where most ideas die. We close it with a lean, AI-native collective that ships in days, not quarters.</p>
+      <p>The name is the manifesto: a sharp point, a single collective, a zero-based operating model.</p>
+      <a class="more">Read the manifesto →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POINT / ONE / ZERO ============ -->
+<section class="section">
+  <div class="section-header">
+    <div class="eyebrow">The frame</div>
+    <h2 class="section-title">Three words. One operating model.</h2>
+    <p class="section-lead">Every engagement runs through this frame — from the first scoping call through delivery.</p>
+  </div>
+
+  <div class="pillars-wrap">
+    <div class="pillars">
+      <div class="pillar">
+        <div class="dot"></div>
+        <div class="word">POINT</div>
+        <div class="pillar-title">Sharper tip of the sphere</div>
+        <p>The intersection of strategy, design, and AI — giving direction, momentum, and velocity. We focus on the one sharp thing.</p>
+      </div>
+      <div class="pillar">
+        <div class="dot"></div>
+        <div class="word">ONE</div>
+        <div class="pillar-title">The collective</div>
+        <p>One team — domain experts, strategists, designers, and engineers — co-creating in agile pods. No subcontracting, no handoff theater.</p>
+      </div>
+      <div class="pillar">
+        <div class="dot"></div>
+        <div class="word">ZERO</div>
+        <div class="pillar-title">Zero-based model</div>
+        <p>Lean, distilled, AI-native. Built for the shifting economics of talent and the speed of AI. The library does the heavy lifting.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Metrics -->
+  <div class="metrics-row">
+    <div class="metric-cell">
+      <div class="stat-num stat-num-lg">17<small>hours</small></div>
+      <p>From idea to working prototype, in our signature engagement loop.</p>
+    </div>
+    <div class="metric-cell">
+      <div class="stat-num stat-num-lg">10<small>×</small></div>
+      <p>Faster to market vs. traditional consulting cadences.</p>
+    </div>
+    <div class="metric-cell featured">
+      <div class="stat-num stat-num-lg">92<small>+</small></div>
+      <p>Reusable AI agents in the library. Every engagement adds to it.</p>
+    </div>
+    <div class="metric-cell">
+      <div class="stat-num stat-num-lg">47<small>%</small></div>
+      <p>Average cost reduction through automation, reuse, and the zero-based model.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEAM ============ -->
+<section class="section">
+  <div class="section-header">
+    <div class="eyebrow">The collective</div>
+    <h2 class="section-title">Senior practitioners, partner-led.</h2>
+    <p class="section-lead">Twelve full-time partners and a rotating bench of specialists. Every pod is led by a partner from start to finish.</p>
+  </div>
+
+  <div class="team-grid">
+    <div class="person founder">
+      <div class="portrait">RA</div>
+      <div class="name">Rajiv Ahuja</div>
+      <div class="role">Founder &amp; managing partner</div>
+      <p class="bio">Twenty years at the intersection of strategy and engineering. Previously at McKinsey Digital, head of platform at a Series D fintech. PhD, computer science.</p>
+      <div class="meta">
+        <span class="tag">Strategy</span>
+        <span class="tag">Engineering</span>
+      </div>
+    </div>
+    <div class="person">
+      <div class="portrait">ML</div>
+      <div class="name">Maya Lindgren</div>
+      <div class="role">Partner · Build practice</div>
+      <p class="bio">Former design director at Stripe and IDEO. Led the Northwind, Aegis, and Coda engagements. Built three of the agents currently in the library.</p>
+      <div class="meta">
+        <span class="tag">Design</span>
+      </div>
+    </div>
+    <div class="person">
+      <div class="portrait">TO</div>
+      <div class="name">Tomas Oduya</div>
+      <div class="role">Partner · AI systems</div>
+      <p class="bio">Architected the original agent library. Twelve years building production ML systems at scale. Previously staff engineer at a hyperscaler.</p>
+      <div class="meta">
+        <span class="tag">Engineering</span>
+        <span class="tag">AI</span>
+      </div>
+    </div>
+    <div class="person">
+      <div class="portrait">SC</div>
+      <div class="name">Sara Chen</div>
+      <div class="role">Partner · Strategy</div>
+      <p class="bio">Former strategy lead at Bain, MBA Wharton. Translates ambiguous business problems into the scoped-down version that actually ships.</p>
+      <div class="meta">
+        <span class="tag">Strategy</span>
+      </div>
+    </div>
+    <div class="person">
+      <div class="portrait">BO</div>
+      <div class="name">Ben Otieno</div>
+      <div class="role">Partner · Embed practice</div>
+      <p class="bio">Leads the long-engagement portfolio. Previously CPO at a B2B SaaS unicorn; ran a 80-person product org.</p>
+      <div class="meta">
+        <span class="tag">Product</span>
+      </div>
+    </div>
+    <div class="person">
+      <div class="portrait">HR</div>
+      <div class="name">Hana Reyes</div>
+      <div class="role">Partner · Design</div>
+      <p class="bio">Editorial designer turned product designer. Built the design system you are reading. Twelve years at agency and in-house.</p>
+      <div class="meta">
+        <span class="tag">Design</span>
+        <span class="tag">Systems</span>
+      </div>
+    </div>
+    <div class="person">
+      <div class="portrait">TA</div>
+      <div class="name">Theo Aaron</div>
+      <div class="role">Partner · Engineering</div>
+      <p class="bio">Staff-plus engineer with a research bent. Three patents in retrieval architecture. Volunteers as the firm's open-source steward.</p>
+      <div class="meta">
+        <span class="tag">Engineering</span>
+        <span class="tag">Research</span>
+      </div>
+    </div>
+    <div class="person">
+      <div class="portrait">PV</div>
+      <div class="name">Priya Vasquez</div>
+      <div class="role">Partner · Operations</div>
+      <p class="bio">Runs the firm. Former COO at a 40-person research lab; expert at keeping a lean collective lean.</p>
+      <div class="meta">
+        <span class="tag">Operations</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRINCIPLES ============ -->
+<section class="section">
+  <div class="section-header">
+    <div class="eyebrow">What we believe</div>
+    <h2 class="section-title">A handful of principles, taken seriously.</h2>
+    <p class="section-lead">We've stopped saying things we don't mean. Here's what we actually believe — and act on.</p>
+  </div>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="n">01</div>
+      <h4>Restraint scales. Permission does not.</h4>
+      <p>The first accent is a signal; the seventh is chrome. The same is true of features, services, and methodologies. We keep the surface small on purpose.</p>
+    </div>
+    <div class="principle">
+      <div class="n">02</div>
+      <h4>One sentence beats three.</h4>
+      <p>If we can't say it in a sentence, we don't understand it yet. Every brief, every readout, every deliverable starts with the sentence.</p>
+    </div>
+    <div class="principle">
+      <div class="n">03</div>
+      <h4>Senior practitioners only.</h4>
+      <p>No subcontracting. No offshore. No leverage pyramid. The person who sells the work does the work. The lean structure is the model.</p>
+    </div>
+    <div class="principle">
+      <div class="n">04</div>
+      <h4>Reuse, every time.</h4>
+      <p>If we built it once, the next engagement gets it free. The 92+ agent library is the compounding asset; every new client adds to it.</p>
+    </div>
+    <div class="principle">
+      <div class="n">05</div>
+      <h4>We measure outcomes, not output.</h4>
+      <p>Hours billed is a poor proxy for value. We scope engagements by the change they create — and we say so out loud in the contract.</p>
+    </div>
+    <div class="principle">
+      <div class="n">06</div>
+      <h4>Speed is a respect for the client.</h4>
+      <p>Seventeen hours from idea to prototype isn't a flex. It's how we honor your time. Slow consulting is a tax we don't ask you to pay.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIMELINE ============ -->
+<section class="section">
+  <div class="section-header">
+    <div class="eyebrow">The story</div>
+    <h2 class="section-title">A short history.</h2>
+    <p class="section-lead">We are not a fifty-year heritage firm. The model is too new for that. Here's what's happened since 2023.</p>
+  </div>
+
+  <div class="timeline">
+    <ol>
+      <li>
+        <span class="when">2023 · Q3</span>
+        <span class="what">Founded as a three-person studio.<small>Rajiv, Maya, and Tomas. One client. One question: can a senior collective beat a 200-person consultancy?</small></span>
+        <span class="place">Princeton, NJ</span>
+      </li>
+      <li>
+        <span class="when">2024 · Q1</span>
+        <span class="what">First agent library committed to git.<small>Five reusable patterns. The library mindset is the model.</small></span>
+        <span class="place">Library v0.1</span>
+      </li>
+      <li>
+        <span class="when">2024 · Q4</span>
+        <span class="what">Twelve partners, no associates.<small>The lean structure stays. We turned down two PE term sheets to keep it that way.</small></span>
+        <span class="place">12 partners</span>
+      </li>
+      <li>
+        <span class="when">2025 · Q2</span>
+        <span class="what">Library passes 50 agents.<small>The compounding asset compounds.</small></span>
+        <span class="place">Library v0.4</span>
+      </li>
+      <li>
+        <span class="when">2025 · Q4</span>
+        <span class="what">First Embed engagement shipped to production.<small>Two-year roadmap, monthly readouts, no scope drift.</small></span>
+        <span class="place">CS-2025-09</span>
+      </li>
+      <li class="now">
+        <span class="when">2026 · Now</span>
+        <span class="what">92+ agents, 47 engagements, design system v0.4.0.<small>You are reading the system. The work continues.</small></span>
+        <span class="place">In progress</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta-wrap">
+  <div class="cta-veil"></div>
+  <div class="cta">
+    <div>
+      <span class="eyebrow">Next step</span>
+      <h2 style="margin-top: 18px">Want to <span class="brand-word">work</span> with us?</h2>
+      <p>The honest version of the first call: 30 minutes, three questions, an honest yes or no on whether we're the right partner.</p>
+      <div class="actions">
+        <button class="btn btn-primary btn-lg">Book a call</button>
+        <button class="btn btn-secondary btn-lg">See engagements</button>
+      </div>
+    </div>
+    <div class="contact">
+      <div class="label">Reach us</div>
+      <dl class="kv-list">
+        <dt>Address</dt><dd>25 Palmer Square, Princeton, NJ 08542</dd>
+        <dt>E-mail</dt><dd>admin@pointonezero.com</dd>
+        <dt>Phone</dt><dd class="mono">(678) 901-4328</dd>
+        <dt>Press</dt><dd>press@pointonezero.com</dd>
+        <dt>Careers</dt><dd>careers@pointonezero.com</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-inner">
+    <div>© Point One Zero · 25 Palmer Square, Princeton, NJ 08542</div>
+    <div class="mono">v0.4.0 · about</div>
+  </div>
+</footer>
+
+</body>
+</html>
