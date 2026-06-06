@@ -1,0 +1,2448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Canonical URL normalizer (skips redirect on localhost) -->
+<link id="canonical-link" rel="canonical" href="">
+<script>
+(function(){
+  try{
+    const u = new URL(location.href);
+    let p = u.pathname;
+    if (p.endsWith('/index.html')) p = p.replace(/\/index\.html$/, '/');
+    const m = p.match(/^\/([^\/]+)\/\1\.html$/);
+    if (m) p = '/' + m[1];
+    if (p !== '/' && p.endsWith('/')) p = p.replace(/\/+$/, '');
+    const parts = p.split('/').filter(Boolean);
+    if (parts.length === 1 || (parts[0] === 'blogs' && parts.length === 2)) {
+      const normalized = parts.map(s => s.toLowerCase()).join('/');
+      p = '/' + normalized;
+    }
+    const canonicalHref = 'https://abseth.com' + p + u.search + u.hash;
+    const canon = document.getElementById('canonical-link');
+    if (canon) canon.href = canonicalHref;
+    const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    if (!isLocal && p !== u.pathname) location.replace(canonicalHref);
+  } catch(e){ console.error('canonical normalizer error', e); }
+})();
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-98H0ZTK0T4');
+</script>
+
+<!-- Clarity tracking code -->
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "vaaig4fq2o");
+</script>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>POZ Design System — Case Study by Abhishek Sethuraman</title>
+<meta name="author" content="Abhishek Sethuraman" />
+<meta name="description" content="Case study: designing the Point One Zero (POZ) design system — one token layer, 32 components, and 12 production UI kits spanning web, print, social, and decks." />
+<meta name="keywords" content="Design System, Design Tokens, Component Library, UI Kit, Brand System, Point One Zero, Abhishek Sethuraman" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#010102" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://abseth.com/my-works/DesignSystemPOZ/" />
+<meta property="og:title" content="POZ Design System — Case Study by Abhishek Sethuraman" />
+<meta property="og:description" content="One token layer, 32 components, 12 production UI kits spanning web, print, social, and decks — the Point One Zero design system." />
+<meta property="og:image" content="https://abseth.com/img/favicon.png" />
+<meta property="og:site_name" content="Abhishek Sethuraman Portfolio" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="POZ Design System — Case Study by Abhishek Sethuraman" />
+<meta name="twitter:description" content="One token layer, 32 components, 12 production UI kits — the Point One Zero design system." />
+<meta name="twitter:image" content="https://abseth.com/img/favicon.png" />
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "POZ Design System",
+  "url": "https://abseth.com/my-works/DesignSystemPOZ/",
+  "image": "https://abseth.com/img/favicon.png",
+  "description": "Case study: designing the Point One Zero (POZ) design system — one token layer, 32 components, and 12 production UI kits spanning web, print, social, and decks.",
+  "author": { "@type": "Person", "name": "Abhishek Sethuraman", "url": "https://abseth.com/" },
+  "datePublished": "2026"
+}
+</script>
+
+<link rel="icon" href="/img/favicon.png" type="image/png" />
+<link rel="preconnect" href="https://rsms.me" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<style>
+/* ============================================================
+   Point One Zero tokens + primitives — inlined
+   ============================================================ */
+
+
+@import url("https://rsms.me/inter/inter.css");
+
+:root,
+[data-theme="light"] {
+  /* ---------- Color (raw) ---------- */
+  --color-primary:    #0a0a0a;            /* primary fill (near-black) */
+  --color-secondary:  #0a0a0a;            /* on-surface text */
+  --color-on-surface: #0a0a0a;
+
+  /* Canvas + surface ladder (4-step lift)
+     In light, the ladder steps DOWN into faint gray — a
+     featured surface settles a notch off the canvas, never
+     brighter than it. */
+  --canvas:    #ffffff;                   /* page background — the clean page */
+  --surface-1: #fafafa;                   /* default card */
+  --surface-2: #f3f4f5;                   /* featured / hovered card */
+  --surface-3: #ebeced;                   /* dropdown, sub-nav */
+  --surface-4: #e2e4e6;                   /* deepest lifted surface */
+
+  /* Hairline borders (subtle — strong) — black on light */
+  --border-subtle:   rgba(0, 0, 0, 0.06);
+  --border-default:  rgba(0, 0, 0, 0.10);
+  --border-strong:   rgba(0, 0, 0, 0.16);
+  --edge-highlight:  inset 0 1px 0 rgba(255, 255, 255, 0.7);  /* faint top edge on lifted panels */
+
+  /* ---------- Semantic (status) ---------- */
+  --success:        #1A9E5F;              /* status pills, success indicators */
+  --success-soft:   rgba(26, 158, 95, 0.10);
+  --success-mid:    rgba(26, 158, 95, 0.30);
+  --warning:        #C77A0A;
+  --warning-soft:   rgba(199, 122, 10, 0.10);
+  --warning-mid:    rgba(199, 122, 10, 0.30);
+  --danger:         #DC2626;
+  --danger-soft:    rgba(220, 38, 38, 0.10);
+  --danger-mid:     rgba(220, 38, 38, 0.30);
+  /* Note: there is no --info token. "Info" is the brand's job, but the
+     brand color is reserved for the eight surfaces in README § The brand
+     color. Use `.toast.is-info` / `.banner.is-info` chrome explicitly
+     when the meaning is informational; do not alias --info := --brand. */
+
+  /* ---------- Brand (the one accent) ---------- */
+  --brand:        #009FEF;
+  --brand-50:     #E6F7FF;
+  --brand-100:    #B8E5FE;
+  --brand-200:    #8AD4FC;
+  --brand-300:    #5CC2F9;
+  --brand-400:    #2EB0F6;
+  --brand-500:    #009FEF;                /* === --brand */
+  --brand-600:    #007FBF;
+  --brand-700:    #00608F;
+  --brand-800:    #00405F;
+  --brand-900:    #002030;
+  --brand-foreground: #ffffff;            /* white text on solid brand */
+
+  /* Brand tints — tuned for white contrast */
+  --brand-softer: rgba(0, 159, 239, 0.05);
+  --brand-soft:   rgba(0, 159, 239, 0.10);
+  --brand-mid:    rgba(0, 159, 239, 0.25);
+  --brand-glow:   0 0 8px rgba(0, 159, 239, 0.35);
+
+  /* Gradients
+     ---------------------------------------------------------
+     - hero-veil:        atmospheric blue at the top of a hero,
+                         very faint — smudge, not statement
+     - hero-veil-floor:  ambient blue washing up from the bottom
+     - brand-line:       1–2px keyline (active rails)
+     - brand-fade:       reserved for the rare full-brand surface
+     - card-hover:       inset top wash that mirrors the tactile
+                         feel of the primary button on hover
+     - card-featured:    a more present wash for the featured card
+     - panel-edge:       subtle top sheen for lifted panels
+     --------------------------------------------------------- */
+  --gradient-brand-line:   linear-gradient(90deg, #009FEF 0%, #2EB0F6 100%);
+  --gradient-brand-fade:   linear-gradient(135deg, #009FEF 0%, #005C8C 100%);
+  --gradient-hero-veil:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,159,239,0.08), transparent 65%),
+    radial-gradient(ellipse 90% 35% at 50% 8%, rgba(0,159,239,0.04), transparent 80%);
+  --gradient-hero-veil-floor:
+    radial-gradient(ellipse 70% 40% at 50% 100%, rgba(0,159,239,0.05), transparent 75%);
+  --gradient-card-hover:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,0,0,0.025), transparent 70%);
+  --gradient-card-featured:
+    /* Neutral surface lift only — no brand wash. Per README § The brand
+       color, the featured card tints the number, not the fill. */
+    linear-gradient(180deg, rgba(0,0,0,0.025), rgba(0,0,0,0) 60%);
+  --gradient-panel-edge:
+    linear-gradient(180deg, rgba(0,0,0,0.025), rgba(0,0,0,0) 18%);
+
+  /* Focus halo */
+  --shadow-focus-brand:
+    0 0 0 2px var(--canvas),
+    0 0 0 4px var(--brand);
+
+  /* ---------- Semantic ---------- */
+  --background:        var(--canvas);
+  --surface:           var(--surface-1);
+  --foreground:        var(--color-on-surface);
+  --foreground-muted:  #3f3f46;           /* body copy */
+  --foreground-subtle: #71717a;           /* meta, captions, eyebrows */
+  --foreground-faint:  #a1a1aa;           /* footnotes, disabled */
+  --foreground-dim:    #d4d4d8;           /* deep faint — background text, watermark */
+
+  --primary:           var(--color-primary);
+  --primary-foreground:var(--canvas);     /* white text on dark button */
+
+  --link-color: var(--foreground);
+  --link-decoration-color: var(--brand);
+
+  /* ---------- Type ---------- */
+  --font-sans: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-feature: "ss01", "ss02", "cv01", "cv03";
+
+  /* Display scale */
+  --font-display-xl: 80px / 84px var(--font-sans);     /* hero */
+  --track-display-xl: -3.0px;
+  --weight-display-xl: 600;
+
+  /* Print-extended display scale
+     ----------------------------------------------------------
+     Used by fixed-canvas print formats (1080×1440 portrait,
+     1080×1080 landscape) where 80px would read as merely large.
+     Each step derives its track from the same ~-3.8% ratio that
+     governs --track-display-xl. Web surfaces never reach for
+     these — if you find yourself using 2xl on a web page, you
+     want display-xl. */
+  --font-display-2xl: 96px / 100px var(--font-sans);    /* white-paper portrait cover */
+  --track-display-2xl: -3.6px;
+  --font-display-3xl: 120px / 116px var(--font-sans);   /* white-paper portrait chapter, landscape body opener */
+  --track-display-3xl: -4.4px;
+  --font-display-4xl: 168px / 156px var(--font-sans);   /* white-paper landscape cover */
+  --track-display-4xl: -6.4px;
+
+  --font-display-lg: 56px / 61.6px var(--font-sans);   /* section openers */
+  --track-display-lg: -1.8px;
+  --weight-display-lg: 600;
+
+  --font-display-md: 40px / 46px var(--font-sans);     /* sub-sections */
+  --track-display-md: -1.0px;
+  --weight-display-md: 600;
+
+  --font-headline: 28px / 33.6px var(--font-sans);     /* pricing tier titles, CTA banner */
+  --track-headline: -0.6px;
+  --weight-headline: 600;
+
+  --font-card-title: 22px / 27.5px var(--font-sans);   /* feature card title */
+  --track-card-title: -0.4px;
+  --weight-card-title: 510;
+
+  --font-subhead: 20px / 28px var(--font-sans);        /* lead body, intro paragraphs */
+  --track-subhead: -0.2px;
+
+  --font-body-lg: 18px / 27px var(--font-sans);        /* hero subhead */
+  --track-body-lg: -0.1px;
+
+  --font-body: 16px / 24px var(--font-sans);           /* default body */
+  --track-body: -0.05px;
+
+  --font-body-sm: 14px / 21px var(--font-sans);        /* card body, footer columns */
+  --track-body-sm: 0px;
+
+  --font-caption: 12px / 16.8px var(--font-sans);
+  --track-caption: 0px;
+
+  --font-button: 14px / 16.8px var(--font-sans);
+  --weight-button: 510;
+
+  /* The eyebrow inverts display's negative tracking — positive 0.4px (~3% at 13px)
+     marks eyebrow-as-taxonomy, contrasting with display-as-statement. */
+  --font-eyebrow: 13px / 16.9px var(--font-sans);
+  --track-eyebrow: 0.4px;
+  --weight-eyebrow: 510;
+
+  --font-mono-md: 13px / 19.5px var(--font-mono);
+
+  /* Weights */
+  --weight-regular: 400;
+  --weight-medium: 510;
+  --weight-semibold: 600;
+
+  /* ---------- Spacing (4px base) ---------- */
+  --space-xxs: 4px;
+  --space-xs:  8px;
+  --space-sm:  12px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-xxl: 48px;
+  --space-section: 96px;          /* between major sections */
+
+  /* ---------- Radii ---------- */
+  --radius-none: 0px;
+  --radius-xs:   4px;             /* status chips */
+  --radius-sm:   6px;             /* inline tags */
+  --radius-md:   8px;             /* square buttons, inputs */
+  --radius-lg:   12px;            /* pricing/feature/testimonial cards */
+  --radius-xl:   16px;            /* product screenshot panels */
+  --radius-xxl:  24px;            /* oversized CTA banners (rare) */
+  --radius-full: 9999px;          /* pill buttons, status pills, avatars */
+
+  /* ---------- Shadow / depth ----------
+     Light carries more of its hierarchy through shadow than
+     dark does — the surface ladder alone can't lift a white
+     card off a white canvas. */
+  --shadow-sm: rgba(15, 17, 20, 0.06) 0px 1px 2px 0px;
+  --shadow-md: rgba(15, 17, 20, 0.08) 0 8px 24px -6px;
+  --shadow-lg: rgba(15, 17, 20, 0.10) 0 24px 64px -16px;
+
+  /* Linear's stacked primary-button shadow — retuned for light */
+  --shadow-primary-btn:
+    rgba(0, 0, 0, 0.04) 0px 5px 2px 0px,
+    rgba(0, 0, 0, 0.08) 0px 3px 2px 0px,
+    rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
+    rgba(0, 0, 0, 0.10) 0px 0px 1px 0px;
+
+  /* Hover — same stack, a touch deeper / further lifted */
+  --shadow-primary-btn-hover:
+    rgba(0, 0, 0, 0.06) 0px 8px 3px 0px,
+    rgba(0, 0, 0, 0.10) 0px 4px 2px 0px,
+    rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
+    rgba(0, 0, 0, 0.12) 0px 0px 1px 0px;
+
+  /* Pressed — collapse the lift, keep the hairline */
+  --shadow-primary-btn-press:
+    rgba(0, 0, 0, 0.02) 0px 1px 1px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+
+  /* Secondary-button — black hairline + soft drop */
+  --shadow-secondary-btn:
+    rgba(0, 0, 0, 0.02) 0px 0px 0px 1px inset,
+    rgba(255, 255, 255, 0.50) 0px 1px 0px 0px inset,
+    rgba(0, 0, 0, 0.12) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px 0px;
+
+  /* Hover — strengthen the hairline, deepen the drop */
+  --shadow-secondary-btn-hover:
+    rgba(0, 0, 0, 0.03) 0px 0px 0px 1px inset,
+    rgba(255, 255, 255, 0.60) 0px 1px 0px 0px inset,
+    rgba(0, 0, 0, 0.18) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.08) 0px 4px 8px -1px;
+
+  /* ---------- Motion ---------- */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-instant: 80ms;
+  --dur-fast: 160ms;
+  --dur-base: 240ms;
+  --dur-slow: 420ms;
+
+  /* ---------- Chrome ---------- */
+  --canvas-blur: rgba(255, 255, 255, 0.82);
+  --container-max: 1280px;
+  --container-analytical: 1200px;
+  --container-prose: 1180px;
+
+  /* Inner content widths — caps that live INSIDE a container.
+     The container holds the page; these hold the readable column
+     and the showcase frame. Two values, named — not free-form. */
+  --content-narrow: 640px;          /* headline cap, lead paragraph */
+  --content-wide:   1160px;         /* product-frame / wide showcase block */
+
+  /* Neutral mid — the "absent / missing" state dot.
+     Sits between --foreground-faint (#a1a1aa) and the dark surfaces.
+     Used on light surfaces when an indicator means "this is not
+     populated" rather than "this is disabled". */
+  --neutral-mid: #2c2f34;
+}
+
+[data-theme="dark"] {
+  /* ---------- Color (raw) ---------- */
+  --color-primary:    #e5e5e6;            /* primary fill (off-white) */
+  --color-secondary:  #f7f8f8;            /* on-surface text */
+  --color-on-surface: #f7f8f8;
+
+  /* Canvas + surface ladder — inverted */
+  --canvas:    #010102;                   /* near-pure black with a faint blue tint */
+  --surface-1: #08090b;
+  --surface-2: #0f1114;
+  --surface-3: #16181c;
+  --surface-4: #1c1f24;
+
+  /* Hairline borders — white opacities */
+  --border-subtle:   rgba(255, 255, 255, 0.06);
+  --border-default:  rgba(255, 255, 255, 0.10);
+  --border-strong:   rgba(255, 255, 255, 0.18);
+  --edge-highlight:  inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  /* ---------- Brand tints — re-tuned for dark contrast ---------- */
+  --brand-softer: rgba(0, 159, 239, 0.06);
+  --brand-soft:   rgba(0, 159, 239, 0.14);
+  --brand-mid:    rgba(0, 159, 239, 0.32);
+  --brand-glow:   0 0 12px rgba(0, 159, 239, 0.45);
+  --brand-foreground: #010102;            /* dark text on solid brand */
+
+  /* Status — saturated values that pop on dark */
+  --success:        #4FD08F;
+  --success-soft:   rgba(79, 208, 143, 0.14);
+  --success-mid:    rgba(79, 208, 143, 0.32);
+  --warning:        #E0A046;
+  --warning-soft:   rgba(224, 160, 70, 0.14);
+  --warning-mid:    rgba(224, 160, 70, 0.32);
+  --danger:         #FF5C5C;
+  --danger-soft:    rgba(255, 92, 92, 0.14);
+  --danger-mid:     rgba(255, 92, 92, 0.32);
+
+  /* ---------- Gradients ---------- */
+  --gradient-hero-veil:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,159,239,0.14), transparent 65%),
+    radial-gradient(ellipse 90% 35% at 50% 8%, rgba(0,159,239,0.06), transparent 80%);
+  --gradient-hero-veil-floor:
+    radial-gradient(ellipse 70% 40% at 50% 100%, rgba(0,159,239,0.10), transparent 75%);
+  --gradient-card-hover:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,255,255,0.045), transparent 70%);
+  --gradient-card-featured:
+    linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0) 60%);
+  --gradient-panel-edge:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0) 18%);
+
+  /* ---------- Foreground scale ---------- */
+  --foreground:        #f7f8f8;
+  --foreground-muted:  #d0d6e0;
+  --foreground-subtle: #8a8f98;
+  --foreground-faint:  #62666d;
+  --foreground-dim:    #4a4d52;
+
+  --primary-foreground: var(--canvas);
+
+  /* ---------- Shadows — retreat on dark ---------- */
+  --shadow-sm: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px;
+  --shadow-md: rgba(0, 0, 0, 0.55) 0 12px 32px -10px;
+  --shadow-lg: rgba(0, 0, 0, 0.6) 0 30px 80px -20px;
+
+  --shadow-primary-btn:
+    rgba(0, 0, 0, 0.01) 0px 5px 2px 0px,
+    rgba(0, 0, 0, 0.04) 0px 3px 2px 0px,
+    rgba(0, 0, 0, 0.07) 0px 1px 1px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
+  --shadow-primary-btn-hover:
+    rgba(0, 0, 0, 0.02) 0px 8px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 4px 2px 0px,
+    rgba(0, 0, 0, 0.09) 0px 1px 1px 0px,
+    rgba(0, 0, 0, 0.10) 0px 0px 1px 0px;
+  --shadow-primary-btn-press:
+    rgba(0, 0, 0, 0.04) 0px 0px 0px 1px;
+
+  --shadow-secondary-btn:
+    rgba(255, 255, 255, 0.03) 0px 0px 0px 1px inset,
+    rgba(255, 255, 255, 0.04) 0px 1px 0px 0px inset,
+    rgba(0, 0, 0, 0.60) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.10) 0px 4px 4px 0px;
+  --shadow-secondary-btn-hover:
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset,
+    rgba(255, 255, 255, 0.06) 0px 1px 0px 0px inset,
+    rgba(255, 255, 255, 0.10) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.14) 0px 6px 8px 0px;
+
+  /* ---------- Chrome ---------- */
+  --canvas-blur: rgba(1, 1, 2, 0.78);
+}
+
+html, body {
+  background: var(--canvas);
+  color: var(--foreground);
+  font: var(--font-body);
+  letter-spacing: var(--track-body);
+  font-family: var(--font-sans);
+  font-feature-settings: var(--font-feature);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, .h1, .display-xl {
+  font: var(--font-display-xl);
+  letter-spacing: var(--track-display-xl);
+  font-weight: var(--weight-display-xl);
+  color: var(--foreground);
+  margin: 0;
+  text-wrap: balance;
+}
+
+h2, .h2, .display-lg {
+  font: var(--font-display-lg);
+  letter-spacing: var(--track-display-lg);
+  font-weight: var(--weight-display-lg);
+  color: var(--foreground);
+  margin: 0;
+  text-wrap: balance;
+}
+
+h3, .h3, .display-md {
+  font: var(--font-display-md);
+  letter-spacing: var(--track-display-md);
+  font-weight: var(--weight-display-md);
+  color: var(--foreground);
+  margin: 0;
+}
+
+h4, .h4, .headline {
+  font: var(--font-headline);
+  letter-spacing: var(--track-headline);
+  font-weight: var(--weight-headline);
+  color: var(--foreground);
+  margin: 0;
+}
+
+.card-title {
+  font: var(--font-card-title);
+  letter-spacing: var(--track-card-title);
+  font-weight: var(--weight-card-title);
+  color: var(--foreground);
+}
+
+.subhead {
+  font: var(--font-subhead);
+  letter-spacing: var(--track-subhead);
+  color: var(--foreground-muted);
+}
+
+p, .body {
+  font: var(--font-body);
+  letter-spacing: var(--track-body);
+  color: var(--foreground-muted);
+  margin: 0;
+}
+
+.body-lg { font: var(--font-body-lg); letter-spacing: var(--track-body-lg); color: var(--foreground); }
+.body-sm { font: var(--font-body-sm); color: var(--foreground-muted); }
+.caption  { font: var(--font-caption); color: var(--foreground-subtle); }
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--link-decoration-color);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* The single brand-colored word inside a heading. Use once per page (twice, max). */
+.brand-word { color: var(--brand); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  height: 40px;
+  padding: 0 18px;
+  border-radius: var(--radius-full);
+  font: var(--font-button);
+  font-weight: var(--weight-button);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+  user-select: none;
+  white-space: nowrap;
+  border: 0;
+}
+.btn-square { border-radius: var(--radius-md); }
+
+/* Sizes */
+.btn-lg { height: 44px; padding: 0 22px; min-width: 127px; }
+.btn-sm { height: 32px; padding: 0 14px; font-size: 13px; }
+
+/* Primary — near-black pill with the stacked shadow on light;
+   inverts to off-white on dark. Hover deepens the lift; active
+   collapses it; focus-visible shows the brand halo; disabled fades.
+   Every state respects prefers-reduced-motion via the global rule. */
+.btn-primary {
+  background: var(--color-primary);
+  color: #ffffff;
+  box-shadow: var(--shadow-primary-btn);
+  transform: translateY(0);
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+.btn-primary:hover {
+  background: #000000;
+  box-shadow: var(--shadow-primary-btn-hover);
+  transform: translateY(-0.5px);
+}
+.btn-primary:active {
+  background: var(--color-primary);
+  box-shadow: var(--shadow-primary-btn-press);
+  transform: translateY(0);
+}
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-primary-btn), var(--shadow-focus-brand);
+}
+.btn-primary:disabled,
+.btn-primary[aria-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+[data-theme="dark"] .btn-primary { color: var(--canvas); }
+[data-theme="dark"] .btn-primary:hover { background: #ffffff; }
+[data-theme="dark"] .btn-primary:active { background: var(--color-primary); }
+
+/* Secondary — defined entirely by inset shadow. Hover strengthens
+   the hairline; active deepens the fill; focus-visible adds the halo. */
+.btn-secondary {
+  background: transparent;
+  color: var(--foreground);
+  box-shadow: var(--shadow-secondary-btn);
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+.btn-secondary:hover {
+  background: rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-secondary-btn-hover);
+}
+.btn-secondary:active {
+  background: rgba(0, 0, 0, 0.07);
+  box-shadow: var(--shadow-secondary-btn);
+}
+.btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-secondary-btn), var(--shadow-focus-brand);
+}
+.btn-secondary:disabled,
+.btn-secondary[aria-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+[data-theme="dark"] .btn-secondary { color: var(--color-secondary); }
+[data-theme="dark"] .btn-secondary:hover { background: rgba(255, 255, 255, 0.04); }
+[data-theme="dark"] .btn-secondary:active { background: rgba(255, 255, 255, 0.07); }
+
+/* Tertiary — flat text-button on canvas. Hover paints a subtle fill;
+   active deepens; focus-visible adds the halo. */
+.btn-tertiary {
+  background: transparent;
+  color: var(--foreground);
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+.btn-tertiary:hover { background: rgba(0, 0, 0, 0.04); }
+.btn-tertiary:active { background: rgba(0, 0, 0, 0.07); }
+.btn-tertiary:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-brand);
+}
+.btn-tertiary:disabled,
+.btn-tertiary[aria-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+[data-theme="dark"] .btn-tertiary:hover { background: rgba(255, 255, 255, 0.04); }
+[data-theme="dark"] .btn-tertiary:active { background: rgba(255, 255, 255, 0.07); }
+
+/* Link — underlined inline button. Hover swaps the text to brand
+   and thickens the underline; focus-visible inherits the global ring. */
+.btn-link {
+  background: transparent;
+  color: var(--foreground);
+  border: 0;
+  padding: 0;
+  height: auto;
+  border-radius: 0;
+  box-shadow: none;
+  text-decoration: underline;
+  text-decoration-color: var(--brand);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    text-decoration-thickness var(--dur-fast) var(--ease-out);
+}
+.btn-link:hover {
+  color: var(--brand);
+  text-decoration-thickness: 2px;
+}
+.btn-link:active { color: var(--brand-700, #007FBF); }
+.btn-link:disabled,
+.btn-link[aria-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+  text-decoration-color: var(--foreground-faint);
+}
+
+.card {
+  position: relative;
+  background: var(--surface-1);
+  color: var(--foreground);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  transition:
+    border-color var(--dur-base) var(--ease-out),
+    background var(--dur-base) var(--ease-out);
+  box-shadow: var(--edge-highlight);
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--gradient-card-hover);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-out);
+  pointer-events: none;
+  border-radius: inherit;
+}
+.card:hover { border-color: var(--border-default); }
+.card:hover::before { opacity: 1; }
+.card-featured {
+  background: var(--surface-2);
+  border-color: var(--border-default);
+}
+.card-featured::before {
+  background: var(--gradient-card-featured);
+  opacity: 1;
+}
+.card-deep { background: var(--surface-3); }
+
+/* Children inside the card must sit above ::before */
+.card > * { position: relative; z-index: 1; }
+
+/* Eyebrow — section/category taxonomy.
+   Positive tracking (+0.4px) deliberately inverts display's aggressive negative tracking. */
+.eyebrow {
+  font: var(--font-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  font-weight: var(--weight-eyebrow);
+  color: var(--foreground-subtle);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+/* The brand dot — appears on the wordmark, occasionally on a hero status pill.
+   NOT a decoration for every eyebrow. Use sparingly. */
+.brand-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--brand);
+  box-shadow: var(--brand-glow);
+  display: inline-block;
+  flex: none;
+}
+
+/* Status pill — small rounded chip on lifted surface */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  height: 24px;
+  padding: 0 10px;
+  border-radius: var(--radius-full);
+  background: var(--surface-2);
+  border: 1px solid var(--border-default);
+  color: var(--foreground-muted);
+  font: var(--font-caption);
+}
+[data-theme="dark"] .status-pill { border-color: var(--border-subtle); }
+
+/* Mono — inline ordinal / identifier / address numerics.
+   USE FOR: version strings, IDs, addresses, phone numbers, page indicators,
+   reference numbers (Vol., Ch., Def., Fig., §, Cf.), ordinal markers in
+   lists, URLs in citations, footnote refs, anything that reads as data.
+   DON'T USE FOR: stats / metrics (use .stat-num), counts in body prose
+   (let them inherit), or button labels (let them inherit).
+   The point is to mark numbers as *data, not statement.* */
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum";
+}
+
+.tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 22px; padding: 0 8px;
+  border-radius: var(--radius-xs);
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  color: var(--foreground-muted);
+  font: var(--font-caption);
+  font-weight: var(--weight-medium);
+}
+.tag-dot { width: 6px; height: 6px; border-radius: 9999px; flex: none; }
+
+.badge {
+  display: inline-flex; align-items: center;
+  height: 18px; padding: 0 7px;
+  border-radius: var(--radius-full);
+  background: var(--surface-2);
+  color: var(--foreground-muted);
+  font: var(--font-caption); font-size: 11px;
+  font-weight: var(--weight-medium);
+}
+.badge-success { background: var(--success-soft); color: var(--success); }
+.badge-warning { background: var(--warning-soft); color: var(--warning); }
+.badge-danger  { background: var(--danger-soft); color: var(--danger); }
+/* Note: there is no .badge-info. Informational tags use plain `.tag` —
+   filling a badge with brand blue extends the accent past its eight-item
+   list (see README § The brand color). */
+
+.input {
+  width: 100%;
+  background: var(--canvas);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font: var(--font-body);
+  letter-spacing: var(--track-body);
+  color: var(--foreground);
+  box-sizing: border-box;
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.input::placeholder { color: var(--foreground-faint); }
+.input:hover { border-color: var(--border-strong); }
+.input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(0, 159, 239, 0.18);
+}
+.input.is-error {
+  border-color: var(--danger-mid);
+  box-shadow: 0 0 0 3px var(--danger-soft);
+}
+.input.is-success {
+  border-color: var(--success-mid);
+  box-shadow: 0 0 0 3px var(--success-soft);
+}
+.input:disabled {
+  background: var(--surface-1);
+  color: var(--foreground-faint);
+  cursor: not-allowed;
+  border-color: var(--border-subtle);
+}
+.input-help {
+  display: block; margin-top: 6px;
+  font: var(--font-caption);
+  color: var(--foreground-subtle);
+}
+.input-help.is-error { color: var(--danger); }
+.input-help.is-success { color: var(--success); }
+
+[data-theme="dark"] .input { border-color: var(--border-subtle); }
+[data-theme="dark"] .input:hover { border-color: var(--border-default); }
+[data-theme="dark"] .input:focus {
+  border-color: var(--brand-mid);
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+
+/* Focus */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------------- Form atoms ---------------- */
+
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+.field-label {
+  font: var(--font-body-sm);
+  font-weight: var(--weight-medium);
+  color: var(--foreground-subtle);
+}
+.field-help {
+  font: var(--font-caption);
+  color: var(--foreground-subtle);
+}
+.field-help.is-error { color: var(--danger); }
+.field-help.is-success { color: var(--success); }
+
+.textarea {
+  width: 100%;
+  background: var(--canvas);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font: var(--font-body);
+  letter-spacing: var(--track-body);
+  color: var(--foreground);
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 100px;
+  font-family: var(--font-sans);
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.textarea:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(0, 159, 239, 0.18);
+}
+[data-theme="dark"] .textarea { border-color: var(--border-subtle); }
+[data-theme="dark"] .textarea:focus {
+  border-color: var(--brand-mid);
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+
+/* Select — styled native */
+.select {
+  appearance: none;
+  width: 100%;
+  background-color: var(--canvas);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--foreground-subtle) 50%),
+    linear-gradient(135deg, var(--foreground-subtle) 50%, transparent 50%);
+  background-position: right 16px center, right 11px center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 10px 36px 10px 14px;
+  font: var(--font-body);
+  letter-spacing: var(--track-body);
+  color: var(--foreground);
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.select:hover { border-color: var(--border-strong); }
+.select:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(0, 159, 239, 0.18);
+}
+[data-theme="dark"] .select { border-color: var(--border-subtle); }
+[data-theme="dark"] .select:hover { border-color: var(--border-default); }
+[data-theme="dark"] .select:focus {
+  border-color: var(--brand-mid);
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+
+/* Checkbox + radio — visually consistent, semantically distinct */
+.checkbox, .radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: var(--font-body-sm);
+  color: var(--foreground);
+  cursor: pointer;
+  user-select: none;
+}
+.checkbox input, .radio input { position: absolute; opacity: 0; pointer-events: none; }
+.checkbox .box, .radio .box {
+  width: 16px; height: 16px; flex: none;
+  background: var(--canvas);
+  border: 1px solid var(--border-strong);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.checkbox .box { border-radius: var(--radius-xs); }
+.radio .box { border-radius: 9999px; }
+.checkbox:hover .box, .radio:hover .box { border-color: var(--foreground-subtle); }
+.checkbox input:checked + .box {
+  background: var(--brand);
+  border-color: var(--brand);
+}
+.checkbox input:checked + .box::after {
+  content: '';
+  width: 8px; height: 4px;
+  border-left: 1.5px solid var(--brand-foreground);
+  border-bottom: 1.5px solid var(--brand-foreground);
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+.radio input:checked + .box::after {
+  content: '';
+  width: 6px; height: 6px; border-radius: 9999px;
+  background: var(--brand);
+}
+.radio input:checked + .box { border-color: var(--brand); }
+.checkbox input:focus-visible + .box, .radio input:focus-visible + .box {
+  box-shadow: var(--shadow-focus-brand);
+}
+
+/* Switch — toggle */
+.switch {
+  display: inline-flex; align-items: center; gap: 10px;
+  font: var(--font-body-sm); color: var(--foreground);
+  cursor: pointer; user-select: none;
+}
+.switch input { position: absolute; opacity: 0; pointer-events: none; }
+.switch .track {
+  width: 32px; height: 18px;
+  border-radius: 9999px;
+  background: var(--surface-3);
+  border: 1px solid var(--border-default);
+  position: relative;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.switch .track::after {
+  content: '';
+  position: absolute;
+  top: 1px; left: 1px;
+  width: 14px; height: 14px;
+  border-radius: 9999px;
+  background: var(--foreground-muted);
+  transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+.switch input:checked + .track { background: var(--brand); border-color: var(--brand); }
+.switch input:checked + .track::after { background: var(--brand-foreground); transform: translateX(14px); }
+
+/* ---------------- Icon button ---------------- */
+
+.btn.btn-icon {
+  height: 32px; width: 32px;
+  min-width: 32px;
+  padding: 0;
+  border-radius: var(--radius-md);
+}
+.btn.btn-icon.btn-pill { border-radius: var(--radius-full); }
+.btn.btn-icon.btn-lg { height: 40px; width: 40px; min-width: 40px; }
+.btn.btn-icon.btn-sm { height: 28px; width: 28px; min-width: 28px; }
+
+/* ---------------- Button group / segmented control ---------------- */
+
+.btn-group {
+  display: inline-flex;
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 3px;
+  gap: 2px;
+  box-shadow: var(--edge-highlight);
+}
+.btn-group .seg {
+  height: 28px;
+  padding: 0 14px;
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: 0;
+  font: var(--font-button);
+  font-weight: var(--weight-button);
+  color: var(--foreground-subtle);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.btn-group .seg:hover { color: var(--foreground); background: rgba(0, 0, 0, 0.03); }
+.btn-group .seg:active { background: rgba(0, 0, 0, 0.06); }
+.btn-group .seg:focus-visible {
+  outline: none;
+  color: var(--foreground);
+  box-shadow: var(--shadow-focus-brand);
+}
+.btn-group .seg.active {
+  background: var(--canvas);
+  color: var(--foreground);
+  box-shadow: var(--shadow-sm);
+}
+[data-theme="dark"] .btn-group .seg:hover { background: rgba(255, 255, 255, 0.03); }
+[data-theme="dark"] .btn-group .seg:active { background: rgba(255, 255, 255, 0.06); }
+[data-theme="dark"] .btn-group .seg.active {
+  background: var(--surface-3);
+  box-shadow: none;
+}
+
+/* ---------------- Tabs — underline ---------------- */
+
+.tabs {
+  display: flex; gap: 24px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.tab {
+  padding: 12px 0;
+  background: transparent; border: 0;
+  font: var(--font-button); font-weight: var(--weight-medium);
+  color: var(--foreground-subtle);
+  cursor: pointer;
+  position: relative;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.tab:hover { color: var(--foreground); }
+.tab.active { color: var(--foreground); }
+.tab.active::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 2px;
+  background: var(--brand);
+  border-radius: 1px;
+}
+
+/* ---------------- Popover / menu shell ---------------- */
+
+.popover {
+  background: var(--canvas);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 6px;
+  box-shadow: var(--shadow-md);
+  min-width: 200px;
+  display: flex; flex-direction: column;
+  gap: 1px;
+}
+[data-theme="dark"] .popover {
+  background: var(--surface-3);
+}
+.popover-item {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font: var(--font-body-sm);
+  color: var(--foreground);
+  cursor: pointer;
+  display: flex; align-items: center; gap: 10px;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.popover-item:hover { background: rgba(0, 0, 0, 0.04); }
+[data-theme="dark"] .popover-item:hover { background: rgba(255, 255, 255, 0.04); }
+.popover-item .meta {
+  margin-left: auto;
+  font: var(--font-mono-md); font-size: 11px;
+  color: var(--foreground-subtle);
+}
+.popover-separator {
+  height: 1px; background: var(--border-subtle);
+  margin: 4px 0;
+}
+.popover-section-label {
+  padding: 8px 12px 4px;
+  font: var(--font-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--foreground-subtle);
+}
+
+/* ---------------- Tooltip ---------------- */
+
+.tooltip {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 5px 10px;
+  font: var(--font-caption);
+  color: #ffffff;
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  display: inline-block;
+}
+[data-theme="dark"] .tooltip {
+  background: var(--surface-4);
+  border-color: var(--border-default);
+  color: var(--foreground);
+}
+.tooltip kbd {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 16px; height: 16px; padding: 0 4px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  margin-left: 6px;
+}
+[data-theme="dark"] .tooltip kbd {
+  background: var(--surface-3);
+  border-color: var(--border-subtle);
+  color: var(--foreground-muted);
+}
+
+/* ---------------- Avatar ---------------- */
+
+.avatar {
+  width: 32px; height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--foreground);
+  font: var(--font-body-sm);
+  font-weight: var(--weight-semibold);
+  flex: none;
+  position: relative;
+  overflow: hidden;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-sm { width: 24px; height: 24px; font-size: 11px; }
+.avatar-lg { width: 40px; height: 40px; font-size: 15px; }
+.avatar-xl { width: 64px; height: 64px; font-size: 22px; }
+.avatar-group { display: inline-flex; }
+.avatar-group .avatar + .avatar { margin-left: -8px; box-shadow: 0 0 0 2px var(--canvas); }
+
+/* ---------------- Table ---------------- */
+
+.table-wrap {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface-1);
+  box-shadow: var(--edge-highlight);
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font: var(--font-body-sm);
+  color: var(--foreground);
+}
+.table thead th {
+  text-align: left;
+  padding: 12px 18px;
+  font: var(--font-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+  color: var(--foreground-subtle);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.table tbody td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--foreground-muted);
+}
+.table tbody tr:last-child td { border-bottom: 0; }
+.table tbody tr { transition: background var(--dur-fast) var(--ease-out); }
+.table tbody tr:hover { background: rgba(0, 0, 0, 0.02); }
+[data-theme="dark"] .table tbody tr:hover { background: rgba(255, 255, 255, 0.02); }
+.table td.num, .table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.table td.strong { color: var(--foreground); font-weight: var(--weight-medium); }
+
+/* ---------------- Toast ---------------- */
+
+.toast {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--canvas);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  box-shadow: var(--shadow-md);
+  font: var(--font-body-sm);
+  color: var(--foreground);
+}
+[data-theme="dark"] .toast { background: var(--surface-3); }
+.toast .toast-dot {
+  width: 8px; height: 8px; border-radius: 9999px;
+  background: var(--success);
+  box-shadow: 0 0 6px rgba(26, 158, 95, 0.4);
+}
+[data-theme="dark"] .toast .toast-dot { box-shadow: 0 0 6px rgba(79, 208, 143, 0.4); }
+.toast.is-warning .toast-dot { background: var(--warning); box-shadow: 0 0 6px rgba(199, 122, 10, 0.4); }
+[data-theme="dark"] .toast.is-warning .toast-dot { box-shadow: 0 0 6px rgba(224, 160, 70, 0.4); }
+.toast.is-danger .toast-dot { background: var(--danger); box-shadow: 0 0 6px rgba(220, 38, 38, 0.4); }
+[data-theme="dark"] .toast.is-danger .toast-dot { box-shadow: 0 0 6px rgba(255, 92, 92, 0.4); }
+.toast.is-info .toast-dot { background: var(--brand); box-shadow: var(--brand-glow); }
+.toast-close {
+  margin-left: 10px;
+  background: transparent; border: 0;
+  color: var(--foreground-subtle);
+  cursor: pointer; padding: 0;
+  display: inline-flex;
+}
+
+/* ---------------- Banner / inline alert ---------------- */
+
+.banner {
+  display: grid;
+  grid-template-columns: 20px 1fr auto;
+  gap: 14px; align-items: flex-start;
+  padding: 14px 18px;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-1);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--edge-highlight);
+}
+.banner .banner-ic {
+  padding-top: 2px;
+  color: var(--brand);
+}
+.banner .banner-body {
+  font: var(--font-body-sm);
+  color: var(--foreground-muted);
+  line-height: 1.5;
+}
+.banner .banner-body strong { color: var(--foreground); font-weight: var(--weight-medium); }
+.banner.is-info    .banner-ic { color: var(--brand); }
+.banner.is-success .banner-ic { color: var(--success); }
+.banner.is-warning .banner-ic { color: var(--warning); }
+.banner.is-danger  .banner-ic { color: var(--danger); }
+
+/* ---------------- Empty state ---------------- */
+
+.empty-state {
+  text-align: center;
+  padding: 64px 32px;
+  background: var(--surface-1);
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-lg);
+  display: flex; flex-direction: column;
+  align-items: center; gap: 8px;
+}
+.empty-state .empty-ic {
+  width: 40px; height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--foreground-subtle);
+  margin-bottom: 14px;
+}
+.empty-state h4 {
+  font: var(--font-card-title);
+  letter-spacing: var(--track-card-title);
+  font-weight: var(--weight-card-title);
+  color: var(--foreground);
+  margin: 0;
+}
+.empty-state p {
+  font: var(--font-body-sm);
+  color: var(--foreground-muted);
+  margin: 4px 0 14px;
+  max-width: 360px;
+}
+
+/* ---------------- Skeleton ---------------- */
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.skeleton {
+  background:
+    linear-gradient(90deg,
+      var(--surface-2) 0%,
+      var(--surface-3) 50%,
+      var(--surface-2) 100%);
+  background-size: 200% 100%;
+  border-radius: var(--radius-sm);
+  animation: skeleton-shimmer 1.6s linear infinite;
+  display: inline-block;
+}
+.skeleton-line { height: 12px; width: 100%; border-radius: 3px; }
+.skeleton-line.sm { width: 50%; }
+.skeleton-line.md { width: 78%; }
+.skeleton-line.lg { width: 92%; }
+.skeleton-circle { border-radius: 9999px; width: 32px; height: 32px; }
+.skeleton-block { height: 100px; width: 100%; border-radius: var(--radius-md); }
+
+/* ---------------- Stat number ----------------
+   The canonical big-number element. Inter sans, semibold, tabular-nums,
+   negative tracking that scales with size. Use one of the size modifiers
+   below; never roll your own big number. Extending the scale beyond -xl
+   is done by the print-extended scale in the white-paper kits. */
+
+.stat-num {
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: -1.6px;
+  font-weight: var(--weight-semibold);
+  color: var(--foreground);
+  font-variant-numeric: tabular-nums;
+  display: inline-flex; align-items: baseline; gap: 2px;
+}
+.stat-num small {
+  font-size: 18px;
+  color: var(--foreground-subtle);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.4px;
+  margin-left: 2px;
+}
+.stat-num-sm  { font-size: 36px; letter-spacing: -1.0px; }
+.stat-num-sm  small { font-size: 14px; letter-spacing: -0.2px; }
+.stat-num-lg  { font-size: 68px; letter-spacing: -2.4px; }
+.stat-num-lg  small { font-size: 24px; }
+.stat-num-xl  { font-size: 96px; letter-spacing: -3.6px; }
+.stat-num-xl  small { font-size: 32px; }
+.stat-num-2xl { font-size: 132px; letter-spacing: -5px; }   /* deck metrics */
+.stat-num-2xl small { font-size: 40px; letter-spacing: -1.4px; }
+.stat-num-3xl { font-size: 168px; letter-spacing: -6.4px; } /* white-paper landscape featured stat */
+.stat-num-3xl small { font-size: 48px; letter-spacing: -1.8px; }
+.stat-num.brand { color: var(--brand); }
+
+/* Inline tabular sans — use for any numeric that lives next to body
+   text but needs columnar alignment (audit score rails, table .num
+   cells, in-line stats inside a card body). Smaller than .stat-num and
+   inherits its surrounding font-size. */
+.num,
+.num-sans {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.stat-label {
+  font: var(--font-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--foreground-subtle);
+  margin-top: 10px;
+}
+
+/* ---------------- Breadcrumb ---------------- */
+
+.crumbs {
+  display: inline-flex; align-items: center; gap: 6px;
+  font: var(--font-body-sm);
+  color: var(--foreground-subtle);
+}
+.crumbs a { color: var(--foreground-subtle); text-decoration: none; }
+.crumbs a:hover { color: var(--foreground); }
+.crumbs .sep { color: var(--foreground-faint); }
+.crumbs .current { color: var(--foreground); }
+
+/* ---------------- Divider ---------------- */
+
+.hr { height: 1px; background: var(--border-subtle); border: 0; margin: var(--space-section) 0; }
+
+/* ---------------- KV list (definition list) ---------------- */
+
+.kv-list { display: grid; grid-template-columns: max-content 1fr; gap: 8px 24px; margin: 0; }
+.kv-list dt { color: var(--foreground-subtle); font: var(--font-body-sm); font-weight: var(--weight-medium); }
+.kv-list dd { color: var(--foreground); font: var(--font-body-sm); margin: 0; }
+.kv-list dd.mono { font-family: var(--font-mono); }
+
+/* Skip-to-content — required for a11y, invisible until focus */
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  transform: translateY(-150%);
+  padding: 10px 16px;
+  background: var(--brand);
+  color: var(--brand-foreground);
+  border-radius: var(--radius-md);
+  font: var(--font-button);
+  font-weight: var(--weight-button);
+  text-decoration: none;
+  z-index: 100;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.skip-link:focus { transform: translateY(0); }
+
+/* Site nav — codified */
+.site-nav {
+  position: sticky; top: 0; z-index: 10;
+  backdrop-filter: blur(10px);
+  background: var(--canvas-blur);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.site-nav-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 14px var(--space-xxl);
+  height: 60px;
+  box-sizing: border-box;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.site-nav .brand-mark {
+  font: var(--font-body);
+  font-weight: var(--weight-medium);
+  color: var(--foreground);
+  letter-spacing: -0.2px;
+  display: inline-flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.site-nav .brand-mark .crumb {
+  font: var(--font-mono-md);
+  color: var(--foreground-subtle);
+  padding-left: 14px;
+  border-left: 1px solid var(--border-subtle);
+}
+.site-nav-anchors {
+  display: flex; gap: 24px;
+  font: var(--font-body-sm);
+  font-weight: var(--weight-medium);
+}
+.site-nav-anchors a {
+  color: var(--foreground-subtle);
+  text-decoration: none;
+}
+.site-nav-anchors a:hover { color: var(--foreground); }
+.site-nav-anchors a.current { color: var(--foreground); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .skeleton { animation: none; }
+}
+
+
+/* ============================================================
+   Case study page shell
+   ============================================================ */
+:root { --container: 1280px; --pad: 56px; --measure: 38em; }
+body { margin: 0; min-height: 100vh; overflow-x: hidden; }
+
+/* NAV */
+.site-nav { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(10px); background: var(--canvas-blur); border-bottom: 1px solid var(--border-subtle); }
+.site-nav-inner { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-xxl); height: 60px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; }
+.brand-mark { font: var(--font-body); font-weight: var(--weight-medium); color: var(--foreground); letter-spacing: -0.2px; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand-mark .crumb { font: var(--font-mono-md); color: var(--foreground-subtle); padding-left: 14px; border-left: 1px solid var(--border-subtle); }
+.nav-right { display: flex; gap: 8px; }
+.skip-link { position: absolute; left: 16px; top: 16px; transform: translateY(-150%); padding: 10px 16px; background: var(--brand); color: var(--brand-foreground); border-radius: var(--radius-md); font: var(--font-button); font-weight: var(--weight-button); text-decoration: none; z-index: 100; transition: transform var(--dur-fast) var(--ease-out); }
+.skip-link:focus { transform: translateY(0); }
+
+/* HERO */
+.head-wrap { position: relative; }
+.head-veil { position: absolute; inset: 0; background: var(--gradient-hero-veil); pointer-events: none; }
+.head { position: relative; max-width: var(--container); margin: 0 auto; padding: 96px var(--pad) 48px; }
+.crumbs-line { color: var(--foreground-subtle); margin-bottom: 24px; }
+.crumbs { display: inline-flex; align-items: center; gap: 6px; font: var(--font-body-sm); color: var(--foreground-subtle); }
+.crumbs a { color: var(--foreground-subtle); text-decoration: none; }
+.crumbs a:hover { color: var(--foreground); }
+.crumbs .sep { color: var(--foreground-faint); }
+.crumbs .current { color: var(--foreground); }
+.head h1 { font: var(--font-display-lg); letter-spacing: var(--track-display-lg); font-weight: var(--weight-display-lg); margin: 18px 0 0; max-width: 880px; text-wrap: balance; }
+.head h1 .brand-word { color: var(--brand); }
+.head .lead { font: var(--font-subhead); letter-spacing: var(--track-subhead); color: var(--foreground-muted); max-width: 680px; margin: 28px 0 0; text-wrap: pretty; }
+.head .byline { margin-top: 20px; font: var(--font-body-sm); color: var(--foreground-subtle); }
+.head .byline strong { color: var(--foreground); font-weight: var(--weight-medium); }
+.head .summary { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-subtle); display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+.head .summary .item { display: flex; flex-direction: column; }
+.head .summary .item .label { font: var(--font-eyebrow); letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--foreground-subtle); }
+.head .summary .item .value { margin-top: 8px; font: var(--font-body); font-weight: var(--weight-medium); color: var(--foreground); }
+.head .summary .item .value.mono { font-family: var(--font-mono); }
+
+/* METRICS BANNER */
+.metrics-wrap { position: relative; background: var(--surface-1); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); overflow: hidden; }
+.metrics-wrap::before { content: ''; position: absolute; inset: 0; background: var(--gradient-card-featured); pointer-events: none; }
+.metrics { position: relative; max-width: var(--container); margin: 0 auto; padding: 56px var(--pad); display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.metric { padding: 0 24px; border-left: 1px solid var(--border-subtle); }
+.metric:first-child { border-left: 0; padding-left: 0; }
+.metric .stat-num { color: var(--foreground); }
+.metric.featured .stat-num { color: var(--brand); }
+.metric .stat-label { margin-top: 10px; font: var(--font-eyebrow); letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--foreground-subtle); }
+.metric .desc { font: var(--font-caption); color: var(--foreground-subtle); margin-top: 10px; }
+
+/* ARTICLE + TOC */
+.body-wrap { max-width: var(--container); margin: 0 auto; padding: 96px var(--pad); display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 80px; align-items: start; }
+article { max-width: var(--measure); color: var(--foreground-muted); font: var(--font-body-lg); letter-spacing: var(--track-body-lg); }
+article > * + * { margin-top: 24px; }
+article p { margin: 0; text-wrap: pretty; }
+article p strong { color: var(--foreground); font-weight: var(--weight-semibold); }
+article h2 { font: var(--font-display-md); letter-spacing: var(--track-display-md); font-weight: var(--weight-display-md); color: var(--foreground); margin: 64px 0 0; text-wrap: balance; }
+article h2 + p { margin-top: 20px; }
+article h3 { font: var(--font-card-title); letter-spacing: var(--track-card-title); font-weight: var(--weight-card-title); color: var(--foreground); margin: 36px 0 0; }
+article ul { margin: 0; padding: 0; list-style: none; }
+article ul > li { padding: 12px 0 12px 28px; position: relative; border-top: 1px solid var(--border-subtle); }
+article ul > li:first-child { border-top: 0; padding-top: 4px; }
+article ul > li::before { content: ''; position: absolute; left: 10px; top: 22px; width: 6px; height: 6px; border-radius: 9999px; background: var(--brand); }
+article ul > li:first-child::before { top: 14px; }
+article a { color: var(--foreground); text-decoration: underline; text-decoration-color: var(--brand); text-underline-offset: 4px; text-decoration-thickness: 1px; }
+article blockquote { margin: 16px 0 0; padding: 28px 0; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+article blockquote > p { font: var(--font-display-md); letter-spacing: var(--track-display-md); font-weight: var(--weight-display-md); color: var(--foreground); text-wrap: balance; margin: 0; }
+article blockquote .qm { color: var(--brand); font-size: 40px; line-height: 0.5; font-weight: 600; display: block; margin-bottom: 14px; }
+article blockquote cite { display: flex; align-items: center; gap: 12px; margin-top: 22px; font: var(--font-body-sm); font-style: normal; color: var(--foreground-subtle); }
+article blockquote cite .who { color: var(--foreground); font-weight: var(--weight-medium); }
+article aside.result { margin: 32px 0 0; background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 28px 32px; position: relative; overflow: hidden; box-shadow: var(--edge-highlight); }
+article aside.result::before { content: ''; position: absolute; inset: 0; background: var(--gradient-card-hover); pointer-events: none; border-radius: inherit; }
+article aside.result > * { position: relative; z-index: 1; }
+article aside.result .eyebrow { color: var(--foreground-subtle); font: var(--font-eyebrow); letter-spacing: var(--track-eyebrow); text-transform: uppercase; }
+article aside.result .stat-num { color: var(--foreground); margin-top: 14px; }
+article aside.result p { font: var(--font-body-sm); color: var(--foreground-muted); margin-top: 12px; }
+
+/* TOC rail */
+.toc { position: sticky; top: 88px; align-self: start; font: var(--font-body-sm); }
+.toc .toc-eyebrow { font: var(--font-eyebrow); letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--foreground-subtle); padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle); margin-bottom: 4px; }
+.toc ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
+.toc li a { display: block; padding: 9px 0 9px 14px; margin-left: -14px; color: var(--foreground-subtle); border-left: 1px solid transparent; text-decoration: none; }
+.toc li a:hover { color: var(--foreground); }
+.toc li a.active { color: var(--foreground); border-left-color: var(--brand); }
+.team-card { margin-top: 24px; padding: 18px; background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); }
+.team-card .label { font: var(--font-eyebrow); letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--foreground-subtle); }
+.team-card .roles { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; font: var(--font-body-sm); color: var(--foreground); }
+.team-card .roles .role { color: var(--foreground-subtle); }
+
+/* ============================================================
+   PORTFOLIO GALLERY — full-width kit previews
+   ============================================================ */
+.portfolio-section { max-width: var(--container); margin: 0 auto; padding: 0 var(--pad) 96px; }
+.portfolio-section .section-head { margin-bottom: 48px; }
+.portfolio-section .section-head h2 { font: var(--font-display-md); letter-spacing: var(--track-display-md); font-weight: var(--weight-display-md); margin: 14px 0 0; }
+
+/* Preview frame */
+.preview-frame {
+  width: 100%; overflow: hidden; border-radius: var(--radius-xl);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  background: var(--canvas);
+}
+.preview-frame.dark-bg { background: #010102; }
+.preview-inner {
+  transform-origin: top left;
+  pointer-events: none;
+}
+/* Kit label badge */
+.kit-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-bottom: 16px;
+}
+.kit-label .fmt { font: var(--font-mono-md); color: var(--foreground-subtle); }
+.kit-label .nm { font: var(--font-card-title); letter-spacing: var(--track-card-title); font-weight: var(--weight-card-title); font-size: 18px; color: var(--foreground); }
+
+/* Layout rows */
+.preview-full { margin-bottom: 48px; }
+.preview-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 48px; }
+.preview-col { display: flex; flex-direction: column; gap: 16px; }
+.preview-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 48px; align-items: start; }
+.preview-social-row { display: flex; gap: 20px; justify-content: center; margin-bottom: 48px; }
+
+/* ============================================================
+   DESIGN LANGUAGE section
+   ============================================================ */
+.language-section { max-width: var(--container); margin: 0 auto; padding: 0 var(--pad) 96px; }
+.language-band {
+  background: var(--surface-1); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--edge-highlight);
+  position: relative;
+}
+.language-band::before { content: ''; position: absolute; inset: 0; background: var(--gradient-card-hover); pointer-events: none; border-radius: inherit; }
+.language-band > * { position: relative; z-index: 1; }
+.lang-head { padding: 40px 48px 32px; border-bottom: 1px solid var(--border-subtle); }
+.lang-head .eyebrow { font: var(--font-eyebrow); letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--foreground-subtle); }
+.lang-head h3 { font: var(--font-display-md); letter-spacing: var(--track-display-md); font-weight: var(--weight-display-md); margin: 14px 0 0; }
+.lang-body { padding: 40px 48px; }
+
+/* Color surface swatches */
+.surface-ladder { display: flex; gap: 0; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-subtle); }
+.surf-swatch { flex: 1; padding: 20px 16px 16px; border-right: 1px solid var(--border-subtle); }
+.surf-swatch:last-child { border-right: 0; }
+.surf-swatch .surf-token { font: var(--font-mono-md); color: var(--foreground-subtle); font-size: 11px; margin-bottom: 4px; }
+.surf-swatch .surf-hex { font: var(--font-caption); color: var(--foreground-faint); font-family: var(--font-mono); }
+
+/* Type scale specimen — large */
+.type-specimen { display: flex; flex-direction: column; gap: 0; }
+.type-specimen-row { display: grid; grid-template-columns: 140px 1fr 200px; align-items: baseline; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--border-subtle); }
+.type-specimen-row:last-child { border-bottom: 0; }
+.ts-token { font: var(--font-mono-md); color: var(--foreground-subtle); font-size: 11px; }
+.ts-meta { font: var(--font-mono-md); color: var(--foreground-subtle); font-size: 11px; text-align: right; }
+
+/* Brand restraint visual */
+.brand-budget { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 32px; }
+.budget-item { background: var(--canvas); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--edge-highlight); }
+.budget-item .budget-num { font-size: 32px; font-weight: 600; letter-spacing: -1px; color: var(--brand); }
+.budget-item .budget-label { font: var(--font-body-sm); color: var(--foreground-muted); margin-top: 8px; }
+.budget-item.inactive .budget-num { color: var(--foreground-faint); }
+.budget-item.inactive { opacity: 0.5; }
+
+/* Component mini-demos */
+.comp-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 24px; }
+
+/* RELATED */
+.related { max-width: var(--container); margin: 0 auto; padding: 0 var(--pad) 96px; }
+.related .eyebrow { color: var(--foreground-subtle); font: var(--font-eyebrow); letter-spacing: var(--track-eyebrow); text-transform: uppercase; }
+.related h3 { font: var(--font-headline); letter-spacing: var(--track-headline); font-weight: var(--weight-headline); margin: 14px 0 24px; }
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.related-grid .card { padding: 24px; text-decoration: none; color: var(--foreground); display: flex; flex-direction: column; min-height: 168px; background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); box-shadow: var(--edge-highlight); transition: border-color var(--dur-base) var(--ease-out); }
+.related-grid .card:hover { border-color: var(--border-default); }
+.related-grid .card .r-meta { margin-top: auto; padding-top: 24px; font: var(--font-caption); color: var(--foreground-subtle); }
+.related-grid .card .r-title { margin-top: 12px; font: var(--font-card-title); letter-spacing: var(--track-card-title); font-weight: var(--weight-card-title); text-wrap: balance; }
+.related-grid .card.card-featured { background: var(--surface-2); border-color: var(--border-default); }
+
+/* FOOTER */
+.foot { border-top: 1px solid var(--border-subtle); }
+.foot-inner { max-width: var(--container); margin: 0 auto; padding: 32px var(--pad); display: flex; justify-content: space-between; align-items: center; font: var(--font-caption); color: var(--foreground-subtle); }
+.foot-inner .mono { font-family: var(--font-mono); }
+
+/* Shared primitives */
+.eyebrow { font: var(--font-eyebrow); letter-spacing: var(--track-eyebrow); font-weight: var(--weight-eyebrow); color: var(--foreground-subtle); text-transform: uppercase; display: inline-flex; align-items: center; gap: var(--space-xs); }
+.brand-dot { width: 6px; height: 6px; border-radius: 9999px; background: var(--brand); box-shadow: var(--brand-glow); display: inline-block; flex: none; }
+.brand-word { color: var(--brand); }
+.status-pill { display: inline-flex; align-items: center; gap: var(--space-xs); height: 24px; padding: 0 10px; border-radius: var(--radius-full); background: var(--surface-2); border: 1px solid var(--border-default); color: var(--foreground-muted); font: var(--font-caption); }
+.mono { font-family: var(--font-mono); font-feature-settings: "tnum"; }
+.stat-num { font-size: 48px; line-height: 1; letter-spacing: -1.6px; font-weight: var(--weight-semibold); color: var(--foreground); font-variant-numeric: tabular-nums; display: inline-flex; align-items: baseline; gap: 2px; }
+.stat-num small { font-size: 18px; color: var(--foreground-subtle); font-weight: var(--weight-semibold); letter-spacing: -0.4px; margin-left: 2px; }
+.stat-num-lg { font-size: 68px; letter-spacing: -2.4px; font-weight: var(--weight-semibold); font-variant-numeric: tabular-nums; display: inline-flex; align-items: baseline; gap: 2px; }
+.stat-num-lg small { font-size: 24px; color: var(--foreground-subtle); font-weight: var(--weight-semibold); margin-left: 2px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs); height: 40px; padding: 0 18px; border-radius: var(--radius-full); font: var(--font-button); font-weight: var(--weight-button); cursor: pointer; user-select: none; white-space: nowrap; border: 0; }
+.btn-sm { height: 32px; padding: 0 14px; font-size: 13px; }
+.btn-lg { height: 44px; padding: 0 22px; }
+.btn-primary { background: var(--color-primary); color: #fff; box-shadow: var(--shadow-primary-btn); }
+.btn-secondary { background: transparent; color: var(--foreground); box-shadow: var(--shadow-secondary-btn); }
+.avatar { width: 32px; height: 32px; border-radius: var(--radius-full); background: var(--surface-2); border: 1px solid var(--border-subtle); display: inline-flex; align-items: center; justify-content: center; color: var(--foreground); font: var(--font-body-sm); font-weight: var(--weight-semibold); flex: none; }
+.avatar-sm { width: 24px; height: 24px; font-size: 11px; }
+.badge { display: inline-flex; align-items: center; height: 18px; padding: 0 7px; border-radius: var(--radius-full); background: var(--surface-2); color: var(--foreground-muted); font: var(--font-caption); font-size: 11px; font-weight: var(--weight-medium); }
+.badge-success { background: var(--success-soft); color: var(--success); }
+.tag { display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 8px; border-radius: var(--radius-xs); background: var(--surface-2); border: 1px solid var(--border-subtle); color: var(--foreground-muted); font: var(--font-caption); font-weight: var(--weight-medium); }
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+/* Responsive — collapse the TOC + multi-col previews on small screens */
+@media (max-width: 980px) {
+  .body-wrap { grid-template-columns: 1fr; gap: 48px; }
+  .toc { position: static; }
+  .head .summary { grid-template-columns: repeat(2, 1fr); }
+  .metrics { grid-template-columns: repeat(2, 1fr); row-gap: 32px; }
+  .preview-2col { grid-template-columns: 1fr; }
+  .brand-budget { grid-template-columns: repeat(2, 1fr); }
+  .related-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="brand-mark" href="/" style="text-decoration:none">
+      point one zero<span class="crumb">Work</span>
+    </a>
+    <div class="nav-right">
+      <a href="/" class="btn btn-secondary btn-sm" style="text-decoration:none">All work</a>
+      <a href="mailto:admin@pointonezero.com" class="btn btn-primary btn-sm" style="text-decoration:none">Let's talk</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="head-wrap">
+  <div class="head-veil"></div>
+  <div class="head">
+    <div class="crumbs-line">
+      <span class="crumbs">
+        <a href="/">Work</a>
+        <span class="sep">/</span>
+        <span class="current">POZ Design System</span>
+      </span>
+    </div>
+    <span class="eyebrow"><span class="brand-dot"></span>Design systems · Internal · 2026</span>
+    <h1>A design language that holds in <span class="brand-word">12 formats</span>.</h1>
+    <p class="lead">One CSS file. 32 components. 12 production UI kits spanning web, print, social, and slide decks — all governed by a single token layer and one quiet brand accent.</p>
+    <div class="byline">Design system designed by <strong>Abhishek Sethuraman</strong> for Point One Zero.</div>
+    <div class="summary">
+      <div class="item">
+        <div class="label">Client</div>
+        <div class="value">Point One Zero</div>
+      </div>
+      <div class="item">
+        <div class="label">Role</div>
+        <div class="value">Design system designer</div>
+      </div>
+      <div class="item">
+        <div class="label">Scope</div>
+        <div class="value">Web · Print · Social · Deck</div>
+      </div>
+      <div class="item">
+        <div class="label">Version</div>
+        <div class="value mono">v0.6.4 · 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ METRICS ============ -->
+<section class="metrics-wrap">
+  <div class="metrics">
+    <div class="metric featured">
+      <div class="stat-num stat-num-lg" style="color:var(--brand)">12</div>
+      <div class="stat-label">UI kits shipped</div>
+      <div class="desc">Every output format the studio produces, all from one token source.</div>
+    </div>
+    <div class="metric">
+      <div class="stat-num stat-num-lg">32<small>+</small></div>
+      <div class="stat-label">Components</div>
+      <div class="desc">Every state — hover, active, focus, disabled — documented and production-ready.</div>
+    </div>
+    <div class="metric">
+      <div class="stat-num stat-num-lg">1</div>
+      <div class="stat-label">CSS source file</div>
+      <div class="desc">Color, type, spacing, shadow, and motion — all in one inheritance layer.</div>
+    </div>
+    <div class="metric">
+      <div class="stat-num stat-num-lg">8</div>
+      <div class="stat-label">Brand surfaces</div>
+      <div class="desc">The exact count of named places where <span class="mono">#009FEF</span> is permitted to appear.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARTICLE + TOC ============ -->
+<div class="body-wrap">
+  <article>
+
+    <h2 id="brief">The brief</h2>
+    <p>Point One Zero produces output across 8 distinct formats before the system existed. Each was styled from scratch — brand color applied wherever it felt right, type sizes eyeballed, spacing drifted between surfaces. A pull quote set at 40px in a white paper had no relationship to the 40px heading on the website. There was no shared definition of what the firm looked like.</p>
+    <p>The goal was one source of truth that would govern everything — without constraining it. A system that could underpin a pitch deck and a social carousel and a stakeholder report, all with the same visual logic underneath.</p>
+
+    <h2 id="decisions">Key decisions</h2>
+
+    <p><strong>Token-first, light-first.</strong> Every color, type size, spacing value, radius, and shadow is a CSS custom property on <span class="mono">:root</span>. Everything downstream inherits. Light is the default — dark is an opt-in scope for surfaces that need it (pitch decks, product chrome). Never via <span class="mono">prefers-color-scheme</span>.</p>
+
+    <p><strong>The surface ladder.</strong> Hierarchy on light is hard — white cards on a white canvas look flat. The solution is a four-step surface ladder that steps <em>down</em> into faint gray (<span class="mono">--canvas → --surface-1 → --surface-2 → --surface-3</span>), supplemented by a soft shadow. A featured card settles one step into the page instead of changing color.</p>
+
+    <blockquote>
+      <span class="qm">"</span>
+      <p>The brand is a noun, not a color. It appears where it carries meaning and nowhere else.</p>
+      <cite>
+        <span class="avatar avatar-sm">PZ</span>
+        <span><span class="who">Point One Zero</span> · Design Language, v0.5.0</span>
+      </cite>
+    </blockquote>
+
+    <p><strong>Brand restraint.</strong> <span class="mono">#009FEF</span> is assigned exactly 8 named contexts: the wordmark dot, one hero word, focus rings, link underlines on hover, one featured metric per page, active toggle states, editorial ordinal markers, and pull-quote glyphs. If it's not on the list, it doesn't appear. The discipline of that constraint is what makes the blue land when it does.</p>
+
+    <aside class="result">
+      <div class="eyebrow">The constraint</div>
+      <div class="stat-num">0</div>
+      <p>Hardcoded hex values in component markup across all 12 kits. Every color is a CSS variable — a single line edit propagates everywhere.</p>
+    </aside>
+
+    <h2 id="kits">The kits</h2>
+    <p>12 output formats, all extending the same foundation. Web pages, letter-size documents, 1920×1080 slide decks, 1080×1350 social carousels, and 1080×1440 print white papers. Each kit ships its own spec, component vocabulary, copywriting budgets, common mistakes, and an agent prompt — the system was designed for AI-assisted authoring from the start.</p>
+
+  </article>
+
+  <aside class="toc">
+    <div class="toc-eyebrow">In this post</div>
+    <ul>
+      <li><a href="#brief" class="active">The brief</a></li>
+      <li><a href="#decisions">Key decisions</a></li>
+      <li><a href="#kits">The kits</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#language">Design language</a></li>
+    </ul>
+    <div class="team-card">
+      <div class="label">Built by</div>
+      <div class="roles">
+        <div><span class="role">Designer</span> &nbsp;Abhishek Sethuraman</div>
+        <div><span class="role">Client</span> &nbsp;Point One Zero</div>
+        <div><span class="role">Stack</span> &nbsp;HTML · CSS · React</div>
+        <div><span class="role">Version</span> &nbsp;<span class="mono">v0.6.4</span></div>
+        <div><span class="role">Filed</span> &nbsp;<span class="mono">2026</span></div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- ============================================================
+     PORTFOLIO GALLERY — the work, shown large
+     ============================================================ -->
+<section class="portfolio-section" id="gallery">
+
+  <div class="section-head">
+    <span class="eyebrow">The work</span>
+    <h2>12 kits. One system.</h2>
+  </div>
+
+  <!-- 1. MARKETING — full width -->
+  <div class="preview-full">
+    <div class="kit-label">
+      <span class="fmt">web · 1280px · light</span>
+      <span style="color:var(--foreground-subtle);margin:0 4px">—</span>
+      <span class="nm">Marketing</span>
+    </div>
+    <div class="preview-frame" style="height:506px">
+      <div class="preview-inner" style="width:1280px;height:800px;transform:scale(0.703125)">
+        <div style="position:relative;background:#ffffff;height:100%;overflow:hidden">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(0,159,239,0.08),transparent 65%),radial-gradient(ellipse 90% 35% at 50% 8%,rgba(0,159,239,0.04),transparent 80%);pointer-events:none"></div>
+          <div style="height:60px;border-bottom:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;padding:0 56px;justify-content:space-between;background:rgba(255,255,255,0.82);position:relative;z-index:2">
+            <span style="font-size:16px;font-weight:510;color:#0a0a0a;letter-spacing:-0.2px">point one zero</span>
+            <div style="display:flex;gap:28px">
+              <span style="font-size:14px;font-weight:510;color:#0a0a0a">Engagements</span>
+              <span style="font-size:14px;font-weight:510;color:#71717a">About</span>
+              <span style="font-size:14px;font-weight:510;color:#71717a">Principles</span>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-secondary btn-sm">Sign in</button>
+              <button class="btn btn-primary btn-sm">Let's talk</button>
+            </div>
+          </div>
+          <div style="padding:120px 56px 0;text-align:center;position:relative;z-index:1">
+            <div style="display:inline-flex;align-items:center;gap:8px;height:24px;padding:0 10px;border-radius:9999px;background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.1);color:#3f3f46;font-size:12px">
+              <div style="width:6px;height:6px;border-radius:50%;background:#009FEF;box-shadow:0 0 8px rgba(0,159,239,0.35)"></div>
+              An AI-native firm · Princeton, NJ
+            </div>
+            <h1 style="font-size:80px;line-height:84px;letter-spacing:-3px;font-weight:600;color:#0a0a0a;margin:28px auto 0;max-width:900px">Let your bold ideas <span style="color:#009FEF">bloom</span><br>into business impact.</h1>
+            <p style="font-size:20px;line-height:28px;color:#3f3f46;max-width:560px;margin:24px auto 0;letter-spacing:-0.2px">An AI-native firm transforming how businesses grow and innovate through strategy, design, and engineering — fused.</p>
+            <div style="margin-top:40px;display:inline-flex;gap:12px">
+              <button class="btn btn-primary btn-lg">Let's talk</button>
+              <button class="btn btn-secondary btn-lg">Read the principles</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. ABOUT + PRICING — 2-col -->
+  <div class="preview-2col">
+    <div class="preview-col">
+      <div class="kit-label"><span class="fmt">web · light</span><span style="color:var(--foreground-subtle);margin:0 4px">—</span><span class="nm">About</span></div>
+      <div class="preview-frame" style="height:298px">
+        <div class="preview-inner" style="width:1280px;height:800px;transform:scale(0.328125)">
+          <div style="position:relative;background:#ffffff;height:100%;overflow:hidden">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(0,159,239,0.08),transparent 65%);pointer-events:none"></div>
+            <div style="height:60px;border-bottom:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;padding:0 56px;justify-content:space-between;background:rgba(255,255,255,0.82);position:relative;z-index:2">
+              <span style="font-size:16px;font-weight:510;color:#0a0a0a">point one zero</span>
+              <div style="display:flex;gap:8px"><button class="btn btn-primary btn-sm">Let's talk</button></div>
+            </div>
+            <div style="padding:80px 56px 0;display:grid;grid-template-columns:1fr 1fr;gap:80px;position:relative;z-index:1">
+              <div>
+                <span style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;font-weight:510;color:#71717a">About us</span>
+                <h1 style="font-size:80px;line-height:84px;letter-spacing:-3px;font-weight:600;color:#0a0a0a;margin:20px 0 0;text-wrap:balance">Where strategy meets <span style="color:#009FEF">action</span>.</h1>
+              </div>
+              <div style="padding-top:40px">
+                <p style="font-size:20px;line-height:28px;color:#3f3f46;letter-spacing:-0.2px">An AI-native collective of domain experts, strategists, designers, and engineers. Lean pods. Brief to production.</p>
+                <p style="font-size:20px;line-height:28px;color:#3f3f46;letter-spacing:-0.2px;margin-top:20px">The name is the manifesto. <strong style="color:#0a0a0a">POINT. ONE. ZERO.</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="preview-col">
+      <div class="kit-label"><span class="fmt">web · light</span><span style="color:var(--foreground-subtle);margin:0 4px">—</span><span class="nm">Pricing</span></div>
+      <div class="preview-frame" style="height:298px">
+        <div class="preview-inner" style="width:1280px;height:800px;transform:scale(0.328125)">
+          <div style="position:relative;background:#ffffff;height:100%;overflow:hidden">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(0,159,239,0.08),transparent 65%);pointer-events:none"></div>
+            <div style="height:60px;border-bottom:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;padding:0 56px;background:rgba(255,255,255,0.82);position:relative;z-index:2">
+              <span style="font-size:16px;font-weight:510;color:#0a0a0a">point one zero</span>
+            </div>
+            <div style="padding:72px 56px 0;text-align:center;position:relative;z-index:1">
+              <span style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;font-weight:510;color:#71717a;display:inline-flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#009FEF;box-shadow:0 0 8px rgba(0,159,239,0.35);display:inline-block"></span>Engagements</span>
+              <h1 style="font-size:80px;line-height:84px;letter-spacing:-3px;font-weight:600;color:#0a0a0a;margin:20px auto 0;max-width:840px;text-wrap:balance">Pick the shape that fits the <span style="color:#009FEF">problem</span>.</h1>
+              <div style="margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:left">
+                <div style="background:#fafafa;border:1px solid rgba(0,0,0,0.06);border-radius:12px;padding:32px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.7)">
+                  <span style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;font-weight:510;color:#71717a">Sprint</span>
+                  <div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:#0a0a0a;line-height:1;margin-top:16px">2<small style="font-size:28px;color:#71717a">wk</small></div>
+                  <p style="font-size:14px;color:#3f3f46;margin-top:14px">Concept to clickable prototype.</p>
+                </div>
+                <div style="background:#f3f4f5;border:1px solid rgba(0,0,0,0.1);border-radius:12px;padding:32px;position:relative">
+                  <div style="position:absolute;top:14px;right:14px;background:rgba(26,158,95,0.1);color:#1A9E5F;font-size:11px;font-weight:510;padding:0 7px;border-radius:9999px;height:18px;display:flex;align-items:center">Most chosen</div>
+                  <span style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;font-weight:510;color:#71717a">Build</span>
+                  <div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:#009FEF;line-height:1;margin-top:16px">5–8<small style="font-size:28px;color:#71717a">wk</small></div>
+                  <p style="font-size:14px;color:#3f3f46;margin-top:14px">Brief to production. Flagship shape.</p>
+                </div>
+                <div style="background:#fafafa;border:1px solid rgba(0,0,0,0.06);border-radius:12px;padding:32px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.7)">
+                  <span style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;font-weight:510;color:#71717a">Run</span>
+                  <div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:#0a0a0a;line-height:1;margin-top:16px">Ongo-<small style="font-size:28px">ing</small></div>
+                  <p style="font-size:14px;color:#3f3f46;margin-top:14px">Partnership after launch.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. PITCH DECK — full width, dark -->
+  <div class="preview-full">
+    <div class="kit-label">
+      <span class="fmt">deck · 1920×1080 · dark</span>
+      <span style="color:var(--foreground-subtle);margin:0 4px">—</span>
+      <span class="nm">Pitch deck</span>
+    </div>
+    <div class="preview-frame dark-bg" style="height:506px">
+      <div class="preview-inner" style="width:1920px;height:1080px;transform:scale(0.46875)">
+        <div style="background:#010102;height:100%;position:relative;overflow:hidden">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(0,159,239,0.14),transparent 65%),radial-gradient(ellipse 90% 35% at 50% 8%,rgba(0,159,239,0.06),transparent 80%);pointer-events:none"></div>
+          <div style="padding:120px 160px;display:flex;flex-direction:column;height:100%;box-sizing:border-box;position:relative">
+            <div style="display:inline-flex;align-items:center;gap:14px;font-size:22px;letter-spacing:0.031em;text-transform:uppercase;font-weight:510;color:#8a8f98">
+              <div style="width:8px;height:8px;border-radius:50%;background:#009FEF;box-shadow:0 0 12px rgba(0,159,239,0.45)"></div>
+              Point One Zero · Investor Presentation · 2026
+            </div>
+            <h1 style="font-size:120px;line-height:116px;letter-spacing:-4.4px;font-weight:600;color:#f7f8f8;margin:56px 0 0;max-width:1500px;text-wrap:balance">The AI firm that ships,<br>not <span style="color:#009FEF">slides</span>.</h1>
+            <p style="font-size:28px;line-height:33.6px;letter-spacing:-0.6px;color:#d0d6e0;max-width:800px;margin-top:40px">Strategy · Design · Engineering — fused into agile pods that move from brief to production in weeks.</p>
+            <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-family:monospace;font-size:13px;color:#8a8f98">
+              <span style="font-size:16px;font-weight:510;color:#f7f8f8;font-family:inherit;font-family:sans-serif">point one zero</span>
+              <span>01 / 12</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. CASE STUDY + REPORT PRESENTATION — 2-col -->
+  <div class="preview-2col">
+    <div class="preview-col">
+      <div class="kit-label"><span class="fmt">web · light</span><span style="color:var(--foreground-subtle);margin:0 4px">—</span><span class="nm">Case study</span></div>
+      <div class="preview-frame" style="height:298px">
+        <div class="preview-inner" style="width:1280px;height:800px;transform:scale(0.328125)">
+          <div style="background:#ffffff;height:100%;overflow:hidden;position:relative">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(0,159,239,0.08),transparent 65%);pointer-events:none"></div>
+            <div style="height:60px;border-bottom:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;padding:0 56px;justify-content:space-between;background:rgba(255,255,255,0.82);position:relative;z-index:2">
+              <span style="font-size:16px;font-weight:510">point one zero</span>
+              <span style="font-family:monospace;font-size:13px;color:#71717a;padding-left:14px;border-left:1px solid rgba(0,0,0,0.06);margin-left:10px">Case study</span>
+            </div>
+            <div style="padding:60px 56px 0;position:relative;z-index:1">
+              <span style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;font-weight:510;color:#71717a;display:inline-flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#009FEF;box-shadow:0 0 8px rgba(0,159,239,0.35);display:inline-block"></span>Financial services · 2026</span>
+              <h1 style="font-size:56px;line-height:61.6px;letter-spacing:-1.8px;font-weight:600;color:#0a0a0a;margin:16px 0 0;max-width:840px;text-wrap:balance">From idea to production in <span style="color:#009FEF">17 hours</span>.</h1>
+              <p style="font-size:20px;color:#3f3f46;max-width:600px;margin-top:22px;letter-spacing:-0.2px">A six-week engagement compressing a year-long roadmap into one AI-native prototype.</p>
+            </div>
+            <div style="background:#fafafa;border-top:1px solid rgba(0,0,0,0.06);border-bottom:1px solid rgba(0,0,0,0.06);margin-top:28px;padding:36px 56px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;position:relative">
+              <div style="padding-left:20px;border-left:1px solid rgba(0,0,0,0.06)"><div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:#009FEF;line-height:1">17<small style="font-size:24px;color:#71717a">hr</small></div><div style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;color:#71717a;margin-top:8px">Prototype</div></div>
+              <div style="padding-left:20px;border-left:1px solid rgba(0,0,0,0.06)"><div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:#0a0a0a;line-height:1">14k</div><div style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;color:#71717a;margin-top:8px">Users</div></div>
+              <div style="padding-left:20px;border-left:1px solid rgba(0,0,0,0.06)"><div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:#0a0a0a;line-height:1">41<small style="font-size:24px;color:#71717a">%</small></div><div style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;color:#71717a;margin-top:8px">Time saved</div></div>
+              <div style="padding-left:20px;border-left:1px solid rgba(0,0,0,0.06)"><div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:#0a0a0a;line-height:1">8</div><div style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;color:#71717a;margin-top:8px">Agents</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="preview-col">
+      <div class="kit-label"><span class="fmt">deck · 1920×1080</span><span style="color:var(--foreground-subtle);margin:0 4px">—</span><span class="nm">Report presentation</span></div>
+      <div class="preview-frame" style="height:298px">
+        <div class="preview-inner" style="width:1920px;height:1080px;transform:scale(0.234375)">
+          <div style="background:#ffffff;height:100%;position:relative;overflow:hidden">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(0,159,239,0.08),transparent 65%);pointer-events:none"></div>
+            <div style="padding:120px 160px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;position:relative">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span style="font-size:22px;letter-spacing:0.031em;text-transform:uppercase;font-weight:510;color:#71717a">Q2 2026 Intelligence Report</span>
+                <div style="display:inline-flex;align-items:center;gap:10px"><div style="width:8px;height:8px;border-radius:50%;background:#009FEF;box-shadow:0 0 12px rgba(0,159,239,0.35)"></div><span style="font-size:16px;font-weight:510">point one zero</span></div>
+              </div>
+              <h1 style="font-size:96px;line-height:100px;letter-spacing:-3.6px;font-weight:600;color:#0a0a0a;margin:60px 0 0;text-wrap:balance">AI Visibility <span style="color:#009FEF">Intelligence</span> Report.</h1>
+              <div style="margin-top:60px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
+                <div style="background:#fafafa;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:32px"><div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:#009FEF;line-height:1">92<small style="font-size:28px;color:#71717a">+</small></div><div style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;color:#71717a;margin-top:12px">AI agents</div></div>
+                <div style="background:#fafafa;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:32px"><div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:#0a0a0a;line-height:1">47<small style="font-size:28px;color:#71717a">%</small></div><div style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;color:#71717a;margin-top:12px">Cost reduced</div></div>
+                <div style="background:#fafafa;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:32px"><div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:#0a0a0a;line-height:1">10<small style="font-size:28px;color:#71717a">×</small></div><div style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;color:#71717a;margin-top:12px">Faster</div></div>
+                <div style="background:#fafafa;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:32px"><div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:#0a0a0a;line-height:1">17<small style="font-size:28px;color:#71717a">hr</small></div><div style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;color:#71717a;margin-top:12px">Prototype</div></div>
+              </div>
+              <div style="margin-top:auto;display:flex;justify-content:space-between;font-family:monospace;font-size:13px;color:#71717a"><span style="font-family:sans-serif;font-weight:510;color:#0a0a0a">point one zero</span><span>01 / 12</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. SOCIAL CAROUSELS — portrait slides -->
+  <div style="margin-bottom:48px">
+    <div class="kit-label" style="margin-bottom:16px"><span class="fmt">social · 1080×1350 · 8 variants</span><span style="color:var(--foreground-subtle);margin:0 4px">—</span><span class="nm">Social carousels</span></div>
+    <div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap">
+
+      <!-- Cover -->
+      <div style="flex:none">
+        <div class="preview-frame" style="width:220px;height:275px">
+          <div class="preview-inner" style="width:1080px;height:1350px;transform:scale(0.2037)">
+            <div style="background:linear-gradient(180deg,rgba(255,252,248,1) 0%,rgba(248,250,255,1) 100%);height:100%;position:relative;overflow:hidden">
+              <div style="position:absolute;top:0;right:0;width:500px;height:500px;background:radial-gradient(ellipse at 80% 20%,rgba(0,159,239,0.12),transparent 70%);pointer-events:none"></div>
+              <div style="padding:80px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;position:relative">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start">
+                  <div style="display:inline-flex;align-items:center;gap:16px"><div style="width:12px;height:12px;border-radius:50%;background:#009FEF;box-shadow:0 0 16px rgba(0,159,239,0.45)"></div><span style="font-size:32px;letter-spacing:0.031em;text-transform:uppercase;font-weight:510;color:#71717a">AEO · 2026</span></div>
+                  <span style="font-size:28px;letter-spacing:0.031em;font-weight:510;color:#71717a">Vol.</span>
+                </div>
+                <div style="margin-top:auto">
+                  <div style="font-size:124px;font-weight:600;letter-spacing:-4.7px;color:#0a0a0a;line-height:1.0">AI<br>Visi-<br><span style="color:#009FEF">bility</span></div>
+                </div>
+                <div style="margin-top:60px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(0,0,0,0.06);padding-top:40px">
+                  <span style="font-size:32px;font-weight:510;color:#0a0a0a">point one zero</span>
+                  <span style="font-family:monospace;font-size:30px;color:#71717a">01 / 08</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:8px;font-family:var(--font-mono)">Cover</div>
+      </div>
+
+      <!-- Definition -->
+      <div style="flex:none">
+        <div class="preview-frame" style="width:220px;height:275px">
+          <div class="preview-inner" style="width:1080px;height:1350px;transform:scale(0.2037)">
+            <div style="background:linear-gradient(180deg,rgba(255,252,248,1) 0%,rgba(248,250,255,1) 100%);height:100%;position:relative;overflow:hidden">
+              <div style="padding:80px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;position:relative">
+                <div style="display:flex;justify-content:space-between"><div style="font-size:32px;letter-spacing:0.031em;text-transform:uppercase;font-weight:510;color:#71717a">AEO · 2026</div><span style="font-size:28px;font-weight:510;color:#71717a">Def.</span></div>
+                <div style="margin-top:80px">
+                  <div style="font-size:220px;font-weight:600;letter-spacing:-8.4px;color:#0a0a0a;line-height:0.9">AEO</div>
+                  <div style="width:96px;height:4px;background:linear-gradient(90deg,#009FEF,transparent);margin-top:48px"></div>
+                  <p style="font-size:40px;line-height:60px;color:#3f3f46;margin-top:40px;letter-spacing:-0.4px">Answer Engine Optimisation. The practice of structuring content so AI assistants surface it directly.</p>
+                </div>
+                <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(0,0,0,0.06);padding-top:40px"><span style="font-size:32px;font-weight:510">point one zero</span><span style="font-family:monospace;font-size:30px;color:#71717a">02 / 08</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:8px;font-family:var(--font-mono)">Definition</div>
+      </div>
+
+      <!-- Stat -->
+      <div style="flex:none">
+        <div class="preview-frame" style="width:220px;height:275px">
+          <div class="preview-inner" style="width:1080px;height:1350px;transform:scale(0.2037)">
+            <div style="background:linear-gradient(180deg,rgba(255,252,248,1) 0%,rgba(248,250,255,1) 100%);height:100%;position:relative;overflow:hidden">
+              <div style="position:absolute;top:0;right:0;width:500px;height:500px;background:radial-gradient(ellipse at 80% 20%,rgba(0,159,239,0.08),transparent 70%);pointer-events:none"></div>
+              <div style="padding:80px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;position:relative">
+                <div style="display:flex;justify-content:space-between"><div style="font-size:32px;letter-spacing:0.031em;text-transform:uppercase;font-weight:510;color:#71717a">AEO · 2026</div><span style="font-size:28px;font-weight:510;color:#71717a">Fig.</span></div>
+                <div style="margin-top:80px">
+                  <div style="font-size:380px;font-weight:600;letter-spacing:-14.5px;background:linear-gradient(135deg,#009FEF,#007FBF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:0.88">47</div>
+                  <div style="font-size:96px;font-weight:600;letter-spacing:-3.6px;color:#71717a;line-height:1;margin-top:-10px">%</div>
+                  <p style="font-size:40px;line-height:52px;color:#3f3f46;margin-top:40px;letter-spacing:-0.4px">Reduction in run-rate operating spend at month six.</p>
+                </div>
+                <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(0,0,0,0.06);padding-top:40px"><span style="font-size:32px;font-weight:510">point one zero</span><span style="font-family:monospace;font-size:30px;color:#71717a">04 / 08</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:8px;font-family:var(--font-mono)">Stat</div>
+      </div>
+
+      <!-- Quote -->
+      <div style="flex:none">
+        <div class="preview-frame" style="width:220px;height:275px">
+          <div class="preview-inner" style="width:1080px;height:1350px;transform:scale(0.2037)">
+            <div style="background:linear-gradient(180deg,rgba(255,252,248,1) 0%,rgba(248,250,255,1) 100%);height:100%;position:relative;overflow:hidden">
+              <div style="padding:80px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;position:relative">
+                <div style="display:flex;justify-content:space-between"><div style="font-size:32px;letter-spacing:0.031em;text-transform:uppercase;font-weight:510;color:#71717a">AEO · 2026</div><span style="font-size:28px;font-weight:510;color:#71717a">§</span></div>
+                <div style="margin-top:80px">
+                  <div style="font-size:120px;line-height:0.5;font-weight:600;color:#009FEF;margin-bottom:40px">"</div>
+                  <p style="font-size:64px;line-height:74px;font-weight:600;letter-spacing:-2px;color:#0a0a0a;text-wrap:balance">We had a working version in our hands by Friday.</p>
+                </div>
+                <div style="margin-top:auto">
+                  <div style="display:flex;align-items:center;gap:20px;padding-top:40px;border-top:1px solid rgba(0,0,0,0.06)">
+                    <div style="width:64px;height:64px;border-radius:50%;background:#f3f4f5;border:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600">SP</div>
+                    <div><div style="font-size:32px;font-weight:510">Sarah Park</div><div style="font-size:28px;color:#71717a">Chief Innovation Officer</div></div>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;margin-top:24px"><span style="font-size:32px;font-weight:510">point one zero</span><span style="font-family:monospace;font-size:30px;color:#71717a">06 / 08</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:8px;font-family:var(--font-mono)">Quote</div>
+      </div>
+
+      <!-- CTA -->
+      <div style="flex:none">
+        <div class="preview-frame" style="width:220px;height:275px">
+          <div class="preview-inner" style="width:1080px;height:1350px;transform:scale(0.2037)">
+            <div style="background:#010102;height:100%;position:relative;overflow:hidden">
+              <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(0,159,239,0.14),transparent 65%);pointer-events:none"></div>
+              <div style="padding:80px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;position:relative">
+                <div style="display:flex;justify-content:space-between"><div style="font-size:32px;letter-spacing:0.031em;text-transform:uppercase;font-weight:510;color:#8a8f98">AEO · 2026</div><span style="font-size:28px;font-weight:510;color:#8a8f98">End.</span></div>
+                <div style="margin-top:auto">
+                  <div style="font-size:32px;letter-spacing:0.031em;text-transform:uppercase;color:#8a8f98;margin-bottom:32px">Ready?</div>
+                  <div style="font-size:96px;font-weight:600;letter-spacing:-3.6px;color:#f7f8f8;line-height:1;text-wrap:balance">Let's <span style="color:#009FEF">build</span><br>something.</div>
+                  <div style="margin-top:60px;display:inline-block;background:#009FEF;color:white;font-size:32px;font-weight:510;padding:20px 48px;border-radius:9999px">Book a call</div>
+                </div>
+                <div style="margin-top:40px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.06);padding-top:40px"><span style="font-size:32px;font-weight:510;color:#f7f8f8">point one zero</span><span style="font-family:monospace;font-size:30px;color:#8a8f98">08 / 08</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:8px;font-family:var(--font-mono)">CTA (dark)</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 6. WHITE PAPER + REPORT DOC — 2-col with portrait art -->
+  <div class="preview-2col">
+    <div class="preview-col">
+      <div class="kit-label"><span class="fmt">print · 1080×1440 portrait</span><span style="color:var(--foreground-subtle);margin:0 4px">—</span><span class="nm">White paper</span></div>
+      <div class="preview-frame" style="height:298px">
+        <div class="preview-inner" style="width:1080px;height:1350px;transform:scale(0.213)">
+          <div style="background:linear-gradient(180deg,rgba(255,252,248,1) 0%,rgba(248,250,255,1) 100%);height:100%;position:relative;overflow:hidden">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(0,159,239,0.08),transparent 65%);pointer-events:none"></div>
+            <div style="padding:96px 80px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;position:relative">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span style="font-size:13px;font-family:monospace;color:#71717a;letter-spacing:0.06em;text-transform:uppercase">White Paper · Vol. 01</span>
+                <span style="font-size:16px;font-weight:510;color:#0a0a0a">point one zero<span style="color:#009FEF">.</span></span>
+              </div>
+              <div style="margin-top:auto">
+                <span style="font-size:32px;letter-spacing:0.031em;text-transform:uppercase;font-weight:510;color:#71717a;display:block;margin-bottom:32px">Strategy · 2026</span>
+                <div style="font-size:120px;font-weight:600;letter-spacing:-4.4px;color:#0a0a0a;line-height:0.95;text-wrap:balance">The future of AI-native <span style="color:#009FEF">strategy</span>.</div>
+              </div>
+              <div style="margin-top:60px">
+                <div style="height:1px;background:rgba(0,0,0,0.06);margin-bottom:40px"></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;font-size:28px;color:#71717a">
+                  <div>Q1 2026</div>
+                  <div style="text-align:right">25 Palmer Square</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="preview-col">
+      <div class="kit-label"><span class="fmt">print · 8.5×11 · 12 pages</span><span style="color:var(--foreground-subtle);margin:0 4px">—</span><span class="nm">Report document</span></div>
+      <div class="preview-frame" style="height:298px">
+        <div class="preview-inner" style="width:1080px;height:1350px;transform:scale(0.213)">
+          <div style="background:#ffffff;height:100%;position:relative">
+            <!-- Cover: dark header -->
+            <div style="height:460px;background:#0a0a0a;display:flex;flex-direction:column;justify-content:flex-end;padding:64px 80px;position:relative;overflow:hidden">
+              <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(0,159,239,0.14),transparent 60%);pointer-events:none"></div>
+              <div style="position:relative">
+                <span style="font-size:24px;font-family:monospace;color:#8a8f98;text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:24px">Client Report · Q2 2026</span>
+                <div style="font-size:80px;font-weight:600;letter-spacing:-3px;color:#f7f8f8;line-height:0.95">AI Visibility<br>Intelligence<br><span style="color:#009FEF">Report</span>.</div>
+              </div>
+            </div>
+            <!-- Body section -->
+            <div style="padding:64px 80px">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:48px">
+                <div><div style="font-size:20px;text-transform:uppercase;letter-spacing:0.4px;color:#71717a;margin-bottom:8px">Prepared for</div><div style="font-size:32px;font-weight:510">Acme Corporation</div></div>
+                <div><div style="font-size:20px;text-transform:uppercase;letter-spacing:0.4px;color:#71717a;margin-bottom:8px">Period</div><div style="font-size:32px;font-weight:510">Q2 2026</div></div>
+              </div>
+              <div style="background:#fafafa;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:48px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.7)">
+                <div style="font-size:20px;text-transform:uppercase;letter-spacing:0.4px;color:#71717a;margin-bottom:16px">Featured finding</div>
+                <div style="font-size:96px;font-weight:600;letter-spacing:-3.6px;color:#009FEF;line-height:1">47<small style="font-size:40px;color:#71717a">%</small></div>
+                <div style="font-size:28px;color:#3f3f46;margin-top:16px">Reduction in run-rate operating spend, Q1 → Q2.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. DOCS + BRAND APPLICATION -->
+  <div class="preview-2col">
+    <div class="preview-col">
+      <div class="kit-label"><span class="fmt">web · light</span><span style="color:var(--foreground-subtle);margin:0 4px">—</span><span class="nm">Docs</span></div>
+      <div class="preview-frame" style="height:298px">
+        <div class="preview-inner" style="width:1280px;height:800px;transform:scale(0.328125)">
+          <div style="background:#ffffff;height:100%;overflow:hidden;display:grid;grid-template-columns:240px 1fr">
+            <div style="background:#fafafa;border-right:1px solid rgba(0,0,0,0.06);padding:32px 24px;height:100%;box-sizing:border-box">
+              <div style="font-size:16px;font-weight:510;margin-bottom:8px">point one zero<span style="color:#009FEF">.</span></div>
+              <div style="display:flex;flex-direction:column;gap:4px;margin-top:16px">
+                <span style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;font-weight:510;color:#a1a1aa;margin-bottom:4px">Guides</span>
+                <a style="font-size:14px;color:#009FEF;padding:4px 0;border-left:2px solid #009FEF;padding-left:12px;display:block">Getting started</a>
+                <a style="font-size:14px;color:#71717a;padding:4px 0">AUTHORING.md</a>
+                <a style="font-size:14px;color:#71717a;padding:4px 0">Brand restraint</a>
+                <span style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;font-weight:510;color:#a1a1aa;margin:16px 0 4px">Kits</span>
+                <a style="font-size:14px;color:#71717a;padding:4px 0">Marketing</a>
+                <a style="font-size:14px;color:#71717a;padding:4px 0">Case study</a>
+                <a style="font-size:14px;color:#71717a;padding:4px 0">White paper</a>
+                <a style="font-size:14px;color:#71717a;padding:4px 0">Social</a>
+                <a style="font-size:14px;color:#71717a;padding:4px 0">Pitch deck</a>
+              </div>
+            </div>
+            <div style="padding:56px 64px">
+              <span style="font-size:13px;letter-spacing:0.4px;text-transform:uppercase;font-weight:510;color:#71717a">Design system</span>
+              <h1 style="font-size:40px;font-weight:600;letter-spacing:-1px;margin:20px 0 0">Getting started</h1>
+              <p style="font-size:18px;line-height:27px;color:#3f3f46;margin-top:20px;max-width:520px">One stylesheet. All tokens. Load <code style="font-family:monospace;font-size:14px;padding:2px 6px;background:#f3f4f5;border-radius:4px">colors_and_type.css</code> and every token is available globally on <code style="font-family:monospace;font-size:14px;padding:2px 6px;background:#f3f4f5;border-radius:4px">:root</code>.</p>
+              <div style="margin-top:32px;height:1px;background:rgba(0,0,0,0.06)"></div>
+              <h2 style="font-size:28px;font-weight:600;letter-spacing:-0.6px;margin:28px 0 14px">Quick start</h2>
+              <p style="font-size:16px;color:#3f3f46;margin:0">The system ships 32+ components, 12 UI kits, and 3 composition patterns — all governed from one 1472-line CSS file. No build step required.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="preview-col">
+      <div class="kit-label"><span class="fmt">identity</span><span style="color:var(--foreground-subtle);margin:0 4px">—</span><span class="nm">Brand application</span></div>
+      <div class="preview-frame" style="height:298px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;gap:32px">
+        <!-- Business card -->
+        <div style="width:280px;height:160px;background:#0a0a0a;border-radius:10px;box-shadow:var(--shadow-lg);padding:28px 32px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(0,159,239,0.14),transparent 65%);pointer-events:none"></div>
+          <div style="position:relative">
+            <div style="font-size:18px;font-weight:510;color:white;letter-spacing:-0.2px">point one zero<span style="color:#009FEF">.</span></div>
+          </div>
+          <div style="position:relative">
+            <div style="font-size:15px;font-weight:510;color:white">Maya Lindgren</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:2px">Partner</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.35);margin-top:8px;font-family:monospace">maya@pointonezero.com</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.35);font-family:monospace">(678) 901-4328</div>
+          </div>
+        </div>
+        <!-- Email signature -->
+        <div style="background:white;border:1px solid rgba(0,0,0,0.1);border-radius:10px;padding:24px 28px;width:260px;box-shadow:var(--shadow-sm)">
+          <div style="font-size:16px;font-weight:510;color:#0a0a0a">Maya Lindgren</div>
+          <div style="font-size:13px;color:#71717a;margin-top:2px">Partner · Point One Zero</div>
+          <div style="height:1px;background:rgba(0,0,0,0.06);margin:14px 0"></div>
+          <div style="font-size:12px;color:#71717a;font-family:monospace">maya@pointonezero.com</div>
+          <div style="font-size:12px;color:#71717a;font-family:monospace">(678) 901-4328</div>
+          <div style="font-size:12px;color:#71717a;font-family:monospace">pointonezero.com</div>
+          <div style="margin-top:14px;font-size:14px;font-weight:510;color:#0a0a0a">point one zero<span style="color:#009FEF">.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. ERRORS — full width -->
+  <div class="preview-full">
+    <div class="kit-label">
+      <span class="fmt">web · 1280px · light</span>
+      <span style="color:var(--foreground-subtle);margin:0 4px">—</span>
+      <span class="nm">Errors</span>
+    </div>
+    <div class="preview-frame" style="height:380px">
+      <div class="preview-inner" style="width:1280px;height:800px;transform:scale(0.703125)">
+        <div style="background:#ffffff;height:100%;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(0,159,239,0.08),transparent 65%);pointer-events:none"></div>
+          <div style="position:relative">
+            <div style="font-size:168px;font-weight:600;letter-spacing:-6.4px;color:#e2e4e6;line-height:1">404</div>
+            <h1 style="font-size:56px;font-weight:600;letter-spacing:-1.8px;margin:0;margin-top:-16px;color:#0a0a0a">Page not found.</h1>
+            <p style="font-size:20px;color:#3f3f46;margin:20px auto 0;max-width:480px;letter-spacing:-0.2px">The page you're looking for doesn't exist or has moved. Check the URL or go back home.</p>
+            <div style="margin-top:36px;display:inline-flex;gap:12px">
+              <button class="btn btn-primary btn-lg">Back to home</button>
+              <button class="btn btn-secondary btn-lg">Contact us</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============================================================
+     DESIGN LANGUAGE SECTION
+     ============================================================ -->
+<section class="language-section" id="language">
+  <div style="margin-bottom:40px">
+    <span class="eyebrow">Design language</span>
+    <h2 style="font:var(--font-display-md);letter-spacing:var(--track-display-md);font-weight:var(--weight-display-md);margin:14px 0 0">The decisions underneath.</h2>
+  </div>
+
+  <!-- Surface ladder -->
+  <div class="language-band" style="margin-bottom:16px">
+    <div class="lang-head">
+      <div class="eyebrow">Color system</div>
+      <h3>The surface ladder</h3>
+    </div>
+    <div class="lang-body">
+      <p style="font:var(--font-body);color:var(--foreground-muted);max-width:640px;margin:0 0 32px">Hierarchy on light is hard — white cards on white canvas look flat. The system uses a four-step ladder that steps <em>down</em> into faint gray. A featured card settles one step into the page; it doesn't change color. Shadow supplements where the lift alone isn't enough.</p>
+      <div class="surface-ladder">
+        <div class="surf-swatch" style="background:var(--canvas)"><div class="surf-token">--canvas</div><div class="surf-hex">#ffffff</div></div>
+        <div class="surf-swatch" style="background:var(--surface-1)"><div class="surf-token">--surface-1</div><div class="surf-hex">#fafafa</div><div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:4px">Default card</div></div>
+        <div class="surf-swatch" style="background:var(--surface-2)"><div class="surf-token">--surface-2</div><div class="surf-hex">#f3f4f5</div><div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:4px">Featured card</div></div>
+        <div class="surf-swatch" style="background:var(--surface-3)"><div class="surf-token">--surface-3</div><div class="surf-hex">#ebeced</div><div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:4px">Dropdown</div></div>
+        <div class="surf-swatch" style="background:var(--surface-4)"><div class="surf-token">--surface-4</div><div class="surf-hex">#e2e4e6</div><div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:4px">Rare deep lift</div></div>
+      </div>
+      <!-- Brand restraint -->
+      <div style="margin-top:36px;padding-top:36px;border-top:1px solid var(--border-subtle)">
+        <div style="font:var(--font-eyebrow);letter-spacing:var(--track-eyebrow);text-transform:uppercase;color:var(--foreground-subtle);margin-bottom:16px">Brand color — the complete list of 8 permitted surfaces</div>
+        <div class="brand-budget">
+          <div class="budget-item"><div class="budget-num">1.</div><div class="budget-label">The brand dot in the wordmark</div></div>
+          <div class="budget-item"><div class="budget-num">2.</div><div class="budget-label">One word per hero headline</div></div>
+          <div class="budget-item"><div class="budget-num">3.</div><div class="budget-label">Focus rings (functional)</div></div>
+          <div class="budget-item"><div class="budget-num">4.</div><div class="budget-label">Link underlines on hover</div></div>
+          <div class="budget-item"><div class="budget-num">5.</div><div class="budget-label">One featured metric per page</div></div>
+          <div class="budget-item"><div class="budget-num">6.</div><div class="budget-label">Active state on binary controls</div></div>
+          <div class="budget-item"><div class="budget-num">7.</div><div class="budget-label">Editorial ordinal markers</div></div>
+          <div class="budget-item"><div class="budget-num">8.</div><div class="budget-label">Pull-quote opening glyph</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Type scale -->
+  <div class="language-band" style="margin-bottom:16px">
+    <div class="lang-head">
+      <div class="eyebrow">Typography</div>
+      <h3>One face, eleven steps</h3>
+    </div>
+    <div class="lang-body">
+      <p style="font:var(--font-body);color:var(--foreground-muted);max-width:640px;margin:0 0 32px">Inter Variable from 80px down to 12px. Hierarchy is size and tracking — not family or color. Display uses weight 600 with aggressive negative tracking. The eyebrow inverts with <em>positive</em> tracking (+0.4px) to read as taxonomy, not statement.</p>
+      <div class="type-specimen">
+        <div class="type-specimen-row"><div class="ts-token">display-xl</div><div style="font:var(--font-display-xl);letter-spacing:var(--track-display-xl);font-weight:var(--weight-display-xl);line-height:1">Bloom</div><div class="ts-meta">80px · 600 · -3.0px</div></div>
+        <div class="type-specimen-row"><div class="ts-token">display-lg</div><div style="font:var(--font-display-lg);letter-spacing:var(--track-display-lg);font-weight:var(--weight-display-lg)">Section opener</div><div class="ts-meta">56px · 600 · -1.8px</div></div>
+        <div class="type-specimen-row"><div class="ts-token">display-md</div><div style="font:var(--font-display-md);letter-spacing:var(--track-display-md);font-weight:var(--weight-display-md)">Sub-section</div><div class="ts-meta">40px · 600 · -1.0px</div></div>
+        <div class="type-specimen-row"><div class="ts-token">headline</div><div style="font:var(--font-headline);letter-spacing:var(--track-headline);font-weight:var(--weight-headline)">Pricing tier title</div><div class="ts-meta">28px · 600 · -0.6px</div></div>
+        <div class="type-specimen-row"><div class="ts-token">card-title</div><div style="font:var(--font-card-title);letter-spacing:var(--track-card-title);font-weight:var(--weight-card-title)">Feature card heading</div><div class="ts-meta">22px · 510 · -0.4px</div></div>
+        <div class="type-specimen-row"><div class="ts-token">body-lg</div><div style="font:var(--font-body-lg);letter-spacing:var(--track-body-lg);color:var(--foreground-muted)">Article body — readable prose at scale.</div><div class="ts-meta">18px · 400 · -0.1px</div></div>
+        <div class="type-specimen-row"><div class="ts-token">body</div><div style="font:var(--font-body);letter-spacing:var(--track-body);color:var(--foreground-muted)">Default body, nav, cards, general UI.</div><div class="ts-meta">16px · 400 · -0.05px</div></div>
+        <div class="type-specimen-row"><div class="ts-token">eyebrow</div><div style="font:var(--font-eyebrow);letter-spacing:var(--track-eyebrow);text-transform:uppercase;color:var(--foreground-subtle)">Section taxonomy — inverts display</div><div class="ts-meta">13px · 510 · +0.4px</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Components teaser -->
+  <div class="language-band">
+    <div class="lang-head">
+      <div class="eyebrow">Components</div>
+      <h3>32 primitives, every state</h3>
+    </div>
+    <div class="lang-body">
+      <p style="font:var(--font-body);color:var(--foreground-muted);max-width:640px;margin:0">Buttons through tables, all states documented. Pill is the default button shape — near-black on paper-white with a stacked shadow that quietly implies depth. Square is available for product chrome and forms. The brand never fills a button.</p>
+      <div class="comp-row" style="margin-top:28px">
+        <button class="btn btn-primary btn-lg">Let's talk</button>
+        <button class="btn btn-secondary btn-lg">Read more</button>
+        <button class="btn btn-tertiary">Tertiary</button>
+        <div style="display:inline-flex;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:9999px;padding:3px;gap:2px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.7)"><button style="height:28px;padding:0 14px;border-radius:9999px;background:var(--canvas);border:0;font:var(--font-button);font-weight:var(--weight-button);color:var(--foreground);cursor:pointer;box-shadow:rgba(15,17,20,0.06) 0px 1px 2px">Monthly</button><button style="height:28px;padding:0 14px;border-radius:9999px;background:transparent;border:0;font:var(--font-button);font-weight:var(--weight-button);color:var(--foreground-subtle);cursor:pointer">Annual</button></div>
+      </div>
+      <div class="comp-row" style="margin-top:16px;flex-wrap:wrap;gap:8px">
+        <span style="display:inline-flex;align-items:center;gap:8px;height:24px;padding:0 10px;border-radius:9999px;background:var(--surface-2);border:1px solid rgba(0,0,0,0.1);color:var(--foreground-muted);font:var(--font-caption)"><span style="width:6px;height:6px;border-radius:50%;background:var(--brand);box-shadow:var(--brand-glow)"></span>An AI-native firm · Princeton, NJ</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 8px;border-radius:4px;background:var(--surface-2);border:1px solid rgba(0,0,0,0.06);color:var(--foreground-muted);font:var(--font-caption);font-weight:510">Strategy</span>
+        <span style="display:inline-flex;align-items:center;height:18px;padding:0 7px;border-radius:9999px;background:var(--success-soft);color:var(--success);font:var(--font-caption);font-size:11px;font-weight:510">Shipped</span>
+        <span style="display:inline-flex;align-items:center;height:18px;padding:0 7px;border-radius:9999px;background:var(--warning-soft);color:var(--warning);font:var(--font-caption);font-size:11px;font-weight:510">Pending</span>
+        <span style="width:32px;height:32px;border-radius:9999px;background:var(--surface-2);border:1px solid rgba(0,0,0,0.06);display:inline-flex;align-items:center;justify-content:center;font:var(--font-body-sm);font-weight:600">ML</span>
+        <span style="width:24px;height:24px;border-radius:9999px;background:var(--surface-2);border:1px solid rgba(0,0,0,0.06);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600">TA</span>
+      </div>
+      <div style="margin-top:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+        <div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:var(--brand);line-height:1;font-variant-numeric:tabular-nums">47<small style="font-size:24px;color:var(--foreground-subtle)">%</small></div>
+        <div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:var(--foreground);line-height:1;font-variant-numeric:tabular-nums">17<small style="font-size:24px;color:var(--foreground-subtle)">hr</small></div>
+        <div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:var(--foreground);line-height:1;font-variant-numeric:tabular-nums">10<small style="font-size:24px;color:var(--foreground-subtle)">×</small></div>
+        <div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:var(--foreground);line-height:1;font-variant-numeric:tabular-nums">92<small style="font-size:24px;color:var(--foreground-subtle)">+</small></div>
+      </div>
+      <div style="margin-top:8px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font:var(--font-eyebrow);letter-spacing:var(--track-eyebrow);text-transform:uppercase;color:var(--foreground-subtle)">
+        <div>Featured · brand</div><div>Default</div><div>Default</div><div>Default</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED -->
+<section class="related">
+  <div class="eyebrow">More work</div>
+  <h3>From the studio.</h3>
+  <div class="related-grid">
+    <a class="card">
+      <span class="eyebrow">Social · 2026</span>
+      <span class="r-title">AEO Platform audit — 8-slide carousel built on the social subsystem.</span>
+      <span class="r-meta">Carousel · 8 slides · CS-2026-AEO-01</span>
+    </a>
+    <a class="card card-featured">
+      <span class="eyebrow">Intelligence report · 2026</span>
+      <span class="r-title">Intelli AEO — client intelligence report in the POZ document style.</span>
+      <span class="r-meta">Report · PDF · CS-2026-AEO-02</span>
+    </a>
+    <a class="card">
+      <span class="eyebrow">Pitch deck · 2026</span>
+      <span class="r-title">Investor deck — 12 slides, dark theme, stat-num-2xl metrics.</span>
+      <span class="r-meta">Deck · 12 slides · CS-2026-DECK-01</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-inner">
+    <div>© Point One Zero · 25 Palmer Square, Princeton, NJ 08542</div>
+    <div class="mono">CS-2026-DS-01 · design systems · v0.6.4</div>
+  </div>
+</footer>
+
+<script>
+const tocLinks = document.querySelectorAll('.toc a');
+const sectionIds = ['brief','decisions','kits','gallery','language'];
+const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+let ticking = false;
+function updateToc() {
+  const y = window.scrollY + 140;
+  let cur = sectionEls[0];
+  for (const s of sectionEls) { if (s && s.offsetTop <= y) cur = s; }
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur?.id));
+}
+window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(() => { updateToc(); ticking = false; }); ticking = true; }});
+updateToc();
+</script>
+</body>
+</html>
