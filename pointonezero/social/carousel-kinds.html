@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Carousel kinds — Point One Zero</title>
+<link rel="icon" href="../../assets/favicon.svg" />
+<link rel="stylesheet" href="../../colors_and_type.css" />
+<link rel="stylesheet" href="carousel-system.css" />
+<style>
+  html, body { margin: 0; background: #f5f4f0; min-height: 100vh; }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="carousel-templates.jsx"></script>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+  const App = () => (
+    <DesignCanvas>
+
+      {/* ============================================================
+         A · CASE STUDY — engagement story arc.
+         Cover → Chapter (the brief) → TwoCol (before/after) →
+         Stat (featured) → Quote → CTA. The "we shipped this" carousel.
+         ============================================================ */}
+      <DCSection
+        id="case-study"
+        title="Carousel · Case study"
+        subtitle="Engagement story — the brief, the build, the result. 6 slides · 1080 × 1350"
+      >
+        <DCArtboard id="cs-1" label="01 · Cover" width={1080} height={1350}>
+          <CoverSlide
+            page={1} total={6}
+            eyebrow="Case study · Financial services"
+            vol="No. 03"
+            headline="Northwind Capital — idea to production in seventeen hours."
+            brandWord="seventeen hours"
+            lead="A regional broker-dealer needed a client-facing AI assistant in front of regulators in a single quarter. We shipped it on a Tuesday."
+          />
+        </DCArtboard>
+
+        <DCArtboard id="cs-2" label="02 · The brief" width={1080} height={1350}>
+          <ChapterSlide
+            page={2} total={6}
+            chapter="01"
+            name="The brief."
+            intro="One pod, six weeks, a working assistant that could answer client questions about portfolio positions without hallucinating a single ticker."
+          />
+        </DCArtboard>
+
+        <DCArtboard id="cs-3" label="03 · Before / after" width={1080} height={1350}>
+          <TwoColSlide
+            page={3} total={6}
+            eyebrow="Before, after"
+            leftLabel="Before"
+            leftBody="Three full-time analysts handling overnight client e-mail. Average reply time of fourteen hours. Compliance review for every outbound message."
+            rightLabel="After"
+            rightBody="One assistant grounded in the firm's positions API. Reply time under forty seconds, with compliance review only on flagged messages — eight percent of volume."
+          />
+        </DCArtboard>
+
+        <DCArtboard id="cs-4" label="04 · The result" width={1080} height={1350}>
+          <StatSlide
+            page={4} total={6}
+            eyebrow="The result"
+            figure="03"
+            value="47"
+            suffix="%"
+            label="Reduction in run-rate operating spend at month six."
+            body="Measured against the previous quarter, with the assistant and its agent library handed off to the client's platform team. The agents stayed in production after we left."
+            source="Northwind Capital · Internal review · Q1 2026"
+            featured
+          />
+        </DCArtboard>
+
+        <DCArtboard id="cs-5" label="05 · Client voice" width={1080} height={1350}>
+          <QuoteSlide
+            page={5} total={6}
+            eyebrow="Client voice"
+            quote="They arrived on Monday with no opinion about our stack. They left on Friday with a working product, a deployment script, and an agent we are still using."
+            attribution="Adaeze Okafor"
+            source="VP of Client Experience · Northwind Capital"
+          />
+        </DCArtboard>
+
+        <DCArtboard id="cs-6" label="06 · CTA" width={1080} height={1350}>
+          <CTASlide
+            page={6} total={6}
+            eyebrow="Engage"
+            headline="Tell us about the problem on your desk."
+            brandWord="on your desk"
+            body="Six weeks. One pod. A prototype that proves or kills the thesis."
+            action="Let's talk"
+            url="pointonezero.com/case-studies"
+          />
+        </DCArtboard>
+      </DCSection>
+
+
+      {/* ============================================================
+         B · LISTICLE / FRAMEWORK — numbered framework.
+         Cover → 5× Chapter (each a numbered item) → CTA.
+         The "five lessons" / "three traps" / "seven rules" carousel.
+         ============================================================ */}
+      <DCSection
+        id="listicle"
+        title="Carousel · Listicle / Framework"
+        subtitle="Numbered framework — chapters as items. 7 slides · 1080 × 1350"
+      >
+        <DCArtboard id="ls-1" label="01 · Cover" width={1080} height={1350}>
+          <CoverSlide
+            page={1} total={7}
+            eyebrow="Field notes · After twelve sprints"
+            vol="Vol. 03"
+            headline="Five lessons from a year of restraint."
+            brandWord="restraint"
+            lead="Things we got wrong, then got right, then codified. The list is short on purpose — five is the budget we give ourselves."
+          />
+        </DCArtboard>
+
+        <DCArtboard id="ls-2" label="02 · One" width={1080} height={1350}>
+          <ChapterSlide
+            page={2} total={7}
+            chapter="01"
+            name="Start narrow. Stay narrow."
+            intro="The first prototype answers one question for one user. Everything else is a distraction dressed up as ambition."
+          />
+        </DCArtboard>
+
+        <DCArtboard id="ls-3" label="03 · Two" width={1080} height={1350}>
+          <ChapterSlide
+            page={3} total={7}
+            chapter="02"
+            name="Ship by Tuesday."
+            intro="The artifact teaches the team things the brief cannot. A working surface on day two beats a finished spec on day twelve, every time."
+          />
+        </DCArtboard>
+
+        <DCArtboard id="ls-4" label="04 · Three" width={1080} height={1350}>
+          <ChapterSlide
+            page={4} total={7}
+            chapter="03"
+            name="The agent is the artifact."
+            intro="Every engagement leaves behind a small, narrow, well-tested agent. The library compounds; the headcount does not."
+          />
+        </DCArtboard>
+
+        <DCArtboard id="ls-5" label="05 · Four" width={1080} height={1350}>
+          <ChapterSlide
+            page={5} total={7}
+            chapter="04"
+            name="No handoffs."
+            intro="Research, design, and engineering work in the same room, on the same artifact, in the same week. The relay race is the bug, not the process."
+          />
+        </DCArtboard>
+
+        <DCArtboard id="ls-6" label="06 · Five" width={1080} height={1350}>
+          <ChapterSlide
+            page={6} total={7}
+            chapter="05"
+            name="Restraint is the design."
+            intro="One accent. One headline. One featured number. The discipline is the brief — the rest is what the client paid for."
+          />
+        </DCArtboard>
+
+        <DCArtboard id="ls-7" label="07 · CTA" width={1080} height={1350}>
+          <CTASlide
+            page={7} total={7}
+            eyebrow="Engage"
+            headline="Which of the five do you violate the most?"
+            brandWord="violate the most"
+            body="Send a reply. We will read every one."
+            action="Reply"
+            url="pointonezero.com/notes"
+          />
+        </DCArtboard>
+      </DCSection>
+
+
+      {/* ============================================================
+         C · ESSAY / THOUGHT LEADERSHIP — editorial argument.
+         Cover → Editorial → Editorial → Quote → CTA.
+         The "long-read on the feed" carousel.
+         ============================================================ */}
+      <DCSection
+        id="essay"
+        title="Carousel · Essay"
+        subtitle="Editorial argument — two long-form paragraphs flanked by a pull quote. 5 slides · 1080 × 1350"
+      >
+        <DCArtboard id="ey-1" label="01 · Cover" width={1080} height={1350}>
+          <CoverSlide
+            page={1} total={5}
+            eyebrow="An essay · On consulting"
+            vol="Essay 01"
+            headline="The end of the relay race."
+            brandWord="relay race"
+            lead="The classic consulting model — research throws to strategy, strategy throws to design, design throws to engineering — is the only thing more expensive than a bad prototype."
+          />
+        </DCArtboard>
+
+        <DCArtboard id="ey-2" label="02 · Open" width={1080} height={1350}>
+          <EditorialSlide
+            page={2} total={5}
+            eyebrow="The argument · Open"
+            paragraph="Every handoff is a translation, and every translation is a tax. By the time the work is on a server, the client is paying for the fourth draft of the original problem."
+            byline="From the field notes · 2026"
+          />
+        </DCArtboard>
+
+        <DCArtboard id="ey-3" label="03 · Middle" width={1080} height={1350}>
+          <EditorialSlide
+            page={3} total={5}
+            eyebrow="The argument · Middle"
+            paragraph="The fix is not better handoffs. The fix is no handoffs. One pod, one room, one artifact alive on a screen every day. The work is the meeting. The artifact is the brief."
+            byline="From the field notes · 2026"
+            brandWord="no handoffs"
+          />
+        </DCArtboard>
+
+        <DCArtboard id="ey-4" label="04 · Pull quote" width={1080} height={1350}>
+          <QuoteSlide
+            page={4} total={5}
+            eyebrow="The argument · Close"
+            quote="The relay race is the bug. The room is the process. The artifact is everything."
+            attribution="From the essay"
+            source="§ 4 · pointonezero.com/notes/relay"
+          />
+        </DCArtboard>
+
+        <DCArtboard id="ey-5" label="05 · CTA" width={1080} height={1350}>
+          <CTASlide
+            page={5} total={5}
+            eyebrow="Read on"
+            headline="The long version is on the site."
+            brandWord="long version"
+            body="Four thousand words, six footnotes, one diagram."
+            action="Read the essay"
+            url="pointonezero.com/notes/relay"
+          />
+        </DCArtboard>
+      </DCSection>
+
+
+      {/* ============================================================
+         D · ANNOUNCEMENT — launch a new offering.
+         Cover → Definition (what it is) → TwoCol (in/out of scope) →
+         Stat → CTA.
+         ============================================================ */}
+      <DCSection
+        id="announcement"
+        title="Carousel · Announcement"
+        subtitle="Launching a new offering — the what, the in/out, a proof number. 5 slides · 1080 × 1350"
+      >
+        <DCArtboard id="an-1" label="01 · Cover" width={1080} height={1350}>
+          <CoverSlide
+            page={1} total={5}
+            eyebrow="Announcement · A new engagement"
+            vol="No. 04"
+            headline="Introducing Embed — a quarter inside your team."
+            brandWord="inside your team"
+            lead="A new long-form engagement, for clients who want the pod on the org chart, not on a statement of work."
+          />
+        </DCArtboard>
+
+        <DCArtboard id="an-2" label="02 · What it is" width={1080} height={1350}>
+          <DefinitionSlide
+            page={2} total={5}
+            eyebrow="What it is"
+            defNumber="01"
+            word="EMBED"
+            definition="A three-month engagement with a Point One Zero pod sitting inside your team, on your tools, on your cadence."
+            body="One strategist, one designer, two engineers — paired with two of your people, every day. Outputs ship into your repo. Agents stay on your platform. We leave the lights on."
+            footnote="Available Q3 2026 · Limited to four clients per quarter"
+          />
+        </DCArtboard>
+
+        <DCArtboard id="an-3" label="03 · In and out of scope" width={1080} height={1350}>
+          <TwoColSlide
+            page={3} total={5}
+            eyebrow="The scope"
+            leftLabel="In scope"
+            leftBody="Daily stand-ups on your tooling. Two pull requests a week. An agent library handed off at month three. A read-out for the board."
+            rightLabel="Out of scope"
+            rightBody="On-call rotation. Hiring backfill. Long-tail bug triage on systems we did not build. The promise is depth, not headcount."
+          />
+        </DCArtboard>
+
+        <DCArtboard id="an-4" label="04 · Proof number" width={1080} height={1350}>
+          <StatSlide
+            page={4} total={5}
+            eyebrow="The proof"
+            figure="01"
+            value="92"
+            suffix="+"
+            label="Reusable AI agents from prior engagements, ready on day one."
+            body="The library is the moat the model implies. An Embed engagement starts further along than a Build engagement; a Build starts further along than a Sprint. The compounding is the point."
+            source="Internal · Agent registry · Q1 2026"
+            featured
+          />
+        </DCArtboard>
+
+        <DCArtboard id="an-5" label="05 · CTA" width={1080} height={1350}>
+          <CTASlide
+            page={5} total={5}
+            eyebrow="Engage"
+            headline="Four slots open this quarter."
+            brandWord="Four slots"
+            body="A thirty-minute conversation is the first step. We bring questions; you bring the org chart."
+            action="Request a slot"
+            url="pointonezero.com/embed"
+          />
+        </DCArtboard>
+      </DCSection>
+
+
+      {/* ============================================================
+         E · HIRING — open role.
+         Cover → Editorial (about the role) → TwoCol (you / us) →
+         Quote (team voice) → CTA.
+         ============================================================ */}
+      <DCSection
+        id="hiring"
+        title="Carousel · Hiring"
+        subtitle="An open role — the work, the fit, the team voice. 5 slides · 1080 × 1350"
+      >
+        <DCArtboard id="hr-1" label="01 · Cover" width={1080} height={1350}>
+          <CoverSlide
+            page={1} total={5}
+            eyebrow="We're hiring · Princeton + Remote"
+            vol="Role 01"
+            headline="A senior product engineer, one of eight."
+            brandWord="one of eight"
+            lead="Point One Zero is adding a ninth partner. Senior engineer, product-shaped brain, comfortable shipping on day three of a six-week sprint."
+          />
+        </DCArtboard>
+
+        <DCArtboard id="hr-2" label="02 · The work" width={1080} height={1350}>
+          <EditorialSlide
+            page={2} total={5}
+            eyebrow="The work"
+            paragraph="You will own the slice of every engagement that becomes a running product. In the room with the strategist on Monday, on the pull request by Wednesday. The artifact is the brief."
+            byline="Job spec · 2026 · pointonezero.com/roles"
+            brandWord="in the room"
+          />
+        </DCArtboard>
+
+        <DCArtboard id="hr-3" label="03 · You / Us" width={1080} height={1350}>
+          <TwoColSlide
+            page={3} total={5}
+            eyebrow="The fit"
+            leftLabel="You"
+            leftBody="Eight years of shipping. A language you love, a stack you can argue about. You write in plain prose. You think in prototypes."
+            rightLabel="Us"
+            rightBody="Eight partners. A flat org chart. Princeton office, remote-friendly. Profit share on every engagement. No timesheets. No managers."
+          />
+        </DCArtboard>
+
+        <DCArtboard id="hr-4" label="04 · Team voice" width={1080} height={1350}>
+          <QuoteSlide
+            page={4} total={5}
+            eyebrow="From the team"
+            quote="I have not been in a status meeting in eleven months. I have shipped to production every week. The trade is the work, and the trade is good."
+            attribution="Theo Aaron"
+            source="Partner · Joined 2025 · Point One Zero"
+          />
+        </DCArtboard>
+
+        <DCArtboard id="hr-5" label="05 · CTA" width={1080} height={1350}>
+          <CTASlide
+            page={5} total={5}
+            eyebrow="Apply"
+            headline="Send a link. We read every one."
+            brandWord="every one"
+            body="A repo, an essay, a deck, a project — whichever you would point a friend at."
+            action="Apply"
+            url="pointonezero.com/roles"
+          />
+        </DCArtboard>
+      </DCSection>
+
+    </DesignCanvas>
+  );
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+</body>
+</html>

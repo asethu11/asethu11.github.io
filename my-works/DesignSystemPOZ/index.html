@@ -508,12 +508,9 @@ a.kit-card:hover { border-color: var(--border-default); transform: translateY(-2
 /* Live preview — the real page in a scaled, non-interactive iframe */
 .kit-preview { position: relative; width: 100%; aspect-ratio: 1280 / 800; overflow: hidden; background: var(--canvas); border-bottom: 1px solid var(--border-subtle); }
 .kit-preview iframe { position: absolute; top: 0; left: 0; width: 1280px; height: 800px; border: 0; transform-origin: top left; transform: scale(var(--kit-scale, 0.45)); pointer-events: none; }
-
-/* Static descriptor tile for kits that aren't web pages */
-.kit-preview.is-static { display: flex; align-items: center; justify-content: center; background: var(--surface-2); background-image: var(--gradient-card-featured); }
-.kit-preview.is-static.dark { background: #010102; background-image: var(--gradient-hero-veil); }
-.kit-preview.is-static .glyph { font: var(--font-display-md); letter-spacing: var(--track-display-md); font-weight: var(--weight-semibold); color: var(--foreground-faint); text-transform: uppercase; }
-.kit-preview.is-static.dark .glyph { color: rgba(255,255,255,0.34); }
+/* Wide variant for 1920×1080 decks */
+.kit-preview--1920 { aspect-ratio: 1920 / 1080; }
+.kit-preview--1920 iframe { width: 1920px; height: 1080px; }
 
 .kit-meta { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 6px; }
 .kit-meta .fmt { font: var(--font-mono-md); color: var(--foreground-subtle); }
@@ -763,7 +760,7 @@ a.kit-card:hover { border-color: var(--border-default); transform: translateY(-2
   <div class="section-head">
     <span class="eyebrow">The work</span>
     <h2>12 kits. One system.</h2>
-    <p style="font:var(--font-body);color:var(--foreground-muted);max-width:680px;margin:14px 0 0">Six of the twelve kits are live web pages, embedded below in real time and rendered from the same token layer. The rest — decks, print, social, identity — ship in the same system. <a href="/pointonezero/" style="color:var(--foreground);text-decoration:underline;text-decoration-color:var(--brand);text-underline-offset:4px">Explore the running site &#8594;</a></p>
+    <p style="font:var(--font-body);color:var(--foreground-muted);max-width:680px;margin:14px 0 0">All 12 kits are embedded live below — web pages, slide decks, social carousels, print documents, and identity — every one rendered from the same token layer. <a href="/pointonezero/" style="color:var(--foreground);text-decoration:underline;text-decoration-color:var(--brand);text-underline-offset:4px">Explore the running site &#8594;</a></p>
   </div>
 
   <div class="kit-grid">
@@ -821,60 +818,60 @@ a.kit-card:hover { border-color: var(--border-default); transform: translateY(-2
           <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
       </a>
-      <div class="kit-card">
-        <div class="kit-preview is-static dark"><span class="glyph">DECK</span></div>
+      <a class="kit-card" href="/pointonezero/pitch-deck/" target="_blank" rel="noopener">
+        <div class="kit-preview kit-preview--1920"><iframe src="/pointonezero/pitch-deck/" loading="lazy" title="Pitch deck — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">deck · 1920×1080 · dark</span>
           <span class="nm">Pitch deck</span>
           <span class="desc">Investor deck built on the shared deck-stage runtime.</span>
-          <span class="note">Ships in the system &middot; not a web page</span>
+          <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
-      </div>
-      <div class="kit-card">
-        <div class="kit-preview is-static"><span class="glyph">DECK</span></div>
+      </a>
+      <a class="kit-card" href="/pointonezero/report-presentation/" target="_blank" rel="noopener">
+        <div class="kit-preview kit-preview--1920"><iframe src="/pointonezero/report-presentation/" loading="lazy" title="Report presentation — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">deck · 1920×1080</span>
           <span class="nm">Report presentation</span>
           <span class="desc">Twelve-slide, report-style deck on the same stage.</span>
-          <span class="note">Ships in the system &middot; not a web page</span>
+          <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
-      </div>
-      <div class="kit-card">
-        <div class="kit-preview is-static"><span class="glyph">SOCIAL</span></div>
+      </a>
+      <a class="kit-card" href="/pointonezero/social/" target="_blank" rel="noopener">
+        <div class="kit-preview"><iframe src="/pointonezero/social/" loading="lazy" title="Social carousels — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">social · 1080×1350 · 8 variants</span>
           <span class="nm">Social carousels</span>
           <span class="desc">Phone-feed carousel system — Cover, Stat, Quote, CTA…</span>
-          <span class="note">Ships in the system &middot; not a web page</span>
+          <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
-      </div>
-      <div class="kit-card">
-        <div class="kit-preview is-static"><span class="glyph">PRINT</span></div>
+      </a>
+      <a class="kit-card" href="/pointonezero/white-paper/" target="_blank" rel="noopener">
+        <div class="kit-preview"><iframe src="/pointonezero/white-paper/" loading="lazy" title="White paper — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">print · 1080×1440 · portrait + landscape</span>
           <span class="nm">White paper</span>
           <span class="desc">Long-form print, PDF-ready, with a print-extended type scale.</span>
-          <span class="note">Ships in the system &middot; not a web page</span>
+          <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
-      </div>
-      <div class="kit-card">
-        <div class="kit-preview is-static"><span class="glyph">PRINT</span></div>
+      </a>
+      <a class="kit-card" href="/pointonezero/report-document/" target="_blank" rel="noopener">
+        <div class="kit-preview"><iframe src="/pointonezero/report-document/" loading="lazy" title="Report document — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">print · 8.5×11 · 12 pages</span>
           <span class="nm">Report document</span>
           <span class="desc">Letter-size stakeholder report — cover to references.</span>
-          <span class="note">Ships in the system &middot; not a web page</span>
+          <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
-      </div>
-      <div class="kit-card">
-        <div class="kit-preview is-static"><span class="glyph">IDENTITY</span></div>
+      </a>
+      <a class="kit-card" href="/pointonezero/brand-application/" target="_blank" rel="noopener">
+        <div class="kit-preview"><iframe src="/pointonezero/brand-application/" loading="lazy" title="Brand application — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
-          <span class="fmt">identity</span>
+          <span class="fmt">identity · dark chrome · light pieces</span>
           <span class="nm">Brand application</span>
           <span class="desc">Business card, email signature, and wallpaper.</span>
-          <span class="note">Ships in the system &middot; not a web page</span>
+          <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
-      </div>
+      </a>
   </div>
 </section>
 
@@ -1025,12 +1022,13 @@ function updateToc() {
 window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(() => { updateToc(); ticking = false; }); ticking = true; }});
 updateToc();
 
-/* Scale each live kit-preview iframe (1280px logical) to fit its card. */
+/* Scale each live kit-preview iframe to fit its card. */
 (function(){
   function fit(){
     document.querySelectorAll('.kit-preview > iframe').forEach(function(fr){
       var w = fr.parentElement.clientWidth;
-      if (w) fr.parentElement.style.setProperty('--kit-scale', (w/1280).toFixed(4));
+      var logW = fr.parentElement.classList.contains('kit-preview--1920') ? 1920 : 1280;
+      if (w) fr.parentElement.style.setProperty('--kit-scale', (w/logW).toFixed(4));
     });
   }
   if (window.ResizeObserver){
