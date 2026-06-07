@@ -705,11 +705,11 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
     <p class="lead">One CSS file. 32 components. 12 production UI kits spanning web, print, social, and slide decks — all governed by a single token layer and one quiet brand accent.</p>
     <div class="byline">Design system designed by <strong>Abhishek Sethuraman</strong> for Point One Zero.</div>
     <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
-      <a href="/pointonezero/" class="btn btn-primary btn-lg" style="text-decoration:none">Explore the live site →</a>
+      <a href="#gallery" class="btn btn-secondary btn-lg" style="text-decoration:none">Jump to artifacts ↓</a>
     </div>
     <div class="summary">
       <div class="item">
-        <div class="label">Client</div>
+        <div class="label">Company</div>
         <div class="value">Point One Zero</div>
       </div>
       <div class="item">
@@ -803,21 +803,118 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
       <li><a href="#brief" class="active">The brief</a></li>
       <li><a href="#decisions">Key decisions</a></li>
       <li><a href="#kits">The kits</a></li>
-      <li><a href="#gallery">Gallery</a></li>
       <li><a href="#language">Design language</a></li>
+      <li><a href="#gallery">Artifacts</a></li>
     </ul>
     <div class="team-card">
       <div class="label">Built by</div>
       <div class="roles">
         <div><span class="role">Designer</span> &nbsp;Abhishek Sethuraman</div>
-        <div><span class="role">Client</span> &nbsp;Point One Zero</div>
+        <div><span class="role">Company</span> &nbsp;Point One Zero</div>
         <div><span class="role">Stack</span> &nbsp;HTML · CSS · React</div>
         <div><span class="role">Version</span> &nbsp;<span class="mono">v0.6.4</span></div>
-        <div><span class="role">Filed</span> &nbsp;<span class="mono">2026</span></div>
+        <div><span class="role">Filed</span> &nbsp;<span class="mono">June 2026</span></div>
       </div>
     </div>
   </aside>
 </div>
+
+<!-- ============================================================
+     DESIGN LANGUAGE SECTION
+     ============================================================ -->
+<section class="language-section" id="language">
+  <div style="margin-bottom:40px">
+    <span class="eyebrow">Design language</span>
+    <h2 style="font:var(--font-display-md);letter-spacing:var(--track-display-md);font-weight:var(--weight-display-md);margin:14px 0 0">The decisions underneath.</h2>
+  </div>
+
+  <!-- Surface ladder -->
+  <div class="language-band" style="margin-bottom:16px">
+    <div class="lang-head">
+      <div class="eyebrow">Color system</div>
+      <h3>The surface ladder</h3>
+    </div>
+    <div class="lang-body">
+      <p style="font:var(--font-body);color:var(--foreground-muted);max-width:640px;margin:0 0 32px">Hierarchy on light is hard — white cards on white canvas look flat. The system uses a four-step ladder that steps <em>down</em> into faint gray. A featured card settles one step into the page; it doesn't change color. Shadow supplements where the lift alone isn't enough.</p>
+      <div class="surface-ladder">
+        <div class="surf-swatch" style="background:var(--canvas)"><div class="surf-token">--canvas</div><div class="surf-hex">#ffffff</div></div>
+        <div class="surf-swatch" style="background:var(--surface-1)"><div class="surf-token">--surface-1</div><div class="surf-hex">#fafafa</div><div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:4px">Default card</div></div>
+        <div class="surf-swatch" style="background:var(--surface-2)"><div class="surf-token">--surface-2</div><div class="surf-hex">#f3f4f5</div><div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:4px">Featured card</div></div>
+        <div class="surf-swatch" style="background:var(--surface-3)"><div class="surf-token">--surface-3</div><div class="surf-hex">#ebeced</div><div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:4px">Dropdown</div></div>
+        <div class="surf-swatch" style="background:var(--surface-4)"><div class="surf-token">--surface-4</div><div class="surf-hex">#e2e4e6</div><div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:4px">Rare deep lift</div></div>
+      </div>
+      <!-- Brand restraint -->
+      <div style="margin-top:36px;padding-top:36px;border-top:1px solid var(--border-subtle)">
+        <div style="font:var(--font-eyebrow);letter-spacing:var(--track-eyebrow);text-transform:uppercase;color:var(--foreground-subtle);margin-bottom:16px">Brand color — the complete list of 8 permitted surfaces</div>
+        <div class="brand-budget">
+          <div class="budget-item"><div class="budget-num">1.</div><div class="budget-label">The brand dot in the wordmark</div></div>
+          <div class="budget-item"><div class="budget-num">2.</div><div class="budget-label">One word per hero headline</div></div>
+          <div class="budget-item"><div class="budget-num">3.</div><div class="budget-label">Focus rings (functional)</div></div>
+          <div class="budget-item"><div class="budget-num">4.</div><div class="budget-label">Link underlines on hover</div></div>
+          <div class="budget-item"><div class="budget-num">5.</div><div class="budget-label">One featured metric per page</div></div>
+          <div class="budget-item"><div class="budget-num">6.</div><div class="budget-label">Active state on binary controls</div></div>
+          <div class="budget-item"><div class="budget-num">7.</div><div class="budget-label">Editorial ordinal markers</div></div>
+          <div class="budget-item"><div class="budget-num">8.</div><div class="budget-label">Pull-quote opening glyph</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Type scale -->
+  <div class="language-band" style="margin-bottom:16px">
+    <div class="lang-head">
+      <div class="eyebrow">Typography</div>
+      <h3>One face, eleven steps</h3>
+    </div>
+    <div class="lang-body">
+      <p style="font:var(--font-body);color:var(--foreground-muted);max-width:640px;margin:0 0 32px">Inter Variable from 80px down to 12px. Hierarchy is size and tracking — not family or color. Display uses weight 600 with aggressive negative tracking. The eyebrow inverts with <em>positive</em> tracking (+0.4px) to read as taxonomy, not statement.</p>
+      <div class="type-specimen">
+        <div class="type-specimen-row"><div class="ts-token">display-xl</div><div style="font:var(--font-display-xl);letter-spacing:var(--track-display-xl);font-weight:var(--weight-display-xl);line-height:1">Bloom</div><div class="ts-meta">80px · 600 · -3.0px</div></div>
+        <div class="type-specimen-row"><div class="ts-token">display-lg</div><div style="font:var(--font-display-lg);letter-spacing:var(--track-display-lg);font-weight:var(--weight-display-lg)">Section opener</div><div class="ts-meta">56px · 600 · -1.8px</div></div>
+        <div class="type-specimen-row"><div class="ts-token">display-md</div><div style="font:var(--font-display-md);letter-spacing:var(--track-display-md);font-weight:var(--weight-display-md)">Sub-section</div><div class="ts-meta">40px · 600 · -1.0px</div></div>
+        <div class="type-specimen-row"><div class="ts-token">headline</div><div style="font:var(--font-headline);letter-spacing:var(--track-headline);font-weight:var(--weight-headline)">Pricing tier title</div><div class="ts-meta">28px · 600 · -0.6px</div></div>
+        <div class="type-specimen-row"><div class="ts-token">card-title</div><div style="font:var(--font-card-title);letter-spacing:var(--track-card-title);font-weight:var(--weight-card-title)">Feature card heading</div><div class="ts-meta">22px · 510 · -0.4px</div></div>
+        <div class="type-specimen-row"><div class="ts-token">body-lg</div><div style="font:var(--font-body-lg);letter-spacing:var(--track-body-lg);color:var(--foreground-muted)">Article body — readable prose at scale.</div><div class="ts-meta">18px · 400 · -0.1px</div></div>
+        <div class="type-specimen-row"><div class="ts-token">body</div><div style="font:var(--font-body);letter-spacing:var(--track-body);color:var(--foreground-muted)">Default body, nav, cards, general UI.</div><div class="ts-meta">16px · 400 · -0.05px</div></div>
+        <div class="type-specimen-row"><div class="ts-token">eyebrow</div><div style="font:var(--font-eyebrow);letter-spacing:var(--track-eyebrow);text-transform:uppercase;color:var(--foreground-subtle)">Section taxonomy — inverts display</div><div class="ts-meta">13px · 510 · +0.4px</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Components teaser -->
+  <div class="language-band">
+    <div class="lang-head">
+      <div class="eyebrow">Components</div>
+      <h3>32 primitives, every state</h3>
+    </div>
+    <div class="lang-body">
+      <p style="font:var(--font-body);color:var(--foreground-muted);max-width:640px;margin:0">Buttons through tables, all states documented. Pill is the default button shape — near-black on paper-white with a stacked shadow that quietly implies depth. Square is available for product chrome and forms. The brand never fills a button.</p>
+      <div class="comp-row" style="margin-top:28px">
+        <button class="btn btn-primary btn-lg">Let's talk</button>
+        <button class="btn btn-secondary btn-lg">Read more</button>
+        <button class="btn btn-tertiary">Tertiary</button>
+        <div style="display:inline-flex;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:9999px;padding:3px;gap:2px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.7)"><button style="height:28px;padding:0 14px;border-radius:9999px;background:var(--canvas);border:0;font:var(--font-button);font-weight:var(--weight-button);color:var(--foreground);cursor:pointer;box-shadow:rgba(15,17,20,0.06) 0px 1px 2px">Monthly</button><button style="height:28px;padding:0 14px;border-radius:9999px;background:transparent;border:0;font:var(--font-button);font-weight:var(--weight-button);color:var(--foreground-subtle);cursor:pointer">Annual</button></div>
+      </div>
+      <div class="comp-row" style="margin-top:16px;flex-wrap:wrap;gap:8px">
+        <span style="display:inline-flex;align-items:center;gap:8px;height:24px;padding:0 10px;border-radius:9999px;background:var(--surface-2);border:1px solid rgba(0,0,0,0.1);color:var(--foreground-muted);font:var(--font-caption)"><span style="width:6px;height:6px;border-radius:50%;background:var(--brand);box-shadow:var(--brand-glow)"></span>An AI-native firm · Princeton, NJ</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 8px;border-radius:4px;background:var(--surface-2);border:1px solid rgba(0,0,0,0.06);color:var(--foreground-muted);font:var(--font-caption);font-weight:510">Strategy</span>
+        <span style="display:inline-flex;align-items:center;height:18px;padding:0 7px;border-radius:9999px;background:var(--success-soft);color:var(--success);font:var(--font-caption);font-size:11px;font-weight:510">Shipped</span>
+        <span style="display:inline-flex;align-items:center;height:18px;padding:0 7px;border-radius:9999px;background:var(--warning-soft);color:var(--warning);font:var(--font-caption);font-size:11px;font-weight:510">Pending</span>
+        <span style="width:32px;height:32px;border-radius:9999px;background:var(--surface-2);border:1px solid rgba(0,0,0,0.06);display:inline-flex;align-items:center;justify-content:center;font:var(--font-body-sm);font-weight:600">ML</span>
+        <span style="width:24px;height:24px;border-radius:9999px;background:var(--surface-2);border:1px solid rgba(0,0,0,0.06);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600">TA</span>
+      </div>
+      <div style="margin-top:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+        <div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:var(--brand);line-height:1;font-variant-numeric:tabular-nums">47<small style="font-size:24px;color:var(--foreground-subtle)">%</small></div>
+        <div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:var(--foreground);line-height:1;font-variant-numeric:tabular-nums">17<small style="font-size:24px;color:var(--foreground-subtle)">hr</small></div>
+        <div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:var(--foreground);line-height:1;font-variant-numeric:tabular-nums">10<small style="font-size:24px;color:var(--foreground-subtle)">×</small></div>
+        <div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:var(--foreground);line-height:1;font-variant-numeric:tabular-nums">92<small style="font-size:24px;color:var(--foreground-subtle)">+</small></div>
+      </div>
+      <div style="margin-top:8px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font:var(--font-eyebrow);letter-spacing:var(--track-eyebrow);text-transform:uppercase;color:var(--foreground-subtle)">
+        <div>Featured · brand</div><div>Default</div><div>Default</div><div>Default</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ============================================================
      PORTFOLIO GALLERY — the work, shown large
@@ -826,7 +923,7 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
   <div class="section-head">
     <span class="eyebrow">The work</span>
     <h2>12 kits. One system.</h2>
-    <p style="font:var(--font-body);color:var(--foreground-muted);max-width:680px;margin:14px 0 0">All 12 kits are embedded live below — web pages, slide decks, social carousels, print documents, and identity — every one rendered from the same token layer. <a href="/pointonezero/" style="color:var(--foreground);text-decoration:underline;text-decoration-color:var(--brand);text-underline-offset:4px">Explore the running site &#8594;</a></p>
+    <p style="font:var(--font-body);color:var(--foreground-muted);max-width:680px;margin:14px 0 0">All 12 kits are embedded live below — web pages, slide decks, social carousels, print documents, and identity — every one rendered from the same token layer.</p>
   </div>
 
   <div class="kit-grid">
@@ -941,103 +1038,6 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
   </div>
 </section>
 
-<!-- ============================================================
-     DESIGN LANGUAGE SECTION
-     ============================================================ -->
-<section class="language-section" id="language">
-  <div style="margin-bottom:40px">
-    <span class="eyebrow">Design language</span>
-    <h2 style="font:var(--font-display-md);letter-spacing:var(--track-display-md);font-weight:var(--weight-display-md);margin:14px 0 0">The decisions underneath.</h2>
-  </div>
-
-  <!-- Surface ladder -->
-  <div class="language-band" style="margin-bottom:16px">
-    <div class="lang-head">
-      <div class="eyebrow">Color system</div>
-      <h3>The surface ladder</h3>
-    </div>
-    <div class="lang-body">
-      <p style="font:var(--font-body);color:var(--foreground-muted);max-width:640px;margin:0 0 32px">Hierarchy on light is hard — white cards on white canvas look flat. The system uses a four-step ladder that steps <em>down</em> into faint gray. A featured card settles one step into the page; it doesn't change color. Shadow supplements where the lift alone isn't enough.</p>
-      <div class="surface-ladder">
-        <div class="surf-swatch" style="background:var(--canvas)"><div class="surf-token">--canvas</div><div class="surf-hex">#ffffff</div></div>
-        <div class="surf-swatch" style="background:var(--surface-1)"><div class="surf-token">--surface-1</div><div class="surf-hex">#fafafa</div><div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:4px">Default card</div></div>
-        <div class="surf-swatch" style="background:var(--surface-2)"><div class="surf-token">--surface-2</div><div class="surf-hex">#f3f4f5</div><div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:4px">Featured card</div></div>
-        <div class="surf-swatch" style="background:var(--surface-3)"><div class="surf-token">--surface-3</div><div class="surf-hex">#ebeced</div><div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:4px">Dropdown</div></div>
-        <div class="surf-swatch" style="background:var(--surface-4)"><div class="surf-token">--surface-4</div><div class="surf-hex">#e2e4e6</div><div style="font:var(--font-caption);color:var(--foreground-subtle);margin-top:4px">Rare deep lift</div></div>
-      </div>
-      <!-- Brand restraint -->
-      <div style="margin-top:36px;padding-top:36px;border-top:1px solid var(--border-subtle)">
-        <div style="font:var(--font-eyebrow);letter-spacing:var(--track-eyebrow);text-transform:uppercase;color:var(--foreground-subtle);margin-bottom:16px">Brand color — the complete list of 8 permitted surfaces</div>
-        <div class="brand-budget">
-          <div class="budget-item"><div class="budget-num">1.</div><div class="budget-label">The brand dot in the wordmark</div></div>
-          <div class="budget-item"><div class="budget-num">2.</div><div class="budget-label">One word per hero headline</div></div>
-          <div class="budget-item"><div class="budget-num">3.</div><div class="budget-label">Focus rings (functional)</div></div>
-          <div class="budget-item"><div class="budget-num">4.</div><div class="budget-label">Link underlines on hover</div></div>
-          <div class="budget-item"><div class="budget-num">5.</div><div class="budget-label">One featured metric per page</div></div>
-          <div class="budget-item"><div class="budget-num">6.</div><div class="budget-label">Active state on binary controls</div></div>
-          <div class="budget-item"><div class="budget-num">7.</div><div class="budget-label">Editorial ordinal markers</div></div>
-          <div class="budget-item"><div class="budget-num">8.</div><div class="budget-label">Pull-quote opening glyph</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Type scale -->
-  <div class="language-band" style="margin-bottom:16px">
-    <div class="lang-head">
-      <div class="eyebrow">Typography</div>
-      <h3>One face, eleven steps</h3>
-    </div>
-    <div class="lang-body">
-      <p style="font:var(--font-body);color:var(--foreground-muted);max-width:640px;margin:0 0 32px">Inter Variable from 80px down to 12px. Hierarchy is size and tracking — not family or color. Display uses weight 600 with aggressive negative tracking. The eyebrow inverts with <em>positive</em> tracking (+0.4px) to read as taxonomy, not statement.</p>
-      <div class="type-specimen">
-        <div class="type-specimen-row"><div class="ts-token">display-xl</div><div style="font:var(--font-display-xl);letter-spacing:var(--track-display-xl);font-weight:var(--weight-display-xl);line-height:1">Bloom</div><div class="ts-meta">80px · 600 · -3.0px</div></div>
-        <div class="type-specimen-row"><div class="ts-token">display-lg</div><div style="font:var(--font-display-lg);letter-spacing:var(--track-display-lg);font-weight:var(--weight-display-lg)">Section opener</div><div class="ts-meta">56px · 600 · -1.8px</div></div>
-        <div class="type-specimen-row"><div class="ts-token">display-md</div><div style="font:var(--font-display-md);letter-spacing:var(--track-display-md);font-weight:var(--weight-display-md)">Sub-section</div><div class="ts-meta">40px · 600 · -1.0px</div></div>
-        <div class="type-specimen-row"><div class="ts-token">headline</div><div style="font:var(--font-headline);letter-spacing:var(--track-headline);font-weight:var(--weight-headline)">Pricing tier title</div><div class="ts-meta">28px · 600 · -0.6px</div></div>
-        <div class="type-specimen-row"><div class="ts-token">card-title</div><div style="font:var(--font-card-title);letter-spacing:var(--track-card-title);font-weight:var(--weight-card-title)">Feature card heading</div><div class="ts-meta">22px · 510 · -0.4px</div></div>
-        <div class="type-specimen-row"><div class="ts-token">body-lg</div><div style="font:var(--font-body-lg);letter-spacing:var(--track-body-lg);color:var(--foreground-muted)">Article body — readable prose at scale.</div><div class="ts-meta">18px · 400 · -0.1px</div></div>
-        <div class="type-specimen-row"><div class="ts-token">body</div><div style="font:var(--font-body);letter-spacing:var(--track-body);color:var(--foreground-muted)">Default body, nav, cards, general UI.</div><div class="ts-meta">16px · 400 · -0.05px</div></div>
-        <div class="type-specimen-row"><div class="ts-token">eyebrow</div><div style="font:var(--font-eyebrow);letter-spacing:var(--track-eyebrow);text-transform:uppercase;color:var(--foreground-subtle)">Section taxonomy — inverts display</div><div class="ts-meta">13px · 510 · +0.4px</div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Components teaser -->
-  <div class="language-band">
-    <div class="lang-head">
-      <div class="eyebrow">Components</div>
-      <h3>32 primitives, every state</h3>
-    </div>
-    <div class="lang-body">
-      <p style="font:var(--font-body);color:var(--foreground-muted);max-width:640px;margin:0">Buttons through tables, all states documented. Pill is the default button shape — near-black on paper-white with a stacked shadow that quietly implies depth. Square is available for product chrome and forms. The brand never fills a button.</p>
-      <div class="comp-row" style="margin-top:28px">
-        <button class="btn btn-primary btn-lg">Let's talk</button>
-        <button class="btn btn-secondary btn-lg">Read more</button>
-        <button class="btn btn-tertiary">Tertiary</button>
-        <div style="display:inline-flex;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:9999px;padding:3px;gap:2px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.7)"><button style="height:28px;padding:0 14px;border-radius:9999px;background:var(--canvas);border:0;font:var(--font-button);font-weight:var(--weight-button);color:var(--foreground);cursor:pointer;box-shadow:rgba(15,17,20,0.06) 0px 1px 2px">Monthly</button><button style="height:28px;padding:0 14px;border-radius:9999px;background:transparent;border:0;font:var(--font-button);font-weight:var(--weight-button);color:var(--foreground-subtle);cursor:pointer">Annual</button></div>
-      </div>
-      <div class="comp-row" style="margin-top:16px;flex-wrap:wrap;gap:8px">
-        <span style="display:inline-flex;align-items:center;gap:8px;height:24px;padding:0 10px;border-radius:9999px;background:var(--surface-2);border:1px solid rgba(0,0,0,0.1);color:var(--foreground-muted);font:var(--font-caption)"><span style="width:6px;height:6px;border-radius:50%;background:var(--brand);box-shadow:var(--brand-glow)"></span>An AI-native firm · Princeton, NJ</span>
-        <span style="display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 8px;border-radius:4px;background:var(--surface-2);border:1px solid rgba(0,0,0,0.06);color:var(--foreground-muted);font:var(--font-caption);font-weight:510">Strategy</span>
-        <span style="display:inline-flex;align-items:center;height:18px;padding:0 7px;border-radius:9999px;background:var(--success-soft);color:var(--success);font:var(--font-caption);font-size:11px;font-weight:510">Shipped</span>
-        <span style="display:inline-flex;align-items:center;height:18px;padding:0 7px;border-radius:9999px;background:var(--warning-soft);color:var(--warning);font:var(--font-caption);font-size:11px;font-weight:510">Pending</span>
-        <span style="width:32px;height:32px;border-radius:9999px;background:var(--surface-2);border:1px solid rgba(0,0,0,0.06);display:inline-flex;align-items:center;justify-content:center;font:var(--font-body-sm);font-weight:600">ML</span>
-        <span style="width:24px;height:24px;border-radius:9999px;background:var(--surface-2);border:1px solid rgba(0,0,0,0.06);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600">TA</span>
-      </div>
-      <div style="margin-top:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
-        <div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:var(--brand);line-height:1;font-variant-numeric:tabular-nums">47<small style="font-size:24px;color:var(--foreground-subtle)">%</small></div>
-        <div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:var(--foreground);line-height:1;font-variant-numeric:tabular-nums">17<small style="font-size:24px;color:var(--foreground-subtle)">hr</small></div>
-        <div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:var(--foreground);line-height:1;font-variant-numeric:tabular-nums">10<small style="font-size:24px;color:var(--foreground-subtle)">×</small></div>
-        <div style="font-size:68px;font-weight:600;letter-spacing:-2.4px;color:var(--foreground);line-height:1;font-variant-numeric:tabular-nums">92<small style="font-size:24px;color:var(--foreground-subtle)">+</small></div>
-      </div>
-      <div style="margin-top:8px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font:var(--font-eyebrow);letter-spacing:var(--track-eyebrow);text-transform:uppercase;color:var(--foreground-subtle)">
-        <div>Featured · brand</div><div>Default</div><div>Default</div><div>Default</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- RELATED -->
 <section class="related">
   <div class="eyebrow">More work</div>
@@ -1090,7 +1090,7 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
 
 <script>
 const tocLinks = document.querySelectorAll('.toc a');
-const sectionIds = ['brief','decisions','kits','gallery','language'];
+const sectionIds = ['brief','decisions','kits','language','gallery'];
 const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 let ticking = false;
 function updateToc() {
