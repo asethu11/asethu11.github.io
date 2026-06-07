@@ -760,13 +760,17 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
 
     <h2 id="brief">The brief</h2>
     <p>Point One Zero produces output across 8 distinct formats before the system existed. Each was styled from scratch — brand color applied wherever it felt right, type sizes eyeballed, spacing drifted between surfaces. A pull quote set at 40px in a white paper had no relationship to the 40px heading on the website. There was no shared definition of what the firm looked like.</p>
+    <br>
     <p>The goal was one source of truth that would govern everything — without constraining it. A system that could underpin a pitch deck and a social carousel and a stakeholder report, all with the same visual logic underneath.</p>
+    <br>
 
     <h2 id="decisions">Key decisions</h2>
 
     <p><strong>Token-first, light-first.</strong> Every color, type size, spacing value, radius, and shadow is a CSS custom property on <span class="mono">:root</span>. Everything downstream inherits. Light is the default — dark is an opt-in scope for surfaces that need it (pitch decks, product chrome). Never via <span class="mono">prefers-color-scheme</span>.</p>
+    <br>
 
     <p><strong>The surface ladder.</strong> Hierarchy on light is hard — white cards on a white canvas look flat. The solution is a four-step surface ladder that steps <em>down</em> into faint gray (<span class="mono">--canvas → --surface-1 → --surface-2 → --surface-3</span>), supplemented by a soft shadow. A featured card settles one step into the page instead of changing color.</p>
+    <br>
 
     <blockquote>
       <span class="qm">"</span>
@@ -778,6 +782,7 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
     </blockquote>
 
     <p><strong>Brand restraint.</strong> <span class="mono">#009FEF</span> is assigned exactly 8 named contexts: the wordmark dot, one hero word, focus rings, link underlines on hover, one featured metric per page, active toggle states, editorial ordinal markers, and pull-quote glyphs. If it's not on the list, it doesn't appear. The discipline of that constraint is what makes the blue land when it does.</p>
+    <br>
 
     <aside class="result">
       <div class="eyebrow">The constraint</div>
@@ -787,6 +792,7 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
 
     <h2 id="kits">The kits</h2>
     <p>12 output formats, all extending the same foundation. Web pages, letter-size documents, 1920×1080 slide decks, 1080×1350 social carousels, and 1080×1440 print white papers. Each kit ships its own spec, component vocabulary, copywriting budgets, common mistakes, and an agent prompt — the system was designed for AI-assisted authoring from the start.</p>
+    <br>
 
   </article>
 
