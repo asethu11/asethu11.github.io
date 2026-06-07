@@ -1,11 +1,14 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=1280" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>On restraint: why one accent is enough — Point One Zero</title>
-<link rel="icon" href="../../assets/favicon.svg" />
-<link rel="stylesheet" href="../../colors_and_type.css" />
+<link rel="icon" href="../assets/favicon.svg" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<link rel="stylesheet" href="../site.css" />
+<script>(function(){try{var k=localStorage.getItem('pozTheme');var d=k?k==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',d?'dark':'light');}catch(e){}})();</script>
+<script src="../theme.js" defer></script>
 <style>
   :root { --doc-container: 1180px; --doc-pad: 56px; --measure: 36em; }
   html, body {
@@ -449,6 +452,23 @@
     font: var(--font-caption); color: var(--foreground-subtle);
   }
   .foot-inner .mono { font-family: var(--font-mono); }
+
+  /* ================= Responsive ================= */
+  @media (max-width: 1024px) {
+    :root { --doc-pad: 32px; }
+    .body-wrap { grid-template-columns: 1fr; }
+    .toc { display: none; }
+    .article-foot { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    :root { --doc-pad: 20px; }
+    .related-grid { grid-template-columns: 1fr; }
+    .nav-anchor { display: none; }
+  }
+  @media (max-width: 480px) {
+    :root { --doc-pad: 16px; }
+    h1 { font-size: 44px; letter-spacing: -1.4px; }
+  }
 </style>
 </head>
 <body>
@@ -633,26 +653,7 @@
 </footer>
 
 <script>
-  // Theme toggle with localStorage persistence
-  (function () {
-    const KEY = 'p1z-docs-theme';
-    const root = document.documentElement;
-    const stored = localStorage.getItem(KEY);
-    if (stored === 'dark') root.removeAttribute('data-theme');
-    else if (stored === 'light') root.setAttribute('data-theme', 'light');
-    // default (no stored value) — keep page-author default, which is light here
-
-    document.getElementById('themeToggle').addEventListener('click', () => {
-      const isLight = root.getAttribute('data-theme') === 'light';
-      if (isLight) {
-        root.removeAttribute('data-theme');
-        localStorage.setItem(KEY, 'dark');
-      } else {
-        root.setAttribute('data-theme', 'light');
-        localStorage.setItem(KEY, 'light');
-      }
-    });
-  })();
+  // Theme handled by shared theme.js (respects OS + manual toggle).
 
   // TOC scroll-spy
   (function () {

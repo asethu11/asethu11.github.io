@@ -22,6 +22,7 @@
 
 :root,
 [data-theme="light"] {
+  color-scheme: light;                    /* declare scheme so browsers don't auto-invert */
   /* ---------- Color (raw) ---------- */
   --color-primary:    #0a0a0a;            /* primary fill (near-black) */
   --color-secondary:  #0a0a0a;            /* on-surface text */
@@ -308,6 +309,7 @@
    ============================================================ */
 
 [data-theme="dark"] {
+  color-scheme: dark;                     /* native controls + scrollbars match the dark canvas */
   /* ---------- Color (raw) ---------- */
   --color-primary:    #e5e5e6;            /* primary fill (off-white) */
   --color-secondary:  #f7f8f8;            /* on-surface text */
