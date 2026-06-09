@@ -1,0 +1,32 @@
+/* Brand accent tokens */
+:root { --theme: #FA704C; --accent: #934CFA; }
+@media (prefers-color-scheme: dark) {
+    :root { --theme: #FFC15E; --accent: #934CFA; }
+}
+#theme { color: var(--red); }
+
+/* Article layout overrides — figures stay inside the column, no breakout */
+.article-body { max-width: 800px; }
+.article-figure {
+    margin: var(--space-xl) 0;
+    max-width: 100%;
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+}
+.grey-background-article {
+    max-width: 100%;
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+    height: 280px;
+}
+@media only screen and (max-width: 480px) {
+    .grey-background-article { height: 200px; }
+}
+
+/* Tech-stack chips */
+.tech-stack { background-color: var(--background-grey); padding: var(--space-md); border-radius: var(--radius-lg); margin: var(--space-lg) 0; }
+.tech-compact { display: flex; flex-wrap: wrap; gap: 0.3rem; align-items: center; justify-content: space-between; font-size: var(--font-size-sm); }
+.tech-tool { background-color: var(--text-secondary); color: var(--background); padding: 0.2rem var(--space-sm); border-radius: 6px; font-weight: 500; font-size: var(--font-size-xs); white-space: nowrap; margin: 0.1rem; }
+.tech-separator { color: var(--text-secondary); font-weight: 300; margin: 0 0.2rem; }
