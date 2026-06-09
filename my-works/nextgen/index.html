@@ -17,7 +17,7 @@
               const normalized = parts.map(s => s.toLowerCase()).join('/');
               p = '/' + normalized;
             }
-            const canonicalHref = 'https://abseth.com' + p + u.search + u.hash;
+            const canonicalHref = u.origin + p + u.search + u.hash;
             const canon = document.getElementById('canonical-link');
             if (canon) canon.href = canonicalHref;
             if (p !== u.pathname) location.replace(canonicalHref);
@@ -47,51 +47,14 @@
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Abseth Design System (tokens, components, motion) — loaded first so page CSS can override -->
-        <link rel="stylesheet" href="/design-system/colors_and_type.css">
-        <link rel="stylesheet" href="/design-system/components.css">
-        <link rel="stylesheet" href="/design-system/motion.css">
 
-
-        <title>VR Training Platform for Minnesota Law Enforcement — NextGen Badge Case Study</title>
-        <meta name="author" content="Abhishek Sethuraman">
-        <meta name="description" content="Designed a VR training platform for Minnesota law enforcement trainees in Unreal Engine 5 — recreating high-stakes scenarios safely for repeatable, debriefable practice.">
-        <meta name="keywords" content="UX, UI, Design, Portfolio, VR, XR, Unreal Engine, Law Enforcement, Training, Minnesota">
+        <title>VR Training Platform - NextGen Badge - Abhishek does UX</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="VR Training Platform for Minnesota's Law Enforcement Trainees built in Unreal Engine 5.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, VR, XR, Unreal Engine, Arizona, USA">
         <meta name="robots" content="index, follow">
         <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
-
-        <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="article">
-        <meta property="og:url" content="https://abseth.com/my-works/nextgen/">
-        <meta property="og:title" content="VR Training Platform for Minnesota Law Enforcement — NextGen Badge Case Study">
-        <meta property="og:description" content="Designed a VR training platform for Minnesota law enforcement trainees in Unreal Engine 5 — recreating high-stakes scenarios safely for repeatable, debriefable practice.">
-        <meta property="og:image" content="https://abseth.com/my-works/nextgen/thumbnail.png">
-        <meta property="og:site_name" content="Abhishek Sethuraman Portfolio">
-
-        <!-- Twitter -->
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="VR Training Platform for Minnesota Law Enforcement — NextGen Badge">
-        <meta name="twitter:description" content="VR training in Unreal Engine 5 for Minnesota law enforcement trainees — high-stakes scenarios, safe practice, structured debriefs.">
-        <meta name="twitter:image" content="https://abseth.com/my-works/nextgen/thumbnail.png">
-
-        <!-- JSON-LD Structured Data -->
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "CreativeWork",
-          "name": "VR Training Platform for Minnesota Law Enforcement (NextGen Badge)",
-          "url": "https://abseth.com/my-works/nextgen/",
-          "image": "https://abseth.com/my-works/nextgen/thumbnail.png",
-          "description": "Designed a VR training platform for Minnesota law enforcement trainees in Unreal Engine 5 — recreating high-stakes scenarios safely for repeatable, debriefable practice.",
-          "author": {
-            "@type": "Person",
-            "name": "Abhishek Sethuraman",
-            "url": "https://abseth.com/"
-          },
-          "datePublished": "2023"
-        }
-        </script>
 
         <!-- Optimized font loading -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -461,19 +424,14 @@
                 const isForcedLight = document.documentElement.classList.contains('force-light');
                 const isForcedDark = document.documentElement.classList.contains('force-dark');
                 const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const target = isForcedLight ? 'dark' : isForcedDark ? 'light' : (prefersDark ? 'light' : 'dark');
 
-                if (!document.startViewTransition) {
-                    applyForcedTheme(target);
-                    return;
+                if (isForcedLight) {
+                    applyForcedTheme('dark');
+                } else if (isForcedDark) {
+                    applyForcedTheme('light');
+                } else {
+                    applyForcedTheme(prefersDark ? 'light' : 'dark');
                 }
-                const t = document.startViewTransition(() => applyForcedTheme(target));
-                t.ready.then(() => {
-                    document.documentElement.animate(
-                        { clipPath: ["inset(0 0 100% 0)", "inset(0)"] },
-                        { pseudoElement: "::view-transition-new(root)", duration: 600, easing: "ease-in-out" }
-                    );
-                });
             }
 
             updateTrackBounds();

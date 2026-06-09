@@ -17,7 +17,7 @@
               const normalized = parts.map(s => s.toLowerCase()).join('/');
               p = '/' + normalized;
             }
-            const canonicalHref = 'https://abseth.com' + p + u.search + u.hash;
+            const canonicalHref = u.origin + p + u.search + u.hash;
             const canon = document.getElementById('canonical-link');
             if (canon) canon.href = canonicalHref;
             if (p !== u.pathname) location.replace(canonicalHref);
@@ -48,62 +48,56 @@
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Abseth Design System (tokens, components, motion) — loaded first so page CSS can override -->
-        <link rel="stylesheet" href="/design-system/colors_and_type.css">
-        <link rel="stylesheet" href="/design-system/components.css">
-        <link rel="stylesheet" href="/design-system/motion.css">
-        <link rel="stylesheet" href="/design-system/article.css">
 
-
-        <title>AI-Powered Data Extraction UI — RAG & LLM Workflow Case Study</title>
-        <meta name="author" content="Abhishek Sethuraman">
-        <meta name="description" content="Designed an AI-powered data extraction interface using RAG and LLMs — turning unstructured document review into a guided, auditable workflow for enterprise users.">
-        <meta name="keywords" content="UX, UI, Design, Portfolio, AI, RAG, LLM, Data Extraction, Enterprise, Workflow Design">
+        <title>AI-powered Data Extraction UI</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
         <meta name="robots" content="index, follow">
         <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
 
-        <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="article">
-        <meta property="og:url" content="https://abseth.com/my-works/LSR/">
-        <meta property="og:title" content="AI-Powered Data Extraction UI — RAG & LLM Workflow Case Study">
-        <meta property="og:description" content="Designed an AI-powered data extraction interface using RAG and LLMs — turning unstructured document review into a guided, auditable workflow for enterprise users.">
-        <meta property="og:image" content="https://abseth.com/my-works/LSR/thumbnail.png">
-        <meta property="og:site_name" content="Abhishek Sethuraman Portfolio">
-
-        <!-- Twitter -->
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="AI-Powered Data Extraction UI — RAG & LLM Workflow Case Study">
-        <meta name="twitter:description" content="An AI-powered data extraction interface built on RAG and LLMs — guided, auditable document review for enterprise teams.">
-        <meta name="twitter:image" content="https://abseth.com/my-works/LSR/thumbnail.png">
-
-        <!-- JSON-LD Structured Data -->
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "CreativeWork",
-          "name": "AI-Powered Data Extraction UI",
-          "url": "https://abseth.com/my-works/LSR/",
-          "image": "https://abseth.com/my-works/LSR/thumbnail.png",
-          "description": "Designed an AI-powered data extraction interface using RAG and LLMs — turning unstructured document review into a guided, auditable workflow for enterprise users.",
-          "author": {
-            "@type": "Person",
-            "name": "Abhishek Sethuraman",
-            "url": "https://abseth.com/"
-          },
-          "datePublished": "2024"
-        }
-        </script>
-
         <script src="/script.js"></script>
         <script src="/shared.js"></script>
+        <link rel="stylesheet" href="/my-works/LSR/LSR-fixed.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="/my-works/LSR/lsr.css">
         <link rel="icon" href="/img/favicon.png" type="image/png">
 
         <script>
-            window.updateImages = initThemeImages('/my-works/LSR');
-            window.openImageInNewTab = function(n) { openThemeImageInNewTab(n, '/my-works/LSR'); };
+            function isDarkTheme() {
+                const forcedLight = document.documentElement.classList.contains('force-light');
+                const forcedDark = document.documentElement.classList.contains('force-dark');
+                if (forcedLight) return false;
+                if (forcedDark) return true;
+                return window.matchMedia("(prefers-color-scheme: dark)").matches;
+            }
+
+            function updateImages() {
+                const isDarkMode = isDarkTheme();
+                document.querySelectorAll(".theme-img").forEach(img => {
+                    const imageName = img.dataset.name;
+                    const newSrc = isDarkMode 
+                        ? `/my-works/LSR/img/dk/${imageName}.png` 
+                        : `/my-works/LSR/img/lt/${imageName}.png`;
+
+                    if (img.src !== newSrc) {
+                        img.src = newSrc;
+                    }
+                });
+            }
+
+            const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+            darkModeQuery.addEventListener("change", updateImages);
+
+            document.addEventListener("DOMContentLoaded", updateImages);
+
+            function openImageInNewTab(imageName) {
+                const isDarkMode = isDarkTheme();
+                const imagePath = isDarkMode 
+                    ? `/my-works/LSR/img/dk/${imageName}.png` 
+                    : `/my-works/LSR/img/lt/${imageName}.png`;
+                window.open(imagePath, '_blank');
+            }
         </script>
     </head>
 
@@ -460,7 +454,177 @@
         </div>
 
 
-        <script src="/design-system/article.js"></script>
+        <script>
+            (function() {
+                const fill = document.querySelector('.reading-progress-fill');
+                const track = document.querySelector('.reading-progress');
+                const tocWrapper = document.querySelector('.toc-wrapper');
+                const tocNav = document.querySelector('.toc-nav');
+                const toast = document.querySelector('.toast');
+                const toastSwitch = document.getElementById('toast-switch-light');
+                const toastDismiss = document.getElementById('toast-dismiss');
+                const themeToggle = document.getElementById('theme-toggle');
+                if (!fill) return;
+
+                function updateTrackBounds() {
+                    if (!track || !tocWrapper || !tocNav) return;
+                    const wrapperRect = tocWrapper.getBoundingClientRect();
+                    const navRect = tocNav.getBoundingClientRect();
+                    const topOffset = navRect.top - wrapperRect.top;
+                    const height = navRect.height;
+                    track.style.top = `${topOffset}px`;
+                    track.style.height = `${height}px`;
+                }
+
+                function updateProgress() {
+                    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 98 : 0;
+                    fill.style.height = `${progress}%`;
+                }
+
+                function showToastIfNeeded() {
+                    if (!toast) return;
+                    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    const dismissed = sessionStorage.getItem('lightModeToastDismissed') === '1';
+                    const forcedLight = document.documentElement.classList.contains('force-light');
+                    const forcedDark = document.documentElement.classList.contains('force-dark');
+                    if (prefersDark && !dismissed && !forcedLight && !forcedDark) {
+                        toast.classList.add('show');
+                    }
+                }
+
+                function applyForcedTheme(theme) {
+                    document.documentElement.classList.remove('force-light', 'force-dark');
+                    if (theme === 'light') {
+                        document.documentElement.classList.add('force-light');
+                    } else if (theme === 'dark') {
+                        document.documentElement.classList.add('force-dark');
+                    }
+                    if (theme) {
+                        sessionStorage.setItem('forcedTheme', theme);
+                        sessionStorage.setItem('lightModeToastDismissed', '1');
+                    } else {
+                        sessionStorage.removeItem('forcedTheme');
+                    }
+                    updateImages();
+                    updateToggleLabel();
+                    if (toast) toast.classList.remove('show');
+                }
+
+                function dismissToast() {
+                    sessionStorage.setItem('lightModeToastDismissed', '1');
+                    if (toast) toast.classList.remove('show');
+                }
+
+                function updateToggleLabel() {
+                    if (!themeToggle) return;
+                    const isForcedLight = document.documentElement.classList.contains('force-light');
+                    const isForcedDark = document.documentElement.classList.contains('force-dark');
+                    const isDark = isForcedDark || (!isForcedLight && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                    themeToggle.textContent = isDark ? 'Switch to light' : 'Switch to dark';
+                    themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+                }
+
+                function toggleTheme() {
+                    const isForcedLight = document.documentElement.classList.contains('force-light');
+                    const isForcedDark = document.documentElement.classList.contains('force-dark');
+                    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                    if (isForcedLight) {
+                        applyForcedTheme('dark');
+                    } else if (isForcedDark) {
+                        applyForcedTheme('light');
+                    } else {
+                        applyForcedTheme(prefersDark ? 'light' : 'dark');
+                    }
+                }
+
+                updateTrackBounds();
+                updateProgress();
+                document.addEventListener('scroll', updateProgress, { passive: true });
+                window.addEventListener('resize', () => {
+                    updateTrackBounds();
+                    updateProgress();
+                });
+
+                if (toastSwitch) {
+                    toastSwitch.addEventListener('click', () => applyForcedTheme('light'));
+                }
+
+                if (toastDismiss) {
+                    toastDismiss.addEventListener('click', dismissToast);
+                }
+
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', toggleTheme);
+                }
+
+                const storedTheme = sessionStorage.getItem('forcedTheme');
+                if (storedTheme === 'light' || storedTheme === 'dark') {
+                    applyForcedTheme(storedTheme);
+                } else {
+                    updateToggleLabel();
+                }
+
+                showToastIfNeeded();
+            })();
+
+            // Active TOC highlighting based on scroll position
+            (function() {
+                const sections = Array.from(document.querySelectorAll('h2[id]'));
+                const tocLinks = document.querySelectorAll('.toc-list a');
+                let lastScrollY = window.scrollY;
+
+                function updateActiveLink() {
+                    const currentScrollY = window.scrollY;
+                    const scrollingUp = currentScrollY < lastScrollY;
+                    lastScrollY = currentScrollY;
+
+                    // Use different thresholds: 25% when scrolling down, 20% when scrolling up
+                    const threshold = scrollingUp ? 0.20 : 0.25;
+                    const scrollPos = currentScrollY + (window.innerHeight * threshold);
+                    let currentSection = null;
+
+                    // Find which section we're currently in
+                    for (let i = 0; i < sections.length; i++) {
+                        const section = sections[i];
+                        const nextSection = sections[i + 1];
+                        const sectionTop = section.offsetTop;
+                        const nextSectionTop = nextSection ? nextSection.offsetTop : Infinity;
+
+                        if (scrollPos >= sectionTop && scrollPos < nextSectionTop) {
+                            currentSection = section;
+                            break;
+                        }
+                    }
+
+                    // Fallback: if we're past the last section
+                    if (!currentSection && sections.length > 0) {
+                        const lastSection = sections[sections.length - 1];
+                        if (scrollPos >= lastSection.offsetTop) {
+                            currentSection = lastSection;
+                        }
+                    }
+
+                    if (currentSection) {
+                        const id = currentSection.getAttribute('id');
+                        
+                        tocLinks.forEach(link => link.classList.remove('active'));
+                        
+                        const activeLink = document.querySelector(`.toc-list a[href="#${id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                }
+
+                window.addEventListener('scroll', updateActiveLink);
+                updateActiveLink();
+            })();
+        </script>
+        <script src="../../script.js"></script>
+        <script src="../../shared.js"></script>
     </body>
 </html>
 

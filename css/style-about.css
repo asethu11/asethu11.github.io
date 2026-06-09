@@ -50,9 +50,9 @@ body {
 
 h1 {
     font-family: "Big Shoulders Display", serif;
-    font-size: var(--font-size-3xl) !important;
-    margin-top: var(--space-md);
-    margin-bottom: var(--space-md);
+    font-size: 3rem !important;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     letter-spacing: -0.3px;
 }
 
@@ -62,16 +62,16 @@ h2, h3, h4, h5, h6, p{
 
 
 h2 {
-    font-size: var(--font-size-lg);
+    font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: var(--space-md);
+    margin-bottom: 1rem;
     letter-spacing: -0.3px;
 }
 
 h3 {
-    font-size: var(--font-size-lg);
+    font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: var(--space-md);
+    margin-bottom: 1rem;
     line-height: 1.6rem;
 }
 
@@ -115,7 +115,7 @@ a:hover {
 
 li {
     line-height: 1.5;
-    margin-top: var(--space-sm);
+    margin-top: 0.5rem;
 }
 
 p {
@@ -133,16 +133,16 @@ p {
 
 .back-button {
     position: relative;
-    top: var(--space-xl);
-    left: var(--space-xl);
+    top: 2rem;
+    left: 2rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-sm);
-    padding: 0.75rem var(--space-md);
-    border-radius: var(--radius-md);
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
     color: var(--text-primary) !important;
-    font-size: var(--font-size-sm);
+    font-size: 0.9rem;
     font-weight: 500;
     text-decoration: none;
     transition: all 0.2s ease;
@@ -164,8 +164,8 @@ p {
 
 @media only screen and (max-width: 768px) {
     .back-button {
-        top: var(--space-md);
-        left: var(--space-md);
+        top: 1rem;
+        left: 1rem;
     }
 }
 
@@ -203,25 +203,25 @@ p {
   }
 
 pre {
-    font-size: var(--font-size-xs);
+    font-size: 0.8rem;
     line-height: 1.6rem;
     margin: 0;
     padding: 0;
     background-color: #1E1E1E;
-    border-radius: var(--radius-md);
+    border-radius: 8px;
     width: 100%;
-    margin: var(--space-lg) 0;
+    margin: 1.5rem 0;
 }
 
 code {
-    padding: var(--space-lg);
+    padding: 1.5rem;
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow-x: visible;
     font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
     color: #D4D4D4;
     display: block;
-    border-radius: var(--radius-md);
+    border-radius: 8px;
 }
 
 pre > code {
@@ -274,7 +274,7 @@ pre > code {
     font-family: "Big Shoulders Display", serif;
     letter-spacing: -0.04em;
     height: 80px;
-    font-size: var(--font-size-hero);
+    font-size: 80px;
     font-weight: 650;
     font-style: normal;
     text-align: left;
@@ -291,14 +291,14 @@ pre > code {
 
   /* -------------  introduction  ------------- */
 .introduction {
-    margin-top: var(--space-xl);
+    margin-top: 2rem;
 
   }
   .introduction-text {
     width: 60%;
-    font-size: var(--font-size-md);
+    font-size: 1rem;
     line-height: 1.5rem;
-    margin-top: var(--space-lg);
+    margin-top: 1.5rem;
   }
   
   @media only screen and (max-width: 768px) and (min-width: 481px) {
@@ -363,7 +363,7 @@ pre > code {
   
   .social-icons {
     display: flex;
-    gap: var(--space-md);
+    gap: 16px;
     margin-bottom: ;
   }
   
@@ -386,7 +386,16 @@ pre > code {
     gap: 100px;
   }
   
-  /* #linked / #linkedin: deprecated — resume CTA now uses system .btn-primary */
+  #linked  {
+    font-size: 16px;
+  }
+  
+  #linkedin {
+    display: flex;
+    gap: 15px;
+    height: 16px;
+    margin: 0;
+  }
   
   #linklog {
     margin-top: 3px;
@@ -425,7 +434,7 @@ pre > code {
     height: 26px;
     
     display: flex;
-    border-radius: var(--radius-md);
+    border-radius: 8px;
   }
   
   .words {
@@ -536,23 +545,23 @@ pre > code {
   }
   
   .keynotes {
-    margin-top: var(--space-xl);
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
+    gap: 24px;
   }
   
   .video {
     display: flex;
     flex-direction: row;
-    gap: var(--space-xl);
+    gap: 32px;
   }
   
   .play {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: var(--font-size-2xl);
+    font-size: 2rem;
     width: 50px;
     height: 50px;
     border-radius: 99px;
@@ -615,7 +624,7 @@ pre > code {
     background-size: cover;
     background-color: var(--background-grey);
     background-position: center center;
-    border-radius: var(--radius-xl);
+    border-radius: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -647,7 +656,7 @@ pre > code {
         width: 100%;
     }
     .video {
-        gap: var(--space-md);
+        gap: 16px;
     }
   }
   
@@ -657,7 +666,7 @@ pre > code {
         width: 100%;
     }
     .video {
-        gap: var(--space-md);
+        gap: 16px;
     }
   }
   
@@ -668,7 +677,7 @@ pre > code {
   
     .video {
         flex-direction: column;
-        gap: var(--space-sm);
+        gap: 8px;
     }
     .image-background{
         width: 100%;
@@ -697,19 +706,19 @@ pre > code {
   }
   
   .other-projects h2 {
-    margin-bottom: var(--space-xl);
+    margin-bottom: 2rem;
   }
   
   .columns-container {
     display: flex;
-    gap: var(--space-xl);
+    gap: 32px;
   }
   
   /* Left column with project rows */
   .projects {
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
+    gap: 8px;
     width: 50%;
   }
   
@@ -729,7 +738,7 @@ pre > code {
     opacity: 0;
     transition: opacity 0.3s ease;
     background-color: var(--background-grey);
-    border-radius: var(--radius-lg);
+    border-radius: 12px;
     visibility: hidden;
     left: 0;
     /* Center vertically within container */
@@ -742,7 +751,7 @@ pre > code {
     width: 100%;
     height: auto;
     object-fit: cover;
-    border-radius: var(--radius-lg);
+    border-radius: 12px;
     display: block;
   }
   
@@ -766,11 +775,11 @@ pre > code {
     color: var(--text-primary);
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs);
+    gap: 4px;
     align-items: start;
     margin: 0 -12px;
-    padding: var(--space-sm) 12px;
-    border-radius: var(--radius-md);
+    padding: 8px 12px;
+    border-radius: 8px;
     transition: background-color 0.2s ease;
   }
   
@@ -795,7 +804,7 @@ pre > code {
   .project-row-sub-title{
     display: flex;
     flex-direction: row;
-    gap: var(--space-sm);
+    gap: 8px;
     align-items: center;
     justify-content: start;
   }

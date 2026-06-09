@@ -1,38 +1,5 @@
 // Shared JavaScript functionality for portfolio
 
-// Theme-aware image switching — call initThemeImages(basePath) once per page.
-// Returns the update function (assign to window.updateImages so inline scripts can call it).
-function isDarkTheme() {
-    if (document.documentElement.classList.contains('force-light')) return false;
-    if (document.documentElement.classList.contains('force-dark')) return true;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-}
-
-function initThemeImages(basePath, ext) {
-    ext = ext || 'png';
-    function update() {
-        const dark = isDarkTheme();
-        document.querySelectorAll('.theme-img').forEach(function(img) {
-            var name = img.dataset.name;
-            var newSrc = dark
-                ? basePath + '/img/dk/' + name + '.' + ext
-                : basePath + '/img/lt/' + name + '.' + ext;
-            if (img.src !== newSrc) img.src = newSrc;
-        });
-    }
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', update);
-    document.addEventListener('DOMContentLoaded', update);
-    return update;
-}
-
-function openThemeImageInNewTab(imageName, basePath, ext) {
-    ext = ext || 'png';
-    var path = isDarkTheme()
-        ? basePath + '/img/dk/' + imageName + '.' + ext
-        : basePath + '/img/lt/' + imageName + '.' + ext;
-    window.open(path, '_blank');
-}
-
 // Project preview hover functionality
 function initProjectPreviews() {
     const projectRows = document.querySelectorAll('.project-row');

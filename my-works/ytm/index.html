@@ -17,7 +17,7 @@
               const normalized = parts.map(s => s.toLowerCase()).join('/');
               p = '/' + normalized;
             }
-            const canonicalHref = 'https://abseth.com' + p + u.search + u.hash;
+            const canonicalHref = u.origin + p + u.search + u.hash;
             const canon = document.getElementById('canonical-link');
             if (canon) canon.href = canonicalHref;
             if (p !== u.pathname) location.replace(canonicalHref);
@@ -45,51 +45,14 @@
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Abseth Design System (tokens, components, motion) — loaded first so page CSS can override -->
-        <link rel="stylesheet" href="/design-system/colors_and_type.css">
-        <link rel="stylesheet" href="/design-system/components.css">
-        <link rel="stylesheet" href="/design-system/motion.css">
 
-
-        <title>Reimagining YouTube Music — Music Streaming UX Concept</title>
-        <meta name="author" content="Abhishek Sethuraman">
-        <meta name="description" content="A self-initiated UX exploration reimagining YouTube Music — fixing everyday frustrations around discovery, playback, and library management on a streaming app.">
-        <meta name="keywords" content="UX, UI, Design, Portfolio, YouTube Music, Music Streaming, Mobile App, Concept Design">
+        <title>Reimagining Youtube Music</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Portfolio of Abhishek, a UX Designer based in USA.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Arizona, USA">
         <meta name="robots" content="index, follow">
         <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
-
-        <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="article">
-        <meta property="og:url" content="https://abseth.com/my-works/ytm/">
-        <meta property="og:title" content="Reimagining YouTube Music — Music Streaming UX Concept">
-        <meta property="og:description" content="A self-initiated UX exploration reimagining YouTube Music — fixing everyday frustrations around discovery, playback, and library management on a streaming app.">
-        <meta property="og:image" content="https://abseth.com/my-works/ytm/img/dk/slide1.png">
-        <meta property="og:site_name" content="Abhishek Sethuraman Portfolio">
-
-        <!-- Twitter -->
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Reimagining YouTube Music — Music Streaming UX Concept">
-        <meta name="twitter:description" content="A self-initiated UX exploration reimagining YouTube Music — discovery, playback, and library frustrations rethought.">
-        <meta name="twitter:image" content="https://abseth.com/my-works/ytm/img/dk/slide1.png">
-
-        <!-- JSON-LD Structured Data -->
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "CreativeWork",
-          "name": "Reimagining YouTube Music",
-          "url": "https://abseth.com/my-works/ytm/",
-          "image": "https://abseth.com/my-works/ytm/img/dk/slide1.png",
-          "description": "A self-initiated UX exploration reimagining YouTube Music — fixing everyday frustrations around discovery, playback, and library management on a streaming app.",
-          "author": {
-            "@type": "Person",
-            "name": "Abhishek Sethuraman",
-            "url": "https://abseth.com/"
-          },
-          "datePublished": "2023"
-        }
-        </script>
 
         <script src="/script.js"></script>
         <script src="/shared.js"></script>

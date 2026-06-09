@@ -17,7 +17,7 @@
               const normalized = parts.map(s => s.toLowerCase()).join('/');
               p = '/' + normalized;
             }
-            const canonicalHref = 'https://abseth.com' + p + u.search + u.hash;
+            const canonicalHref = u.origin + p + u.search + u.hash;
             const canon = document.getElementById('canonical-link');
             if (canon) canon.href = canonicalHref;
             if (p !== u.pathname) location.replace(canonicalHref);
@@ -45,64 +45,51 @@
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Abseth Design System (tokens, components, motion) — loaded first so page CSS can override -->
-        <link rel="stylesheet" href="/design-system/colors_and_type.css">
-        <link rel="stylesheet" href="/design-system/components.css">
-        <link rel="stylesheet" href="/design-system/motion.css">
 
-
-        <title>Solving an Adoption Crisis at Arizona State — Product Strategy Case Study</title>
-        <meta name="author" content="Abhishek Sethuraman">
-        <meta name="description" content="Turned a stalled adoption curve into renewed growth at Arizona State by combining data analysis, product strategy, and UX redesign to lift activation across 220K+ users.">
-        <meta name="keywords" content="UX, UI, Design, Portfolio, Product Strategy, Data Analysis, Adoption, Activation, Arizona, USA">
+        <title>Solving Adoption Crisis at Arizona State</title>
+        <meta name="author" content="asethu11">
+        <meta name="description" content="Transforming adoption plateau into growth through data analysis and product strategy.">
+        <meta name="keywords" content="UX, UI, Design, Portfolio, Product Strategy, Data Analysis, Arizona, USA">
         <meta name="robots" content="index, follow">
         <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
 
-        <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="article">
-        <meta property="og:url" content="https://abseth.com/my-works/improvingAdoption/">
-        <meta property="og:title" content="Solving an Adoption Crisis at Arizona State — Product Strategy Case Study">
-        <meta property="og:description" content="Turned a stalled adoption curve into renewed growth at Arizona State by combining data analysis, product strategy, and UX redesign to lift activation across 220K+ users.">
-        <meta property="og:image" content="https://abseth.com/my-works/improvingAdoption/thumbnail.png">
-        <meta property="og:site_name" content="Abhishek Sethuraman Portfolio">
-
-        <!-- Twitter -->
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Solving an Adoption Crisis at Arizona State — Product Strategy Case Study">
-        <meta name="twitter:description" content="Turned a stalled adoption curve into renewed growth at Arizona State — data analysis + product strategy + UX redesign across 220K+ users.">
-        <meta name="twitter:image" content="https://abseth.com/my-works/improvingAdoption/thumbnail.png">
-
-        <!-- JSON-LD Structured Data -->
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "CreativeWork",
-          "name": "Solving an Adoption Crisis at Arizona State",
-          "url": "https://abseth.com/my-works/improvingAdoption/",
-          "image": "https://abseth.com/my-works/improvingAdoption/thumbnail.png",
-          "description": "Turned a stalled adoption curve into renewed growth at Arizona State by combining data analysis, product strategy, and UX redesign to lift activation across 220K+ users.",
-          "author": {
-            "@type": "Person",
-            "name": "Abhishek Sethuraman",
-            "url": "https://abseth.com/"
-          },
-          "datePublished": "2024"
-        }
-        </script>
-
-        <!-- Skeleton Loading Styles — uses design system tokens (.sk-image visual) -->
+        <!-- Skeleton Loading Styles -->
         <style>
-            /* Loading placeholder — flat surface fill, theme-aware via --surface.
-               Matches the design system's .sk-image semantics (no shimmer). */
+            /* Base skeleton animation */
+            @keyframes shimmer {
+                0% { background-position: 200% 0; }
+                100% { background-position: -200% 0; }
+            }
+            
+            /* The class applied to the container (figure) during loading */
             figure.media-skeleton {
                 position: relative;
-                z-index: 1;
-                background: var(--surface);
-                min-height: 300px;
-                border-radius: var(--radius-md);
+                z-index: 1; /* Ensure on top */
+                background: #e0e0e0; /* Fallback - darker */
+                background: linear-gradient(90deg, 
+                    rgba(0, 0, 0, 0.06) 25%, 
+                    rgba(0, 0, 0, 0.15) 37%, 
+                    rgba(0, 0, 0, 0.06) 63%);
+                background-size: 200% 100%;
+                animation: shimmer 1.5s ease-in-out infinite;
+                min-height: 300px; /* Placeholder height */
+                border-radius: 8px;
                 display: block;
             }
+
+            /* Dark mode specific skeleton */
+            @media (prefers-color-scheme: dark) {
+                figure.media-skeleton {
+                    background: linear-gradient(90deg, 
+                        rgba(255, 255, 255, 0.02) 25%, 
+                        rgba(255, 255, 255, 0.08) 37%, 
+                        rgba(255, 255, 255, 0.02) 63%);
+                    background-size: 200% 100%;
+                }
+            }
+
+
         </style>
 
         <script src="/my-works/improvingAdoption/script.js"></script>
@@ -694,16 +681,16 @@
 
                 <p>Two design decisions shaped the final product and illustrate the tension between building for scale versus building for trust.</p>
 
-                <p class="callout-border"><b>Conversation starters and Customizations.</b><br>
+                <p><b>Conversation starters and Customizations.</b><br> 
                    As we framed requirements, I initially pushed for fully AI-generated starters because the approach scaled cleanly and minimized manual effort. The risk was AI slop. Tonality and personalization features also became a point of debate. To avoid over-investing upfront, I ultimately shipped a lean MVP without conversation starters and designed the system to scale later without reworking the core flow.</p>
 
-                <p class="callout-border"><b>No migration path into advanced controls.</b><br>
+                <p><b>No migration path into advanced controls.</b><br> 
                     A bigger tradeoff came up around whether Q&A Bot should offer a migration path into the main CreateAI platform. Leadership saw value in letting users "graduate" into advanced controls over time. I pushed back because it solved the wrong problem. Power users were not blocked by complexity, and non-technical faculty did not aspire to manage 20 settings later. Adding migration paths would have increased cognitive load and reframed Q&A Bot as a simplified version of the platform instead of a product designed for a specific job. We chose clarity over optionality, even though it meant saying no to a feature that looked good on a roadmap.</p>
 
                 <p>That decision ultimately protected both products. Q&A Bot stayed focused on fast, reliable course setup, while the core platform remained the place for deep customization. The tradeoff was fewer crossovers, but the upside was clear positioning and fewer confused users.</p>
 
                 <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="slide5" width="100%" alt="Information architecture diagram mapping happy paths and failure cases, prioritizing surface-level elements while pushing secondary complexity deeper in the flow">
+                    <img class="theme-img" src="" data-name="slide5" width="100%" >
                     <figcaption>By mapping both happy paths and failure cases upfront, I intentionally prioritized surface-level elements and pushed secondary complexity deeper into the flow, keeping the experience scalable without overwhelming users.</figcaption>
                 </figure>
 
@@ -714,7 +701,7 @@
 
                 
                 <figure class="article-figure">
-                    <img class="theme-img" src="" data-name="slide6" width="100%" alt="Mid-fidelity wireframes exploring layouts for different user paths including success and failure states, optimizing for an error-free user flow">
+                    <img class="theme-img" src="" data-name="slide6" width="100%" >
                     <figcaption>Mid Fidelity: Exploring UI for different user paths, including success and failure states. Dabbled with different layout strategies to optimize an error free user-flow</figcaption>
                 </figure>
 
@@ -1064,19 +1051,15 @@
                 const isForcedLight = document.documentElement.classList.contains('force-light');
                 const isForcedDark = document.documentElement.classList.contains('force-dark');
                 const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const target = isForcedLight ? 'dark' : isForcedDark ? 'light' : (prefersDark ? 'light' : 'dark');
 
-                if (!document.startViewTransition) {
-                    applyForcedTheme(target);
-                    return;
+                if (isForcedLight) {
+                    applyForcedTheme('dark');
+                } else if (isForcedDark) {
+                    applyForcedTheme('light');
+                } else {
+                    // system state: flip
+                    applyForcedTheme(prefersDark ? 'light' : 'dark');
                 }
-                const t = document.startViewTransition(() => applyForcedTheme(target));
-                t.ready.then(() => {
-                    document.documentElement.animate(
-                        { clipPath: ["inset(0 0 100% 0)", "inset(0)"] },
-                        { pseudoElement: "::view-transition-new(root)", duration: 600, easing: "ease-in-out" }
-                    );
-                });
             }
 
             updateTrackBounds();

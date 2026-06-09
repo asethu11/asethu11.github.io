@@ -114,3 +114,36 @@
   padding: var(--space-lg); color: var(--text-primary); overflow-x: auto;
 }
 .code-block .tok-code { color: var(--code-text); }
+
+/* ---- Icons --------------------------------------------------------------- */
+.icon-sm { width: 16px; height: 16px; }
+.icon-md { width: 24px; height: 24px; }
+.icon-lg { width: 32px; height: 32px; }
+
+/* ---- Tooltip ------------------------------------------------------------- */
+.tooltip { position: relative; cursor: default; }
+.tooltip-text {
+  position: absolute; bottom: calc(100% + var(--space-xs)); left: 50%;
+  transform: translateX(-50%); background: var(--gray-900); color: var(--gray-50);
+  font-size: var(--font-size-xs); padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm); white-space: nowrap; pointer-events: none;
+  opacity: 0; transition: opacity var(--dur-base) var(--ease-standard) 300ms;
+}
+.tooltip:hover .tooltip-text, .tooltip:focus-within .tooltip-text { opacity: 1; }
+
+/* ---- Data tables --------------------------------------------------------- */
+.table-header { background-color: #D1D5DB; }
+.table-first-col { background-color: rgba(209, 213, 219, 0.4); }
+@media (prefers-color-scheme: dark) {
+  .table-header { background-color: var(--background-grey); }
+  .table-first-col { background-color: rgba(43, 44, 46, 0.3); }
+}
+
+/* ---- Reference chip ------------------------------------------------------ */
+.reference-chip {
+  display: inline-flex; padding: var(--space-xs) var(--space-md);
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 999px; font-size: var(--font-size-sm); color: var(--text-secondary);
+  text-decoration: none; transition: border-color var(--dur-base), color var(--dur-base);
+}
+.reference-chip:hover { border-color: var(--primary); color: var(--primary); }

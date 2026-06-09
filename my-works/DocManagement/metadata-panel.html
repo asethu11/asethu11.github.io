@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vertex Hub — Document Metadata Panel</title>
+  <style>
+    :root {
+      --bg:      #FCFCFD;
+      --fg:      #0F172A;
+      --card:    #FFFFFF;
+      --border:  #E5E7EB;
+      --divider: #ECECEF;
+      --muted:   #F4F5F7;
+      --dim:     #8B95A1;
+      --label:   #64748B;
+      --primary: #5E6AD2;
+      --ring:    rgba(94,106,210,.28);
+      --sans:    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --mono:    "SF Mono", "Fira Code", ui-monospace, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      font-family: var(--sans);
+      color: var(--fg);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 32px 20px 48px;
+    }
+
+    /* — Panel shell — */
+    .panel {
+      width: 340px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.04);
+    }
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--fg);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    /* — Metadata grid — */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 24px;
+      row-gap: 16px;
+    }
+    .col-2 { grid-column: span 2; }
+    .div-b { border-bottom: 1px solid var(--divider); padding-bottom: 12px; }
+    .div-t { border-top:    1px solid var(--divider); padding-top:    8px;  }
+
+    /* — Field — */
+    .field { display: flex; flex-direction: column; gap: 2px; }
+    .field-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--dim);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .field-display {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 4px;
+      margin: 0 -4px;
+      border-radius: 4px;
+      font-size: 13.5px;
+      color: var(--fg);
+      line-height: 1.4;
+      cursor: pointer;
+      transition: background 100ms;
+      min-height: 24px;
+    }
+    .field-display:hover { background: rgba(244,245,247,.9); }
+    .pencil { opacity: 0; transition: opacity 100ms; color: var(--dim); flex-shrink: 0; }
+    .field-display:hover .pencil { opacity: 1; }
+    .field-display.mono { font-family: var(--mono); font-size: 11.5px; word-break: break-all; }
+
+    .field-editor { display: none; }
+    .field-editor.active { display: block; }
+
+    .field-input, .field-select {
+      width: calc(100% + 8px);
+      margin-left: -4px;
+      height: 28px;
+      padding: 0 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(94,106,210,.45);
+      background: var(--card);
+      font-family: var(--sans);
+      font-size: 13.5px;
+      color: var(--fg);
+      outline: none;
+    }
+    .field-input:focus, .field-select:focus { box-shadow: 0 0 0 3px var(--ring); }
+    .field-input.mono { font-family: var(--mono); font-size: 11.5px; }
+
+    .ro {
+      font-size: 13.5px;
+      color: var(--fg);
+      line-height: 1.4;
+      min-height: 24px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* — Compliance badge — */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      border: 1px solid;
+      white-space: nowrap;
+      line-height: 1.6;
+    }
+    .badge-ferpa     { border-color: #E11D48; color: #BE123C; }
+    .badge-financial { border-color: #D97706; color: #92400E; }
+    .badge-public    { border-color: #059669; color: #065F46; }
+    .badge-internal  { border-color: #64748B; color: #475569; }
+
+    /* — Tags — */
+    .tags-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      margin-top: 6px;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 5px 2px 8px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      background: var(--muted);
+      color: var(--label);
+      border: 1px solid var(--divider);
+    }
+    .tag-x {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--dim);
+      padding: 0 1px;
+      font-size: 14px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      transition: color 100ms;
+      font-family: var(--sans);
+    }
+    .tag-x:hover { color: var(--fg); }
+    .tag-add-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      color: var(--dim);
+      background: none;
+      border: 1px dashed var(--border);
+      cursor: pointer;
+      transition: background 100ms, color 100ms;
+      font-family: var(--sans);
+    }
+    .tag-add-btn:hover { background: var(--muted); color: var(--fg); }
+    .tag-input-wrap { position: relative; }
+    .tag-input {
+      height: 26px;
+      padding: 0 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(94,106,210,.45);
+      background: var(--card);
+      font-size: 12px;
+      font-family: var(--sans);
+      color: var(--fg);
+      outline: none;
+      width: 120px;
+    }
+    .tag-input:focus { box-shadow: 0 0 0 3px var(--ring); }
+    .tag-suggs {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.1);
+      z-index: 100;
+      min-width: 140px;
+      overflow: hidden;
+    }
+    .tag-sugg {
+      padding: 5px 10px;
+      font-size: 12px;
+      color: var(--fg);
+      cursor: pointer;
+      transition: background 80ms;
+    }
+    .tag-sugg:hover { background: var(--muted); }
+
+    /* — Access section — */
+    .access-section {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--divider);
+    }
+    .access-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .access-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--dim);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--label);
+      background: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 100ms;
+      font-family: var(--sans);
+    }
+    .share-btn:hover { background: var(--muted); }
+    .chips-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 8px 2px 6px;
+      border-radius: 9999px;
+      font-size: 11.5px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .chip-role  { background: #EEF2FF; color: #4338CA; }
+    .chip-team  { background: #F0F9FF; color: #0369A1; }
+    .chip-email { background: #F5F3FF; color: #6D28D9; }
+    .chip-none  { background: var(--muted); color: var(--dim); }
+    .access-note { font-size: 11.5px; color: var(--label); line-height: 1.55; }
+    .access-note strong { color: var(--fg); font-weight: 500; }
+    .restricted { color: #B45309; font-weight: 500; }
+
+    /* — Modal — */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.38);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-bg.open { display: flex; }
+    .modal {
+      background: var(--card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(0,0,0,.14);
+      width: 420px;
+      max-width: calc(100vw - 32px);
+      padding: 20px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .modal-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 16px;
+    }
+    .modal-sec { margin-bottom: 16px; }
+    .modal-sec-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--dim);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .modal-chips { display: flex; flex-wrap: wrap; gap: 6px; min-height: 26px; }
+    .m-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 6px 2px 8px;
+      border-radius: 9999px;
+      font-size: 11.5px;
+      font-weight: 500;
+    }
+    .m-chip-x {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0 0 0 2px;
+      display: flex;
+      align-items: center;
+      opacity: .55;
+      font-size: 14px;
+      line-height: 1;
+      transition: opacity 100ms;
+      font-family: var(--sans);
+    }
+    .m-chip-x:hover { opacity: 1; }
+    .modal-add-row { display: flex; gap: 6px; margin-top: 8px; }
+    .modal-sel, .modal-inp {
+      flex: 1;
+      height: 30px;
+      padding: 0 8px;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      font-size: 13px;
+      font-family: var(--sans);
+      color: var(--fg);
+      outline: none;
+    }
+    .modal-sel:focus, .modal-inp:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--ring);
+    }
+    .modal-add {
+      height: 30px;
+      padding: 0 10px;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      background: var(--muted);
+      font-size: 13px;
+      font-family: var(--sans);
+      color: var(--fg);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 100ms;
+    }
+    .modal-add:hover { background: var(--border); }
+    .modal-hr { height: 1px; background: var(--divider); margin: 16px 0; }
+    .modal-footer { display: flex; justify-content: flex-end; gap: 8px; }
+    .btn-ghost {
+      height: 32px;
+      padding: 0 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      font-size: 13px;
+      font-family: var(--sans);
+      color: var(--fg);
+      cursor: pointer;
+      transition: background 100ms;
+    }
+    .btn-ghost:hover { background: var(--muted); }
+    .btn-primary {
+      height: 32px;
+      padding: 0 14px;
+      border-radius: 6px;
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: var(--sans);
+      cursor: pointer;
+      transition: opacity 100ms;
+    }
+    .btn-primary:hover { opacity: .86; }
+
+    /* — Toast — */
+    #toasts {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 9999;
+    }
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #18181b;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 13px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+      animation: t-in 180ms ease;
+      max-width: 300px;
+    }
+    .toast-msg { flex: 1; }
+    .toast-undo {
+      background: none;
+      border: 1px solid rgba(255,255,255,.28);
+      color: #fff;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-family: var(--sans);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 100ms;
+    }
+    .toast-undo:hover { background: rgba(255,255,255,.14); }
+    @keyframes t-in {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="panel">
+  <p class="section-title">Metadata</p>
+
+  <div class="meta-grid">
+
+    <div class="col-2">
+      <div class="field">
+        <span class="field-label">File name</span>
+        <div class="field-display mono" id="disp-file_name" onclick="startEdit('file_name')">
+          <span id="v-file_name"></span>
+          <svg class="pencil" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <div class="field-editor" id="ed-file_name">
+          <input class="field-input mono" id="inp-file_name" type="text"
+            onblur="commitText('file_name')"
+            onkeydown="fieldKey(event,'file_name')">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-2 div-b">
+      <div class="field">
+        <span class="field-label">Process</span>
+        <div class="field-display" id="disp-process" onclick="startEdit('process')">
+          <span id="v-process"></span>
+          <svg class="pencil" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <div class="field-editor" id="ed-process">
+          <input class="field-input" id="inp-process" type="text"
+            onblur="commitText('process')"
+            onkeydown="fieldKey(event,'process')">
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Client</span>
+      <div class="field-display" id="disp-organization_id" onclick="startEdit('organization_id')">
+        <span id="v-organization_id"></span>
+        <svg class="pencil" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      </div>
+      <div class="field-editor" id="ed-organization_id">
+        <select class="field-select" id="inp-organization_id"
+          onchange="commitSelect('organization_id')"
+          onblur="closeEdit('organization_id')"
+          onkeydown="if(event.key==='Escape')closeEdit('organization_id')">
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Service</span>
+      <div class="field-display" id="disp-service_type" onclick="startEdit('service_type')">
+        <span id="v-service_type"></span>
+        <svg class="pencil" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      </div>
+      <div class="field-editor" id="ed-service_type">
+        <select class="field-select" id="inp-service_type"
+          onchange="commitSelect('service_type')"
+          onblur="closeEdit('service_type')"
+          onkeydown="if(event.key==='Escape')closeEdit('service_type')">
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Document type</span>
+      <div class="field-display" id="disp-document_type" onclick="startEdit('document_type')">
+        <span id="v-document_type"></span>
+        <svg class="pencil" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      </div>
+      <div class="field-editor" id="ed-document_type">
+        <select class="field-select" id="inp-document_type"
+          onchange="commitSelect('document_type')"
+          onblur="closeEdit('document_type')"
+          onkeydown="if(event.key==='Escape')closeEdit('document_type')">
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Period</span>
+      <div class="field-display" id="disp-period" onclick="startEdit('period')">
+        <span id="v-period"></span>
+        <svg class="pencil" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      </div>
+      <div class="field-editor" id="ed-period">
+        <input class="field-input" id="inp-period" type="date"
+          onblur="commitText('period')"
+          onkeydown="fieldKey(event,'period')">
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Version</span>
+      <span class="ro" id="v-version"></span>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Compliance</span>
+      <div class="field-display" id="disp-compliance_class" onclick="startEdit('compliance_class')">
+        <span id="v-compliance_class"></span>
+        <svg class="pencil" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      </div>
+      <div class="field-editor" id="ed-compliance_class">
+        <select class="field-select" id="inp-compliance_class"
+          onchange="commitSelect('compliance_class')"
+          onblur="closeEdit('compliance_class')"
+          onkeydown="if(event.key==='Escape')closeEdit('compliance_class')">
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Uploaded by</span>
+      <span class="ro" id="v-uploaded_by"></span>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Uploaded at</span>
+      <span class="ro" id="v-uploaded_at"></span>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Reviewed by</span>
+      <span class="ro" id="v-reviewed_by"></span>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Reviewed at</span>
+      <span class="ro" id="v-reviewed_at"></span>
+    </div>
+
+    <div class="col-2 div-t">
+      <div class="field">
+        <span class="field-label">Tags</span>
+        <div class="tags-wrap" id="tags-wrap"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="access-section">
+    <div class="access-header">
+      <span class="access-label">Access</span>
+      <button class="share-btn" onclick="openModal()">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Share &amp; access
+      </button>
+    </div>
+    <div class="chips-row" id="access-chips"></div>
+    <p class="access-note" id="access-note"></p>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-bg" onclick="bgClick(event)">
+  <div class="modal">
+    <p class="modal-title">Share &amp; access</p>
+
+    <div class="modal-sec">
+      <p class="modal-sec-label">School roles</p>
+      <div class="modal-chips" id="m-roles"></div>
+      <div class="modal-add-row">
+        <select class="modal-sel" id="m-role-sel"><option value="">Add a role…</option></select>
+        <button class="modal-add" onclick="mAddRole()">Add</button>
+      </div>
+    </div>
+
+    <div class="modal-hr"></div>
+
+    <div class="modal-sec">
+      <p class="modal-sec-label">Teams</p>
+      <div class="modal-chips" id="m-teams"></div>
+      <div class="modal-add-row">
+        <select class="modal-sel" id="m-team-sel"><option value="">Add a team…</option></select>
+        <button class="modal-add" onclick="mAddTeam()">Add</button>
+      </div>
+    </div>
+
+    <div class="modal-hr"></div>
+
+    <div class="modal-sec">
+      <p class="modal-sec-label">Specific people</p>
+      <div class="modal-chips" id="m-emails"></div>
+      <div class="modal-add-row">
+        <input class="modal-inp" id="m-email-inp" type="email" placeholder="Email address…"
+          onkeydown="if(event.key==='Enter'){event.preventDefault();mAddEmail();}">
+        <button class="modal-add" onclick="mAddEmail()">Add</button>
+      </div>
+    </div>
+
+    <div class="modal-hr"></div>
+
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn-primary" onclick="saveAccess()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div id="toasts"></div>
+
+<script>
+  const ORGS = [
+    { id: 'aoa', name: 'Academy of Alameda' },
+    { id: 'bap', name: 'Bay Area Prep Charter' },
+    { id: 'svc', name: 'Sonoma Valley Public Charter' },
+    { id: 'lva', name: 'Lehigh Valley Academy' },
+    { id: 'kcc', name: 'Keystone Charter Collegiate' },
+  ];
+  const ORG = Object.fromEntries(ORGS.map(o => [o.id, o]));
+
+  const SERVICES = ['Payroll', 'AP', 'Data', 'Back Office'];
+
+  const DOC_TYPES = {
+    Payroll:      ['Payroll Register','Pay Period Summary','Timesheet Batch','Direct Deposit Authorization','Workers Comp Report','941 Filing','Bank Statement','Benefits Election','I-9 Verification','Onboarding Form'],
+    AP:           ['Invoice','AP Invoice Batch','Vendor W-9','Payment Confirmation','Credit Memo'],
+    'Back Office':['Service Request','Resolution Summary','Escalation Report','Knowledge Base Article','Invoice'],
+    Data:         ['Inspection Report','Site Visit Summary','Compliance Certificate','Corrective Action Plan'],
+  };
+
+  const COMPLIANCE = ['FERPA', 'Financial', 'Public', 'Internal Only'];
+
+  const ROLES = ['Principal', 'Business Manager', 'Office Manager'];
+
+  const TEAMS = [
+    { id: 'team-payroll-aoa',        name: 'Payroll Team · AoA',  count: 2 },
+    { id: 'team-vertex-payroll-ops', name: 'Vertex Payroll Ops',   count: 3 },
+    { id: 'team-auditors-q2-2026',   name: 'Auditors · Q2 2026',   count: 3 },
+  ];
+  const TEAM = Object.fromEntries(TEAMS.map(t => [t.id, t]));
+
+  const SEED_TAGS = ['q1-2025','q2-2025','q3-2025','q4-2025','payroll','certified','draft','pending','final','ferpa','financial','internal'];
+
+  const doc = {
+    file_name:        'payroll-register-apr-2025-v2.pdf',
+    process:          'Q2 2025 Payroll Cycle',
+    organization_id:  'aoa',
+    service_type:     'Payroll',
+    document_type:    'Payroll Register',
+    period:           '2025-04-30',
+    version:          2,
+    compliance_class: 'Financial',
+    uploaded_by:      'James Okafor',
+    uploaded_at:      '2025-05-01T09:14:00',
+    reviewed_by:      'Sarah Mitchell',
+    reviewed_at:      '2025-05-02T11:30:00',
+    tags:             ['q2-2025', 'payroll', 'certified'],
+    shared_roles:     ['Principal'],
+    shared_team_ids:  ['team-payroll-aoa'],
+    shared_emails:    ['mrodriguez@academyofalameda.org'],
+  };
+
+  let draft = {};
+  let prev  = {};
+
+  function fmtDate(iso) {
+    const d = new Date(iso.length === 10 ? iso + 'T12:00:00' : iso);
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
+  function fmtDT(iso) {
+    const d = new Date(iso);
+    const date = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    const hh = String(d.getHours()).padStart(2, '0');
+    const mm = String(d.getMinutes()).padStart(2, '0');
+    return `${date} · ${hh}:${mm}`;
+  }
+
+  function badgeHtml(cls) {
+    const map = { FERPA: 'ferpa', Financial: 'financial', Public: 'public', 'Internal Only': 'internal' };
+    const titles = {
+      FERPA:           'FERPA — protected student records.',
+      Financial:       'Financial — payroll, banking, or accounting record.',
+      Public:          'Public — safe to share externally.',
+      'Internal Only': 'Internal Only — Vertex operations record.',
+    };
+    return `<span class="badge badge-${map[cls]||'internal'}" title="${titles[cls]||''}">${cls}</span>`;
+  }
+
+  const IC = {
+    shield: `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    users:  `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+    mail:   `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
+    dot:    `<span style="width:6px;height:6px;border-radius:50%;background:#a1a1aa;display:inline-block;flex-shrink:0;"></span>`,
+  };
+
+  function render() {
+    set('v-file_name',       doc.file_name);
+    set('v-process',         doc.process || 'No linked process');
+    set('v-organization_id', ORG[doc.organization_id]?.name || doc.organization_id);
+    set('v-service_type',    doc.service_type);
+    set('v-document_type',   doc.document_type);
+    set('v-period',          fmtDate(doc.period));
+    set('v-version',         `v${doc.version}`);
+    html('v-compliance_class', badgeHtml(doc.compliance_class));
+    set('v-uploaded_by',     doc.uploaded_by);
+    set('v-uploaded_at',     fmtDT(doc.uploaded_at));
+    set('v-reviewed_by',     doc.reviewed_by || '—');
+    set('v-reviewed_at',     doc.reviewed_at ? fmtDT(doc.reviewed_at) : '—');
+    renderTags();
+    renderChips();
+    renderNote();
+  }
+
+  function set(id, v)  { const el = document.getElementById(id); if (el) el.textContent = v; }
+  function html(id, v) { const el = document.getElementById(id); if (el) el.innerHTML = v; }
+
+  function renderTags() {
+    const wrap = document.getElementById('tags-wrap');
+    wrap.innerHTML = '';
+    doc.tags.forEach(tag => {
+      const chip = document.createElement('span');
+      chip.className = 'tag';
+      chip.innerHTML = `${tag}<button class="tag-x" onclick="removeTag('${tag}')" title="Remove">×</button>`;
+      wrap.appendChild(chip);
+    });
+    const wrap2 = document.createElement('div');
+    wrap2.className = 'tag-input-wrap';
+    wrap2.innerHTML = `
+      <button class="tag-add-btn" id="tag-add-btn" onclick="showTagInput()">+ Add</button>
+      <div id="tag-inp-wrap" style="display:none;">
+        <input class="tag-input" id="tag-inp" placeholder="tag name…"
+          oninput="renderSuggs()"
+          onkeydown="tagKey(event)"
+          onblur="tagBlur()">
+        <div class="tag-suggs" id="tag-suggs" style="display:none;"></div>
+      </div>`;
+    wrap.appendChild(wrap2);
+  }
+
+  function renderChips() {
+    const el = document.getElementById('access-chips');
+    const roles  = doc.shared_roles    || [];
+    const teams  = doc.shared_team_ids || [];
+    const emails = doc.shared_emails   || [];
+    if (!roles.length && !teams.length && !emails.length) {
+      el.innerHTML = `<span class="chip chip-none">${IC.dot}&nbsp;Not shared with school</span>`;
+      return;
+    }
+    let h = '';
+    roles.forEach(r =>
+      h += `<span class="chip chip-role" title="Anyone with the ${r} role at this client.">${IC.shield} ${r}</span>`);
+    teams.forEach(id => {
+      const t = TEAM[id];
+      if (t) h += `<span class="chip chip-team" title="Team · ${t.count} members">${IC.users} ${t.name}</span>`;
+    });
+    if (emails.length)
+      h += `<span class="chip chip-email" title="${emails.join(', ')}">${IC.mail} ${emails.length} ${emails.length === 1 ? 'person' : 'people'}</span>`;
+    el.innerHTML = h;
+  }
+
+  function renderNote() {
+    const org = ORG[doc.organization_id];
+    const short = org ? org.name.split(' ')[0].toUpperCase() : doc.organization_id.toUpperCase();
+    let h = `Visible to Vertex staff assigned to <strong>${short}</strong> (${doc.service_type}) and all Admins.`;
+    if (doc.compliance_class === 'Financial') h += ` <span class="restricted">Financial record — restricted.</span>`;
+    else if (doc.compliance_class === 'FERPA') h += ` <span class="restricted">FERPA protected.</span>`;
+    html('access-note', h);
+  }
+
+  const LABELS = {
+    file_name: 'File name', process: 'Process', organization_id: 'Client',
+    service_type: 'Service', document_type: 'Document type', period: 'Period',
+    compliance_class: 'Compliance',
+  };
+
+  function opts(field) {
+    if (field === 'organization_id')  return ORGS.map(o => [o.id, o.name]);
+    if (field === 'service_type')     return SERVICES.map(s => [s, s]);
+    if (field === 'document_type')    return (DOC_TYPES[doc.service_type] || []).map(t => [t, t]);
+    if (field === 'compliance_class') return COMPLIANCE.map(c => [c, c]);
+    return [];
+  }
+
+  function startEdit(field) {
+    prev[field] = doc[field];
+    const disp = document.getElementById(`disp-${field}`);
+    const ed   = document.getElementById(`ed-${field}`);
+    const inp  = document.getElementById(`inp-${field}`);
+    disp.style.display = 'none';
+    ed.classList.add('active');
+    if (inp.tagName === 'SELECT') {
+      inp.innerHTML = opts(field).map(([v, l]) => `<option value="${v}"${v===doc[field]?' selected':''}>${l}</option>`).join('');
+    } else {
+      inp.value = doc[field];
+    }
+    inp.focus();
+    if (inp.select) inp.select();
+  }
+
+  function closeEdit(field) {
+    document.getElementById(`disp-${field}`).style.display = '';
+    document.getElementById(`ed-${field}`).classList.remove('active');
+  }
+
+  function commitText(field) {
+    const val = document.getElementById(`inp-${field}`).value;
+    const old = prev[field];
+    if (val !== old) {
+      doc[field] = val;
+      render();
+      toast(LABELS[field] + ' updated', () => { doc[field] = old; render(); });
+    }
+    closeEdit(field);
+  }
+
+  function commitSelect(field) {
+    const val = document.getElementById(`inp-${field}`).value;
+    const old = prev[field];
+    if (val !== old) {
+      if (field === 'service_type') {
+        const prevDT = doc.document_type;
+        doc.service_type = val;
+        const types = DOC_TYPES[val] || [];
+        if (!types.includes(doc.document_type)) doc.document_type = types[0] || '';
+        render();
+        toast('Service updated', () => { doc.service_type = old; doc.document_type = prevDT; render(); });
+      } else {
+        doc[field] = val;
+        render();
+        toast(LABELS[field] + ' updated', () => { doc[field] = old; render(); });
+      }
+    }
+    closeEdit(field);
+  }
+
+  function fieldKey(e, field) {
+    if (e.key === 'Enter')  { e.preventDefault(); commitText(field); }
+    if (e.key === 'Escape') { closeEdit(field); }
+  }
+
+  function removeTag(tag) {
+    const old = [...doc.tags];
+    doc.tags = doc.tags.filter(t => t !== tag);
+    renderTags();
+    toast(`Tag "${tag}" removed`, () => { doc.tags = old; renderTags(); });
+  }
+
+  function showTagInput() {
+    document.getElementById('tag-add-btn').style.display = 'none';
+    document.getElementById('tag-inp-wrap').style.display = 'block';
+    document.getElementById('tag-inp').focus();
+  }
+
+  function hideTagInput() {
+    const btn = document.getElementById('tag-add-btn');
+    const wrap = document.getElementById('tag-inp-wrap');
+    if (btn) btn.style.display = '';
+    if (wrap) wrap.style.display = 'none';
+    const inp = document.getElementById('tag-inp');
+    if (inp) inp.value = '';
+    const suggs = document.getElementById('tag-suggs');
+    if (suggs) suggs.style.display = 'none';
+  }
+
+  let _tagBlurTimer;
+  function tagBlur() { _tagBlurTimer = setTimeout(hideTagInput, 200); }
+
+  function addTag(tag) {
+    tag = tag.trim().toLowerCase().replace(/\s+/g, '-');
+    if (!tag || doc.tags.includes(tag)) return false;
+    const old = [...doc.tags];
+    doc.tags = [...doc.tags, tag];
+    renderTags();
+    toast(`Tag "${tag}" added`, () => { doc.tags = old; renderTags(); });
+    return true;
+  }
+
+  function tagKey(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const inp = document.getElementById('tag-inp');
+      addTag(inp.value);
+      inp.value = '';
+      renderSuggs();
+      inp.focus();
+    }
+    if (e.key === 'Escape') hideTagInput();
+  }
+
+  function renderSuggs() {
+    const inp = document.getElementById('tag-inp');
+    const box = document.getElementById('tag-suggs');
+    if (!inp || !box) return;
+    const q = (inp.value || '').trim().toLowerCase();
+    const matches = SEED_TAGS.filter(t => !doc.tags.includes(t) && (!q || t.includes(q))).slice(0, 5);
+    if (!matches.length) { box.style.display = 'none'; return; }
+    box.innerHTML = matches.map(t =>
+      `<div class="tag-sugg" onmousedown="pickSugg('${t}')">${t}</div>`).join('');
+    box.style.display = 'block';
+  }
+
+  function pickSugg(tag) {
+    clearTimeout(_tagBlurTimer);
+    addTag(tag);
+    const inp = document.getElementById('tag-inp');
+    if (inp) { inp.value = ''; inp.focus(); }
+    renderSuggs();
+  }
+
+  function openModal() {
+    draft = {
+      roles:   [...(doc.shared_roles    || [])],
+      teamIds: [...(doc.shared_team_ids || [])],
+      emails:  [...(doc.shared_emails   || [])],
+    };
+    syncModalSelects();
+    renderModalChips();
+    document.getElementById('modal-bg').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('modal-bg').classList.remove('open');
+  }
+
+  function bgClick(e) { if (e.target === document.getElementById('modal-bg')) closeModal(); }
+
+  function syncModalSelects() {
+    const rs = document.getElementById('m-role-sel');
+    rs.innerHTML = '<option value="">Add a role…</option>' +
+      ROLES.filter(r => !draft.roles.includes(r))
+           .map(r => `<option value="${r}">${r}</option>`).join('');
+    const ts = document.getElementById('m-team-sel');
+    ts.innerHTML = '<option value="">Add a team…</option>' +
+      TEAMS.filter(t => !draft.teamIds.includes(t.id))
+            .map(t => `<option value="${t.id}">${t.name}</option>`).join('');
+  }
+
+  function renderModalChips() {
+    html('m-roles',
+      draft.roles.map(r =>
+        `<span class="m-chip chip-role">${IC.shield} ${r}<button class="m-chip-x" onclick="mRmRole('${r}')">×</button></span>`
+      ).join('') || '<span style="font-size:12px;color:var(--dim);">None</span>');
+    html('m-teams',
+      draft.teamIds.map(id => {
+        const t = TEAM[id];
+        return t ? `<span class="m-chip chip-team">${IC.users} ${t.name}<button class="m-chip-x" onclick="mRmTeam('${id}')">×</button></span>` : '';
+      }).join('') || '<span style="font-size:12px;color:var(--dim);">None</span>');
+    html('m-emails',
+      draft.emails.map(e =>
+        `<span class="m-chip chip-email">${IC.mail} ${e}<button class="m-chip-x" onclick="mRmEmail('${e}')">×</button></span>`
+      ).join('') || '<span style="font-size:12px;color:var(--dim);">None</span>');
+  }
+
+  function mAddRole()  { const v = document.getElementById('m-role-sel').value; if (!v || draft.roles.includes(v)) return; draft.roles.push(v); document.getElementById('m-role-sel').value = ''; syncModalSelects(); renderModalChips(); }
+  function mRmRole(r)  { draft.roles = draft.roles.filter(x => x !== r); syncModalSelects(); renderModalChips(); }
+  function mAddTeam()  { const v = document.getElementById('m-team-sel').value; if (!v || draft.teamIds.includes(v)) return; draft.teamIds.push(v); document.getElementById('m-team-sel').value = ''; syncModalSelects(); renderModalChips(); }
+  function mRmTeam(id) { draft.teamIds = draft.teamIds.filter(x => x !== id); syncModalSelects(); renderModalChips(); }
+  function mAddEmail() {
+    const inp = document.getElementById('m-email-inp');
+    const v = inp.value.trim().toLowerCase();
+    if (!v || draft.emails.includes(v)) return;
+    draft.emails.push(v);
+    inp.value = '';
+    renderModalChips();
+  }
+  function mRmEmail(e) { draft.emails = draft.emails.filter(x => x !== e); renderModalChips(); }
+
+  function saveAccess() {
+    const old = { roles: [...(doc.shared_roles||[])], teamIds: [...(doc.shared_team_ids||[])], emails: [...(doc.shared_emails||[])] };
+    doc.shared_roles    = [...draft.roles];
+    doc.shared_team_ids = [...draft.teamIds];
+    doc.shared_emails   = [...draft.emails];
+    renderChips();
+    renderNote();
+    closeModal();
+    toast('Access updated', () => {
+      doc.shared_roles = old.roles; doc.shared_team_ids = old.teamIds; doc.shared_emails = old.emails;
+      renderChips(); renderNote();
+    });
+  }
+
+  function toast(msg, undoFn) {
+    const el = document.createElement('div');
+    el.className = 'toast';
+    el.innerHTML = `<span class="toast-msg">${msg}</span>` +
+      (undoFn ? `<button class="toast-undo">Undo</button>` : '');
+    if (undoFn) el.querySelector('.toast-undo').onclick = () => { undoFn(); clearTimeout(el._t); el.remove(); };
+    document.getElementById('toasts').appendChild(el);
+    el._t = setTimeout(() => el.remove(), 5000);
+  }
+
+  render();
+</script>
+</body>
+</html>

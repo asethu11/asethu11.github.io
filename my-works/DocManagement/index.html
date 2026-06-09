@@ -295,52 +295,7 @@
         <br>
 
         <h3>No shared folder convention</h3>
-        <p>Folders ran five to ten levels deep in both cases, with no consistent logic between them. Someone working across both divisions was navigating two completely different information architectures. For schools, it was worse: Box&#8217;s waterfall permissions meant they often saw a scattered set of folders shared at different depths, with no coherent top-level view.</p>
-
-        <figure class="article-figure">
-          <svg viewBox="0 0 330 96" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px;display:block;margin:0 auto">
-            <style>
-              .hc-team { font: 600 9px/1 var(--font-sans, system-ui); fill: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; }
-              .hc-name { font: 11px/1 var(--font-mono, monospace); }
-              .hc-box  { stroke-width: 1.5; fill-opacity: .07; }
-              .hc-red  { fill: var(--red); stroke: var(--red); }
-              .hc-blue { fill: var(--primary); stroke: var(--primary); }
-              .hc-tr   { fill: var(--red); }
-              .hc-tb   { fill: var(--primary); }
-              .hc-arr  { stroke: var(--border-strong); stroke-width: 1; }
-              .hc-con  { stroke: var(--primary); stroke-dasharray: 2.5 2; stroke-width: 1; }
-              .hc-eq   { font: 8px/1 var(--font-sans, system-ui); fill: var(--primary); }
-            </style>
-            <!-- EdTech row -->
-            <text x="0" y="23" class="hc-team">EdTech</text>
-            <rect x="58" y="7" width="74" height="24" rx="4" class="hc-box hc-red"/>
-            <text x="95" y="23" text-anchor="middle" class="hc-name hc-tr">State</text>
-            <line x1="132" y1="19" x2="143" y2="19" class="hc-arr"/>
-            <path d="M140,16.5 L145.5,19 L140,21.5" class="hc-arr" fill="none"/>
-            <rect x="151" y="7" width="76" height="24" rx="4" class="hc-box hc-blue"/>
-            <text x="189" y="23" text-anchor="middle" class="hc-name hc-tb">School</text>
-            <line x1="227" y1="19" x2="238" y2="19" class="hc-arr"/>
-            <path d="M235,16.5 L240.5,19 L235,21.5" class="hc-arr" fill="none"/>
-            <rect x="245" y="7" width="77" height="24" rx="4" class="hc-box hc-red"/>
-            <text x="283" y="23" text-anchor="middle" class="hc-name hc-tr">Year</text>
-            <!-- vertical connector -->
-            <line x1="189" y1="31" x2="189" y2="65" class="hc-con"/>
-            <text x="197" y="52" class="hc-eq">same</text>
-            <!-- PA/K-12 row -->
-            <text x="0" y="87" class="hc-team">PA/K-12</text>
-            <rect x="58" y="71" width="74" height="24" rx="4" class="hc-box hc-red"/>
-            <text x="95" y="87" text-anchor="middle" class="hc-name hc-tr">Year</text>
-            <line x1="132" y1="83" x2="143" y2="83" class="hc-arr"/>
-            <path d="M140,80.5 L145.5,83 L140,85.5" class="hc-arr" fill="none"/>
-            <rect x="151" y="71" width="76" height="24" rx="4" class="hc-box hc-blue"/>
-            <text x="189" y="87" text-anchor="middle" class="hc-name hc-tb">School</text>
-            <line x1="227" y1="83" x2="238" y2="83" class="hc-arr"/>
-            <path d="M235,80.5 L240.5,83 L235,85.5" class="hc-arr" fill="none"/>
-            <rect x="245" y="71" width="77" height="24" rx="4" class="hc-box hc-red"/>
-            <text x="283" y="87" text-anchor="middle" class="hc-name hc-tr">Function</text>
-          </svg>
-          <figcaption>&#8220;Year&#8221; appears in both hierarchies at different positions. School is the only stable anchor.</figcaption>
-        </figure>
+        <p>EdTech organized by State &#8594; School &#8594; Year. PA/K-12 used Year &#8594; School &#8594; Function. Folders ran five to ten levels deep in both cases, with no consistent logic between them. Someone working across both divisions was navigating two completely different information architectures. For schools, it was worse: Box&#8217;s waterfall permissions meant they often saw a scattered set of folders shared at different depths, with no coherent top-level view.</p>
 
         <br>
 
@@ -478,13 +433,175 @@
         <p>When a document is uploaded through a platform workflow, most of its metadata fills in automatically from the context of the task that triggered it. The person uploading confirms the document type and sets who should have access. That&#8217;s typically two or three decisions, not a full form to fill out.</p>
 
         <figure class="article-figure">
-          <div style="max-width:420px;margin:0 auto;border:1px solid var(--border-light);border-radius:var(--radius-md);overflow:hidden;">
-            <iframe
-              src="/my-works/DocManagement/metadata-panel.html"
-              title="Interactive document metadata panel"
-              loading="lazy"
-              sandbox="allow-scripts allow-same-origin"
-              style="width:100%;height:800px;border:0;display:block;"></iframe>
+          <div class="doc-meta-panel">
+            <div class="panel">
+              <p class="section-title">Metadata</p>
+              <div class="meta-grid">
+
+                <div class="col-2">
+                  <div class="field">
+                    <span class="field-label">File name</span>
+                    <div class="field-display mono" id="disp-file_name" onclick="VxMetaPanel.startEdit('file_name')">
+                      <span id="v-file_name"></span>
+                      <svg class="pencil" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </div>
+                    <div class="field-editor" id="ed-file_name">
+                      <input class="field-input mono" id="inp-file_name" type="text" onblur="VxMetaPanel.commitText('file_name')" onkeydown="VxMetaPanel.fieldKey(event,'file_name')">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-2 div-b">
+                  <div class="field">
+                    <span class="field-label">Process</span>
+                    <div class="field-display" id="disp-process" onclick="VxMetaPanel.startEdit('process')">
+                      <span id="v-process"></span>
+                      <svg class="pencil" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </div>
+                    <div class="field-editor" id="ed-process">
+                      <input class="field-input" id="inp-process" type="text" onblur="VxMetaPanel.commitText('process')" onkeydown="VxMetaPanel.fieldKey(event,'process')">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <span class="field-label">Client</span>
+                  <div class="field-display" id="disp-organization_id" onclick="VxMetaPanel.startEdit('organization_id')">
+                    <span id="v-organization_id"></span>
+                    <svg class="pencil" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </div>
+                  <div class="field-editor" id="ed-organization_id">
+                    <select class="field-select" id="inp-organization_id" onchange="VxMetaPanel.commitSelect('organization_id')" onblur="VxMetaPanel.closeEdit('organization_id')" onkeydown="if(event.key==='Escape')VxMetaPanel.closeEdit('organization_id')"></select>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <span class="field-label">Service</span>
+                  <div class="field-display" id="disp-service_type" onclick="VxMetaPanel.startEdit('service_type')">
+                    <span id="v-service_type"></span>
+                    <svg class="pencil" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </div>
+                  <div class="field-editor" id="ed-service_type">
+                    <select class="field-select" id="inp-service_type" onchange="VxMetaPanel.commitSelect('service_type')" onblur="VxMetaPanel.closeEdit('service_type')" onkeydown="if(event.key==='Escape')VxMetaPanel.closeEdit('service_type')"></select>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <span class="field-label">Document type</span>
+                  <div class="field-display" id="disp-document_type" onclick="VxMetaPanel.startEdit('document_type')">
+                    <span id="v-document_type"></span>
+                    <svg class="pencil" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </div>
+                  <div class="field-editor" id="ed-document_type">
+                    <select class="field-select" id="inp-document_type" onchange="VxMetaPanel.commitSelect('document_type')" onblur="VxMetaPanel.closeEdit('document_type')" onkeydown="if(event.key==='Escape')VxMetaPanel.closeEdit('document_type')"></select>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <span class="field-label">Period</span>
+                  <div class="field-display" id="disp-period" onclick="VxMetaPanel.startEdit('period')">
+                    <span id="v-period"></span>
+                    <svg class="pencil" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </div>
+                  <div class="field-editor" id="ed-period">
+                    <input class="field-input" id="inp-period" type="date" onblur="VxMetaPanel.commitText('period')" onkeydown="VxMetaPanel.fieldKey(event,'period')">
+                  </div>
+                </div>
+
+                <div class="field">
+                  <span class="field-label">Version</span>
+                  <span class="ro" id="v-version"></span>
+                </div>
+
+                <div class="field">
+                  <span class="field-label">Compliance</span>
+                  <div class="field-display" id="disp-compliance_class" onclick="VxMetaPanel.startEdit('compliance_class')">
+                    <span id="v-compliance_class"></span>
+                    <svg class="pencil" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </div>
+                  <div class="field-editor" id="ed-compliance_class">
+                    <select class="field-select" id="inp-compliance_class" onchange="VxMetaPanel.commitSelect('compliance_class')" onblur="VxMetaPanel.closeEdit('compliance_class')" onkeydown="if(event.key==='Escape')VxMetaPanel.closeEdit('compliance_class')"></select>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <span class="field-label">Uploaded by</span>
+                  <span class="ro" id="v-uploaded_by"></span>
+                </div>
+                <div class="field">
+                  <span class="field-label">Uploaded at</span>
+                  <span class="ro" id="v-uploaded_at"></span>
+                </div>
+                <div class="field">
+                  <span class="field-label">Reviewed by</span>
+                  <span class="ro" id="v-reviewed_by"></span>
+                </div>
+                <div class="field">
+                  <span class="field-label">Reviewed at</span>
+                  <span class="ro" id="v-reviewed_at"></span>
+                </div>
+
+                <div class="col-2 div-t">
+                  <div class="field">
+                    <span class="field-label">Tags</span>
+                    <div class="tags-wrap" id="tags-wrap"></div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="access-section">
+                <div class="access-header">
+                  <span class="access-label">Access</span>
+                  <button class="share-btn" onclick="VxMetaPanel.openModal()">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    Share &amp; access
+                  </button>
+                </div>
+                <div class="chips-row" id="access-chips"></div>
+                <p class="access-note" id="access-note"></p>
+              </div>
+            </div>
+
+            <!-- Access modal -->
+            <div class="panel-modal-bg" id="panel-modal-bg" onclick="VxMetaPanel.bgClick(event)">
+              <div class="panel-modal">
+                <p class="panel-modal-title">Share &amp; access</p>
+                <div class="panel-modal-sec">
+                  <p class="panel-modal-sec-label">School roles</p>
+                  <div class="panel-modal-chips" id="m-roles"></div>
+                  <div class="panel-modal-add-row">
+                    <select class="panel-modal-sel" id="m-role-sel"><option value="">Add a role&#8230;</option></select>
+                    <button class="panel-modal-add" onclick="VxMetaPanel.mAddRole()">Add</button>
+                  </div>
+                </div>
+                <div class="panel-modal-hr"></div>
+                <div class="panel-modal-sec">
+                  <p class="panel-modal-sec-label">Teams</p>
+                  <div class="panel-modal-chips" id="m-teams"></div>
+                  <div class="panel-modal-add-row">
+                    <select class="panel-modal-sel" id="m-team-sel"><option value="">Add a team&#8230;</option></select>
+                    <button class="panel-modal-add" onclick="VxMetaPanel.mAddTeam()">Add</button>
+                  </div>
+                </div>
+                <div class="panel-modal-hr"></div>
+                <div class="panel-modal-sec">
+                  <p class="panel-modal-sec-label">Specific people</p>
+                  <div class="panel-modal-chips" id="m-emails"></div>
+                  <div class="panel-modal-add-row">
+                    <input class="panel-modal-inp" id="m-email-inp" type="email" placeholder="Email address&#8230;" onkeydown="if(event.key==='Enter'){event.preventDefault();VxMetaPanel.mAddEmail();}">
+                    <button class="panel-modal-add" onclick="VxMetaPanel.mAddEmail()">Add</button>
+                  </div>
+                </div>
+                <div class="panel-modal-hr"></div>
+                <div class="panel-modal-footer">
+                  <button class="panel-btn-ghost" onclick="VxMetaPanel.closeModal()">Cancel</button>
+                  <button class="panel-btn-primary" onclick="VxMetaPanel.saveAccess()">Save</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="panel-toasts" class="panel-toasts"></div>
           </div>
           <figcaption>A document&#8217;s metadata panel. Fields like client, service, and process fill in automatically from the workflow that triggered the upload. Click any editable field to change it, add or remove tags, or open the &#8220;Share &amp; access&#8221; panel.</figcaption>
         </figure>
@@ -517,12 +634,12 @@
             <div>
               <div class="embed-chrome">
                 <span class="ec-dots"><i></i><i></i><i></i></span>
-                <span class="ec-route">/repository?persona=james</span>
+                <span class="ec-route">/home?persona=james</span>
               </div>
               <div class="embed-scale">
                 <iframe
-                  src="https://vertex-docmgmt-git-v1-embeds-asethus-projects.vercel.app/repository?persona=james"
-                  title="Staff power-user repository"
+                  src="https://vertex-docmgmt-git-v1-embeds-asethus-projects.vercel.app/home?persona=james"
+                  title="Staff power-user home"
                   loading="lazy"
                   sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
               </div>
@@ -602,7 +719,7 @@
           </div>
           <div class="embed-scale">
             <iframe
-              src="https://vertex-docmgmt-git-v1-embeds-asethus-projects.vercel.app/admin/access?persona=austin"
+              src="https://vertex-docmgmt-add-persona-deeplink.vercel.app/admin/access?persona=austin"
               title="Per-user access inspector"
               loading="lazy"
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
@@ -898,132 +1015,351 @@
     </div>
   </footer>
 
+  <script src="/design-system/article.js"></script>
+
   <script>
-  (function() {
+  /* Add an "Expand view" button to every prototype's chrome bar. Each button
+     opens that embed's own iframe URL full-screen in a new tab, so the href
+     always stays in sync with what the embed is showing. */
+  (function () {
+    var EXPAND_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>';
+    var bars = document.querySelectorAll('.embed-chrome');
+    for (var i = 0; i < bars.length; i++) {
+      var bar = bars[i];
+      if (bar.querySelector('.ec-expand')) continue;
+      var frame = bar.parentElement.querySelector('.embed-scale iframe');
+      var url = frame && frame.getAttribute('src');
+      if (!url) continue;
+      var a = document.createElement('a');
+      a.className = 'ec-expand';
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.title = 'Expand view';
+      a.setAttribute('aria-label', 'Open this prototype full-screen in a new tab');
+      a.innerHTML = EXPAND_SVG + '<span>Expand</span>';
+      bar.appendChild(a);
+    }
+  })();
+  </script>
+
+  <script>
+  var VxMetaPanel = (function() {
     'use strict';
 
-    // ---- Embed iframe load-in ----
-    document.querySelectorAll('.embed-scale').forEach(function(wrap) {
-      var ifr = wrap.querySelector('iframe');
-      if (!ifr) return;
-      ifr.addEventListener('load', function() { wrap.classList.add('is-loaded'); });
-    });
-    });
+    var ORGS = [
+      { id: 'aoa', name: 'Academy of Alameda' },
+      { id: 'bap', name: 'Bay Area Prep Charter' },
+      { id: 'svc', name: 'Sonoma Valley Public Charter' },
+      { id: 'lva', name: 'Lehigh Valley Academy' },
+      { id: 'kcc', name: 'Keystone Charter Collegiate' },
+    ];
+    var ORG = {};
+    ORGS.forEach(function(o) { ORG[o.id] = o; });
 
-    // ---- Reading progress bar ----
-    var fill = document.querySelector('.reading-progress-fill');
-    var track = document.querySelector('.reading-progress');
-    var tocWrapper = document.querySelector('.toc-wrapper');
-    var tocNav = document.querySelector('.toc-nav');
+    var SERVICES = ['Payroll', 'AP', 'Data', 'Back Office'];
+    var DOC_TYPES = {
+      'Payroll':      ['Payroll Register','Pay Period Summary','Timesheet Batch','Direct Deposit Authorization','Workers Comp Report','941 Filing','Bank Statement','Benefits Election','I-9 Verification','Onboarding Form'],
+      'AP':           ['Invoice','AP Invoice Batch','Vendor W-9','Payment Confirmation','Credit Memo'],
+      'Back Office':  ['Service Request','Resolution Summary','Escalation Report','Knowledge Base Article','Invoice'],
+      'Data':         ['Inspection Report','Site Visit Summary','Compliance Certificate','Corrective Action Plan'],
+    };
+    var COMPLIANCE = ['FERPA', 'Financial', 'Public', 'Internal Only'];
+    var ROLES = ['Principal', 'Business Manager', 'Office Manager'];
+    var TEAMS = [
+      { id: 'team-payroll-aoa',        name: 'Payroll Team · AoA', count: 2 },
+      { id: 'team-vertex-payroll-ops', name: 'Vertex Payroll Ops',      count: 3 },
+      { id: 'team-auditors-q2-2026',   name: 'Auditors · Q2 2026', count: 3 },
+    ];
+    var TEAM = {};
+    TEAMS.forEach(function(t) { TEAM[t.id] = t; });
+    var SEED_TAGS = ['q1-2025','q2-2025','q3-2025','q4-2025','payroll','certified','draft','pending','final','ferpa','financial','internal'];
 
-    function updateTrackBounds() {
-      if (!track || !tocWrapper || !tocNav) return;
-      var wrapperRect = tocWrapper.getBoundingClientRect();
-      var navRect = tocNav.getBoundingClientRect();
-      track.style.top = (navRect.top - wrapperRect.top) + 'px';
-      track.style.height = navRect.height + 'px';
+    var doc = {
+      file_name: 'payroll-register-apr-2025-v2.pdf',
+      process: 'Q2 2025 Payroll Cycle',
+      organization_id: 'aoa',
+      service_type: 'Payroll',
+      document_type: 'Payroll Register',
+      period: '2025-04-30',
+      version: 2,
+      compliance_class: 'Financial',
+      uploaded_by: 'James Okafor',
+      uploaded_at: '2025-05-01T09:14:00',
+      reviewed_by: 'Sarah Mitchell',
+      reviewed_at: '2025-05-02T11:30:00',
+      tags: ['q2-2025', 'payroll', 'certified'],
+      shared_roles: ['Principal'],
+      shared_team_ids: ['team-payroll-aoa'],
+      shared_emails: ['mrodriguez@academyofalameda.org'],
+    };
+
+    var draft = {}, prev = {};
+
+    var IC = {
+      shield: '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+      users:  '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+      mail:   '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
+      dot:    '<span style="width:6px;height:6px;border-radius:50%;background:#a1a1aa;display:inline-block;flex-shrink:0;"></span>',
+    };
+
+    function set(id, v)  { var el = document.getElementById(id); if (el) el.textContent = v; }
+    function html(id, v) { var el = document.getElementById(id); if (el) el.innerHTML = v; }
+
+    function fmtDate(iso) {
+      var d = new Date(iso.length === 10 ? iso + 'T12:00:00' : iso);
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+    function fmtDT(iso) {
+      var d = new Date(iso);
+      var date = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      var hh = String(d.getHours()).padStart(2, '0');
+      var mm = String(d.getMinutes()).padStart(2, '0');
+      return date + ' · ' + hh + ':' + mm;
+    }
+    function badgeHtml(cls) {
+      var map = { FERPA: 'ferpa', Financial: 'financial', Public: 'public', 'Internal Only': 'internal' };
+      var titles = {
+        FERPA: 'FERPA — protected student records.',
+        Financial: 'Financial — payroll, banking, or accounting record.',
+        Public: 'Public — safe to share externally.',
+        'Internal Only': 'Internal Only — Vertex operations record.',
+      };
+      return '<span class="badge badge-' + (map[cls] || 'internal') + '" title="' + (titles[cls] || '') + '">' + cls + '</span>';
     }
 
-    function updateProgress() {
-      if (!fill) return;
-      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      var progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 98 : 0;
-      fill.style.height = progress + '%';
+    function render() {
+      set('v-file_name',       doc.file_name);
+      set('v-process',         doc.process || 'No linked process');
+      set('v-organization_id', ORG[doc.organization_id] ? ORG[doc.organization_id].name : doc.organization_id);
+      set('v-service_type',    doc.service_type);
+      set('v-document_type',   doc.document_type);
+      set('v-period',          fmtDate(doc.period));
+      set('v-version',         'v' + doc.version);
+      html('v-compliance_class', badgeHtml(doc.compliance_class));
+      set('v-uploaded_by',     doc.uploaded_by);
+      set('v-uploaded_at',     fmtDT(doc.uploaded_at));
+      set('v-reviewed_by',     doc.reviewed_by || '—');
+      set('v-reviewed_at',     doc.reviewed_at ? fmtDT(doc.reviewed_at) : '—');
+      renderTags();
+      renderChips();
+      renderNote();
     }
 
-    updateTrackBounds();
-    updateProgress();
-    document.addEventListener('scroll', updateProgress, { passive: true });
-    window.addEventListener('resize', function() { updateTrackBounds(); updateProgress(); });
+    function renderTags() {
+      var wrap = document.getElementById('tags-wrap');
+      if (!wrap) return;
+      wrap.innerHTML = '';
+      doc.tags.forEach(function(tag) {
+        var chip = document.createElement('span');
+        chip.className = 'tag';
+        chip.innerHTML = tag + '<button class="tag-x" onclick="VxMetaPanel.removeTag(\'' + tag + '\')" title="Remove">×</button>';
+        wrap.appendChild(chip);
+      });
+      var wrap2 = document.createElement('div');
+      wrap2.className = 'tag-input-wrap';
+      wrap2.innerHTML = '<button class="tag-add-btn" id="tag-add-btn" onclick="VxMetaPanel.showTagInput()">+ Add</button>' +
+        '<div id="tag-inp-wrap" style="display:none;">' +
+        '<input class="tag-input" id="tag-inp" placeholder="tag name…" oninput="VxMetaPanel.renderSuggs()" onkeydown="VxMetaPanel.tagKey(event)" onblur="VxMetaPanel.tagBlur()">' +
+        '<div class="tag-suggs" id="tag-suggs" style="display:none;"></div></div>';
+      wrap.appendChild(wrap2);
+    }
 
-    // ---- Toast & theme toggle ----
-    var toast = document.querySelector('.toast');
-    var toastSwitch = document.getElementById('toast-switch-light');
-    var toastDismiss = document.getElementById('toast-dismiss');
-    var themeToggle = document.getElementById('theme-toggle');
+    function renderChips() {
+      var el = document.getElementById('access-chips');
+      if (!el) return;
+      var roles = doc.shared_roles || [], teams = doc.shared_team_ids || [], emails = doc.shared_emails || [];
+      if (!roles.length && !teams.length && !emails.length) {
+        el.innerHTML = '<span class="chip chip-none">' + IC.dot + '&nbsp;Not shared with school</span>';
+        return;
+      }
+      var h = '';
+      roles.forEach(function(r) { h += '<span class="chip chip-role" title="Anyone with the ' + r + ' role at this client.">' + IC.shield + ' ' + r + '</span>'; });
+      teams.forEach(function(id) {
+        var t = TEAM[id];
+        if (t) h += '<span class="chip chip-team" title="Team · ' + t.count + ' members">' + IC.users + ' ' + t.name + '</span>';
+      });
+      if (emails.length) h += '<span class="chip chip-email" title="' + emails.join(', ') + '">' + IC.mail + ' ' + emails.length + ' ' + (emails.length === 1 ? 'person' : 'people') + '</span>';
+      el.innerHTML = h;
+    }
 
-    function applyForcedTheme(theme) {
-      document.documentElement.classList.remove('force-light', 'force-dark');
-      if (theme === 'light') document.documentElement.classList.add('force-light');
-      else if (theme === 'dark') document.documentElement.classList.add('force-dark');
-      if (theme) {
-        sessionStorage.setItem('forcedTheme', theme);
-        sessionStorage.setItem('lightModeToastDismissed', '1');
+    function renderNote() {
+      var org = ORG[doc.organization_id];
+      var short = org ? org.name.split(' ')[0].toUpperCase() : doc.organization_id.toUpperCase();
+      var h = 'Visible to Vertex staff assigned to <strong>' + short + '</strong> (' + doc.service_type + ') and all Admins.';
+      if (doc.compliance_class === 'Financial') h += ' <span class="restricted">Financial record — restricted.</span>';
+      else if (doc.compliance_class === 'FERPA') h += ' <span class="restricted">FERPA protected.</span>';
+      html('access-note', h);
+    }
+
+    var LABELS = { file_name: 'File name', process: 'Process', organization_id: 'Client', service_type: 'Service', document_type: 'Document type', period: 'Period', compliance_class: 'Compliance' };
+
+    function opts(field) {
+      if (field === 'organization_id')  return ORGS.map(function(o) { return [o.id, o.name]; });
+      if (field === 'service_type')     return SERVICES.map(function(s) { return [s, s]; });
+      if (field === 'document_type')    return (DOC_TYPES[doc.service_type] || []).map(function(t) { return [t, t]; });
+      if (field === 'compliance_class') return COMPLIANCE.map(function(c) { return [c, c]; });
+      return [];
+    }
+
+    function startEdit(field) {
+      prev[field] = doc[field];
+      var disp = document.getElementById('disp-' + field);
+      var ed   = document.getElementById('ed-' + field);
+      var inp  = document.getElementById('inp-' + field);
+      disp.style.display = 'none';
+      ed.classList.add('active');
+      if (inp.tagName === 'SELECT') {
+        inp.innerHTML = opts(field).map(function(o) { return '<option value="' + o[0] + '"' + (o[0] === doc[field] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('');
       } else {
-        sessionStorage.removeItem('forcedTheme');
+        inp.value = doc[field];
       }
-      updateToggleLabel();
-      if (toast) toast.classList.remove('show');
+      inp.focus();
+      if (inp.select) inp.select();
     }
 
-    function dismissToast() {
-      sessionStorage.setItem('lightModeToastDismissed', '1');
-      if (toast) toast.classList.remove('show');
+    function closeEdit(field) {
+      document.getElementById('disp-' + field).style.display = '';
+      document.getElementById('ed-' + field).classList.remove('active');
     }
 
-    function updateToggleLabel() {
-      if (!themeToggle) return;
-      var isForcedLight = document.documentElement.classList.contains('force-light');
-      var isForcedDark = document.documentElement.classList.contains('force-dark');
-      var isDark = isForcedDark || (!isForcedLight && window.matchMedia('(prefers-color-scheme: dark)').matches);
-      themeToggle.textContent = isDark ? 'Switch to light' : 'Switch to dark';
-      themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+    function commitText(field) {
+      var val = document.getElementById('inp-' + field).value;
+      var old = prev[field];
+      if (val !== old) { doc[field] = val; render(); toast(LABELS[field] + ' updated', function() { doc[field] = old; render(); }); }
+      closeEdit(field);
     }
 
-    function toggleTheme() {
-      var isForcedLight = document.documentElement.classList.contains('force-light');
-      var isForcedDark = document.documentElement.classList.contains('force-dark');
-      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var target = isForcedLight ? 'dark' : isForcedDark ? 'light' : (prefersDark ? 'light' : 'dark');
-      if (!document.startViewTransition) { applyForcedTheme(target); return; }
-      var t = document.startViewTransition(function() { applyForcedTheme(target); });
-      t.ready.then(function() {
-        document.documentElement.animate(
-          { clipPath: ['inset(0 0 100% 0)', 'inset(0)'] },
-          { pseudoElement: '::view-transition-new(root)', duration: 600, easing: 'ease-in-out' }
-        );
-      });
-    }
-
-    function showToastIfNeeded() {
-      if (!toast) return;
-      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var dismissed = sessionStorage.getItem('lightModeToastDismissed') === '1';
-      var forcedLight = document.documentElement.classList.contains('force-light');
-      var forcedDark = document.documentElement.classList.contains('force-dark');
-      if (prefersDark && !dismissed && !forcedLight && !forcedDark) toast.classList.add('show');
-    }
-
-    if (toastSwitch) toastSwitch.addEventListener('click', function() { applyForcedTheme('light'); });
-    if (toastDismiss) toastDismiss.addEventListener('click', dismissToast);
-    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
-
-    var storedTheme = sessionStorage.getItem('forcedTheme');
-    if (storedTheme === 'light' || storedTheme === 'dark') applyForcedTheme(storedTheme);
-    else updateToggleLabel();
-    showToastIfNeeded();
-
-    // ---- TOC active-link scrollspy ----
-    var sections = document.querySelectorAll('section[id]');
-    var tocLinks = document.querySelectorAll('.toc-list a');
-
-    function updateActiveLink() {
-      var currentSection = null;
-      var scrollPos = window.scrollY + window.innerHeight * 0.35;
-      sections.forEach(function(sec) {
-        if (scrollPos >= sec.offsetTop) currentSection = sec;
-      });
-      if (currentSection) {
-        var id = currentSection.getAttribute('id');
-        tocLinks.forEach(function(l) { l.classList.remove('active'); });
-        var active = document.querySelector('.toc-list a[href="#' + id + '"]');
-        if (active) active.classList.add('active');
+    function commitSelect(field) {
+      var val = document.getElementById('inp-' + field).value;
+      var old = prev[field];
+      if (val !== old) {
+        if (field === 'service_type') {
+          var prevDT = doc.document_type;
+          doc.service_type = val;
+          var types = DOC_TYPES[val] || [];
+          if (types.indexOf(doc.document_type) === -1) doc.document_type = types[0] || '';
+          render();
+          toast('Service updated', function() { doc.service_type = old; doc.document_type = prevDT; render(); });
+        } else {
+          doc[field] = val; render(); toast(LABELS[field] + ' updated', function() { doc[field] = old; render(); });
+        }
       }
+      closeEdit(field);
     }
 
-    window.addEventListener('scroll', updateActiveLink, { passive: true });
-    updateActiveLink();
+    function fieldKey(e, field) {
+      if (e.key === 'Enter')  { e.preventDefault(); commitText(field); }
+      if (e.key === 'Escape') { closeEdit(field); }
+    }
+
+    function removeTag(tag) {
+      var old = doc.tags.slice();
+      doc.tags = doc.tags.filter(function(t) { return t !== tag; });
+      renderTags();
+      toast('Tag "' + tag + '" removed', function() { doc.tags = old; renderTags(); });
+    }
+
+    function showTagInput() {
+      document.getElementById('tag-add-btn').style.display = 'none';
+      document.getElementById('tag-inp-wrap').style.display = 'block';
+      document.getElementById('tag-inp').focus();
+    }
+
+    function hideTagInput() {
+      var btn = document.getElementById('tag-add-btn'), wrap = document.getElementById('tag-inp-wrap');
+      if (btn) btn.style.display = '';
+      if (wrap) wrap.style.display = 'none';
+      var inp = document.getElementById('tag-inp'); if (inp) inp.value = '';
+      var suggs = document.getElementById('tag-suggs'); if (suggs) suggs.style.display = 'none';
+    }
+
+    var _tagBlurTimer;
+    function tagBlur() { _tagBlurTimer = setTimeout(hideTagInput, 200); }
+
+    function addTag(tag) {
+      tag = tag.trim().toLowerCase().replace(/\s+/g, '-');
+      if (!tag || doc.tags.indexOf(tag) !== -1) return false;
+      var old = doc.tags.slice();
+      doc.tags = doc.tags.concat([tag]);
+      renderTags();
+      toast('Tag "' + tag + '" added', function() { doc.tags = old; renderTags(); });
+      return true;
+    }
+
+    function tagKey(e) {
+      if (e.key === 'Enter') { e.preventDefault(); var inp = document.getElementById('tag-inp'); addTag(inp.value); inp.value = ''; renderSuggs(); inp.focus(); }
+      if (e.key === 'Escape') hideTagInput();
+    }
+
+    function renderSuggs() {
+      var inp = document.getElementById('tag-inp'), box = document.getElementById('tag-suggs');
+      if (!inp || !box) return;
+      var q = (inp.value || '').trim().toLowerCase();
+      var matches = SEED_TAGS.filter(function(t) { return doc.tags.indexOf(t) === -1 && (!q || t.indexOf(q) !== -1); }).slice(0, 5);
+      if (!matches.length) { box.style.display = 'none'; return; }
+      box.innerHTML = matches.map(function(t) { return '<div class="tag-sugg" onmousedown="VxMetaPanel.pickSugg(\'' + t + '\')">' + t + '</div>'; }).join('');
+      box.style.display = 'block';
+    }
+
+    function pickSugg(tag) {
+      clearTimeout(_tagBlurTimer);
+      addTag(tag);
+      var inp = document.getElementById('tag-inp');
+      if (inp) { inp.value = ''; inp.focus(); }
+      renderSuggs();
+    }
+
+    function openModal() {
+      draft = { roles: (doc.shared_roles || []).slice(), teamIds: (doc.shared_team_ids || []).slice(), emails: (doc.shared_emails || []).slice() };
+      syncModalSelects();
+      renderModalChips();
+      document.getElementById('panel-modal-bg').classList.add('open');
+    }
+
+    function closeModal() { document.getElementById('panel-modal-bg').classList.remove('open'); }
+
+    function bgClick(e) { if (e.target === document.getElementById('panel-modal-bg')) closeModal(); }
+
+    function syncModalSelects() {
+      var rs = document.getElementById('m-role-sel');
+      rs.innerHTML = '<option value="">Add a role…</option>' + ROLES.filter(function(r) { return draft.roles.indexOf(r) === -1; }).map(function(r) { return '<option value="' + r + '">' + r + '</option>'; }).join('');
+      var ts = document.getElementById('m-team-sel');
+      ts.innerHTML = '<option value="">Add a team…</option>' + TEAMS.filter(function(t) { return draft.teamIds.indexOf(t.id) === -1; }).map(function(t) { return '<option value="' + t.id + '">' + t.name + '</option>'; }).join('');
+    }
+
+    function renderModalChips() {
+      html('m-roles', draft.roles.map(function(r) { return '<span class="m-chip chip-role">' + IC.shield + ' ' + r + '<button class="m-chip-x" onclick="VxMetaPanel.mRmRole(\'' + r + '\')">×</button></span>'; }).join('') || '<span style="font-size:12px;color:var(--text-muted);">None</span>');
+      html('m-teams', draft.teamIds.map(function(id) { var t = TEAM[id]; return t ? '<span class="m-chip chip-team">' + IC.users + ' ' + t.name + '<button class="m-chip-x" onclick="VxMetaPanel.mRmTeam(\'' + id + '\')">×</button></span>' : ''; }).join('') || '<span style="font-size:12px;color:var(--text-muted);">None</span>');
+      html('m-emails', draft.emails.map(function(e) { return '<span class="m-chip chip-email">' + IC.mail + ' ' + e + '<button class="m-chip-x" onclick="VxMetaPanel.mRmEmail(\'' + e + '\')">×</button></span>'; }).join('') || '<span style="font-size:12px;color:var(--text-muted);">None</span>');
+    }
+
+    function mAddRole()  { var v = document.getElementById('m-role-sel').value; if (!v || draft.roles.indexOf(v) !== -1) return; draft.roles.push(v); document.getElementById('m-role-sel').value = ''; syncModalSelects(); renderModalChips(); }
+    function mRmRole(r)  { draft.roles = draft.roles.filter(function(x) { return x !== r; }); syncModalSelects(); renderModalChips(); }
+    function mAddTeam()  { var v = document.getElementById('m-team-sel').value; if (!v || draft.teamIds.indexOf(v) !== -1) return; draft.teamIds.push(v); document.getElementById('m-team-sel').value = ''; syncModalSelects(); renderModalChips(); }
+    function mRmTeam(id) { draft.teamIds = draft.teamIds.filter(function(x) { return x !== id; }); syncModalSelects(); renderModalChips(); }
+    function mAddEmail() { var inp = document.getElementById('m-email-inp'), v = inp.value.trim().toLowerCase(); if (!v || draft.emails.indexOf(v) !== -1) return; draft.emails.push(v); inp.value = ''; renderModalChips(); }
+    function mRmEmail(e) { draft.emails = draft.emails.filter(function(x) { return x !== e; }); renderModalChips(); }
+
+    function saveAccess() {
+      var old = { roles: (doc.shared_roles || []).slice(), teamIds: (doc.shared_team_ids || []).slice(), emails: (doc.shared_emails || []).slice() };
+      doc.shared_roles = draft.roles.slice(); doc.shared_team_ids = draft.teamIds.slice(); doc.shared_emails = draft.emails.slice();
+      renderChips(); renderNote(); closeModal();
+      toast('Access updated', function() { doc.shared_roles = old.roles; doc.shared_team_ids = old.teamIds; doc.shared_emails = old.emails; renderChips(); renderNote(); });
+    }
+
+    function toast(msg, undoFn) {
+      var el = document.createElement('div');
+      el.className = 'panel-toast';
+      el.innerHTML = '<span class="panel-toast-msg">' + msg + '</span>' + (undoFn ? '<button class="panel-toast-undo">Undo</button>' : '');
+      if (undoFn) el.querySelector('.panel-toast-undo').onclick = function() { undoFn(); clearTimeout(el._t); el.remove(); };
+      document.getElementById('panel-toasts').appendChild(el);
+      el._t = setTimeout(function() { el.remove(); }, 5000);
+    }
+
+    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', render); } else { render(); }
+
+    return { startEdit: startEdit, closeEdit: closeEdit, commitText: commitText, commitSelect: commitSelect, fieldKey: fieldKey, removeTag: removeTag, showTagInput: showTagInput, tagBlur: tagBlur, tagKey: tagKey, renderSuggs: renderSuggs, pickSugg: pickSugg, openModal: openModal, closeModal: closeModal, bgClick: bgClick, mAddRole: mAddRole, mRmRole: mRmRole, mAddTeam: mAddTeam, mRmTeam: mRmTeam, mAddEmail: mAddEmail, mRmEmail: mRmEmail, saveAccess: saveAccess };
   })();
   </script>
 

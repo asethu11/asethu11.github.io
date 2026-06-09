@@ -5,7 +5,7 @@
     --background: #FCFCFC;
     --background-grey: #F3F5F7;
     --text-primary: #262628; 
-    --text-secondary: #737373; 
+    --text-secondary: #7a7a7a; 
     --primary: #0070EA; 
     --red: #db4f4f;
 
@@ -66,9 +66,9 @@ body {
 
 h1 {
     font-family: "Big Shoulders Display", serif;
-    font-size: var(--font-size-3xl);
-    margin-top: var(--space-md);
-    margin-bottom: var(--space-md);
+    font-size: 3rem !important;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     letter-spacing: -0.3px;
 }
 
@@ -80,14 +80,14 @@ h2, h3, h4, h5, h6, p{
 h2 {
     font-size: 1.4rem;
     font-weight: 600;
-    margin-bottom: var(--space-md);
+    margin-bottom: 1rem;
     letter-spacing: -0.3px;
 }
 
 h3 {
     font-size: 1.2rem;
     font-weight: 500;
-    margin-bottom: var(--space-md);
+    margin-bottom: 1rem;
     line-height: 1.6rem;
 }
 
@@ -132,14 +132,14 @@ a:visited {
 
 
 #intro-tags1 {
-    margin-top: var(--space-2xl);
+    margin-top: 3rem;
     color: var(--text-secondary) !important;
     }
 
 
     .intro-hr {
-        margin-top: var(--space-3xl);
-        margin-bottom: var(--space-xl);
+        margin-top: 4rem;
+        margin-bottom: 2rem;
         border: 0;
         border-top: 1px solid var(--background-grey);
     }
@@ -148,9 +148,24 @@ a:visited {
         border-color: var(--background-grey);
     }
 
-/* .headtag styles now come from design-system/components.css.
-   The system version uses opacity + translateX for smoother arrow reveal
-   (vs. display:none/flex toggle) and properly scopes .arr to .headtag. */
+.headtag {
+    display: inline-flex;
+    height: 20px;
+  }
+  
+  .arr {
+    display: none;
+    color: var(--red);
+  }
+  
+  .headtag:hover .arr {
+    display: flex;
+    margin-left: 10px;
+  }
+  
+  .headtag:hover {
+    color: var(--red);
+  }
 
 
 
@@ -173,25 +188,25 @@ p {
 }
 
 pre {
-    font-size: var(--font-size-xs);
+    font-size: 0.8rem;
     line-height: 1.6rem;
     margin: 0;
     padding: 0;
     background-color: #1E1E1E;
-    border-radius: var(--radius-md);
+    border-radius: 8px;
     width: 100%;
-    margin: var(--space-lg) 0;
+    margin: 1.5rem 0;
 }
 
 code {
-    padding: var(--space-lg);
+    padding: 1.5rem;
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow-x: visible;
     font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
     color: #D4D4D4;
     display: block;
-    border-radius: var(--radius-md);
+    border-radius: 8px;
 }
 
 pre > code {
@@ -227,12 +242,12 @@ pre > code {
 .article-body {
     max-width: 800px;
     width: 100%;
-    padding: 0 var(--space-md);
+    padding: 0 1rem;
     box-sizing: border-box;
 }
 
 .article-figure {
-    margin: var(--space-xl) 0;
+    margin: 2rem 0;
 }
 
 
@@ -240,47 +255,47 @@ pre > code {
 .article-figure img {
     max-width: 100%;
     height: auto;
-    border-radius: var(--radius-md);
+    border-radius: 8px;
 }
 
 .article-figure figcaption {
-    margin-top: var(--space-sm);
-    font-size: var(--font-size-sm);
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
     color: var(--text-secondary);
 }
 
 ol {
-    padding-left: var(--space-lg);
-    margin: var(--space-md) 0;
+    padding-left: 1.5rem;
+    margin: 1rem 0;
 }
 
 ol li {
     line-height: 1.5;
-    margin-bottom: var(--space-sm);
+    margin-bottom: 0.5rem;
 }
 
 .article-video {
     width: 100%;
     max-width: 100%;
     height: auto;
-    border-radius: var(--radius-md);
-    margin: var(--space-md) 0;
+    border-radius: 8px;
+    margin: 1rem 0;
 }
 
 .article-h1{
-    font-size: var(--font-size-2xl);
+    font-size: 2rem;
     letter-spacing: -0.05rem;
-    margin-bottom: var(--space-xl);
-    margin-top: var(--space-xl);
+    margin-bottom: 2rem;
+    margin-top: 2rem;
 }
 
 .article-h2{
-    margin-top: var(--space-3xl);
+    margin-top: 4rem;
 }
 
 .grey-background-article {
     background-color: var(--background-grey);
-    border-radius: var(--radius-xl);
+    border-radius: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -323,16 +338,16 @@ li pre {
 
 .back-button {
     position: fixed;
-    top: var(--space-xl);
-    left: var(--space-xl);
+    top: 2rem;
+    left: 2rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-sm);
-    padding: 0.75rem var(--space-md);
-    border-radius: var(--radius-md);
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
     color: var(--text-primary) !important;
-    font-size: var(--font-size-sm);
+    font-size: 0.9rem;
     font-weight: 500;
     text-decoration: none;
     transition: all 0.2s ease;
@@ -354,8 +369,8 @@ li pre {
 
 @media only screen and (max-width: 768px) {
     .back-button {
-        top: var(--space-md);
-        left: var(--space-md);
+        top: 1rem;
+        left: 1rem;
     }
 }
 
@@ -424,7 +439,7 @@ justify-content: space-between;
     margin-bottom: 6rem;
     background-color: var(--background-grey);
     border: var(--background-grey);
-    border-radius: var(--radius-lg);
+    border-radius: 12px;
     overflow: visible;
     padding: 1% 10%;
     width: 100%;
@@ -435,14 +450,14 @@ justify-content: space-between;
 
 .bp{
     display: flex;
-    gap: var(--space-md);
+    gap: 1rem;
 }
 
 
 .boxed {
     background-color: var(--background-grey);
     border: var(--background-grey);
-    border-radius: var(--radius-lg);
+    border-radius: 12px;
     overflow: visible;
     padding: 3% 3%;
     width: 100%;

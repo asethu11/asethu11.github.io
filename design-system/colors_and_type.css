@@ -126,7 +126,7 @@
    aliases are re-pinned to dark-appropriate indices; back-compat aliases
    (--background-grey, --border-light, …) follow automatically. ========== */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root:not([data-theme="light"]):not(.force-light) {
     --background:      #040404;
     --text-primary:    var(--gray-950);
     --text-secondary:  var(--gray-700);
@@ -166,6 +166,38 @@
 
 /* Manual overrides: <html data-theme="light"> / "dark" — same remap. */
 html[data-theme="dark"] {
+  --background: #040404;
+  --text-primary: var(--gray-950); --text-secondary: var(--gray-700); --text-bold: #FFFFFF;
+  --primary: #0A84FF; --code-text: #A78BFA;
+  --gray-50:#121212; --gray-100:#1F2022; --gray-200:#2B2C2E; --gray-300:#333435;
+  --gray-400:#4A4B4D; --gray-500:#6E6F71; --gray-600:#909193; --gray-700:#ADABAB;
+  --gray-800:#CFCFCF; --gray-900:#E6E6E6; --gray-950:#F0F0F0;
+  --surface: var(--gray-200); --surface-raised: var(--gray-300); --surface-sunken: var(--gray-50);
+  --border: var(--gray-300); --border-strong: var(--gray-400);
+  --text-tertiary: var(--gray-600); --text-muted: var(--gray-500); --divider: var(--gray-400);
+  --skeleton: var(--gray-100); --surface-overlay: var(--gray-400); --border-subtle: var(--gray-200);
+  --hover-overlay: var(--gray-300); --active-overlay: var(--gray-400);
+  color-scheme: dark;
+}
+
+/* Manual theme class overrides — <html class="force-light"> / "force-dark"
+   Used by the theme-toggle button on article/case-study pages. Fully remaps
+   the gray ramp so every token resolves correctly regardless of OS preference. */
+html.force-light {
+  --background: #FCFCFC;
+  --text-primary: #262628; --text-secondary: #737373; --text-bold: #0A0A0A;
+  --primary: #0070EA; --red: #DB4F4F; --code-text: #8B5CF6;
+  --gray-50:#F3F5F7; --gray-100:#E6E6E6; --gray-200:#CCCCCC; --gray-300:#B3B3B3;
+  --gray-400:#999999; --gray-500:#808080; --gray-600:#666666; --gray-700:#4D4D4D;
+  --gray-800:#333333; --gray-900:#1A1A1A; --gray-950:#121212;
+  --surface: var(--gray-50); --surface-raised: var(--gray-100); --surface-sunken: var(--gray-100);
+  --border: var(--gray-200); --border-strong: var(--gray-300);
+  --text-tertiary: var(--gray-500); --text-muted: var(--gray-400); --divider: var(--gray-300);
+  --skeleton: var(--gray-100); --surface-overlay: var(--gray-200); --border-subtle: var(--gray-100);
+  --hover-overlay: var(--gray-100); --active-overlay: var(--gray-200);
+  color-scheme: light;
+}
+html.force-dark {
   --background: #040404;
   --text-primary: var(--gray-950); --text-secondary: var(--gray-700); --text-bold: #FFFFFF;
   --primary: #0A84FF; --code-text: #A78BFA;

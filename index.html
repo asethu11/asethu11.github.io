@@ -51,11 +51,6 @@
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Abseth Design System (tokens, components, motion) — loaded first so page CSS can override -->
-        <link rel="stylesheet" href="/design-system/colors_and_type.css">
-        <link rel="stylesheet" href="/design-system/components.css">
-        <link rel="stylesheet" href="/design-system/motion.css">
-
 
         <title>Abhishek Sethuraman - UX Designer | AI Products & Enterprise Design</title>
         <meta name="author" content="Abhishek Sethuraman">
@@ -63,28 +58,25 @@
         <meta name="keywords" content="UX Designer, Product Designer, AI Products, RAG, LLM, Enterprise UX, Workflow Design, Arizona, USA, Abhishek Sethuraman">
         <meta name="robots" content="index, follow">
 
-        <!-- Google Search Console verification (replace content value after registering site at search.google.com/search-console) -->
-        <meta name="google-site-verification" content="xU5P33WkK0xTyU9WZulVbzG2kTK5Peb718tiQFlMd7E" />
-
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">
-        <meta property="og:url" content="https://abseth.com/">
+        <meta property="og:url" content="https://asethu11.github.io/">
         <meta property="og:title" content="Abhishek Sethuraman - UX Designer | AI Products & Enterprise Design">
         <meta property="og:description" content="UX & Product Designer specializing in AI-native products, RAG systems, and enterprise experiences for 220K+ users. Expert in simplifying complex workflows and scaling features.">
-        <meta property="og:image" content="https://abseth.com/img/favicon.png">
-        <meta property="og:image:width" content="399">
-        <meta property="og:image:height" content="317">
+        <meta property="og:image" content="https://asethu11.github.io/my-works/improving-adoption/thumbnail.png">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
         <meta property="og:site_name" content="Abhishek Sethuraman Portfolio">
 
         <!-- Twitter -->
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:url" content="https://abseth.com/">
+        <meta name="twitter:url" content="https://asethu11.github.io/">
         <meta name="twitter:title" content="Abhishek Sethuraman - UX Designer | AI Products & Enterprise Design">
         <meta name="twitter:description" content="UX & Product Designer specializing in AI-native products, RAG systems, and enterprise experiences for 220K+ users.">
-        <meta name="twitter:image" content="https://abseth.com/img/favicon.png">
+        <meta name="twitter:image" content="https://asethu11.github.io/my-works/improving-adoption/thumbnail.png">
 
         <!-- Canonical URL -->
-        <link rel="canonical" href="https://abseth.com/">
+        <link rel="canonical" href="https://asethu11.github.io/">
 
         <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
         <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
@@ -95,8 +87,8 @@
           "@context": "https://schema.org",
           "@type": "Person",
           "name": "Abhishek Sethuraman",
-          "url": "https://abseth.com/",
-          "image": "https://abseth.com/img/Abhishek.jpg",
+          "url": "https://asethu11.github.io/",
+          "image": "https://asethu11.github.io/img/Abhishek.jpg",
           "jobTitle": "UX & Product Designer",
           "worksFor": {
             "@type": "Organization",
@@ -123,9 +115,9 @@
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
         <link rel="preconnect" href="https://cdnjs.cloudflare.com">
         <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-        <link rel="stylesheet" href="/design-system/home.css">
-        <link rel="stylesheet" href="/design-system/cards.css">
-        <link rel="stylesheet" href="/design-system/thumbnail-effects.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/components/cards.css">
+        <link rel="stylesheet" href="/css/components/thumbnail-effects.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="icon" href="img/favicon.png" type="image/png">
 
@@ -220,19 +212,20 @@
         
           <!-- My Works Section -->
           <div class="header2"> 
-            <h2 class="section-t fx-stagger" style="--stagger-delay: 0">
+            <h2 class="section-t stagger-fade" style="--stagger-delay: 0">
                 Main work
             </h2>
 
             <!-- Project 1 -->
 
-            <div class="headerproject fx-stagger" style="--stagger-delay: 1">
+            <div class="headerproject stagger-fade" style="--stagger-delay: 1">
               <a href="/improvingAdoption">
-                <div class="grey-background headerprojectbg fx-tilt" data-coolthumb="tilt-stack-glare-chroma">
-                  <img src="my-works/improvingAdoption/thumbnail.png" alt="Improving Adoption Project" class="project-image" loading="lazy">
-                  <div aria-hidden="true" data-coolthumb-glare></div>
-                  <div aria-hidden="true" data-coolthumb-chroma></div>
-                  <div aria-hidden="true" data-coolthumb-badge>220K+ users</div>
+                <div class="grey-background headerprojectbg skeleton-wrapper" data-coolthumb="tilt-stack-glare-chroma" style="will-change: transform; transform: translateZ(0); transform-style: preserve-3d; transition: transform 140ms cubic-bezier(.2,.8,.2,1);">
+                  <div class="skeleton skeleton-image"></div>
+                  <img src="my-works/improvingAdoption/thumbnail.png" alt="Improving Adoption Project" class="project-image" loading="lazy" onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';" style="transform:translateZ(18px);">
+                  <div aria-hidden="true" data-coolthumb-glare style="position:absolute; inset:0; pointer-events:none; z-index:4; opacity:0; transition:opacity 160ms cubic-bezier(.2,.8,.2,1);"></div>
+                  <div aria-hidden="true" data-coolthumb-chroma style="position:absolute; inset:0; pointer-events:none; z-index:6; opacity:0; transition:opacity 160ms cubic-bezier(.2,.8,.2,1); mix-blend-mode:screen; filter:blur(10px); background:radial-gradient(240px 160px at 50% 40%, rgba(0,160,255,0.18), transparent 60%), radial-gradient(240px 160px at 50% 40%, rgba(255,0,120,0.14), transparent 62%);"></div>
+                  <div aria-hidden="true" data-coolthumb-badge style="position:absolute; right:14px; bottom:14px; pointer-events:none; z-index:5; opacity:0; transform:translateY(8px); transition:transform 200ms cubic-bezier(.2,.8,.2,1), opacity 160ms cubic-bezier(.2,.8,.2,1); padding:8px 10px; border-radius:999px; background:color-mix(in srgb, var(--background) 80%, transparent); box-shadow: 0 6px 18px rgba(0,0,0,0.10); color:var(--text-primary); font-weight:650; font-size:0.85rem; letter-spacing:-0.01em;">220K+ users</div>
                 </div>
               </a>
 
@@ -255,13 +248,14 @@
 
 
             <!-- Project 2 -->
-            <div class="headerproject fx-stagger" style="--stagger-delay: 2">
+            <div class="headerproject stagger-fade" style="--stagger-delay: 2">
               <a href="/LSR">
-                <div class="grey-background headerprojectbg fx-tilt" data-coolthumb="tilt-stack-glare-chroma">
-                  <img src="my-works/LSR/thumbnail.png" alt="Project GIF" class="project-image" loading="lazy">
-                  <div aria-hidden="true" data-coolthumb-glare></div>
-                  <div aria-hidden="true" data-coolthumb-chroma></div>
-                  <div aria-hidden="true" data-coolthumb-badge>RAG + LLMs</div>
+                <div class="grey-background headerprojectbg skeleton-wrapper" data-coolthumb="tilt-stack-glare-chroma" style="will-change: transform; transform: translateZ(0); transform-style: preserve-3d; transition: transform 140ms cubic-bezier(.2,.8,.2,1);">
+                  <div class="skeleton skeleton-image"></div>
+                  <img src="my-works/LSR/thumbnail.png" alt="Project GIF" class="project-image" loading="lazy" onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';" style="transform:translateZ(18px);">
+                  <div aria-hidden="true" data-coolthumb-glare style="position:absolute; inset:0; pointer-events:none; z-index:4; opacity:0; transition:opacity 160ms cubic-bezier(.2,.8,.2,1);"></div>
+                  <div aria-hidden="true" data-coolthumb-chroma style="position:absolute; inset:0; pointer-events:none; z-index:6; opacity:0; transition:opacity 160ms cubic-bezier(.2,.8,.2,1); mix-blend-mode:screen; filter:blur(10px); background:radial-gradient(240px 160px at 50% 40%, rgba(0,160,255,0.18), transparent 60%), radial-gradient(240px 160px at 50% 40%, rgba(255,0,120,0.14), transparent 62%);"></div>
+                  <div aria-hidden="true" data-coolthumb-badge style="position:absolute; right:14px; bottom:14px; pointer-events:none; z-index:5; opacity:0; transform:translateY(8px); transition:transform 200ms cubic-bezier(.2,.8,.2,1), opacity 160ms cubic-bezier(.2,.8,.2,1); padding:8px 10px; border-radius:999px; background:color-mix(in srgb, var(--background) 80%, transparent); box-shadow: 0 6px 18px rgba(0,0,0,0.10); color:var(--text-primary); font-weight:650; font-size:0.85rem; letter-spacing:-0.01em;">RAG + LLMs</div>
                 </div>
               </a>
 
@@ -283,13 +277,14 @@
             </div>
 
             <!-- Project 3 -->
-            <div class="headerproject fx-stagger" style="--stagger-delay: 3">
+            <div class="headerproject stagger-fade" style="--stagger-delay: 3">
               <a href="/nextgen">
-                <div class="grey-background headerprojectbg fx-tilt" data-coolthumb="tilt-stack-glare-chroma" data-coolthumb-hover="my-works/nextgen/thumbnail-hover.mp4">
-                  <img src="my-works/nextgen/thumbnail.png" alt="Project GIF" class="project-image" loading="lazy">
-                  <div aria-hidden="true" data-coolthumb-glare></div>
-                  <div aria-hidden="true" data-coolthumb-chroma></div>
-                  <div aria-hidden="true" data-coolthumb-badge>Unreal Engine 5</div>
+                <div class="grey-background headerprojectbg skeleton-wrapper" data-coolthumb="tilt-stack-glare-chroma" data-coolthumb-hover="my-works/nextgen/thumbnail-hover.mp4" style="will-change: transform; transform: translateZ(0); transform-style: preserve-3d; transition: transform 140ms cubic-bezier(.2,.8,.2,1);">
+                  <div class="skeleton skeleton-image"></div>
+                  <img src="my-works/nextgen/thumbnail.png" alt="Project GIF" class="project-image" loading="lazy" onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';" style="transform:translateZ(18px);">
+                  <div aria-hidden="true" data-coolthumb-glare style="position:absolute; inset:0; pointer-events:none; z-index:4; opacity:0; transition:opacity 160ms cubic-bezier(.2,.8,.2,1);"></div>
+                  <div aria-hidden="true" data-coolthumb-chroma style="position:absolute; inset:0; pointer-events:none; z-index:6; opacity:0; transition:opacity 160ms cubic-bezier(.2,.8,.2,1); mix-blend-mode:screen; filter:blur(10px); background:radial-gradient(240px 160px at 50% 40%, rgba(0,160,255,0.18), transparent 60%), radial-gradient(240px 160px at 50% 40%, rgba(255,0,120,0.14), transparent 62%);"></div>
+                  <div aria-hidden="true" data-coolthumb-badge style="position:absolute; right:14px; bottom:14px; pointer-events:none; z-index:5; opacity:0; transform:translateY(8px); transition:transform 200ms cubic-bezier(.2,.8,.2,1), opacity 160ms cubic-bezier(.2,.8,.2,1); padding:8px 10px; border-radius:999px; background:color-mix(in srgb, var(--background) 80%, transparent); box-shadow: 0 6px 18px rgba(0,0,0,0.10); color:var(--text-primary); font-weight:650; font-size:0.85rem; letter-spacing:-0.01em;">Unreal Engine 5</div>
                 </div>
               </a>
 
@@ -311,13 +306,14 @@
             </div>
 
             <!-- Project 4 -->
-            <div class="headerproject fx-stagger" style="--stagger-delay: 4">
+            <div class="headerproject stagger-fade" style="--stagger-delay: 4">
               <a href="/COMUT">
-                <div class="grey-background headerprojectbg fx-tilt" data-coolthumb="tilt-stack-glare-chroma">
-                  <img src="my-works/COMUT/com-presentation.jpg" alt="City of Mesa safety messaging case study — user testing for transit-safety communications" class="project-image" loading="lazy">
-                  <div aria-hidden="true" data-coolthumb-glare></div>
-                  <div aria-hidden="true" data-coolthumb-chroma></div>
-                  <div aria-hidden="true" data-coolthumb-badge>3× recall</div>
+                <div class="grey-background headerprojectbg skeleton-wrapper" data-coolthumb="tilt-stack-glare-chroma" style="will-change: transform; transform: translateZ(0); transform-style: preserve-3d; transition: transform 140ms cubic-bezier(.2,.8,.2,1);">
+                  <div class="skeleton skeleton-image"></div>
+                  <img src="my-works/COMUT/com-presentation.jpg" alt="" class="project-image" loading="lazy" onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';" style="transform:translateZ(18px);">
+                  <div aria-hidden="true" data-coolthumb-glare style="position:absolute; inset:0; pointer-events:none; z-index:4; opacity:0; transition:opacity 160ms cubic-bezier(.2,.8,.2,1);"></div>
+                  <div aria-hidden="true" data-coolthumb-chroma style="position:absolute; inset:0; pointer-events:none; z-index:6; opacity:0; transition:opacity 160ms cubic-bezier(.2,.8,.2,1); mix-blend-mode:screen; filter:blur(10px); background:radial-gradient(240px 160px at 50% 40%, rgba(0,160,255,0.18), transparent 60%), radial-gradient(240px 160px at 50% 40%, rgba(255,0,120,0.14), transparent 62%);"></div>
+                  <div aria-hidden="true" data-coolthumb-badge style="position:absolute; right:14px; bottom:14px; pointer-events:none; z-index:5; opacity:0; transform:translateY(8px); transition:transform 200ms cubic-bezier(.2,.8,.2,1), opacity 160ms cubic-bezier(.2,.8,.2,1); padding:8px 10px; border-radius:999px; background:color-mix(in srgb, var(--background) 80%, transparent); box-shadow: 0 6px 18px rgba(0,0,0,0.10); color:var(--text-primary); font-weight:650; font-size:0.85rem; letter-spacing:-0.01em;">3× recall</div>
                 </div>
               </a>
 
@@ -347,19 +343,6 @@
           
           <div class="columns-container">
             <div class="projects">
-
-              <a href="/my-works/DesignSystemPOZ/" class="project-row">
-                <p class="project-row-title">
-                    POZ Design System
-                </p>
-                  <div class="project-row-sub-title">
-                      <p class="project-tag">June 2026</p>
-                      <p class="project-tag">·</p>
-                      <p class="project-tag">Design Systems</p>
-                      <p class="project-tag">·</p>
-                      <p class="project-tag">HTML · CSS · React</p>
-                  </div>
-              </a>
 
               <a href="/ytm" class="project-row">
                 <p class="project-row-title">
@@ -433,10 +416,6 @@
       
             <div class="preview-container">
                 <!-- Project Previews -->
-
-                <div class="project-preview">
-                  <img src="my-works/DesignSystemPOZ/thumbnail.png" alt="POZ Design System preview" loading="lazy">
-                </div>
 
                 <div class="project-preview">
                   <img src="my-works/ytm/img/dk/slide1.png" alt="Project 1 preview" loading="lazy">
