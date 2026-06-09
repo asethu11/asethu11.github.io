@@ -52,6 +52,7 @@
         <link rel="stylesheet" href="/design-system/colors_and_type.css">
         <link rel="stylesheet" href="/design-system/components.css">
         <link rel="stylesheet" href="/design-system/motion.css">
+        <link rel="stylesheet" href="/design-system/article.css">
 
 
         <title>AI-Powered Data Extraction UI — RAG & LLM Workflow Case Study</title>
@@ -96,45 +97,13 @@
 
         <script src="/script.js"></script>
         <script src="/shared.js"></script>
-        <link rel="stylesheet" href="/my-works/LSR/LSR-fixed.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="/my-works/LSR/lsr.css">
         <link rel="icon" href="/img/favicon.png" type="image/png">
 
         <script>
-            function isDarkTheme() {
-                const forcedLight = document.documentElement.classList.contains('force-light');
-                const forcedDark = document.documentElement.classList.contains('force-dark');
-                if (forcedLight) return false;
-                if (forcedDark) return true;
-                return window.matchMedia("(prefers-color-scheme: dark)").matches;
-            }
-
-            function updateImages() {
-                const isDarkMode = isDarkTheme();
-                document.querySelectorAll(".theme-img").forEach(img => {
-                    const imageName = img.dataset.name;
-                    const newSrc = isDarkMode 
-                        ? `/my-works/LSR/img/dk/${imageName}.png` 
-                        : `/my-works/LSR/img/lt/${imageName}.png`;
-
-                    if (img.src !== newSrc) {
-                        img.src = newSrc;
-                    }
-                });
-            }
-
-            const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-            darkModeQuery.addEventListener("change", updateImages);
-
-            document.addEventListener("DOMContentLoaded", updateImages);
-
-            function openImageInNewTab(imageName) {
-                const isDarkMode = isDarkTheme();
-                const imagePath = isDarkMode 
-                    ? `/my-works/LSR/img/dk/${imageName}.png` 
-                    : `/my-works/LSR/img/lt/${imageName}.png`;
-                window.open(imagePath, '_blank');
-            }
+            window.updateImages = initThemeImages('/my-works/LSR');
+            window.openImageInNewTab = function(n) { openThemeImageInNewTab(n, '/my-works/LSR'); };
         </script>
     </head>
 
@@ -665,8 +634,6 @@
                 updateActiveLink();
             })();
         </script>
-        <script src="../../script.js"></script>
-        <script src="../../shared.js"></script>
     </body>
 </html>
 

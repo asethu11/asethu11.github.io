@@ -49,6 +49,7 @@
         <link rel="stylesheet" href="/design-system/colors_and_type.css">
         <link rel="stylesheet" href="/design-system/components.css">
         <link rel="stylesheet" href="/design-system/motion.css">
+        <link rel="stylesheet" href="/design-system/article.css">
 
 
         <title>City of Mesa Safety Messaging — User Testing & 3× Recall Case Study</title>
@@ -93,46 +94,14 @@
 
         <script src="/script.js"></script>
         <script src="/shared.js"></script>
-        <link rel="stylesheet" href="/my-works/COMUT/COMUT.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="/my-works/COMUT/comut.css">
         <link rel="icon" href="/img/favicon.png" type="image/png">
     </head>
 
 <script>
-    function isDarkTheme() {
-        const forcedLight = document.documentElement.classList.contains('force-light');
-        const forcedDark = document.documentElement.classList.contains('force-dark');
-        if (forcedLight) return false;
-        if (forcedDark) return true;
-        return window.matchMedia("(prefers-color-scheme: dark)").matches;
-    }
-
-    function updateImages() {
-        const isDarkMode = isDarkTheme();
-        document.querySelectorAll(".theme-img").forEach(img => {
-            const imageName = img.dataset.name;
-            const newSrc = isDarkMode 
-                ? `/my-works/COMUT/img/dk/${imageName}.png` 
-                : `/my-works/COMUT/img/lt/${imageName}.png`;
-
-            if (img.src !== newSrc) {
-                img.src = newSrc;
-            }
-        });
-    }
-
-    const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    darkModeQuery.addEventListener("change", updateImages);
-
-    document.addEventListener("DOMContentLoaded", updateImages);
-
-    function openImageInNewTab(imageName) {
-        const isDarkMode = isDarkTheme();
-        const imagePath = isDarkMode 
-            ? `/my-works/COMUT/img/dk/${imageName}.png` 
-            : `/my-works/COMUT/img/lt/${imageName}.png`;
-        window.open(imagePath, '_blank');
-    }
+    window.updateImages = initThemeImages('/my-works/COMUT');
+    window.openImageInNewTab = function(n) { openThemeImageInNewTab(n, '/my-works/COMUT'); };
 </script>
 
 
@@ -573,8 +542,6 @@
             updateActiveLink();
         })();
     </script>
-    <script src="/script.js"></script>
-    <script src="/shared.js"></script>
 </body>
 </html>
 
