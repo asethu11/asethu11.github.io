@@ -1,910 +1,1031 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Canonical URL normalizer -->
-        <link id="canonical-link" rel="canonical" href="">
-        <script>
-        (function(){
-          try{
-            const u = new URL(location.href);
-            let p = u.pathname;
-            if (p.endsWith('/index.html')) p = p.replace(/\/index\.html$/, '/');
-            const m = p.match(/^\/([^\/]+)\/\1\.html$/);
-            if (m) p = '/' + m[1];
-            if (p !== '/' && p.endsWith('/')) p = p.replace(/\/+$/, '');
-            const parts = p.split('/').filter(Boolean);
-            if (parts.length === 1 || (parts[0] === 'blogs' && parts.length === 2)) {
-              const normalized = parts.map(s => s.toLowerCase()).join('/');
-              p = '/' + normalized;
-            }
-            const canonicalHref = 'https://abseth.com' + p + u.search + u.hash;
-            const canon = document.getElementById('canonical-link');
-            if (canon) canon.href = canonicalHref;
-            if (p !== u.pathname) location.replace(canonicalHref);
-          } catch(e){ console.error('canonical normalizer error', e); }
-        })();
-        </script>
+<head>
+  <!-- Canonical URL normalizer -->
+  <link id="canonical-link" rel="canonical" href="">
+  <script>
+  (function(){
+    try{
+      const u = new URL(location.href);
+      let p = u.pathname;
+      if (p.endsWith('/index.html')) p = p.replace(/\/index\.html$/, '/');
+      const m = p.match(/^\/([^\/]+)\/\1\.html$/);
+      if (m) p = '/' + m[1];
+      if (p !== '/' && p.endsWith('/')) p = p.replace(/\/+$/, '');
+      const parts = p.split('/').filter(Boolean);
+      if (parts.length === 1 || (parts[0] === 'blogs' && parts.length === 2)) {
+        const normalized = parts.map(s => s.toLowerCase()).join('/');
+        p = '/' + normalized;
+      }
+      const canonicalHref = 'https://abseth.com' + p + u.search + u.hash;
+      const canon = document.getElementById('canonical-link');
+      if (canon) canon.href = canonicalHref;
+      if (p !== u.pathname) location.replace(canonicalHref);
+    } catch(e){ console.error('canonical normalizer error', e); }
+  })();
+  </script>
 
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
-            gtag('config', 'G-98H0ZTK0T4');
-        </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-98H0ZTK0T4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-98H0ZTK0T4');
+  </script>
 
-        <!-- Clarity tracking code -->
-        <script type="text/javascript">
-            (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "vaaig4fq2o");
-        </script>
+  <!-- Clarity tracking -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "vaaig4fq2o");
+  </script>
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Abseth Design System (tokens, components, motion) — loaded first so page CSS can override -->
-        <link rel="stylesheet" href="/design-system/colors_and_type.css">
-        <link rel="stylesheet" href="/design-system/components.css">
-        <link rel="stylesheet" href="/design-system/motion.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 
+  <!-- Abseth Design System — loaded first so page CSS can override -->
+  <link rel="stylesheet" href="/design-system/colors_and_type.css">
+  <link rel="stylesheet" href="/design-system/components.css">
+  <link rel="stylesheet" href="/design-system/motion.css">
+  <link rel="stylesheet" href="/design-system/article.css">
 
-        <title>Vertex Hub Payroll Module — Enterprise Payroll UX Case Study by Abhishek Sethuraman</title>
-        <meta name="author" content="Abhishek Sethuraman">
-        <meta name="description" content="Designed a structured payroll module for an existing operations platform — reducing approval errors and streamlining pay-run workflows for finance teams at scale.">
-        <meta name="keywords" content="UX, UI, Design, Portfolio, Payroll, Enterprise, B2B, SaaS, Workflow Design">
-        <meta name="robots" content="index, follow">
-        <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
-        <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
+  <title>Consolidating Four Document Systems Into One Searchable Layer | Abhishek Sethuraman</title>
+  <meta name="author" content="Abhishek Sethuraman">
+  <meta name="description" content="UX and product design case study: a platform-native, metadata-driven document layer that replaces a fragmented Box, SharePoint, email, and OneDrive stack across hundreds of charter schools.">
+  <meta name="keywords" content="UX, UI, Design, Portfolio, Document Management, Education, Enterprise, B2B, SaaS">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#040404" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#FCFCFC" media="(prefers-color-scheme: light)">
 
-        <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="article">
-        <meta property="og:url" content="https://abseth.com/my-works/payrollModule/">
-        <meta property="og:title" content="Vertex Hub Payroll Module — Enterprise Payroll UX Case Study">
-        <meta property="og:description" content="Designed a structured payroll module for an existing operations platform — reducing approval errors and streamlining pay-run workflows for finance teams at scale.">
-        <meta property="og:image" content="https://abseth.com/img/Abhishek.jpg">
-        <meta property="og:site_name" content="Abhishek Sethuraman Portfolio">
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://abseth.com/my-works/DocManagement/">
+  <meta property="og:title" content="Consolidating Four Document Systems Into One Searchable Layer">
+  <meta property="og:description" content="UX and product design case study: a platform-native, metadata-driven document layer that replaces a fragmented Box, SharePoint, email, and OneDrive stack.">
+  <meta property="og:image" content="https://abseth.com/my-works/DocManagement/img/lt/thumbnail.png">
+  <meta property="og:image:alt" content="Document Layer case study &#8212; metadata-driven repository for 400+ charter schools">
+  <meta property="og:site_name" content="Abhishek Sethuraman Portfolio">
 
-        <!-- Twitter -->
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="Vertex Hub Payroll Module — Enterprise Payroll UX Case Study">
-        <meta name="twitter:description" content="Designed a structured payroll module for an existing operations platform — reducing approval errors and streamlining pay-run workflows for finance teams.">
-        <meta name="twitter:image" content="https://abseth.com/img/Abhishek.jpg">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Consolidating Four Document Systems Into One Searchable Layer">
+  <meta name="twitter:description" content="UX and product design case study: a platform-native, metadata-driven document layer.">
+  <meta name="twitter:image" content="https://abseth.com/my-works/DocManagement/img/lt/thumbnail.png">
+  <meta name="twitter:image:alt" content="Document Layer case study &#8212; metadata-driven repository for 400+ charter schools">
 
-        <!-- JSON-LD Structured Data -->
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "CreativeWork",
-          "name": "Vertex Hub Payroll Module",
-          "url": "https://abseth.com/my-works/payrollModule/",
-          "image": "https://abseth.com/img/Abhishek.jpg",
-          "description": "Designed a structured payroll module for an existing operations platform — reducing approval errors and streamlining pay-run workflows for finance teams at scale.",
-          "author": {
-            "@type": "Person",
-            "name": "Abhishek Sethuraman",
-            "url": "https://abseth.com/"
-          },
-          "datePublished": "2024"
-        }
-        </script>
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "Consolidating Four Document Systems Into One Searchable Layer",
+    "url": "https://abseth.com/my-works/DocManagement/",
+    "description": "UX and product design case study: a platform-native, metadata-driven document layer that replaces a fragmented Box, SharePoint, email, and OneDrive stack across hundreds of charter schools.",
+    "image": "https://abseth.com/my-works/DocManagement/img/lt/thumbnail.png",
+    "author": { "@type": "Person", "name": "Abhishek Sethuraman", "url": "https://abseth.com/" },
+    "publisher": { "@type": "Person", "name": "Abhishek Sethuraman", "url": "https://abseth.com/" },
+    "keywords": "UX, UI, Design, Document Management, Education, Enterprise, B2B, SaaS",
+    "datePublished": "2026-05",
+    "dateModified": "2026-06"
+  }
+  </script>
 
-        <script src="/script.js"></script>
-        <script src="/shared.js"></script>
-        <link rel="stylesheet" href="/my-works/payrollModule/payrollModule.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="icon" href="/img/favicon.png" type="image/png">
+  <link rel="stylesheet" href="/my-works/DocManagement/docManagement.css">
+  <link rel="icon" href="/img/favicon.png" type="image/png">
 
-        <script>
-            function isDarkTheme() {
-                const forcedLight = document.documentElement.classList.contains('force-light');
-                const forcedDark = document.documentElement.classList.contains('force-dark');
-                if (forcedLight) return false;
-                if (forcedDark) return true;
-                return window.matchMedia("(prefers-color-scheme: dark)").matches;
-            }
+  <script>
+    function isDarkTheme() {
+      const forcedLight = document.documentElement.classList.contains('force-light');
+      const forcedDark = document.documentElement.classList.contains('force-dark');
+      if (forcedLight) return false;
+      if (forcedDark) return true;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
 
-            function updateImages() {
-                const isDarkMode = isDarkTheme();
-                document.querySelectorAll(".theme-img").forEach(img => {
-                    const imageName = img.dataset.name;
-                    const newSrc = isDarkMode
-                        ? `/my-works/payrollModule/img/dk/${imageName}.png`
-                        : `/my-works/payrollModule/img/lt/${imageName}.png`;
-                    if (img.src !== newSrc) img.src = newSrc;
-                });
-            }
+    function updateImages() {
+      const isDarkMode = isDarkTheme();
+      document.querySelectorAll('.theme-img').forEach(img => {
+        const imageName = img.dataset.name;
+        const newSrc = isDarkMode
+          ? `/my-works/DocManagement/img/dk/${imageName}.png`
+          : `/my-works/DocManagement/img/lt/${imageName}.png`;
+        if (img.src !== newSrc) img.src = newSrc;
+      });
+    }
 
-            window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateImages);
-            document.addEventListener("DOMContentLoaded", updateImages);
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateImages);
+    document.addEventListener('DOMContentLoaded', function() {
+      updateImages();
+      new MutationObserver(updateImages).observe(document.documentElement, { attributeFilter: ['class'] });
+    });
+  </script>
+</head>
+<body>
 
-            function openImageInNewTab(imageName) {
-                const isDarkMode = isDarkTheme();
-                const imagePath = isDarkMode
-                    ? `/my-works/payrollModule/img/dk/${imageName}.png`
-                    : `/my-works/payrollModule/img/lt/${imageName}.png`;
-                window.open(imagePath, '_blank');
-            }
-        </script>
-    </head>
+  <a href="/" class="back-button">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Home
+  </a>
 
-    <body>
-        <a href="/" class="back-button">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Home
-        </a>
+  <!-- Sticky Table of Contents -->
+  <aside class="toc-sticky" aria-label="Table of contents">
+    <div class="toc-wrapper">
+      <h3 class="toc-title">Contents</h3>
+      <div class="reading-progress" aria-hidden="true">
+        <div class="reading-progress-fill"></div>
+      </div>
+      <nav class="toc-nav">
+        <ul class="toc-list">
+          <li><a href="#tldr" data-ga-event="click" data-ga-event-name="toc_tldr" data-ga-event-category="navigation">TL;DR</a></li>
+          <li><a href="#problem" data-ga-event="click" data-ga-event-name="toc_problem" data-ga-event-category="navigation">The problem</a></li>
+          <li><a href="#discovery" data-ga-event="click" data-ga-event-name="toc_discovery" data-ga-event-category="navigation">Discovery</a></li>
+          <li><a href="#alignment" data-ga-event="click" data-ga-event-name="toc_alignment" data-ga-event-category="navigation">Strategy &amp; scope</a></li>
+          <li><a href="#solution" data-ga-event="click" data-ga-event-name="toc_solution" data-ga-event-category="navigation">The solution</a></li>
+          <li><a href="#components" data-ga-event="click" data-ga-event-name="toc_components" data-ga-event-category="navigation">Components</a></li>
+          <li><a href="#rationale" data-ga-event="click" data-ga-event-name="toc_rationale" data-ga-event-category="navigation">Design rationale</a></li>
+          <li><a href="#validation" data-ga-event="click" data-ga-event-name="toc_validation" data-ga-event-category="navigation">Review</a></li>
+          <li><a href="#results" data-ga-event="click" data-ga-event-name="toc_results" data-ga-event-category="navigation">Results</a></li>
+          <li><a href="#vision" data-ga-event="click" data-ga-event-name="toc_vision" data-ga-event-category="navigation">Vision &amp; Phase 2</a></li>
+        </ul>
+      </nav>
+      <a class="toc-top" href="#top" data-ga-event="click" data-ga-event-name="back_to_top" data-ga-event-category="navigation">Back to top</a>
+    </div>
+  </aside>
 
-        <!-- Sticky TOC -->
-        <aside class="toc-sticky" aria-label="Table of contents">
-            <div class="toc-wrapper">
-                <h3 class="toc-title">Contents</h3>
-                <div class="reading-progress" aria-hidden="true">
-                    <div class="reading-progress-fill"></div>
-                </div>
-                <nav class="toc-nav">
-                    <ul class="toc-list">
-                        <li><a href="#tldr" data-ga-event="click" data-ga-event-name="toc_tldr" data-ga-event-category="navigation">TL;DR</a></li>
-                        <li><a href="#context" data-ga-event="click" data-ga-event-name="toc_context" data-ga-event-category="navigation">Context</a></li>
-                        <li><a href="#challenges" data-ga-event="click" data-ga-event-name="toc_challenges" data-ga-event-category="navigation">Constraints</a></li>
-                        <li><a href="#approach" data-ga-event="click" data-ga-event-name="toc_approach" data-ga-event-category="navigation">Design Process</a></li>
-                        <li><a href="#module" data-ga-event="click" data-ga-event-name="toc_module" data-ga-event-category="navigation">The Design</a></li>
-                        <li><a href="#decisions" data-ga-event="click" data-ga-event-name="toc_decisions" data-ga-event-category="navigation">Driving Closure</a></li>
-                        <li><a href="#outcomes" data-ga-event="click" data-ga-event-name="toc_outcomes" data-ga-event-category="navigation">Outcomes</a></li>
+  <div class="toast" role="alert" aria-live="polite" aria-atomic="true">
+    <div class="toast-title">This content is optimized for light mode</div>
+    <div class="toast-text">You&#8217;re viewing in dark mode. Switch to light for a comfortable reading experience.</div>
+    <div class="toast-actions">
+      <button class="btn-primary" id="toast-switch-light" data-ga-event="click" data-ga-event-name="switch_to_light_mode" data-ga-event-category="theme">Switch to light mode</button>
+      <button class="btn-ghost" id="toast-dismiss" data-ga-event="click" data-ga-event-name="dismiss_toast" data-ga-event-category="notification">Dismiss</button>
+    </div>
+  </div>
 
-                        <li><a href="#next" data-ga-event="click" data-ga-event-name="toc_next" data-ga-event-category="navigation">What's Next</a></li>
-                    </ul>
-                </nav>
-                <a class="toc-top" href="#top" data-ga-event="click" data-ga-event-name="back_to_top" data-ga-event-category="navigation">Back to top</a>
-            </div>
-        </aside>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme" data-ga-event="click" data-ga-event-name="toggle_theme" data-ga-event-category="theme">Switch to light</button>
 
-        <div class="toast" role="alert" aria-live="polite" aria-atomic="true">
-            <div class="toast-title">This content is optimized for light mode</div>
-            <div class="toast-text">You're viewing in dark mode. Switch to light for a comfortable reading experience.</div>
-            <div class="toast-actions">
-                <button class="btn-primary" id="toast-switch-light">Switch to light mode</button>
-                <button class="btn-ghost" id="toast-dismiss">Dismiss</button>
-            </div>
-        </div>
+  <div class="article-container" id="top">
+    <article class="article-body">
 
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">Switch to light</button>
-
-        <div class="article-container">
-            <article class="article-body">
-
-                <!-- Intro -->
-                <section class="section-1">
-                    <div class="grey-background-article image-bottom">
-                        <figure class="article-figure">
-                            <img class="theme-img" src="" data-name="cover" width="100%" alt="Vertex Hub Payroll Module" loading="lazy">
-                        </figure>
-                    </div>
-
-                    <h1 class="article-h1">
-                        Vertex Hub Payroll: Structuring Fragmented Payroll Operations
-                    </h1>
-
-                    <p>
-                        I designed a payroll module for Vertex Hub that replaced email-and-spreadsheet coordination with structured workflows. The module introduces dual-path submission, exception-focused review, and formal approval workflows with embedded validation and audit trails.
-                    </p>
-
-                    <div class="sub-header">
-                        <p id="intro-tags1">Mar&ndash;Apr 2026 &nbsp;|&nbsp; Product Manager + Product Designer &nbsp;|&nbsp; B2B SaaS Platform Extension</p>
-                    </div>
-                </section>
-
-                <hr>
-
-                <!-- TL;DR -->
-                <section class="section-tldr">
-                    <h2 class="article-h2" id="tldr">TL;DR</h2>
-
-                    <p><b style="color: var(--red);">Problem</b><br>
-                    Payroll teams spent 9,000+ hours annually managing spreadsheets across five systems. Schools submitted data via email with 75% first-pass accuracy. No centralized visibility, audit trails, or structured validation.</p>
-
-                    <p><b style="color: var(--red);">What I did</b><br>
-                    Led discovery (stakeholder interviews, workflow mapping), designed submission and review flows, defined 150+ functional requirements, established technical architecture for Q2 delivery.</p>
-
-                    <p><b style="color: var(--red);">Result</b><br>
-                    Launched with targets: &gt;80% school adoption, &gt;50% email reduction, &lt;24-hour review cycles. Early signals: 3-minute submissions vs previous 20&ndash;30 minutes. Misconfiguration errors eliminated by design.</p>
-                </section>
-
-                <hr class="intro-hr">
-
-                <!-- Context -->
-                <section class="section-context">
-                    <h2 class="article-h2" id="context">Context</h2>
-                    <p>Vertex Hub handles school operations&mdash;enrollment, compliance, reporting. Payroll remained outside the platform, running through 17 manual steps involving email reminders, Excel templates, Box uploads, manual interpretation, and double data entry across five payroll systems (Paylocity, ADP, iSolved, Paycore).</p>
-
-                    <p>The numbers:</p>
-                    <ul>
-                        <li>9,000+ annual hours spent on spreadsheet management (24% of EdTec team time, 53% of PA team time)</li>
-                        <li>75% first-pass accuracy from schools</li>
-                        <li>Data arriving &lt;24 hours before payroll deadlines</li>
-                        <li>Zero tolerance for errors (compliance requirement)</li>
-                    </ul>
-
+                <div class="grey-background-article image-bottom">
                     <figure class="article-figure">
-                        <style>
-                        .wf4-outer { border-radius: 12px; border: 1px solid rgba(128,128,128,0.12); overflow: hidden; }
-                        .wf4-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0.9rem; border-bottom: 1px solid rgba(128,128,128,0.1); background: var(--background-grey); flex-wrap: wrap; gap: 0.4rem; }
-                        .wf4-legend { display: flex; flex-wrap: wrap; gap: 0.3rem 0.85rem; }
-                        .wf4-leg { display: flex; align-items: center; gap: 5px; font-size: 0.68rem; color: var(--text-secondary); font-weight: 500; }
-                        .wf4-leg::before { content: ''; display: inline-block; width: 14px; height: 3px; border-radius: 2px; flex-shrink: 0; }
-                        .wf4-leg.sc::before { background: #3b82f6; } .wf4-leg.sp::before { background: #f59e0b; }
-                        .wf4-leg.de::before { background: #8b5cf6; } .wf4-leg.sy::before { background: #6b7280; }
-                        .wf4-ctrls { display: flex; gap: 3px; flex-shrink: 0; }
-                        .wf4-btn { width: 24px; height: 24px; border: 1px solid rgba(128,128,128,0.22); background: var(--background, #fff); border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); line-height: 1; }
-                        .wf4-btn:hover { background: rgba(128,128,128,0.1); }
-                        .wf4-canvas { height: 260px; overflow: hidden; position: relative; cursor: grab; user-select: none; -webkit-user-select: none; background: var(--background-grey); }
-                        .wf4-canvas:active { cursor: grabbing; }
-                        #payroll-wf5 { position: absolute; top: 0; left: 0; margin: 0; padding: 0; border: none; background: none; transform-origin: 0 0; white-space: nowrap; line-height: 0; }
-                        #payroll-wf5 svg { display: block; max-width: none !important; }
-                        .wf4-hint { position: absolute; bottom: 7px; right: 10px; font-size: 0.58rem; color: var(--text-secondary); opacity: 0.38; pointer-events: none; letter-spacing: 0.01em; }
-                        @media (prefers-color-scheme: dark) { .wf4-bar, .wf4-canvas { background: rgba(255,255,255,0.025); } .wf4-btn { background: #1c1c1c; } }
-                        html.force-dark .wf4-bar, html.force-dark .wf4-canvas { background: rgba(255,255,255,0.025); }
-                        html.force-dark .wf4-btn { background: #1c1c1c; }
-                        html.force-light .wf4-bar, html.force-light .wf4-canvas { background: var(--background-grey); }
-                        html.force-light .wf4-btn { background: #fff; }
-                        </style>
-
-                        <div class="wf4-outer">
-                            <div class="wf4-bar">
-                                <div class="wf4-legend">
-                                    <span class="wf4-leg sc">School</span>
-                                    <span class="wf4-leg sp">Specialist</span>
-                                    <span class="wf4-leg de">AM/QC Decision</span>
-                                    <span class="wf4-leg sy">Systems</span>
-                                </div>
-                                <div class="wf4-ctrls">
-                                    <button class="wf4-btn" id="wf4-zi" title="Zoom in">+</button>
-                                    <button class="wf4-btn" id="wf4-zo" title="Zoom out">&minus;</button>
-                                    <button class="wf4-btn" id="wf4-fit" title="Fit to view" style="font-size:10px;">&#x229F;</button>
-                                </div>
-                            </div>
-                            <div class="wf4-canvas" id="wf4-canvas">
-                                <pre class="mermaid" id="payroll-wf5"></pre>
-                                <span class="wf4-hint">scroll to zoom &middot; drag to pan</span>
-                            </div>
-                        </div>
-
-                        <figcaption>The existing 17-step process&mdash;email reminders, Excel templates, Box uploads, manual tracking, double entry.</figcaption>
+                        <img class="theme-img" src="" data-name="thumbnail" width="100%" alt="Replacing a decade of folders with one searchable layer for hundreds of schools">
                     </figure>
-
-                    <script type="module">
-                    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-
-                    /* ── Edit labels here ──────────────────────────────────────────── */
-                    const DIAGRAM = (s) => `flowchart LR
-    A([Receive reminder]):::sc
-    B([Fill PCS sheet]):::sc
-    C([Fill Hours sheet]):::sc
-    D([Upload files]):::sc
-    E([Add email notes]):::sc
-    F[Monitor inbox]:::sp
-    G[Download docs]:::sp
-    H[Interpret data]:::sp
-    I["Enter data (1st)"]:::sp
-    J[(Internal sheet)]:::sy
-    K["Re-enter (2nd)"]:::sp
-    L[(Payroll system)]:::sy
-    M[QC check]:::sp
-    N{Issues?}:::de
-    O[Email school]:::sp
-    P([School responds]):::sc
-    Q[Update data]:::sp
-    R[Compile package]:::sp
-    S[(Box/SharePoint)]:::sy
-    T[Email package]:::sp
-    U([Review package]):::sc
-    V{Approved?}:::de
-    W([Request changes]):::sc
-    X[Update & re-issue]:::sp
-    Z([Send approval]):::sc
-    AA[Finalize payroll]:::sp
-    AB[(GL/Finance)]:::sy
-
-    A-->B-->C-->D-->E-->F-->G-->H-->I-->J-->K-->L-->M-->N
-    N-- Yes -->O-->P-->Q-->N
-    N-- No -->R-->S-->T-->U-->V
-    V-- No -->W-->X-->U
-    V-- Yes -->Z-->AA-->AB
-
-    classDef sc ${s.sc}
-    classDef sp ${s.sp}
-    classDef sy ${s.sy}
-    classDef de ${s.de}`;
-                    /* ─────────────────────────────────────────────────────────────── */
-
-                    const STYLES = {
-                        light: { sc: 'fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a', sp: 'fill:#fef3c7,stroke:#f59e0b,color:#78350f', sy: 'fill:#f3f4f6,stroke:#9ca3af,color:#374151', de: 'fill:#ede9fe,stroke:#8b5cf6,color:#4c1d95' },
-                        dark:  { sc: 'fill:#1e3a8a,stroke:#3b82f6,color:#bfdbfe', sp: 'fill:#451a03,stroke:#f59e0b,color:#fde68a', sy: 'fill:#111827,stroke:#6b7280,color:#d1d5db', de: 'fill:#2e1065,stroke:#8b5cf6,color:#ddd6fe' }
-                    };
-
-                    const canvas = document.getElementById('wf4-canvas');
-                    const el = document.getElementById('payroll-wf5');
-                    let sc = 1, tx = 0, ty = 0;
-                    const MIN_SCALE = 0.4; /* ← tweak zoom-out floor here */
-                    const MAX_SCALE = 6;   /* ← tweak zoom-in ceiling here */
-
-                    const apply = () => { el.style.transform = `translate(${tx}px,${ty}px) scale(${sc})`; };
-
-                    function fit() {
-                        const svg = el.querySelector('svg');
-                        if (!svg) return;
-                        const vb = svg.getAttribute('viewBox');
-                        let sw, sh;
-                        if (vb) { const p = vb.trim().split(/[\s,]+/).map(Number); sw = p[2]; sh = p[3]; }
-                        else { sw = parseFloat(svg.getAttribute('width')) || 1200; sh = parseFloat(svg.getAttribute('height')) || 400; }
-                        const cw = canvas.clientWidth, ch = canvas.clientHeight;
-                        sc = 3;
-                        tx = 73;
-                        ty = 100;
-                        apply();
-                    }
-
-                    function getIsDark() {
-                        if (document.documentElement.classList.contains('force-light')) return false;
-                        if (document.documentElement.classList.contains('force-dark')) return true;
-                        return window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    }
-
-                    async function render() {
-                        const dark = getIsDark();
-                        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default', flowchart: { curve: 'linear', padding: 8 }, fontFamily: 'Inter, ui-sans-serif, sans-serif', fontSize: 13 });
-                        document.getElementById('_pwf5')?.remove();
-                        try {
-                            const { svg } = await mermaid.render('_pwf5', DIAGRAM(dark ? STYLES.dark : STYLES.light));
-                            el.innerHTML = svg;
-                            fit();
-                        } catch(e) {}
-                    }
-
-                    /* ── Zoom to cursor ── */
-                    canvas.addEventListener('wheel', e => {
-                        e.preventDefault();
-                        const r = canvas.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top;
-                        const f = e.deltaY < 0 ? 1.12 : 0.89, ns = Math.min(MAX_SCALE, Math.max(MIN_SCALE, sc * f));
-                        tx = mx - (mx - tx) * (ns / sc); ty = my - (my - ty) * (ns / sc); sc = ns; apply();
-                    }, { passive: false });
-
-                    /* ── Drag to pan ── */
-                    let drag = false, dx, dy, stx, sty;
-                    canvas.addEventListener('mousedown', e => { if (e.button) return; drag = true; dx = e.clientX; dy = e.clientY; stx = tx; sty = ty; });
-                    window.addEventListener('mousemove', e => { if (!drag) return; tx = stx + e.clientX - dx; ty = sty + e.clientY - dy; apply(); });
-                    window.addEventListener('mouseup', () => { drag = false; });
-
-                    /* ── Pinch to zoom ── */
-                    let pd = null;
-                    canvas.addEventListener('touchstart', e => { if (e.touches.length === 2) pd = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY); }, { passive: true });
-                    canvas.addEventListener('touchmove', e => { if (e.touches.length !== 2 || !pd) return; const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY); sc = Math.min(10, Math.max(MIN_SCALE, sc * d / pd)); pd = d; apply(); }, { passive: true });
-                    canvas.addEventListener('touchend', () => pd = null);
-
-                    /* ── Buttons ── */
-                    const zoom = (f) => { const c = canvas.clientWidth/2, m = canvas.clientHeight/2, ns = Math.min(MAX_SCALE, Math.max(MIN_SCALE, sc*f)); tx = c-(c-tx)*(ns/sc); ty = m-(m-ty)*(ns/sc); sc=ns; apply(); };
-                    document.getElementById('wf4-zi').onclick = () => zoom(1.3);
-                    document.getElementById('wf4-zo').onclick = () => zoom(0.80);
-                    document.getElementById('wf4-fit').onclick = fit;
-
-                    render();
-                    new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-                    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
-                    </script>
-
-                    <p>The process had no shared visibility, no audit trails, and no structured validation. Schools had no way to track cycle status. Specialists preserved every interaction in case they needed it later for corrections or compliance reviews.</p>
-
-                    <br>
-
-                    <blockquote class="pull-quote">
-                        <p>The first round of information that we get from them is about 75% either accurate or in entirety.</p>
-                        <cite>&mdash; Danielle Kabak, Payroll Operations Lead</cite>
-                    </blockquote>
-
-                    <a href="#module" class="jump-btn" data-ga-event="click" data-ga-event-name="skip_to_module" data-ga-event-category="navigation">
-                        Jump to The Solution
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 5v14M5 12l7 7 7-7"/>
-                        </svg>
-                    </a>
-                </section>
-
-                <hr class="intro-hr">
-
-                <!-- Challenges -->
-                <section class="section-challenges">
-                    <h2 class="article-h2" id="challenges">Constraints</h2>
-
-                    <h3>Entity Variations</h3>
-                    <p>EdTec ran Paylocity-centered workflows with standardized processes. Pennsylvania used multiple systems with school-maintained spreadsheets and account-manager QC. Couldn't design for average&mdash;had to accommodate both while establishing patterns for eventual convergence.</p>
-
-                    <h3>Trust Requirements</h3>
-                    <p>Zero tolerance for errors meant validation architecture, audit trails, and human oversight weren't optional. Any design that bypassed human judgment in ambiguous cases would fail.</p>
-
-                    <h3>Excel Power Users</h3>
-                    <p>Some schools relied on VLOOKUPs, external data joins, and embedded formulas. Others just submitted basic rows. A single interaction pattern would guarantee low adoption from one segment.</p>
-
-                    <h3>Scope Pressure</h3>
-                    <p>Every conversation surfaced adjacent needs: Asana integration, SharePoint migration, state-specific checklists, KPI dashboards. Used phased roadmapping to protect v1 scope while documenting clear Phase 2&ndash;4 paths.</p>
-
-                    <h3>No Direct Integration</h3>
-                    <p>Couldn't connect to payroll systems in v1. Manual export would continue. Had to create value through submission clarity and review efficiency while building architecture for future automation.</p>
-                </section>
-
-                <hr class="intro-hr">
-
-                <!-- Approach -->
-                <section class="section-approach">
-                    <h2 class="article-h2" id="approach">Design Process</h2>
-
-                    <h3>My Approach</h3>
-                    <p>I looked at the existing tools teams were already using&mdash;Asana, Box, and Vertex Hub&mdash;and mapped the new design to those familiar patterns. The goal was to automate everything that didn't require human judgment (reminders, emails, data entry, copy-pasting) and let specialists focus on what actually mattered: decision-making and verification.</p>
-                    <p>I structured the experience around three surfaces that map to the actual workflow:</p>
-
-                    <figure class="article-figure">
-                        <style>
-                        .svf-bg-sc{fill:#dbeafe;stroke:#3b82f6}.svf-t-sc{fill:#1e3a8a}
-                        .svf-bg-sp{fill:#fef3c7;stroke:#f59e0b}.svf-t-sp{fill:#78350f}
-                        .svf-bg-ap{fill:#ede9fe;stroke:#8b5cf6}.svf-t-ap{fill:#4c1d95}
-                        .svf-arr{fill:#9ca3af}
-                        @media(prefers-color-scheme:dark){
-                            .svf-bg-sc{fill:#1e3a8a;stroke:#3b82f6}.svf-t-sc{fill:#bfdbfe}
-                            .svf-bg-sp{fill:#451a03;stroke:#f59e0b}.svf-t-sp{fill:#fde68a}
-                            .svf-bg-ap{fill:#2e1065;stroke:#8b5cf6}.svf-t-ap{fill:#ddd6fe}
-                            .svf-arr{fill:#6b7280}
-                        }
-                        html.force-light .svf-bg-sc{fill:#dbeafe;stroke:#3b82f6}html.force-light .svf-t-sc{fill:#1e3a8a}
-                        html.force-light .svf-bg-sp{fill:#fef3c7;stroke:#f59e0b}html.force-light .svf-t-sp{fill:#78350f}
-                        html.force-light .svf-bg-ap{fill:#ede9fe;stroke:#8b5cf6}html.force-light .svf-t-ap{fill:#4c1d95}
-                        html.force-light .svf-arr{fill:#9ca3af}
-                        html.force-dark .svf-bg-sc{fill:#1e3a8a;stroke:#3b82f6}html.force-dark .svf-t-sc{fill:#bfdbfe}
-                        html.force-dark .svf-bg-sp{fill:#451a03;stroke:#f59e0b}html.force-dark .svf-t-sp{fill:#fde68a}
-                        html.force-dark .svf-bg-ap{fill:#2e1065;stroke:#8b5cf6}html.force-dark .svf-t-ap{fill:#ddd6fe}
-                        html.force-dark .svf-arr{fill:#6b7280}
-                        </style>
-                        <svg viewBox="0 0 560 170" xmlns="http://www.w3.org/2000/svg" width="100%" style="display:block;font-family:inherit;font-size:9px">
-                            <line x1="0" y1="57" x2="560" y2="57" stroke="rgba(128,128,128,0.12)" stroke-width="1"/>
-                            <line x1="0" y1="114" x2="560" y2="114" stroke="rgba(128,128,128,0.12)" stroke-width="1"/>
-
-                            <!-- Row 1: School submission (y_center=28) -->
-                            <rect class="svf-bg-sc" x="1" y="13" width="102" height="30" rx="6" stroke-width="1"/>
-                            <text class="svf-t-sc" x="52" y="25" text-anchor="middle" font-weight="600">School</text>
-                            <text class="svf-t-sc" x="52" y="37" text-anchor="middle" font-weight="600">submission</text>
-
-                            <rect class="svf-bg-sc" x="111" y="13" width="130" height="30" rx="5" stroke-width="1"/>
-                            <text class="svf-t-sc" x="176" y="25" text-anchor="middle">Magic-link</text>
-                            <text class="svf-t-sc" x="176" y="37" text-anchor="middle">landing</text>
-
-                            <polygon class="svf-arr" points="243,24 253,28 243,32"/>
-
-                            <rect class="svf-bg-sc" x="257" y="13" width="130" height="30" rx="5" stroke-width="1"/>
-                            <text class="svf-t-sc" x="322" y="25" text-anchor="middle">Bulk upload or</text>
-                            <text class="svf-t-sc" x="322" y="37" text-anchor="middle">structured forms</text>
-
-                            <polygon class="svf-arr" points="389,24 399,28 389,32"/>
-
-                            <rect class="svf-bg-sc" x="403" y="13" width="130" height="30" rx="5" stroke-width="1"/>
-                            <text class="svf-t-sc" x="468" y="25" text-anchor="middle">Submit</text>
-                            <text class="svf-t-sc" x="468" y="37" text-anchor="middle">for review</text>
-
-                            <!-- Row 2: Internal review (y_center=85) -->
-                            <rect class="svf-bg-sp" x="1" y="70" width="102" height="30" rx="6" stroke-width="1"/>
-                            <text class="svf-t-sp" x="52" y="82" text-anchor="middle" font-weight="600">Internal</text>
-                            <text class="svf-t-sp" x="52" y="94" text-anchor="middle" font-weight="600">review</text>
-
-                            <rect class="svf-bg-sp" x="111" y="70" width="130" height="30" rx="5" stroke-width="1"/>
-                            <text class="svf-t-sp" x="176" y="88" text-anchor="middle">Work queue</text>
-
-                            <polygon class="svf-arr" points="243,81 253,85 243,89"/>
-
-                            <rect class="svf-bg-sp" x="257" y="70" width="130" height="30" rx="5" stroke-width="1"/>
-                            <text class="svf-t-sp" x="322" y="82" text-anchor="middle">Cycle workspace</text>
-                            <text class="svf-t-sp" x="322" y="94" text-anchor="middle">+ exception tabs</text>
-
-                            <polygon class="svf-arr" points="389,81 399,85 389,89"/>
-
-                            <rect class="svf-bg-sp" x="403" y="70" width="130" height="30" rx="5" stroke-width="1"/>
-                            <text class="svf-t-sp" x="468" y="82" text-anchor="middle">Flag issues</text>
-                            <text class="svf-t-sp" x="468" y="94" text-anchor="middle">or approve</text>
-
-                            <!-- Row 3: Approval (y_center=142) -->
-                            <rect class="svf-bg-ap" x="1" y="127" width="102" height="30" rx="6" stroke-width="1"/>
-                            <text class="svf-t-ap" x="52" y="145" text-anchor="middle" font-weight="600">Approval</text>
-
-                            <rect class="svf-bg-ap" x="111" y="127" width="108" height="30" rx="5" stroke-width="1"/>
-                            <text class="svf-t-ap" x="165" y="139" text-anchor="middle">Upload required</text>
-                            <text class="svf-t-ap" x="165" y="151" text-anchor="middle">documents</text>
-
-                            <polygon class="svf-arr" points="221,138 231,142 221,146"/>
-
-                            <rect class="svf-bg-ap" x="235" y="127" width="82" height="30" rx="5" stroke-width="1"/>
-                            <text class="svf-t-ap" x="276" y="139" text-anchor="middle">Send to</text>
-                            <text class="svf-t-ap" x="276" y="151" text-anchor="middle">school</text>
-
-                            <polygon class="svf-arr" points="319,138 329,142 319,146"/>
-
-                            <rect class="svf-bg-ap" x="333" y="127" width="118" height="30" rx="5" stroke-width="1"/>
-                            <text class="svf-t-ap" x="392" y="139" text-anchor="middle">School reviews</text>
-                            <text class="svf-t-ap" x="392" y="151" text-anchor="middle">and approves</text>
-
-                            <polygon class="svf-arr" points="453,138 463,142 453,146"/>
-
-                            <rect class="svf-bg-ap" x="467" y="127" width="68" height="30" rx="5" stroke-width="1"/>
-                            <text class="svf-t-ap" x="501" y="145" text-anchor="middle">Export</text>
-                        </svg>
-                    </figure>
-
-                    <p>This creates a mental model of Submit &rarr; Review &amp; Triage &rarr; Approve &amp; Export that matches how people already think about payroll cycles, just systematized.</p>
-
-                    <figure class="article-figure">
-                        <img class="theme-img" src="" data-name="slide2" width="100%" alt="Three time horizons framing" loading="lazy">
-                        <figcaption>Mapping the three time horizons&mdash;current reality, near-term transition, and target future state.</figcaption>
-                    </figure>
-
-                    <h3>Discovery: Three Time Horizons</h3>
-                    <p>Conducted 3&ndash;5 internal interviews with payroll specialists across both entities and 3&ndash;5 school interviews ranging from simple submitters to Excel power users. Didn't show prototypes first&mdash;needed to understand actual workflows before proposing solutions.</p>
-                    <p>The key insight: had to design for three time horizons simultaneously&mdash;current state (what's happening now across entity variations), near-term transition (PA already adopting EdTec's standardized forms), and target future (structured data model for eventual API integration). This temporal layering prevented digitizing behaviors already being phased out while keeping the design buildable in Q2.</p>
-
-                    <h3>Review Interface: From Full Roster to Exceptions</h3>
-                    <p>My initial concept showed a full roster comparison with change highlighting&mdash;mirroring the internal payroll spreadsheet where every employee appears every cycle. Testing revealed visual noise: 90%+ of rows were unchanged in most cycles. Specialists scanned hundreds of irrelevant rows looking for the handful that mattered. Dawn Carey pushed back:</p>
-
-                    <blockquote class="pull-quote">
-                        <p>I don't want to see a bunch of people on a list if they didn't have data.</p>
-                        <cite>&mdash; Dawn Carey, Payroll Operations</cite>
-                    </blockquote>
-
-                    <p>She was right. This led to tabbed exception views&mdash;separate tabs for All, New, Terminated, Modified, and Flagged&mdash;with specialists landing on what needs attention by default. Unchanged employees available on demand but not in the primary review lane.</p>
-
-                    <h3>Dual-Path Submission</h3>
-                    <p>Discovery revealed two distinct school behaviors. Excel power users relied on complex spreadsheets with VLOOKUPs, external data joins, and embedded formulas. Simple submitters just filled in basic rows. When I started testing pure web-based concepts, a critical adoption risk emerged:</p>
-
-                    <blockquote class="pull-quote">
-                        <p>Clients aren't going to want to enter things directly. They're going to want to have a form that they can download, complete, and then upload. We need those two options to be available.</p>
-                        <cite>&mdash; School stakeholder interview</cite>
-                    </blockquote>
-
-                    <p>Forcing schools to abandon Excel workflows overnight would guarantee low adoption. The solution was two coordinated entry points: structured forms for salary changes (type-driven fields that adapt to the change type selected), and file upload for hours and complex scenarios. Both paths feed into the same review and validation system.</p>
-
-                    <figure class="article-figure">
-                        <img class="theme-img" src="" data-name="slide3" width="100%" alt="Dual-path submission decision" loading="lazy">
-                        <figcaption>Dual-path entry&mdash;web forms and file upload converge at the same review workflow.</figcaption>
-                    </figure>
-
-                    <h3>Testing &amp; Iteration</h3>
-                    <p>Tested with internal operations leaders, working payroll managers, engineering leads, plus school contacts representing different spreadsheet sophistication levels. Used HTML-based, low-visual-fidelity but behaviorally rich prototypes&mdash;focused on whether specialists could find exceptions, whether issues were visible in the right places, whether the cycle model matched their mental model.</p>
-                    <p>During technical feasibility discussions, the team explored AI-assisted document interpretation for uploaded files. Austin de Rossi's assessment was pragmatic:</p>
-
-                    <blockquote class="pull-quote">
-                        <p>That is a cool concept, but I think as a v1, it would cause a lot more confusion than actually be a benefit.</p>
-                        <cite>&mdash; Austin de Rossi, Engineering</cite>
-                    </blockquote>
-
-                    <p>Trust requirements in payroll meant any AI errors would destroy confidence. Building fallback flows for AI failures would add complexity, and the Q2 timeline didn't allow for adequate testing. We deferred AI interpretation to v2, focusing v1 on structured intake with deterministic validation.</p>
-                </section>
-
-                <hr class="intro-hr">
-
-                <!-- The Module -->
-                <section class="section-module">
-                    <h2 class="article-h2" id="module">The Design</h2>
-
-                    <h3>School Submission Flow</h3>
-                    <p>Schools access cycles via magic links&mdash;cycle-specific URLs with 14-day expiry scoped to exactly one cycle. No account creation, no learning curve. The landing page orients schools immediately: what cycle is this, when is it due, what's the current status, what do they need to do.</p>
-                    <p>Two coordinated entry points, both feeding the same validation and review system:</p>
-                    <ul>
-                        <li><b>Structured forms (salary changes)</b> &mdash; type-driven forms where selecting change type reveals appropriate fields. New Hire shows onboarding fields. Termination shows exit fields. Inline validation catches errors at point of entry&mdash;missing SSN blocks save with explanation, large salary increases (&gt;20%) create a warning flag requiring comment but don't block submission.</li>
-                        <li><b>File upload (hours &amp; complex cases)</b> &mdash; drag-and-drop with real-time processing status (pending &rarr; processing &rarr; validated/failed). Preview screen shows extracted data with validation issues highlighted. Never blocks the cycle if parsing fails&mdash;schools can proceed with manual handling if needed.</li>
-                    </ul>
-                    <p>Both paths converge at a review screen showing all changes with color-coded validation status before submission. Submit button enables only when blocking errors are resolved.</p>
-
-                    <figure class="article-figure">
-                        <img class="theme-img" src="" data-name="slide4" width="100%" alt="School submission flow" loading="lazy">
-                        <figcaption>School submission&mdash;magic link landing, dual-path entry, converging review before submit.</figcaption>
-                    </figure>
-
-                    <h3>Internal Review Workspace</h3>
-                    <p>The workspace is structured around five tabs: All Employees (complete roster for audit cases), New (hires needing onboarding validation), Terminated (exits needing final pay calculations), Modified (employees with field-level changes), and Flagged (all validation warnings and errors). Specialists land on what needs attention&mdash;clean records are hidden unless explicitly requested.</p>
-
-                    <figure class="article-figure">
-                        <img class="theme-img" src="" data-name="slide5" width="100%" alt="Internal review workspace" loading="lazy">
-                        <figcaption>Exception-focused review grid&mdash;tabs surface only what needs attention, drill-down for full context.</figcaption>
-                    </figure>
-
-                    <p><b>Changes-requested loop:</b> When specialists need clarification, they flag specific employees with comments and mark the cycle "Changes Requested." Schools re-enter via magic link and see only the flagged employees&mdash;not the full submission. Schools correct those specific items, add response comments, and resubmit. Full comment history is preserved for both parties while the working surface stays focused on what needs action.</p>
-
-                    <h3>Approval Workflow</h3>
-                    <p>After payroll processing completes, specialists prepare an approval package with three required documents: Salary Report, Hours Summary, and Financial Package. Upload these, add comments for school context, click "Send for Approval." The school-facing approval interface uses a three-tab structure separating concerns: Employees (per-row approval with flagging capability), Financial Summary (totals and budget impact), and Documents (the three required uploads with opened indicators). Schools must either approve or flag every employee&mdash;they can't skip rows. All three documents must be opened before final submission.</p>
-
-                    <figure class="article-figure">
-                        <img class="theme-img" src="" data-name="slide6" width="100%" alt="Approval workflow" loading="lazy">
-                        <figcaption>School-facing approval&mdash;three-tab structure covering employees, financials, and documents.</figcaption>
-                    </figure>
-
-                    <a href="#outcomes" class="jump-btn" data-ga-event="click" data-ga-event-name="skip_to_outcomes" data-ga-event-category="navigation">
-                        See the Outcomes
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 5v14M5 12l7 7 7-7"/>
-                        </svg>
-                    </a>
-                </section>
-
-                <hr class="intro-hr">
-
-                <!-- Design Decisions -->
-                <section class="section-decisions">
-                    <h2 class="article-h2" id="decisions">Driving Closure: How I Locked the Design</h2>
-
-                    <h3>The Decision Framework</h3>
-                    <p>Three weeks from ambiguous stakeholder requests to locked requirements meant I needed clear decision criteria. Every design decision had to answer three questions: Does this create measurable value in v1? Does this preserve the path to automation? Does this solve the adoption barrier or create a new one? These three questions converted debates into decisions&mdash;having explicit criteria prevented endless revision cycles.</p>
-
-                    <h3>Mental Models for Constraint Navigation</h3>
-                    <p><b>Entity variation:</b> "Design for the union, implement for the intersection." The interface accommodated both entities' needs while the underlying data model found common patterns. One product that flexed to handle variations without fracturing into entity-specific codebases. <b>Trust vs automation:</b> "Automate the tedious, gate the critical." Reminders, status updates, validation checks&mdash;fully automated. Large salary changes, unusual patterns, ambiguous data&mdash;flagged for human review with clear context. <b>Excel transition:</b> "Meet them where they are, create pull toward structured data." Upload path works today. Structured forms show what's possible. Schools migrate voluntarily as they see the forms are faster.</p>
-
-                    <h3>Success Metrics as Design Constraints</h3>
-                    <p>Rather than treating metrics as post-launch evaluation, I used them as design constraints during development. &gt;80% school adoption within 90 days ruled out any design that added friction at the entry point&mdash;led directly to magic links and dual-path submission. &gt;50% email reduction required eliminating specific email-based workflows&mdash;led to the changes-requested loop where schools see only flagged items. &lt;24 hours submission to review demanded exception-focused interfaces&mdash;led to tabbed workspace where specialists land on what needs attention.</p>
-
-                    <h3>Stakeholder Alignment Sessions</h3>
-                    <p>Three critical alignment sessions locked requirements and resolved design conflicts in real time. Week 1: walked through exception-focused tabs vs full roster with operations leaders using a live HTML prototype&mdash;team consensus landed on exception-focused after seeing the volume of unchanged rows in real cycle data. Week 2: presented dual-path decision to cross-functional group, framed as adoption risk mitigation, not feature complexity. Week 3: requirements lock&mdash;went through every contested feature with the decision framework and produced 150+ locked requirements with documented Phase 2&ndash;4 backlog rationale.</p>
-
-                    <h3>Post-Redesign Validation</h3>
-                    <p>After locking the design direction, ran validation calls with the same school contacts from discovery. Schools immediately understood the magic link access model. Excel power users confirmed they'd use the upload path initially but expressed interest in trying structured forms "once we see how it works"&mdash;validating the dual-path strategy and the migration hypothesis. Simple submitters preferred structured forms and appreciated the dynamic field logic. The changes-requested loop resonated strongly&mdash;schools liked seeing only flagged items. What changed from validation: clearer status messaging on the landing page and more prominent document-opened indicators in the approval flow. Shipped with zero major design changes post-validation.</p>
-
-                    <h3>Technical Alignment as Forcing Function</h3>
-                    <p>Weekly sessions with engineering weren't just feasibility checks&mdash;they were design validation. When engineering showed that reliable AI document interpretation would require 6&ndash;8 weeks of testing and fallback flows, that timeline conflict immediately clarified the decision: defer to v2, focus v1 on deterministic validation. These sessions converted design concepts into buildable specifications while the Q2 deadline eliminated everything that wasn't essential.</p>
-                </section>
-
-                <hr class="intro-hr">
-
-                <!-- Outcomes -->
-                <section class="section-outcomes">
-                    <h2 class="article-h2" id="outcomes">Outcomes</h2>
-                    <p>Delivered development-ready PRD with 150+ functional requirements, aligned cross-functional stakeholders, established technical architecture for Q2 delivery.</p>
-
-                    <figure class="article-figure">
-                        <img class="theme-img" src="" data-name="slide7" width="100%" alt="Outcome metrics" loading="lazy">
-                    </figure>
-
-                    <h3>Target Metrics</h3>
-                    <ul>
-                        <li><b>&gt;80% school adoption</b> within 90 days of launch</li>
-                        <li><b>&gt;50% email reduction</b> in payroll-related communication</li>
-                        <li><b>&lt;24 hours</b> average time from submission to review complete</li>
-                        <li><b>&gt;90% approvals</b> completed through Hub vs external processes</li>
-                        <li><b>&gt;4.0/5.0 user satisfaction</b> from both schools and internal teams</li>
-                    </ul>
-
-                    <h3>Early Signals</h3>
-                    <p>Schools completing submissions in under 3 minutes versus the previous 20&ndash;30 minute process. Misconfiguration errors eliminated by design. Schools requesting other administrative workflows move into Hub. Expanding from 147 schools toward 200&ndash;300 as rollout continues.</p>
-
-                    <blockquote class="pull-quote">
-                        <p>The whole value is a structured request that we can eventually use to send off API calls.</p>
-                        <cite>&mdash; Jose Castellanos</cite>
-                    </blockquote>
-
-                    <p>The module established a structured data foundation for future payroll system integrations and created a retirement path for the internal payroll spreadsheet once direct system connections exist. Proved Hub can handle high-stakes, compliance-sensitive workflows with embedded audit trails and version control.</p>
-                </section>
-
-                <hr class="intro-hr">
-
-                <!-- What's Next -->
-                <section class="section-next">
-                    <h2 class="article-h2" id="next">What's Next</h2>
-
-                    <style>
-                    .phase-strip { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; margin-top: 1.75rem; width: calc(100% + 100px); margin-left: -50px; margin-right: -50px; }
-                    .phase-strip::before { content: ''; position: absolute; top: 20px; left: 12.5%; right: 12.5%; height: 1px; background: var(--border-light); z-index: 0; }
-                    .phase-item { display: flex; flex-direction: column; align-items: center; padding: 0 0.6rem; text-align: center; }
-                    .phase-dot { width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--border-light); background: var(--background); display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.9rem; position: relative; z-index: 1; flex-shrink: 0; }
-                    .phase-title { font-size: 0.82rem; font-weight: 600; margin-bottom: 0.3rem; line-height: 1.35; }
-                    .phase-desc { font-size: 0.74rem; color: var(--text-secondary); line-height: 1.55; }
-                    @media (max-width: 600px) { .phase-strip { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } .phase-strip::before { display: none; } }
-                    </style>
-
-                    <div class="phase-strip">
-                        <div class="phase-item">
-                            <div class="phase-dot">2</div>
-                            <p class="phase-title">System Integrations</p>
-                            <p class="phase-desc">Direct API connections to Paylocity, ADP, and iSolved</p>
-                        </div>
-                        <div class="phase-item">
-                            <div class="phase-dot">3</div>
-                            <p class="phase-title">Spreadsheet Retirement</p>
-                            <p class="phase-desc">Internal payroll spreadsheet replaced as structured data takes over</p>
-                        </div>
-                        <div class="phase-item">
-                            <div class="phase-dot">4</div>
-                            <p class="phase-title">GL Automation</p>
-                            <p class="phase-desc">Downstream financial workflows automated via GL system</p>
-                        </div>
-                        <div class="phase-item">
-                            <div class="phase-dot">5</div>
-                            <p class="phase-title">Advanced Analytics</p>
-                            <p class="phase-desc">Predictive validation, anomaly detection, and reporting</p>
-                        </div>
-                    </div>
-
-                    <p>Currently rolling out to departments that never engaged with payroll via Hub before. The pattern established&mdash;structured intake, exception-focused review, formal approval workflows&mdash;is now being applied to other operational domains within Vertex Hub.</p>
-                </section>
-
-                <hr class="intro-hr">
-
-                <!-- Continue reading -->
-                <div class="next-steps">
-                    <h3 class="next-steps-title">Continue reading</h3>
-                    <div class="next-steps-grid">
-                        <a href="/improvingAdoption" class="next-step-card">
-                            <span class="next-step-label">Next Project</span>
-                            <span class="next-step-name">Solving an 80% Bounce-Rate for an Enterprise Tool &rarr;</span>
-                        </a>
-                        <a id="random-blog-card" href="#" class="next-step-card">
-                            <span class="next-step-label">Read a blog</span>
-                            <span class="next-step-name" id="random-blog-title">&rarr;</span>
-                        </a>
-                    </div>
                 </div>
 
-                <!-- ── Blog list: add/remove entries here to update the random card above ── -->
-                <script>
-                    var BLOGS = [
-                        { title: "From Chat Windows to Interaction Systems", url: "https://blogs.abseth.com/Conversational-UX" },
-                        { title: "Designing AI Answers Around How People Actually Read Them", url: "https://blogs.abseth.com/designing-ai-human-interaction-2026" },
-                        { title: "Tyranny of the A/B Test", url: "https://blogs.abseth.com/tyranny-of-the-a-b-test" },
-                        { title: "Stop Leveling Up Prototyping Skills", url: "https://blogs.abseth.com/stopLevelingUpPrototypingSkills" },
-                        { title: "Personalized Interfaces", url: "https://blogs.abseth.com/personalizedInterfaces" },
-                        { title: "Why Voice Interfaces Keep Failing", url: "https://blogs.abseth.com/whyVoiceInterfacesKeepFailing" },
-                        { title: "Follow the Vibe of the Tribe", url: "https://blogs.abseth.com/followTheVibeOfTheTribe" },
-                        { title: "Why I Start in High-Fidelity", url: "https://blogs.abseth.com/why-i-start-in-high-fidelity" },
-                    ];
-                    // ─────────────────────────────────────────────────────────────────────────
-                    (function() {
-                        var pick = BLOGS[Math.floor(Math.random() * BLOGS.length)];
-                        var card = document.getElementById('random-blog-card');
-                        var titleEl = document.getElementById('random-blog-title');
-                        if (card && pick) {
-                            card.href = pick.url;
-                            titleEl.textContent = pick.title + ' →';
-                        }
-                    })();
-                </script>
 
-                <footer>
-                    <br><br><br>
-                    <hr><br>
-                    <div class="footer-container">
-                        <a href="#top" class="hyp-p">back to top &uarr;</a>
-                    </div>
-                    <br>
-                    <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.95rem;">Site coded by a human in vanilla HTML, CSS, and JavaScript.</p>
-                </footer>
+      <!-- HEADER -->
+      <h1 class="article-h1">Replacing a decade of folders with one searchable layer for hundreds of schools</h1>
+      <p>The client stored documents across four systems with no shared metadata and no way to find anything without asking someone. I led UX and product design for a platform-native repository where every file is organized by what it is, and built a working prototype to prove it.</p>
+      <p id="intro-tags1">10 min read &nbsp;|&nbsp; UX / Product Designer &nbsp;|&nbsp; May 2026 &nbsp;|&nbsp; Document Management</p>
 
-            </article>
+      <hr>
+
+      <!-- TL;DR -->
+      <section id="tldr">
+        <h2 class="article-h2">TLDR</h2>
+        <p><b style="color: var(--red);">Problem</b><br>The client stored documents across Box, SharePoint, email, and OneDrive with no shared metadata and folder conventions that differed by team. Finding a file meant asking the person who built the folder. As the platform expanded into new service modules, the problem would get worse.</p>
+        <p><b style="color: var(--red);">What I did</b><br>Led UX and product design for a platform-native metadata layer: every file carries type, service, school, period, and owner. Designed the information architecture, two home experiences for two different audiences, a permission model built around roles rather than manual sharing, and a working prototype with eight live routes.</p>
+        <p><b style="color: var(--red);">Result</b><br>Every contracted artifact delivered; two exceeded what the SOW asked for. The &#8220;lo-fi prototype&#8221; became a fully interactive coded app. Five stakeholders aligned on one direction across a three-week sprint.</p>
+      </section>
+
+      <hr class="intro-hr">
+
+            <!-- HERO EMBED -->
+      <figure class="article-figure">
+        <div class="embed-chrome">
+          <span class="ec-dots"><i></i><i></i><i></i></span>
+          <span class="ec-route">vertex-docmgmt.vercel.app/repository?persona=austin</span>
+        </div>
+        <div class="embed-scale">
+          <iframe
+            src="https://vertex-docmgmt-git-v1-embeds-asethus-projects.vercel.app/repository?persona=austin"
+            title="Document repository &#8212; staff view"
+            loading="lazy"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+        </div>
+        <figcaption>The product, up front. One search returns documents across every school, service, and year. No folder to open.</figcaption>
+      </figure>
+
+                <hr class="intro-hr">
+
+      <!-- THE PROBLEM -->
+      <section id="problem">
+        <h2 class="article-h2">Four systems, no shared way to find anything</h2>
+        <figure class="article-figure">
+          <div style="background:var(--surface);border-radius:12px;padding:1rem 1.25rem;">
+            <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.75rem;">
+              <span style="font-family:var(--font-display);font-size:2rem;font-weight:800;letter-spacing:-0.03em;line-height:1;">~13 TB</span>
+              <span style="color:var(--text-secondary);font-size:0.8rem;">no shared index · 4 systems</span>
+            </div>
+            <div style="display:flex;gap:3px;height:60px;border-radius:8px;overflow:hidden;margin-bottom:0.5rem;">
+              <div style="flex:77;background:#0070EA;padding:0.5rem 0.75rem;display:flex;flex-direction:column;justify-content:space-between;min-width:0;">
+                <span style="font-size:0.68rem;font-weight:600;color:rgba(255,255,255,0.75);">Box</span>
+                <span style="font-family:var(--font-display);font-size:1.25rem;font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1;">~10 TB</span>
+              </div>
+              <div style="flex:23;background:#D4920A;padding:0.5rem 0.5rem;display:flex;flex-direction:column;justify-content:space-between;min-width:0;overflow:hidden;">
+                <span style="font-size:0.65rem;font-weight:600;color:rgba(0,0,0,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">SharePoint</span>
+                <span style="font-family:var(--font-display);font-size:1rem;font-weight:800;color:rgba(0,0,0,0.75);letter-spacing:-0.02em;line-height:1;">~3 TB</span>
+              </div>
+              <div style="flex:5;border:1.5px dashed var(--border-strong);border-radius:0 6px 6px 0;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                <span style="font-size:0.55rem;color:var(--text-muted);writing-mode:vertical-rl;transform:rotate(180deg);">overflow</span>
+              </div>
+            </div>
+
+            <p style="margin:0;font-size:0.8rem;">
+              <span style="font-size:0.8rem;font-weight:600;letter-spacing:0.07em;color:var(--text-muted);margin-right:0.5rem;">Structural debt</span>
+              <span style="padding:0.1rem 0.45rem;background:var(--background);border:1px solid var(--border);border-radius:4px;color:var(--text-secondary);margin-right:0.3rem;">folders 5&#8211;10 deep</span>
+              <span style="padding:0.1rem 0.45rem;background:var(--background);border:1px solid var(--border);border-radius:4px;color:var(--text-secondary);margin-right:0.3rem;">conventions differ by team</span>
+              <span style="padding:0.1rem 0.45rem;background:var(--background);border:1px solid var(--border);border-radius:4px;color:var(--text-secondary);">permissions broken in prior migration</span>
+            </p>
+          </div>
+          <figcaption>No shared index across the four stores. Finding a file means knowing who owns it &#8212; folder by folder.</figcaption>
+        </figure>
+
+        <br>
+        <p>Documents were split across four systems with no shared way to find anything. Schools got routed to whichever system the relevant team used, and Box&#8217;s waterfall permissions meant they often landed on a scattered list of folders at inconsistent depths with no clear top-level view. With the platform expanding into Service Center, Inspections, and Billing, each new module would add more documents to the same fragmented structure. The engagement was a three-week sprint to map the current state, prototype a metadata-driven repository, and give the client something concrete enough to build from.</p>
+        <br>
+
+        <p class="callout-border" style="background:var(--surface);"><em><span style="color:var(--red);">&#8220;</span>Documents management comes up in nearly every conversation about what we plan to do long term. We need this design even if we&#8217;re not necessarily ready to build immediately.<span style="color:var(--red);">&#8221;</span></em><br><span style="color:var(--text-secondary); font-size:var(--font-size-sm);">&#8212; Platform Lead, April 2026</span></p>
+
+        <br>
+        <p><b>The design target</b> was the EdTech specialist who had organized Box folders for ten years and expected the new system to be harder to use. Every design decision came back to one question: does this show you will find things faster here?</p>
+        <br>
+
+        <figure class="article-figure stat-ribbon">
+          <div class="stat-block">
+            <span class="stat-val">~13 TB</span>
+            <span class="stat-label">Documents to transition</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-val">400+</span>
+            <span class="stat-label">Charter schools served</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-val">3 wks</span>
+            <span class="stat-label">Discovery to handoff</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-val">5</span>
+            <span class="stat-label">Stakeholders aligned</span>
+          </div>
+        </figure>
+      </section>
+
+                      <hr class="intro-hr">
+
+      <!-- DISCOVERY -->
+      <section id="discovery">
+        <h2 class="article-h2">Discovery &amp; Research: The interviews that built the taxonomy</h2>
+        <p>Four moderated sessions over two weeks with five stakeholders, covering three primary personas: an EdTech specialist who lived in Box, an operations lead who worked in SharePoint, and an IT infrastructure lead who managed both. Each walked through how they actually store, find, and share documents today. Three problems came up in every session.</p>
+
+        <br>
+
+        <h3>Finding a document meant finding a person</h3>
+        <p>Staff routinely spent 5&#8211;30 minutes locating a file, and often weren&#8217;t sure which system held it in the first place. Box sends a notification when something is uploaded, but it carries no context about where the file actually landed. The specialist still has to navigate the folder tree themselves. Nothing was indexed across systems, because nothing shared any metadata.</p>
+
+        <br>
+
+        <p class="callout-border" style="background:var(--surface);"><em><span style="color:var(--red);">&#8220;</span>I can rarely find a document on my own. I always have to ask whoever owns it. Unless you&#8217;ve been here over a year, finding anything in the folder structure is impractical.<span style="color:var(--red);">&#8221;</span></em><br><span style="color:var(--text-secondary); font-size:var(--font-size-sm);">&#8212; Operations Lead, discovery interview</span></p>
+
+        <br>
+
+        <h3>No shared folder convention</h3>
+        <p>Folders ran five to ten levels deep in both cases, with no consistent logic between them. Someone working across both divisions was navigating two completely different information architectures. For schools, it was worse: Box&#8217;s waterfall permissions meant they often saw a scattered set of folders shared at different depths, with no coherent top-level view.</p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 330 96" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px;display:block;margin:0 auto">
+            <style>
+              .hc-team { font: 600 9px/1 var(--font-sans, system-ui); fill: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; }
+              .hc-name { font: 11px/1 var(--font-mono, monospace); }
+              .hc-box  { stroke-width: 1.5; fill-opacity: .07; }
+              .hc-red  { fill: var(--red); stroke: var(--red); }
+              .hc-blue { fill: var(--primary); stroke: var(--primary); }
+              .hc-tr   { fill: var(--red); }
+              .hc-tb   { fill: var(--primary); }
+              .hc-arr  { stroke: var(--border-strong); stroke-width: 1; }
+              .hc-con  { stroke: var(--primary); stroke-dasharray: 2.5 2; stroke-width: 1; }
+              .hc-eq   { font: 8px/1 var(--font-sans, system-ui); fill: var(--primary); }
+            </style>
+            <!-- EdTech row -->
+            <text x="0" y="23" class="hc-team">EdTech</text>
+            <rect x="58" y="7" width="74" height="24" rx="4" class="hc-box hc-red"/>
+            <text x="95" y="23" text-anchor="middle" class="hc-name hc-tr">State</text>
+            <line x1="132" y1="19" x2="143" y2="19" class="hc-arr"/>
+            <path d="M140,16.5 L145.5,19 L140,21.5" class="hc-arr" fill="none"/>
+            <rect x="151" y="7" width="76" height="24" rx="4" class="hc-box hc-blue"/>
+            <text x="189" y="23" text-anchor="middle" class="hc-name hc-tb">School</text>
+            <line x1="227" y1="19" x2="238" y2="19" class="hc-arr"/>
+            <path d="M235,16.5 L240.5,19 L235,21.5" class="hc-arr" fill="none"/>
+            <rect x="245" y="7" width="77" height="24" rx="4" class="hc-box hc-red"/>
+            <text x="283" y="23" text-anchor="middle" class="hc-name hc-tr">Year</text>
+            <!-- vertical connector -->
+            <line x1="189" y1="31" x2="189" y2="65" class="hc-con"/>
+            <text x="197" y="52" class="hc-eq">same</text>
+            <!-- PA/K-12 row -->
+            <text x="0" y="87" class="hc-team">PA/K-12</text>
+            <rect x="58" y="71" width="74" height="24" rx="4" class="hc-box hc-red"/>
+            <text x="95" y="87" text-anchor="middle" class="hc-name hc-tr">Year</text>
+            <line x1="132" y1="83" x2="143" y2="83" class="hc-arr"/>
+            <path d="M140,80.5 L145.5,83 L140,85.5" class="hc-arr" fill="none"/>
+            <rect x="151" y="71" width="76" height="24" rx="4" class="hc-box hc-blue"/>
+            <text x="189" y="87" text-anchor="middle" class="hc-name hc-tb">School</text>
+            <line x1="227" y1="83" x2="238" y2="83" class="hc-arr"/>
+            <path d="M235,80.5 L240.5,83 L235,85.5" class="hc-arr" fill="none"/>
+            <rect x="245" y="71" width="77" height="24" rx="4" class="hc-box hc-red"/>
+            <text x="283" y="87" text-anchor="middle" class="hc-name hc-tr">Function</text>
+          </svg>
+          <figcaption>&#8220;Year&#8221; appears in both hierarchies at different positions. School is the only stable anchor.</figcaption>
+        </figure>
+
+        <br>
+
+        <h3>Too many logins</h3>
+        <p>Schools run on Google Workspace internally. Working with the client meant a separate Box account, SharePoint guest links, and email, each with its own credentials and expiry. Staff described onboarding and offboarding as a manual, error-prone process as a result. The request from schools was simple: log in once and see everything for my school.</p>
+
+
+        <table class="article-table">
+          <thead>
+            <tr class="table-header">
+              <th class="table-first-col">Pain point</th>
+              <th>What the evidence showed</th>
+              <th>Confidence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="table-first-col">Search &amp; discoverability</td>
+              <td>5&#8211;30 min to locate a file; staff unsure which system holds it; finding anything depends on institutional memory</td>
+              <td class="cell-yes">High</td>
+            </tr>
+            <tr>
+              <td class="table-first-col">Navigation clarity</td>
+              <td>Two incompatible folder conventions; schools see a scattered view with no coherent structure</td>
+              <td class="cell-yes">High</td>
+            </tr>
+            <tr>
+              <td class="table-first-col">Single login</td>
+              <td>Multiple credentials across systems; surfaced strongly but from fewer sources</td>
+              <td class="cell-mid">Moderate</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <p>I mapped document flows end-to-end for both service lines. The maps confirmed the structural cause: deep folder trees built independently by each team, with permission inheritance broken during a prior migration from Google Drive to SharePoint. They also showed something useful: the documents themselves are predictable in type and origin, which is exactly what a metadata model needs to work.</p>
+
+        <br>
+
+        <figure class="article-figure">
+          <div class="fig-placeholder">
+            <span class="ph-icon">Artifact</span>
+            <p class="ph-cap">Current-state document flow maps for both service lines, showing folder depth, conflicting conventions, and where access breaks.</p>
+            <p class="ph-hint">Document Flow Maps v1.1 &#8212; attach export here</p>
+          </div>
+        </figure>
+
+        <br>
+
+        <h3>Where the taxonomy came from</h3>
+        <p>The most useful moment in Week 1 came from a simple question I asked the operations lead: would her colleagues fill in metadata consistently if it required manual entry? Her answer was immediate: <b>&#8220;They don&#8217;t do metadata at all.&#8221;</b> Then she spent five minutes describing exactly what the tags needed to be, without any prompting:</p>
+
+        <br>
+
+        <p class="callout-border" style="background:var(--surface);"><em><span style="color:var(--red);">&#8220;</span>Almost every file needs a customer tag, a date tag, a functional tag, probably an owner tag, a school tag &#8212; even a process tag. If it&#8217;s payroll: &#8216;employee changes, this pay cycle.&#8217; Same with accounting. Also bank. And supplier for AP, because we&#8217;ll need 1099s.<span style="color:var(--red);">&#8221;</span></em><br><span style="color:var(--text-secondary); font-size:var(--font-size-sm);">&#8212; Operations Lead</span></p>
+
+        <br>
+
+        <p>That session produced the metadata field set (organization, service, document type, process, period, access scope) that became the backbone of the information architecture. It didn&#8217;t come from a workshop or a competitive audit. It came from listening to someone describe what they already knew they needed.</p>
+
+        <p class="callout-border"><b>What the research did and did not cover.</b><br>Three internal personas were completed (EdTech, Operations, IT). Three weren&#8217;t reached in time: Service Center, Finance/Accounting, and direct school client sessions. Schools described symptoms (can&#8217;t find files, too many logins), not a solution, so the decision to build a platform-native system was a strategic call by leadership, not something research prescribed. School-side requirements carry explicit assumption tags, single-source findings carry a Moderate confidence label, and every gap is named in the artifacts rather than ignored.</p>
+      </section>
+
+
+                <hr class="intro-hr">
+
+      <!-- STRATEGY & SCOPE -->
+      <section id="alignment">
+        <h2 class="article-h2">Strategy &amp; Scope: Two paths, one deliberate choice</h2>
+        <p>Before any design work, the engagement lead raised the foundational question: is the client in the document-management business long-term? Two paths were laid out as a real choice, not a recommendation in disguise:</p>
+
+        <table class="article-table">
+          <thead>
+            <tr class="table-header">
+              <th class="table-first-col">Dimension</th>
+              <th>Search layer over Box/SharePoint</th>
+              <th>Platform-native repository</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="table-first-col">What it is</td>
+              <td>Platform searches across Box and SharePoint, which stay the systems of record</td>
+              <td class="cell-pick">Platform owns storage and the document experience end-to-end</td>
+            </tr>
+            <tr>
+              <td class="table-first-col">Solves the retrieval problem</td>
+              <td class="cell-yes">Yes</td>
+              <td class="cell-pick cell-yes">Yes</td>
+            </tr>
+            <tr>
+              <td class="table-first-col">Fixes the folder structure</td>
+              <td class="cell-no">No &#8212; the messy underlying taxonomy stays</td>
+              <td class="cell-pick cell-yes">Yes &#8212; metadata replaces folders structurally</td>
+            </tr>
+            <tr>
+              <td class="table-first-col">Single login for schools</td>
+              <td class="cell-mid">Partial</td>
+              <td class="cell-pick cell-yes">Yes</td>
+            </tr>
+            <tr>
+              <td class="table-first-col">Long-term ownership</td>
+              <td>Tied to Box and SharePoint contracts</td>
+              <td class="cell-pick">Platform owns the experience</td>
+            </tr>
+            <tr>
+              <td class="table-first-col">Main risk</td>
+              <td>Two systems to maintain; no clean exit from folders</td>
+              <td class="cell-pick">Build and maintenance cost; a product to own</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>The platform lead chose the platform-native path. The product stores files produced through the platform, applies metadata from the workflow context, and supports search and filtering without any folder navigation. Migrating the existing archives was explicitly a non-goal. Box freezes as a read-only archive. SharePoint stays as a bridge for the rare files that need live collaborative editing, with a reference kept in the repository so they still show up in search.</p>
+
+        <br>
+
+        <p class="callout-border" style="background:var(--surface);"><em><span style="color:var(--red);">&#8220;</span>The scope of the project should be based on customer experience &#8212; that is always our North Star. Define the experience first. Treat the system as a black box. Let that drive implementation.<span style="color:var(--red);">&#8221;</span></em><br><span style="color:var(--text-secondary); font-size:var(--font-size-sm);">&#8212; Sridhar Karimanal, Point One Zero engagement lead, May 8 sync</span></p>
+
+        <br>
+
+        <p>One design question had to be answered before anything else: how should access work? Most documents should follow a role. When a Business Manager leaves and someone new takes the seat, their document access transfers automatically. Some documents should stay with a specific person regardless of role changes, like an attachment on a personal service request. Getting this right early meant it could inform the information architecture from the start rather than being retrofitted later.</p>
+      </section>
+
+      <hr class="intro-hr">
+
+      <!-- THE SOLUTION -->
+      <section id="solution">
+        <h2 class="article-h2">Solution: One model, two front doors</h2>
+        <p>The core idea: every file carries structured metadata the moment it enters the system, and search and filters do the retrieval. No folder path. No naming convention to remember. You find a document by what it is, not where it was filed.</p>
+
+        <br>
+
+        <h3>What a tagged document looks like</h3>
+        <p>When a document is uploaded through a platform workflow, most of its metadata fills in automatically from the context of the task that triggered it. The person uploading confirms the document type and sets who should have access. That&#8217;s typically two or three decisions, not a full form to fill out.</p>
+
+        <figure class="article-figure">
+          <div style="max-width:420px;margin:0 auto;border:1px solid var(--border-light);border-radius:var(--radius-md);overflow:hidden;">
+            <iframe
+              src="/my-works/DocManagement/metadata-panel.html"
+              title="Interactive document metadata panel"
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin"
+              style="width:100%;height:800px;border:0;display:block;"></iframe>
+          </div>
+          <figcaption>A document&#8217;s metadata panel. Fields like client, service, and process fill in automatically from the workflow that triggered the upload. Click any editable field to change it, add or remove tags, or open the &#8220;Share &amp; access&#8221; panel.</figcaption>
+        </figure>
+
+        <h3>The repository &#8212; staff view</h3>
+        <p>Staff get a dense, filterable table with fuzzy search across every document the platform has ever produced. Filters stack: narrow by service, then by document type, then by period, and get exactly the slice you need. Saved filter presets let people bookmark their recurring searches so the view is always there when they need it.</p>
+
+        <figure class="article-figure">
+          <div class="embed-chrome">
+            <span class="ec-dots"><i></i><i></i><i></i></span>
+            <span class="ec-route">vertex-docmgmt.vercel.app/repository?persona=james&amp;service_type=Payroll&amp;status=Returned</span>
+          </div>
+          <div class="embed-scale">
+            <iframe
+              src="https://vertex-docmgmt-git-v1-embeds-asethus-projects.vercel.app/repository?persona=james&service_type=Payroll&status=Returned"
+              title="Repository with filters applied &#8212; payroll, returned status"
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+          </div>
+          <figcaption>Combinable filters and fuzzy search. Retrieval happens by what a document is, not where it was filed.</figcaption>
+        </figure>
+
+        <br>
+
+        <h3>Two homes from one data model</h3>
+        <p>Staff and school clients have fundamentally different needs when it comes to documents, so they get different home experiences built on the same underlying data. One shared interface would force compromises on both. Two separate products would mean duplicating the data and doubling the maintenance burden. One data model with two purpose-built surfaces was the right call.</p>
+
+        <figure class="article-figure">
+          <div class="embed-twoup">
+            <div>
+              <div class="embed-chrome">
+                <span class="ec-dots"><i></i><i></i><i></i></span>
+                <span class="ec-route">/repository?persona=james</span>
+              </div>
+              <div class="embed-scale">
+                <iframe
+                  src="https://vertex-docmgmt-git-v1-embeds-asethus-projects.vercel.app/repository?persona=james"
+                  title="Staff power-user repository"
+                  loading="lazy"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+              </div>
+            </div>
+            <div>
+              <div class="embed-chrome">
+                <span class="ec-dots"><i></i><i></i><i></i></span>
+                <span class="ec-route">/home?persona=maria</span>
+              </div>
+              <div class="embed-scale">
+                <iframe
+                  src="https://vertex-docmgmt-git-v1-embeds-asethus-projects.vercel.app/home?persona=maria"
+                  title="School client process-first home"
+                  loading="lazy"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+              </div>
+            </div>
+          </div>
+          <figcaption>Staff get density and control. Schools get a process-first surface where the primary question is &#8220;what do I need to do next,&#8221; not &#8220;where is my file.&#8221;</figcaption>
+        </figure>
+      </section>
+
+
+                <hr class="intro-hr">
+
+      <!-- COMPONENTS -->
+      <section id="components">
+        <h2 class="article-h2">Key surfaces in detail</h2>
+
+        <h3>Document detail and sharing</h3>
+        <p>Every document has a detail page showing its full metadata, version history, and an activity log. From here, staff can share the document with specific people or roles without touching any admin settings. The sharing panel shows exactly who has access and why: by role, by individual, or by team.</p>
+
+        <figure class="article-figure">
+          <div class="embed-chrome">
+            <span class="ec-dots"><i></i><i></i><i></i></span>
+            <span class="ec-route">/documents/aoa-pr-2026-05a-bank?persona=austin</span>
+          </div>
+          <div class="embed-scale">
+            <iframe
+              src="https://vertex-docmgmt-git-v1-embeds-asethus-projects.vercel.app/documents/aoa-pr-2026-05a-bank?persona=austin"
+              title="Document detail with sharing panel"
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+          </div>
+          <figcaption>Document detail with the sharing panel open. Every grant is visible and named: who has access, and through what.</figcaption>
+        </figure>
+
+        <br>
+
+        <h3>Submission wizard</h3>
+        <p>When a school submits a document as part of a workflow task, they go through a short wizard that already knows the context: which school, which service, which process. The school confirms the document type, uploads the file, and lands on the resulting document in the repository. If this is a resubmission after a return, the wizard shows the reviewer&#8217;s return reason at the top so the school knows exactly what to fix.</p>
+
+        <figure class="article-figure">
+          <div class="embed-chrome">
+            <span class="ec-dots"><i></i><i></i><i></i></span>
+            <span class="ec-route">/upload/task/bap-pr-2026-05a-register?persona=maria</span>
+          </div>
+          <div class="embed-scale">
+            <iframe
+              src="https://vertex-docmgmt-git-v1-embeds-asethus-projects.vercel.app/upload/task/bap-pr-2026-05a-register?persona=maria"
+              title="Document submission wizard &#8212; resubmit mode"
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+          </div>
+          <figcaption>The submission wizard. Context is carried in from the originating task. Metadata fills in automatically. The person makes two or three decisions, not fifteen.</figcaption>
+        </figure>
+
+        <br>
+
+        <h3>Access management</h3>
+        <p>Admins can inspect any user and see exactly why they have access to a given document: is it because of their role, a direct share, a team they belong to, or their organization&#8217;s default scope? The same answer that powers the permission logic shows up directly in the interface, so what you read on screen reflects how the system actually works.</p>
+
+        <figure class="article-figure">
+          <div class="embed-chrome">
+            <span class="ec-dots"><i></i><i></i><i></i></span>
+            <span class="ec-route">/admin/access?persona=austin</span>
+          </div>
+          <div class="embed-scale">
+            <iframe
+              src="https://vertex-docmgmt-git-v1-embeds-asethus-projects.vercel.app/admin/access?persona=austin"
+              title="Per-user access inspector"
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+          </div>
+          <figcaption>The access inspector. For any user, you can see exactly why they can or can&#8217;t see a document: by role, direct share, team, or org scope.</figcaption>
+        </figure>
+
+        <br>
+
+
+        <h3>Trash and recovery</h3>
+        <p>Deleted documents move to a trash bin with a 30-day recovery window before permanent deletion. Permanent deletion is a capability that admins can grant to specific staff without giving them full admin access, so the right people can clean up without opening up everything else.</p>
+
+        <figure class="article-figure">
+          <div class="embed-chrome">
+            <span class="ec-dots"><i></i><i></i><i></i></span>
+            <span class="ec-route">/trash?persona=austin</span>
+          </div>
+          <div class="embed-scale">
+            <iframe
+              src="https://vertex-docmgmt-git-v1-embeds-asethus-projects.vercel.app/trash?persona=austin"
+              title="Trash with soft-delete and recovery"
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+          </div>
+          <figcaption>Trash with 30-day recovery. Permanent deletion is a separate permission, grantable without full admin access.</figcaption>
+        </figure>
+
+        <br>
+
+
+        <h3>Supporting surfaces</h3>
+        <p>Version history with the ability to revert to a previous version. A per-document activity log. A command palette for keyboard navigation. A scripted platform assistant that hands off to a filtered repository view. In-app role switching for demos, so one login shows every perspective without juggling accounts.</p>
+
+        <p class="callout-border"><b>What&#8217;s live vs. simulated in the prototype.</b><br>The full interface, permission logic, metadata model, and all interactions are real and running. The backend storage, authentication, file transmission, AI responses, and exports are simulated. This is a socialization prototype built to demonstrate the experience and validate the design direction, not a production build.</p>
+      </section>
+
+                <hr class="intro-hr">
+
+      <!-- DESIGN RATIONALE -->
+      <section id="rationale">
+        <h2 class="article-h2">Design Rationale: The decisions that shaped the product</h2>
+
+        <h3>Cutting features to make the demo land</h3>
+        <p>The first version of the prototype had a five-stage document workflow, approval indicators, dedicated pages for each service module, and a separate filter just for modules. When I reviewed it with the platform lead, the feedback was clear: the demo had one job &#8212; show that you can find things faster here. The extra surfaces were distracting from that.</p>
+        <p>I removed the workflow layer entirely and collapsed document status to two states: active and final. The module pages came out, because workflow belongs inside the service modules that own it, not the document layer. The module filter came out, because the service filter already handled it. The prototype got simpler and the thesis became easier to see. The features that came out weren&#8217;t wrong. They just weren&#8217;t the right thing to lead with for a skeptical first audience.</p>
+
+        <figure class="article-figure">
+          <div class="embed-chrome">
+            <span class="ec-dots"><i></i><i></i><i></i></span>
+            <span class="ec-route">/repository?persona=james</span>
+          </div>
+          <div class="embed-scale">
+            <iframe
+              src="https://vertex-docmgmt-git-v1-embeds-asethus-projects.vercel.app/repository?persona=james"
+              title="Simplified repository with role switching"
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+          </div>
+          <figcaption>The simplified model with in-app role switching. One login shows every perspective (staff, school client, admin) without juggling accounts during a demo.</figcaption>
+        </figure>
+
+        <br>
+
+
+        <h3>How the permission model evolved</h3>
+        <p>The initial idea from the platform lead at kickoff was the right one: access should follow the role, not the person. A school&#8217;s Business Manager should be able to see their organization&#8217;s documents because of the seat they hold, not because someone manually shared each document with them. When a new person takes that role, they inherit the access. When someone leaves, it goes with them.</p>
+        <p>The implementation took three iterations to get right.</p>
+
+        <div class="iter-list">
+          <div class="iter-item">
+            <div class="iter-n">1</div>
+            <div class="iter-body">
+              <h4>A freeform text note on each document</h4>
+              <p>The first sketch was a simple notes field describing who should see the document. Easy to add in a prototype, but you couldn&#8217;t actually enforce it or audit it. Worked in a demo, fell apart immediately in practice.</p>
+            </div>
+          </div>
+          <div class="iter-item">
+            <div class="iter-n">2</div>
+            <div class="iter-body">
+              <h4>A single toggle: role-based or individual</h4>
+              <p>Cleaner, and mapped directly to the original idea. But it was too blunt. It couldn&#8217;t handle sharing with a named group of people, or sharing with an external contact who didn&#8217;t have an account yet. Real use cases broke it quickly.</p>
+            </div>
+          </div>
+          <div class="iter-item iter-shipped">
+            <div class="iter-n">3</div>
+            <div class="iter-body">
+              <h4>Three independent sharing types that stack <em>(shipped)</em></h4>
+              <p>By role, by individual email address, or by a named team. Each grant adds access independently, with no conflicts or hierarchies. The original role-based idea is still there, extended to cover every real case that came up.</p>
+            </div>
+          </div>
         </div>
 
-        <script>
-            (function() {
-                const fill = document.querySelector('.reading-progress-fill');
-                const track = document.querySelector('.reading-progress');
-                const tocWrapper = document.querySelector('.toc-wrapper');
-                const tocNav = document.querySelector('.toc-nav');
-                const toast = document.querySelector('.toast');
-                const toastSwitch = document.getElementById('toast-switch-light');
-                const toastDismiss = document.getElementById('toast-dismiss');
-                const themeToggle = document.getElementById('theme-toggle');
-                if (!fill) return;
+        <br>
 
-                function updateTrackBounds() {
-                    if (!track || !tocWrapper || !tocNav) return;
-                    const wrapperRect = tocWrapper.getBoundingClientRect();
-                    const navRect = tocNav.getBoundingClientRect();
-                    track.style.top = `${navRect.top - wrapperRect.top}px`;
-                    track.style.height = `${navRect.height}px`;
-                }
 
-                function updateProgress() {
-                    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-                    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                    fill.style.height = `${scrollHeight > 0 ? (scrollTop / scrollHeight) * 98 : 0}%`;
-                }
+        <h3>Personnel rotation: a real scenario the model had to handle</h3>
+        <p>In a managed-services organization, people change roles frequently. A Business Manager leaves. Someone new is hired. All the documents that were shared with the previous BM need to be accessible to the new one, automatically, without anyone re-sharing them manually. Role-based grants handle this: the access follows the seat. When someone new takes the role, they see the documents. The previous person loses access through that route. Any direct individual shares they had stay in place separately, because sometimes you want to keep a specific person in the loop even after they move seats.</p>
 
-                function showToastIfNeeded() {
-                    if (!toast) return;
-                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    const dismissed = sessionStorage.getItem('lightModeToastDismissed') === '1';
-                    const forcedLight = document.documentElement.classList.contains('force-light');
-                    const forcedDark = document.documentElement.classList.contains('force-dark');
-                    if (prefersDark && !dismissed && !forcedLight && !forcedDark) toast.classList.add('show');
-                }
+        <div class="rbac-grid">
+          <div class="rbac-row">
+            <div class="rbac-key">
+              <span class="rk-label">By role</span>
+              <span class="rk-val"><code>Follows the seat</code></span>
+            </div>
+            <div class="rbac-val">Shared with &#8220;<code>Business Manager</code> at Charter School A,&#8221; meaning whoever holds that role right now. Access updates automatically when roles change.</div>
+          </div>
+          <div class="rbac-row">
+            <div class="rbac-key">
+              <span class="rk-label">By person</span>
+              <span class="rk-val"><code>Follows the individual</code></span>
+            </div>
+            <div class="rbac-val">Shared with a specific email address. Stays with that person regardless of any role changes. Works for external contacts and one-off shares too.</div>
+          </div>
+          <div class="rbac-row">
+            <div class="rbac-key">
+              <span class="rk-label">By team</span>
+              <span class="rk-val"><code>Follows the group</code></span>
+            </div>
+            <div class="rbac-val">Shared with a named team (e.g., &#8220;All finance leads&#8221;). Update the team membership once and every document shared with that team updates automatically.</div>
+          </div>
+        </div>
 
-                function applyForcedTheme(theme) {
-                    document.documentElement.classList.remove('force-light', 'force-dark');
-                    if (theme === 'light') document.documentElement.classList.add('force-light');
-                    else if (theme === 'dark') document.documentElement.classList.add('force-dark');
-                    if (theme) {
-                        sessionStorage.setItem('forcedTheme', theme);
-                        sessionStorage.setItem('lightModeToastDismissed', '1');
-                    } else {
-                        sessionStorage.removeItem('forcedTheme');
-                    }
-                    updateImages();
-                    updateToggleLabel();
-                    if (toast) toast.classList.remove('show');
-                }
+        <p class="callout-border"><b>Why the access inspector matters.</b><br>When sharing stacks from multiple sources, it can get hard to track why a particular person has access to a document. The access inspector answers that question directly: role grant, individual share, team membership, default org scope, or no access. What an admin reads on screen is the actual reason, not a summary. This made permissions something admins could troubleshoot themselves rather than file a support ticket about.</p>
 
-                function dismissToast() {
-                    sessionStorage.setItem('lightModeToastDismissed', '1');
-                    if (toast) toast.classList.remove('show');
-                }
+        <br>
 
-                function updateToggleLabel() {
-                    if (!themeToggle) return;
-                    const isForcedLight = document.documentElement.classList.contains('force-light');
-                    const isForcedDark = document.documentElement.classList.contains('force-dark');
-                    const isDark = isForcedDark || (!isForcedLight && window.matchMedia('(prefers-color-scheme: dark)').matches);
-                    themeToggle.textContent = isDark ? 'Switch to light' : 'Switch to dark';
-                    themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
-                }
 
-                function toggleTheme() {
-                    const isForcedLight = document.documentElement.classList.contains('force-light');
-                    const isForcedDark = document.documentElement.classList.contains('force-dark');
-                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    const target = isForcedLight ? 'dark' : isForcedDark ? 'light' : (prefersDark ? 'light' : 'dark');
-                    if (!document.startViewTransition) { applyForcedTheme(target); return; }
-                    const t = document.startViewTransition(() => applyForcedTheme(target));
-                    t.ready.then(() => {
-                        document.documentElement.animate(
-                            { clipPath: ["inset(0 0 100% 0)", "inset(0)"] },
-                            { pseudoElement: "::view-transition-new(root)", duration: 600, easing: "ease-in-out" }
-                        );
-                    });
-                }
+        <h3>Metadata instead of better folders</h3>
+        <p>The alternative I considered seriously was improving the folder conventions rather than replacing them: enforce a shared structure, build better tooling around it, and train teams to use it. The reason I didn&#8217;t recommend it: it requires ongoing discipline from every person who creates a document. The moment one team builds a slightly different structure, the model breaks for anyone who crosses that boundary. With metadata, the structure is applied at the point of upload based on the workflow context, not by the person uploading. The mental-model shift for people used to folders is real, which is why saved filters exist.</p>
 
-                updateTrackBounds();
-                updateProgress();
-                document.addEventListener('scroll', updateProgress, { passive: true });
-                window.addEventListener('resize', () => { updateTrackBounds(); updateProgress(); });
+        <br>
 
-                if (toastSwitch) toastSwitch.addEventListener('click', () => applyForcedTheme('light'));
-                if (toastDismiss) toastDismiss.addEventListener('click', dismissToast);
-                if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
 
-                const storedTheme = sessionStorage.getItem('forcedTheme');
-                if (storedTheme === 'light' || storedTheme === 'dark') applyForcedTheme(storedTheme);
-                else updateToggleLabel();
+        <h3>Saved filters as a bridge for folder habits</h3>
+        <p>People who are used to folders don&#8217;t primarily search. They navigate to a known place and scan. Saved filters give them a direct equivalent: a named, persistent view like &#8220;Charter School A, current-year compliance&#8221; that updates automatically as new matching documents arrive. It behaves like a folder from a mental-model perspective. It&#8217;s actually a saved search that runs against the metadata. This was the most concrete UX response to the adoption risk the research surfaced.</p>
 
-                showToastIfNeeded();
-            })();
+        <figure class="article-figure">
+          <div class="embed-chrome">
+            <span class="ec-dots"><i></i><i></i><i></i></span>
+            <span class="ec-route">/repository?persona=james&amp;client=aoa&amp;compliance_class=Financial</span>
+          </div>
+          <div class="embed-scale">
+            <iframe
+              src="https://vertex-docmgmt-git-v1-embeds-asethus-projects.vercel.app/repository?persona=james&client=aoa&compliance_class=Financial"
+              title="Saved filters applied &#8212; compliance documents"
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+          </div>
+          <figcaption>Saved filters give folder-trained users a personal, persistent view that updates as new matching documents arrive.</figcaption>
+        </figure>
 
-            (function() {
-                const sections = document.querySelectorAll('h2[id]');
-                const tocLinks = document.querySelectorAll('.toc-list a');
+        <h3>Designing the failure paths first</h3>
+        <p>For a prototype built to change the minds of people who were already skeptical, a single confusing moment can undo everything. I mapped failure paths alongside happy paths and treated them with the same priority. The most urgent fix during the engagement was a case where an uploaded file briefly disappeared from the repository view. In a demo for people whose core concern is &#8220;will this system lose my documents,&#8221; that moment reads as confirmation of everything they feared. Making sure uploaded files stayed visible, required steps were surfaced clearly, and nothing happened silently was more important than adding any new feature.</p>
+      </section>
 
-                function updateActiveLink() {
-                    let currentSection = null;
-                    const scrollPos = window.scrollY + (window.innerHeight * 0.5);
+                <hr class="intro-hr">
 
-                    sections.forEach(section => {
-                        if (scrollPos >= section.offsetTop) {
-                            currentSection = section;
-                        }
-                    });
+      <!-- REVIEW & FEASIBILITY -->
+      <section id="validation">
+        <h2 class="article-h2">Review &amp; Feasibility: What got validated</h2>
+        <p>A three-week definition sprint doesn&#8217;t include large-scale user testing, so I&#8217;m precise about what happened. The prototype&#8217;s permission logic was written specifically so the engineering lead could read it and validate the model before any build work began. The goal was a version he could review line by line, not a production implementation.</p>
+        <p>The internal design review covered all five deliverables and the prototype together, attended by the platform lead, domain lead, incoming PM, and engineering lead. Two things came out of it: the Document Type filter was updated to show only the types that are relevant to whichever service is currently selected, and the filter ordering was clarified so Service is always the primary dimension.</p>
+        <p>The engineering review also surfaced a real gap in the permission model: there&#8217;s currently no way to limit a school&#8217;s document access to only the services they&#8217;re actually contracted for. A school that isn&#8217;t contracted for Campus Inspections could theoretically see Inspection documents if someone accidentally shares them. I logged it as an open question with a temporary workaround and a clear Phase 2 path, so it didn&#8217;t block the build. It&#8217;s addressed in the Phase 2 section below.</p>
+        <p>Direct testing with schools and with the folder-trained staff is the first validation step of the build phase. The assumptions that weren&#8217;t validated in this engagement are documented and tagged in the PRD so the next team knows exactly where to start.</p>
+      </section>
 
-                    if (currentSection) {
-                        const id = currentSection.getAttribute('id');
-                        tocLinks.forEach(link => link.classList.remove('active'));
-                        const activeLink = document.querySelector(`.toc-list a[href="#${id}"]`);
-                        if (activeLink) activeLink.classList.add('active');
-                    }
-                }
 
-                window.addEventListener('scroll', updateActiveLink);
-                updateActiveLink();
-            })();
-        </script>
-        <script src="../../script.js"></script>
-        <script src="../../shared.js"></script>
-    </body>
+
+                <hr class="intro-hr">
+
+      <!-- RESULTS -->
+      <section id="results">
+        <h2 class="article-h2">Results: Every artifact delivered. Two exceeded the brief.</h2>
+
+        <ul class="clean">
+          <li><b>Full deliverable package:</b> product requirements document, solution architecture overview, role-document access matrix, internal design review findings, and a SOW coverage checklist, each linked and cross-referenced.</li>
+          <li><b>Prototype exceeded the brief:</b> the engagement asked for lo-fi clickable wireframes. What shipped was a working eight-route application with persistent state, four personas with in-app role switching, and 23 document types seeded across the model.</li>
+          <li><b>Access matrix in code:</b> rather than a diagram on paper, the role-access matrix was implemented as working logic in the prototype, so the engineering lead could review it directly rather than translating from a document.</li>
+          <li><b>Five stakeholders, one direction:</b> every deferred item is named in the PRD with a rationale and an owner, so there&#8217;s no ambiguity about what&#8217;s in scope and what&#8217;s not.</li>
+          <li><b>Success metrics framed before build:</b> time-to-find, submission completion rate, and reliance on colleagues to locate files are defined as targets. Not yet measured, but established so engineering decisions have something concrete to work against.</li>
+        </ul>
+
+        <figure class="article-figure stat-ribbon">
+          <div class="stat-block">
+            <span class="stat-val">5</span>
+            <span class="stat-label">Deliverables &#8212; all contracted, 2 exceeded</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-val">8</span>
+            <span class="stat-label">Prototype routes, live</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-val">23</span>
+            <span class="stat-label">Document types seeded</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-val">4</span>
+            <span class="stat-label">Personas with role switching</span>
+          </div>
+        </figure>
+      </section>
+
+                <hr class="intro-hr">
+
+      <!-- VISION & PHASE 2 -->
+      <section id="vision">
+        <h2 class="article-h2">The longer vision: The document layer is the foundation</h2>
+        <p>The platform lead&#8217;s stated goal was that every client interaction happens through the platform, and the platform integrates with whatever operational tools the internal team uses. The document layer is the first shared core capability that makes that work: a single place where every file from every service module lives, regardless of which team produced it or which system originated it.</p>
+
+        <p class="callout-border" style="background:var(--surface);"><em><span style="color:var(--red);">&#8220;</span>The long-term goal is that every single client interaction occurs through the platform. Our teams would almost never engage with it directly &#8212; they&#8217;d work out of HubSpot, out of Zendesk. But everything they do gets communicated back to the client through the platform.<span style="color:var(--red);">&#8221;</span></em><br><span style="color:var(--text-secondary); font-size:var(--font-size-sm);">&#8212; Platform Lead, April 2026</span></p>
+
+        <h3>HubSpot and Zendesk as the operational layer</h3>
+        <p>The client&#8217;s teams will work from HubSpot for service operations and Zendesk for support. The platform is the client-facing surface, not an internal tool. For the document layer, this means that a document produced through a HubSpot workflow or attached to a Zendesk ticket should land in the repository automatically, with its metadata derived from the context of the request that created it. The school finds it in the platform. The file is findable without anyone manually transferring it.</p>
+
+        <figure class="article-figure">
+          <div class="embed-chrome">
+            <span class="ec-dots"><i></i><i></i><i></i></span>
+            <span class="ec-route">vertex-docmgmt-add-persona-deeplink.vercel.app/repository?persona=austin</span>
+          </div>
+          <div class="embed-scale">
+            <iframe
+              src="https://vertex-docmgmt-git-add-persona-deeplink-asethus-projects.vercel.app/repository?persona=austin"
+              title="Future-direction prototype &#8212; unified repository"
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+          </div>
+          <figcaption>Every service module feeds the same repository through a single ingest point. Adding a new module adds documents to the repository without requiring a new document surface.</figcaption>
+        </figure>
+
+        <h3>Phase 2 &#8212; what&#8217;s deferred and why</h3>
+        <p>Each item below was scoped out deliberately so the v1 could focus on proving the core concept. Every deferral is documented in the PRD with a rationale, a temporary workaround where needed, and a clear owner.</p>
+
+        <div class="decision-block decided">
+          <span class="db-label">Phase 2</span>
+          <h4>A platform assistant that understands your documents</h4>
+          <p>Because every document in the repository carries structured metadata (type, service, school, period), the corpus is already set up to support a conversational search layer. A school could ask &#8220;show me everything we submitted for payroll last quarter&#8221; and get a filtered view rather than a keyword search result. The prototype includes a scripted version of this interaction to preview the model.</p>
+          <p>The design question isn&#8217;t whether to add AI; it&#8217;s how to frame it. The direction I&#8217;d carry forward: users should collaborate with the assistant, not depend on it. It surfaces and filters; the person confirms and acts.</p>
+          <span class="db-outcome">The v1 metadata structure is already set up to support this. Phase 2 adds the real retrieval layer on top.</span>
+        </div>
+
+        <div class="decision-block decided">
+          <span class="db-label">Phase 2</span>
+          <h4>Zendesk and HubSpot integration</h4>
+          <p>Files attached to Zendesk support tickets and HubSpot deal records should land in the document repository with the correct metadata automatically derived. Right now they live inside those tools and can&#8217;t be found from the school&#8217;s platform home. A Phase 2 integration would route them through the same ingest point every other document uses. The metadata gets derived from the ticket or deal context, and the file becomes findable from both sides.</p>
+          <span class="db-outcome">Same ingest point, two new sources. No new document surfaces required.</span>
+        </div>
+
+        <div class="decision-block decided">
+          <span class="db-label">Phase 2</span>
+          <h4>Native auditor access</h4>
+          <p>In v1, external audits are handled by creating a temporary SharePoint folder share. It works, but it&#8217;s a reason to keep maintaining SharePoint and a reason for staff to keep a parallel folder structure running. The Phase 2 design is a dedicated Auditor role with time-limited access that expires after the audit window, scoped to specific documents rather than a whole organization. It&#8217;s an extension of the existing permission model, not a separate system.</p>
+          <span class="db-outcome">v1: SharePoint folder share as interim. Phase 2: Auditor role with time-limited, document-level access.</span>
+        </div>
+
+        <div class="decision-block decided">
+          <span class="db-label">Phase 2</span>
+          <h4>Limiting access to contracted services</h4>
+          <p>The current permission model doesn&#8217;t enforce what a school is actually contracted for. A school not contracted for Campus Inspections could theoretically see inspection documents if someone accidentally shares them. Closing this requires a data source for what each school is under contract for, which wasn&#8217;t in scope for this engagement. For v1, admins handle this manually by only assigning the relevant service scope when setting up a school. As the client adds more modules and more schools, a more automated layer will be needed.</p>
+          <span class="db-outcome">v1: manual admin setup as the guardrail. Phase 2: contract data drives what each school can see.</span>
+        </div>
+
+        <p class="callout-border"><b>Why the Phase 2 items fit naturally.</b><br>Every item above extends the v1 design rather than replacing parts of it. The permission model already supports role, individual, and team grants, so adding a time-limited auditor grant is an addition, not a redesign. The metadata structure is already set up for AI retrieval; adding the assistant is a layer on top. Zendesk and HubSpot just become two more sources feeding the same ingest point. V1 was designed with this in mind.</p>
+      </section>
+
+      <!-- CONTINUE READING -->
+      <div class="next-steps">
+        <h3 class="next-steps-title">Continue reading</h3>
+        <div class="next-steps-grid">
+          <a href="../improvingAdoption/" class="next-step-card">
+            <span class="next-step-label">Next Project</span>
+            <span class="next-step-name">Solving an Adoption Crisis at Arizona State &#8594;</span>
+          </a>
+          <a href="../../blogs/tyranny-of-the-a-b-test/tyranny-of-the-a-b-test.html" class="next-step-card">
+            <span class="next-step-label">Check out my blogs</span>
+            <span class="next-step-name">Tyranny of the A/B test &#8594;</span>
+          </a>
+        </div>
+      </div>
+
+    </article>
+  </div>
+
+  <footer>
+    <div style="max-width: 700px; margin: 0 auto; padding: 0 var(--space-md);">
+      <br><br><br>
+      <hr><br>
+      <div class="footer-container">
+        <a href="#top" class="hyp-p" data-ga-event="click" data-ga-event-name="back_to_top" data-ga-event-category="navigation">back to top &#8593;</a>
+      </div>
+      <br>
+      <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.95rem;">Site coded by a human in vanilla HTML, CSS, and JavaScript.</p>
+    </div>
+  </footer>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // ---- Embed iframe load-in ----
+    document.querySelectorAll('.embed-scale').forEach(function(wrap) {
+      var ifr = wrap.querySelector('iframe');
+      if (!ifr) return;
+      ifr.addEventListener('load', function() { wrap.classList.add('is-loaded'); });
+    });
+    });
+
+    // ---- Reading progress bar ----
+    var fill = document.querySelector('.reading-progress-fill');
+    var track = document.querySelector('.reading-progress');
+    var tocWrapper = document.querySelector('.toc-wrapper');
+    var tocNav = document.querySelector('.toc-nav');
+
+    function updateTrackBounds() {
+      if (!track || !tocWrapper || !tocNav) return;
+      var wrapperRect = tocWrapper.getBoundingClientRect();
+      var navRect = tocNav.getBoundingClientRect();
+      track.style.top = (navRect.top - wrapperRect.top) + 'px';
+      track.style.height = navRect.height + 'px';
+    }
+
+    function updateProgress() {
+      if (!fill) return;
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 98 : 0;
+      fill.style.height = progress + '%';
+    }
+
+    updateTrackBounds();
+    updateProgress();
+    document.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', function() { updateTrackBounds(); updateProgress(); });
+
+    // ---- Toast & theme toggle ----
+    var toast = document.querySelector('.toast');
+    var toastSwitch = document.getElementById('toast-switch-light');
+    var toastDismiss = document.getElementById('toast-dismiss');
+    var themeToggle = document.getElementById('theme-toggle');
+
+    function applyForcedTheme(theme) {
+      document.documentElement.classList.remove('force-light', 'force-dark');
+      if (theme === 'light') document.documentElement.classList.add('force-light');
+      else if (theme === 'dark') document.documentElement.classList.add('force-dark');
+      if (theme) {
+        sessionStorage.setItem('forcedTheme', theme);
+        sessionStorage.setItem('lightModeToastDismissed', '1');
+      } else {
+        sessionStorage.removeItem('forcedTheme');
+      }
+      updateToggleLabel();
+      if (toast) toast.classList.remove('show');
+    }
+
+    function dismissToast() {
+      sessionStorage.setItem('lightModeToastDismissed', '1');
+      if (toast) toast.classList.remove('show');
+    }
+
+    function updateToggleLabel() {
+      if (!themeToggle) return;
+      var isForcedLight = document.documentElement.classList.contains('force-light');
+      var isForcedDark = document.documentElement.classList.contains('force-dark');
+      var isDark = isForcedDark || (!isForcedLight && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      themeToggle.textContent = isDark ? 'Switch to light' : 'Switch to dark';
+      themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+    }
+
+    function toggleTheme() {
+      var isForcedLight = document.documentElement.classList.contains('force-light');
+      var isForcedDark = document.documentElement.classList.contains('force-dark');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var target = isForcedLight ? 'dark' : isForcedDark ? 'light' : (prefersDark ? 'light' : 'dark');
+      if (!document.startViewTransition) { applyForcedTheme(target); return; }
+      var t = document.startViewTransition(function() { applyForcedTheme(target); });
+      t.ready.then(function() {
+        document.documentElement.animate(
+          { clipPath: ['inset(0 0 100% 0)', 'inset(0)'] },
+          { pseudoElement: '::view-transition-new(root)', duration: 600, easing: 'ease-in-out' }
+        );
+      });
+    }
+
+    function showToastIfNeeded() {
+      if (!toast) return;
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var dismissed = sessionStorage.getItem('lightModeToastDismissed') === '1';
+      var forcedLight = document.documentElement.classList.contains('force-light');
+      var forcedDark = document.documentElement.classList.contains('force-dark');
+      if (prefersDark && !dismissed && !forcedLight && !forcedDark) toast.classList.add('show');
+    }
+
+    if (toastSwitch) toastSwitch.addEventListener('click', function() { applyForcedTheme('light'); });
+    if (toastDismiss) toastDismiss.addEventListener('click', dismissToast);
+    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+
+    var storedTheme = sessionStorage.getItem('forcedTheme');
+    if (storedTheme === 'light' || storedTheme === 'dark') applyForcedTheme(storedTheme);
+    else updateToggleLabel();
+    showToastIfNeeded();
+
+    // ---- TOC active-link scrollspy ----
+    var sections = document.querySelectorAll('section[id]');
+    var tocLinks = document.querySelectorAll('.toc-list a');
+
+    function updateActiveLink() {
+      var currentSection = null;
+      var scrollPos = window.scrollY + window.innerHeight * 0.35;
+      sections.forEach(function(sec) {
+        if (scrollPos >= sec.offsetTop) currentSection = sec;
+      });
+      if (currentSection) {
+        var id = currentSection.getAttribute('id');
+        tocLinks.forEach(function(l) { l.classList.remove('active'); });
+        var active = document.querySelector('.toc-list a[href="#' + id + '"]');
+        if (active) active.classList.add('active');
+      }
+    }
+
+    window.addEventListener('scroll', updateActiveLink, { passive: true });
+    updateActiveLink();
+  })();
+  </script>
+
+</body>
 </html>
