@@ -335,7 +335,6 @@ li pre {
 }
 
 .back-button:hover {
-    transform: translateY(-1px);
     color: var(--primary) !important;
 }
 
@@ -429,7 +428,6 @@ li pre {
 }
 
 .toast button:hover {
-    transform: translateY(-1px);
 }
 
 .toast button:active {
@@ -457,7 +455,6 @@ li pre {
 }
 
 .theme-toggle:hover {
-    transform: translateY(-1px);
     background: rgba(0, 0, 0, 0.16);
     border-color: rgba(0, 0, 0, 0.12);
 }
@@ -522,7 +519,6 @@ li pre {
 }
 
 .toc-wrapper:hover {
-    transform: translateY(-1px);
 }
 
 .toc-title {

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <!-- Canonical URL normalizer -->
-  <link id="canonical-link" rel="canonical" href="">
+  <link id="canonical-link" rel="canonical" href="https://abseth.com/docmanagement">
   <script>
   (function(){
     try{
@@ -62,7 +62,7 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://abseth.com/my-works/DocManagement/">
+  <meta property="og:url" content="https://abseth.com/docmanagement">
   <meta property="og:title" content="Consolidating Four Document Systems Into One Searchable Layer">
   <meta property="og:description" content="UX and product design case study: a platform-native, metadata-driven document layer that replaces a fragmented Box, SharePoint, email, and OneDrive stack.">
   <meta property="og:image" content="https://abseth.com/my-works/DocManagement/img/lt/thumbnail.png">
@@ -82,7 +82,7 @@
     "@context": "https://schema.org",
     "@type": "CreativeWork",
     "name": "Consolidating Four Document Systems Into One Searchable Layer",
-    "url": "https://abseth.com/my-works/DocManagement/",
+    "url": "https://abseth.com/docmanagement",
     "description": "UX and product design case study: a platform-native, metadata-driven document layer that replaces a fragmented Box, SharePoint, email, and OneDrive stack across hundreds of charter schools.",
     "image": "https://abseth.com/my-works/DocManagement/img/lt/thumbnail.png",
     "author": { "@type": "Person", "name": "Abhishek Sethuraman", "url": "https://abseth.com/" },
@@ -97,6 +97,21 @@
   <link rel="icon" href="/img/favicon.png" type="image/png">
 
   <script>
+    // Pre-paint: re-apply an already-saved theme choice BEFORE first paint, to
+    // avoid a flash of the system theme on same-session reloads. First-time
+    // visitors (no saved choice) intentionally fall through to the system
+    // default + the light-mode toast — this does nothing for them.
+    (function() {
+      try {
+        var saved = sessionStorage.getItem('forcedTheme');
+        if (saved === 'light' || saved === 'dark') {
+          var root = document.documentElement;
+          root.classList.add(saved === 'light' ? 'force-light' : 'force-dark');
+          root.setAttribute('data-theme', saved);
+        }
+      } catch (e) {}
+    })();
+
     function isDarkTheme() {
       const forcedLight = document.documentElement.classList.contains('force-light');
       const forcedDark = document.documentElement.classList.contains('force-dark');
@@ -166,6 +181,21 @@
     </div>
   </div>
 
+  <!-- Prototype margin note: fixed in the left gutter, fades in while a
+       prototype embed is on screen, dismissible. Mirrors the TOC on the right.
+       Below the wide breakpoint the inline .callout-border.proto-source is the fallback. -->
+  <aside class="proto-note" id="proto-note">
+    <button class="proto-note-close" id="proto-note-dismiss" type="button" aria-label="Dismiss prototype note">&#10005;</button>
+    <span class="proto-note-label">Prototype note</span>
+    <p class="proto-note-title">What&#8217;s live vs. simulated</p>
+    <p class="proto-note-text">The full interface, permission logic, and metadata model are real and running.</p>
+    <p class="proto-note-text">Backend storage, authentication, file transmission, AI responses, and exports are simulated &#8212; a socialization prototype, not a production build.</p>
+    <p class="proto-note-cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 9 5 12 1.8-5.2L21 14Z"/><path d="M7.2 2.2 8 5.1"/><path d="m5.1 7.2 2.9.8"/><path d="M14 4.1 12 6"/><path d="m6 12-1.9 2"/></svg>
+      <span>Go ahead and click in &#8212; every prototype here is fully interactive.</span>
+    </p>
+  </aside>
+
   <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme" data-ga-event="click" data-ga-event-name="toggle_theme" data-ga-event-category="theme">Switch to light</button>
 
   <div class="article-container" id="top">
@@ -199,7 +229,7 @@
       <figure class="article-figure">
         <div class="embed-chrome">
           <span class="ec-dots"><i></i><i></i><i></i></span>
-          <span class="ec-route">vertex-docmgmt.vercel.app/repository?persona=austin</span>
+          <span class="ec-route">Document repository &#8212; staff view</span>
         </div>
         <div class="embed-scale">
           <iframe
@@ -274,6 +304,14 @@
             <span class="stat-label">Stakeholders aligned</span>
           </div>
         </figure>
+
+        <!-- Jump to solution CTA -->
+        <a href="#solution" class="jump-btn" data-ga-event="click" data-ga-event-name="skip_to_solution" data-ga-event-category="navigation">
+          Jump to the solution
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>
+        </a>
       </section>
 
                       <hr class="intro-hr">
@@ -295,7 +333,66 @@
         <br>
 
         <h3>No shared folder convention</h3>
-        <p>EdTech organized by State &#8594; School &#8594; Year. PA/K-12 used Year &#8594; School &#8594; Function. Folders ran five to ten levels deep in both cases, with no consistent logic between them. Someone working across both divisions was navigating two completely different information architectures. For schools, it was worse: Box&#8217;s waterfall permissions meant they often saw a scattered set of folders shared at different depths, with no coherent top-level view.</p>
+        <p>Folders ran five to ten levels deep in both cases, with no consistent logic between them. Someone working across both divisions was navigating two completely different information architectures. For schools, it was worse: Box&#8217;s waterfall permissions meant they often saw a scattered set of folders shared at different depths, with no coherent top-level view.</p>
+
+        <figure class="article-figure">
+          <div class="diagram-bg">
+          <svg viewBox="0 0 500 186" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px;display:block;margin:0 auto">
+            <style>
+              .hx-lvl   { font: 600 8.5px var(--font-sans, system-ui); fill: var(--text-muted); letter-spacing: .06em; text-transform: uppercase; }
+              .hx-lvl-on{ fill: var(--primary); }
+              .hx-team  { font: 600 9px var(--font-sans, system-ui); fill: var(--text-muted); letter-spacing: .05em; text-transform: uppercase; }
+              .hx-name  { font: 600 12px var(--font-sans, system-ui); }
+              .hx-tb    { fill: var(--primary); }
+              .hx-tr    { fill: var(--red); }
+              .hx-tn    { fill: var(--text-secondary); }
+              .hx-bb    { stroke: var(--primary); fill: var(--primary); fill-opacity: .10; stroke-width: 1.5; }
+              .hx-br    { stroke: var(--red); fill: var(--red); fill-opacity: .08; stroke-width: 1.5; }
+              .hx-bn    { stroke: var(--border-strong); fill: var(--surface); stroke-width: 1.2; }
+              .hx-arr   { stroke: var(--border-strong); stroke-width: 1.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+              .hx-con   { stroke: var(--primary); stroke-dasharray: 3 2.5; stroke-width: 1.3; }
+              .hx-eq    { font: 600 8px var(--font-sans, system-ui); fill: var(--primary); }
+              .hx-anchor{ fill: var(--primary); fill-opacity: .05; }
+              .hx-anchor-lbl { font: 600 8.5px var(--font-sans, system-ui); fill: var(--primary); letter-spacing: .06em; text-transform: uppercase; }
+            </style>
+
+            <!-- Level-2 (School) anchor band -->
+            <rect x="210" y="42" width="136" height="114" rx="10" class="hx-anchor"/>
+            <text x="278" y="170" text-anchor="middle" class="hx-anchor-lbl">stable anchor</text>
+
+            <!-- position headers -->
+            <text x="144" y="16" text-anchor="middle" class="hx-lvl">Level 1</text>
+            <text x="278" y="16" text-anchor="middle" class="hx-lvl hx-lvl-on">Level 2</text>
+            <text x="412" y="16" text-anchor="middle" class="hx-lvl">Level 3</text>
+
+            <!-- EdTech hierarchy: State / School / Year -->
+            <text x="74" y="72" text-anchor="end" class="hx-team">EdTech</text>
+            <rect x="86" y="52" width="116" height="32" rx="6" class="hx-bn"/>
+            <text x="144" y="72" text-anchor="middle" class="hx-name hx-tn">State</text>
+            <path d="M205,68 h12 m-4,-3 l5,3 l-5,3" class="hx-arr"/>
+            <rect x="220" y="52" width="116" height="32" rx="6" class="hx-bb"/>
+            <text x="278" y="72" text-anchor="middle" class="hx-name hx-tb">School</text>
+            <path d="M339,68 h12 m-4,-3 l5,3 l-5,3" class="hx-arr"/>
+            <rect x="354" y="52" width="116" height="32" rx="6" class="hx-br"/>
+            <text x="412" y="72" text-anchor="middle" class="hx-name hx-tr">Year</text>
+
+            <!-- School holds the same position across both -->
+            <line x1="278" y1="84" x2="278" y2="114" class="hx-con"/>
+            <text x="286" y="102" class="hx-eq">same</text>
+
+            <!-- PA/K-12 hierarchy: Year / School / Function -->
+            <text x="74" y="134" text-anchor="end" class="hx-team">PA/K-12</text>
+            <rect x="86" y="114" width="116" height="32" rx="6" class="hx-br"/>
+            <text x="144" y="134" text-anchor="middle" class="hx-name hx-tr">Year</text>
+            <path d="M205,130 h12 m-4,-3 l5,3 l-5,3" class="hx-arr"/>
+            <rect x="220" y="114" width="116" height="32" rx="6" class="hx-bb"/>
+            <text x="278" y="134" text-anchor="middle" class="hx-name hx-tb">School</text>
+            <path d="M339,130 h12 m-4,-3 l5,3 l-5,3" class="hx-arr"/>
+            <rect x="354" y="114" width="116" height="32" rx="6" class="hx-bn"/>
+            <text x="412" y="134" text-anchor="middle" class="hx-name hx-tn">Function</text>
+          </svg>
+          </div>
+        </figure>
 
         <br>
 
@@ -315,33 +412,23 @@
             <tr>
               <td class="table-first-col">Search &amp; discoverability</td>
               <td>5&#8211;30 min to locate a file; staff unsure which system holds it; finding anything depends on institutional memory</td>
-              <td class="cell-yes">High</td>
+              <td><span class="conf conf-high">High</span></td>
             </tr>
             <tr>
               <td class="table-first-col">Navigation clarity</td>
               <td>Two incompatible folder conventions; schools see a scattered view with no coherent structure</td>
-              <td class="cell-yes">High</td>
+              <td><span class="conf conf-high">High</span></td>
             </tr>
             <tr>
               <td class="table-first-col">Single login</td>
               <td>Multiple credentials across systems; surfaced strongly but from fewer sources</td>
-              <td class="cell-mid">Moderate</td>
+              <td><span class="conf conf-mod">Moderate</span></td>
             </tr>
           </tbody>
         </table>
 
 
         <p>I mapped document flows end-to-end for both service lines. The maps confirmed the structural cause: deep folder trees built independently by each team, with permission inheritance broken during a prior migration from Google Drive to SharePoint. They also showed something useful: the documents themselves are predictable in type and origin, which is exactly what a metadata model needs to work.</p>
-
-        <br>
-
-        <figure class="article-figure">
-          <div class="fig-placeholder">
-            <span class="ph-icon">Artifact</span>
-            <p class="ph-cap">Current-state document flow maps for both service lines, showing folder depth, conflicting conventions, and where access breaks.</p>
-            <p class="ph-hint">Document Flow Maps v1.1 &#8212; attach export here</p>
-          </div>
-        </figure>
 
         <br>
 
@@ -355,8 +442,6 @@
         <br>
 
         <p>That session produced the metadata field set (organization, service, document type, process, period, access scope) that became the backbone of the information architecture. It didn&#8217;t come from a workshop or a competitive audit. It came from listening to someone describe what they already knew they needed.</p>
-
-        <p class="callout-border"><b>What the research did and did not cover.</b><br>Three internal personas were completed (EdTech, Operations, IT). Three weren&#8217;t reached in time: Service Center, Finance/Accounting, and direct school client sessions. Schools described symptoms (can&#8217;t find files, too many logins), not a solution, so the decision to build a platform-native system was a strategic call by leadership, not something research prescribed. School-side requirements carry explicit assumption tags, single-source findings carry a Moderate confidence label, and every gap is named in the artifacts rather than ignored.</p>
       </section>
 
 
@@ -372,7 +457,7 @@
             <tr class="table-header">
               <th class="table-first-col">Dimension</th>
               <th>Search layer over Box/SharePoint</th>
-              <th>Platform-native repository</th>
+              <th class="cell-pick">Platform-native repository</th>
             </tr>
           </thead>
           <tbody>
@@ -429,8 +514,192 @@
 
         <br>
 
+        <!-- Time-to-find before/after viz -->
+        <figure class="article-figure">
+          <div class="ttf-viz">
+            <div class="ttf-head">
+              <span class="ttf-title">Time to locate a document</span>
+              <span class="ttf-shift" aria-hidden="true">
+                <span>minutes</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                <span>seconds</span>
+              </span>
+            </div>
+
+            <div class="ttf-row ttf-before">
+              <div class="ttf-row-top">
+                <span class="ttf-tag ttf-tag-old">Before</span>
+                <span class="ttf-ctx">4 fragmented systems &middot; folder by folder</span>
+                <span class="ttf-val ttf-val-old">5&#8211;30 min</span>
+              </div>
+              <div class="ttf-track"><div class="ttf-fill ttf-fill-old"></div></div>
+            </div>
+
+            <div class="ttf-row ttf-after">
+              <div class="ttf-row-top">
+                <span class="ttf-tag ttf-tag-new">After</span>
+                <span class="ttf-ctx">one search across everything</span>
+                <span class="ttf-val ttf-val-new">under <span class="ttf-count" data-to="10">10</span> sec</span>
+              </div>
+              <div class="ttf-track"><div class="ttf-fill ttf-fill-new"></div></div>
+            </div>
+          </div>
+          <figcaption>From minutes of folder-hunting across four systems to a single search that returns the file in seconds &#8212; the core promise of the metadata layer, made tangible.</figcaption>
+        </figure>
+
+        <style>
+          .ttf-viz {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.4rem 1.5rem 1.25rem;
+          }
+          .ttf-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.4rem;
+          }
+          .ttf-title {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+          }
+          .ttf-shift {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            background: var(--background);
+            border: 1px solid var(--border);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--text-secondary);
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity 0.5s ease 1.3s, transform 0.5s ease 1.3s;
+          }
+          .ttf-shift svg { color: var(--primary); }
+          .ttf-viz.in-view .ttf-shift { opacity: 1; transform: translateY(0); }
+
+          .ttf-row + .ttf-row { margin-top: 1.1rem; }
+          .ttf-row-top {
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transform: translateX(-12px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+          }
+          .ttf-viz.in-view .ttf-before .ttf-row-top { opacity: 1; transform: translateX(0); transition-delay: 0.1s; }
+          .ttf-viz.in-view .ttf-after  .ttf-row-top { opacity: 1; transform: translateX(0); transition-delay: 0.5s; }
+
+          .ttf-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: 0.12rem 0.5rem;
+            border-radius: 5px;
+          }
+          .ttf-tag-old { color: var(--red); background: rgba(219,79,79,0.12); }
+          .ttf-tag-new { color: var(--primary); background: rgba(0,112,234,0.10); }
+          .ttf-ctx {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            flex: 1 1 auto;
+            min-width: 0;
+          }
+          .ttf-val {
+            margin-left: auto;
+            font-family: var(--font-display, system-ui);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            white-space: nowrap;
+          }
+          .ttf-val-old { font-size: 1.5rem; color: var(--red); }
+          .ttf-val-new { font-size: 1.8rem; color: var(--primary); }
+
+          .ttf-track {
+            height: 10px;
+            border-radius: 5px;
+            background: var(--background);
+            overflow: hidden;
+          }
+          .ttf-fill {
+            height: 100%;
+            width: 0;
+            border-radius: 5px;
+            transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+          }
+          .ttf-fill-old { background: var(--red); }
+          .ttf-fill-new { background: var(--primary); min-width: 6px; }
+          .ttf-viz.in-view .ttf-fill-old { width: 100%; transition-delay: 0.2s; }
+          .ttf-viz.in-view .ttf-fill-new { width: 4%; transition-delay: 0.7s; }
+
+          @media (prefers-reduced-motion: reduce) {
+            .ttf-shift, .ttf-row-top { opacity: 1; transform: none; transition: none; }
+            .ttf-fill { transition: none; }
+            .ttf-fill-old { width: 100%; }
+            .ttf-fill-new { width: 4%; }
+          }
+        </style>
+
+        <script>
+          (function () {
+            var viz = document.currentScript.previousElementSibling;
+            while (viz && !viz.classList.contains('article-figure')) viz = viz.previousElementSibling;
+            var card = viz && viz.querySelector('.ttf-viz');
+            if (!card) return;
+
+            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            function countUp(el) {
+              var target = parseInt(el.getAttribute('data-to'), 10) || 0;
+              if (reduce) { el.textContent = target; return; }
+              var dur = 900, start = performance.now();
+              function tick(now) {
+                var t = Math.min(1, (now - start) / dur);
+                var eased = 1 - Math.pow(1 - t, 3);
+                el.textContent = Math.round(eased * target);
+                if (t < 1) requestAnimationFrame(tick);
+              }
+              el.textContent = '0';
+              requestAnimationFrame(tick);
+            }
+
+            var io = new IntersectionObserver(function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting && !card.classList.contains('in-view')) {
+                  card.classList.add('in-view');
+                  var counter = card.querySelector('.ttf-count');
+                  if (counter) setTimeout(function () { countUp(counter); }, reduce ? 0 : 700);
+                  io.unobserve(entry.target);
+                }
+              });
+            }, { threshold: 0.3 });
+
+            io.observe(card);
+          })();
+        </script>
+
+        <br>
+
+        <p class="callout-border proto-source"><b>What&#8217;s live vs. simulated in the prototype.</b><br>The full interface, permission logic, metadata model, and all interactions are real and running. The backend storage, authentication, file transmission, AI responses, and exports are simulated. This is a socialization prototype built to demonstrate the experience and validate the design direction, not a production build.<br><br><b>Go ahead and click in &#8212; every prototype on this page is fully interactive.</b></p>
+
+        <br>
+
         <h3>What a tagged document looks like</h3>
-        <p>When a document is uploaded through a platform workflow, most of its metadata fills in automatically from the context of the task that triggered it. The person uploading confirms the document type and sets who should have access. That&#8217;s typically two or three decisions, not a full form to fill out.</p>
+        <p>When a document is uploaded through a platform workflow, most of its metadata &#8212; fields like client, service, and process &#8212; fills in automatically from the context of the task that triggered it. The person uploading confirms the document type and sets who should have access. That&#8217;s typically two or three decisions, not a full form to fill out. Click any editable field below to change it, add or remove tags, or open the &#8220;Share &amp; access&#8221; panel.</p>
 
         <figure class="article-figure">
           <div class="doc-meta-panel">
@@ -603,8 +872,9 @@
 
             <div id="panel-toasts" class="panel-toasts"></div>
           </div>
-          <figcaption>A document&#8217;s metadata panel. Fields like client, service, and process fill in automatically from the workflow that triggered the upload. Click any editable field to change it, add or remove tags, or open the &#8220;Share &amp; access&#8221; panel.</figcaption>
         </figure>
+
+        <br>
 
         <h3>The repository &#8212; staff view</h3>
         <p>Staff get a dense, filterable table with fuzzy search across every document the platform has ever produced. Filters stack: narrow by service, then by document type, then by period, and get exactly the slice you need. Saved filter presets let people bookmark their recurring searches so the view is always there when they need it.</p>
@@ -612,7 +882,7 @@
         <figure class="article-figure">
           <div class="embed-chrome">
             <span class="ec-dots"><i></i><i></i><i></i></span>
-            <span class="ec-route">vertex-docmgmt.vercel.app/repository?persona=james&amp;service_type=Payroll&amp;status=Returned</span>
+            <span class="ec-route">Repository with filters applied &#8212; payroll, returned status</span>
           </div>
           <div class="embed-scale">
             <iframe
@@ -634,12 +904,12 @@
             <div>
               <div class="embed-chrome">
                 <span class="ec-dots"><i></i><i></i><i></i></span>
-                <span class="ec-route">/home?persona=james</span>
+                <span class="ec-route">Staff power-user repository</span>
               </div>
               <div class="embed-scale">
                 <iframe
-                  src="https://vertex-docmgmt-git-v1-embeds-asethus-projects.vercel.app/home?persona=james"
-                  title="Staff power-user home"
+                  src="https://vertex-docmgmt-git-v1-embeds-asethus-projects.vercel.app/repository?persona=james"
+                  title="Staff power-user repository"
                   loading="lazy"
                   sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
               </div>
@@ -647,7 +917,7 @@
             <div>
               <div class="embed-chrome">
                 <span class="ec-dots"><i></i><i></i><i></i></span>
-                <span class="ec-route">/home?persona=maria</span>
+                <span class="ec-route">School client process-first home</span>
               </div>
               <div class="embed-scale">
                 <iframe
@@ -660,6 +930,14 @@
           </div>
           <figcaption>Staff get density and control. Schools get a process-first surface where the primary question is &#8220;what do I need to do next,&#8221; not &#8220;where is my file.&#8221;</figcaption>
         </figure>
+
+        <!-- Jump to future vision CTA -->
+        <a href="#vision" class="jump-btn" data-ga-event="click" data-ga-event-name="jump_to_vision" data-ga-event-category="navigation">
+          Jump to the future vision
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>
+        </a>
       </section>
 
 
@@ -675,7 +953,7 @@
         <figure class="article-figure">
           <div class="embed-chrome">
             <span class="ec-dots"><i></i><i></i><i></i></span>
-            <span class="ec-route">/documents/aoa-pr-2026-05a-bank?persona=austin</span>
+            <span class="ec-route">Document detail with sharing panel</span>
           </div>
           <div class="embed-scale">
             <iframe
@@ -695,7 +973,7 @@
         <figure class="article-figure">
           <div class="embed-chrome">
             <span class="ec-dots"><i></i><i></i><i></i></span>
-            <span class="ec-route">/upload/task/bap-pr-2026-05a-register?persona=maria</span>
+            <span class="ec-route">Document submission wizard &#8212; resubmit mode</span>
           </div>
           <div class="embed-scale">
             <iframe
@@ -715,11 +993,11 @@
         <figure class="article-figure">
           <div class="embed-chrome">
             <span class="ec-dots"><i></i><i></i><i></i></span>
-            <span class="ec-route">/admin/access?persona=austin</span>
+            <span class="ec-route">Per-user access inspector</span>
           </div>
           <div class="embed-scale">
             <iframe
-              src="https://vertex-docmgmt-add-persona-deeplink.vercel.app/admin/access?persona=austin"
+              src="/my-works/DocManagement/access-management.html"
               title="Per-user access inspector"
               loading="lazy"
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
@@ -736,7 +1014,7 @@
         <figure class="article-figure">
           <div class="embed-chrome">
             <span class="ec-dots"><i></i><i></i><i></i></span>
-            <span class="ec-route">/trash?persona=austin</span>
+            <span class="ec-route">Trash with soft-delete and recovery</span>
           </div>
           <div class="embed-scale">
             <iframe
@@ -748,13 +1026,13 @@
           <figcaption>Trash with 30-day recovery. Permanent deletion is a separate permission, grantable without full admin access.</figcaption>
         </figure>
 
-        <br>
-
-
-        <h3>Supporting surfaces</h3>
-        <p>Version history with the ability to revert to a previous version. A per-document activity log. A command palette for keyboard navigation. A scripted platform assistant that hands off to a filtered repository view. In-app role switching for demos, so one login shows every perspective without juggling accounts.</p>
-
-        <p class="callout-border"><b>What&#8217;s live vs. simulated in the prototype.</b><br>The full interface, permission logic, metadata model, and all interactions are real and running. The backend storage, authentication, file transmission, AI responses, and exports are simulated. This is a socialization prototype built to demonstrate the experience and validate the design direction, not a production build.</p>
+        <!-- Jump to results CTA -->
+        <a href="#results" class="jump-btn" data-ga-event="click" data-ga-event-name="see_results" data-ga-event-category="navigation">
+          See what shipped
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>
+        </a>
       </section>
 
                 <hr class="intro-hr">
@@ -770,7 +1048,7 @@
         <figure class="article-figure">
           <div class="embed-chrome">
             <span class="ec-dots"><i></i><i></i><i></i></span>
-            <span class="ec-route">/repository?persona=james</span>
+            <span class="ec-route">Simplified repository with role switching</span>
           </div>
           <div class="embed-scale">
             <iframe
@@ -789,61 +1067,38 @@
         <p>The initial idea from the platform lead at kickoff was the right one: access should follow the role, not the person. A school&#8217;s Business Manager should be able to see their organization&#8217;s documents because of the seat they hold, not because someone manually shared each document with them. When a new person takes that role, they inherit the access. When someone leaves, it goes with them.</p>
         <p>The implementation took three iterations to get right.</p>
 
-        <div class="iter-list">
-          <div class="iter-item">
-            <div class="iter-n">1</div>
-            <div class="iter-body">
-              <h4>A freeform text note on each document</h4>
+        <div class="evo">
+          <div class="evo-step evo-rejected">
+            <span class="evo-node">v1</span>
+            <div class="evo-body">
+              <div class="evo-head">
+                <h4>A freeform text note on each document</h4>
+                <span class="evo-tag evo-tag-rej">Rejected</span>
+              </div>
               <p>The first sketch was a simple notes field describing who should see the document. Easy to add in a prototype, but you couldn&#8217;t actually enforce it or audit it. Worked in a demo, fell apart immediately in practice.</p>
             </div>
           </div>
-          <div class="iter-item">
-            <div class="iter-n">2</div>
-            <div class="iter-body">
-              <h4>A single toggle: role-based or individual</h4>
+          <div class="evo-step evo-rejected">
+            <span class="evo-node">v2</span>
+            <div class="evo-body">
+              <div class="evo-head">
+                <h4>A single toggle: role-based or individual</h4>
+                <span class="evo-tag evo-tag-rej">Rejected</span>
+              </div>
               <p>Cleaner, and mapped directly to the original idea. But it was too blunt. It couldn&#8217;t handle sharing with a named group of people, or sharing with an external contact who didn&#8217;t have an account yet. Real use cases broke it quickly.</p>
             </div>
           </div>
-          <div class="iter-item iter-shipped">
-            <div class="iter-n">3</div>
-            <div class="iter-body">
-              <h4>Three independent sharing types that stack <em>(shipped)</em></h4>
+          <div class="evo-step evo-shipped">
+            <span class="evo-node">v3</span>
+            <div class="evo-body">
+              <div class="evo-head">
+                <h4>Three independent sharing types that stack</h4>
+                <span class="evo-tag evo-tag-ship">Shipped</span>
+              </div>
               <p>By role, by individual email address, or by a named team. Each grant adds access independently, with no conflicts or hierarchies. The original role-based idea is still there, extended to cover every real case that came up.</p>
             </div>
           </div>
         </div>
-
-        <br>
-
-
-        <h3>Personnel rotation: a real scenario the model had to handle</h3>
-        <p>In a managed-services organization, people change roles frequently. A Business Manager leaves. Someone new is hired. All the documents that were shared with the previous BM need to be accessible to the new one, automatically, without anyone re-sharing them manually. Role-based grants handle this: the access follows the seat. When someone new takes the role, they see the documents. The previous person loses access through that route. Any direct individual shares they had stay in place separately, because sometimes you want to keep a specific person in the loop even after they move seats.</p>
-
-        <div class="rbac-grid">
-          <div class="rbac-row">
-            <div class="rbac-key">
-              <span class="rk-label">By role</span>
-              <span class="rk-val"><code>Follows the seat</code></span>
-            </div>
-            <div class="rbac-val">Shared with &#8220;<code>Business Manager</code> at Charter School A,&#8221; meaning whoever holds that role right now. Access updates automatically when roles change.</div>
-          </div>
-          <div class="rbac-row">
-            <div class="rbac-key">
-              <span class="rk-label">By person</span>
-              <span class="rk-val"><code>Follows the individual</code></span>
-            </div>
-            <div class="rbac-val">Shared with a specific email address. Stays with that person regardless of any role changes. Works for external contacts and one-off shares too.</div>
-          </div>
-          <div class="rbac-row">
-            <div class="rbac-key">
-              <span class="rk-label">By team</span>
-              <span class="rk-val"><code>Follows the group</code></span>
-            </div>
-            <div class="rbac-val">Shared with a named team (e.g., &#8220;All finance leads&#8221;). Update the team membership once and every document shared with that team updates automatically.</div>
-          </div>
-        </div>
-
-        <p class="callout-border"><b>Why the access inspector matters.</b><br>When sharing stacks from multiple sources, it can get hard to track why a particular person has access to a document. The access inspector answers that question directly: role grant, individual share, team membership, default org scope, or no access. What an admin reads on screen is the actual reason, not a summary. This made permissions something admins could troubleshoot themselves rather than file a support ticket about.</p>
 
         <br>
 
@@ -860,7 +1115,7 @@
         <figure class="article-figure">
           <div class="embed-chrome">
             <span class="ec-dots"><i></i><i></i><i></i></span>
-            <span class="ec-route">/repository?persona=james&amp;client=aoa&amp;compliance_class=Financial</span>
+            <span class="ec-route">Saved filters applied &#8212; compliance documents</span>
           </div>
           <div class="embed-scale">
             <iframe
@@ -881,10 +1136,7 @@
       <!-- REVIEW & FEASIBILITY -->
       <section id="validation">
         <h2 class="article-h2">Review &amp; Feasibility: What got validated</h2>
-        <p>A three-week definition sprint doesn&#8217;t include large-scale user testing, so I&#8217;m precise about what happened. The prototype&#8217;s permission logic was written specifically so the engineering lead could read it and validate the model before any build work began. The goal was a version he could review line by line, not a production implementation.</p>
-        <p>The internal design review covered all five deliverables and the prototype together, attended by the platform lead, domain lead, incoming PM, and engineering lead. Two things came out of it: the Document Type filter was updated to show only the types that are relevant to whichever service is currently selected, and the filter ordering was clarified so Service is always the primary dimension.</p>
-        <p>The engineering review also surfaced a real gap in the permission model: there&#8217;s currently no way to limit a school&#8217;s document access to only the services they&#8217;re actually contracted for. A school that isn&#8217;t contracted for Campus Inspections could theoretically see Inspection documents if someone accidentally shares them. I logged it as an open question with a temporary workaround and a clear Phase 2 path, so it didn&#8217;t block the build. It&#8217;s addressed in the Phase 2 section below.</p>
-        <p>Direct testing with schools and with the folder-trained staff is the first validation step of the build phase. The assumptions that weren&#8217;t validated in this engagement are documented and tagged in the PRD so the next team knows exactly where to start.</p>
+        <p>The internal design review covered all five deliverables and the prototype with the full stakeholder group. Two filter refinements came out of it: Document Type now scopes to the active Service selection, and Service is the fixed primary filter dimension. The review also surfaced a permission gap &#8212; no mechanism yet to limit a school&#8217;s access to only their contracted services &#8212; logged as an open question with a workaround and a Phase 2 path. Direct testing with schools and folder-trained staff is the first step of the build phase.</p>
       </section>
 
 
@@ -932,13 +1184,15 @@
 
         <p class="callout-border" style="background:var(--surface);"><em><span style="color:var(--red);">&#8220;</span>The long-term goal is that every single client interaction occurs through the platform. Our teams would almost never engage with it directly &#8212; they&#8217;d work out of HubSpot, out of Zendesk. But everything they do gets communicated back to the client through the platform.<span style="color:var(--red);">&#8221;</span></em><br><span style="color:var(--text-secondary); font-size:var(--font-size-sm);">&#8212; Platform Lead, April 2026</span></p>
 
+        <br>
+
         <h3>HubSpot and Zendesk as the operational layer</h3>
         <p>The client&#8217;s teams will work from HubSpot for service operations and Zendesk for support. The platform is the client-facing surface, not an internal tool. For the document layer, this means that a document produced through a HubSpot workflow or attached to a Zendesk ticket should land in the repository automatically, with its metadata derived from the context of the request that created it. The school finds it in the platform. The file is findable without anyone manually transferring it.</p>
 
         <figure class="article-figure">
           <div class="embed-chrome">
             <span class="ec-dots"><i></i><i></i><i></i></span>
-            <span class="ec-route">vertex-docmgmt-add-persona-deeplink.vercel.app/repository?persona=austin</span>
+            <span class="ec-route">Future-direction prototype &#8212; unified repository</span>
           </div>
           <div class="embed-scale">
             <iframe
@@ -950,40 +1204,84 @@
           <figcaption>Every service module feeds the same repository through a single ingest point. Adding a new module adds documents to the repository without requiring a new document surface.</figcaption>
         </figure>
 
+        <br>
+
         <h3>Phase 2 &#8212; what&#8217;s deferred and why</h3>
         <p>Each item below was scoped out deliberately so the v1 could focus on proving the core concept. Every deferral is documented in the PRD with a rationale, a temporary workaround where needed, and a clear owner.</p>
 
         <div class="decision-block decided">
-          <span class="db-label">Phase 2</span>
           <h4>A platform assistant that understands your documents</h4>
           <p>Because every document in the repository carries structured metadata (type, service, school, period), the corpus is already set up to support a conversational search layer. A school could ask &#8220;show me everything we submitted for payroll last quarter&#8221; and get a filtered view rather than a keyword search result. The prototype includes a scripted version of this interaction to preview the model.</p>
+          <br>
           <p>The design question isn&#8217;t whether to add AI; it&#8217;s how to frame it. The direction I&#8217;d carry forward: users should collaborate with the assistant, not depend on it. It surfaces and filters; the person confirms and acts.</p>
-          <span class="db-outcome">The v1 metadata structure is already set up to support this. Phase 2 adds the real retrieval layer on top.</span>
+          <br>
+          <div class="defer-track">
+            <div class="defer-now">
+              <span class="defer-stage">Now &middot; v1</span>
+              <p>Metadata is already structured for retrieval; the prototype ships a scripted preview.</p>
+            </div>
+            <span class="defer-arrow" aria-hidden="true">&#8594;</span>
+            <div class="defer-next">
+              <span class="defer-stage">Phase 2</span>
+              <p>Add the real retrieval layer on top.</p>
+            </div>
+          </div>
         </div>
 
         <div class="decision-block decided">
-          <span class="db-label">Phase 2</span>
           <h4>Zendesk and HubSpot integration</h4>
           <p>Files attached to Zendesk support tickets and HubSpot deal records should land in the document repository with the correct metadata automatically derived. Right now they live inside those tools and can&#8217;t be found from the school&#8217;s platform home. A Phase 2 integration would route them through the same ingest point every other document uses. The metadata gets derived from the ticket or deal context, and the file becomes findable from both sides.</p>
-          <span class="db-outcome">Same ingest point, two new sources. No new document surfaces required.</span>
+          <br>
+          <div class="defer-track">
+            <div class="defer-now">
+              <span class="defer-stage">Now &middot; v1</span>
+              <p>Files live inside Zendesk and HubSpot &#8212; not findable from the platform.</p>
+            </div>
+            <span class="defer-arrow" aria-hidden="true">&#8594;</span>
+            <div class="defer-next">
+              <span class="defer-stage">Phase 2</span>
+              <p>Route them through the same ingest point &#8212; no new surfaces.</p>
+            </div>
+          </div>
         </div>
 
         <div class="decision-block decided">
-          <span class="db-label">Phase 2</span>
           <h4>Native auditor access</h4>
           <p>In v1, external audits are handled by creating a temporary SharePoint folder share. It works, but it&#8217;s a reason to keep maintaining SharePoint and a reason for staff to keep a parallel folder structure running. The Phase 2 design is a dedicated Auditor role with time-limited access that expires after the audit window, scoped to specific documents rather than a whole organization. It&#8217;s an extension of the existing permission model, not a separate system.</p>
-          <span class="db-outcome">v1: SharePoint folder share as interim. Phase 2: Auditor role with time-limited, document-level access.</span>
+          <br>
+          <div class="defer-track">
+            <div class="defer-now">
+              <span class="defer-stage">Now &middot; v1</span>
+              <p>A temporary SharePoint folder share.</p>
+            </div>
+            <span class="defer-arrow" aria-hidden="true">&#8594;</span>
+            <div class="defer-next">
+              <span class="defer-stage">Phase 2</span>
+              <p>A dedicated Auditor role &#8212; time-limited, document-level access.</p>
+            </div>
+          </div>
         </div>
 
         <div class="decision-block decided">
-          <span class="db-label">Phase 2</span>
           <h4>Limiting access to contracted services</h4>
           <p>The current permission model doesn&#8217;t enforce what a school is actually contracted for. A school not contracted for Campus Inspections could theoretically see inspection documents if someone accidentally shares them. Closing this requires a data source for what each school is under contract for, which wasn&#8217;t in scope for this engagement. For v1, admins handle this manually by only assigning the relevant service scope when setting up a school. As the client adds more modules and more schools, a more automated layer will be needed.</p>
-          <span class="db-outcome">v1: manual admin setup as the guardrail. Phase 2: contract data drives what each school can see.</span>
+          <br>
+          <div class="defer-track">
+            <div class="defer-now">
+              <span class="defer-stage">Now &middot; v1</span>
+              <p>Admins assign each school&#8217;s service scope manually at setup.</p>
+            </div>
+            <span class="defer-arrow" aria-hidden="true">&#8594;</span>
+            <div class="defer-next">
+              <span class="defer-stage">Phase 2</span>
+              <p>Contract data drives what each school can see.</p>
+            </div>
+          </div>
         </div>
-
-        <p class="callout-border"><b>Why the Phase 2 items fit naturally.</b><br>Every item above extends the v1 design rather than replacing parts of it. The permission model already supports role, individual, and team grants, so adding a time-limited auditor grant is an addition, not a redesign. The metadata structure is already set up for AI retrieval; adding the assistant is a layer on top. Zendesk and HubSpot just become two more sources feeding the same ingest point. V1 was designed with this in mind.</p>
       </section>
+
+
+    <hr class="intro-hr">
 
       <!-- CONTINUE READING -->
       <div class="next-steps">
@@ -1005,7 +1303,6 @@
 
   <footer>
     <div style="max-width: 700px; margin: 0 auto; padding: 0 var(--space-md);">
-      <br><br><br>
       <hr><br>
       <div class="footer-container">
         <a href="#top" class="hyp-p" data-ga-event="click" data-ga-event-name="back_to_top" data-ga-event-category="navigation">back to top &#8593;</a>
@@ -1015,31 +1312,302 @@
     </div>
   </footer>
 
-  <script src="/design-system/article.js"></script>
+  <script>
+  (function() {
+    'use strict';
+
+    // ---- Embed iframe load-in ----
+    document.querySelectorAll('.embed-scale').forEach(function(wrap) {
+      var ifr = wrap.querySelector('iframe');
+      if (!ifr) return;
+      ifr.addEventListener('load', function() { wrap.classList.add('is-loaded'); });
+    });
+
+    // ---- Media skeleton loader (img/video: shimmer placeholder -> fade in) ----
+    function initSkeletonLoader() {
+      document.querySelectorAll('.article-body figure img, .article-body figure video').forEach(function(el) {
+        if (el.classList.contains('media-loaded-content')) return;
+        var fig = el.closest('figure');
+        if (!fig) return;
+        var ready = (el.tagName === 'IMG' && el.complete && el.naturalWidth > 0) ||
+                    (el.tagName === 'VIDEO' && el.readyState >= 3);
+        if (ready) { el.classList.add('media-loaded-content'); return; }
+        el.classList.add('media-loading-content');
+        fig.classList.add('media-skeleton');
+        function done() {
+          fig.classList.remove('media-skeleton');
+          el.classList.remove('media-loading-content');
+          el.classList.add('media-loaded-content');
+        }
+        el.addEventListener('load', done);
+        el.addEventListener('loadeddata', done);
+        el.addEventListener('error', function() {
+          fig.classList.remove('media-skeleton');
+          el.classList.remove('media-loading-content');
+        });
+      });
+    }
+    initSkeletonLoader();
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
+      setTimeout(initSkeletonLoader, 100);
+    });
+
+    // ---- Reading progress bar ----
+    var fill = document.querySelector('.reading-progress-fill');
+    var track = document.querySelector('.reading-progress');
+    var tocWrapper = document.querySelector('.toc-wrapper');
+    var tocNav = document.querySelector('.toc-nav');
+
+    function updateTrackBounds() {
+      if (!track || !tocWrapper || !tocNav) return;
+      var wrapperRect = tocWrapper.getBoundingClientRect();
+      var navRect = tocNav.getBoundingClientRect();
+      track.style.top = (navRect.top - wrapperRect.top) + 'px';
+      track.style.height = navRect.height + 'px';
+    }
+
+    function updateProgress() {
+      if (!fill) return;
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 98 : 0;
+      fill.style.height = progress + '%';
+    }
+
+    updateTrackBounds();
+    updateProgress();
+    document.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', function() { updateTrackBounds(); updateProgress(); });
+
+    // ---- Toast & theme toggle ----
+    var toast = document.querySelector('.toast');
+    var toastSwitch = document.getElementById('toast-switch-light');
+    var toastDismiss = document.getElementById('toast-dismiss');
+    var themeToggle = document.getElementById('theme-toggle');
+
+    function applyForcedTheme(theme) {
+      var root = document.documentElement;
+      // Class drives the page-specific .force-* rules + theme images;
+      // data-theme attribute drives the design-system color tokens.
+      root.classList.remove('force-light', 'force-dark');
+      if (theme === 'light') { root.classList.add('force-light'); root.setAttribute('data-theme', 'light'); }
+      else if (theme === 'dark') { root.classList.add('force-dark'); root.setAttribute('data-theme', 'dark'); }
+      else { root.removeAttribute('data-theme'); }
+      if (theme) {
+        sessionStorage.setItem('forcedTheme', theme);
+        sessionStorage.setItem('lightModeToastDismissed', '1');
+      } else {
+        sessionStorage.removeItem('forcedTheme');
+      }
+      updateToggleLabel();
+      if (toast) toast.classList.remove('show');
+    }
+
+    function dismissToast() {
+      sessionStorage.setItem('lightModeToastDismissed', '1');
+      if (toast) toast.classList.remove('show');
+    }
+
+    function updateToggleLabel() {
+      if (!themeToggle) return;
+      var isForcedLight = document.documentElement.classList.contains('force-light');
+      var isForcedDark = document.documentElement.classList.contains('force-dark');
+      var isDark = isForcedDark || (!isForcedLight && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      themeToggle.textContent = isDark ? 'Switch to light' : 'Switch to dark';
+      themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+    }
+
+    function toggleTheme() {
+      var isForcedLight = document.documentElement.classList.contains('force-light');
+      var isForcedDark = document.documentElement.classList.contains('force-dark');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var target = isForcedLight ? 'dark' : isForcedDark ? 'light' : (prefersDark ? 'light' : 'dark');
+      if (!document.startViewTransition) { applyForcedTheme(target); return; }
+      var t = document.startViewTransition(function() { applyForcedTheme(target); });
+      t.ready.then(function() {
+        document.documentElement.animate(
+          { clipPath: ['inset(0 0 100% 0)', 'inset(0)'] },
+          { pseudoElement: '::view-transition-new(root)', duration: 600, easing: 'ease-in-out' }
+        );
+      });
+    }
+
+    function showToastIfNeeded() {
+      if (!toast) return;
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var dismissed = sessionStorage.getItem('lightModeToastDismissed') === '1';
+      var forcedLight = document.documentElement.classList.contains('force-light');
+      var forcedDark = document.documentElement.classList.contains('force-dark');
+      if (prefersDark && !dismissed && !forcedLight && !forcedDark) toast.classList.add('show');
+    }
+
+    if (toastSwitch) toastSwitch.addEventListener('click', function() { applyForcedTheme('light'); });
+    if (toastDismiss) toastDismiss.addEventListener('click', dismissToast);
+    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+
+    var storedTheme = sessionStorage.getItem('forcedTheme');
+    if (storedTheme === 'light' || storedTheme === 'dark') applyForcedTheme(storedTheme);
+    else updateToggleLabel();
+    showToastIfNeeded();
+
+    // ---- TOC active-link scrollspy ----
+    var sections = document.querySelectorAll('section[id]');
+    var tocLinks = document.querySelectorAll('.toc-list a');
+
+    function updateActiveLink() {
+      var currentSection = null;
+      var scrollPos = window.scrollY + window.innerHeight * 0.35;
+      sections.forEach(function(sec) {
+        if (scrollPos >= sec.offsetTop) currentSection = sec;
+      });
+      if (currentSection) {
+        var id = currentSection.getAttribute('id');
+        tocLinks.forEach(function(l) { l.classList.remove('active'); });
+        var active = document.querySelector('.toc-list a[href="#' + id + '"]');
+        if (active) active.classList.add('active');
+      }
+    }
+
+    window.addEventListener('scroll', updateActiveLink, { passive: true });
+    updateActiveLink();
+  })();
+  </script>
+
 
   <script>
-  /* Add an "Expand view" button to every prototype's chrome bar. Each button
-     opens that embed's own iframe URL full-screen in a new tab, so the href
-     always stays in sync with what the embed is showing. */
+  /* Every prototype's chrome bar gets an "Expand" button that opens the embed
+     in a modal on this same page, shown at full scale (no zoom-out). The button
+     is a real link to the embed URL, so Ctrl/Cmd/middle-click still opens it in
+     a new tab; a plain click opens the modal. */
   (function () {
     var EXPAND_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>';
+
+    // ----- build the modal once, reused by every embed -----
+    var modal = document.createElement('div');
+    modal.className = 'embed-modal';
+    modal.hidden = true;
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Expanded prototype view');
+    modal.innerHTML =
+      '<div class="embed-modal-backdrop" data-close></div>' +
+      '<div class="embed-modal-dialog">' +
+        '<div class="embed-modal-chrome">' +
+          '<span class="ec-dots"><i></i><i></i><i></i></span>' +
+          '<span class="ec-route embed-modal-route"></span>' +
+          '<a class="embed-modal-newtab" target="_blank" rel="noopener" title="Open in new tab" aria-label="Open in new tab">' + EXPAND_SVG + '</a>' +
+          '<button class="embed-modal-close" type="button" data-close aria-label="Close expanded view">&#10005;</button>' +
+        '</div>' +
+        '<div class="embed-modal-body">' +
+          '<iframe class="embed-modal-frame" title="Expanded prototype view" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(modal);
+
+    var mFrame = modal.querySelector('.embed-modal-frame');
+    var mRoute = modal.querySelector('.embed-modal-route');
+    var mNewtab = modal.querySelector('.embed-modal-newtab');
+    var lastFocus = null;
+
+    function openModal(url, route) {
+      lastFocus = document.activeElement;
+      mRoute.textContent = route || url;
+      mNewtab.href = url;
+      mFrame.src = url;
+      modal.hidden = false;
+      void modal.offsetWidth;            // force reflow so the fade-in runs
+      modal.classList.add('is-open');
+      document.documentElement.style.overflow = 'hidden';
+      modal.querySelector('.embed-modal-close').focus();
+    }
+
+    function closeModal() {
+      if (!modal.classList.contains('is-open')) return;
+      modal.classList.remove('is-open');
+      document.documentElement.style.overflow = '';
+      setTimeout(function () {
+        if (!modal.classList.contains('is-open')) {
+          modal.hidden = true;
+          mFrame.src = 'about:blank';     // stop the prototype running in the background
+        }
+      }, 200);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    modal.addEventListener('click', function (e) {
+      if (e.target.closest('[data-close]')) closeModal();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // ----- add an Expand button to every embed chrome bar -----
     var bars = document.querySelectorAll('.embed-chrome');
     for (var i = 0; i < bars.length; i++) {
-      var bar = bars[i];
-      if (bar.querySelector('.ec-expand')) continue;
-      var frame = bar.parentElement.querySelector('.embed-scale iframe');
-      var url = frame && frame.getAttribute('src');
-      if (!url) continue;
-      var a = document.createElement('a');
-      a.className = 'ec-expand';
-      a.href = url;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.title = 'Expand view';
-      a.setAttribute('aria-label', 'Open this prototype full-screen in a new tab');
-      a.innerHTML = EXPAND_SVG + '<span>Expand</span>';
-      bar.appendChild(a);
+      (function (bar) {
+        if (bar.querySelector('.ec-expand')) return;
+        var ifr = bar.parentElement.querySelector('.embed-scale iframe');
+        var url = ifr && ifr.getAttribute('src');
+        if (!url) return;
+        var routeEl = bar.querySelector('.ec-route');
+        var route = routeEl ? routeEl.textContent.trim() : '';
+        var a = document.createElement('a');
+        a.className = 'ec-expand';
+        a.href = url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.title = 'Expand view';
+        a.setAttribute('aria-label', 'Expand this prototype');
+        a.innerHTML = EXPAND_SVG + '<span>Expand</span>';
+        a.addEventListener('click', function (e) {
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return; // let new-tab through
+          e.preventDefault();
+          openModal(url, route);
+        });
+        bar.appendChild(a);
+      })(bars[i]);
     }
+
+    // ---- Prototype margin note (scroll-reactive + dismissible) ----
+    (function initProtoNote() {
+      var note = document.getElementById('proto-note');
+      if (!note) return;
+      var embeds = document.querySelectorAll('.embed-scale');
+      // Need IntersectionObserver and at least one embed to drive the note;
+      // otherwise leave the inline .proto-source callout as the fallback.
+      if (!embeds.length || !('IntersectionObserver' in window)) return;
+
+      // Mark the document so CSS can swap the inline callout for the margin note (wide screens only).
+      document.documentElement.classList.add('has-proto-note');
+
+      var DISMISS_KEY = 'docmgmt-proto-note-dismissed';
+      var dismissed = false;
+      try { dismissed = sessionStorage.getItem(DISMISS_KEY) === '1'; } catch (e) {}
+
+      function show() { if (!dismissed) note.classList.add('is-visible'); }
+      function hide() { note.classList.remove('is-visible'); }
+
+      var dismissBtn = document.getElementById('proto-note-dismiss');
+      if (dismissBtn) {
+        dismissBtn.addEventListener('click', function() {
+          dismissed = true;
+          hide();
+          try { sessionStorage.setItem(DISMISS_KEY, '1'); } catch (e) {}
+        });
+      }
+
+      // Show whenever any prototype embed is at least partly in view.
+      var inView = new Set();
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) inView.add(entry.target);
+          else inView.delete(entry.target);
+        });
+        if (inView.size > 0) show(); else hide();
+      }, { threshold: 0.25 });
+
+      embeds.forEach(function(el) { io.observe(el); });
+    })();
   })();
   </script>
 

@@ -50,9 +50,9 @@
 .fx-link { transition: color var(--dur-base) var(--ease-standard); }
 .fx-link:hover { color: var(--red); }
 
-/* HOVER — social icon: turn blue. */
-.fx-lift { transition: color var(--dur-instant) var(--ease-standard); }
-.fx-lift:hover { color: var(--primary); }
+/* HOVER — social icon: lift 5px + turn blue. */
+.fx-lift { transition: transform var(--dur-instant) var(--ease-standard), color var(--dur-instant) var(--ease-standard); }
+.fx-lift:hover { transform: translateY(-5px); color: var(--primary); }
 
 /* HOVER — list row: background tint (no movement). */
 .fx-row { transition: background-color var(--dur-base) var(--ease-standard); border-radius: var(--radius-md); }

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>White paper template · landscape — Point One Zero</title>
+<link rel="icon" href="../../assets/favicon.svg" />
+<link rel="stylesheet" href="../../colors_and_type.css" />
+<link rel="stylesheet" href="white-paper-landscape-styles.css" />
+<style>
+  body { background: #f5f5f5; margin: 0; }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="white-paper-landscape-pages.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+const PAGE_W = 1920;
+const PAGE_H = 1080;
+
+function App() {
+  return (
+    <DesignCanvas
+      title="White paper template · landscape"
+      subtitle="1920 × 1080 (16:9 PowerPoint default) · split layouts unlock body + sidebar pairings the portrait format can't hold · same chrome, same tokens"
+    >
+      <DCSection
+        id="covers"
+        title="Covers & front matter"
+        subtitle="Title page and contents — split across the wider canvas."
+      >
+        <DCArtboard id="cover" label="Cover" width={PAGE_W} height={PAGE_H}>
+          <WPLCover />
+        </DCArtboard>
+        <DCArtboard id="toc" label="Table of contents · 2-column" width={PAGE_W} height={PAGE_H}>
+          <WPLToc />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection
+        id="chapters"
+        title="Chapter dividers"
+        subtitle="Massive chapter name on the left, lead on the right."
+      >
+        <DCArtboard id="ch1" label="Chapter divider · Idea" width={PAGE_W} height={PAGE_H}>
+          <WPLChapter
+            chapterNum="Chapter 03"
+            title="Idea"
+            brandWord="stage"
+            lead="Every startup founder starts from the same place: a problem they can't stop thinking about. Startup success in 2026 requires the discipline of not building until the evidence justifies it."
+            page={8}
+            meta="Building an AI-native startup"
+          />
+        </DCArtboard>
+        <DCArtboard id="ch2" label="Chapter divider · Scale" width={PAGE_W} height={PAGE_H}>
+          <WPLChapter
+            chapterNum="Chapter 06"
+            title="Scale"
+            brandWord="stage"
+            lead="Lean is no longer scrappy. At scale, AI-native startups stay structurally small on purpose — and extend leverage instead of headcount."
+            page={25}
+            meta="Building an AI-native startup"
+          />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection
+        id="body"
+        title="Body layouts"
+        subtitle="The reading pages. Split content opens up — body on one side, sidebar artifact on the other."
+      >
+        <DCArtboard id="body-standard" label="Standard · two prose columns" width={PAGE_W} height={PAGE_H}>
+          <WPLBodyStandard />
+        </DCArtboard>
+
+        <DCArtboard id="body-bullets" label="Body + bullet list" width={PAGE_W} height={PAGE_H}>
+          <WPLBodyBullets />
+        </DCArtboard>
+
+        <DCArtboard id="body-numbered" label="Body + numbered list" width={PAGE_W} height={PAGE_H}>
+          <WPLBodyNumbered />
+        </DCArtboard>
+
+        <DCArtboard id="body-pullquote" label="Body + sidebar pull quote" width={PAGE_W} height={PAGE_H}>
+          <WPLBodyPullquote />
+        </DCArtboard>
+
+        <DCArtboard id="body-stats" label="Body · stat row (4 across)" width={PAGE_W} height={PAGE_H}>
+          <WPLBodyStats />
+        </DCArtboard>
+
+        <DCArtboard id="body-featured-stat" label="Body + featured number" width={PAGE_W} height={PAGE_H}>
+          <WPLBodyFeaturedStat />
+        </DCArtboard>
+
+        <DCArtboard id="body-figure" label="Body + figure placeholder" width={PAGE_W} height={PAGE_H}>
+          <WPLBodyFigure />
+        </DCArtboard>
+
+        <DCArtboard id="body-callout" label="Body + callout sidebar" width={PAGE_W} height={PAGE_H}>
+          <WPLBodyCallout />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection
+        id="back"
+        title="Back matter"
+        subtitle="Resources, references, and the closing CTA."
+      >
+        <DCArtboard id="resources" label="Resources · 2-column refs" width={PAGE_W} height={PAGE_H}>
+          <WPLResources />
+        </DCArtboard>
+        <DCArtboard id="back-cover" label="Back cover" width={PAGE_W} height={PAGE_H}>
+          <WPLBack />
+        </DCArtboard>
+      </DCSection>
+
+      <DCPostIt x={120} y={120}>
+        13 landscape templates at 1920 × 1080 (default PowerPoint 16:9). Companion to the portrait set — same chrome, same brand grammar, but every body layout uses a split grid: body on one side, sidebar artifact (figure / pull quote / featured number / callout) on the other. Open the portrait set at index.html.
+      </DCPostIt>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+</body>
+</html>

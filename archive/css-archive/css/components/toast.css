@@ -62,7 +62,6 @@
 }
 
 .toast button:hover {
-    transform: translateY(-1px);
 }
 
 .toast button:active {

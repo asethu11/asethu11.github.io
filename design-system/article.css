@@ -703,64 +703,75 @@ table tr:last-child td {
     position: fixed;
     bottom: var(--space-lg);
     right: var(--space-lg);
-    max-width: 320px;
-    padding: 14px var(--space-md);
+    width: min(400px, calc(100vw - var(--space-lg) * 2));
+    padding: var(--space-md) var(--space-lg);
     border-radius: var(--radius-lg);
-    background: rgba(20, 20, 20, 0.92);
-    color: #f7f7f7;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    background: var(--surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
     display: none;
-    gap: 12px;
     z-index: 200;
 }
 
 .toast.show {
     display: grid;
     grid-template-columns: 1fr;
-    row-gap: 10px;
+    row-gap: var(--space-sm);
 }
 
 /* Toast title */
 .toast-title {
     font-size: var(--font-size-base);
     font-weight: 700;
+    color: var(--text-primary);
 }
 
 /* Toast message text */
 .toast-text {
     font-size: var(--font-size-sm);
-    color: #e0e0e0;
+    color: var(--text-secondary);
     line-height: 1.4;
 }
 
 /* Toast action buttons container */
 .toast-actions {
     display: flex;
-    gap: 10px;
+    gap: var(--space-sm);
     flex-wrap: wrap;
+    margin-top: var(--space-xs);
 }
 
-/* Toast buttons */
+/* Toast buttons — DS button language (hover shifts to red) */
 .toast button {
     cursor: pointer;
-    border: none;
-    border-radius: var(--radius-md);
-    padding: var(--space-sm) 12px;
+    font-family: var(--font-sans);
     font-size: var(--font-size-sm);
     font-weight: 600;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) var(--space-md);
+    transition: all var(--dur-fast) var(--ease-standard);
 }
 
 .toast .btn-primary {
-    background: #f7f7f7;
-    color: #141414;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--background);
+}
+.toast .btn-primary:hover {
+    background: var(--red);
+    border-color: var(--red);
 }
 
 .toast .btn-ghost {
     background: transparent;
-    color: #f7f7f7;
-    border: 1px solid rgba(255,255,255,0.35);
+    border-color: var(--border-strong);
+    color: var(--text-secondary);
+}
+.toast .btn-ghost:hover {
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
 }
 
 

@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Point One Zero — Investor deck</title>
+<link rel="icon" href="../assets/favicon.svg" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<script src="deck-stage.js"></script>
+<style>
+  /* Pitch-deck stage: light slides on a dark backdrop.
+     The backdrop uses --color-primary (#0a0a0a) so a future
+     near-black update propagates. Slides themselves stay light
+     via --slide-bg: var(--canvas). */
+  html, body { margin: 0; background: var(--color-primary); min-height: 100vh; }
+  deck-stage { --slide-w: 1920px; --slide-h: 1080px; --slide-bg: var(--canvas); }
+  deck-stage > section {
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ---- Shared layout helpers ---- */
+  .slide-pad { padding: 120px 160px; box-sizing: border-box; width: 100%; height: 100%; display: flex; flex-direction: column; position: relative; }
+  .slide-pad.center { justify-content: center; align-items: center; text-align: center; }
+  .slide-veil { position: absolute; inset: 0; background: var(--gradient-hero-veil); pointer-events: none; }
+  .slide-pad > * { position: relative; z-index: 1; }
+  .slide-foot {
+    position: absolute; left: 160px; right: 160px; bottom: 64px;
+    display: flex; justify-content: space-between; align-items: center;
+    font: var(--font-mono-md); color: var(--foreground-subtle);
+  }
+  .slide-foot .wm { font: var(--font-body-sm); font-weight: var(--weight-medium); color: var(--foreground); }
+  .slide-foot .pg { font-variant-numeric: tabular-nums; }
+
+  .eyebrow-lg {
+    display: inline-flex; align-items: center; gap: 14px;
+    font: var(--font-eyebrow);
+    font-size: 22px;
+    letter-spacing: 0.031em;       /* +3% of size — matches main system ratio */
+    text-transform: uppercase;
+    color: var(--foreground-subtle);
+  }
+  .eyebrow-lg .brand-dot { width: 9px; height: 9px; }
+
+  .title-xl {
+    font-size: 156px;
+    line-height: 0.96;
+    letter-spacing: -7px;
+    font-weight: var(--weight-semibold);
+    color: var(--foreground);
+    margin: 36px 0 0;
+    text-wrap: balance;
+  }
+  .title-lg {
+    font-size: 120px;
+    line-height: 0.98;
+    letter-spacing: -5.4px;
+    font-weight: var(--weight-semibold);
+    margin: 36px 0 0;
+    text-wrap: balance;
+  }
+  .title-md {
+    font-size: 88px;
+    line-height: 1.0;
+    letter-spacing: -3.6px;
+    font-weight: var(--weight-semibold);
+    margin: 36px 0 0;
+    text-wrap: balance;
+  }
+  .lead-lg {
+    font-size: 36px;
+    line-height: 1.32;
+    color: var(--foreground-muted);
+    margin: 40px 0 0;
+    max-width: 1320px;
+    text-wrap: pretty;
+  }
+  .brand-word { color: var(--brand); }
+
+  /* ============ SLIDE 1: TITLE ============ */
+  .s-title { background: var(--canvas); }
+  .s-title .veil {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 50% 60% at 50% 100%, rgba(0,159,239,0.18), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(0,159,239,0.08), transparent 70%);
+  }
+  .s-title .wordmark {
+    font-size: 280px; line-height: 0.9; letter-spacing: -14px;
+    font-weight: var(--weight-semibold);
+    text-align: center;
+  }
+  .s-title .wordmark .dot { color: var(--brand); }
+  .s-title .tagline {
+    margin-top: 64px;
+    font-size: 32px; color: var(--foreground-muted);
+    letter-spacing: -0.3px;
+  }
+  .s-title .meta {
+    position: absolute; left: 0; right: 0; bottom: 80px;
+    display: flex; justify-content: space-between;
+    padding: 0 160px;
+    font: var(--font-mono-md); font-size: 16px;
+    color: var(--foreground-subtle);
+  }
+
+  /* ============ SLIDE 2: PROBLEM ============ */
+  .three-col {
+    margin-top: 80px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+    align-items: start;
+  }
+  .three-col .col {
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    min-height: 380px;
+    display: flex; flex-direction: column;
+    box-shadow: var(--edge-highlight);
+  }
+  .three-col .col h3 {
+    font-size: 56px; line-height: 1.0; letter-spacing: -1.8px;
+    font-weight: var(--weight-semibold); margin: 0;
+  }
+  .three-col .col p {
+    margin-top: 28px;
+    font-size: 22px; line-height: 1.4;
+    color: var(--foreground-muted);
+  }
+  .three-col .col .ic {
+    width: 56px; height: 56px;
+    border-radius: var(--radius-md);
+    background: var(--surface-2);
+    border: 1px solid var(--border-subtle);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--foreground);
+    margin-bottom: auto;
+    align-self: flex-start;
+  }
+
+  /* ============ SLIDE 3: FRAME (POINT/ONE/ZERO TYPE) ============ */
+  .frame-stack {
+    margin-top: 80px;
+    display: flex; flex-direction: column; gap: 36px;
+  }
+  .frame-stack .row {
+    display: grid; grid-template-columns: 360px 1fr;
+    gap: 64px; align-items: baseline;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .frame-stack .row:last-child { border-bottom: 0; }
+  .frame-stack .row .word {
+    font-size: 184px; line-height: 1.0;
+    letter-spacing: -8px; font-weight: var(--weight-semibold);
+    color: var(--foreground);
+  }
+  .frame-stack .row .meaning {
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .frame-stack .row .meaning .label {
+    font-size: 32px;
+    letter-spacing: -0.6px;
+    font-weight: var(--weight-medium);
+    color: var(--foreground);
+  }
+  .frame-stack .row .meaning .desc {
+    font-size: 22px; line-height: 1.4;
+    color: var(--foreground-muted);
+    max-width: 1000px;
+  }
+
+  /* ============ SLIDE 4: METRICS ============ */
+  .metrics-4 {
+    margin-top: 80px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  }
+  .metrics-4 .m {
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    min-height: 340px;
+    display: flex; flex-direction: column;
+    box-shadow: var(--edge-highlight);
+    position: relative; overflow: hidden;
+  }
+  .metrics-4 .m.featured { background: var(--surface-2); border-color: var(--border-default); }
+  .metrics-4 .m.featured::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--gradient-card-featured);
+    pointer-events: none;
+  }
+  .metrics-4 .m > * { position: relative; z-index: 1; }
+  .metrics-4 .m .n {
+    font-size: 132px; line-height: 1.0;
+    letter-spacing: -6px; font-weight: var(--weight-semibold);
+    color: var(--foreground);
+    font-variant-numeric: tabular-nums;
+    display: flex; align-items: baseline; gap: 4px;
+  }
+  .metrics-4 .m .n small { font-size: 40px; color: var(--foreground-subtle); letter-spacing: -1.4px; }
+  .metrics-4 .m.featured .n { color: var(--brand); }
+  .metrics-4 .m .meta { margin-top: auto; padding-top: 48px; }
+  .metrics-4 .m .meta .label { font: var(--font-eyebrow); font-size: 18px; letter-spacing: 0.031em; text-transform: uppercase; color: var(--foreground-subtle); }
+  .metrics-4 .m .meta .desc { margin-top: 14px; font-size: 20px; line-height: 1.35; color: var(--foreground-muted); }
+
+  /* ============ SLIDE 5-7: POINT/ONE/ZERO DETAIL ============ */
+  .detail {
+    height: 100%;
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 96px; align-items: center;
+  }
+  .detail .left .word {
+    font-size: 280px; line-height: 0.95;
+    letter-spacing: -14px; font-weight: var(--weight-semibold);
+    color: var(--foreground);
+    margin-top: 36px;
+  }
+  .detail .right {
+    padding-top: 96px;
+  }
+  .detail .right h3 {
+    font-size: 64px; line-height: 1.02; letter-spacing: -2.4px;
+    font-weight: var(--weight-semibold);
+    margin: 0;
+  }
+  .detail .right p {
+    margin-top: 36px;
+    font-size: 26px; line-height: 1.45;
+    color: var(--foreground-muted);
+    text-wrap: pretty;
+    max-width: 720px;
+  }
+  .detail .right ul {
+    margin-top: 40px; padding: 0; list-style: none;
+    display: flex; flex-direction: column;
+  }
+  .detail .right ul li {
+    padding: 22px 0;
+    border-top: 1px solid var(--border-subtle);
+    display: grid; grid-template-columns: 56px 1fr; gap: 20px; align-items: baseline;
+    font-size: 22px; color: var(--foreground);
+  }
+  .detail .right ul li:first-child { border-top: 0; }
+  .detail .right ul li .n {
+    font-family: var(--font-mono); font-size: 18px; color: var(--brand);
+  }
+
+  /* ============ SLIDE 8: SERVICES ============ */
+  .services-3 {
+    margin-top: 80px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .services-3 .s {
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    min-height: 400px;
+    display: flex; flex-direction: column;
+    box-shadow: var(--edge-highlight);
+  }
+  .services-3 .s .ic {
+    width: 60px; height: 60px;
+    border-radius: var(--radius-md);
+    background: var(--surface-2);
+    border: 1px solid var(--border-subtle);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--foreground);
+    margin-bottom: 36px;
+  }
+  .services-3 .s h3 {
+    font-size: 38px; line-height: 1.1; letter-spacing: -1px;
+    font-weight: var(--weight-semibold); margin: 0;
+  }
+  .services-3 .s p {
+    margin-top: 24px; font-size: 20px; line-height: 1.42;
+    color: var(--foreground-muted); text-wrap: pretty;
+  }
+
+  /* ============ SLIDE 9: PROCESS ============ */
+  .process-4 {
+    margin-top: 80px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  }
+  .process-4 .step {
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 44px 36px;
+    min-height: 360px;
+    display: flex; flex-direction: column;
+    box-shadow: var(--edge-highlight);
+  }
+  .process-4 .step .n {
+    font-family: var(--font-mono); font-size: 18px;
+    color: var(--foreground-subtle); letter-spacing: 0.05em;
+  }
+  .process-4 .step h3 {
+    margin: 48px 0 0;
+    font-size: 32px; line-height: 1.1; letter-spacing: -0.8px;
+    font-weight: var(--weight-semibold);
+  }
+  .process-4 .step p {
+    margin-top: 24px;
+    font-size: 18px; line-height: 1.42;
+    color: var(--foreground-muted);
+  }
+
+  /* ============ SLIDE 10: CASE STUDY ============ */
+  .case {
+    height: 100%;
+    display: grid; grid-template-columns: 1.05fr 1fr; gap: 96px; align-items: center;
+  }
+  .case .left h2 {
+    margin-top: 36px;
+    font-size: 88px; line-height: 1.0;
+    letter-spacing: -3.6px; font-weight: var(--weight-semibold);
+    text-wrap: balance;
+  }
+  .case .left .who {
+    margin-top: 32px;
+    font: var(--font-mono-md); font-size: 22px;
+    color: var(--foreground-subtle);
+  }
+  .case .left .pull {
+    margin-top: 56px;
+    padding-top: 36px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 34px; line-height: 1.32; color: var(--foreground);
+    letter-spacing: -0.6px;
+    max-width: 880px;
+    text-wrap: balance;
+  }
+  .case .left .pull cite {
+    display: block; margin-top: 28px;
+    font-size: 18px; color: var(--foreground-subtle);
+    font-style: normal;
+  }
+  .case .results {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .case .results .r {
+    padding: 32px 36px;
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    display: flex; justify-content: space-between; align-items: baseline; gap: 32px;
+    box-shadow: var(--edge-highlight);
+  }
+  .case .results .r.featured { background: var(--surface-2); border-color: var(--border-default); }
+  .case .results .r .label {
+    font-size: 18px; color: var(--foreground-subtle); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 510;
+  }
+  .case .results .r .desc { font-size: 22px; color: var(--foreground-muted); margin-top: 6px; max-width: 320px; }
+  .case .results .r .n {
+    font-size: 88px; line-height: 1.0;
+    letter-spacing: -3.6px; font-weight: var(--weight-semibold);
+    color: var(--foreground); font-variant-numeric: tabular-nums;
+    display: flex; align-items: baseline; gap: 4px; flex: none;
+  }
+  .case .results .r .n small { font-size: 32px; color: var(--foreground-subtle); letter-spacing: -1px; }
+  .case .results .r.featured .n { color: var(--brand); }
+
+  /* ============ SLIDE 11: ENGAGEMENTS ============ */
+  .tiers-3 {
+    margin-top: 80px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .tiers-3 .t {
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    box-shadow: var(--edge-highlight);
+    display: flex; flex-direction: column;
+    min-height: 480px;
+    position: relative; overflow: hidden;
+  }
+  .tiers-3 .t.featured { background: var(--surface-2); border-color: var(--border-default); }
+  .tiers-3 .t.featured::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--gradient-card-featured);
+    pointer-events: none;
+  }
+  .tiers-3 .t > * { position: relative; z-index: 1; }
+  .tiers-3 .t h3 {
+    font-size: 56px; line-height: 1.0; letter-spacing: -2.2px;
+    font-weight: var(--weight-semibold); margin: 0;
+  }
+  .tiers-3 .t .price {
+    margin-top: 28px;
+    font-size: 64px; line-height: 1.0; letter-spacing: -2.6px;
+    font-weight: var(--weight-semibold); color: var(--foreground);
+    font-variant-numeric: tabular-nums;
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  .tiers-3 .t .price small { font-size: 24px; color: var(--foreground-subtle); letter-spacing: -0.5px; }
+  .tiers-3 .t.featured .price { color: var(--brand); }
+  .tiers-3 .t .desc {
+    margin-top: 24px; font-size: 20px; color: var(--foreground-muted);
+    text-wrap: pretty;
+  }
+  .tiers-3 .t ul {
+    margin-top: 36px; padding: 0; list-style: none;
+    display: flex; flex-direction: column;
+  }
+  .tiers-3 .t ul li {
+    padding: 14px 0; border-top: 1px solid var(--border-subtle);
+    font-size: 18px; color: var(--foreground);
+    display: grid; grid-template-columns: 24px 1fr; gap: 12px;
+  }
+  .tiers-3 .t ul li:first-child { border-top: 0; }
+  .tiers-3 .t ul li::before {
+    content: '✓';
+    color: var(--foreground-subtle);
+  }
+  .tiers-3 .t.featured ul li::before { color: var(--brand); }
+
+  /* ============ SLIDE 12: CLOSE ============ */
+  .close {
+    height: 100%; display: grid;
+    grid-template-columns: 1.1fr 1fr; gap: 96px; align-items: center;
+  }
+  .close .left h2 {
+    font-size: 156px; line-height: 0.98; letter-spacing: -7px;
+    font-weight: var(--weight-semibold);
+    margin: 36px 0 0;
+    text-wrap: balance;
+  }
+  .close .left p {
+    margin-top: 40px;
+    font-size: 30px; line-height: 1.35;
+    color: var(--foreground-muted);
+    max-width: 820px; text-wrap: pretty;
+  }
+  .close .right {
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 56px 56px;
+    box-shadow: var(--edge-highlight);
+  }
+  .close .right h4 {
+    font-size: 24px; font-weight: var(--weight-medium);
+    color: var(--foreground); margin: 0 0 32px;
+  }
+  .close .right dl {
+    display: grid; grid-template-columns: 140px 1fr; gap: 18px 24px;
+    margin: 0;
+    font-size: 22px;
+  }
+  .close .right dt { color: var(--foreground-subtle); }
+  .close .right dd { color: var(--foreground); margin: 0; }
+  .close .right dd.mono { font-family: var(--font-mono); }
+  .close .right .cta-row { margin-top: 48px; padding-top: 36px; border-top: 1px solid var(--border-subtle); }
+  .close .right .cta-row .pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 18px 32px;
+    background: var(--surface-4); color: var(--foreground);
+    border-radius: 9999px;
+    font-size: 22px; font-weight: var(--weight-medium);
+  }
+</style>
+</head>
+<body>
+
+<deck-stage>
+
+  <!-- ===== SLIDE 01 — TITLE ===== -->
+  <section class="s-title" data-screen-label="01 Title">
+    <div class="veil"></div>
+    <div class="slide-pad center">
+      <div class="eyebrow-lg"><span class="brand-dot"></span>Investor deck · v0.4.0 · 2026</div>
+      <div class="wordmark" style="margin-top: 48px;">point one zero<span class="dot">.</span></div>
+      <div class="tagline">An AI-native firm at the intersection of strategy, design, and engineering.</div>
+    </div>
+    <div class="meta">
+      <span>Princeton, NJ</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 02 — THE PROBLEM ===== -->
+  <section data-screen-label="02 Problem">
+    <div class="slide-veil"></div>
+    <div class="slide-pad">
+      <span class="eyebrow-lg"><span class="brand-dot"></span>The problem</span>
+      <h2 class="title-lg">The gap between strategy, design, and engineering is where ideas <span class="brand-word">die</span>.</h2>
+      <p class="lead-lg">Three industries, three vocabularies, three timelines. The most expensive cost in modern product development is the handoff — not the work.</p>
+
+      <div class="three-col">
+        <div class="col">
+          <div class="ic">
+            <svg width="22" height="22" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="9" r="6.5"/><path d="M9 4.5v4.8l3 1.7"/></svg>
+          </div>
+          <h3>Slow</h3>
+          <p>The average enterprise initiative ships in nine months. Most don't ship at all. Pace kills momentum.</p>
+        </div>
+        <div class="col">
+          <div class="ic">
+            <svg width="22" height="22" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h12M3 9h12M3 12h12"/></svg>
+          </div>
+          <h3>Bloated</h3>
+          <p>Traditional consulting runs a leverage pyramid. The associate writes the strategy the partner sold. The output reflects it.</p>
+        </div>
+        <div class="col">
+          <div class="ic">
+            <svg width="22" height="22" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 14L9 4l5 10M6 11h6"/></svg>
+          </div>
+          <h3>Disconnected</h3>
+          <p>Strategy decks land. Design briefs land. Engineering specs land. Nothing arrives in production as one coherent thing.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="wm">point one zero</span><span class="pg">02 / 12</span></div>
+  </section>
+
+  <!-- ===== SLIDE 03 — THE FRAME ===== -->
+  <section data-screen-label="03 Frame">
+    <div class="slide-veil"></div>
+    <div class="slide-pad">
+      <span class="eyebrow-lg"><span class="brand-dot"></span>The frame</span>
+      <h2 class="title-lg">Our name is the <span class="brand-word">manifesto</span>.</h2>
+
+      <div class="frame-stack">
+        <div class="row">
+          <div class="word">POINT</div>
+          <div class="meaning">
+            <div class="label">Sharper tip of the sphere</div>
+            <div class="desc">The intersection of strategy, design, and AI. We focus on the one sharp thing — the decision that has to be right.</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="word">ONE</div>
+          <div class="meaning">
+            <div class="label">The collective</div>
+            <div class="desc">One team — domain experts, strategists, designers, and engineers — co-creating in agile pods. No subcontracting, no handoff theater.</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="word">ZERO</div>
+          <div class="meaning">
+            <div class="label">Zero-based model</div>
+            <div class="desc">Lean, distilled, AI-native. Built for the shifting economics of talent and the speed of AI. The library does the heavy lifting.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="wm">point one zero</span><span class="pg">03 / 12</span></div>
+  </section>
+
+  <!-- ===== SLIDE 04 — METRICS ===== -->
+  <section data-screen-label="04 Outcomes">
+    <div class="slide-veil"></div>
+    <div class="slide-pad">
+      <span class="eyebrow-lg"><span class="brand-dot"></span>Outcomes · what we deliver</span>
+      <h2 class="title-lg">The work speaks through <span class="brand-word">numbers</span>.</h2>
+
+      <div class="metrics-4">
+        <div class="m">
+          <div class="n">17<small>hrs</small></div>
+          <div class="meta">
+            <div class="label">Innovation</div>
+            <div class="desc">Prototyping at the speed of thought.</div>
+          </div>
+        </div>
+        <div class="m">
+          <div class="n">10<small>×</small></div>
+          <div class="meta">
+            <div class="label">Velocity</div>
+            <div class="desc">Faster time to market.</div>
+          </div>
+        </div>
+        <div class="m">
+          <div class="n">92<small>+</small></div>
+          <div class="meta">
+            <div class="label">Agents</div>
+            <div class="desc">Reusable AI agents, purpose-built.</div>
+          </div>
+        </div>
+        <div class="m featured">
+          <div class="n">47<small>%</small></div>
+          <div class="meta">
+            <div class="label">Cost reduction</div>
+            <div class="desc">Through automation, reuse, and the zero-based model.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="wm">point one zero</span><span class="pg">04 / 12</span></div>
+  </section>
+
+  <!-- ===== SLIDE 05 — POINT ===== -->
+  <section data-screen-label="05 Point">
+    <div class="slide-veil"></div>
+    <div class="slide-pad">
+      <div class="detail">
+        <div class="left">
+          <span class="eyebrow-lg"><span class="brand-dot"></span>The frame · I of III</span>
+          <div class="word">POINT</div>
+        </div>
+        <div class="right">
+          <h3>Sharper tip of the sphere.</h3>
+          <p>Every engagement starts with a question, not a scope. We refuse to scope until the question is sharp enough to fit on a sticky note.</p>
+          <ul>
+            <li><span class="n">01</span><span>One question, one engagement</span></li>
+            <li><span class="n">02</span><span>Reframe before we resource</span></li>
+            <li><span class="n">03</span><span>The smallest thing that solves it wins</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="wm">point one zero</span><span class="pg">05 / 12</span></div>
+  </section>
+
+  <!-- ===== SLIDE 06 — ONE ===== -->
+  <section data-screen-label="06 One">
+    <div class="slide-veil"></div>
+    <div class="slide-pad">
+      <div class="detail">
+        <div class="left">
+          <span class="eyebrow-lg"><span class="brand-dot"></span>The frame · II of III</span>
+          <div class="word">ONE</div>
+        </div>
+        <div class="right">
+          <h3>The collective.</h3>
+          <p>Twelve full-time partners. Senior practitioners only. The person who scopes the work ships the work — every time.</p>
+          <ul>
+            <li><span class="n">01</span><span>No subcontracting, no offshore</span></li>
+            <li><span class="n">02</span><span>Partner-led pods, every engagement</span></li>
+            <li><span class="n">03</span><span>Lean stays lean — we turned down PE twice</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="wm">point one zero</span><span class="pg">06 / 12</span></div>
+  </section>
+
+  <!-- ===== SLIDE 07 — ZERO ===== -->
+  <section data-screen-label="07 Zero">
+    <div class="slide-veil"></div>
+    <div class="slide-pad">
+      <div class="detail">
+        <div class="left">
+          <span class="eyebrow-lg"><span class="brand-dot"></span>The frame · III of III</span>
+          <div class="word">ZERO</div>
+        </div>
+        <div class="right">
+          <h3>Zero-based model.</h3>
+          <p>Built for the shifting economics of talent and the speed of AI. The 92+ agent library compounds with every engagement; clients ride the curve we've already built.</p>
+          <ul>
+            <li><span class="n">01</span><span>92+ reusable AI agents in production</span></li>
+            <li><span class="n">02</span><span>Every engagement adds to the library</span></li>
+            <li><span class="n">03</span><span>The next client gets your work for free</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="wm">point one zero</span><span class="pg">07 / 12</span></div>
+  </section>
+
+  <!-- ===== SLIDE 08 — SERVICES ===== -->
+  <section data-screen-label="08 Services">
+    <div class="slide-veil"></div>
+    <div class="slide-pad">
+      <span class="eyebrow-lg"><span class="brand-dot"></span>What we build</span>
+      <h2 class="title-lg">Three services, one delivery model.</h2>
+
+      <div class="services-3">
+        <div class="s">
+          <div class="ic">
+            <svg width="24" height="24" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="2.5" width="13" height="13" rx="2"/><path d="M2.5 7h13M7 7v8.5"/></svg>
+          </div>
+          <h3>Build products</h3>
+          <p>Design, architect, and ship digital products and platforms from idea to production-ready deployment.</p>
+        </div>
+        <div class="s">
+          <div class="ic">
+            <svg width="24" height="24" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="9" r="6.5"/><circle cx="9" cy="9" r="2.5" fill="currentColor"/></svg>
+          </div>
+          <h3>Deploy AI agents</h3>
+          <p>Stand up 92+ reusable AI agents — purpose-built and orchestrated across your enterprise systems.</p>
+        </div>
+        <div class="s">
+          <div class="ic">
+            <svg width="24" height="24" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.5 13.5V4l4 4 4-4 4 9.5"/></svg>
+          </div>
+          <h3>Transform operations</h3>
+          <p>Re-engineer workflows with the zero-based model — distilled, automated, continuously learning.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="wm">point one zero</span><span class="pg">08 / 12</span></div>
+  </section>
+
+  <!-- ===== SLIDE 09 — PROCESS ===== -->
+  <section data-screen-label="09 Process">
+    <div class="slide-veil"></div>
+    <div class="slide-pad">
+      <span class="eyebrow-lg"><span class="brand-dot"></span>Our process</span>
+      <h2 class="title-lg">One collective, four <span class="brand-word">cycles</span>.</h2>
+
+      <div class="process-4">
+        <div class="step">
+          <span class="n">01</span>
+          <h3>Innovation &amp; Strategy</h3>
+          <p>Turn ideas into value through clear choices on where to compete, how to win, and what matters.</p>
+        </div>
+        <div class="step">
+          <span class="n">02</span>
+          <h3>Design &amp; Prototyping</h3>
+          <p>Synthetic user research, experience design, real-time prototyping. Design sprints on steroids.</p>
+        </div>
+        <div class="step">
+          <span class="n">03</span>
+          <h3>Development &amp; Integration</h3>
+          <p>Engineer AI-powered systems connected with your data platforms, APIs, and business services.</p>
+        </div>
+        <div class="step">
+          <span class="n">04</span>
+          <h3>Launch &amp; Learn</h3>
+          <p>Manage launch, support, monitor — evolving with continuous learning post-deployment.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="wm">point one zero</span><span class="pg">09 / 12</span></div>
+  </section>
+
+  <!-- ===== SLIDE 10 — CASE STUDY ===== -->
+  <section data-screen-label="10 Case">
+    <div class="slide-veil"></div>
+    <div class="slide-pad">
+      <div class="case">
+        <div class="left">
+          <span class="eyebrow-lg"><span class="brand-dot"></span>Case · Northwind Capital</span>
+          <h2>From idea to production in <span class="brand-word">17 hours</span>.</h2>
+          <div class="who">CS-2026-04 · Wealth management · 14,000 advisors</div>
+          <div class="pull">
+            "We had been talking about this for over a year. Point One Zero had a working version in our hands by Friday."
+            <cite>— Sarah Park, Chief Innovation Officer, Northwind Capital</cite>
+          </div>
+        </div>
+        <div class="results">
+          <div class="r featured">
+            <div>
+              <div class="label">Idea to prototype</div>
+              <div class="desc">A year-long roadmap, in 17 hours of focused work.</div>
+            </div>
+            <div class="n">17<small>hrs</small></div>
+          </div>
+          <div class="r">
+            <div>
+              <div class="label">Daily users</div>
+              <div class="desc">8 weeks post-launch — adoption without mandate.</div>
+            </div>
+            <div class="n">14,000</div>
+          </div>
+          <div class="r">
+            <div>
+              <div class="label">Prep time reduction</div>
+              <div class="desc">Per client meeting, measured month-over-month.</div>
+            </div>
+            <div class="n">41<small>%</small></div>
+          </div>
+          <div class="r">
+            <div>
+              <div class="label">Voluntary attrition</div>
+              <div class="desc">Two quarters post-launch — biggest secondary outcome.</div>
+            </div>
+            <div class="n">−33<small>%</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="wm">point one zero</span><span class="pg">10 / 12</span></div>
+  </section>
+
+  <!-- ===== SLIDE 11 — ENGAGEMENTS ===== -->
+  <section data-screen-label="11 Engagements">
+    <div class="slide-veil"></div>
+    <div class="slide-pad">
+      <span class="eyebrow-lg"><span class="brand-dot"></span>How we work with you</span>
+      <h2 class="title-lg">Three engagement shapes.</h2>
+
+      <div class="tiers-3">
+        <div class="t">
+          <h3>Sprint</h3>
+          <div class="price">$75<small>k</small></div>
+          <p class="desc">A sharp, time-boxed problem in two weeks. Decision-grade prototype or strategic brief.</p>
+          <ul>
+            <li>2-week sprint · fixed scope</li>
+            <li>2 senior practitioners, partner-led</li>
+            <li>1 AI-powered prototype</li>
+            <li>Optional handoff package</li>
+          </ul>
+        </div>
+        <div class="t featured">
+          <h3>Build</h3>
+          <div class="price">$45<small>k / mo</small></div>
+          <p class="desc">Ship an AI-powered product end to end. The signature engagement.</p>
+          <ul>
+            <li>3-month minimum · roll-on</li>
+            <li>Full-stack pod, 4-6 practitioners</li>
+            <li>Up to 25 agents deployed</li>
+            <li>Launch, monitoring, post-launch iteration</li>
+          </ul>
+        </div>
+        <div class="t">
+          <h3>Embed</h3>
+          <div class="price">Custom</div>
+          <p class="desc">Long-term partnership. Multi-pod, outcome-aligned, exec-level access.</p>
+          <ul>
+            <li>12-month minimum · annual</li>
+            <li>Multi-pod, scaled to portfolio</li>
+            <li>Custom agent development</li>
+            <li>Quarterly exec readouts</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="wm">point one zero</span><span class="pg">11 / 12</span></div>
+  </section>
+
+  <!-- ===== SLIDE 12 — CLOSE ===== -->
+  <section data-screen-label="12 Close">
+    <div class="slide-veil"></div>
+    <div class="slide-pad">
+      <div class="close">
+        <div class="left">
+          <span class="eyebrow-lg"><span class="brand-dot"></span>Next step</span>
+          <h2>Let's bring your vision <span class="brand-word">to life</span>.</h2>
+          <p>A 30-minute call. We'll listen, ask three questions, and tell you whether we're the right partner — or recommend who is.</p>
+        </div>
+        <div class="right">
+          <h4>Reach us</h4>
+          <dl>
+            <dt>Address</dt><dd>25 Palmer Square, Princeton, NJ 08542</dd>
+            <dt>E-mail</dt><dd>admin@pointonezero.com</dd>
+            <dt>Phone</dt><dd class="mono">(678) 901-4328</dd>
+            <dt>Web</dt><dd class="mono">pointonezero.com</dd>
+          </dl>
+          <div class="cta-row">
+            <span class="pill">Book a call →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="wm">point one zero</span><span class="pg">12 / 12</span></div>
+  </section>
+
+</deck-stage>
+
+</body>
+</html>

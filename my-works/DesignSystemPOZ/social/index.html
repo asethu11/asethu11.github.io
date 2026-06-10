@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Social campaign templates — Point One Zero</title>
+<link rel="icon" href="../assets/favicon.svg" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  html, body { background: #050506; margin: 0; }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="templates.jsx"></script>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+  const App = () => (
+    <DesignCanvas>
+
+      <DCSection id="share" title="Share &amp; preview" subtitle="1.91:1 · 16:9 — every preview unfurl, link share, and video thumb">
+        <DCArtboard id="og-hero" label="OG · Hero message" width={1200} height={630}>
+          <OGCard
+            eyebrow="An AI-native firm · Princeton, NJ"
+            headline="Let your bold ideas bloom into business impact."
+            brandWord="bloom"
+          />
+        </DCArtboard>
+        <DCArtboard id="og-outcomes" label="OG · Outcomes" width={1200} height={630}>
+          <OGCard
+            eyebrow="Outcomes · this quarter"
+            headline="From idea to working prototype in 17 hours."
+            brandWord="17 hours"
+          />
+        </DCArtboard>
+        <DCArtboard id="li-share" label="LinkedIn link share" width={1200} height={627}>
+          <ArticleShare
+            eyebrow="Field notes"
+            section="v0.4.0"
+            headline="On restraint: why one accent is enough."
+            brandWord="one"
+          />
+        </DCArtboard>
+        <DCArtboard id="yt-thumb" label="YouTube thumbnail" width={1280} height={720}>
+          <VideoThumb
+            kicker="Talk · 12 min"
+            headline="The zero-based model."
+            brandWord="zero-based"
+          />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="feed" title="Feed posts" subtitle="1:1 · 4:5 — Instagram, LinkedIn, Twitter / X primary in-feed">
+        <DCArtboard id="sq-stat-17" label="Square · 17 hours" width={1080} height={1080}>
+          <SquareStat
+            eyebrow="Outcomes"
+            value="17"
+            suffix="hrs"
+            label="Idea to working prototype"
+          />
+        </DCArtboard>
+        <DCArtboard id="sq-stat-10x" label="Square · 10× faster" width={1080} height={1080}>
+          <SquareStat
+            eyebrow="Velocity"
+            value="10"
+            suffix="×"
+            label="Faster time to market"
+          />
+        </DCArtboard>
+        <DCArtboard id="sq-stat-47" label="Square · 47% reduction" width={1080} height={1080}>
+          <SquareStat
+            eyebrow="Cost"
+            value="47"
+            suffix="%"
+            label="Reduction through automation &amp; reuse"
+          />
+        </DCArtboard>
+        <DCArtboard id="sq-quote-restraint" label="Square · Restraint quote" width={1080} height={1080}>
+          <SquareQuote
+            eyebrow="Field notes"
+            quote="Restraint is the only frame that scales."
+            attribution="v0.4.0 notes"
+          />
+        </DCArtboard>
+        <DCArtboard id="sq-quote-bloom" label="Square · Bloom quote" width={1080} height={1080}>
+          <SquareQuote
+            eyebrow="Brand"
+            quote="Let your bold ideas bloom into business impact."
+            attribution="The manifesto"
+          />
+        </DCArtboard>
+        <DCArtboard id="sq-announce" label="Square · Announcement" width={1080} height={1080}>
+          <SquareAnnouncement
+            eyebrow="New"
+            kicker="2026-05-26"
+            headline="We've shipped v0.4.0 of the system."
+            brandWord="v0.4.0"
+            sub="Field notes, a docs kit, and an audit of what's next."
+          />
+        </DCArtboard>
+        <DCArtboard id="pt-hiring" label="Portrait · Hiring" width={1080} height={1350}>
+          <PortraitHiring
+            eyebrow="We're hiring"
+            role="Senior product designer"
+            location="Princeton, NJ"
+            type="Full-time · hybrid"
+          />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="stories" title="Stories &amp; reels" subtitle="9:16 — Instagram, LinkedIn, TikTok dwell format">
+        <DCArtboard id="st-link" label="Story · Link" width={1080} height={1920}>
+          <StoryLink
+            eyebrow="Field notes · New"
+            headline="On restraint: why one accent is enough."
+            brandWord="one"
+            sub="A note on the brand language behind v0.4.0."
+          />
+        </DCArtboard>
+        <DCArtboard id="st-stat" label="Story · Stat" width={1080} height={1920}>
+          <StoryStat
+            eyebrow="Outcomes"
+            value="92"
+            suffix="+"
+            label="Reusable AI agents, purpose-built"
+          />
+        </DCArtboard>
+        <DCArtboard id="st-frame" label="Story · The frame" width={1080} height={1920}>
+          <StoryFrame />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="banners" title="Profile banners" subtitle="Low-height, brand-only — LinkedIn, Twitter / X, Facebook covers">
+        <DCArtboard id="li-cover" label="LinkedIn cover" width={1584} height={396}>
+          <ProfileBanner
+            headline="An AI-native firm."
+            sub="Strategy, design, engineering — fused."
+            w={1584}
+            h={396}
+            padX={96}
+          />
+        </DCArtboard>
+        <DCArtboard id="tw-header" label="Twitter / X header" width={1500} height={500}>
+          <ProfileBanner
+            headline="Bold ideas, business impact."
+            brandWord="impact"
+            sub="An AI-native firm · Princeton, NJ"
+            w={1500}
+            h={500}
+            padX={96}
+          />
+        </DCArtboard>
+        <DCArtboard id="fb-cover" label="Facebook cover" width={820} height={312}>
+          <ProfileBanner
+            headline="Strategy. Design. Engineering."
+            sub="Fused."
+            w={820}
+            h={312}
+            padX={56}
+          />
+        </DCArtboard>
+      </DCSection>
+
+    </DesignCanvas>
+  );
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+</body>
+</html>

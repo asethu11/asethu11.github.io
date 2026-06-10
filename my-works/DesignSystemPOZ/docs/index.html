@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>On restraint: why one accent is enough — Point One Zero</title>
+<link rel="icon" href="../assets/favicon.svg" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<link rel="stylesheet" href="../site.css" />
+<script>(function(){try{var k=localStorage.getItem('pozTheme');var d=k?k==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',d?'dark':'light');}catch(e){}})();</script>
+<script src="../theme.js" defer></script>
+<style>
+  :root { --doc-container: 1180px; --doc-pad: 56px; --measure: 36em; }
+  html, body {
+    transition:
+      background-color var(--dur-base) var(--ease-out),
+      color var(--dur-base) var(--ease-out);
+  }
+  body { margin: 0; min-height: 100vh; overflow-x: hidden; }
+
+  /* ---------------- NAV (local content rules only) ---------------- */
+  .brand-mark {
+    font: var(--font-body); font-weight: var(--weight-medium);
+    color: var(--foreground); letter-spacing: -0.2px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .brand-mark .crumb {
+    font: var(--font-mono-md);
+    color: var(--foreground-subtle);
+    padding-left: 14px;
+    border-left: 1px solid var(--border-subtle);
+  }
+  .nav-right { display: flex; gap: 14px; align-items: center; }
+  .nav-anchor {
+    font: var(--font-body-sm); font-weight: var(--weight-medium);
+    color: var(--foreground-subtle); cursor: pointer;
+  }
+  .nav-anchor:hover { color: var(--foreground); }
+
+  /* Theme toggle */
+  .theme-toggle {
+    height: 32px; width: 32px;
+    border-radius: var(--radius-full);
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--foreground-subtle);
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition:
+      background-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out);
+  }
+  .theme-toggle:hover { color: var(--foreground); border-color: var(--border-default); }
+  .theme-toggle .sun { display: block; }
+  .theme-toggle .moon { display: none; }
+  [data-theme="light"] .theme-toggle .sun { display: none; }
+  [data-theme="light"] .theme-toggle .moon { display: block; }
+
+  /* ---------------- ARTICLE HEAD ---------------- */
+  .head-wrap { position: relative; }
+  .head-veil {
+    position: absolute; inset: 0;
+    background: var(--gradient-hero-veil);
+    pointer-events: none;
+  }
+  .head {
+    position: relative;
+    max-width: var(--doc-container);
+    margin: 0 auto;
+    padding: 96px var(--doc-pad) 56px;
+  }
+  .head .eyebrow { color: var(--foreground-subtle); }
+  .head .eyebrow .brand-dot { box-shadow: var(--brand-glow); }
+  .head h1 {
+    font: var(--font-display-md);
+    letter-spacing: var(--track-display-md);
+    font-weight: var(--weight-display-md);
+    margin: 22px 0 0;
+    max-width: 880px;
+    text-wrap: balance;
+  }
+  .head .lead {
+    font: var(--font-subhead);
+    letter-spacing: var(--track-subhead);
+    color: var(--foreground-muted);
+    margin-top: 24px;
+    max-width: var(--measure);
+    text-wrap: pretty;
+  }
+  .byline {
+    margin-top: 40px;
+    display: flex; align-items: center; gap: 14px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-subtle);
+    font: var(--font-body-sm);
+    color: var(--foreground-subtle);
+  }
+  .byline .avatar {
+    width: 32px; height: 32px;
+    border-radius: var(--radius-full);
+    background: var(--surface-2);
+    border: 1px solid var(--border-subtle);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--foreground);
+    font: var(--font-eyebrow);
+    letter-spacing: 0;
+    font-weight: var(--weight-semibold);
+  }
+  .byline .avatar::after {
+    content: ''; display: block;
+    width: 6px; height: 6px;
+    border-radius: 9999px;
+    background: var(--brand);
+    box-shadow: var(--brand-glow);
+    position: absolute;
+    transform: translate(11px, 9px);
+  }
+  .byline .by-name { color: var(--foreground); font-weight: var(--weight-medium); }
+  .byline .sep::before { content: '·'; padding: 0 6px; color: var(--foreground-faint); }
+
+  /* ---------------- MAIN LAYOUT ---------------- */
+  .body-wrap {
+    max-width: var(--doc-container);
+    margin: 0 auto;
+    padding: 24px var(--doc-pad) 96px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 224px;
+    gap: 72px;
+    align-items: start;
+  }
+
+  /* ---------------- ARTICLE BODY ---------------- */
+  article {
+    max-width: var(--measure);
+    color: var(--foreground-muted);
+    font: var(--font-body-lg);
+    letter-spacing: var(--track-body-lg);
+  }
+  article > * + * { margin-top: 24px; }
+  article p { margin: 0; text-wrap: pretty; }
+  article p strong { color: var(--foreground); font-weight: var(--weight-semibold); }
+
+  /* The drop cap on the opening paragraph */
+  article > p.opener::first-letter {
+    font-size: 64px;
+    line-height: 1;
+    float: left;
+    padding: 6px 14px 0 0;
+    color: var(--foreground);
+    font-weight: var(--weight-semibold);
+    letter-spacing: -2px;
+  }
+
+  /* Section headings */
+  article h2 {
+    font: var(--font-display-md);
+    letter-spacing: var(--track-display-md);
+    font-weight: var(--weight-display-md);
+    color: var(--foreground);
+    margin: 64px 0 0;
+    text-wrap: balance;
+  }
+  article h2 + p { margin-top: 20px; }
+  article h3 {
+    font: var(--font-card-title);
+    letter-spacing: var(--track-card-title);
+    font-weight: var(--weight-card-title);
+    color: var(--foreground);
+    margin: 40px 0 0;
+  }
+  article h3 + p { margin-top: 14px; }
+
+  /* Lists */
+  article ul, article ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex; flex-direction: column;
+    counter-reset: list;
+  }
+  article ul > li,
+  article ol > li {
+    padding: 14px 0 14px 36px;
+    position: relative;
+    border-top: 1px solid var(--border-subtle);
+  }
+  article ul > li:first-child,
+  article ol > li:first-child { border-top: 0; padding-top: 4px; }
+  article ul > li::before {
+    content: '';
+    position: absolute;
+    left: 14px; top: 24px;
+    width: 6px; height: 6px;
+    border-radius: 9999px;
+    background: var(--foreground-faint);
+  }
+  article ul > li:first-child::before { top: 14px; }
+  article ol > li {
+    counter-increment: list;
+  }
+  article ol > li::before {
+    content: counter(list, decimal-leading-zero);
+    position: absolute;
+    left: 0; top: 16px;
+    font: var(--font-mono-md);
+    color: var(--brand);
+    font-variant-numeric: tabular-nums;
+  }
+  article ol > li:first-child::before { top: 6px; }
+
+  /* Inline code */
+  article code {
+    font: var(--font-mono-md);
+    font-size: 14px;
+    padding: 1px 6px;
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    border: 1px solid var(--border-subtle);
+    color: var(--foreground);
+    white-space: nowrap;
+  }
+  article a code { border-color: transparent; }
+
+  /* Block code */
+  article pre {
+    margin: 0;
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 22px 24px;
+    overflow-x: auto;
+    box-shadow: var(--edge-highlight);
+  }
+  article pre code {
+    background: transparent; border: 0; padding: 0;
+    font-size: 13px;
+    line-height: 21px;
+    white-space: pre;
+    color: var(--foreground);
+  }
+  /* Light syntax tint — a single dim color for property tokens */
+  article pre .tok-prop { color: var(--brand); }
+  article pre .tok-com  { color: var(--foreground-faint); font-style: italic; }
+  article pre .tok-val  { color: var(--foreground-muted); }
+  article pre .tok-sel  { color: var(--foreground); font-weight: var(--weight-semibold); }
+
+  /* Pull quote / blockquote */
+  article blockquote {
+    margin: 8px 0 0;
+    padding: 32px 0 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+  article blockquote > p {
+    font: var(--font-display-md);
+    letter-spacing: var(--track-display-md);
+    font-weight: var(--weight-display-md);
+    color: var(--foreground);
+    text-wrap: balance;
+    margin: 0;
+    max-width: 100%;
+  }
+  article blockquote .quote-mark {
+    display: block;
+    color: var(--brand);
+    font-size: 40px; line-height: 0.6;
+    font-weight: var(--weight-semibold);
+    margin-bottom: 18px;
+    user-select: none;
+  }
+  article blockquote cite {
+    display: block;
+    margin-top: 20px;
+    font: var(--font-body-sm);
+    font-style: normal;
+    color: var(--foreground-subtle);
+  }
+
+  /* Callout / aside */
+  article aside.callout {
+    margin: 32px 0 0;
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 14px;
+    box-shadow: var(--edge-highlight);
+    font: var(--font-body-sm);
+    color: var(--foreground-muted);
+  }
+  article aside.callout .icon {
+    color: var(--brand);
+    display: flex; align-items: flex-start;
+    padding-top: 2px;
+  }
+  article aside.callout strong { color: var(--foreground); font-weight: var(--weight-medium); }
+
+  /* kbd */
+  article kbd {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 22px; height: 22px; padding: 0 6px;
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    border: 1px solid var(--border-default);
+    box-shadow: 0 1px 0 var(--border-default);
+    color: var(--foreground);
+    font: var(--font-mono-md);
+    font-size: 12px;
+    vertical-align: 1px;
+  }
+  article kbd + kbd { margin-left: 4px; }
+
+  /* Links */
+  article a {
+    color: var(--foreground);
+    text-decoration: underline;
+    text-decoration-color: var(--brand);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+  }
+  article a:hover { text-decoration-thickness: 2px; }
+
+  /* Section divider */
+  article hr {
+    margin: 56px 0 0;
+    border: 0;
+    height: 1px;
+    background: var(--border-subtle);
+  }
+
+  /* Brand word inline (inherited class) */
+  article .brand-word { font-weight: var(--weight-semibold); }
+
+  /* ---------------- TOC ---------------- */
+  .toc {
+    position: sticky; top: 88px;
+    align-self: start;
+    font: var(--font-body-sm);
+  }
+  .toc .toc-eyebrow {
+    font: var(--font-eyebrow);
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--foreground-subtle);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 4px;
+  }
+  .toc ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
+  .toc li a {
+    display: block;
+    padding: 9px 0;
+    color: var(--foreground-subtle);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+    border-left: 1px solid transparent;
+    padding-left: 14px;
+    margin-left: -14px;
+  }
+  .toc li a:hover { color: var(--foreground); }
+  .toc li a.active {
+    color: var(--foreground);
+    border-left-color: var(--brand);
+  }
+  .toc .toc-meta {
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-subtle);
+    font: var(--font-caption);
+    color: var(--foreground-subtle);
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .toc .toc-meta .mono { font-family: var(--font-mono); }
+
+  /* ---------------- ARTICLE FOOTER ---------------- */
+  .article-foot {
+    max-width: var(--doc-container);
+    margin: 0 auto;
+    padding: 48px var(--doc-pad) 24px;
+    border-top: 1px solid var(--border-subtle);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 224px;
+    gap: 72px;
+  }
+  .article-foot .tags {
+    display: flex; gap: 8px; align-items: center;
+    flex-wrap: wrap;
+  }
+  .article-foot .cite {
+    margin-top: 18px;
+    max-width: var(--measure);
+    font: var(--font-body-sm);
+    color: var(--foreground-subtle);
+  }
+  .article-foot .cite .mono { font-family: var(--font-mono); color: var(--foreground); }
+
+  /* ---------------- RELATED ---------------- */
+  .related {
+    max-width: var(--doc-container);
+    margin: 0 auto;
+    padding: 24px var(--doc-pad) 96px;
+  }
+  .related .eyebrow { color: var(--foreground-subtle); }
+  .related h3 {
+    font: var(--font-headline);
+    letter-spacing: var(--track-headline);
+    font-weight: var(--weight-headline);
+    margin: 12px 0 24px;
+  }
+  .related-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .related-grid .card {
+    padding: 24px;
+    text-decoration: none;
+    color: var(--foreground);
+    display: flex; flex-direction: column;
+    min-height: 168px;
+  }
+  .related-grid .card .r-eyebrow {
+    font: var(--font-eyebrow);
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--foreground-subtle);
+  }
+  .related-grid .card .r-title {
+    margin-top: 12px;
+    font: var(--font-card-title);
+    letter-spacing: var(--track-card-title);
+    font-weight: var(--weight-card-title);
+    color: var(--foreground);
+    text-wrap: balance;
+  }
+  .related-grid .card .r-meta {
+    margin-top: auto;
+    padding-top: 24px;
+    font: var(--font-caption);
+    color: var(--foreground-subtle);
+  }
+
+  /* ---------------- FOOTER ---------------- */
+  .foot {
+    border-top: 1px solid var(--border-subtle);
+    background: var(--surface-1);
+  }
+  .foot-inner {
+    max-width: var(--doc-container); margin: 0 auto;
+    padding: 24px var(--doc-pad);
+    display: flex; justify-content: space-between; align-items: center;
+    font: var(--font-caption); color: var(--foreground-subtle);
+  }
+  .foot-inner .mono { font-family: var(--font-mono); }
+
+  /* ================= Responsive ================= */
+  @media (max-width: 1024px) {
+    :root { --doc-pad: 32px; }
+    .body-wrap { grid-template-columns: 1fr; }
+    .toc { display: none; }
+    .article-foot { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    :root { --doc-pad: 20px; }
+    .related-grid { grid-template-columns: 1fr; }
+    .nav-anchor { display: none; }
+  }
+  @media (max-width: 480px) {
+    :root { --doc-pad: 16px; }
+    h1 { font-size: 44px; letter-spacing: -1.4px; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+
+<!-- ============ NAV ============ -->
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <div class="brand-mark">
+      point one zero
+      <span class="crumb">Notes</span>
+    </div>
+    <div class="nav-right">
+      <div class="nav-anchor">Archive</div>
+      <div class="nav-anchor">Subscribe</div>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme" id="themeToggle">
+        <!-- Sun (visible in dark) -->
+        <svg class="sun" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.6M8 12.9v1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M1.5 8h1.6M12.9 8h1.6M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1"/></svg>
+        <!-- Moon (visible in light) -->
+        <svg class="moon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 9.5a5.5 5.5 0 1 1-6.5-7.3 4.7 4.7 0 0 0 6.5 7.3z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+<!-- ============ ARTICLE HEAD ============ -->
+<section class="head-wrap">
+  <div class="head-veil"></div>
+  <div class="head">
+    <span class="eyebrow"><span class="brand-dot"></span>Notes · Design</span>
+    <h1>On restraint: why one accent is enough.</h1>
+    <p class="lead">Most systems collect color the way attics collect things. Ours does the opposite — one blue, five places, and a near-pure-black canvas that lets it land.</p>
+    <div class="byline">
+      <div class="avatar">P1</div>
+      <span class="by-name">Point One Zero</span>
+      <span class="sep"></span>
+      <span>6 min read</span>
+      <span class="sep"></span>
+      <span>v0.4.0 reference</span>
+      <span class="sep"></span>
+      <span>May 26, 2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BODY ============ -->
+<div class="body-wrap">
+
+  <article>
+    <p class="opener">The first version of this system had seven brand variants. A blue for primary, a green for callouts, a coral for warnings, a violet for "new", an amber for trust, and two neutrals that wanted to feel like accents. Every section had its color. Every color had a meaning we had written down once and then forgotten.</p>
+
+    <p>The problem was not the colors. The problem was that none of them meant anything anymore.</p>
+
+    <h2 id="more">The temptation of more</h2>
+    <p>There is always a case for a fourth color. A pricing page wants a "best value" tier; that wants a color. An empty state wants warmth; that wants a color. A new-feature flag wants attention; that wants a color. Each request is reasonable in isolation, and yet —</p>
+
+    <blockquote>
+      <span class="quote-mark">"</span>
+      <p>Restraint is the only frame that scales. Permission is not.</p>
+      <cite>— a rule we keep on a sticky note</cite>
+    </blockquote>
+
+    <p>— each request, granted, costs the system its handle on what blue means. The first accent is a <strong>signal</strong>; the seventh is just chrome. Once color stops carrying meaning, it starts demanding effects — gradients, glows, glass — to do the work color was supposed to do.</p>
+
+    <h2 id="earns">What a single accent earns you</h2>
+    <p>When the brand is one color, the color can mean something specific. Ours does: <span class="brand-word">attention</span>. The blue appears where the user should look first, and it appears nowhere else. That predictability is the entire payoff.</p>
+    <p>Five rules govern where the blue can land:</p>
+
+    <ol>
+      <li><strong>The brand mark.</strong> The dot in the wordmark, and a single brand-dot inside a hero status pill.</li>
+      <li><strong>One word per hero.</strong> A single inline <code>.brand-word</code> in the page's main headline. Used twice across the page, max.</li>
+      <li><strong>Focus rings.</strong> 2px outline at 2px offset. The functional case — accessibility never negotiates.</li>
+      <li><strong>Link underlines on hover.</strong> Text stays the foreground color; the underline is brand. The hover is the signal.</li>
+      <li><strong>One featured number.</strong> The brand-colored numeric in the one featured metric card per page. Never two.</li>
+    </ol>
+
+    <p>Notice what is not on the list. Buttons are not brand-filled. Eyebrow chips are not blue. Section dividers are not blue. The blue is a noun, not a decoration.</p>
+
+    <h2 id="code">What this looks like in code</h2>
+    <p>The system exposes the rule via a single class. To color the one inline word in a hero, use <code>.brand-word</code>. To put a brand dot before a status pill's text, use <code>.brand-dot</code>. Both are intentionally specific names — <code>.text-brand</code> would have leaked into a hundred places we did not authorize.</p>
+
+<pre><code><span class="tok-com">/* Use exactly twice per page, max. */</span>
+<span class="tok-sel">.brand-word</span> { <span class="tok-prop">color</span>: <span class="tok-val">var(--brand)</span>; }
+
+<span class="tok-com">/* The mark in miniature. Glow is the only allowed glow. */</span>
+<span class="tok-sel">.brand-dot</span> {
+  <span class="tok-prop">width</span>: <span class="tok-val">6px</span>; <span class="tok-prop">height</span>: <span class="tok-val">6px</span>;
+  <span class="tok-prop">border-radius</span>: <span class="tok-val">9999px</span>;
+  <span class="tok-prop">background</span>: <span class="tok-val">var(--brand)</span>;
+  <span class="tok-prop">box-shadow</span>: <span class="tok-val">var(--brand-glow)</span>;
+}</code></pre>
+
+    <p>There is no <code>.bg-brand</code> utility. There is no brand button variant. There is no "primary accent" filter. The shape of the API enforces the shape of the rule.</p>
+
+    <h3 id="naming">Naming as enforcement</h3>
+    <p>Tokens are mirrored to the shadcn convention — <code>--background</code>, <code>--foreground</code>, <code>--primary</code> — but the brand color lives in its own slot called <code>--brand</code>, not <code>--accent</code>. That single naming choice keeps the door closed: hover surfaces want to be called accent, and they should be neutral.</p>
+
+    <h2 id="outcomes">Outcomes</h2>
+    <p>Press <kbd>⌘</kbd><kbd>K</kbd> on any of our product surfaces and you will see the system's strictest moment — a popover with a single blue focus ring, on a near-black canvas, with no other color present. That moment is the brand.</p>
+
+    <aside class="callout">
+      <span class="icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 5v.01M8 7.5v4"/></svg>
+      </span>
+      <div><strong>By the numbers.</strong> The marketing site has roughly 12,000 pixels of brand blue across its entire homepage — every dot, every focus ring, every link underline, every one of the four featured-metric digits. The dark canvas takes the rest.</div>
+    </aside>
+
+    <p>We measured what restraint earned us. The number is small, but the point is the ratio.</p>
+
+    <hr />
+
+    <p>If the design language has any one rule, it is this: every accent must justify its place by carrying a meaning the rest of the canvas cannot. Color is the smallest unit of communication. Spend it once, and spend it where it counts.</p>
+  </article>
+
+  <aside class="toc">
+    <div class="toc-eyebrow">On this page</div>
+    <ul>
+      <li><a href="#more" class="active">The temptation of more</a></li>
+      <li><a href="#earns">What a single accent earns you</a></li>
+      <li><a href="#code">What this looks like in code</a></li>
+      <li><a href="#naming" style="padding-left: 28px;">Naming as enforcement</a></li>
+      <li><a href="#outcomes">Outcomes</a></li>
+    </ul>
+    <div class="toc-meta">
+      <div>Reading time · 6 min</div>
+      <div>Word count · <span class="mono">812</span></div>
+      <div>Last edited · 2026-05-26</div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- ============ ARTICLE FOOTER ============ -->
+<div class="article-foot">
+  <div>
+    <div class="tags">
+      <span class="tag"><span class="tag-dot" style="background: var(--brand)"></span>Design</span>
+      <span class="tag"><span class="tag-dot" style="background: var(--success)"></span>System</span>
+      <span class="tag">Notes</span>
+    </div>
+    <p class="cite">
+      Cite as <span class="mono">Point One Zero, "On restraint: why one accent is enough," v0.4.0 (2026).</span>
+    </p>
+  </div>
+  <div></div>
+</div>
+
+<!-- ============ RELATED ============ -->
+<section class="related">
+  <div class="eyebrow">Continue</div>
+  <h3>Related notes.</h3>
+  <div class="related-grid">
+    <a class="card">
+      <span class="r-eyebrow">Notes · Process</span>
+      <span class="r-title">Seventeen hours: notes on the zero-based model.</span>
+      <span class="r-meta">8 min read · v0.4.0</span>
+    </a>
+    <a class="card card-featured">
+      <span class="r-eyebrow">Notes · Type</span>
+      <span class="r-title">The four type principles, and why eyebrows track positive.</span>
+      <span class="r-meta">5 min read · v0.4.0</span>
+    </a>
+    <a class="card">
+      <span class="r-eyebrow">Notes · Engineering</span>
+      <span class="r-title">A surface ladder, not a shadow stack.</span>
+      <span class="r-meta">4 min read · v0.4.0</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+
+</main>
+
+<footer class="foot">
+  <div class="foot-inner">
+    <div>© Point One Zero · 25 Palmer Square, Princeton, NJ 08542</div>
+    <div class="mono">v0.4.0 · notes</div>
+  </div>
+</footer>
+
+<script>
+  // Theme handled by shared theme.js (respects OS + manual toggle).
+
+  // TOC scroll-spy
+  (function () {
+    const links = document.querySelectorAll('.toc a');
+    const sections = [...links].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    function onScroll() {
+      const y = window.scrollY + 160;
+      let active = sections[0];
+      for (const s of sections) { if (s.offsetTop <= y) active = s; }
+      links.forEach(a => {
+        const matched = a.getAttribute('href') === '#' + active.id;
+        a.classList.toggle('active', matched);
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+
+</body>
+</html>

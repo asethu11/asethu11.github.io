@@ -22,7 +22,6 @@
 }
 
 .theme-toggle:hover {
-    transform: translateY(-1px);
     background: rgba(0, 0, 0, 0.16);
     border-color: rgba(0, 0, 0, 0.12);
 }

@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vertex Hub — Access Management</title>
+  <style>
+    :root {
+      --bg:      #FCFCFD; --fg:     #0F172A; --card:   #FFFFFF;
+      --border:  #E5E7EB; --div:    #ECECEF; --muted:  #F4F5F7;
+      --dim:     #8B95A1; --label:  #64748B; --primary:#5E6AD2;
+      --ring:    rgba(94,106,210,.28);
+      --sb:      #FAFAFA;
+      --sans:    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --mono:    "SF Mono","Fira Code",ui-monospace,monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: var(--sans); color: var(--fg); background: var(--bg); }
+
+    /* ── Shell ── */
+    .shell { display: flex; height: 100vh; overflow: hidden; }
+
+    /* ── Sidebar ── */
+    .sb {
+      width: 240px; flex-shrink: 0; height: 100%;
+      background: var(--sb); border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; overflow: hidden;
+      transition: width 150ms ease-out;
+    }
+    .sb.col { width: 56px; }
+
+    .sb-hdr {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 48px; padding: 0 12px; border-bottom: 1px solid var(--div);
+      flex-shrink: 0; overflow: hidden;
+    }
+    .sb.col .sb-hdr { justify-content: center; padding: 0 8px; }
+    .sb-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; min-width: 0; }
+    .vh { width: 24px; height: 24px; border-radius: 6px; background: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .vh span { color: #fff; font-size: 10px; font-weight: 700; line-height: 1; }
+    .sb-word { font-size: 13px; font-weight: 600; color: var(--fg); white-space: nowrap; overflow: hidden; }
+    .ib { width: 28px; height: 28px; border-radius: 5px; border: none; background: none; cursor: pointer; color: var(--dim); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ib:hover { background: var(--muted); color: var(--fg); }
+
+    .sb-expand-row { display: flex; justify-content: center; padding: 4px 0; border-bottom: 1px solid var(--div); flex-shrink: 0; }
+
+    .sb-nav { flex: 1; padding: 8px; overflow-y: auto; display: flex; flex-direction: column; gap: 1px; }
+    .sb.col .sb-nav { padding: 8px 6px; align-items: center; }
+    .sb-sep { height: 1px; background: var(--div); margin: 5px 0; width: 100%; }
+
+    .nl {
+      display: flex; align-items: center; gap: 10px;
+      padding: 6px 10px; border-radius: 6px;
+      text-decoration: none; font-size: 13px; color: var(--label);
+      transition: background .1s, color .1s; white-space: nowrap; width: 100%;
+    }
+    .nl:hover { background: var(--muted); color: var(--fg); }
+    .nl.act { background: var(--muted); color: var(--fg); font-weight: 500; }
+    .nl.act svg { color: var(--primary); }
+    .sb.col .nl { width: 32px; height: 32px; padding: 0; justify-content: center; gap: 0; }
+
+    .sb-banner { margin: 0 8px 8px; border-radius: 6px; background: #FFFBEB; border: 1px solid #FCD34D; padding: 8px 10px; }
+    .sb-banner p:first-child { font-size: 11px; color: #92400E; font-weight: 500; }
+    .sb-banner p:last-child  { font-size: 11px; color: #B45309; line-height: 1.4; margin-top: 2px; }
+
+    .sb-utils { border-top: 1px solid var(--div); padding: 6px 8px; flex-shrink: 0; display: flex; flex-direction: column; gap: 1px; }
+    .sb.col .sb-utils { padding: 6px; align-items: center; }
+    .ub { display: flex; align-items: center; gap: 10px; width: 100%; padding: 5px 8px; border-radius: 6px; border: none; background: none; cursor: default; font-size: 12px; color: var(--label); font-family: var(--sans); }
+    .sb.col .ub { width: 32px; height: 32px; padding: 0; justify-content: center; gap: 0; }
+    .util-badge { font-size: 10px; color: var(--dim); font-family: var(--mono); border: 1px solid var(--div); border-radius: 3px; padding: 1px 4px; margin-left: auto; }
+
+    /* ── Persona area ── */
+    .sb-p-wrap { border-top: 1px solid var(--div); padding: 8px; flex-shrink: 0; position: relative; }
+    .sb.col .sb-p-wrap { padding: 6px; display: flex; justify-content: center; }
+    .p-btn {
+      display: flex; align-items: center; gap: 10px; width: 100%;
+      padding: 5px 8px; border-radius: 6px; border: none; background: none;
+      cursor: pointer; font-family: var(--sans); transition: background .1s;
+    }
+    .p-btn:hover { background: var(--muted); }
+    .sb.col .p-btn { width: 40px; height: 40px; padding: 0; justify-content: center; gap: 0; }
+    .p-av {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 600; flex-shrink: 0;
+    }
+    .sb.col .p-av { width: 32px; height: 32px; font-size: 12px; }
+    .av-A  { background: #FEF3C7; color: #92400E; }
+    .av-SM { background: #EDE9FE; color: #6D28D9; }
+    .av-VS { background: #DBEAFE; color: #1D4ED8; }
+    .av-SC { background: #D1FAE5; color: #065F46; }
+    .p-info { flex: 1; min-width: 0; text-align: left; }
+    .p-name { font-size: 12px; font-weight: 500; color: var(--fg); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .p-role-txt { font-size: 11px; color: var(--dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    /* Persona dropdown */
+    .p-drop {
+      position: absolute; bottom: calc(100% + 6px); left: 8px; right: 8px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(15,23,42,.14); z-index: 200; overflow: hidden;
+      animation: di .12s ease;
+    }
+    .sb.col .p-drop { left: 56px; bottom: 6px; right: auto; width: 264px; }
+    @keyframes di { from { opacity:0; transform:translateY(4px); } }
+    .pd-hdr { padding: 10px 14px 6px; font-size: 11px; color: var(--dim); }
+    .pd-sep { height: 1px; background: var(--div); margin: 2px 0; }
+    .pd-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 12px; cursor: pointer; transition: background .1s;
+    }
+    .pd-row:hover { background: var(--muted); }
+    .pd-row.on { background: var(--muted); }
+    .pd-info { flex: 1; min-width: 0; }
+    .pd-name { font-size: 13px; font-weight: 500; color: var(--fg); }
+    .pd-desc { font-size: 11px; color: var(--dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .pd-tag  { font-size: 10px; color: var(--dim); font-family: var(--mono); flex-shrink: 0; }
+    .pd-so { display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 13px; color: var(--label); cursor: default; }
+    .pd-note { padding: 8px 12px; font-size: 11px; color: var(--dim); line-height: 1.5; }
+
+    /* ── Main content ── */
+    .main { flex: 1; overflow-y: auto; background: var(--bg); }
+    .page { max-width: 880px; margin: 0 auto; padding: 24px 24px 56px; }
+
+    /* ── Page header ── */
+    .ph { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+    .ph-title { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; margin-bottom: 3px; }
+    .ph-desc { font-size: 12px; color: var(--dim); line-height: 1.5; max-width: 540px; }
+    .ph-btns { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+    /* ── Buttons ── */
+    .btn { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer; border: none; font-family: var(--sans); transition: background .1s; }
+    .btn-p { background: var(--primary); color: #fff; }
+    .btn-p:hover { background: #4F5CB8; }
+    .btn-g { background: none; border: 1px solid var(--border); color: var(--label); }
+    .btn-g:hover { background: var(--muted); color: var(--fg); }
+    .btn-sm { padding: 5px 10px; font-size: 11px; }
+    .lbtn { background: none; border: none; cursor: pointer; font-size: 11px; color: var(--primary); font-family: var(--sans); display: inline-flex; align-items: center; gap: 4px; padding: 0; }
+    .lbtn:hover { text-decoration: underline; }
+    .xib { width: 28px; height: 28px; border-radius: 5px; display: flex; align-items: center; justify-content: center; border: none; background: none; cursor: pointer; color: var(--dim); transition: background .1s, color .1s; }
+    .xib:hover { background: var(--muted); color: var(--fg); }
+    .xib.del:hover { background: #FFF1F2; color: #BE123C; }
+
+    /* ── Summary bar ── */
+    .sum-bar { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
+    .rc { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; cursor: pointer; text-align: left; transition: border-color .12s, box-shadow .12s; }
+    .rc:hover { border-color: #9CA3AF; }
+    .rc.on { border-color: var(--primary); box-shadow: 0 0 0 3px var(--ring); }
+    .rc-n { font-size: 22px; font-weight: 600; line-height: 1; margin-bottom: 3px; }
+    .rc-l { font-size: 11px; color: var(--dim); display: flex; align-items: center; gap: 4px; }
+
+    /* ── Badges ── */
+    .bdg { padding: 2px 7px; border-radius: 999px; font-size: 11px; font-weight: 500; white-space: nowrap; flex-shrink: 0; }
+    .bA  { background: #EDE9FE; color: #6D28D9; }
+    .bSM { background: #EFF6FF; color: #1D4ED8; }
+    .bVS { background: #ECFDF5; color: #065F46; }
+    .bSC { background: #FFFBEB; color: #92400E; }
+    .bdel { padding: 2px 5px; border-radius: 3px; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; border: 1px solid #FECDD3; background: #FFF1F2; color: #BE123C; flex-shrink: 0; }
+
+    /* ── Teams ── */
+    .tc { background: var(--card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 24px; }
+    .thdr { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-bottom: 1px solid var(--div); }
+    .stitle { font-size: 11px; font-weight: 600; color: var(--fg); text-transform: uppercase; letter-spacing: .06em; }
+    .tsub { font-size: 11px; color: var(--dim); }
+    .tcreate { padding: 12px 16px; border-bottom: 1px solid var(--div); background: rgba(244,245,247,.5); display: flex; flex-direction: column; gap: 8px; }
+    .trow { padding: 10px 16px; border-bottom: 1px solid var(--div); }
+    .trow:last-child { border-bottom: none; }
+    .thrw { display: flex; align-items: center; gap: 6px; }
+    .tnbtn { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; font-family: var(--sans); padding: 0; }
+    .tname { font-size: 13px; font-weight: 500; color: var(--fg); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .mc { font-size: 11px; color: var(--dim); flex-shrink: 0; }
+    .tmems { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 2px 2px 8px; border-radius: 999px; font-size: 11px; border: 1px solid var(--border); background: rgba(244,245,247,.7); color: var(--fg); }
+    .chip.pend { border-color: #FCD34D; background: #FFFBEB; color: #92400E; }
+    .crm { width: 16px; height: 16px; border-radius: 50%; border: none; background: none; cursor: pointer; color: inherit; opacity: .65; display: flex; align-items: center; justify-content: center; }
+    .crm:hover { opacity: 1; background: rgba(0,0,0,.08); }
+
+    /* ── Inputs ── */
+    .ti { height: 30px; padding: 0 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--card); font-size: 12px; color: var(--fg); font-family: var(--sans); outline: none; }
+    .ti:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--ring); }
+    .ti::placeholder { color: var(--dim); }
+    .ri { height: 28px; font-size: 13px; }
+    .mi { height: 32px; padding: 0 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--card); font-size: 13px; color: var(--fg); font-family: var(--sans); outline: none; transition: border-color .12s, box-shadow .12s; }
+    .mi:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--ring); }
+    .mi::placeholder { color: var(--dim); }
+    .ms { height: 32px; padding: 0 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--card); font-size: 13px; color: var(--fg); font-family: var(--sans); outline: none; width: 100%; }
+
+    /* ── Section header ── */
+    .sechdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .secleft { display: flex; align-items: center; gap: 6px; }
+    .secct { font-size: 11px; color: var(--dim); }
+    .fbanner { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--dim); margin-bottom: 14px; }
+    .fbanner button { background: none; border: none; cursor: pointer; color: var(--primary); font-size: 11px; font-family: var(--sans); display: inline-flex; align-items: center; gap: 2px; }
+
+    /* ── User rows ── */
+    .ulist { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+    .ucard { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--card); }
+    .uhdr { display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer; transition: background .1s; }
+    .uhdr:hover { background: rgba(244,245,247,.6); }
+    .av { width: 32px; height: 32px; border-radius: 50%; background: rgba(94,106,210,.12); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+    .ui { flex: 1; min-width: 0; }
+    .un { font-size: 13px; font-weight: 500; }
+    .ue { font-size: 11px; color: var(--dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .dv { font-size: 11px; color: var(--dim); white-space: nowrap; }
+    .ract { display: flex; align-items: center; gap: 4px; }
+
+    .expanel { border-top: 1px solid var(--div); }
+    .expgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; padding: 16px; background: rgba(244,245,247,.35); }
+    .plbl { font-size: 11px; font-weight: 600; color: var(--dim); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+    .ropt { display: flex; align-items: flex-start; gap: 7px; margin-bottom: 9px; cursor: pointer; }
+    .ropt input { accent-color: var(--primary); margin-top: 2px; flex-shrink: 0; }
+    .rl { font-size: 12px; }
+    .rl.on { color: var(--fg); font-weight: 500; }
+    .rl.off { color: var(--label); }
+    .rd { font-size: 10px; color: var(--dim); line-height: 1.4; margin-top: 1px; }
+
+    .sc { display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--dim); margin-bottom: 6px; }
+    .sc button { background: none; border: none; cursor: pointer; font-size: 10px; color: var(--dim); font-family: var(--sans); }
+    .sc button:hover { color: var(--primary); }
+    .sc button:disabled { opacity: .4; cursor: default; }
+    .sc .ct { margin-left: auto; font-family: var(--mono); font-size: 10px; }
+
+    .togrow { display: flex; align-items: center; gap: 7px; margin-bottom: 7px; cursor: pointer; }
+    .tog { width: 30px; height: 16px; border-radius: 8px; flex-shrink: 0; position: relative; border: none; cursor: pointer; padding: 0; transition: background .15s; }
+    .tog.on { background: var(--primary); }
+    .tog.off { background: var(--muted); border: 1px solid var(--border); }
+    .knb { position: absolute; top: 2px; width: 12px; height: 12px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.15); transition: left .15s; }
+    .tog.on .knb { left: 16px; }
+    .tog.off .knb { left: 2px; }
+    .tl { font-size: 11px; color: var(--label); line-height: 1.3; }
+    .ts { font-size: 10px; color: var(--dim); }
+
+    .bdrow { padding: 10px 16px; border-top: 1px solid var(--div); background: rgba(244,245,247,.2); }
+    .bdtitle { font-size: 11px; font-weight: 600; color: var(--dim); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 5px; }
+    .bditems { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 12px; color: var(--label); }
+    .bdn { font-weight: 500; color: var(--fg); }
+
+    .caprow { padding: 10px 16px; border-top: 1px solid var(--div); background: rgba(244,245,247,.3); }
+
+    /* ── Modal ── */
+    .mbg { position: fixed; inset: 0; z-index: 300; background: rgba(15,23,42,.35); display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .mbox { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; width: 100%; max-width: 440px; box-shadow: 0 8px 32px rgba(15,23,42,.12); }
+    .mtitle { font-size: 15px; font-weight: 600; margin-bottom: 16px; }
+    .mf { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+    .ml { font-size: 11px; font-weight: 500; color: var(--dim); text-transform: uppercase; letter-spacing: .05em; }
+    .mnote { font-size: 11px; color: var(--dim); margin-top: 4px; }
+    .mfoot { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--div); }
+    .ibox { border: 1px solid var(--border); border-radius: 6px; background: rgba(244,245,247,.5); padding: 10px 14px; margin-top: 12px; }
+    .ibxttl { font-size: 11px; font-weight: 600; color: var(--dim); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+
+    /* ── Toasts ── */
+    #toasts { position: fixed; bottom: 20px; right: 20px; z-index: 400; display: flex; flex-direction: column; gap: 8px; width: 296px; pointer-events: none; }
+    .toast { padding: 10px 14px; border-radius: 8px; background: #1E293B; color: #fff; font-size: 12px; line-height: 1.4; box-shadow: 0 4px 12px rgba(0,0,0,.2); animation: su .18s ease; }
+    .toast.err { background: #9F1239; }
+    @keyframes su { from { transform: translateY(6px); opacity: 0; } }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- ── Sidebar ── -->
+  <aside class="sb" id="sb">
+
+    <!-- Header -->
+    <div class="sb-hdr">
+      <a class="sb-logo" href="#" id="sb-logo-full">
+        <div class="vh"><span>VH</span></div>
+        <span class="sb-word">Vertex Hub</span>
+      </a>
+      <button class="ib" id="sb-collapse-btn" title="Collapse sidebar" onclick="toggleSb()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><path d="M15 9l-3 3 3 3"/></svg>
+      </button>
+    </div>
+    <!-- Expand button shown when collapsed -->
+    <div class="sb-expand-row hidden" id="sb-expand-row">
+      <button class="ib" title="Expand sidebar" onclick="toggleSb()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><path d="M13 15l3-3-3-3"/></svg>
+      </button>
+    </div>
+
+    <!-- Nav -->
+    <nav class="sb-nav">
+      <a class="nl" href="#" title="Home">
+        <svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Home</span>
+      </a>
+      <a class="nl" href="#" title="Repository">
+        <svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <span>Repository</span>
+      </a>
+      <div class="sb-sep"></div>
+      <a class="nl act" href="#" title="Access Management">
+        <svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Access Management</span>
+      </a>
+    </nav>
+
+    <!-- Demo banner (hidden when collapsed) -->
+    <div class="sb-banner" id="sb-banner">
+      <p>Demo prototype</p>
+      <p>Not production data — uploads &amp; approvals are simulated.</p>
+    </div>
+
+    <!-- Utilities -->
+    <div class="sb-utils">
+      <button class="ub" title="Hub Assistant">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        <span>Hub Assistant</span>
+        <span class="util-badge">preview</span>
+      </button>
+      <button class="ub" title="Help">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span>Help</span>
+      </button>
+    </div>
+
+    <!-- Persona switcher -->
+    <div class="sb-p-wrap">
+      <button class="p-btn" id="p-btn" onclick="togglePersonaDrop()" title="Austin de Rossi · Admin">
+        <div class="p-av av-A" id="p-av">AR</div>
+        <div class="p-info" id="p-info">
+          <div class="p-name">Austin de Rossi</div>
+          <div class="p-role-txt">Admin</div>
+        </div>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" id="p-chev"><polyline points="18 15 12 9 6 15"/></svg>
+      </button>
+      <!-- Dropdown -->
+      <div class="p-drop hidden" id="p-drop"></div>
+    </div>
+
+  </aside>
+
+  <!-- ── Main content ── -->
+  <main class="main">
+    <div class="page">
+
+      <!-- Page header -->
+      <div class="ph">
+        <div>
+          <div class="ph-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Access Management
+          </div>
+          <p class="ph-desc">Change permissions and add or remove users. Updates apply across the app immediately and persist to this browser. Use <strong>Reset</strong> to restore the seed baseline.</p>
+        </div>
+        <div class="ph-btns">
+          <button class="btn btn-p btn-sm" onclick="openAddModal('staff')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+            Add staff
+          </button>
+          <button class="btn btn-g btn-sm" style="color:var(--dim);" onclick="document.getElementById('m-reset').classList.remove('hidden')">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- Summary bar -->
+      <div class="sum-bar" id="sum-bar"></div>
+
+      <!-- Filter banner -->
+      <div class="fbanner hidden" id="fbanner">
+        Filtering by <span id="fbadge"></span>
+        <button onclick="S.rf=null;render()">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          clear
+        </button>
+      </div>
+
+      <div id="teams-sec"></div>
+      <div id="staff-sec"></div>
+      <div id="clients-sec"></div>
+
+    </div>
+  </main>
+
+</div>
+
+<!-- Add user modal -->
+<div class="mbg hidden" id="m-add" onclick="if(event.target===this)this.classList.add('hidden')">
+  <div class="mbox">
+    <div class="mtitle" id="m-add-t">Add Vertex staff</div>
+    <div class="mf"><label class="ml">Name</label><input class="mi" id="a-n" placeholder="Jane Doe"></div>
+    <div class="mf"><label class="ml">Email</label><input class="mi" id="a-e" type="email" placeholder="jane@vertex.edu"></div>
+    <div class="mf">
+      <label class="ml">Role</label>
+      <select class="ms" id="a-r" onchange="onAddRole(this.value)">
+        <option>Vertex Specialist</option><option>Service Manager</option><option>Admin</option><option>School Client</option>
+      </select>
+    </div>
+    <div id="a-sf" class="hidden">
+      <div class="mf">
+        <label class="ml">School</label>
+        <select class="ms" id="a-o">
+          <option value="">Select a school…</option>
+          <option value="aoa">Academy of Alameda</option>
+          <option value="bap">Bay Area Prep Charter</option>
+          <option value="svc">Sonoma Valley Public Charter</option>
+          <option value="lva">Lehigh Valley Academy</option>
+          <option value="kcc">Keystone Charter Collegiate</option>
+        </select>
+      </div>
+      <div class="mf">
+        <label class="ml">School role</label>
+        <select class="ms" id="a-sr"><option>Principal</option><option>Business Manager</option><option>Office Manager</option></select>
+      </div>
+    </div>
+    <p class="mnote">New users are immediately available in the persona switcher.</p>
+    <div class="mfoot">
+      <button class="btn btn-g btn-sm" onclick="document.getElementById('m-add').classList.add('hidden')">Cancel</button>
+      <button class="btn btn-p btn-sm" onclick="submitAdd()"><span id="a-bl">Add user</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- Role change modal -->
+<div class="mbg hidden" id="m-role" onclick="if(event.target===this)cancelRole()">
+  <div class="mbox">
+    <div class="mtitle">Change role?</div>
+    <div id="m-role-b"></div>
+    <div class="mfoot">
+      <button class="btn btn-g btn-sm" onclick="cancelRole()">Cancel</button>
+      <button class="btn btn-p btn-sm" onclick="confirmRole()">Apply role change</button>
+    </div>
+  </div>
+</div>
+
+<!-- Reset modal -->
+<div class="mbg hidden" id="m-reset" onclick="if(event.target===this)this.classList.add('hidden')">
+  <div class="mbox">
+    <div class="mtitle">Reset everything to baseline?</div>
+    <p style="font-size:12px;color:var(--label);margin-bottom:10px;line-height:1.55;">All simulated changes will be discarded:</p>
+    <ul style="font-size:12px;color:var(--label);padding-left:20px;line-height:2.1;">
+      <li>Users restored from seed</li><li>Role assignments and capabilities reset</li><li>Teams restored to seed baseline</li>
+    </ul>
+    <p style="font-size:11px;color:var(--dim);margin-top:8px;">This is a simulation — no real data is affected.</p>
+    <div class="mfoot">
+      <button class="btn btn-g btn-sm" onclick="document.getElementById('m-reset').classList.add('hidden')">Cancel</button>
+      <button class="btn btn-sm" style="background:#D97706;color:#fff;" onclick="doReset()">Reset to baseline</button>
+    </div>
+  </div>
+</div>
+
+<div id="toasts"></div>
+
+<script>
+// ── Static data ──────────────────────────────────────────────────────────────
+const ORGS=[{id:'aoa',name:'Academy of Alameda',short:'AoA'},{id:'bap',name:'Bay Area Prep Charter',short:'BAP'},{id:'svc',name:'Sonoma Valley Pub. Charter',short:'SVC'},{id:'lva',name:'Lehigh Valley Academy',short:'LVA'},{id:'kcc',name:'Keystone Charter Collegiate',short:'KCC'}];
+const ALL_SVCS=['Payroll','AP','Data','Back Office'];
+const ALL_ROLES=['Admin','Service Manager','Vertex Specialist','School Client'];
+const SCH_ROLES=['Principal','Business Manager','Office Manager'];
+const ROLE_DESC={Admin:'Full access to every document and every module. Can override any access binding.','Service Manager':'Sees all clients within assigned services. Can reassign reviewers within scope.','Vertex Specialist':'Sees documents for assigned clients, scoped to assigned services.','School Client':"Sees only their own organization's documents, narrowed by access type."};
+const BCSS={Admin:'bA','Service Manager':'bSM','Vertex Specialist':'bVS','School Client':'bSC'};
+const AV_CSS={Admin:'av-A','Service Manager':'av-SM','Vertex Specialist':'av-VS','School Client':'av-SC'};
+
+const BD={
+  austin:{total:15,via_org:15,via_team:0,via_ind:0,via_role:0},
+  james: {total:9, via_org:7, via_team:2,via_ind:0,via_role:0},
+  sarah: {total:12,via_org:12,via_team:0,via_ind:0,via_role:0},
+  nadia: {total:4, via_org:4, via_team:0,via_ind:0,via_role:0},
+  thomas:{total:3, via_org:3, via_team:0,via_ind:0,via_role:0},
+  maria: {total:5, via_org:0, via_team:1,via_ind:1,via_role:3},
+  jessica:{total:2,via_org:0,via_team:0, via_ind:0,via_role:2},
+  david: {total:1, via_org:0, via_team:0,via_ind:0,via_role:1},
+  alex:  {total:2, via_org:0, via_team:0,via_ind:0,via_role:2},
+};
+
+function mkUsers(){return[
+  {id:'austin',name:'Austin de Rossi',email:'austin.derossi@vertex.edu',role:'Admin',ini:'AR',can_delete:false},
+  {id:'james', name:'James Okafor',   email:'james.okafor@vertex.edu',  role:'Vertex Specialist',ini:'JO',can_delete:false,orgs:['aoa'],      svcs:['Payroll']},
+  {id:'sarah', name:'Sarah Mitchell', email:'sarah.mitchell@vertex.edu', role:'Service Manager',  ini:'SM',can_delete:false,orgs:['aoa','bap','svc'],svcs:['Payroll','AP']},
+  {id:'nadia', name:'Nadia Kowalski', email:'nadia.kowalski@vertex.edu', role:'Vertex Specialist',ini:'NK',can_delete:false,orgs:['lva','kcc'],svcs:['Payroll','Back Office']},
+  {id:'thomas',name:'Thomas Reed',    email:'thomas.reed@vertex.edu',   role:'Vertex Specialist',ini:'TR',can_delete:false,orgs:['svc','lva'],svcs:['Data']},
+  {id:'maria', name:'Maria Rodriguez',email:'mrodriguez@academyofalameda.org',role:'School Client',ini:'MR',org:'aoa',srole:'Business Manager'},
+  {id:'jessica',name:'Jessica Liu',   email:'jessica.liu@bayprepcharter.org',role:'School Client',ini:'JL',org:'bap',srole:'Principal'},
+  {id:'david', name:'David Kim',      email:'dkim@sonomavalley.org',    role:'School Client',ini:'DK',org:'svc',srole:'Office Manager'},
+  {id:'alex',  name:'Alex Torres',    email:'atorres@lehighvalley.org', role:'School Client',ini:'AT',org:'lva',srole:'Business Manager'},
+];}
+function mkTeams(){return[
+  {id:'t1',name:'Payroll Team · AoA',  mids:['james','maria'],        emails:[]},
+  {id:'t2',name:'Vertex Payroll Ops',  mids:['james','sarah','nadia'],emails:[]},
+  {id:'t3',name:'Auditors · Q2 2026',  mids:['maria','thomas'],       emails:['external.auditor@cpa-partners.com']},
+];}
+
+// Persona descriptions for switcher
+const P_DESC={
+  austin:'Admin · Full access',
+  james:'Vertex Specialist · AoA · Payroll',
+  sarah:'Service Manager · AoA, BAP, SVC · Payroll, AP',
+  nadia:'Vertex Specialist · LVA, KCC · Payroll, Back Office',
+  thomas:'Vertex Specialist · SVC, LVA · Data',
+  maria:'Business Manager · Academy of Alameda',
+  jessica:'Principal · Bay Area Prep Charter',
+  david:'Office Manager · Sonoma Valley Public Charter',
+  alex:'Business Manager · Lehigh Valley Academy',
+};
+
+// ── State ────────────────────────────────────────────────────────────────────
+const S={
+  users:mkUsers(), teams:mkTeams(),
+  rf:null,            // role filter
+  xuid:null,          // expanded user id
+  xtid:null,          // expanded team id
+  creat:false,        // creating team
+  newTN:'',           // new team name
+  renTid:null,        // renaming team id
+  renD:'',            // rename draft
+  pendRole:null,      // { uid, from, to }
+  sbCol:false,        // sidebar collapsed
+  pDrop:false,        // persona dropdown open
+  activeP:'austin',   // active persona id
+};
+
+// ── Sidebar ──────────────────────────────────────────────────────────────────
+function toggleSb(){
+  S.sbCol=!S.sbCol;
+  const sb=document.getElementById('sb');
+  const logo=document.getElementById('sb-logo-full');
+  const colBtn=document.getElementById('sb-collapse-btn');
+  const expRow=document.getElementById('sb-expand-row');
+  const banner=document.getElementById('sb-banner');
+  const word=document.querySelector('.sb-word');
+  const pInfo=document.getElementById('p-info');
+  const pChev=document.getElementById('p-chev');
+
+  sb.classList.toggle('col',S.sbCol);
+  if(S.sbCol){
+    expRow.classList.remove('hidden');
+    colBtn.classList.add('hidden');
+    banner.classList.add('hidden');
+    // hide text in nav links
+    sb.querySelectorAll('.nl span, .ub span, .util-badge').forEach(e=>e.classList.add('hidden'));
+    if(pInfo) pInfo.classList.add('hidden');
+    if(pChev) pChev.classList.add('hidden');
+    if(word) word.classList.add('hidden');
+    logo.style.pointerEvents='none';
+  } else {
+    expRow.classList.add('hidden');
+    colBtn.classList.remove('hidden');
+    banner.classList.remove('hidden');
+    sb.querySelectorAll('.nl span, .ub span, .util-badge').forEach(e=>e.classList.remove('hidden'));
+    if(pInfo) pInfo.classList.remove('hidden');
+    if(pChev) pChev.classList.remove('hidden');
+    if(word) word.classList.remove('hidden');
+    logo.style.pointerEvents='';
+  }
+}
+
+function togglePersonaDrop(){
+  S.pDrop=!S.pDrop;
+  renderPersonaDrop();
+}
+
+function renderPersonaDrop(){
+  const drop=document.getElementById('p-drop');
+  if(!S.pDrop){ drop.classList.add('hidden'); return; }
+  drop.classList.remove('hidden');
+  const allP=S.users;
+  const items=allP.map(u=>{
+    const isSelf=u.id===S.activeP;
+    return `<div class="pd-row${isSelf?' on':''}" onclick="switchPersona('${u.id}')">
+      <div class="p-av ${AV_CSS[u.role]}" style="width:28px;height:28px;font-size:11px;">${u.ini}</div>
+      <div class="pd-info">
+        <div class="pd-name">${esc(u.name)}</div>
+        <div class="pd-desc">${esc(P_DESC[u.id]||u.role)}</div>
+      </div>
+      ${isSelf?'<span class="pd-tag">active</span>':''}
+    </div>`;
+  }).join('');
+  drop.innerHTML=`
+    <div class="pd-hdr">Switch demo persona</div>
+    <div class="pd-sep"></div>
+    ${items}
+    <div class="pd-sep"></div>
+    <div class="pd-so">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Sign out
+    </div>
+    <div class="pd-note">Switching personas changes what documents are visible and which actions are available. This simulates role-based access — not authentication.</div>`;
+}
+
+function switchPersona(id){
+  const u=S.users.find(x=>x.id===id); if(!u)return;
+  S.activeP=id; S.pDrop=false;
+  // Update persona button display
+  const av=document.getElementById('p-av');
+  const info=document.getElementById('p-info');
+  if(av){ av.className=`p-av ${AV_CSS[u.role]}`; av.textContent=u.ini; }
+  if(info) info.innerHTML=`<div class="p-name">${esc(u.name)}</div><div class="p-role-txt">${u.role}</div>`;
+  document.getElementById('p-btn').title=`${u.name} · ${u.role}`;
+  renderPersonaDrop();
+  if(u.role!=='Admin'){
+    toast(`${u.name} doesn't have access to Access Management — Admin only.`,'err');
+  } else {
+    toast(`Switched to ${u.name}`);
+  }
+}
+
+// Close persona drop when clicking outside
+document.addEventListener('click',e=>{
+  if(S.pDrop && !document.getElementById('sb-p-wrap')?.contains(e.target) && !document.querySelector('.sb-p-wrap')?.contains(e.target)){
+    S.pDrop=false; renderPersonaDrop();
+  }
+});
+
+// ── Main render ──────────────────────────────────────────────────────────────
+function render(){
+  renderSum(); renderFBanner(); renderTeams(); renderUsers();
+}
+
+function renderSum(){
+  const c={};
+  ALL_ROLES.forEach(r=>c[r]=S.users.filter(u=>u.role===r).length);
+  document.getElementById('sum-bar').innerHTML=ALL_ROLES.map(r=>`
+    <button class="rc${S.rf===r?' on':''}" onclick="togRF('${r}')">
+      <div class="rc-n">${c[r]}</div>
+      <div class="rc-l">${r}${S.rf===r?`<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`:''}</div>
+    </button>`).join('');
+}
+function renderFBanner(){
+  const el=document.getElementById('fbanner');
+  if(!S.rf){el.classList.add('hidden');return;}
+  el.classList.remove('hidden');
+  document.getElementById('fbadge').innerHTML=`<span class="bdg ${BCSS[S.rf]}" style="margin:0 4px;">${S.rf}</span>`;
+}
+
+function renderTeams(){
+  const rows=S.teams.map(t=>{
+    const exp=S.xtid===t.id, mc=t.mids.length+t.emails.length, ren=S.renTid===t.id;
+    const hdr=ren?`
+      <input class="ti ri" style="flex:1;" id="ren-${t.id}" value="${esc(S.renD)}"
+        oninput="S.renD=this.value" onkeydown="onRK(event,'${t.id}')" onclick="event.stopPropagation()">
+      <button class="xib" style="color:#059669;" onclick="event.stopPropagation();doRen('${t.id}')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </button>`:`
+      <button class="tnbtn" onclick="togT('${t.id}')"><span class="tname">${esc(t.name)}</span><span class="mc">${mc} ${mc===1?'member':'members'}</span></button>
+      <button class="xib" title="Rename" onclick="event.stopPropagation();startRen('${t.id}')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+      <button class="xib del" title="Delete" onclick="event.stopPropagation();delT('${t.id}')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></button>`;
+    let mems='';
+    if(exp){
+      const chips=[
+        ...t.mids.map(id=>{const u=S.users.find(x=>x.id===id);return`<span class="chip">${esc(u?u.name:id)}<button class="crm" onclick="rmTM('${t.id}','id','${id}')"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></span>`;}),
+        ...t.emails.map(a=>`<span class="chip pend" title="Pending">${a}<button class="crm" onclick="rmTM('${t.id}','email','${a}')"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></span>`),
+      ];
+      mems=`<div class="tmems">${chips.length?chips.join(''):'<span style="font-size:11px;color:var(--dim);font-style:italic;">No members yet.</span>'}</div>
+        <div style="margin-top:8px;"><input class="ti" style="width:100%;" placeholder="Add a teammate or external email…" id="ta-${t.id}" onkeydown="onTA(event,'${t.id}')" onclick="event.stopPropagation()"></div>`;
+    }
+    return`<div class="trow"><div class="thrw">${hdr}</div>${mems}</div>`;
+  }).join('');
+  const cf=S.creat?`<div class="tcreate"><input class="ti" style="width:100%;" id="nt-inp" value="${esc(S.newTN)}" placeholder="Team name — e.g. Auditors · Q2 2026" oninput="S.newTN=this.value" onkeydown="if(event.key==='Enter')doNewT()"><div style="display:flex;gap:8px;align-items:center;"><button class="btn btn-p btn-sm" onclick="doNewT()">Create team</button><button class="btn btn-g btn-sm" onclick="S.creat=false;S.newTN='';render()">Cancel</button><span style="font-size:11px;color:var(--dim);">Add members after creating.</span></div></div>`:'';
+  document.getElementById('teams-sec').innerHTML=`<div class="tc"><div class="thdr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="1.75"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="stitle">Teams</span><span class="tsub">reusable sharing groups · shared with documents from the Share dialog</span><button class="lbtn" style="margin-left:auto;" onclick="S.creat=!S.creat;S.newTN='';render()"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> New team</button></div>${cf}${S.teams.length===0&&!S.creat?'<p style="padding:14px 16px;font-size:11px;color:var(--dim);">No teams yet.</p>':''}<div>${rows}</div></div>`;
+  if(S.creat){const el=document.getElementById('nt-inp');if(el)el.focus();}
+  if(S.renTid){const el=document.getElementById('ren-'+S.renTid);if(el){el.focus();el.select();}}
+}
+
+function renderUsers(){
+  const staff=S.users.filter(u=>u.role!=='School Client');
+  const cli=S.users.filter(u=>u.role==='School Client');
+  // Staff
+  if(S.rf==='School Client'){document.getElementById('staff-sec').innerHTML='';} else {
+    const lst=S.rf?staff.filter(u=>u.role===S.rf):staff;
+    document.getElementById('staff-sec').innerHTML=usecSec('Vertex staff','staff',lst);
+  }
+  // Clients
+  if(S.rf&&S.rf!=='School Client'){document.getElementById('clients-sec').innerHTML='';} else {
+    document.getElementById('clients-sec').innerHTML=usecSec('School clients','clients',cli);
+  }
+}
+
+function usecSec(title,kind,list){
+  const rows=list.length===0?`<div style="border:1px dashed var(--border);border-radius:8px;padding:24px;text-align:center;"><p style="font-size:13px;font-weight:500;color:var(--dim);">No ${kind==='staff'?'Vertex staff':'school clients'}${S.rf?' match the current filter':''}</p></div>`
+    :list.map(u=>uRow(u)).join('');
+  const addLbl=kind==='staff'?'Add staff':'Add school client';
+  const addFn=kind==='staff'?`openAddModal('staff')`:`openAddModal('client')`;
+  return`<div><div class="sechdr"><div class="secleft"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="1.75"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span class="stitle">${title}</span><span class="secct">(${list.length})</span></div><button class="lbtn" onclick="${addFn}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>${addLbl}</button></div><div class="ulist">${rows}</div></div>`;
+}
+
+function uRow(u){
+  const exp=S.xuid===u.id, isSch=u.role==='School Client';
+  const bd=BD[u.id]||{total:0,via_org:0,via_team:0,via_ind:0,via_role:0};
+  const tip=isSch?`${bd.via_role} via role · ${bd.via_ind} via specific people · ${bd.via_team} via team`:`${bd.via_org} via org/service scope · ${bd.via_team} via team · ${bd.via_ind} via specific people`;
+  let expHTML='';
+  if(exp){
+    const rP=`<div><div class="plbl">Role</div>${ALL_ROLES.map(r=>`<label class="ropt"><input type="radio" name="r-${u.id}" value="${r}" ${u.role===r?'checked':''} onchange="reqRole('${u.id}','${r}')"><span><div class="rl ${u.role===r?'on':'off'}">${r}</div><div class="rd">${ROLE_DESC[r]}</div></span></label>`).join('')}</div>`;
+    let cP='';
+    if(u.role==='Admin') cP=`<div><div class="plbl">Clients</div><p style="font-size:12px;color:var(--dim);">Admin has access to all clients.</p></div>`;
+    else if(isSch){const on=ORGS.find(o=>o.id===u.org);cP=`<div><div class="plbl">Clients</div><p style="font-size:12px;color:var(--dim);">Fixed to ${on?on.name:u.org}.</p></div>`;}
+    else{const ao=u.orgs||[];cP=`<div><div class="plbl">Clients</div><div class="sc"><button onclick="setAO('${u.id}',true)" ${ao.length===ORGS.length?'disabled':''}>Select all</button><span>·</span><button onclick="setAO('${u.id}',false)" ${ao.length===0?'disabled':''}>Clear</button><span class="ct">${ao.length}/${ORGS.length}</span></div>${ORGS.map(o=>`<div class="togrow" onclick="togO('${u.id}','${o.id}')"><button class="tog ${ao.includes(o.id)?'on':'off'}"><div class="knb"></div></button><div><div class="tl">${o.name}</div><div class="ts">${o.short}</div></div></div>`).join('')}</div>`;}
+    let sP='';
+    if(u.role==='Admin') sP=`<div><div class="plbl">Services</div><p style="font-size:12px;color:var(--dim);">Admin has access to all services.</p></div>`;
+    else if(isSch) sP=`<div><div class="plbl">School role</div>${SCH_ROLES.map(sr=>`<label class="ropt"><input type="radio" name="sr-${u.id}" value="${sr}" ${u.srole===sr?'checked':''} onchange="setSR('${u.id}','${sr}')"><div class="rl ${u.srole===sr?'on':'off'}">${sr}</div></label>`).join('')}<p style="font-size:10px;color:var(--dim);margin-top:6px;line-height:1.4;">Drives role-bound document visibility at this user's org.</p></div>`;
+    else{const as=u.svcs||[];sP=`<div><div class="plbl">Services</div><div class="sc"><button onclick="setAS('${u.id}',true)" ${as.length===ALL_SVCS.length?'disabled':''}>Select all</button><span>·</span><button onclick="setAS('${u.id}',false)" ${as.length===0?'disabled':''}>Clear</button><span class="ct">${as.length}/${ALL_SVCS.length}</span></div>${ALL_SVCS.map(s=>`<div class="togrow" onclick="togS('${u.id}','${s}')"><button class="tog ${as.includes(s)?'on':'off'}"><div class="knb"></div></button><span class="tl">${s}</span></div>`).join('')}</div>`;}
+    const bdH=isSch?`<span><span class="bdn">${bd.via_role}</span> <span style="color:var(--dim)">via role (${u.srole||'—'})</span></span><span style="color:var(--dim)">·</span><span><span class="bdn">${bd.via_ind}</span> <span style="color:var(--dim)">via specific people</span></span><span style="color:var(--dim)">·</span><span><span class="bdn">${bd.via_team}</span> <span style="color:var(--dim)">via team</span></span>`:`<span><span class="bdn">${bd.via_org}</span> <span style="color:var(--dim)">via org + service scope</span></span><span style="color:var(--dim)">·</span><span><span class="bdn">${bd.via_team}</span> <span style="color:var(--dim)">via team</span></span><span style="color:var(--dim)">·</span><span><span class="bdn">${bd.via_ind}</span> <span style="color:var(--dim)">via specific people</span></span>`;
+    const capH=!isSch?`<div class="caprow"><div class="plbl" style="margin-bottom:6px;">Additional capabilities</div>${u.role==='Admin'?'<p style="font-size:12px;color:var(--dim);font-style:italic;">Admins implicitly have every capability.</p>':`<div class="togrow" onclick="togDel('${u.id}')"><button class="tog ${u.can_delete?'on':'off'}"><div class="knb"></div></button><span class="tl">Allow permanent deletion of documents</span></div>`}</div>`:'';
+    expHTML=`<div class="expanel"><div class="expgrid">${rP}${cP}${sP}</div><div class="bdrow"><div class="bdtitle">How the ${bd.total} docs are reached</div><div class="bditems">${bdH}</div></div>${capH}</div>`;
+  }
+  const rm=u.role!=='Admin'?`<button class="xib del" title="Remove" onclick="event.stopPropagation();rmU('${u.id}')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></button>`:'';
+  return`<div class="ucard"><div class="uhdr" onclick="togU('${u.id}')"><div class="av">${u.ini}</div><div class="ui"><div class="un">${esc(u.name)}</div><div class="ue">${esc(u.email)}</div></div><span class="bdg ${BCSS[u.role]}" title="${ROLE_DESC[u.role]}">${u.role}</span>${u.can_delete?'<span class="bdel">Delete</span>':''}<span class="dv" title="${tip}">${bd.total} docs visible</span><div class="ract">${rm}<button class="xib" onclick="event.stopPropagation();togU('${u.id}')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${exp?'<polyline points="18 15 12 9 6 15"/>':'<polyline points="6 9 12 15 18 9"/>'}</svg></button></div></div>${expHTML}</div>`;
+}
+
+// ── Interactions ─────────────────────────────────────────────────────────────
+function togRF(r){S.rf=S.rf===r?null:r;render();}
+function togU(id){S.xuid=S.xuid===id?null:id;render();}
+function togT(id){S.xtid=S.xtid===id?null:id;render();}
+function startRen(id){S.renTid=id;S.renD=S.teams.find(t=>t.id===id)?.name||'';render();}
+function doRen(id){const t=S.teams.find(x=>x.id===id);const n=S.renD.trim();if(t&&n){t.name=n;toast(`Renamed to "${n}"`);}S.renTid=null;render();}
+function onRK(e,id){if(e.key==='Enter')doRen(id);if(e.key==='Escape'){S.renTid=null;render();}}
+function delT(id){const t=S.teams.find(x=>x.id===id);if(!t)return;S.teams=S.teams.filter(x=>x.id!==id);if(S.xtid===id)S.xtid=null;toast(`Team "${t.name}" deleted`);render();}
+function doNewT(){const n=S.newTN.trim();if(!n){toast('Give the team a name.','err');return;}const id='t-'+Date.now();S.teams.push({id,name:n,mids:[],emails:[]});S.creat=false;S.newTN='';S.xtid=id;toast(`Team "${n}" created`);render();}
+function rmTM(tid,type,val){const t=S.teams.find(x=>x.id===tid);if(!t)return;if(type==='id')t.mids=t.mids.filter(x=>x!==val);else t.emails=t.emails.filter(x=>x!==val);render();}
+function onTA(e,tid){if(e.key!=='Enter')return;const val=e.target.value.trim();if(!val)return;const t=S.teams.find(x=>x.id===tid);if(!t)return;if(val.includes('@')){if(!t.emails.includes(val)){t.emails.push(val);toast(`Added ${val}`);}e.target.value='';render();return;}const u=S.users.find(x=>x.name.toLowerCase().includes(val.toLowerCase()));if(u&&!t.mids.includes(u.id)){t.mids.push(u.id);toast(`Added ${u.name}`);e.target.value='';render();}else toast('Type a full name or email address.','err');}
+function togO(uid,oid){const u=S.users.find(x=>x.id===uid);if(!u)return;u.orgs=u.orgs||[];u.orgs=u.orgs.includes(oid)?u.orgs.filter(o=>o!==oid):[...u.orgs,oid];render();}
+function setAO(uid,all){const u=S.users.find(x=>x.id===uid);if(!u)return;u.orgs=all?ORGS.map(o=>o.id):[];render();}
+function togS(uid,svc){const u=S.users.find(x=>x.id===uid);if(!u)return;u.svcs=u.svcs||[];u.svcs=u.svcs.includes(svc)?u.svcs.filter(s=>s!==svc):[...u.svcs,svc];render();}
+function setAS(uid,all){const u=S.users.find(x=>x.id===uid);if(!u)return;u.svcs=all?[...ALL_SVCS]:[];render();}
+function setSR(uid,sr){const u=S.users.find(x=>x.id===uid);if(!u)return;u.srole=sr;toast(`${u.name} school role set to ${sr}`);render();}
+function togDel(uid){const u=S.users.find(x=>x.id===uid);if(!u)return;u.can_delete=!u.can_delete;toast(`${u.name} ${u.can_delete?'gained':'lost'} delete capability`);render();}
+function rmU(uid){const u=S.users.find(x=>x.id===uid);if(!u)return;S.users=S.users.filter(x=>x.id!==uid);if(S.xuid===uid)S.xuid=null;toast(`${u.name} removed`);render();}
+function reqRole(uid,nr){const u=S.users.find(x=>x.id===uid);if(!u||u.role===nr)return;S.pendRole={uid,from:u.role,to:nr};const gain=nr==='Admin'?3:(nr==='Service Manager'&&u.role==='Vertex Specialist'?4:0);const lose=nr==='School Client'?(BD[uid]?.total||0):(u.role==='Admin'&&nr!=='Admin'?3:0);document.getElementById('m-role-b').innerHTML=`<div style="display:flex;align-items:center;gap:8px;font-size:12px;margin-bottom:12px;"><strong>${esc(u.name)}</strong><span class="bdg ${BCSS[u.role]}">${u.role}</span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg><span class="bdg ${BCSS[nr]}">${nr}</span></div><div class="ibox"><div class="ibxttl">Document visibility impact</div><div style="display:flex;align-items:center;gap:12px;font-size:12px;"><span><strong style="color:#047857;">+${gain}</strong> <span style="color:var(--dim)">docs newly visible</span></span><span style="color:var(--dim)">·</span><span><strong style="color:#BE123C;">−${lose}</strong> <span style="color:var(--dim)">docs removed</span></span></div>${gain===0&&lose===0?'<p style="font-size:11px;color:var(--dim);font-style:italic;margin-top:6px;">No change to visible documents.</p>':''}</div>${nr==='School Client'?'<p style="font-size:11px;color:#D97706;margin-top:10px;">Switching to School Client without an org will hide all documents.</p>':''}`;document.getElementById('m-role').classList.remove('hidden');}
+function cancelRole(){S.pendRole=null;document.getElementById('m-role').classList.add('hidden');render();}
+function confirmRole(){if(!S.pendRole)return;const u=S.users.find(x=>x.id===S.pendRole.uid);if(!u)return;u.role=S.pendRole.to;if(u.role==='Admin'){delete u.orgs;delete u.svcs;}if(u.role==='School Client'){delete u.orgs;delete u.svcs;u.srole=u.srole||'Business Manager';}toast(`${u.name} role changed to ${u.role}`);S.pendRole=null;document.getElementById('m-role').classList.add('hidden');render();}
+function openAddModal(kind){const isCli=kind==='client';document.getElementById('a-r').value=isCli?'School Client':'Vertex Specialist';document.getElementById('a-sf').classList.toggle('hidden',!isCli);document.getElementById('m-add-t').textContent=isCli?'Add school client':'Add Vertex staff';document.getElementById('a-bl').textContent=isCli?'Add school client':'Add user';document.getElementById('a-n').value='';document.getElementById('a-e').value='';document.getElementById('m-add').classList.remove('hidden');setTimeout(()=>document.getElementById('a-n').focus(),50);}
+function onAddRole(r){const isCli=r==='School Client';document.getElementById('a-sf').classList.toggle('hidden',!isCli);document.getElementById('m-add-t').textContent=isCli?'Add school client':'Add Vertex staff';document.getElementById('a-bl').textContent=isCli?'Add school client':'Add user';}
+function submitAdd(){const n=document.getElementById('a-n').value.trim();const e=document.getElementById('a-e').value.trim();const r=document.getElementById('a-r').value;const o=document.getElementById('a-o').value;const sr=document.getElementById('a-sr').value;if(!n||!e){toast('Name and email required.','err');return;}if(r==='School Client'&&!o){toast('Select a school.','err');return;}const ini=n.split(' ').map(p=>p[0]?.toUpperCase()||'').join('').slice(0,2);S.users.push({id:'u-'+Date.now(),name:n,email:e,role:r,ini,can_delete:false,org:r==='School Client'?o:undefined,srole:r==='School Client'?sr:undefined,orgs:(r==='School Client'||r==='Admin')?undefined:[],svcs:(r==='School Client'||r==='Admin')?undefined:[]});document.getElementById('m-add').classList.add('hidden');toast(`${n} added as ${r}`);render();}
+function doReset(){S.users=mkUsers();S.teams=mkTeams();S.rf=null;S.xuid=null;S.xtid=null;document.getElementById('m-reset').classList.add('hidden');toast('Reset to seed baseline');render();}
+function toast(msg,type){const el=document.createElement('div');el.className='toast'+(type==='err'?' err':'');el.textContent=msg;document.getElementById('toasts').appendChild(el);setTimeout(()=>el.remove(),3200);}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+render();
+</script>
+</body>
+</html>

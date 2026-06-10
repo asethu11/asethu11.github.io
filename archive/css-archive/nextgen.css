@@ -316,7 +316,6 @@ li pre {
 }
 
 .back-button:hover {
-    transform: translateY(-1px);
     color: var(--primary) !important;
 }
 
@@ -435,7 +434,6 @@ li pre {
 }
 
 .toast button:hover {
-    transform: translateY(-1px);
 }
 
 .toast button:active {
@@ -463,7 +461,6 @@ li pre {
 }
 
 .theme-toggle:hover {
-    transform: translateY(-1px);
     background: rgba(0, 0, 0, 0.16);
     border-color: rgba(0, 0, 0, 0.12);
 }
@@ -613,7 +610,6 @@ li pre {
 }
 
 .next-step-card:hover {
-    transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 

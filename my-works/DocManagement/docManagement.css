@@ -15,6 +15,17 @@
    ================================================= */
 
 
+/* ========== TOC ANCHOR OFFSET ==========
+   Shared article.css applies scroll-margin-top to headings carrying the id
+   (.article-body hN[id]). DocManagement puts the anchor id on the wrapping
+   <section> instead, so it needs the same 110px buffer here — otherwise a
+   clicked TOC link lands the heading flush against the top with no breathing
+   room. Mirrors improving-adoption's behavior. */
+.article-body section[id] {
+    scroll-margin-top: 110px;
+}
+
+
 /* ========== EMBED SCALE (zoom-out) ==========
    Renders the iframe at a larger logical size, then visually scales it down
    inside a clipped frame, so the prototype shows more and reads less cramped.
@@ -126,12 +137,235 @@
 @media (max-width: 700px) { .embed-twoup { grid-template-columns: 1fr; } }
 
 
+/* ========== EMBED EXPAND MODAL ==========
+   The "Expand" button opens the prototype here, on the same page, at full
+   scale (no zoom-out). Built/controlled by the script at the end of index.html. */
+.embed-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(12px, 4vw, 48px);
+    opacity: 0;
+    transition: opacity 0.18s ease;
+}
+.embed-modal[hidden] { display: none; }
+.embed-modal.is-open { opacity: 1; }
+
+.embed-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.embed-modal-dialog {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: min(1280px, 100%);
+    height: min(860px, 100%);
+    background: var(--background);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    transform: translateY(8px) scale(0.99);
+    transition: transform 0.18s ease;
+}
+.embed-modal.is-open .embed-modal-dialog { transform: none; }
+
+.embed-modal-chrome {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-shrink: 0;
+    padding: 8px var(--space-md);
+    background: var(--background-grey);
+    border-bottom: 1px solid var(--border-light);
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+}
+.embed-modal-route {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 11px;
+}
+.embed-modal-newtab,
+.embed-modal-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 27px;
+    height: 27px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+.embed-modal-newtab svg { width: 13px; height: 13px; }
+.embed-modal-close { font-size: 15px; line-height: 1; }
+.embed-modal-newtab:hover,
+.embed-modal-close:hover {
+    color: var(--text-primary);
+    background: var(--gray-200);
+}
+
+.embed-modal-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    background: var(--background);
+}
+.embed-modal-frame {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .embed-modal,
+    .embed-modal-dialog { transition: none; }
+}
+
+
+/* ========== DIAGRAM PANEL ==========
+   Subtle background card for inline SVG diagrams (e.g. the taxonomy figure). */
+.diagram-bg {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl) var(--space-lg);
+}
+
+
+/* ========== PROTOTYPE MARGIN NOTE ==========
+   Fixed annotation in the left gutter (mirrors the TOC on the right). Fades /
+   slides in while any prototype embed is in view; dismissible for the session.
+   Wide screens only (>=1200px, where the gutter has room); below that the
+   inline .callout-border.proto-source remains the in-flow fallback. */
+.proto-note {
+    position: fixed;
+    top: 50%;
+    left: var(--space-lg);
+    width: 236px;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    z-index: 109;
+    box-sizing: border-box;
+    padding: var(--space-md);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-50%) translateX(-12px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    display: none;
+}
+.proto-note.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(-50%) translateX(0);
+}
+.proto-note-label {
+    display: block;
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--primary);
+}
+.proto-note-title {
+    margin: 0 0 6px;
+    padding-right: 18px; /* clear the close button */
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--text-primary);
+}
+.proto-note-text {
+    margin: 0;
+    font-size: var(--font-size-xs);
+    line-height: 1.55;
+    color: var(--text-secondary);
+}
+.proto-note-text + .proto-note-text { margin-top: var(--space-sm); }
+
+/* Interactivity nudge — it isn't obvious the embeds are clickable. */
+.proto-note-cta {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    margin: var(--space-md) 0 0;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--border);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--primary);
+}
+.proto-note-cta svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+.proto-note-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+.proto-note-close:hover {
+    color: var(--text-primary);
+    background: var(--gray-200);
+}
+
+/* Reveal in the left gutter only where there's room; swap out the inline
+   callout there (but only once JS has activated the note). */
+@media (min-width: 1240px) {
+    .proto-note { display: block; }
+    .has-proto-note .callout-border.proto-source { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .proto-note { transition: opacity 0.2s ease, visibility 0.2s; transform: translateY(-50%); }
+    .proto-note.is-visible { transform: translateY(-50%); }
+}
+
+
 /* ========== ARTICLE TABLE ========== */
 .article-table {
     width: 100%;
     border-collapse: collapse;
     margin: var(--space-lg) 0;
     font-size: var(--font-size-sm);
+    border: none;
     border-radius: var(--radius-md);
     overflow: hidden;
 }
@@ -158,21 +392,50 @@
 .cell-yes  { color: var(--primary); font-weight: 600; }
 .cell-no   { color: var(--red);     font-weight: 600; }
 .cell-mid  { color: var(--text-secondary); font-weight: 600; }
-.cell-pick { background: var(--gray-100); }
+/* Highlights the recommended column with a neutral raised surface. --surface-raised
+   is gray-100 in light and gray-300 in dark, so it sits a clearly visible step
+   above the page in both themes, matching the token-driven base table styling. */
+.cell-pick { background: var(--surface-raised); }
 
-/* Revert enhanced border/backgrounds in dark mode */
-@media (prefers-color-scheme: dark) {
-    :root:not(.force-light) .article-table { border: none; }
-    :root:not(.force-light) .article-table th,
-    :root:not(.force-light) .article-table td { border-bottom: none; }
-    :root:not(.force-light) .article-table .table-header { background-color: transparent; }
-    :root:not(.force-light) .article-table .table-first-col { background-color: transparent; }
+/* Confidence rating badges (research evidence table). The DS palette has no
+   green/amber, so the traffic-light status hues are introduced HERE as named,
+   theme-aware tokens (the one place raw hex lives — centralized, not inline).
+   High = green, Moderate = amber, Low = the DS red. Pill backgrounds are
+   color-mix tints of each foreground token, so they track light/dark. */
+:root {
+    --conf-high-fg: #1A7F37;    /* green — High     */
+    --conf-mod-fg:  #9A6700;    /* amber — Moderate */
+    --conf-low-fg:  var(--red); /* red   — Low      */
 }
-html.force-dark .article-table { border: none; }
-html.force-dark .article-table th,
-html.force-dark .article-table td { border-bottom: none; }
-html.force-dark .article-table .table-header { background-color: transparent; }
-html.force-dark .article-table .table-first-col { background-color: transparent; }
+.conf {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 99px;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+.conf-high { color: var(--conf-high-fg); background: color-mix(in srgb, var(--conf-high-fg) 14%, transparent); }
+.conf-mod  { color: var(--conf-mod-fg);  background: color-mix(in srgb, var(--conf-mod-fg) 16%, transparent); }
+.conf-low  { color: var(--conf-low-fg);  background: color-mix(in srgb, var(--conf-low-fg) 18%, transparent); font-weight: 700; }
+
+/* Brighter green/amber for dark backgrounds (mirrors the DS dark remap pattern). */
+@media (prefers-color-scheme: dark) {
+    :root:not(.force-light) {
+        --conf-high-fg: #3FB950;
+        --conf-mod-fg:  #D29922;
+    }
+}
+html.force-dark {
+    --conf-high-fg: #3FB950;
+    --conf-mod-fg:  #D29922;
+}
+
+/* Dark mode needs no table overrides: --gray-100 (header), --gray-50 (first
+   column) and the cell border-bottoms all remap automatically via
+   colors_and_type.css — the same token-driven approach the base design system
+   uses, so tables keep their structure in both themes. */
 
 
 /* ========== CLEAN LIST ========== */
@@ -194,7 +457,7 @@ ul.clean li::before {
     top: 0.62em;
     width: 7px;
     height: 7px;
-    background: var(--primary);
+    background: #fff;
     border-radius: 50%;
 }
 ul.clean li:last-child { margin-bottom: 0; }
@@ -236,6 +499,26 @@ ul.clean li:last-child { margin-bottom: 0; }
     opacity: 0.6;
     margin: 0;
 }
+
+
+/* ========== MEDIA SKELETON LOADER ==========
+   A figure gets .media-skeleton (shimmer placeholder) until its img/video
+   fires load; then the media fades in. Driven by initSkeletonLoader() in
+   index.html. Defined top-level here because article.css nests its copies
+   under .article-video, so they don't reach this page's image figures. */
+.media-skeleton {
+    position: relative;
+    background: linear-gradient(90deg,
+        var(--background-grey) 25%,
+        var(--surface) 37%,
+        var(--background-grey) 63%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer var(--loop-shimmer, 1.5s) ease-in-out infinite;
+    border-radius: var(--radius-md);
+    min-height: 180px;
+}
+.media-loading-content { opacity: 0; }
+.media-loaded-content  { opacity: 1; transition: opacity 0.4s ease-in; }
 
 
 /* ========== CURRENT-STATE FRAGMENTATION INFOGRAPHIC ==========
@@ -668,11 +951,9 @@ figure.stat-ribbon { box-sizing: border-box; }
 
 /* ========== DECISION BLOCKS ========== */
 .decision-block {
-    border-left: 3px solid var(--border-light);
-    padding: var(--space-md) 0 var(--space-md) var(--space-xl);
+    padding: var(--space-md) 0;
     margin: var(--space-xl) 0;
 }
-.decision-block.decided { border-left-color: var(--primary); }
 .db-label {
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
@@ -692,10 +973,9 @@ figure.stat-ribbon { box-sizing: border-box; }
     line-height: 1.4;
 }
 .decision-block p {
-    font-size: var(--font-size-sm);
-    color: var(--text-secondary);
-    margin: 0 0 var(--space-sm);
-    line-height: 1.65;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-md);
+    line-height: 1.6;
 }
 .decision-block p:last-of-type { margin-bottom: 0; }
 .db-outcome {
@@ -733,22 +1013,26 @@ html.force-dark hr {
 
 /* ========== METADATA PANEL COMPONENT ========== */
 
-/* Panel card bg: mirrors colors_and_type.css pattern — variable switches with theme toggle */
-:root                                          { --doc-panel-bg: #ffffff; }
-@media (prefers-color-scheme: dark) {
-  :root:not(.force-light)                      { --doc-panel-bg: #0f1011; }
-}
-html.force-dark                                { --doc-panel-bg: #0f1011; }
-html.force-light                               { --doc-panel-bg: #ffffff; }
-
 .doc-meta-panel {
   position: relative;
   max-width: 380px;
   margin: var(--space-lg) auto 0;
+
+  /* Fixed light surface (mirrors metadata-panel.html). Pin the colour tokens to
+     light values so the panel never inherits the page/OS dark theme — text like
+     the read-only reviewer/date fields stays dark on white. Inherited by the
+     panel, the access modal, and the toasts (all nested inside). */
+  --text-primary:    #0F172A;
+  --text-secondary:  #64748B;
+  --text-muted:      #8B95A1;
+  --border-light:    #E5E7EB;
+  --background-grey: #F4F5F7;
+  --background:      #FCFCFD;
+  --primary:         #0070EA;
 }
 
 .doc-meta-panel .panel {
-  background: var(--doc-panel-bg);
+  background: #ffffff;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   padding: 16px;
@@ -815,7 +1099,7 @@ html.force-light                               { --doc-panel-bg: #ffffff; }
   height: 28px;
   padding: 0 6px;
   border-radius: 4px;
-  border: 1px solid rgba(94,106,210,.45);
+  border: 1px solid color-mix(in srgb, var(--primary) 50%, transparent);
   background: var(--background);
   font-family: var(--font-sans);
   font-size: 13.5px;
@@ -823,7 +1107,7 @@ html.force-light                               { --doc-panel-bg: #ffffff; }
   outline: none;
 }
 .doc-meta-panel .field-input:focus,
-.doc-meta-panel .field-select:focus { box-shadow: 0 0 0 3px rgba(94,106,210,.28); }
+.doc-meta-panel .field-select:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 30%, transparent); }
 .doc-meta-panel .field-input.mono { font-family: var(--font-mono); font-size: 11.5px; }
 
 .doc-meta-panel .ro {
@@ -905,7 +1189,7 @@ html.force-light                               { --doc-panel-bg: #ffffff; }
   height: 26px;
   padding: 0 6px;
   border-radius: 4px;
-  border: 1px solid rgba(94,106,210,.45);
+  border: 1px solid color-mix(in srgb, var(--primary) 50%, transparent);
   background: var(--background);
   font-size: 12px;
   font-family: var(--font-sans);
@@ -913,7 +1197,7 @@ html.force-light                               { --doc-panel-bg: #ffffff; }
   outline: none;
   width: 120px;
 }
-.doc-meta-panel .tag-input:focus { box-shadow: 0 0 0 3px rgba(94,106,210,.28); }
+.doc-meta-panel .tag-input:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 30%, transparent); }
 .doc-meta-panel .tag-suggs {
   position: absolute;
   top: calc(100% + 4px);
@@ -1066,7 +1350,7 @@ html.force-light                               { --doc-panel-bg: #ffffff; }
   outline: none;
 }
 .panel-modal-sel:focus,
-.panel-modal-inp:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(94,106,210,.28); }
+.panel-modal-inp:focus { border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 30%, transparent); }
 .panel-modal-add {
   height: 30px;
   padding: 0 10px;
@@ -1155,31 +1439,202 @@ html.force-light                               { --doc-panel-bg: #ffffff; }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Dark mode — badges, chips, restricted */
-@media (prefers-color-scheme: dark) {
-  .doc-meta-panel .badge-ferpa     { border-color: rgba(248,113,113,.55); color: #FCA5A5; }
-  .doc-meta-panel .badge-financial { border-color: rgba(251,191,36,.55);  color: #FCD34D; }
-  .doc-meta-panel .badge-public    { border-color: rgba(52,211,153,.55);  color: #6EE7B7; }
-  .doc-meta-panel .badge-internal  { border-color: rgba(148,163,184,.55); color: #CBD5E1; }
-  .doc-meta-panel .chip-role,  .m-chip.chip-role  { background: rgba(79,70,229,.18);  color: #A5B4FC; }
-  .doc-meta-panel .chip-team,  .m-chip.chip-team  { background: rgba(3,105,161,.18);  color: #7DD3FC; }
-  .doc-meta-panel .chip-email, .m-chip.chip-email { background: rgba(109,40,217,.18); color: #C4B5FD; }
-  .doc-meta-panel .restricted { color: #FBBF24; }
+/* Light-only: badges, chips, and restricted text use a single set of colours
+   (base rules above). No light/dark theme variants for the metadata panel. */
+
+
+/* ========== DESIGN EVOLUTION (versioned attempts on a rail) ==========
+   Restyles the permission-model iteration story. Borrows the timeline-rail
+   from other case studies and the outline status-badge language from
+   .btn-primary (outline, not filled). v1/v2 sit muted as rejected; v3 lands
+   full-strength as the shipped resolution. DS tokens only. */
+.evo { margin: var(--space-lg) 0 var(--space-xl); }
+
+.evo-step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    column-gap: var(--space-md);
+    padding-bottom: var(--space-lg);
 }
-html.force-dark .doc-meta-panel .badge-ferpa     { border-color: rgba(248,113,113,.55); color: #FCA5A5; }
-html.force-dark .doc-meta-panel .badge-financial { border-color: rgba(251,191,36,.55);  color: #FCD34D; }
-html.force-dark .doc-meta-panel .badge-public    { border-color: rgba(52,211,153,.55);  color: #6EE7B7; }
-html.force-dark .doc-meta-panel .badge-internal  { border-color: rgba(148,163,184,.55); color: #CBD5E1; }
-html.force-dark .doc-meta-panel .chip-role,  html.force-dark .m-chip.chip-role  { background: rgba(79,70,229,.18);  color: #A5B4FC; }
-html.force-dark .doc-meta-panel .chip-team,  html.force-dark .m-chip.chip-team  { background: rgba(3,105,161,.18);  color: #7DD3FC; }
-html.force-dark .doc-meta-panel .chip-email, html.force-dark .m-chip.chip-email { background: rgba(109,40,217,.18); color: #C4B5FD; }
-html.force-dark .doc-meta-panel .restricted { color: #FBBF24; }
-html.force-light .doc-meta-panel .badge-ferpa     { border-color: #E11D48; color: #BE123C; }
-html.force-light .doc-meta-panel .badge-financial { border-color: #D97706; color: #92400E; }
-html.force-light .doc-meta-panel .badge-public    { border-color: #059669; color: #065F46; }
-html.force-light .doc-meta-panel .badge-internal  { border-color: #64748B; color: #475569; }
-html.force-light .doc-meta-panel .chip-role,  html.force-light .m-chip.chip-role  { background: #EEF2FF; color: #4338CA; }
-html.force-light .doc-meta-panel .chip-team,  html.force-light .m-chip.chip-team  { background: #F0F9FF; color: #0369A1; }
-html.force-light .doc-meta-panel .chip-email, html.force-light .m-chip.chip-email { background: #F5F3FF; color: #6D28D9; }
-html.force-light .doc-meta-panel .restricted { color: #B45309; }
+.evo-step:last-child { padding-bottom: 0; }
+/* connecting rail between consecutive nodes */
+.evo-step:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    left: 1.25rem;
+    top: 1.9rem;
+    bottom: -0.15rem;
+    width: 2px;
+    background: var(--border);
+    transform: translateX(-1px);
+}
+
+.evo-node {
+    align-self: start;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 1.65rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 99px;
+    background: var(--background);
+    border: 1px solid var(--border-strong);
+    color: var(--text-secondary);
+}
+.evo-shipped .evo-node {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--surface);
+    font-weight: 700;
+}
+
+.evo-body { min-width: 0; padding-top: 0.2rem; }
+
+.evo-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-xs);
+}
+.evo-head h4 {
+    margin: 0;
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text-secondary);   /* rejected attempts read as muted */
+}
+.evo-shipped .evo-head h4 { color: var(--text-primary); }
+
+.evo-tag {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 99px;
+    line-height: 1.55;
+    background: var(--background);
+}
+.evo-tag-rej  { color: var(--red);     border: 1px solid var(--red); }
+.evo-tag-ship { color: var(--primary); border: 1px solid var(--primary); }
+
+.evo-body p {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+@media (max-width: 540px) {
+    .evo-step { grid-template-columns: 2rem 1fr; column-gap: var(--space-sm); }
+    .evo-step:not(:last-child)::before { left: 1rem; }
+    .evo-node { width: 2rem; }
+}
+
+
+/* ========== DEFER TRACK (Phase 2: now -> next) ==========
+   Upgrades each Phase 2 decision-block's outcome line into a visual roadmap:
+   the interim v1 workaround (dashed = temporary) flows to the planned Phase 2
+   state (solid, raised). Makes "what's deferred and why" show, not tell.
+   DS tokens only. */
+.defer-track {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+}
+.defer-now,
+.defer-next {
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm) var(--space-md);
+}
+.defer-now  { border: 1px dashed var(--border-strong); }      /* interim / temporary */
+.defer-next { border: 1px solid var(--border-light); background: var(--surface); }
+.defer-stage {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-xs);
+    color: var(--text-secondary);
+}
+.defer-next .defer-stage { color: var(--primary); }
+.defer-now p,
+.defer-next p {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+.defer-arrow {
+    align-self: center;
+    color: var(--text-secondary);
+    font-weight: 700;
+    font-size: 1rem;
+}
+@media (max-width: 560px) {
+    .defer-track { grid-template-columns: 1fr; }
+    .defer-arrow { transform: rotate(90deg); justify-self: center; }
+}
+
+
+/* ========== LIGHT-MODE TOAST — 1:1 with improvingAdoption ==========
+   The shared DS toast (article.css) is a light surface with a blue->red primary
+   button. This page intentionally mirrors the improvingAdoption toast instead:
+   a dark pill, a white primary button, and a subtle hover-lift. Values are
+   hardcoded to match that page exactly (deliberate exception to "DS tokens only" —
+   the pill is always dark regardless of page theme, like a notification). */
+.toast {
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+    width: auto;
+    max-width: 320px;
+    padding: 14px var(--space-md);
+    border: none;
+    border-radius: var(--radius-lg);
+    background: rgba(20, 20, 20, 0.92);
+    color: #f7f7f7;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    gap: 12px;
+}
+.toast.show { row-gap: 10px; }
+.toast-title { color: #f7f7f7; }
+.toast-text  { color: #e0e0e0; }
+.toast-actions { margin-top: 0; gap: 10px; }
+.toast button {
+    font-family: inherit;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) 12px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.toast .btn-primary {
+    background: #f7f7f7;
+    color: #141414;
+    border: none;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
+}
+.toast .btn-primary:hover { background: #f7f7f7; }
+.toast .btn-ghost {
+    background: transparent;
+    color: #f7f7f7;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+.toast .btn-ghost:hover {
+    color: #f7f7f7;
+    border-color: rgba(255, 255, 255, 0.35);
+}
+.toast button:hover  { transform: translateY(-1px); }
+.toast button:active { transform: translateY(0); }
 

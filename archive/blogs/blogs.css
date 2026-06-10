@@ -349,7 +349,6 @@ li pre {
 }
 
 .back-button:hover {
-    transform: translateY(-1px);
     color: var(--primary) !important;
 }
 
@@ -420,7 +419,6 @@ li pre {
     background: var(--primary);
     color: white;
     border-color: var(--primary);
-    transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 112, 234, 0.2);
 }
 
@@ -516,7 +514,6 @@ p a.ref-inline:focus-visible {
     color: var(--primary);
     border-color: color-mix(in srgb, var(--primary) 35%, var(--border-light));
     background: color-mix(in srgb, var(--primary) 8%, var(--background));
-    transform: translateY(-1px);
 }
 
 .reference-chip:active {
@@ -645,7 +642,6 @@ p a.ref-inline:focus-visible {
 }
 
 .theme-toggle:hover {
-    transform: translateY(-1px);
     background: rgba(0, 0, 0, 0.16);
     border-color: rgba(0, 0, 0, 0.12);
 }
@@ -716,7 +712,6 @@ p a.ref-inline:focus-visible {
 }
 
 .toast button:hover {
-    transform: translateY(-1px);
 }
 
 .toast button:active {

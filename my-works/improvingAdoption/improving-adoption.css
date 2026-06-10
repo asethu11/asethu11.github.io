@@ -434,7 +434,6 @@ html.force-dark .intro-hr {
 }
 
 .back-button:hover {
-    transform: translateY(-1px);
     color: var(--primary) !important;
 }
 
@@ -486,7 +485,6 @@ html.force-dark .intro-hr {
 }
 
 .toc-wrapper:hover {
-    transform: translateY(-1px);
 }
 
 /* TOC title styling */
@@ -813,7 +811,6 @@ table tr:last-child td {
 }
 
 .theme-toggle:hover {
-    transform: translateY(-1px);
     background: rgba(0, 0, 0, 0.16);
     border-color: rgba(0, 0, 0, 0.12);
 }
@@ -891,7 +888,6 @@ table tr:last-child td {
 }
 
 .toast button:hover {
-    transform: translateY(-1px);
 }
 
 .toast button:active {

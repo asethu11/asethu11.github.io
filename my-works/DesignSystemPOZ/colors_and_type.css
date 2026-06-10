@@ -1,0 +1,1474 @@
+/* ============================================================
+   Point One Zero — Design System
+   colors, type, and primitive tokens
+
+   v0.5.0 — Light-first.
+   The canvas is a clean page. The four-step surface ladder
+   steps DOWN into faint gray for hierarchy without color.
+   Display goes up to 80px with aggressive -3.0px tracking;
+   the eyebrow inverts with positive tracking.
+
+   Brand color (#009FEF) is reserved — it appears on the mark,
+   one word per hero, focus rings, and hovered link underlines.
+   That is the entire list.
+
+   Dark mode is opt-in via <html data-theme="dark"> for
+   product chrome, decks, and any surface that benefits from
+   a deep canvas. Never via @media (prefers-color-scheme) —
+   the brand controls where dark appears.
+   ============================================================ */
+
+@import url("https://rsms.me/inter/inter.css");
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;                    /* declare scheme so browsers don't auto-invert */
+  /* ---------- Color (raw) ---------- */
+  --color-primary:    #0a0a0a;            /* primary fill (near-black) */
+  --color-secondary:  #0a0a0a;            /* on-surface text */
+  --color-on-surface: #0a0a0a;
+
+  /* Canvas + surface ladder (4-step lift)
+     In light, the ladder steps DOWN into faint gray — a
+     featured surface settles a notch off the canvas, never
+     brighter than it. */
+  --canvas:    #ffffff;                   /* page background — the clean page */
+  --surface-1: #fafafa;                   /* default card */
+  --surface-2: #f3f4f5;                   /* featured / hovered card */
+  --surface-3: #ebeced;                   /* dropdown, sub-nav */
+  --surface-4: #e2e4e6;                   /* deepest lifted surface */
+
+  /* Hairline borders (subtle → strong) — black on light */
+  --border-subtle:   rgba(0, 0, 0, 0.06);
+  --border-default:  rgba(0, 0, 0, 0.10);
+  --border-strong:   rgba(0, 0, 0, 0.16);
+  --edge-highlight:  inset 0 1px 0 rgba(255, 255, 255, 0.7);  /* faint top edge on lifted panels */
+
+  /* ---------- Semantic (status) ---------- */
+  --success:        #1A9E5F;              /* status pills, success indicators */
+  --success-soft:   rgba(26, 158, 95, 0.10);
+  --success-mid:    rgba(26, 158, 95, 0.30);
+  --warning:        #C77A0A;
+  --warning-soft:   rgba(199, 122, 10, 0.10);
+  --warning-mid:    rgba(199, 122, 10, 0.30);
+  --danger:         #DC2626;
+  --danger-soft:    rgba(220, 38, 38, 0.10);
+  --danger-mid:     rgba(220, 38, 38, 0.30);
+  /* Note: there is no --info token. "Info" is the brand's job, but the
+     brand color is reserved for the eight surfaces in README § The brand
+     color. Use `.toast.is-info` / `.banner.is-info` chrome explicitly
+     when the meaning is informational; do not alias --info := --brand. */
+
+  /* ---------- Brand (the one accent) ---------- */
+  --brand:        #009FEF;
+  --brand-50:     #E6F7FF;
+  --brand-100:    #B8E5FE;
+  --brand-200:    #8AD4FC;
+  --brand-300:    #5CC2F9;
+  --brand-400:    #2EB0F6;
+  --brand-500:    #009FEF;                /* === --brand */
+  --brand-600:    #007FBF;
+  --brand-700:    #00608F;
+  --brand-800:    #00405F;
+  --brand-900:    #002030;
+  --brand-foreground: #ffffff;            /* white text on solid brand */
+
+  /* Brand tints — tuned for white contrast */
+  --brand-softer: rgba(0, 159, 239, 0.05);
+  --brand-soft:   rgba(0, 159, 239, 0.10);
+  --brand-mid:    rgba(0, 159, 239, 0.25);
+  --brand-glow:   0 0 8px rgba(0, 159, 239, 0.35);
+
+  /* Gradients
+     ---------------------------------------------------------
+     - hero-veil:        atmospheric blue at the top of a hero,
+                         very faint — smudge, not statement
+     - hero-veil-floor:  ambient blue washing up from the bottom
+     - brand-line:       1–2px keyline (active rails)
+     - brand-fade:       reserved for the rare full-brand surface
+     - card-hover:       inset top wash that mirrors the tactile
+                         feel of the primary button on hover
+     - card-featured:    a more present wash for the featured card
+     - panel-edge:       subtle top sheen for lifted panels
+     --------------------------------------------------------- */
+  --gradient-brand-line:   linear-gradient(90deg, #009FEF 0%, #2EB0F6 100%);
+  --gradient-brand-fade:   linear-gradient(135deg, #009FEF 0%, #005C8C 100%);
+  --gradient-hero-veil:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,159,239,0.08), transparent 65%),
+    radial-gradient(ellipse 90% 35% at 50% 8%, rgba(0,159,239,0.04), transparent 80%);
+  --gradient-hero-veil-floor:
+    radial-gradient(ellipse 70% 40% at 50% 100%, rgba(0,159,239,0.05), transparent 75%);
+  --gradient-card-hover:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,0,0,0.025), transparent 70%);
+  --gradient-card-featured:
+    /* Neutral surface lift only — no brand wash. Per README § The brand
+       color, the featured card tints the number, not the fill. */
+    linear-gradient(180deg, rgba(0,0,0,0.025), rgba(0,0,0,0) 60%);
+  --gradient-panel-edge:
+    linear-gradient(180deg, rgba(0,0,0,0.025), rgba(0,0,0,0) 18%);
+
+  /* Focus halo */
+  --shadow-focus-brand:
+    0 0 0 2px var(--canvas),
+    0 0 0 4px var(--brand);
+
+  /* ---------- Semantic ---------- */
+  --background:        var(--canvas);
+  --surface:           var(--surface-1);
+  --foreground:        var(--color-on-surface);
+  --foreground-muted:  #3f3f46;           /* body copy */
+  --foreground-subtle: #71717a;           /* meta, captions, eyebrows */
+  --foreground-faint:  #a1a1aa;           /* footnotes, disabled */
+  --foreground-dim:    #d4d4d8;           /* deep faint — background text, watermark */
+
+  --primary:           var(--color-primary);
+  --primary-foreground:var(--canvas);     /* white text on dark button */
+
+  --link-color: var(--foreground);
+  --link-decoration-color: var(--brand);
+
+  /* ---------- Type ---------- */
+  --font-sans: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-feature: "ss01", "ss02", "cv01", "cv03";
+
+  /* Display scale */
+  --font-display-xl: 80px / 84px var(--font-sans);     /* hero */
+  --track-display-xl: -3.0px;
+  --weight-display-xl: 600;
+
+  /* Print-extended display scale
+     ----------------------------------------------------------
+     Used by fixed-canvas print formats (1080×1440 portrait,
+     1080×1080 landscape) where 80px would read as merely large.
+     Each step derives its track from the same ~-3.8% ratio that
+     governs --track-display-xl. Web surfaces never reach for
+     these — if you find yourself using 2xl on a web page, you
+     want display-xl. */
+  --font-display-2xl: 96px / 100px var(--font-sans);    /* white-paper portrait cover */
+  --track-display-2xl: -3.6px;
+  --font-display-3xl: 120px / 116px var(--font-sans);   /* white-paper portrait chapter, landscape body opener */
+  --track-display-3xl: -4.4px;
+  --font-display-4xl: 168px / 156px var(--font-sans);   /* white-paper landscape cover */
+  --track-display-4xl: -6.4px;
+
+  --font-display-lg: 56px / 61.6px var(--font-sans);   /* section openers */
+  --track-display-lg: -1.8px;
+  --weight-display-lg: 600;
+
+  --font-display-md: 40px / 46px var(--font-sans);     /* sub-sections */
+  --track-display-md: -1.0px;
+  --weight-display-md: 600;
+
+  --font-headline: 28px / 33.6px var(--font-sans);     /* pricing tier titles, CTA banner */
+  --track-headline: -0.6px;
+  --weight-headline: 600;
+
+  --font-card-title: 22px / 27.5px var(--font-sans);   /* feature card title */
+  --track-card-title: -0.4px;
+  --weight-card-title: 510;
+
+  --font-subhead: 20px / 28px var(--font-sans);        /* lead body, intro paragraphs */
+  --track-subhead: -0.2px;
+
+  --font-body-lg: 18px / 27px var(--font-sans);        /* hero subhead */
+  --track-body-lg: -0.1px;
+
+  --font-body: 16px / 24px var(--font-sans);           /* default body */
+  --track-body: -0.05px;
+
+  --font-body-sm: 14px / 21px var(--font-sans);        /* card body, footer columns */
+  --track-body-sm: 0px;
+
+  --font-caption: 12px / 16.8px var(--font-sans);
+  --track-caption: 0px;
+
+  --font-button: 14px / 16.8px var(--font-sans);
+  --weight-button: 510;
+
+  /* The eyebrow inverts display's negative tracking — positive 0.4px (~3% at 13px)
+     marks eyebrow-as-taxonomy, contrasting with display-as-statement. */
+  --font-eyebrow: 13px / 16.9px var(--font-sans);
+  --track-eyebrow: 0.4px;
+  --weight-eyebrow: 510;
+
+  --font-mono-md: 13px / 19.5px var(--font-mono);
+
+  /* Weights */
+  --weight-regular: 400;
+  --weight-medium: 510;
+  --weight-semibold: 600;
+
+  /* ---------- Spacing (4px base) ---------- */
+  --space-xxs: 4px;
+  --space-xs:  8px;
+  --space-sm:  12px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-xxl: 48px;
+  --space-section: 96px;          /* between major sections */
+
+  /* ---------- Radii ---------- */
+  --radius-none: 0px;
+  --radius-xs:   4px;             /* status chips */
+  --radius-sm:   6px;             /* inline tags */
+  --radius-md:   8px;             /* square buttons, inputs */
+  --radius-lg:   12px;            /* pricing/feature/testimonial cards */
+  --radius-xl:   16px;            /* product screenshot panels */
+  --radius-xxl:  24px;            /* oversized CTA banners (rare) */
+  --radius-full: 9999px;          /* pill buttons, status pills, avatars */
+
+  /* ---------- Shadow / depth ----------
+     Light carries more of its hierarchy through shadow than
+     dark does — the surface ladder alone can't lift a white
+     card off a white canvas. */
+  --shadow-sm: rgba(15, 17, 20, 0.06) 0px 1px 2px 0px;
+  --shadow-md: rgba(15, 17, 20, 0.08) 0 8px 24px -6px;
+  --shadow-lg: rgba(15, 17, 20, 0.10) 0 24px 64px -16px;
+
+  /* Linear's stacked primary-button shadow — retuned for light */
+  --shadow-primary-btn:
+    rgba(0, 0, 0, 0.04) 0px 5px 2px 0px,
+    rgba(0, 0, 0, 0.08) 0px 3px 2px 0px,
+    rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
+    rgba(0, 0, 0, 0.10) 0px 0px 1px 0px;
+
+  /* Hover — same stack, a touch deeper / further lifted */
+  --shadow-primary-btn-hover:
+    rgba(0, 0, 0, 0.06) 0px 8px 3px 0px,
+    rgba(0, 0, 0, 0.10) 0px 4px 2px 0px,
+    rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
+    rgba(0, 0, 0, 0.12) 0px 0px 1px 0px;
+
+  /* Pressed — collapse the lift, keep the hairline */
+  --shadow-primary-btn-press:
+    rgba(0, 0, 0, 0.02) 0px 1px 1px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+
+  /* Secondary-button — black hairline + soft drop */
+  --shadow-secondary-btn:
+    rgba(0, 0, 0, 0.02) 0px 0px 0px 1px inset,
+    rgba(255, 255, 255, 0.50) 0px 1px 0px 0px inset,
+    rgba(0, 0, 0, 0.12) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px 0px;
+
+  /* Hover — strengthen the hairline, deepen the drop */
+  --shadow-secondary-btn-hover:
+    rgba(0, 0, 0, 0.03) 0px 0px 0px 1px inset,
+    rgba(255, 255, 255, 0.60) 0px 1px 0px 0px inset,
+    rgba(0, 0, 0, 0.18) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.08) 0px 4px 8px -1px;
+
+  /* ---------- Motion ---------- */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-instant: 80ms;
+  --dur-fast: 160ms;
+  --dur-base: 240ms;
+  --dur-slow: 420ms;
+
+  /* ---------- Chrome ---------- */
+  --canvas-blur: rgba(255, 255, 255, 0.82);
+  --container-max: 1280px;
+  --container-analytical: 1200px;
+  --container-prose: 1180px;
+
+  /* Inner content widths — caps that live INSIDE a container.
+     The container holds the page; these hold the readable column
+     and the showcase frame. Two values, named — not free-form. */
+  --content-narrow: 640px;          /* headline cap, lead paragraph */
+  --content-wide:   1160px;         /* product-frame / wide showcase block */
+
+  /* Neutral mid — the "absent / missing" state dot.
+     Sits between --foreground-faint (#a1a1aa) and the dark surfaces.
+     Used on light surfaces when an indicator means "this is not
+     populated" rather than "this is disabled". */
+  --neutral-mid: #2c2f34;
+}
+
+/* ============================================================
+   Dark theme — opt-in
+   ------------------------------------------------------------
+   Light is the workhorse. Dark is the alternate, available for:
+
+   - Product chrome where a deep canvas reads better (dashboards,
+     editor surfaces, code-adjacent UI)
+   - Decks rendered via `deck-stage` and pitch material
+   - Anywhere ambient blue and the four-step lift up the ladder
+     do hierarchy work that white can't
+
+   Opt-in only: <html data-theme="dark"> or a scoped wrapper.
+   Never via @media (prefers-color-scheme) — the brand controls
+   where dark appears.
+
+   The ladder inverts: near-pure-black canvas (#010102), surfaces
+   step UP into lifted dark, foreground scales to off-white. Brand
+   #009FEF holds; its tints saturate a touch for visibility against
+   the dark canvas. Shadows largely retreat — the lift carries
+   hierarchy on its own.
+   ============================================================ */
+
+[data-theme="dark"] {
+  color-scheme: dark;                     /* native controls + scrollbars match the dark canvas */
+  /* ---------- Color (raw) ---------- */
+  --color-primary:    #e5e5e6;            /* primary fill (off-white) */
+  --color-secondary:  #f7f8f8;            /* on-surface text */
+  --color-on-surface: #f7f8f8;
+
+  /* Canvas + surface ladder — inverted */
+  --canvas:    #010102;                   /* near-pure black with a faint blue tint */
+  --surface-1: #08090b;
+  --surface-2: #0f1114;
+  --surface-3: #16181c;
+  --surface-4: #1c1f24;
+
+  /* Hairline borders — white opacities */
+  --border-subtle:   rgba(255, 255, 255, 0.06);
+  --border-default:  rgba(255, 255, 255, 0.10);
+  --border-strong:   rgba(255, 255, 255, 0.18);
+  --edge-highlight:  inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  /* ---------- Brand tints — re-tuned for dark contrast ---------- */
+  --brand-softer: rgba(0, 159, 239, 0.06);
+  --brand-soft:   rgba(0, 159, 239, 0.14);
+  --brand-mid:    rgba(0, 159, 239, 0.32);
+  --brand-glow:   0 0 12px rgba(0, 159, 239, 0.45);
+  --brand-foreground: #010102;            /* dark text on solid brand */
+
+  /* Status — saturated values that pop on dark */
+  --success:        #4FD08F;
+  --success-soft:   rgba(79, 208, 143, 0.14);
+  --success-mid:    rgba(79, 208, 143, 0.32);
+  --warning:        #E0A046;
+  --warning-soft:   rgba(224, 160, 70, 0.14);
+  --warning-mid:    rgba(224, 160, 70, 0.32);
+  --danger:         #FF5C5C;
+  --danger-soft:    rgba(255, 92, 92, 0.14);
+  --danger-mid:     rgba(255, 92, 92, 0.32);
+
+  /* ---------- Gradients ---------- */
+  --gradient-hero-veil:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,159,239,0.14), transparent 65%),
+    radial-gradient(ellipse 90% 35% at 50% 8%, rgba(0,159,239,0.06), transparent 80%);
+  --gradient-hero-veil-floor:
+    radial-gradient(ellipse 70% 40% at 50% 100%, rgba(0,159,239,0.10), transparent 75%);
+  --gradient-card-hover:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,255,255,0.045), transparent 70%);
+  --gradient-card-featured:
+    linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0) 60%);
+  --gradient-panel-edge:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0) 18%);
+
+  /* ---------- Foreground scale ---------- */
+  --foreground:        #f7f8f8;
+  --foreground-muted:  #d0d6e0;
+  --foreground-subtle: #8a8f98;
+  --foreground-faint:  #62666d;
+  --foreground-dim:    #4a4d52;
+
+  --primary-foreground: var(--canvas);
+
+  /* ---------- Shadows — retreat on dark ---------- */
+  --shadow-sm: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px;
+  --shadow-md: rgba(0, 0, 0, 0.55) 0 12px 32px -10px;
+  --shadow-lg: rgba(0, 0, 0, 0.6) 0 30px 80px -20px;
+
+  --shadow-primary-btn:
+    rgba(0, 0, 0, 0.01) 0px 5px 2px 0px,
+    rgba(0, 0, 0, 0.04) 0px 3px 2px 0px,
+    rgba(0, 0, 0, 0.07) 0px 1px 1px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
+  --shadow-primary-btn-hover:
+    rgba(0, 0, 0, 0.02) 0px 8px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 4px 2px 0px,
+    rgba(0, 0, 0, 0.09) 0px 1px 1px 0px,
+    rgba(0, 0, 0, 0.10) 0px 0px 1px 0px;
+  --shadow-primary-btn-press:
+    rgba(0, 0, 0, 0.04) 0px 0px 0px 1px;
+
+  --shadow-secondary-btn:
+    rgba(255, 255, 255, 0.03) 0px 0px 0px 1px inset,
+    rgba(255, 255, 255, 0.04) 0px 1px 0px 0px inset,
+    rgba(0, 0, 0, 0.60) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.10) 0px 4px 4px 0px;
+  --shadow-secondary-btn-hover:
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset,
+    rgba(255, 255, 255, 0.06) 0px 1px 0px 0px inset,
+    rgba(255, 255, 255, 0.10) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.14) 0px 6px 8px 0px;
+
+  /* ---------- Chrome ---------- */
+  --canvas-blur: rgba(1, 1, 2, 0.78);
+}
+
+/* ============================================================
+   Base / element styles
+   ============================================================ */
+
+html, body {
+  background: var(--canvas);
+  color: var(--foreground);
+  font: var(--font-body);
+  letter-spacing: var(--track-body);
+  font-family: var(--font-sans);
+  font-feature-settings: var(--font-feature);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, .h1, .display-xl {
+  font: var(--font-display-xl);
+  letter-spacing: var(--track-display-xl);
+  font-weight: var(--weight-display-xl);
+  color: var(--foreground);
+  margin: 0;
+  text-wrap: balance;
+}
+
+h2, .h2, .display-lg {
+  font: var(--font-display-lg);
+  letter-spacing: var(--track-display-lg);
+  font-weight: var(--weight-display-lg);
+  color: var(--foreground);
+  margin: 0;
+  text-wrap: balance;
+}
+
+h3, .h3, .display-md {
+  font: var(--font-display-md);
+  letter-spacing: var(--track-display-md);
+  font-weight: var(--weight-display-md);
+  color: var(--foreground);
+  margin: 0;
+}
+
+h4, .h4, .headline {
+  font: var(--font-headline);
+  letter-spacing: var(--track-headline);
+  font-weight: var(--weight-headline);
+  color: var(--foreground);
+  margin: 0;
+}
+
+.card-title {
+  font: var(--font-card-title);
+  letter-spacing: var(--track-card-title);
+  font-weight: var(--weight-card-title);
+  color: var(--foreground);
+}
+
+.subhead {
+  font: var(--font-subhead);
+  letter-spacing: var(--track-subhead);
+  color: var(--foreground-muted);
+}
+
+p, .body {
+  font: var(--font-body);
+  letter-spacing: var(--track-body);
+  color: var(--foreground-muted);
+  margin: 0;
+}
+
+.body-lg { font: var(--font-body-lg); letter-spacing: var(--track-body-lg); color: var(--foreground); }
+.body-sm { font: var(--font-body-sm); color: var(--foreground-muted); }
+.caption  { font: var(--font-caption); color: var(--foreground-subtle); }
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--link-decoration-color);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* The single brand-colored word inside a heading. Use once per page (twice, max). */
+.brand-word { color: var(--brand); }
+
+/* ============================================================
+   Buttons
+   Pill is the default. .btn-square turns any button into an 8px-radius variant.
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  height: 40px;
+  padding: 0 18px;
+  border-radius: var(--radius-full);
+  font: var(--font-button);
+  font-weight: var(--weight-button);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+  user-select: none;
+  white-space: nowrap;
+  border: 0;
+}
+.btn-square { border-radius: var(--radius-md); }
+
+/* Sizes */
+.btn-lg { height: 44px; padding: 0 22px; min-width: 127px; }
+.btn-sm { height: 32px; padding: 0 14px; font-size: 13px; }
+
+/* Primary — near-black pill with the stacked shadow on light;
+   inverts to off-white on dark. Hover deepens the lift; active
+   collapses it; focus-visible shows the brand halo; disabled fades.
+   Every state respects prefers-reduced-motion via the global rule. */
+.btn-primary {
+  background: var(--color-primary);
+  color: #ffffff;
+  box-shadow: var(--shadow-primary-btn);
+  transform: translateY(0);
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+.btn-primary:hover {
+  background: #000000;
+  box-shadow: var(--shadow-primary-btn-hover);
+  transform: translateY(-0.5px);
+}
+.btn-primary:active {
+  background: var(--color-primary);
+  box-shadow: var(--shadow-primary-btn-press);
+  transform: translateY(0);
+}
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-primary-btn), var(--shadow-focus-brand);
+}
+.btn-primary:disabled,
+.btn-primary[aria-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+[data-theme="dark"] .btn-primary { color: var(--canvas); }
+[data-theme="dark"] .btn-primary:hover { background: #ffffff; }
+[data-theme="dark"] .btn-primary:active { background: var(--color-primary); }
+
+/* Secondary — defined entirely by inset shadow. Hover strengthens
+   the hairline; active deepens the fill; focus-visible adds the halo. */
+.btn-secondary {
+  background: transparent;
+  color: var(--foreground);
+  box-shadow: var(--shadow-secondary-btn);
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+.btn-secondary:hover {
+  background: rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-secondary-btn-hover);
+}
+.btn-secondary:active {
+  background: rgba(0, 0, 0, 0.07);
+  box-shadow: var(--shadow-secondary-btn);
+}
+.btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-secondary-btn), var(--shadow-focus-brand);
+}
+.btn-secondary:disabled,
+.btn-secondary[aria-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+[data-theme="dark"] .btn-secondary { color: var(--color-secondary); }
+[data-theme="dark"] .btn-secondary:hover { background: rgba(255, 255, 255, 0.04); }
+[data-theme="dark"] .btn-secondary:active { background: rgba(255, 255, 255, 0.07); }
+
+/* Tertiary — flat text-button on canvas. Hover paints a subtle fill;
+   active deepens; focus-visible adds the halo. */
+.btn-tertiary {
+  background: transparent;
+  color: var(--foreground);
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+.btn-tertiary:hover { background: rgba(0, 0, 0, 0.04); }
+.btn-tertiary:active { background: rgba(0, 0, 0, 0.07); }
+.btn-tertiary:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-brand);
+}
+.btn-tertiary:disabled,
+.btn-tertiary[aria-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+[data-theme="dark"] .btn-tertiary:hover { background: rgba(255, 255, 255, 0.04); }
+[data-theme="dark"] .btn-tertiary:active { background: rgba(255, 255, 255, 0.07); }
+
+/* Link — underlined inline button. Hover swaps the text to brand
+   and thickens the underline; focus-visible inherits the global ring. */
+.btn-link {
+  background: transparent;
+  color: var(--foreground);
+  border: 0;
+  padding: 0;
+  height: auto;
+  border-radius: 0;
+  box-shadow: none;
+  text-decoration: underline;
+  text-decoration-color: var(--brand);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    text-decoration-thickness var(--dur-fast) var(--ease-out);
+}
+.btn-link:hover {
+  color: var(--brand);
+  text-decoration-thickness: 2px;
+}
+.btn-link:active { color: var(--brand-700, #007FBF); }
+.btn-link:disabled,
+.btn-link[aria-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+  text-decoration-color: var(--foreground-faint);
+}
+
+/* ============================================================
+   Cards
+   The surface ladder carries hierarchy. Cards default to surface-1;
+   .card-featured lifts to surface-2; .card-deep to surface-3.
+   ============================================================ */
+
+.card {
+  position: relative;
+  background: var(--surface-1);
+  color: var(--foreground);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  transition:
+    border-color var(--dur-base) var(--ease-out),
+    background var(--dur-base) var(--ease-out);
+  box-shadow: var(--edge-highlight);
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--gradient-card-hover);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-out);
+  pointer-events: none;
+  border-radius: inherit;
+}
+.card:hover { border-color: var(--border-default); }
+.card:hover::before { opacity: 1; }
+.card-featured {
+  background: var(--surface-2);
+  border-color: var(--border-default);
+}
+.card-featured::before {
+  background: var(--gradient-card-featured);
+  opacity: 1;
+}
+.card-deep { background: var(--surface-3); }
+
+/* Children inside the card must sit above ::before */
+.card > * { position: relative; z-index: 1; }
+
+/* Eyebrow — section/category taxonomy.
+   Positive tracking (+0.4px) deliberately inverts display's aggressive negative tracking. */
+.eyebrow {
+  font: var(--font-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  font-weight: var(--weight-eyebrow);
+  color: var(--foreground-subtle);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+/* The brand dot — appears on the wordmark, occasionally on a hero status pill.
+   NOT a decoration for every eyebrow. Use sparingly. */
+.brand-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--brand);
+  box-shadow: var(--brand-glow);
+  display: inline-block;
+  flex: none;
+}
+
+/* Status pill — small rounded chip on lifted surface */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  height: 24px;
+  padding: 0 10px;
+  border-radius: var(--radius-full);
+  background: var(--surface-2);
+  border: 1px solid var(--border-default);
+  color: var(--foreground-muted);
+  font: var(--font-caption);
+}
+[data-theme="dark"] .status-pill { border-color: var(--border-subtle); }
+
+/* Mono — inline ordinal / identifier / address numerics.
+   USE FOR: version strings, IDs, addresses, phone numbers, page indicators,
+   reference numbers (Vol., Ch., Def., Fig., §, Cf.), ordinal markers in
+   lists, URLs in citations, footnote refs, anything that reads as data.
+   DON'T USE FOR: stats / metrics (use .stat-num), counts in body prose
+   (let them inherit), or button labels (let them inherit).
+   The point is to mark numbers as *data, not statement.* */
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum";
+}
+
+/* ============================================================
+   Tags / Badges / Chips
+   ============================================================ */
+
+.tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 22px; padding: 0 8px;
+  border-radius: var(--radius-xs);
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  color: var(--foreground-muted);
+  font: var(--font-caption);
+  font-weight: var(--weight-medium);
+}
+.tag-dot { width: 6px; height: 6px; border-radius: 9999px; flex: none; }
+
+.badge {
+  display: inline-flex; align-items: center;
+  height: 18px; padding: 0 7px;
+  border-radius: var(--radius-full);
+  background: var(--surface-2);
+  color: var(--foreground-muted);
+  font: var(--font-caption); font-size: 11px;
+  font-weight: var(--weight-medium);
+}
+.badge-success { background: var(--success-soft); color: var(--success); }
+.badge-warning { background: var(--warning-soft); color: var(--warning); }
+.badge-danger  { background: var(--danger-soft); color: var(--danger); }
+/* Note: there is no .badge-info. Informational tags use plain `.tag` —
+   filling a badge with brand blue extends the accent past its eight-item
+   list (see README § The brand color). */
+
+/* ============================================================
+   Form states
+   ============================================================ */
+
+.input {
+  width: 100%;
+  background: var(--canvas);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font: var(--font-body);
+  letter-spacing: var(--track-body);
+  color: var(--foreground);
+  box-sizing: border-box;
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.input::placeholder { color: var(--foreground-faint); }
+.input:hover { border-color: var(--border-strong); }
+.input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(0, 159, 239, 0.18);
+}
+.input.is-error {
+  border-color: var(--danger-mid);
+  box-shadow: 0 0 0 3px var(--danger-soft);
+}
+.input.is-success {
+  border-color: var(--success-mid);
+  box-shadow: 0 0 0 3px var(--success-soft);
+}
+.input:disabled {
+  background: var(--surface-1);
+  color: var(--foreground-faint);
+  cursor: not-allowed;
+  border-color: var(--border-subtle);
+}
+.input-help {
+  display: block; margin-top: 6px;
+  font: var(--font-caption);
+  color: var(--foreground-subtle);
+}
+.input-help.is-error { color: var(--danger); }
+.input-help.is-success { color: var(--success); }
+
+[data-theme="dark"] .input { border-color: var(--border-subtle); }
+[data-theme="dark"] .input:hover { border-color: var(--border-default); }
+[data-theme="dark"] .input:focus {
+  border-color: var(--brand-mid);
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+
+/* Focus */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   v0.4 — P0 component primitives
+   ------------------------------------------------------------
+   Naming follows shadcn / Linear conventions where possible.
+   Every primitive uses the four-step surface ladder for
+   hierarchy; in light, shadow supplements the ladder.
+   ============================================================ */
+
+/* ---------------- Form atoms ---------------- */
+
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+.field-label {
+  font: var(--font-body-sm);
+  font-weight: var(--weight-medium);
+  color: var(--foreground-subtle);
+}
+.field-help {
+  font: var(--font-caption);
+  color: var(--foreground-subtle);
+}
+.field-help.is-error { color: var(--danger); }
+.field-help.is-success { color: var(--success); }
+
+.textarea {
+  width: 100%;
+  background: var(--canvas);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font: var(--font-body);
+  letter-spacing: var(--track-body);
+  color: var(--foreground);
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 100px;
+  font-family: var(--font-sans);
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.textarea:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(0, 159, 239, 0.18);
+}
+[data-theme="dark"] .textarea { border-color: var(--border-subtle); }
+[data-theme="dark"] .textarea:focus {
+  border-color: var(--brand-mid);
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+
+/* Select — styled native */
+.select {
+  appearance: none;
+  width: 100%;
+  background-color: var(--canvas);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--foreground-subtle) 50%),
+    linear-gradient(135deg, var(--foreground-subtle) 50%, transparent 50%);
+  background-position: right 16px center, right 11px center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 10px 36px 10px 14px;
+  font: var(--font-body);
+  letter-spacing: var(--track-body);
+  color: var(--foreground);
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.select:hover { border-color: var(--border-strong); }
+.select:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(0, 159, 239, 0.18);
+}
+[data-theme="dark"] .select { border-color: var(--border-subtle); }
+[data-theme="dark"] .select:hover { border-color: var(--border-default); }
+[data-theme="dark"] .select:focus {
+  border-color: var(--brand-mid);
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+
+/* Checkbox + radio — visually consistent, semantically distinct */
+.checkbox, .radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: var(--font-body-sm);
+  color: var(--foreground);
+  cursor: pointer;
+  user-select: none;
+}
+.checkbox input, .radio input { position: absolute; opacity: 0; pointer-events: none; }
+.checkbox .box, .radio .box {
+  width: 16px; height: 16px; flex: none;
+  background: var(--canvas);
+  border: 1px solid var(--border-strong);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.checkbox .box { border-radius: var(--radius-xs); }
+.radio .box { border-radius: 9999px; }
+.checkbox:hover .box, .radio:hover .box { border-color: var(--foreground-subtle); }
+.checkbox input:checked + .box {
+  background: var(--brand);
+  border-color: var(--brand);
+}
+.checkbox input:checked + .box::after {
+  content: '';
+  width: 8px; height: 4px;
+  border-left: 1.5px solid var(--brand-foreground);
+  border-bottom: 1.5px solid var(--brand-foreground);
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+.radio input:checked + .box::after {
+  content: '';
+  width: 6px; height: 6px; border-radius: 9999px;
+  background: var(--brand);
+}
+.radio input:checked + .box { border-color: var(--brand); }
+.checkbox input:focus-visible + .box, .radio input:focus-visible + .box {
+  box-shadow: var(--shadow-focus-brand);
+}
+
+/* Switch — toggle */
+.switch {
+  display: inline-flex; align-items: center; gap: 10px;
+  font: var(--font-body-sm); color: var(--foreground);
+  cursor: pointer; user-select: none;
+}
+.switch input { position: absolute; opacity: 0; pointer-events: none; }
+.switch .track {
+  width: 32px; height: 18px;
+  border-radius: 9999px;
+  background: var(--surface-3);
+  border: 1px solid var(--border-default);
+  position: relative;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.switch .track::after {
+  content: '';
+  position: absolute;
+  top: 1px; left: 1px;
+  width: 14px; height: 14px;
+  border-radius: 9999px;
+  background: var(--foreground-muted);
+  transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+.switch input:checked + .track { background: var(--brand); border-color: var(--brand); }
+.switch input:checked + .track::after { background: var(--brand-foreground); transform: translateX(14px); }
+
+/* ---------------- Icon button ---------------- */
+
+.btn.btn-icon {
+  height: 32px; width: 32px;
+  min-width: 32px;
+  padding: 0;
+  border-radius: var(--radius-md);
+}
+.btn.btn-icon.btn-pill { border-radius: var(--radius-full); }
+.btn.btn-icon.btn-lg { height: 40px; width: 40px; min-width: 40px; }
+.btn.btn-icon.btn-sm { height: 28px; width: 28px; min-width: 28px; }
+
+/* ---------------- Button group / segmented control ---------------- */
+
+.btn-group {
+  display: inline-flex;
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 3px;
+  gap: 2px;
+  box-shadow: var(--edge-highlight);
+}
+.btn-group .seg {
+  height: 28px;
+  padding: 0 14px;
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: 0;
+  font: var(--font-button);
+  font-weight: var(--weight-button);
+  color: var(--foreground-subtle);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.btn-group .seg:hover { color: var(--foreground); background: rgba(0, 0, 0, 0.03); }
+.btn-group .seg:active { background: rgba(0, 0, 0, 0.06); }
+.btn-group .seg:focus-visible {
+  outline: none;
+  color: var(--foreground);
+  box-shadow: var(--shadow-focus-brand);
+}
+.btn-group .seg.active {
+  background: var(--canvas);
+  color: var(--foreground);
+  box-shadow: var(--shadow-sm);
+}
+[data-theme="dark"] .btn-group .seg:hover { background: rgba(255, 255, 255, 0.03); }
+[data-theme="dark"] .btn-group .seg:active { background: rgba(255, 255, 255, 0.06); }
+[data-theme="dark"] .btn-group .seg.active {
+  background: var(--surface-3);
+  box-shadow: none;
+}
+
+/* ---------------- Tabs — underline ---------------- */
+
+.tabs {
+  display: flex; gap: 24px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.tab {
+  padding: 12px 0;
+  background: transparent; border: 0;
+  font: var(--font-button); font-weight: var(--weight-medium);
+  color: var(--foreground-subtle);
+  cursor: pointer;
+  position: relative;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.tab:hover { color: var(--foreground); }
+.tab.active { color: var(--foreground); }
+.tab.active::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 2px;
+  background: var(--brand);
+  border-radius: 1px;
+}
+
+/* ---------------- Popover / menu shell ---------------- */
+
+.popover {
+  background: var(--canvas);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 6px;
+  box-shadow: var(--shadow-md);
+  min-width: 200px;
+  display: flex; flex-direction: column;
+  gap: 1px;
+}
+[data-theme="dark"] .popover {
+  background: var(--surface-3);
+}
+.popover-item {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font: var(--font-body-sm);
+  color: var(--foreground);
+  cursor: pointer;
+  display: flex; align-items: center; gap: 10px;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.popover-item:hover { background: rgba(0, 0, 0, 0.04); }
+[data-theme="dark"] .popover-item:hover { background: rgba(255, 255, 255, 0.04); }
+.popover-item .meta {
+  margin-left: auto;
+  font: var(--font-mono-md); font-size: 11px;
+  color: var(--foreground-subtle);
+}
+.popover-separator {
+  height: 1px; background: var(--border-subtle);
+  margin: 4px 0;
+}
+.popover-section-label {
+  padding: 8px 12px 4px;
+  font: var(--font-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--foreground-subtle);
+}
+
+/* ---------------- Tooltip ---------------- */
+
+.tooltip {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 5px 10px;
+  font: var(--font-caption);
+  color: #ffffff;
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  display: inline-block;
+}
+[data-theme="dark"] .tooltip {
+  background: var(--surface-4);
+  border-color: var(--border-default);
+  color: var(--foreground);
+}
+.tooltip kbd {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 16px; height: 16px; padding: 0 4px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  margin-left: 6px;
+}
+[data-theme="dark"] .tooltip kbd {
+  background: var(--surface-3);
+  border-color: var(--border-subtle);
+  color: var(--foreground-muted);
+}
+
+/* ---------------- Avatar ---------------- */
+
+.avatar {
+  width: 32px; height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--foreground);
+  font: var(--font-body-sm);
+  font-weight: var(--weight-semibold);
+  flex: none;
+  position: relative;
+  overflow: hidden;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-sm { width: 24px; height: 24px; font-size: 11px; }
+.avatar-lg { width: 40px; height: 40px; font-size: 15px; }
+.avatar-xl { width: 64px; height: 64px; font-size: 22px; }
+.avatar-group { display: inline-flex; }
+.avatar-group .avatar + .avatar { margin-left: -8px; box-shadow: 0 0 0 2px var(--canvas); }
+
+/* ---------------- Table ---------------- */
+
+.table-wrap {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface-1);
+  box-shadow: var(--edge-highlight);
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font: var(--font-body-sm);
+  color: var(--foreground);
+}
+.table thead th {
+  text-align: left;
+  padding: 12px 18px;
+  font: var(--font-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+  color: var(--foreground-subtle);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.table tbody td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--foreground-muted);
+}
+.table tbody tr:last-child td { border-bottom: 0; }
+.table tbody tr { transition: background var(--dur-fast) var(--ease-out); }
+.table tbody tr:hover { background: rgba(0, 0, 0, 0.02); }
+[data-theme="dark"] .table tbody tr:hover { background: rgba(255, 255, 255, 0.02); }
+.table td.num, .table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.table td.strong { color: var(--foreground); font-weight: var(--weight-medium); }
+
+/* ---------------- Toast ---------------- */
+
+.toast {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--canvas);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  box-shadow: var(--shadow-md);
+  font: var(--font-body-sm);
+  color: var(--foreground);
+}
+[data-theme="dark"] .toast { background: var(--surface-3); }
+.toast .toast-dot {
+  width: 8px; height: 8px; border-radius: 9999px;
+  background: var(--success);
+  box-shadow: 0 0 6px rgba(26, 158, 95, 0.4);
+}
+[data-theme="dark"] .toast .toast-dot { box-shadow: 0 0 6px rgba(79, 208, 143, 0.4); }
+.toast.is-warning .toast-dot { background: var(--warning); box-shadow: 0 0 6px rgba(199, 122, 10, 0.4); }
+[data-theme="dark"] .toast.is-warning .toast-dot { box-shadow: 0 0 6px rgba(224, 160, 70, 0.4); }
+.toast.is-danger .toast-dot { background: var(--danger); box-shadow: 0 0 6px rgba(220, 38, 38, 0.4); }
+[data-theme="dark"] .toast.is-danger .toast-dot { box-shadow: 0 0 6px rgba(255, 92, 92, 0.4); }
+.toast.is-info .toast-dot { background: var(--brand); box-shadow: var(--brand-glow); }
+.toast-close {
+  margin-left: 10px;
+  background: transparent; border: 0;
+  color: var(--foreground-subtle);
+  cursor: pointer; padding: 0;
+  display: inline-flex;
+}
+
+/* ---------------- Banner / inline alert ---------------- */
+
+.banner {
+  display: grid;
+  grid-template-columns: 20px 1fr auto;
+  gap: 14px; align-items: flex-start;
+  padding: 14px 18px;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-1);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--edge-highlight);
+}
+.banner .banner-ic {
+  padding-top: 2px;
+  color: var(--brand);
+}
+.banner .banner-body {
+  font: var(--font-body-sm);
+  color: var(--foreground-muted);
+  line-height: 1.5;
+}
+.banner .banner-body strong { color: var(--foreground); font-weight: var(--weight-medium); }
+.banner.is-info    .banner-ic { color: var(--brand); }
+.banner.is-success .banner-ic { color: var(--success); }
+.banner.is-warning .banner-ic { color: var(--warning); }
+.banner.is-danger  .banner-ic { color: var(--danger); }
+
+/* ---------------- Empty state ---------------- */
+
+.empty-state {
+  text-align: center;
+  padding: 64px 32px;
+  background: var(--surface-1);
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-lg);
+  display: flex; flex-direction: column;
+  align-items: center; gap: 8px;
+}
+.empty-state .empty-ic {
+  width: 40px; height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--foreground-subtle);
+  margin-bottom: 14px;
+}
+.empty-state h4 {
+  font: var(--font-card-title);
+  letter-spacing: var(--track-card-title);
+  font-weight: var(--weight-card-title);
+  color: var(--foreground);
+  margin: 0;
+}
+.empty-state p {
+  font: var(--font-body-sm);
+  color: var(--foreground-muted);
+  margin: 4px 0 14px;
+  max-width: 360px;
+}
+
+/* ---------------- Skeleton ---------------- */
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.skeleton {
+  background:
+    linear-gradient(90deg,
+      var(--surface-2) 0%,
+      var(--surface-3) 50%,
+      var(--surface-2) 100%);
+  background-size: 200% 100%;
+  border-radius: var(--radius-sm);
+  animation: skeleton-shimmer 1.6s linear infinite;
+  display: inline-block;
+}
+.skeleton-line { height: 12px; width: 100%; border-radius: 3px; }
+.skeleton-line.sm { width: 50%; }
+.skeleton-line.md { width: 78%; }
+.skeleton-line.lg { width: 92%; }
+.skeleton-circle { border-radius: 9999px; width: 32px; height: 32px; }
+.skeleton-block { height: 100px; width: 100%; border-radius: var(--radius-md); }
+
+/* ---------------- Stat number ----------------
+   The canonical big-number element. Inter sans, semibold, tabular-nums,
+   negative tracking that scales with size. Use one of the size modifiers
+   below; never roll your own big number. Extending the scale beyond -xl
+   is done by the print-extended scale in the white-paper kits. */
+
+.stat-num {
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: -1.6px;
+  font-weight: var(--weight-semibold);
+  color: var(--foreground);
+  font-variant-numeric: tabular-nums;
+  display: inline-flex; align-items: baseline; gap: 2px;
+}
+.stat-num small {
+  font-size: 18px;
+  color: var(--foreground-subtle);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.4px;
+  margin-left: 2px;
+}
+.stat-num-sm  { font-size: 36px; letter-spacing: -1.0px; }
+.stat-num-sm  small { font-size: 14px; letter-spacing: -0.2px; }
+.stat-num-lg  { font-size: 68px; letter-spacing: -2.4px; }
+.stat-num-lg  small { font-size: 24px; }
+.stat-num-xl  { font-size: 96px; letter-spacing: -3.6px; }
+.stat-num-xl  small { font-size: 32px; }
+.stat-num-2xl { font-size: 132px; letter-spacing: -5px; }   /* deck metrics */
+.stat-num-2xl small { font-size: 40px; letter-spacing: -1.4px; }
+.stat-num-3xl { font-size: 168px; letter-spacing: -6.4px; } /* white-paper landscape featured stat */
+.stat-num-3xl small { font-size: 48px; letter-spacing: -1.8px; }
+.stat-num.brand { color: var(--brand); }
+
+/* Inline tabular sans — use for any numeric that lives next to body
+   text but needs columnar alignment (audit score rails, table .num
+   cells, in-line stats inside a card body). Smaller than .stat-num and
+   inherits its surrounding font-size. */
+.num,
+.num-sans {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.stat-label {
+  font: var(--font-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--foreground-subtle);
+  margin-top: 10px;
+}
+
+/* ---------------- Breadcrumb ---------------- */
+
+.crumbs {
+  display: inline-flex; align-items: center; gap: 6px;
+  font: var(--font-body-sm);
+  color: var(--foreground-subtle);
+}
+.crumbs a { color: var(--foreground-subtle); text-decoration: none; }
+.crumbs a:hover { color: var(--foreground); }
+.crumbs .sep { color: var(--foreground-faint); }
+.crumbs .current { color: var(--foreground); }
+
+/* ---------------- Divider ---------------- */
+
+.hr { height: 1px; background: var(--border-subtle); border: 0; margin: var(--space-section) 0; }
+
+/* ---------------- KV list (definition list) ---------------- */
+
+.kv-list { display: grid; grid-template-columns: max-content 1fr; gap: 8px 24px; margin: 0; }
+.kv-list dt { color: var(--foreground-subtle); font: var(--font-body-sm); font-weight: var(--weight-medium); }
+.kv-list dd { color: var(--foreground); font: var(--font-body-sm); margin: 0; }
+.kv-list dd.mono { font-family: var(--font-mono); }
+
+/* ============================================================
+   v0.4 — Codified chrome primitives
+   ============================================================ */
+
+/* Skip-to-content — required for a11y, invisible until focus */
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  transform: translateY(-150%);
+  padding: 10px 16px;
+  background: var(--brand);
+  color: var(--brand-foreground);
+  border-radius: var(--radius-md);
+  font: var(--font-button);
+  font-weight: var(--weight-button);
+  text-decoration: none;
+  z-index: 100;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.skip-link:focus { transform: translateY(0); }
+
+/* Site nav — codified */
+.site-nav {
+  position: sticky; top: 0; z-index: 10;
+  backdrop-filter: blur(10px);
+  background: var(--canvas-blur);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.site-nav-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 14px var(--space-xxl);
+  height: 60px;
+  box-sizing: border-box;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.site-nav .brand-mark {
+  font: var(--font-body);
+  font-weight: var(--weight-medium);
+  color: var(--foreground);
+  letter-spacing: -0.2px;
+  display: inline-flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.site-nav .brand-mark .crumb {
+  font: var(--font-mono-md);
+  color: var(--foreground-subtle);
+  padding-left: 14px;
+  border-left: 1px solid var(--border-subtle);
+}
+.site-nav-anchors {
+  display: flex; gap: 24px;
+  font: var(--font-body-sm);
+  font-weight: var(--weight-medium);
+}
+.site-nav-anchors a {
+  color: var(--foreground-subtle);
+  text-decoration: none;
+}
+.site-nav-anchors a:hover { color: var(--foreground); }
+.site-nav-anchors a.current { color: var(--foreground); }
+
+/* ============================================================
+   Motion — respect user preference
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .skeleton { animation: none; }
+}

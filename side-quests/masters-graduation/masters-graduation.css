@@ -63,7 +63,6 @@ body {
 }
 
 .back-button:hover {
-    transform: translateY(-1px);
     color: var(--primary);
 }
 
@@ -162,7 +161,7 @@ h1 {
 }
 
 .celebrate-btn:hover {
-    transform: translateY(-2px) scale(1.02);
+    transform: scale(1.02);
     box-shadow: 0 6px 20px rgba(140, 29, 64, 0.4);
 }
 

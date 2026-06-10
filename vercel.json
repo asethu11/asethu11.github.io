@@ -4,6 +4,10 @@
   "outputDirectory": ".",
   "rewrites": [
     {
+      "source": "/docmanagement",
+      "destination": "/my-works/DocManagement/index.html"
+    },
+    {
       "source": "/improvingAdoption",
       "destination": "/my-works/improvingAdoption/index.html"
     },
@@ -80,6 +84,21 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/my-works/DocManagement",
+      "destination": "/docmanagement",
+      "permanent": true
+    },
+    {
+      "source": "/my-works/DocManagement/index.html",
+      "destination": "/docmanagement",
+      "permanent": true
+    },
+    {
+      "source": "/DocManagement",
+      "destination": "/docmanagement",
+      "permanent": true
+    },
     {
       "source": "/blogs/your-chatbot-sucks-lets-fix-that",
       "destination": "https://blogs.abseth.com/Conversational-UX/",

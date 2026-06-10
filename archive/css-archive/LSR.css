@@ -301,7 +301,6 @@ li pre {
 }
 
 .back-button:hover {
-    transform: translateY(-1px);
     color: var(--primary) !important;
 }
 
