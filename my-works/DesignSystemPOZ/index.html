@@ -21,7 +21,7 @@
     const canon = document.getElementById('canonical-link');
     if (canon) canon.href = canonicalHref;
     const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-    if (!isLocal && p !== u.pathname) location.replace(canonicalHref);
+    /* client redirect disabled: looped on trailing-slash hosts; rel=canonical still set, server handles canonicalization */
   } catch(e){ console.error('canonical normalizer error', e); }
 })();
 </script>
@@ -95,9 +95,9 @@
 }
 </script>
 
-<link rel="icon" href="/img/favicon.png" type="image/png" />
+<link rel="icon" href="assets/favicon.svg" />
 <!-- Real Point One Zero design system tokens + primitives (single source of truth) -->
-<link rel="stylesheet" href="/my-works/DesignSystemPOZ/colors_and_type.css" />
+<link rel="stylesheet" href="colors_and_type.css" />
 <link rel="preconnect" href="https://rsms.me" />
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 <style>
@@ -889,6 +889,9 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
     </div>
     <div class="lang-body">
       <p style="font:var(--font-body);color:var(--foreground-muted);max-width:640px;margin:0">Buttons through tables, all states documented. Pill is the default button shape — near-black on paper-white with a stacked shadow that quietly implies depth. Square is available for product chrome and forms. The brand never fills a button.</p>
+      <!-- TODO: components page (components/index.html) is WIP/broken — re-enable this link once it's fixed
+      <a href="components/" style="display:inline-flex;align-items:center;gap:6px;margin-top:20px;font:var(--font-body-sm);font-weight:var(--weight-medium);color:var(--foreground);text-decoration:underline;text-decoration-color:var(--brand);text-underline-offset:4px">See all 32 components, every state <span aria-hidden="true">&#8594;</span></a>
+      -->
       <div class="comp-row" style="margin-top:28px">
         <button class="btn btn-primary btn-lg">Let's talk</button>
         <button class="btn btn-secondary btn-lg">Read more</button>
@@ -927,8 +930,8 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
   </div>
 
   <div class="kit-grid">
-      <div class="kit-card" data-src="/my-works/DesignSystemPOZ/marketing/" data-title="Marketing">
-        <div class="kit-preview"><iframe src="/my-works/DesignSystemPOZ/marketing/" loading="lazy" title="Marketing — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
+      <div class="kit-card" data-src="marketing/" data-title="Marketing">
+        <div class="kit-preview"><iframe src="marketing/" loading="lazy" title="Marketing — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">web · responsive · light</span>
           <span class="nm">Marketing</span>
@@ -936,8 +939,8 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
           <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
       </div>
-      <div class="kit-card" data-src="/my-works/DesignSystemPOZ/about/" data-title="About">
-        <div class="kit-preview"><iframe src="/my-works/DesignSystemPOZ/about/" loading="lazy" title="About — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
+      <div class="kit-card" data-src="about/" data-title="About">
+        <div class="kit-preview"><iframe src="about/" loading="lazy" title="About — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">web · responsive · light</span>
           <span class="nm">About</span>
@@ -945,8 +948,8 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
           <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
       </div>
-      <div class="kit-card" data-src="/my-works/DesignSystemPOZ/pricing/" data-title="Pricing">
-        <div class="kit-preview"><iframe src="/my-works/DesignSystemPOZ/pricing/" loading="lazy" title="Pricing — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
+      <div class="kit-card" data-src="pricing/" data-title="Pricing">
+        <div class="kit-preview"><iframe src="pricing/" loading="lazy" title="Pricing — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">web · responsive · light</span>
           <span class="nm">Pricing</span>
@@ -954,8 +957,8 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
           <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
       </div>
-      <div class="kit-card" data-src="/my-works/DesignSystemPOZ/case-study/" data-title="Case study">
-        <div class="kit-preview"><iframe src="/my-works/DesignSystemPOZ/case-study/" loading="lazy" title="Case study — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
+      <div class="kit-card" data-src="case-study/" data-title="Case study">
+        <div class="kit-preview"><iframe src="case-study/" loading="lazy" title="Case study — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">web · responsive · light</span>
           <span class="nm">Case study</span>
@@ -963,8 +966,8 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
           <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
       </div>
-      <div class="kit-card" data-src="/my-works/DesignSystemPOZ/docs/" data-title="Docs">
-        <div class="kit-preview"><iframe src="/my-works/DesignSystemPOZ/docs/" loading="lazy" title="Docs — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
+      <div class="kit-card" data-src="docs/" data-title="Docs">
+        <div class="kit-preview"><iframe src="docs/" loading="lazy" title="Docs — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">web · responsive · light</span>
           <span class="nm">Docs</span>
@@ -972,8 +975,8 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
           <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
       </div>
-      <div class="kit-card" data-src="/my-works/DesignSystemPOZ/errors/404.html" data-title="Errors — 404">
-        <div class="kit-preview"><iframe src="/my-works/DesignSystemPOZ/errors/404.html" loading="lazy" title="Errors — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
+      <div class="kit-card" data-src="errors/404.html" data-title="Errors — 404">
+        <div class="kit-preview"><iframe src="errors/404.html" loading="lazy" title="Errors — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">web · responsive · light</span>
           <span class="nm">Errors</span>
@@ -981,8 +984,8 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
           <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
       </div>
-      <div class="kit-card" data-src="/my-works/DesignSystemPOZ/pitch-deck/" data-title="Pitch deck">
-        <div class="kit-preview kit-preview--1920"><iframe src="/my-works/DesignSystemPOZ/pitch-deck/" loading="lazy" title="Pitch deck — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
+      <div class="kit-card" data-src="pitch-deck/" data-title="Pitch deck">
+        <div class="kit-preview kit-preview--1920"><iframe src="pitch-deck/" loading="lazy" title="Pitch deck — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">deck · 1920×1080 · dark</span>
           <span class="nm">Pitch deck</span>
@@ -990,8 +993,8 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
           <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
       </div>
-      <div class="kit-card" data-src="/my-works/DesignSystemPOZ/report-presentation/" data-title="Report presentation">
-        <div class="kit-preview kit-preview--1920"><iframe src="/my-works/DesignSystemPOZ/report-presentation/" loading="lazy" title="Report presentation — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
+      <div class="kit-card" data-src="report-presentation/" data-title="Report presentation">
+        <div class="kit-preview kit-preview--1920"><iframe src="report-presentation/" loading="lazy" title="Report presentation — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">deck · 1920×1080</span>
           <span class="nm">Report presentation</span>
@@ -999,8 +1002,8 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
           <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
       </div>
-      <div class="kit-card" data-src="/my-works/DesignSystemPOZ/social/" data-title="Social carousels">
-        <div class="kit-preview"><iframe src="/my-works/DesignSystemPOZ/social/" loading="lazy" title="Social carousels — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
+      <div class="kit-card" data-src="social/" data-title="Social carousels">
+        <div class="kit-preview"><iframe src="social/" loading="lazy" title="Social carousels — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">social · 1080×1350 · 8 variants</span>
           <span class="nm">Social carousels</span>
@@ -1008,8 +1011,8 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
           <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
       </div>
-      <div class="kit-card" data-src="/my-works/DesignSystemPOZ/white-paper/" data-title="White paper">
-        <div class="kit-preview"><iframe src="/my-works/DesignSystemPOZ/white-paper/" loading="lazy" title="White paper — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
+      <div class="kit-card" data-src="white-paper/" data-title="White paper">
+        <div class="kit-preview"><iframe src="white-paper/" loading="lazy" title="White paper — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">print · 1080×1440 · portrait + landscape</span>
           <span class="nm">White paper</span>
@@ -1017,8 +1020,8 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
           <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
       </div>
-      <div class="kit-card" data-src="/my-works/DesignSystemPOZ/report-document/" data-title="Report document">
-        <div class="kit-preview"><iframe src="/my-works/DesignSystemPOZ/report-document/" loading="lazy" title="Report document — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
+      <div class="kit-card" data-src="report-document/" data-title="Report document">
+        <div class="kit-preview"><iframe src="report-document/" loading="lazy" title="Report document — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">print · 8.5×11 · 12 pages</span>
           <span class="nm">Report document</span>
@@ -1026,8 +1029,8 @@ dialog.kit-modal iframe { flex: 1 1 auto; width: 100%; border: 0; display: block
           <span class="live">View live <span class="arr">&#8594;</span></span>
         </div>
       </div>
-      <div class="kit-card" data-src="/my-works/DesignSystemPOZ/brand-application/" data-title="Brand application">
-        <div class="kit-preview"><iframe src="/my-works/DesignSystemPOZ/brand-application/" loading="lazy" title="Brand application — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
+      <div class="kit-card" data-src="brand-application/" data-title="Brand application">
+        <div class="kit-preview"><iframe src="brand-application/" loading="lazy" title="Brand application — live preview" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
         <div class="kit-meta">
           <span class="fmt">identity · dark chrome · light pieces</span>
           <span class="nm">Brand application</span>
