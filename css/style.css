@@ -1178,3 +1178,60 @@ li pre {
     padding: 12px 16px;
   }
 }
+
+/* Mobile-only "best viewed on desktop" notice */
+.mobile-notice {
+  display: none; /* revealed only on phones via media query below */
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--background-grey);
+  color: var(--text-primary);
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  font-size: 0.9rem;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-notice .fa-desktop {
+  color: var(--primary);
+  font-size: 1rem;
+}
+
+.mobile-notice span {
+  flex: 1;
+}
+
+.mobile-notice-close {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.4rem;
+  line-height: 1;
+  padding: 4px 8px;
+  margin: -4px -4px -4px 0;
+  cursor: pointer;
+}
+
+.mobile-notice-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-notice-dismissed {
+  display: none !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .mobile-notice {
+    display: flex;
+  }
+}

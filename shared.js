@@ -76,10 +76,33 @@ function copyEmail() {
     });
 }
 
+// Mobile-only "best viewed on desktop" notice (dismissible, remembered)
+function initMobileNotice() {
+    const notice = document.querySelector('.mobile-notice');
+    if (!notice) return;
+
+    let dismissed = false;
+    try { dismissed = localStorage.getItem('mobileNoticeDismissed') === '1'; } catch (e) {}
+    if (dismissed) { notice.classList.add('mobile-notice-dismissed'); return; }
+
+    // Entrance animation (matches showToast timing)
+    setTimeout(() => notice.classList.add('mobile-notice-show'), 50);
+
+    const close = notice.querySelector('.mobile-notice-close');
+    if (close) {
+        close.addEventListener('click', () => {
+            notice.classList.remove('mobile-notice-show');
+            setTimeout(() => notice.classList.add('mobile-notice-dismissed'), 300);
+            try { localStorage.setItem('mobileNoticeDismissed', '1'); } catch (e) {}
+        });
+    }
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     initProjectPreviews();
     initGaAutoTagging();
+    initMobileNotice();
 });
 
 // Global GA4 click tracking (auto-tags common interactive elements)

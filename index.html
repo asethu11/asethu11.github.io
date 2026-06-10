@@ -24,7 +24,7 @@
             const canonicalHref = u.origin + p + u.search + u.hash;
             const canon = document.getElementById('canonical-link');
             if (canon) canon.href = canonicalHref;
-            if (p !== u.pathname) location.replace(canonicalHref);
+            /* client redirect disabled: looped on trailing-slash hosts; rel=canonical still set, server handles canonicalization */
           } catch(e){ console.error('canonical normalizer error', e); }
         })();
         </script>
@@ -132,6 +132,14 @@
         <span>site coded by a human in vanilla HTML, CSS, and JavaScript.</span>
       </div>
 
+      <!-- Mobile-only "best on desktop" notice (shown/dismissed via shared.js) -->
+      <div class="mobile-notice" role="note">
+        <i class="fas fa-desktop" aria-hidden="true"></i>
+        <span>This site is best viewed on desktop.</span>
+        <button class="mobile-notice-close" aria-label="Dismiss notice"
+                data-ga-event-name="dismiss_mobile_notice">&times;</button>
+      </div>
+
       <div class="container">
 
         <!-- Introduction -->
@@ -219,7 +227,7 @@
             <!-- Project 1 -->
 
             <div class="headerproject stagger-fade" style="--stagger-delay: 1">
-              <a href="/DocManagement">
+              <a href="/docmanagement">
                 <div class="grey-background headerprojectbg skeleton-wrapper" data-coolthumb="tilt-stack-glare-chroma" style="will-change: transform; transform: translateZ(0); transform-style: preserve-3d; transition: transform 140ms cubic-bezier(.2,.8,.2,1);">
                   <div class="skeleton skeleton-image"></div>
                   <img src="my-works/DocManagement/thumbnail.png" alt="Document Layer Project" class="project-image" loading="lazy" onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';" onerror="this.previousElementSibling.style.display='none';" style="transform:translateZ(18px);">
@@ -241,7 +249,7 @@
 
                 </p>
 
-                <a href="/DocManagement" class="link">Visit --></a>
+                <a href="/docmanagement" class="link">Visit --></a>
               </div>
             </div>
 
@@ -249,7 +257,7 @@
             <!-- Project 2 -->
 
             <div class="headerproject stagger-fade" style="--stagger-delay: 2">
-              <a href="/improvingAdoption">
+              <a href="/improvingadoption">
                 <div class="grey-background headerprojectbg skeleton-wrapper" data-coolthumb="tilt-stack-glare-chroma" style="will-change: transform; transform: translateZ(0); transform-style: preserve-3d; transition: transform 140ms cubic-bezier(.2,.8,.2,1);">
                   <div class="skeleton skeleton-image"></div>
                   <img src="my-works/improvingAdoption/thumbnail.png" alt="Improving Adoption Project" class="project-image" loading="lazy" onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';" style="transform:translateZ(18px);">
@@ -272,14 +280,14 @@
                     
                 </p>
 
-                <a href="/improvingAdoption" class="link">Visit --></a>
+                <a href="/improvingadoption" class="link">Visit --></a>
               </div>
             </div> 
 
 
             <!-- Project 3 -->
             <div class="headerproject stagger-fade" style="--stagger-delay: 3">
-              <a href="/LSR">
+              <a href="/lsr">
                 <div class="grey-background headerprojectbg skeleton-wrapper" data-coolthumb="tilt-stack-glare-chroma" style="will-change: transform; transform: translateZ(0); transform-style: preserve-3d; transition: transform 140ms cubic-bezier(.2,.8,.2,1);">
                   <div class="skeleton skeleton-image"></div>
                   <img src="my-works/LSR/thumbnail.png" alt="Project GIF" class="project-image" loading="lazy" onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';" style="transform:translateZ(18px);">
@@ -302,7 +310,7 @@
                     
                 </p>
 
-                <a href="/LSR" class="link">Visit --></a>
+                <a href="/lsr" class="link">Visit --></a>
               </div>
             </div>
 
@@ -358,7 +366,7 @@
                   </div>
               </a>
 
-              <a href="/COMUT" class="project-row">
+              <a href="/comut" class="project-row">
                 <p class="project-row-title">
                     Improving City of Mesa's Safety Messaging for 100K+ residents
                 </p>
@@ -384,7 +392,7 @@
                   </div>
               </a>
 
-            <a href="/SODA" class="project-row">
+            <a href="/soda" class="project-row">
               <p class="project-row-title">
                   AI-powered Project Management Tool
               </p>
