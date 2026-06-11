@@ -355,6 +355,19 @@ pre > code {
   color: var(--primary);
 }
 
+/* Mobile: the LinkedIn "just called" line carries an 85px desktop offset that
+   pushed it past the viewport edge on small screens (text clipped). Reset the
+   offset on narrow widths so it sits below the icons and wraps cleanly. */
+@media only screen and (max-width: 480px) {
+  #linkedin {
+    left: 0;
+    top: 8px;
+  }
+  #linked {
+    line-height: 1.4;
+  }
+}
+
 
 
 

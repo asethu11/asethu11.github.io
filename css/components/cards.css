@@ -101,8 +101,7 @@
 }
 
 .grey-background:hover .project-image {
-  width: 90%;
-  transition: width 200ms, transform 200ms;
+  transition: transform 200ms;
 }
 
 .white-circle {
@@ -120,7 +119,7 @@
   max-height: 280px;
   position: absolute;
   will-change: transform;
-  transition: width 450ms, transform 450ms;
+  transition: transform 450ms;
 }
 
 #project-1 {

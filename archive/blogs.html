@@ -20,7 +20,7 @@
             const canonicalHref = u.origin + p + u.search + u.hash;
             const canon = document.getElementById('canonical-link');
             if (canon) canon.href = canonicalHref;
-            if (p !== u.pathname) location.replace(canonicalHref);
+            /* client redirect disabled: looped on trailing-slash hosts; rel=canonical still set, server handles canonicalization */
           } catch(e){ console.error('canonical normalizer error', e); }
         })();
         </script>
@@ -74,9 +74,9 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Big+Shoulders+Display:wght@650&display=swap">
         
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="icon" href="img/favicon.png" type="image/png">
+        <link rel="icon" href="/img/favicon.png" type="image/png">
 
         <style>
             .blogs-container {
@@ -219,7 +219,7 @@
             </footer>
         </div>
 
-        <script src="script.js" defer></script>
-        <script src="shared.js" defer></script>
+        <script src="/script.js" defer></script>
+        <script src="/shared.js" defer></script>
     </body>
 </html>

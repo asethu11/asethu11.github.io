@@ -20,7 +20,7 @@
             const canonicalHref = u.origin + p + u.search + u.hash;
             const canon = document.getElementById('canonical-link');
             if (canon) canon.href = canonicalHref;
-            if (p !== u.pathname) location.replace(canonicalHref);
+            /* client redirect disabled: looped on trailing-slash hosts; rel=canonical still set, server handles canonicalization */
           } catch(e){ console.error('canonical normalizer error', e); }
         })();
         </script>
@@ -92,7 +92,7 @@
 
         </style>
 
-        <script src="/my-works/improvingAdoption/script.js"></script>
+        <script src="/script.js"></script>
         <link rel="stylesheet" href="/my-works/improvingAdoption/improving-adoption.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -1124,7 +1124,6 @@
             updateActiveLink();
         })();
     </script>
-    <script src="script.js"></script>
 </body>
 </html>
 

@@ -33,7 +33,7 @@
             const canonicalHref = u.origin + p + u.search + u.hash;
             const canon = document.getElementById('canonical-link');
             if (canon) canon.href = canonicalHref;
-            if (p !== u.pathname) location.replace(canonicalHref);
+            /* client redirect disabled: looped on trailing-slash hosts; rel=canonical still set, server handles canonicalization */
           } catch(e){ console.error('canonical normalizer error', e); }
         })();
         </script>
